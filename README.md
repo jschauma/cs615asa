@@ -38,7 +38,7 @@ and appreciated.  Likewise, you are encouraged to contact me with any
 questions, suggestions, corrections, concerns or comments relating to this
 content.
 
-<div style="float: center"><table border="1" width="75%" align="center">
+<div style="float: center"><table border="1" width="75%" align="center" style="float: center">
 <tr><td>
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img
 alt="Creative Commons License" style="border-width:0"
