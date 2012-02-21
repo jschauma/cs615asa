@@ -33,14 +33,18 @@ and appreciated.  Likewise, you are encouraged to contact me with any
 questions, suggestions, corrections, concerns or comments relating to this
 content.
 
+<center><table border="1" width="75%">
+<tr><td>
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img
 alt="Creative Commons License" style="border-width:0"
 src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This
 work by <span xmlns:cc="http://creativecommons.org/ns#"
 property="cc:attributionName">Jan Schaumann
-&lt;jschauma@netmeister.org&Gt;</span> is licensed under a <a
+&lt;jschauma@netmeister.org&gt;</span> is licensed under a <a
 rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative
 Commons Attribution 3.0 Unported License</a>.
+</td></tr>
+</table></center>
 
 
 Non-copyright / licensed materials
