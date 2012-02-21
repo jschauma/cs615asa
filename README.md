@@ -38,7 +38,7 @@ and appreciated.  Likewise, you are encouraged to contact me with any
 questions, suggestions, corrections, concerns or comments relating to this
 content.
 
-<p align="center"><table border="1" width="75%" align="center">
+<div style="float: center"><table border="1" width="75%" align="center">
 <tr><td>
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img
 alt="Creative Commons License" style="border-width:0"
@@ -49,7 +49,7 @@ property="cc:attributionName">Jan Schaumann
 rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative
 Commons Attribution 3.0 Unported License</a>.
 </td></tr>
-</table></p>
+</table></div>
 
 
 Non-copyright / licensed materials
