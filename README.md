@@ -1,17 +1,22 @@
 CS615ASA - Aspects Of System Administration
 ===========================================
 
-In this repository you can find the files I use for my class "CS615 -
-Aspects of System Administration", which is currently offered at [Stevens
-Institute of Technology](http://www.cs.stevens.edu/).
+In this repository you can find the files I use for my class "[CS615 -
+Aspects of System
+Administration](http://www.cs.stevens.edu/~jschauma/615/)", which is
+currently offered at [Stevens Institute of
+Technology](http://www.cs.stevens.edu/).
 
 Contents
 --------
 
 For the most part, you will find the LaTeX files I use to create the
-slides for my lectures.  Homework assignments etc, are generally kept on
-the course website and are usually changing, so I may not necessarily
-include them here.
+slides for my lectures.  (I use
+[xdvipresent](http://clip.dia.fi.upm.es/Software/xdvipresent_html/xdvipresent_2.html)
+to create the slides.)
+
+Homework assignments etc, are generally kept on the course website and are
+usually changing, so I may not necessarily include them here.
 
 Sometimes a given lecture's directory may include additional notes or
 scripts.
@@ -33,7 +38,7 @@ and appreciated.  Likewise, you are encouraged to contact me with any
 questions, suggestions, corrections, concerns or comments relating to this
 content.
 
-<table border="1" width="75%" align="center">
+<p align="center"><table border="1" width="75%" align="center">
 <tr><td>
 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img
 alt="Creative Commons License" style="border-width:0"
@@ -44,7 +49,7 @@ property="cc:attributionName">Jan Schaumann
 rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative
 Commons Attribution 3.0 Unported License</a>.
 </td></tr>
-</table>
+</table></p>
 
 
 Non-copyright / licensed materials
