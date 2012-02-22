@@ -1,0 +1,405 @@
+#! /bin/sh
+#
+# This script illustrates the use of the various POSIX features relating
+# to shell variables, redirection etc.
+#
+# Written by Jan Schaumann <jschauma@netmeister.org> in February 2012.
+#
+# Run this script as:
+# sh `pwd`/shexamples a "b c" 'd e f' g
+
+: ${1:?"Run as 'sh \`pwd\`/shexamples [-hl] [-f func] | a \"b c\" 'd e f' g"}
+
+FUNC="all"
+NUM=1
+
+###
+### Helper Functions
+###
+
+list_functions() {
+	sed -n -e 's/^\([a-z].*\)() {/\1/p' $0 | sort
+}
+
+example() {
+	local readonly descr=${1}
+
+	echo
+	read nada
+	echo "== Example ${NUM}: ${descr}"
+	NUM=$(( NUM + 1 ))
+}
+
+run_cmd() {
+	local cmd="${1}"
+	echo
+	echo "${1}"
+	eval ${1}
+}
+
+###
+### Examples run
+###
+
+num_args() {
+	example "arguments"
+	echo "I was invoked with ${NUM_ARGS} arguments."
+	echo "\$@ says they were: $@"
+	echo "\$* says they were: $*"
+}
+
+at_args_quoted() {
+	example "\"\$@\""
+	n=1
+	echo "Looping over \"\$@\", I find:"
+	for arg in "$@"; do
+		echo "$n: |$arg|"
+		n=$(( ${n} + 1 ))
+	done
+}
+
+at_args() {
+	example "\$@"
+	n=1
+	echo "Looping over \$@, I find:"
+	for arg in $@; do
+		echo "$n: |$arg|"
+		n=$(( ${n} + 1 ))
+	done
+}
+
+star_args_quoted() {
+	example "\"\$*\""
+	n=1
+	echo "Looping over \"\$*\", I find:"
+	for arg in "$*"; do
+		echo "$n: |$arg|"
+		n=$(( ${n} + 1 ))
+	done
+}
+
+star_args() {
+	example "\$*"
+	n=1
+	echo "Looping over \$*, I find:"
+	for arg in $*; do
+		echo "$n: |$arg|"
+		n=$(( ${n} + 1 ))
+	done
+}
+
+arguments() {
+	num_args "$@"
+	at_args "$@"
+	star_args "$@"
+	at_args_quoted "$@"
+	star_args_quoted "$@"
+}
+
+my_pid() {
+	example "PID"
+	echo "By the way, may PID is: $$"
+	echo "Let's see if ps(1) agrees:"
+	run_cmd 'ps | egrep "^[ ]*$$"'
+}
+
+visual_sleep() {
+	local max=$1
+	local n
+	n=0
+	while [ $n -lt ${max} ]; do
+		printf .
+		n=$(( n + 1 ))
+		sleep 1
+	done
+}
+
+bg_pid() {
+	example "PID of last backgrounded command"
+	echo "Let's run something that takes a while."
+	run_cmd 'ls -lR / >/dev/null 2>&1 &'
+	run_cmd 'echo "The job of that command is: $!"'
+	echo "Let's remember it and see if it's still running in 5 seconds..."
+	echo "  OLDPID=\$!"
+	echo "  n=0; while [ \$n -lt 5 ]; do printf .; n=\$(( n + 1 )); sleep 1; done; echo"
+	OLDPID=$!
+	visual_sleep 5
+	echo
+	run_cmd 'ps | egrep "^[ ]*${OLDPID}"'
+	echo "Yupp, apparently so."
+	visual_sleep 5
+	echo
+	echo "Let's kill it:"
+	run_cmd 'kill ${OLDPID}'
+	echo
+	echo "Ok, that should be dead now.  Let's ask ps(1) to make sure."
+	echo "  ps | egrep \"^[ ]*\${OLDPID}"
+	if ! ps | egrep "^[ ]*${OLDPID}" ; then
+		echo "Alrighty, no process with PID ${OLDPID} exists anymore."
+	else
+		echo "Huh? That didn't go as planned."
+	fi
+	echo "By the way, we could also have checked for the PIDs existence via:"
+	run_cmd 'kill -0 ${OLDPID}'
+	echo "(Had PID ${OLDPID} existed, nothing would have changed, since no actual signal was sent."
+	echo " See signal(2).)"
+}
+
+pids() {
+	my_pid
+	bg_pid
+}
+
+
+pname() {
+	example "\$0"
+	echo "I was invoked as: ${0}"
+
+}
+
+return_code_success() {
+	example "successful return code"
+	echo "Let's run a program:"
+	run_cmd 'ls -l ${0}'
+	run_cmd 'echo "Return code: $?"'
+}
+
+return_code_fail() {
+	example "unsuccessful return code"
+	echo "Let's run a program:"
+	run_cmd 'ls -l does.not.exist'
+	# Can't use "run_cmd" here, because that would run 'echo' before
+	# printing '$?', so always be 0
+	echo "Return code: $?"
+}
+
+return_codes() {
+	return_code_success
+	return_code_fail
+}
+
+suffix_pattern() {
+	example "suffix pattern removal"
+	echo "dirname(1) says my executable's dirname is:"
+	run_cmd 'echo "My dirname is: $(dirname ${0})"'
+	echo
+	echo "I say my executable's dirname is:"
+	run_cmd 'echo "My dirname is: ${0%/*}"'
+}
+
+prefix_pattern() {
+	example "prefix pattern removal"
+	echo "basename(1) says my executable's name is:"
+	run_cmd 'echo "My executable is: $(basename ${0})"'
+	echo
+	echo "Is say my executable's name is:"
+	run_cmd 'echo "My executable is: ${0##*/}"'
+}
+
+env_vars() {
+	example "environment variables"
+	echo "We inherit a number of environment variables."
+	echo "Let's look at the ones relating to my username, ${USER}:"
+	run_cmd 'env | grep ${USER}'
+}
+
+empty_vars() {
+	example "empty variable"
+	echo "The variable \${FOO} is not set..."
+	echo "  echo \"|\${FOO}|\""
+	echo "|${FOO}|"
+	echo "...so setting BAR=\${FOO} means \${BAR} is not set:"
+	echo "  BAR=\${FOO}"
+	echo "  echo \"|\${BAR}|\""
+	BAR=${FOO}
+	echo "|${BAR}|"
+}
+
+def_val() {
+	example "default value"
+	echo "But we can set BAR to a default value if \${FOO} is not set:"
+	echo "  BAR=\${FOO:-\"moo\"}"
+	echo "  echo \"|\${BAR}|\""
+	BAR=${FOO:-"moo"}
+	echo "|${BAR}|"
+}
+
+alt_val() {
+	BAR="moo"
+	example "alternative value"
+	echo "BAR is now set; but let's use an alternative value."
+	echo "  echo \"|\${BAR}|\""
+	echo "  echo \"|\${BAR:+oink}|\""
+	echo "|${BAR}|"
+	echo "|${BAR:+oink}|"
+
+	example "alternative value part II"
+	echo "Note that this only uses 'oink' if BAR was set, but yields nothing if BAR is unset."
+	echo "  BAR="
+	echo "  echo \"|\${BAR:+oink}|\""
+	BAR=
+	echo "|${BAR:+oink}|"
+}
+
+variables() {
+	suffix_pattern
+	prefix_pattern
+	env_vars
+	empty_vars
+	def_val
+	alt_val
+}
+
+backticks() {
+	example "backticks"
+	echo "Backticks are an easy way to include the output of a command:"
+	run_cmd 'echo "Today is: `date`"'
+}
+
+real_subshells() {
+	example "subshells"
+	echo "Subshells are kind of similar:"
+	run_cmd 'echo "Today is: $(date)"'
+
+	example "nested subshells"
+	echo "But you can nest subshells."
+	run_cmd 'echo "$(dirname $(pwd))"'
+
+	example "nested backticks - no good"
+	echo "You can't do that with backticks:"
+	run_cmd 'echo "`dirname `pwd``"'
+}
+
+subshells() {
+	backticks
+	real_subshells
+}
+
+arithmetic() {
+	example "shell arithmetic"
+	echo "You could pipe calculations into bc(1)..."
+	run_cmd 'echo "The sum of 1 + 2 = $(echo 1 + 2 | bc)"'
+	echo
+	echo "But that uses extra processes.  Just do it in this shell:"
+	run_cmd 'echo "The sum of 1 + 2 = $(( 1 + 2 ))"'
+}
+
+stdin_redir() {
+	example "stdin redirection"
+	echo "Input from stdin can be redirected via '<'."
+	echo "The following two commands are functionally equivalent:"
+	run_cmd 'cat donquixote.txt | wc'
+	run_cmd 'wc <donquixote.txt'
+	echo '(Note that wc(1) also takes a file argument, but the output is slightly different.)'
+}
+
+stdin_heredoc() {
+	example "'here-documents'"
+	echo "You can read pre-defined multi-line input from stdin via '<<MARKER'."
+	echo "  wc <<END
+Enter some
+text
+here
+END"
+
+	wc <<END
+Enter some
+text
+here
+END
+}
+
+stdout_redir_simple() {
+	example "stdout redirection"
+	echo "Output from a command can be redirected to a file via '>'."
+	run_cmd 'wc <donquixote.txt >dq.wc && cat dq.wc'
+}
+
+stdout_suppression() {
+	example "stdout suppression"
+	echo "Redirection can be performed to /dev/null to suppress the given output."
+	echo "Note that stderr output is still going to the terminal."
+	run_cmd 'curl http://www.cs.stevens.edu/~jschauma/615/index.html >/dev/null'
+}
+
+stdout_appending() {
+	example "stdout appending"
+	echo "You can append output to a file using '>>'."
+	run_cmd 'wc <donquixote.txt >>dq.wc && wc -l <dq.wc'
+}
+
+stdout_truncating() {
+	example "truncating"
+	echo "'>' will truncate any existing contents."
+	run_cmd 'wc <donquixote.txt >dq.wc && wc -l <dq.wc'
+}
+
+stdout_redir() {
+	stdout_redir_simple
+	stdout_suppression
+	stdout_appending
+	stdout_truncating
+}
+
+redirection() {
+	stdin_redir
+	stdin_heredoc
+	stdout_redir
+}
+
+all() {
+	pname
+	arguments "$@"
+	return_codes
+	pids
+	variables
+	subshells
+	arithmetic
+	redirection
+}
+
+usage() {
+	cat <<EOH
+$0 [-hl] -f func
+        -h       print this help and exit
+        -l       list available functions
+        -f func  only run the given function
+EOH
+}
+
+###
+### Main
+###
+
+while getopts 'hf:l' opt; do
+	case ${opt} in
+		h)
+			usage
+			exit 0
+			# NOTREACHED
+		;;
+		f)
+			FUNC=${OPTARG}
+		;;
+		l)
+			list_functions
+			exit 0
+			# NOTREACHED
+		;;
+		*)
+			usage
+			exit 1
+			# NOTREACHED
+		;;
+	esac
+done
+shift $(( ${OPTIND} - 1 ))
+
+NUM_ARGS=$#
+
+if type ${FUNC} 2>/dev/null | head -1 | egrep -q "is a.*function"; then
+	${FUNC} "$@"
+else
+	echo "No such function '${FUNC}'. See -l." 2>&1
+	exit 1
+fi
