@@ -1,0 +1,498 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<HTML>
+<HEAD>
+
+	<TITLE>CS615A -- Aspects of System Administration</TITLE>
+	<STYLE type="text/css">
+	body {
+	background-color: #FFFFFf;
+	}
+	</STYLE>
+	<STYLE type="text/css">
+	li.c1 {list-style: none}
+	</STYLE>
+</HEAD>
+
+<BODY>
+	<TABLE border="1" align="center" cellpadding="15">
+		<TR>
+			<TD valign="top">
+				<H2>CS615A -- Aspects of System Administration</H2>
+
+				<H3>Course Overview:</H3>
+
+				<P>In a networked environment, the need for a skilled system
+				administrator has become increasingly obvious, but what exactly
+				does a System Administrator do? Traditionally, the System
+				Administrator's job has not had a precise definition; instead
+				it covers a large variety of duties and requires at times rather
+				broad, at other times very specific knowledge about a multitude
+				of topics in virtually every area of networked
+				computing.</P>
+
+				<P>In this class, some of the most essential aspects of
+				system administration will be covered, giving students the
+				opportunity to develop the skills necessary to architect
+				solutions for as well as analyze and
+				troubleshoot problems arising in every day usage of
+				complex networks and large-scale installations.</P>
+
+				<P>Some of the topics covered include: hardware
+				configuration, operating system installation, shell
+				programming, security policies, backup deployment and
+				disaster recovery, network design, software installation
+				and maintenance, operating system tuning.</P>
+
+				<P>Students are expected to be comfortable in a
+				UNIX-like environment on a user level and have a solid
+				understanding of TCP/IP networking and Operating System
+				concepts.</P>
+
+				<P><em>If you have questions about this class, please email <a
+				href="mailto:jschauma@stevens.edu">jschauma@stevens.edu</a>
+				and (this is important to escape the spam filters) include
+				"[CS615]" in the subject line.</em></p>
+
+				<h4>Cloud Computing</h4>
+				<p>
+				In this class, we will make use of <a
+				href="http://aws.amazon.com/ec2/">Amazon's Elastic Compute Cloud</a>
+				for all homework assignments;	this will give students the chance
+				to gain valuable experience in new technologies currently in high
+				demand in the industry (cloud computing, IPv6) and also provide a
+				possibility for students to gain superuser access to a number of
+				operating systems otherwise not available at Stevens.
+				</p>
+
+				<table width="100%" border="0">
+					<tr><td valign="top">
+						<H3>Time, Date &amp; Place:</H3>
+						<b>Spring 2013</b>: Mondays, 18:15-20:45, Pierce 216<br>
+
+						<H3>Resources:</H3>
+
+						<UL>
+							<LI><A href="#syllabus">Syllabus</A></LI>
+							<LI><A href="#grading">Grading</A></LI>
+							<LI><A href="#timeformat">Time Format</A></LI>
+							<LI><A href="#hw">Homeworks</A></LI>
+							<LI><A href="#project">Project Description</A></LI>
+							<LI><A href="/~jschauma/cgi-bin/midterm.cgi">Midterm Evaluation</A></LI>
+							<LI><A href=
+							"https://lists.stevens.edu/cgi-bin/mailman/listinfo/cs615asa">
+							CS615ASA Mailinglist</A></LI>
+							<LI><a href="http://twitter.com/#!/cs615asa">CS615 ASA Twitter Account</a></LI>
+							<LI><a href="https://github.com/jschauma/cs615asa">Raw course material on github</a></LI>
+							<LI><A href=
+							"http://netbsd.gw.com/cgi-bin/man-cgi/man">
+							NetBSD Manual Pages</A></LI>
+						</UL>
+					</td><td valign="top" align="right">
+						<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+						<script>
+new TWTR.Widget({
+	version: 2,
+	type: 'profile',
+	rpp: 3,
+	interval: 4000,
+	width: 350,
+	height: 150,
+	theme: {
+		shell: {
+			background: '#333333',
+			color: '#ffffff'
+		},
+		tweets: {
+			background: '#000000',
+			color: '#ffffff',
+			links: '#4aed05'
+		}
+	},
+	features: {
+		scrollbar: false,
+		loop: false,
+		live: true,
+		hashtags: true,
+		timestamp: true,
+		avatars: false,
+		behavior: 'all'
+	}
+}).render().setUser('cs615asa').start();
+						</script>
+					</td></tr>
+				</table>
+
+				<H3>Textbooks:</H3>
+
+				<P>This class does not have any strictly <EM>required</EM>
+				textbooks. However, there are two books which are
+				<EM>recommended</EM>, if only as a reference throughout the
+				semester. These are:</P>
+
+				<UL>
+					<LI>``Essential System Administration'', 3rd Edition, by
+					<A href="http://www.aeleen.com/">&#198;leen
+					Frisch</A><BR>
+					ISBN: 0-596-00343-9,<BR>
+					Publisher: <A href=
+					"http://www.oreilly.com/catalog/esa3/">O'Reilly &amp;
+					Associates</A><BR>
+					(<a href="http://ezproxy.stevens.edu:2155/book/operating-systems-and-server-administration/unix/0596003439">read online</a>)<br>
+					&#160;</LI>
+
+					<LI>``<a href="http://www.amazon.com/o/ASIN/0321492668/tomontime-20">The
+		Practice of System and Network Administration</a>'', by <A href=
+					"http://www.everythingsysadmin.com/abouttomchris.html">Thomas
+					A. Limoncelli, Christine Hogan,	Strata R. Chalup</A><BR>
+					ISBN: 0321492668<BR>
+					Publisher: <A href=
+					"http://www.pearsonhighered.com/educator/academic/product/0,3110,0321492668,00.html">
+					Addison-Wesley</A><BR>
+	 (<a href="http://ezproxy.stevens.edu:2155/book/networking/network-management/9780321545275">read online</a>)<br>
+					&#160;</LI>
+
+				</UL>
+
+				Other suggested reading:
+				<UL>
+					<LI>``<A href=
+						"http://oreilly.com/catalog/9780596100292/">UNIX in a
+						Nutshell</A>'', 4th Edition, by Arnold Robbins<BR>
+						ISBN: 978-0-596-10029-2<BR>
+						Publisher: O'Reilly &amp; Associates<BR>(<a href="http://ezproxy.stevens.edu:2155/book/operating-systems-and-server-administration/unix/0596100299">read online</a>)<br>
+					&nbsp;</LI>
+					<LI>``<A href=
+					"http://www.iu.hio.no/SystemAdmin/principlebook.html">Principles
+					of Network and System Administration</A>'', 2nd Edition, by Mark
+					Burgess<BR>
+					ISBN: 0470868074<BR>
+					Publisher: John Wiley &amp; Sons<BR>
+					&#160;</LI>
+
+					<LI>``<A href="http://www.admin.com/">Unix System
+					Administration Handbook</A>'', 3rd Edition, by Evi
+					Nemeth, Garth Snyder, Scott Seebass, Trent R. Hein.<BR>
+					ISBN: 0-13-020601-6,<BR>
+					Publisher: <A href=
+					"http://vig.prenhall.com/catalog/academic/product/0,1144,0130206016,00.html">
+					Prentice Hall</A><BR>(<a href="http://ezproxy.stevens.edu:2155/book/operating-systems-and-server-administration/unix/9780137002740">read online</a>)<br>&nbsp;</LI>
+
+					<LI>``<A href=
+					"http://www.wiley.com/WileyCDA/WileyTitle/productCd-0470861002.html">Analytical
+					Network and System Administration : Managing Human-Computer
+					Systems</A>'', by Mark Burgess<BR>
+					ISBN: 0-470-86100-2<BR>
+					Publisher: <a href="http://www.wiley.com/WileyCDA/">Wiley &amp;
+					Sons</A><BR>
+					&nbsp;</LI>
+
+					<LI><A href=
+					"http://www.cs.stevens.edu/~jschauma/usenix/sage/">
+					SAGE Booklets</A><BR>
+					&#160;</LI>
+
+					<LI><A href="http://bofh.ntk.net/BOFH/index.php">BOFH
+					Article series</A><BR>
+					&#160;</LI>
+
+					<LI><a href="http://www.opsschool.org/en/latest/">Ops School</a></LI>
+				</UL>
+
+				<h3>Course Material</h3>
+				If you're interested in the raw course material, ie the
+				<tt>.tex</tt> files that produce the slides etc., you can find
+				everything <a href="https://github.com/jschauma/cs615asa">on
+				github</a>.
+
+				<H3>Instructor:</H3><A href=
+				"http://www.cs.stevens.edu/~jschauma/">Jan
+				Schaumann</A> [<A href=
+				"mailto:jschauma@stevens.edu">jschauma@stevens.edu</A>]
+
+				<H3><A name="grading">Grading</A>:</H3>There will (probably) be:<BR>
+
+				<UL>
+					<LI>a few pop quizzes</LI>
+
+					<LI>a number of homework assignments of varying complexity,
+							including, but not limited to: programming, OS installation, OS
+							security, capture-the-flag-style cracking, security
+							principles</LI>
+
+					<LI>1 presentation; see <A href=
+					"#project">below</A></LI>
+
+					<LI>no curve</LI>
+
+					<LI>some seemingly unrelated <a href="extra-credit.html">extra-credit assignments</a></LI>
+
+				</UL>Letter grades will be given as follows:
+
+				<UL>
+					<LI>90% - 100% of total points =&gt; A</LI>
+					<LI>80% - 89.99% =&gt; B</LI>
+					<LI>70% - 79.99% =&gt; C</LI>
+					<LI>0 - 69.99% points =&gt; F</LI>
+				</UL>
+
+				Within each letter grade, there are +/- grades given at the
+				discretion of the instructor. (Exception: there is no A+)
+
+				<H4>Plagiarism, Cheating and other ways to get an F</H4>
+				This really should not be necessary, but just to preempt any complains
+				that I did not make myself clear:
+				<blockquote>
+					Students are responsible for their own work.	It is unethical (and in
+					some cases illegal) to present as one's work the ideas, words or
+					representations of another without the proper indication of the
+					source.	Therefore, it is the student's responsibility to give credit
+					for any quotation, idea or data (such as statistical data or source
+					code) borrowed from an outside source.
+					<br><br>
+					Failure to do so constitutes plagiarism, may imply copyright
+					infringement and license violations and is viewed as cheating
+					in this class, yielding a failing grade.
+				</blockquote>
+
+				<H3><A name="timeformat">Time Format</A>:</H3>
+				All times, due dates etc. are given in the format <tt>YYYY-MM-DD
+				HH:MM:SS</tt> according to our systems local time (EST or EDT).
+				A clock is always a 24-hour clock -- there is no AM or PM.
+				Due dates are always fixed, non-negotiable and late submissions
+				are not accepted.
+
+				<H3><a name="hw">Homework Assignments</a>:</h3>
+				<ul>
+					<li><a href="hw.txt">General Homework Submission Guidelines</a></li>
+					<!-- <li><a href="s12-hw1.html">Homework #1: Setup your environment for EC2 and create an instance</a></li>
+					<li><a href="s12-hw2.html">Homework #2: Package Management on different OS</a><br>(<a href="s11-hw2-sample-solution.html">sample solution</a>)</li>
+					<li><a href="s12-hw3.html">Homework #3: EC2 Backup</a></li>
+					<li><a href="s12-hw4.html">Homework #4: Use tcpdump to observe traffic flow</a></li>
+					<li><a href="s12-hw5.html">Homework #5: Syslog over IPv6</a></li>
+					<li><a href="s11-hw6.html">Homework #6: Encrypted EC2 Backup</a></li>
+					<li><a href="hw6.txt">Homework #6: Practical PGP</a></li>
+-->
+				</ul>
+
+				<H3><A name="project">Project / Presentation Description</A>:</H3>For the
+				project, you are required to either write a paper or to prepare a
+				presentation on a specific topic of interest.
+				The topic of the paper or the
+				presentation needs to be approved in advance by the
+				instructor; other than that, there are no restrictions.<BR>
+				<BR>
+				If you choose to write a paper, then it should provide an
+				in-depth analysis of the chosen topic based on the research
+				you did, possibly with a case study. The paper should be
+				8-12 pages long and needs to be submitted via email in either
+				plain text, postscript, or PDF format.	The final due date for the paper
+				is 2013-05-06 10:59:59; a draft / work in progress has to be
+				submitted by 2013-04-22: 10:59:59.<BR>
+				<BR>
+
+				For a presentation, you may pick a topic that will	be
+				covered in class. Your presentation will then be part of that
+				class -- therefore, you will need to coordinate in advance with
+				the instructor.
+				Otherwise, the presentation will be given in one of the
+				last classes. You probably want to prepare some slides,
+				even though you may, of course, speak freely from your
+				notes if you choose to. Your presentation should be no shorter than
+				20 minutes.
+
+				<H3><A name="syllabus">Syllabus</A>:</H3>
+
+				<!-- Lecture slides and other supporting material will be uploaded as the
+	semester progresses. -->
+
+				<TABLE border="1" cellpadding="5">
+					<TR>
+						<TH>Date</TH>
+						<TH>Topic</TH>
+						<TH>Suggested Reading Material</TH>
+						<TH>Course Material</TH>
+					</TR>
+
+					<TR>
+						<TD>2013-01-14</TD>
+
+						<TD>Introduction, Policies, Overview, UNIX history and
+						basics</TD>
+
+						<TD><em>Frisch</em>: Preface<BR>
+							<em>Nemeth et al</em>: Chap. 1<BR>
+							<em>Burgess</em>: Chap. 1, 2, 14<BR>
+							<em>Limoncelli &amp; Hogan</em>: Preface, 26<BR>
+							<A href="http://www.cs.stevens.edu/~jschauma/usenix/sage/jobs.pdf">SAGE Job
+							Descriptions for System Administrators</A></TD>
+
+						<TD><!--<a href="slides/lecture01.pdf">Lecture 01 slides</a><br>
+		<a href="s11-hw1.html">HW#1</a> --></td>
+					</TR>
+
+					<TR>
+						<TD>2013-01-21</TD>
+						<TD colspan="3"><em>Martin Luther King Day -- No class</em></TD>
+					</TR>
+
+					<TR>
+						<TD>2013-01-28</TD>
+						<TD>Filesystems and Disks</TD>
+						<TD><em>Frisch</em>: Chap. 10<br>
+								<em>Nemeth et al</em>: Chap. 5, 8</TD>
+						<TD><!-- <a href="slides/lecture02.pdf">Lecture 02 slides</a> --></td>
+					</TR>
+
+					<TR>
+						<TD>2013-02-04</TD>
+						<TD>Software Installation Concepts</TD>
+						<TD><em>Limoncelli &amp; Hogan</em>: Chap. 23 (in first edition) or Chap. 28 (in second edition)<br>
+							<em>Burgess</em> (Principles): Chap. 4.6 - 4.8<br>
+							<em>Frisch</em>: Parts of Chap. 3</TD>
+						<TD><!-- <a href="slides/lecture03.pdf">Lecture 03 slides</a><br>
+		<a href="s12-hw2.html">HW#2</a>--> </td>
+					</TR>
+
+					<TR>
+						<TD>2013-02-11</TD>
+						<TD>Got root?	Multi-user basics, politics, policies and ethics</TD>
+						<TD><em>Frisch</em>: Chap. 6<br>
+								<em>Burgess</em>: Chap. 5<br>
+								<em>Nemeth et al</em>: Chap. 3, 6, 27</TD>
+						<TD><!-- <a href="slides/lecture04.pdf">Lecture 04 slides</a><br>
+		<a href="http://www.cs.stevens.edu/~jschauma/usenix/sage/policy.pdf">SAGE
+		Booklet: A Guide to Developing Computing Policy Documents</a><br>
+		<a href="quiz1.txt">Quiz#1</a>
+		 <a
+href="http://www.cs.stevens.edu/~jschauma/615A/s10-hw3-sample-solution.html">HW#3
+sample solution</a> --></td>
+
+					</TR>
+
+					<TR>
+						<TD>2013-02-19</TD>
+						<TD>Automating Administrative Tasks I / Shell Essentials</TD>
+						<TD><em>Frisch</em>: Chap. 14, Append. A<br>
+							<em>Nemeth et al</em>: Chap. 9</TD>
+						<TD><em>NOTE: Tuesday class</em>
+		<!-- <a href="slides/lecture05.pdf">Lecture 05 slides</a><br>
+		<a href="examples/ip">IPv4 matching regex</a><br>
+		<a href="examples/shexamples">shell basics</a><br>
+		<a href="examples/">Misc Examples</a> --></TD>
+					</TR>
+					<TR>
+						<TD>2013-02-25</TD>
+						<TD>Automation II / Backup and Disaster Recovery</td>
+						<TD><em>Frisch</em>: Chap. 11<BR>
+							<em>Nemeth et al</em>: Chap. 10<br>
+							<em>Burgess</em>: Chap. 12.1 - 12.4<br>
+							<em>Limoncelli &amp; Hogan</em>: Chap. 8, 21<br>
+							<a href="http://www.cs.stevens.edu/~jschauma/usenix/sage/backups.pdf">
+							SAGE Booklet: Backups and Recovery</a><br><br>
+							<em>Frisch</em>: Chap. 15, 16<br>
+							<em>Nemeth et al</em>: Chap. 4, 25<br>
+							<em>Burgess</em>: Chap. 5</TD>
+
+						<TD><!-- <a href="slides/lecture06.pdf">Lecture 06 slides</a><br>
+		<a href="s12-hw3.html">HW#3</a> --></TD>
+
+					</TR>
+					<TR>
+						<TD>2013-03-04</TD>
+						<TD>Networking</TD>
+						<TD><em>Frisch</em>: Chap. 5<BR>
+							<em>Nemeth et al</em>: Chap. 13, 15, 20<br>
+							<em>Burgess</em>: Chap. 3, 10<br>
+							<em>Limoncelli &amp; Hogan</em>: Chap. 18</TD>
+						<TD><!-- <a href="slides/lecture07.pdf">Lecture 07 slides</a><br>
+		<a href="ktrace-telnet">telnet ktrace</a><br>
+		<a href="tcpdump-dig6">tcpdump DNS lookup over IPv6</a><br>
+		<a href="tcpdump-nslookup4">tcpdump DNS lookup over IPv4</a><br>
+		<a href="tcpdump-ping-traceroute">tcpdump ping and traceroute</a><br>
+		<a href="tcpdump-telnet-netbsd">tcpdump TCP port 80 over IPv6</a><br>
+		<a href="tcpdump-telnet-yahoo">tcpdump TCP port 80 over IPv4</a> --><br>
+						 </TD>
+					</TR>
+
+					<TR>
+						<TD>2013-03-11</TD>
+						<TD colspan="3"><em>Spring Break -- No class</em></TD>
+					</TR>
+
+					<TR>
+						<TD>2013-03-18</TD>
+						<TD>Popular services: DNS, SMTP</TD>
+
+						<TD><em>Frisch</em>: Chap. 9<BR>
+							<em>Nemeth et al</em>: Chap. 16, 19, 22<br>
+							<em>Burgess</em>: Chap. 9<br>
+							<em>Limoncelli &amp; Hogan</em>: Chap. 19</TD>
+						<TD><!-- <a href="slides/lecture08.pdf">Lecture 08 slides</a><br>
+		<a href="s12-hw4.html">Homework #4</a>&nbsp;--></td>
+					</TR>
+
+					<TR>
+						<TD>2013-03-25</TD>
+						<TD>Popular services: HTTP, SSH</TD>
+						<TD><em>Frisch</em>: Chap. 9<BR>
+							<em>Nemeth et al</em>: Chap. 16, 19, 22<br>
+							<em>Burgess</em>: Chap. 9<br>
+							<em>Limoncelli &amp; Hogan</em>: Chap. 19</TD>
+						<TD><!-- <a href="slides/lecture09.pdf">Lecture 09 slides</a><br>
+		<a href="presentations/mhegador-ssh.pdf">Michael Hegadorn on SSH</a><br>
+		<a href="http-exercise.html">HTTP exercise (extra credit)</a> --></TD>
+
+					</TR>
+					<TR>
+						<TD>2013-04-01</TD>
+						<TD>System Security</TD>
+						<TD><em>Frisch</em>: Chap. 7<BR>
+							<em>Nemeth et al</em>: Chap. 21<br>
+							<em>Burgess</em>: Chap. 11, 12<br>
+							<em>Limoncelli &amp; Hogan</em>: Chap. 7</TD>
+						<TD><!-- <a href="slides/lecture10.pdf">Lecture 10 slides</a>
+		<a href="qibenx2djregl.html">extra credit</a>--></TD>
+					</TR>
+
+					<TR>
+						<TD>2013-04-08</TD>
+						<TD>AMA / Misc. Topics / Presentations</TD>
+						<TD>&nbsp;</TD>
+						<TD>&nbsp;</TD>
+					</TR>
+					</TR>
+
+					<TR>
+						<TD>2013-04-15</TD>
+						<TD>AMA / Misc. Topics / Presentations</TD>
+						<TD>&nbsp;</TD>
+						<TD>&nbsp;</TD>
+					</TR>
+
+					<TR>
+						<TD>2013-04-22</TD>
+						<TD>AMA / Misc. Topics / Presentations</TD>
+						<TD>&nbsp;</TD>
+						<TD>&nbsp;</TD>
+					</TR>
+
+					<TR>
+						<TD>2013-04-29</TD>
+						<TD>AMA / Misc. Topics / Presentations</TD>
+						<TD>&nbsp;</TD>
+						<TD>&nbsp;</TD>
+					</TR>
+				</TABLE>
+			</TD>
+		</TR>
+	</TABLE>
+
+	<P><SMALL><EM>Misc. Topics</EM> are done based on interest and
+	time available. They may also be used as a presentation topic.
+	They include: cloud computing, virtualization, IPv6 migration,
+	heterogenous networks / multiple OS,
+	automated installation, server room basics, cooling issues,
+	racking etc. clustering, spam...</SMALL></P>
+</BODY>
+</HTML>
