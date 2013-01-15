@@ -73,7 +73,8 @@ FIGURES=	pics/Cable_Tie.eps	\
 		pics/ardennes-horse.eps \
 		pics/vierspaenner.eps \
 		pics/lego-block.eps \
-		pics/millennium-falcon.eps
+		pics/millennium-falcon.eps \
+		pics/t.eps
 
 
 .SUFFIXES: .tex .dvi .ps .pdf .txt .fig .eps .png .jpg .gif
