@@ -3,7 +3,7 @@
 <HTML>
 <HEAD>
 
-	<TITLE>CS615A -- Aspects of System Administration</TITLE>
+	<TITLE>CS615 -- Aspects of System Administration</TITLE>
 	<STYLE type="text/css">
 	body {
 	background-color: #FFFFFf;
@@ -18,7 +18,7 @@
 	<TABLE border="1" align="center" cellpadding="15">
 		<TR>
 			<TD valign="top">
-				<H2>CS615A -- Aspects of System Administration</H2>
+				<H2>CS615 -- Aspects of System Administration</H2>
 
 				<H3>Course Overview:</H3>
 
@@ -68,7 +68,7 @@
 				<table width="100%" border="0">
 					<tr><td valign="top">
 						<H3>Time, Date &amp; Place:</H3>
-						<b>Spring 2013</b>: Mondays, 18:15-20:45, Pierce 216<br>
+						<b>Spring 2013</b>: Mondays, 18:15-20:45, Kiddie 360<br>
 
 						<H3>Resources:</H3>
 
@@ -197,6 +197,8 @@ new TWTR.Widget({
 					&#160;</LI>
 
 					<LI><a href="http://www.opsschool.org/en/latest/">Ops School</a></LI>
+
+					<LI><a href="http://nixsrv.com/llthw">Learn Linux The Hard Way</a></LI>
 				</UL>
 
 				<h3>Course Material</h3>
@@ -265,7 +267,8 @@ new TWTR.Widget({
 				<H3><a name="hw">Homework Assignments</a>:</h3>
 				<ul>
 					<li><a href="hw.txt">General Homework Submission Guidelines</a></li>
-					<!-- <li><a href="s12-hw1.html">Homework #1: Setup your environment for EC2 and create an instance</a></li>
+					<li><a href="s13-hw1.html">Homework #1: Setup your environment for EC2 and create an instance</a></li>
+<!--
 					<li><a href="s12-hw2.html">Homework #2: Package Management on different OS</a><br>(<a href="s11-hw2-sample-solution.html">sample solution</a>)</li>
 					<li><a href="s12-hw3.html">Homework #3: EC2 Backup</a></li>
 					<li><a href="s12-hw4.html">Homework #4: Use tcpdump to observe traffic flow</a></li>
@@ -303,8 +306,8 @@ new TWTR.Widget({
 
 				<H3><A name="syllabus">Syllabus</A>:</H3>
 
-				<!-- Lecture slides and other supporting material will be uploaded as the
-	semester progresses. -->
+				Lecture slides and other supporting material will be uploaded as the
+				semester progresses.
 
 				<TABLE border="1" cellpadding="5">
 					<TR>
@@ -327,8 +330,7 @@ new TWTR.Widget({
 							<A href="http://www.cs.stevens.edu/~jschauma/usenix/sage/jobs.pdf">SAGE Job
 							Descriptions for System Administrators</A></TD>
 
-						<TD><!--<a href="slides/lecture01.pdf">Lecture 01 slides</a><br>
-		<a href="s11-hw1.html">HW#1</a> --></td>
+						<TD><a href="slides/lecture01.pdf">Lecture 01 slides</a></td>
 					</TR>
 
 					<TR>
@@ -341,7 +343,8 @@ new TWTR.Widget({
 						<TD>Filesystems and Disks</TD>
 						<TD><em>Frisch</em>: Chap. 10<br>
 								<em>Nemeth et al</em>: Chap. 5, 8</TD>
-						<TD><!-- <a href="slides/lecture02.pdf">Lecture 02 slides</a> --></td>
+						<TD><a href="slides/lecture02.pdf">Lecture 02 slides</a><br>
+							<a href="s13-hw1.html">HW#1</a></td>
 					</TR>
 
 					<TR>
@@ -350,7 +353,7 @@ new TWTR.Widget({
 						<TD><em>Limoncelli &amp; Hogan</em>: Chap. 23 (in first edition) or Chap. 28 (in second edition)<br>
 							<em>Burgess</em> (Principles): Chap. 4.6 - 4.8<br>
 							<em>Frisch</em>: Parts of Chap. 3</TD>
-						<TD><!-- <a href="slides/lecture03.pdf">Lecture 03 slides</a><br>
+						<TD>&nbsp;<!-- <a href="slides/lecture03.pdf">Lecture 03 slides</a><br>
 		<a href="s12-hw2.html">HW#2</a>--> </td>
 					</TR>
 
@@ -360,7 +363,7 @@ new TWTR.Widget({
 						<TD><em>Frisch</em>: Chap. 6<br>
 								<em>Burgess</em>: Chap. 5<br>
 								<em>Nemeth et al</em>: Chap. 3, 6, 27</TD>
-						<TD><!-- <a href="slides/lecture04.pdf">Lecture 04 slides</a><br>
+						<TD>&nbsp;<!-- <a href="slides/lecture04.pdf">Lecture 04 slides</a><br>
 		<a href="http://www.cs.stevens.edu/~jschauma/usenix/sage/policy.pdf">SAGE
 		Booklet: A Guide to Developing Computing Policy Documents</a><br>
 		<a href="quiz1.txt">Quiz#1</a>
@@ -394,7 +397,7 @@ sample solution</a> --></td>
 							<em>Nemeth et al</em>: Chap. 4, 25<br>
 							<em>Burgess</em>: Chap. 5</TD>
 
-						<TD><!-- <a href="slides/lecture06.pdf">Lecture 06 slides</a><br>
+						<TD>&nbsp;<!-- <a href="slides/lecture06.pdf">Lecture 06 slides</a><br>
 		<a href="s12-hw3.html">HW#3</a> --></TD>
 
 					</TR>
@@ -405,7 +408,7 @@ sample solution</a> --></td>
 							<em>Nemeth et al</em>: Chap. 13, 15, 20<br>
 							<em>Burgess</em>: Chap. 3, 10<br>
 							<em>Limoncelli &amp; Hogan</em>: Chap. 18</TD>
-						<TD><!-- <a href="slides/lecture07.pdf">Lecture 07 slides</a><br>
+						<TD>&nbsp;<!-- <a href="slides/lecture07.pdf">Lecture 07 slides</a><br>
 		<a href="ktrace-telnet">telnet ktrace</a><br>
 		<a href="tcpdump-dig6">tcpdump DNS lookup over IPv6</a><br>
 		<a href="tcpdump-nslookup4">tcpdump DNS lookup over IPv4</a><br>
@@ -428,7 +431,7 @@ sample solution</a> --></td>
 							<em>Nemeth et al</em>: Chap. 16, 19, 22<br>
 							<em>Burgess</em>: Chap. 9<br>
 							<em>Limoncelli &amp; Hogan</em>: Chap. 19</TD>
-						<TD><!-- <a href="slides/lecture08.pdf">Lecture 08 slides</a><br>
+						<TD>&nbsp;<!-- <a href="slides/lecture08.pdf">Lecture 08 slides</a><br>
 		<a href="s12-hw4.html">Homework #4</a>&nbsp;--></td>
 					</TR>
 
@@ -439,7 +442,7 @@ sample solution</a> --></td>
 							<em>Nemeth et al</em>: Chap. 16, 19, 22<br>
 							<em>Burgess</em>: Chap. 9<br>
 							<em>Limoncelli &amp; Hogan</em>: Chap. 19</TD>
-						<TD><!-- <a href="slides/lecture09.pdf">Lecture 09 slides</a><br>
+						<TD>&nbsp;<!-- <a href="slides/lecture09.pdf">Lecture 09 slides</a><br>
 		<a href="presentations/mhegador-ssh.pdf">Michael Hegadorn on SSH</a><br>
 		<a href="http-exercise.html">HTTP exercise (extra credit)</a> --></TD>
 
@@ -451,7 +454,7 @@ sample solution</a> --></td>
 							<em>Nemeth et al</em>: Chap. 21<br>
 							<em>Burgess</em>: Chap. 11, 12<br>
 							<em>Limoncelli &amp; Hogan</em>: Chap. 7</TD>
-						<TD><!-- <a href="slides/lecture10.pdf">Lecture 10 slides</a>
+						<TD>&nbsp;<!-- <a href="slides/lecture10.pdf">Lecture 10 slides</a>
 		<a href="qibenx2djregl.html">extra credit</a>--></TD>
 					</TR>
 

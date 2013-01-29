@@ -1,10 +1,6 @@
-# $Id: Makefile,v 1.6 2006/01/29 23:49:01 jschauma Exp $
-
 TARGET	=	slides
-BIBLIO	=	slides.bib
 
 LATEX	=	latex
-BIBTEX	=	bibtex
 DVIPS	=	dvips -o
 PS2PDF	=	ps2pdf
 PDFTOTEXT=	pdftotext
@@ -15,6 +11,11 @@ FIGURES=	\
 		pics/IRIX.filesystem.eps \
 		pics/Installer_edit_partitions.eps \
 		pics/S50JBOD.eps \
+		pics/SFF_8086.eps \
+		pics/SFF_8087.eps \
+		pics/SFF_8088.eps \
+		pics/SFF_8470.eps \
+		pics/SFF_8484_angled.eps \
 		pics/Sata_host_expansor_en.eps \
 		pics/USB_Connector_End.eps \
 		pics/USB_types.eps \
@@ -32,8 +33,10 @@ FIGURES=	\
 		pics/controlpanel2.eps \
 		pics/cylinders.eps \
 		pics/cloud.eps \
-		pics/das-nas-san.eps \
+		pics/cloud-storage.eps \
+		pics/das-versions.eps \
 		pics/das.eps \
+		pics/ddrdrive.eps \
 		pics/disk-structure.eps \
 		pics/devices.eps \
 		pics/directory.eps \
@@ -45,6 +48,7 @@ FIGURES=	\
 		pics/fc-switched.eps \
 		pics/fc-topologies.eps \
 		pics/file.eps \
+		pics/filesystem-tree-mountpoints.eps \
 		pics/fs-layout.eps \
 		pics/fs-layout1.eps \
 		pics/fs-layout2.eps \
@@ -69,11 +73,15 @@ FIGURES=	\
 		pics/one-bucket-full.eps \
 		pics/partition.eps \
 		pics/pipe.eps \
+		pics/raid-0.eps \
+		pics/raid-1.eps \
+		pics/raid-5.eps \
 		pics/san.eps \
 		pics/san.eps \
 		pics/sata-ide_lg.eps \
 		pics/satavide.eps \
 		pics/satavpata.eps \
+		pics/san-nas-das.eps \
 		pics/scsi-disk.eps \
 		pics/scsi-disk2.eps \
 		pics/scsi-many.eps \
@@ -88,13 +96,13 @@ FIGURES=	\
 		pics/two-buckets.eps \
 		pics/two-cats-one-bucket.eps \
 		pics/usb-hub.eps \
+		pics/ufs-details.eps \
 		pics/xraid.eps \
 		pics/zfs.eps
 
 .SUFFIXES: .tex .dvi .ps .pdf .txt .fig .eps .jpg .png .gif
 
 all:	$(FIGURES) $(TARGET).dvi
-#	${BIBTEX} $(TARGET)
 
 show: ${TARGET}.dvi
 	xdvipresent xga ${TARGET}.dvi -paper 25.8x19.3 -geometry 1024x764-0-0

@@ -1,0 +1,98 @@
+.Dd March 06, 2011
+.Dt EC2-START-INSTANCE 1
+.Os
+.Sh NAME
+.Nm ec2-start-instance
+.Nd start an EC2 instance and wait for it to be running
+.Sh SYNOPSIS
+.Nm
+.Op Fl hv
+.Op Fl a Ar ami
+.Sh DESCRIPTION
+The
+.Nm
+tool will start an EC2 instance and wait for it to be running, then print
+to STDOUT the instance identifier and the hostname.
+As the tool honors a number of environment variables as noted in the
+section
+.Xr ENVIRONMENT ,
+it is useful for scripting other, more advanced tools.
+.Sh OPTIONS
+.Nm
+accepts the following command-line flags:
+.Bl -tag -width a_ami_
+.It Fl a Ar AMI
+Start an instance of the given AMI.
+If not specified,
+.Nm
+will default to ami-b232d0db.
+.It Fl h
+Print a usage statement and exit.
+.It Fl v
+Be verbose.
+If not specified,
+.Nm
+will not generate any output other than the final instance identifier and
+the hostname.
+.El
+.Sh OUTPUT
+Unless the
+.Fl v
+flag is given, the only output generated on STDOUT is a pair of strings:
+the instance identifier and the hostname of the new running instance.
+See the section
+.Xr EXAMPLES
+for expected output.
+.Pp
+If the
+.Fl v
+flag is given,
+.Nm
+may print out some useful information about what steps it is currently
+performing.
+.Pp
+Any errors encountered cause a meaningful error message to be printed to
+STDERR.
+.Sh EXIT STATUS
+The
+.Nm
+will exit with a return status of 0 under normal circumstances.
+If an error occurred,
+.Nm
+will exit with a value >0.
+.Sh EXAMPLES
+The following examples illustrate common usage of this tool.
+.Pp
+.Bd -literal -offset indent
+$ ec2-start-instance -a ami-19a34270
+i-db464ab7 ec2-75-101-236-71.compute-1.amazonaws.com
+$
+.Ed
+.Sh ENVIRONMENT
+.Nm
+assumes that the user has set up their environment for general use with
+the EC2 tools.
+That is, it will not set or modify the variables EC2_CERT, EC2_HOME and
+EC2_PRIVATE_KEY.
+.Pp
+.Nm
+allows the user to add custom flags to the
+.Xr ec2-run-instances 1
+command via the
+.Ar EC2_RUN_INSTANCES_FLAGS
+environment variable.
+If this variable is not set,
+.Nm
+will not append any flags to the command besides
+.Fl a Ar ami .
+.Sh SEE ALSO
+.Xr ec2-run-instances 1 ,
+.Xr ec2-describe-instances 1 ,
+.Xr ping 8
+.Sh HISTORY
+.Nm
+was originally assigned by
+.An Jan Schaumann
+.Aq jschauma@cs.stevens.edu
+as a homework assignment for the class "Aspects of System Administration" at
+Stevens Institute of Technology in the Spring of 2011.
