@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<HTML>
+<HEAD>
+
+  <TITLE>CS615A -- Aspects of System Administration</TITLE>
+  <STYLE type="text/css">
+  body {
+  background-color: #FFFFFf;
+  }
+  </STYLE>
+  <STYLE type="text/css">
+  li.c1 {list-style: none}
+  </STYLE>
+
+</HEAD>
+
+<BODY>
+  <TABLE border="1" align="center" cellpadding="15">
+    <TR>
+      <TD valign="top">
+        <H2>CS615A -- Aspects of System Administration - Spring 2013 - HW#2</H2>
+
+        <H3>HW#2: Package Management on different OS</H3>
+
+        <H4>Summary:</H4>
+        <p>
+          The objective of this assignment is for you to install a few
+          software packages on a few different operating systems or operating
+          system flavors.  You will learn to use the standard package
+          management tools of each as well how to build software manually
+	  as well as how to create a package for a piece of software to
+	  install on another system.
+	</p>
+	<p>
+          At the same time, you will practice using the EC2
+          command-line tools to create and administer the different OS
+          instances.  Writing the documentation to perform these tasks will
+          again be part of your assignment.
+        </p>
+        <p>
+          This is a longer assignment consisting of multiple parts; it is
+	  worth 75 points.
+        </p>
+
+        <h4><a name="instances"></a>OS Instances</h4>
+        <p>
+          The exercises below will be done <em>once for each</em> of the following
+          operating systems/AMIs:
+          <ul>
+            <li>"Getting Started on Fedora Core 8" (AMI Id: ami-b232d0db)</li>
+            <li>Ubuntu 13.04 (AMI Id: ami-1fb63576, or see <a href="http://cloud-images.ubuntu.com/locator/ec2/">this page</a>)</li>
+            <li>OmniOS stable r151004 (AMI Id: ami-4e2c9727)</strike></li>
+            <li>a FreeBSD instance (AMI Id: ami-9d38baf4, or see <a href="http://www.daemonology.net/freebsd-on-ec2/">this page</a>)</li>
+	    <li>a NetBSD instance (AMI Id: ami-5d0f8034, or see <a href="http://wiki.netbsd.org/amazon_ec2/amis/">this page</a>)</li>
+          </ul>
+        </p>
+
+        <H4>Creating the instance</H4>
+        <p>
+          <em>Using the EC2 command-line tools</em>, create an instance of each of the
+          above listed AMIs.  (You can do this in parallel, or sequentially,
+          as you prefer.)  Familiarize yourself with all available
+          command-line tools, most notably, of course, the following commands:
+          <ul>
+            <li><tt>ec2-describe-images</tt></li>
+            <li><tt>ec2-add-group</tt></li>
+            <li><tt>ec2-describe-group</tt></li>
+            <li><tt>ec2-authorize</tt></li>
+            <li><tt>ec2-run-instances</tt></li>
+            <li><tt>ec2-describe-instances</tt></li>
+            <li><tt>ec2-get-console-output</tt></li>
+          </ul>
+        </p>
+
+       <H4><a name="software"></a>Install software using the native package managemer</H4>
+	<p><em><small>25 points</small></em></p>
+       <p>
+         On each instance, use the OS's native package manager (finding out
+         whichever that is and how to use it is part of the assignment) to
+         install the following packages (if not already installed):
+         <ul>
+           <li>gcc</li>
+           <li>perl</li>
+           <li>python</li>
+           <li>gpg (sometimes known as gnupg)</li>
+           <li>screen</li>
+           <li>sudo</li>
+           <li>sipcalc</li>
+         </ul>
+       </p>
+       <p>
+         Though not part of this assignment, you probably should familiarize
+         yourself with these tools.
+       </p>
+
+       <h4>Install software "by hand"</h4>
+	<p><em><small>25 points</small></em></p>
+       <p>
+	Choose any one of the Linux systems listed above as well as one of
+	the non-Linux system.  Then, install <a
+	href="http://graphite.wikidot.com/">Graphite</a> on each without
+	using the package manager.  That is, download the software and follow the
+	instructions provided by the software to install it.
+       </p>
+
+	<h4>Create an RPM for "Statsd"</h4>
+	<p><em><small>25 points</small></em></p>
+	<p>
+	  On an RPM based Linux system (such as the Fedora instance noted
+	  above), create an RPM for the <a
+	  href="https://github.com/etsy/statsd">Statsd</a> software package.
+	  Verify that the resulting package can be installed on a new
+	  instance.
+	</p>
+	<p>
+	  Your submission for this part of the homework will include the
+	  <tt>.spec</tt> file you created.
+	</p>
+
+       <H4>Deliverables and Due Date</H4>
+       <p>
+         Your deliverable is a single flat text file (plain ascii, preferably
+         created via a unix editor such as <tt>vi(1)</tt>).  The file needs
+         to contain:
+         <ul>
+           <li>your full name</li>
+           <li>your <tt>@stevens.edu</tt> email address</li>
+           <li>reasonably detailed step-by-step instructions on how you
+               completed each part of this assignment</li>
+           <li>a <tt>.spec</tt> file for the statsd RPM</li>
+           <li>any gained insights / commentary on what you have
+               learned</li>
+         </ul>
+       </p>
+       <p>
+         The due date for this assignment is 2013-02-25 18:00.  Please
+         attach the file to an email sent from your <tt>@stevens.edu</tt>
+         email address to <a
+         href="mailto:jschauma@stevens.edu?subject=[CS615] HW2">jschauma@stevens.edu</a>
+         with a subject of "[CS615] HW2".
+       </p>
+      <hr>
+      [<a href="index.html">Course Website</a>]
+</BODY>
+</HTML>
