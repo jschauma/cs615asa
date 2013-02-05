@@ -50,7 +50,11 @@ PICTURES=	pics/bandaid.eps \
 		pics/os.eps \
 		pics/beastie.eps \
 		pics/build-automation.eps \
-		pics/anonymous.eps
+		pics/nytimes.eps \
+		pics/wsj.eps \
+		pics/twitter.eps \
+		pics/twitter2.eps \
+		pics/types-of-software.eps
 
 
 
