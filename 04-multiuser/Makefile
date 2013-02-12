@@ -34,8 +34,9 @@ PICTURES=	\
 		pics/uncle-ben.eps \
 		pics/kids_fighting.eps \
 		pics/hyperbolic_tangent.eps \
-		pics/WhitneyHouston.eps \
-		pics/iran.eps
+		pics/superman.eps \
+		pics/groups-machines.eps \
+		pics/ls-l.eps
 
 #FIGURES=	decision-tree.eps two-rules.eps combined.eps area.eps
 
