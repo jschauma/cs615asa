@@ -549,14 +549,14 @@ Three basic categories:
 	\hspace*{5mm}
 	\blueline\\
 	\hspace*{5mm}\\
-		Tuesday, February 21st, 2012
+		Tuesday, February 19th, 2013
 \end{center}
 \vspace*{\fill}
 
 \subsection{Words of Wisdom}
 \\
 
-\newcommand{\gargantuan}{\fontsize{70}{75}\selectfont}
+\newcommand{\gargantuan}{\fontsize{60}{65}\selectfont}
 \gargantuan
 \begin{center}
 Anything you do more than once is worth automating.
@@ -589,17 +589,26 @@ Our software defines, exhibits or provides:
 	\item laziness
 \end{itemize}
 
-\subsection{Scheduling programs}
-
+\subsection{Things to automate}
 \begin{itemize}
-	\item repeatedly $\rightarrow$ \verb+cron(8)+, \verb+crontab(1)+ \\
-		\verb,30 5 * * 6 find /tmp -type f -mtime +7 -atime +7 -exec rm -f '{}' ';',
-	\item once $\rightarrow$ \verb+at(1)+ \\
-		\verb,at -f script.sh 1am tomorrow,
-	\item based on system load $\rightarrow$ \verb+batch(1)+ \\
-		\verb,batch -f script.sh 4pm + 3 days,
+	\item software installation and upgrades
+	\item user account creation and deletion
+	\item system configuration
+	\item log and event processing
+	\item {\em pretty much everything, seriously}
 \end{itemize}
 
+%\subsection{Scheduling programs}
+%
+%\begin{itemize}
+%	\item repeatedly $\rightarrow$ \verb+cron(8)+, \verb+crontab(1)+ \\
+%		\verb,30 5 * * 6 find /tmp -type f -mtime +7 -atime +7 -exec rm -f '{}' ';',
+%	\item once $\rightarrow$ \verb+at(1)+ \\
+%		\verb,at -f script.sh 1am tomorrow,
+%	\item based on system load $\rightarrow$ \verb+batch(1)+ \\
+%		\verb,batch -f script.sh 4pm + 3 days,
+%\end{itemize}
+%
 
 \newpage
 \vspace*{\fill}
@@ -613,175 +622,6 @@ Our software defines, exhibits or provides:
 \end{center}
 \vspace*{\fill}
 
-\subsection{Coding time!}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=2]{pics/donquixote.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{Coding time!}
-Tell me how many words are there in Miguel de Cervantes's ``Don Quixote''.
-
-\subsection{Coding time!}
-Tell me how many words are there in Miguel de Cervantes's ``Don Quixote''.
-\\
-
-\begin{verbatim}
-curl http://www.gutenberg.org/cache/epub/996/pg996.txt | wc
-\end{verbatim}
-
-\subsection{Coding time!}
-Tell me how many words are there in Miguel de Cervantes's ``Don Quixote''.
-\\
-
-\begin{verbatim}
-curl http://www.gutenberg.org/cache/epub/996/pg996.txt | wc
-\end{verbatim}
-\vspace{.5in}
-
-Ok, which word is the most common in this text?
-
-
-\subsection{Coding time!}
-Write a shell script that:
-\begin{itemize}
-	\item reads input from {\tt stdin}
-	\item counts the frequency of each word
-	\item prints the frequency followed by the word to stdout
-\end{itemize}
-\vspace{.5in}
-You have 20 minutes... \\
-
-\vspace{.5in}
-(If you finish before 20 minutes are up, write a script to count the
-frequency of characters, too.) \\
-
-\vspace{.5in}
-(If you finish {\em this} before 20 minutes are up, write a script
-to print the frequency of words by word-length.)
-
-\subsection{Coding time!}
-One solution:
-\begin{verbatim}
-# translate spaces into newlines
-tr '[:space:]' '\n' |                    \
-        # count unique occurrences
-        sort | uniq -c
-\end{verbatim}
-
-\subsection{Coding time!}
-One solution:
-\begin{verbatim}
-# translate spaces into newlines
-tr '[:space:]' '\n' |                    \
-        # ignore punctuation
-        tr -d '[:punct:]' |              \
-        # count unique occurrences
-        sort | uniq -c
-\end{verbatim}
-
-\subsection{Coding time!}
-One solution:
-\begin{verbatim}
-# translate spaces into newlines
-tr '[:space:]' '\n' |                    \
-        # ignore punctuation
-        tr -d '[:punct:]' |              \
-        # treat upper and lower cases the same
-        tr '[:upper:]' '[:lower:]' |     \
-        # count unique occurrences
-        sort | uniq -c
-\end{verbatim}
-
-\subsection{Coding time!}
-One solution:
-\begin{verbatim}
-# ignore punctuation
-tr '[:punct:]' ' ' |                     \
-        # translate spaces into newlines
-        tr '[:space:]' '\n' |            \
-        # treat upper and lower cases the same
-        tr '[:upper:]' '[:lower:]' |     \
-        # count unique occurrences
-        sort | uniq -c
-\end{verbatim}
-
-\subsection{Coding time!}
-One solution:
-\begin{verbatim}
-# ignore punctuation
-tr '[:punct:]' ' ' |                     \
-        # translate spaces into newlines
-        tr '[:space:]' '\n' |            \
-        # treat upper and lower cases the same
-        tr '[:upper:]' '[:lower:]' |     \
-        # ignore numbers and other non-word words
-        grep -v '[^a-z]' |               \
-        # count unique occurrences
-        sort | uniq -c
-\end{verbatim}
-
-\subsection{Coding time!}
-One solution:
-\begin{verbatim}
-# ignore punctuation
-tr '[:punct:]' ' ' |                     \
-        # translate spaces into newlines
-        tr '[:space:]' '\n' |            \
-        # treat upper and lower cases the same
-        tr '[:upper:]' '[:lower:]' |     \
-        # ignore numbers and other non-word words
-        egrep '^[a-z]+$' |               \
-        # count unique occurrences
-        sort | uniq -c
-\end{verbatim}
-
-\subsection{Coding time!}
-One solution:
-\begin{verbatim}
-# ignore punctuation
-tr '[:punct:]' ' ' |                     \
-        # translate spaces into newlines
-        tr '[:space:]' '\n' |            \
-        # treat upper and lower cases the same
-        tr '[:upper:]' '[:lower:]' |     \
-        # ignore numbers and other non-word words
-        egrep '^[a-z]+$' |               \
-        # count unique occurrences
-        sort | uniq -c
-\end{verbatim}
-\vspace{.5in}
-Character frequency:
-\begin{verbatim}
-fold -w1 | tr '[:upper:]' '[:lower:]' | egrep '^[a-z]+$' | sort | uniq -c
-\end{verbatim}
-
-\subsection{Coding time!}
-One solution:
-\begin{verbatim}
-# ignore punctuation
-tr '[:punct:]' ' ' |                     \
-        # translate spaces into newlines
-        tr '[:space:]' '\n' |            \
-        # treat upper and lower cases the same
-        tr '[:upper:]' '[:lower:]' |     \
-        # ignore numbers and other non-word words
-        egrep '^[a-z]+$' |               \
-        # count unique occurrences
-        sort | uniq -c
-\end{verbatim}
-Character frequency:
-\begin{verbatim}
-fold -w1 | tr '[:upper:]' '[:lower:]' | egrep '^[a-z]+$' | sort | uniq -c
-\end{verbatim}
-Word length:
-\begin{verbatim}
-tr '[:punct:]' ' ' | tr '[:space:]' '\n' | tr '[:upper:]' '[:lower:]' | \
-        egrep '^[a-z]+$' | awk '{ print length(); }' | sort -n | uniq -c
-\end{verbatim}
-
-
 \subsection{Shell Essentials}
 Essential Tools:
 \begin{itemize}
@@ -791,122 +631,102 @@ Essential Tools:
 	\item awk(1)
 	\item sed(1)
 	\item tr(1)
+	\item sort(1)
 	\item regular expressions
 	\item ssh(1)/scp(1)
+	\item wc(1)
 	\item expect(1)
 \end{itemize}
 
-\subsection{awk(1)}
-{\tt examples/runcmd.sh}
+\subsection{Coding time!}
+Page view statistics for Wikimedia projects \\
+{\tt http://dumps.wikimedia.org/other/pagecounts-raw/} \\
+\vspace{.5in}
 
-{\tt examples/pkg\_ids}
-
-\subsection{sed(1)}
-
+On {\tt linux-lab.cs.stevens.edu}:
 \begin{verbatim}
-sed -e 's/\([^:]*\).*:\(.*$\)/\1 -> \2/' /etc/passwd
-
-http://sed.sourceforge.net/sed1line.txt
-
-examples/hanoi.sed
+ls ~jschauma/public_html/615/pagecounts-20130201-000000.gz
 \end{verbatim}
 
-
-\subsection{Shell Essentials}
-What does a shell do?
+\subsection{Coding time!}
 \begin{itemize}
-	\item ``simple'' interactive program
-	\item fork-exec commands
-	\item job-control
-	\item input-output redirection
+	\item How many unique objects were requested in that hour in total?
+	\item For {\tt en} only:
+		\begin{itemize}
+			\item How many unique objects were requested?
+			\item Which is the most often requested object?
+			\item How many requests in total?
+			\item How much data was transferred in total?
+			\item Which was the largest object requested?
+			\item What is the longest word found on the ten most
+				frequently retrieved pages?
+		\end{itemize}
 \end{itemize}
 
-\subsection{Writing Shell Scripts: Startup and Environment}
-\begin{itemize}
-	\item when the shell starts, it will read various startup files as
-		well as initialize some variables
-\end{itemize}
+\subsection{Coding time!}
+How many unique objects were requested?
 
-\subsection{Writing Shell Scripts: Startup and Environment}
-\begin{itemize}
-	\item when the shell starts, it will read various startup files as
-		well as initialize some variables
-	\item difference between use as an interactive (or login) shell and a
-		command-interpreter/programming language
-\end{itemize}
+\begin{verbatim}
+FILE=~jschauma/public_html/615/pagecounts-20130201-000000.gz
+zcat ${FILE} | wc -l
+\end{verbatim}
 
-\subsection{Writing Shell Scripts: Startup and Environment}
-\begin{itemize}
-	\item when the shell starts, it will read various startup files as
-		well as initialize some variables
-	\item difference between use as an interactive (or login) shell and a
-		command-interpreter/programming language
-	\item remember that each process inherits the process environment
-		from its parent
-\end{itemize}
+\subsection{Coding time!}
+How many unique objects were requested for {\tt en} only?
 
-\subsection{Writing Shell Scripts: Startup and Environment}
-\begin{itemize}
-	\item when the shell starts, it will read various startup files as
-		well as initialize some variables
-	\item difference between use as an interactive (or login) shell and a
-		command-interpreter/programming language
-	\item remember that each process inherits the process environment
-		from its parent
-	\item \verb+export+ed variables vs local variables
-\end{itemize}
+\begin{verbatim}
+FILE=~jschauma/public_html/615/pc
+grep "^en " ${FILE} | wc -l
+\end{verbatim}
 
-\subsection{Writing Shell Scripts: Startup and Environment}
-\begin{itemize}
-	\item when the shell starts, it will read various startup files as
-		well as initialize some variables
-	\item difference between use as an interactive (or login) shell and a
-		command-interpreter/programming language
-	\item remember that each process inherits the process environment
-		from its parent
-	\item \verb+export+ed variables vs local variables
-	\item some variables influence or apply to many applications
-\end{itemize}
+\subsection{Coding time!}
+Which is the most often requested object?
 
+\begin{verbatim}
+FILE=~jschauma/public_html/615/pc
+grep "^en " ${FILE} | sort -k3 -n | tail -1
+\end{verbatim}
 
-\subsection{Writing Shell Scripts: Startup and Environment}
-\begin{itemize}
-	\item when the shell starts, it will read various startup files as
-		well as initialize some variables
-	\item difference between use as an interactive (or login) shell and a
-		command-interpreter/programming language
-	\item remember that each process inherits the process environment
-		from its parent
-	\item \verb+export+ed variables vs local variables
-	\item some variables influence or apply to many applications
-\end{itemize}
+\subsection{Coding time!}
+How many requests were there in total?
 
-\subsection{Writing Shell Scripts: Shell Variables}
-\begin{itemize}
-	\item {\tt \$*} and {\tt \$@}
-	\item {\tt \$\#}, {\tt \$0} and {\tt \$1 ... \$N}
-	\item {\tt \$?}
-	\item {\tt \$\$}
-	\item {\tt \$!}
-\end{itemize}
+\begin{verbatim}
+awk '{ sum=sum+$(NF-1); }; END { print sum; }' en
+\end{verbatim}
 
-\subsection{Writing Shell Scripts: Shell Variable Expansions}
-\begin{itemize}
-	\item {\tt \$\{var:-default\}}
-	\item {\tt \$\{var:?"Message\}}
-	\item {\tt \$\{var:+value\}}
-	\item {\tt \$\{var\%suffix\}} and {\tt \$\{var\%\%suffix\}}
-	\item {\tt \$\{var\#prefix\}} and {\tt \$\{var\#\#prefix\}}
-\end{itemize}
+\subsection{Coding time!}
+How much data was transferred in total?
 
-\subsection{Writing Shell Scripts: ...and there's still more!}
-\begin{itemize}
-	\item {\tt \$(command)} or {\tt \`{}command\`{}}
-	\item {\tt \$(( arithmetic expression ))}
-	\item stdin, stdout, stderr
-	\item \verb+>+, \verb+>>+, \verb+<+, \verb+<<+, \verb+|+
-\end{itemize}
-\vspace{.5in}
+\begin{verbatim}
+echo $(( $(awk '{ sum=sum+$NF; }; END { print sum; }' en)/1024/1024/1024 ))
+\end{verbatim}
+
+\subsection{Coding time!}
+Which was the largest object requested?
+
+\begin{verbatim}
+FILE=en
+awk '{ s=$NF/$(NF-1); if (s>l) { l=s; n=$0; }}; END { print n; }' <en
+\end{verbatim}
+
+\subsection{Coding time!}
+What is the longest word found on the ten most frequently retrieved pages?
+
+\begin{verbatim}
+for f in $(cat en | sort -k3 -n | tail -10 |
+        sed -e 's/en \(.*\) [0-9]* [0-9]*/\1/'); do
+        links -dump http://en.wikipedia.org/wiki/${f}
+done |
+tr '[:punct:]' ' ' |
+tr '[:space:]' '\n' |
+tr '[:upper:]' '[:lower:]' |
+egrep '^[a-z]+$' |
+awk '{ print length() " " $0; }' |
+sort -n |
+tail -1
+\end{verbatim}
+
+\subsection{Writing Shell Scripts}
 {\tt sh examples/shexamples}
 
 \subsection{Writing Shell Scripts: Builtins, Functions, Job Control, Signals}
@@ -995,59 +815,58 @@ What does a shell do?
 \addvspace{.5in}
 As you can tell, this whole thing looks like a full-blown programming language!
 
-
-
-\subsection{Regular Expressions}
-A regular expression is a pattern that describes a set of strings. \\
-
-\begin{itemize}
-	\item patterns can be
-		\begin{itemize}
-			\item single characters (\verb+a+)
-			\item a bracket expression, such as
-				\begin{itemize}
-					\item a number of characters -- \verb+[aK2l,]+
-					\item a range expression -- \verb+[a-z]+
-					\item a negated bracket expression -- \verb+[^0-9]+
-				\end{itemize}
-			\item a character with a special meaning, such as
-				\begin{itemize}
-					\item \verb+.+ -- any single character
-					\item \verb+^+ -- beginning of line
-					\item \verb+$+ -- end of line
-				\end{itemize}
-			\item a combination of patterns
-		\end{itemize}
-\end{itemize}
-
-\subsection{Regular Expressions}
-\begin{itemize}
-	\item patterns can be followed by qualifiers and quantifiers
-		\begin{itemize}
-			\item \verb+?+ -- the pattern is optional and matched at most once
-			\item \verb+*+ -- the pattern will be matched zero or more times
-			\item \verb|+| -- the pattern will be matched one or more times
-			\item \verb+{n}+ -- the pattern is matched exactly \verb+n+ times
-			\item \verb+{n,}+ -- the pattern is matched \verb+n+ or more times
-			\item \verb+{n,m}+ -- the pattern is matched at least \verb+n+,
-				but no more than \verb+m+ times
-		\end{itemize}
-	\item patterns can be logically grouped together \verb+(1[a-z]2|a[0-9]z)+
-	\item matched patterns can be remembered and referenced lateron
-\end{itemize}
-\addvspace{.5in}
-NB: different tools implement regular expressions somewhat differently
-
-\subsection{Regular Expressions}
-Example exercises:
-\begin{itemize}
-	\item extract all proper words from a document
-	\item extract all URLs from a document
-	\item check if a string is a valid IPv4 address
-	\item check if a string is a valid IPv6 address
-	\item check if a string is a valid date
-\end{itemize}
-
+%
+%\subsection{Regular Expressions}
+%A regular expression is a pattern that describes a set of strings. \\
+%
+%\begin{itemize}
+%	\item patterns can be
+%		\begin{itemize}
+%			\item single characters (\verb+a+)
+%			\item a bracket expression, such as
+%				\begin{itemize}
+%					\item a number of characters -- \verb+[aK2l,]+
+%					\item a range expression -- \verb+[a-z]+
+%					\item a negated bracket expression -- \verb+[^0-9]+
+%				\end{itemize}
+%			\item a character with a special meaning, such as
+%				\begin{itemize}
+%					\item \verb+.+ -- any single character
+%					\item \verb+^+ -- beginning of line
+%					\item \verb+$+ -- end of line
+%				\end{itemize}
+%			\item a combination of patterns
+%		\end{itemize}
+%\end{itemize}
+%
+%\subsection{Regular Expressions}
+%\begin{itemize}
+%	\item patterns can be followed by qualifiers and quantifiers
+%		\begin{itemize}
+%			\item \verb+?+ -- the pattern is optional and matched at most once
+%			\item \verb+*+ -- the pattern will be matched zero or more times
+%			\item \verb|+| -- the pattern will be matched one or more times
+%			\item \verb+{n}+ -- the pattern is matched exactly \verb+n+ times
+%			\item \verb+{n,}+ -- the pattern is matched \verb+n+ or more times
+%			\item \verb+{n,m}+ -- the pattern is matched at least \verb+n+,
+%				but no more than \verb+m+ times
+%		\end{itemize}
+%	\item patterns can be logically grouped together \verb+(1[a-z]2|a[0-9]z)+
+%	\item matched patterns can be remembered and referenced lateron
+%\end{itemize}
+%\addvspace{.5in}
+%NB: different tools implement regular expressions somewhat differently
+%
+%\subsection{Regular Expressions}
+%Example exercises:
+%\begin{itemize}
+%	\item extract all proper words from a document
+%	\item extract all URLs from a document
+%	\item check if a string is a valid IPv4 address
+%	\item check if a string is a valid IPv6 address
+%	\item check if a string is a valid date
+%\end{itemize}
+%
 \newpage
 \vspace*{\fill}
 \begin{center}
@@ -1464,6 +1283,7 @@ Shell:
 \begin{itemize}
 	\item \verb+http://www.tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html+
 	\item \verb+http://www.tldp.org/LDP/abs/html/+
+	\item \verb+http://sed.sourceforge.net/sed1line.txt+
 	\item \verb+csh(1)+, \verb+ksh(1)+, \verb+sh(1)+
 	\item {\em Frisch}: Chapter 3, 14
 \end{itemize}

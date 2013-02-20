@@ -1,13 +1,14 @@
-#! /bin/sh
+#!/bin/sh
 #
 # This script illustrates the use of the various POSIX features relating
-# to shell variables, redirection etc.
+# to shell variables.
 #
 # Written by Jan Schaumann <jschauma@netmeister.org> in February 2012.
 #
 # Run this script as:
 # sh `pwd`/shexamples a "b c" 'd e f' g
 
+#echo "\${1:?\"Run as 'sh \\\`pwd\\\`/shexamples [-hl] [-f func] | a \\\"b c\\\" \\\'d e f\\\' g\"}"
 : ${1:?"Run as 'sh \`pwd\`/shexamples [-hl] [-f func] | a \"b c\" 'd e f' g"}
 
 FUNC="all"
