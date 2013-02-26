@@ -1,0 +1,43 @@
+.Dd February 24, 2013
+.Dt IFCFG-DATA 1
+.Os
+.Sh NAME
+.Nm ifcfg-data
+.Nd extract data from ifconfig output
+.Sh SYNOPSIS
+.Nm
+.Op Fl imn
+.Sh DESCRIPTION
+The
+.Nm
+tool extract data from the output of the
+.Xr ifconfig 8
+command.
+.Pp
+.Nm
+reads data from stdin and prints output to stdout.
+.Sh OPTIONS
+.Nm
+accepts the following command-line flags:
+.Bl -tag -width _f
+.It Fl i
+Print all IP addresses.
+.It Fl m
+Print all MAC addresses.
+.It Fl n
+Print all netmasks.
+.El
+.Sh EXIT STATUS
+.Ex -std
+.Sh SEE ALSO
+.Xr awk 1 ,
+.Xr grep 1 ,
+.Xr sed 1 ,
+.Xr ifconfig 8
+.Sh HISTORY
+.Nm
+was originally assigned by
+.An Jan Schaumann
+.Aq jschauma@stevens.edu
+as a homework assignment for the class "Aspects of System Administration" at
+Stevens Institute of Technology in the Spring of 2013.

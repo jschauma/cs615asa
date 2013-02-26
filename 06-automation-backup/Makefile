@@ -47,7 +47,9 @@ PICTURES= pics/Time_Machine.eps \
 		pics/wafl0.eps \
 		pics/wafl1.eps \
 		pics/wafl2.eps \
-		pics/waste.eps
+		pics/waste.eps \
+		pics/WrongProgramming.eps \
+		pics/20th-and-C.eps
 
 MANPAGES=	ec2-backup.txt ec2-start-instance.txt
 

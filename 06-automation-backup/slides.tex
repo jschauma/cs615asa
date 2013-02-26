@@ -47,6 +47,163 @@
 \end{center}
 \vspace*{\fill}
 
+\subsection{Regular Expressions}
+A regular expression is a pattern that describes a set of strings. \\
+
+\begin{itemize}
+	\item patterns can be a combination of
+		\begin{itemize}
+			\item a fixed string (\verb+abc+)
+		\end{itemize}
+\end{itemize}
+\vspace{.5in}
+\begin{verbatim}
+$ ifconfig -a | egrep "inet"
+\end{verbatim}
+
+\subsection{Regular Expressions}
+A regular expression is a pattern that describes a set of strings. \\
+
+\begin{itemize}
+	\item patterns can be a combination of
+		\begin{itemize}
+			\item a fixed string (\verb+abc+)
+			\item a bracket expression, such as
+				\begin{itemize}
+					\item a number of characters -- \verb+[aK2l,]+
+				\end{itemize}
+		\end{itemize}
+\end{itemize}
+\vspace{.5in}
+\begin{verbatim}
+$ ifconfig -a | egrep "[UBS]"
+\end{verbatim}
+
+\subsection{Regular Expressions}
+A regular expression is a pattern that describes a set of strings. \\
+
+\begin{itemize}
+	\item patterns can be a combination of
+		\begin{itemize}
+			\item a fixed string (\verb+abc+)
+			\item a bracket expression, such as
+				\begin{itemize}
+					\item a number of characters -- \verb+[aK2l,]+
+					\item a range expression -- \verb+[a-z]+
+				\end{itemize}
+		\end{itemize}
+\end{itemize}
+\vspace{.5in}
+\begin{verbatim}
+$ ifconfig -a | egrep "[A-Z]"
+\end{verbatim}
+
+
+
+\subsection{Regular Expressions}
+A regular expression is a pattern that describes a set of strings. \\
+
+\begin{itemize}
+	\item patterns can be a combination of
+		\begin{itemize}
+			\item a fixed string (\verb+abc+)
+			\item a bracket expression, such as
+				\begin{itemize}
+					\item a number of characters -- \verb+[aK2l,]+
+					\item a range expression -- \verb+[a-z]+
+					\item a negated bracket expression -- \verb+[^0-9]+
+				\end{itemize}
+		\end{itemize}
+\end{itemize}
+\vspace{.5in}
+\begin{verbatim}
+$ ifconfig -a | egrep "[^a-zA-Z0-9      <>%,:.()]"
+\end{verbatim}
+
+
+
+\subsection{Regular Expressions}
+A regular expression is a pattern that describes a set of strings. \\
+
+\begin{itemize}
+	\item patterns can be a combination of
+		\begin{itemize}
+			\item a fixed string (\verb+abc+)
+			\item a bracket expression, such as
+				\begin{itemize}
+					\item a number of characters -- \verb+[aK2l,]+
+					\item a range expression -- \verb+[a-z]+
+					\item a negated bracket expression -- \verb+[^0-9]+
+				\end{itemize}
+			\item a character with a special meaning, such as
+				\begin{itemize}
+					\item \verb+.+ -- any single character
+				\end{itemize}
+		\end{itemize}
+\end{itemize}
+\vspace{.5in}
+\begin{verbatim}
+$ ifconfig -a | egrep "flags."
+\end{verbatim}
+
+
+
+\subsection{Regular Expressions}
+A regular expression is a pattern that describes a set of strings. \\
+
+\begin{itemize}
+	\item patterns can be a combination of
+		\begin{itemize}
+			\item a fixed string (\verb+abc+)
+			\item a bracket expression, such as
+				\begin{itemize}
+					\item a number of characters -- \verb+[aK2l,]+
+					\item a range expression -- \verb+[a-z]+
+					\item a negated bracket expression -- \verb+[^0-9]+
+				\end{itemize}
+			\item a character with a special meaning, such as
+				\begin{itemize}
+					\item \verb+.+ -- any single character
+					\item \verb+^+ -- beginning of line
+					\item \verb+$+ -- end of line
+				\end{itemize}
+		\end{itemize}
+\end{itemize}
+\vspace{.5in}
+\begin{verbatim}
+$ ifconfig -a | egrep "[0-9]$"
+\end{verbatim}
+
+\subsection{Regular Expressions}
+\begin{itemize}
+	\item patterns can be followed by qualifiers and quantifiers
+		\begin{itemize}
+			\item \verb+?+ -- the pattern is optional and matched at most once
+			\item \verb+*+ -- the pattern will be matched zero or more times
+			\item \verb|+| -- the pattern will be matched one or more times
+			\item \verb+{n}+ -- the pattern is matched exactly \verb+n+ times
+			\item \verb+{n,}+ -- the pattern is matched \verb+n+ or more times
+			\item \verb+{n,m}+ -- the pattern is matched at least \verb+n+,
+				but no more than \verb+m+ times
+		\end{itemize}
+	\item patterns can be logically grouped together \verb+(1[a-z]2|a[0-9]z)+
+	\item matched patterns can be remembered and referenced lateron
+\end{itemize}
+
+\subsection{Regular Expressions}
+Identify all network interfaces:
+\begin{verbatim}
+$ ifconfig -a | sed -n -E 's/^([a-z]+[0-9]).*/\1/p'
+$ ifconfig -a | sed -n -E 's/^([a-z]+(([0-9]+)|:[0-9]+)?).*/\1/p'
+\end{verbatim}
+\vspace{.5in}
+Now you:
+\begin{itemize}
+	\item extract all IP addresses
+	\item extract all MAC addresses
+	\item extract all netmasks
+\end{itemize}
+
 \subsection{Remember to use the right tool for the job}
 Bourne shell ({\tt /bin/sh}):
 \begin{itemize}
@@ -65,7 +222,7 @@ Bourne shell ({\tt /bin/sh}):
 \end{itemize}
 
 \subsection{Remember to use the right tool for the job}
-Perl, Python, Ruby
+Perl, Python, Ruby, ...
 \begin{itemize}
 	\item suitable for moderately complex tasks
 	\item move to these when {\tt sed(1)}, {\tt awk(1)} and friends
@@ -85,19 +242,18 @@ Perl, Python, Ruby
 \end{itemize}
 
 \subsection{Remember to use the right tool for the job}
-Perl, PHP, Tcl, JavaScript, CoffeeScript, ...
+Perl, Python, PHP, Ruby, JavaScript, ...
 \begin{itemize}
 	\item http/web server interfaces
 	\item CGI ``scripts''
-	\item server-side execution (via, for example, NodeJS in the case
-		of JavaScript)
+	\item server-side execution
 	\item interface with/utilize APIs in a specific domain/vendor products
 	\item frequent cause of all sorts of security problems due to
 		interface with user data / exposure on the internet
 \end{itemize}
 
 \subsection{Remember to use the right tool for the job}
-Java, Scala, Clojure, Rhino...
+Java, Scala, Clojure, ...
 \begin{itemize}
 	\item know your primary applications
 	\item interface with / extend / tie into JVM
@@ -112,12 +268,10 @@ C, C++, Go, ...
 	\item fix/patch your tools
 \end{itemize}
 
-\subsection{Scripting / interpreted Languages}
+\subsection{Of course...}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=0.9]{pics/compiling.eps}
-	\\
-	\small \verb+http://xkcd.com/303/+
+	\includegraphics[scale=0.65]{pics/WrongProgramming.eps}
 \end{center}
 \vspace*{\fill}
 
@@ -142,7 +296,7 @@ General disadvantages:
 		available $\rightarrow$ lots of duplication, stale code,
 		questionable quality
 	\item security features frequently neglected or circumvented ("too
-		hard" or more precisely "inconvenient")
+		hard" / "inconvenient")
 	\item everybody has their particular favorite (and dislikes one or
 		the other)
 	\item interpreter not (necessarily) universally available /
@@ -159,17 +313,13 @@ General disadvantages:
 
 \subsection{Unix Philosophy}
 \\
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.5]{pics/pipe.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{Unix Philosophy}
-\\
 \Huge
 \begin{center}
-	Do one thing and do it well.
+	Write programs that do one thing and do it well.\\
+	\vspace{.5in}
+	Write programs to work together. \\
+	\vspace{.5in}
+	Write programs to handle text streams, because that is a universal interface.
 \end{center}
 \Normalsize
 
@@ -196,201 +346,6 @@ Principle of Least Astonishment
 	\includegraphics[scale=2.0]{pics/tdd.eps}
 \end{center}
 \vspace*{\fill}
-
-
-\subsection{The Zen of Python}
-\Huge
-\begin{center}
-Beautiful is better than ugly.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-Explicit is better than implicit.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-    Simple is better than complex.
-\vspace*{\fill}
-	\includegraphics[scale=0.8]{pics/complexity.eps}
-	\\
-	\small \verb+http://xkcd.com/399/+
-\end{center}
-\vspace*{\fill}
-\Huge
-
-\subsection{The Zen of Python}
-\begin{center}
-    Complex is better than complicated.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-    Flat is better than nested.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-    Sparse is better than dense.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-    Readability counts.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-    Special cases aren't special enough to break the rules.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-    Special cases aren't special enough to break the rules. \\
-\addvspace{.5in}
-    Although practicality beats purity.
-\end{center}
-
-\subsection{The Zen of Python}
-\\
-\begin{center}
-    Errors should never pass silently.
-\end{center}
-
-\subsection{The Zen of Python}
-\\
-\begin{center}
-    Errors should never pass silently. \\
-\addvspace{.2in}
-	\small
-	(That would be implicitly accepted failure.)
-\end{center}
-\Huge
-
-\subsection{The Zen of Python}
-\\
-\begin{center}
-    Errors should never pass silently. \\
-\addvspace{.2in}
-	\small
-	(That would be implicitly accepted failure.) \\
-\addvspace{.2in}
-	(You know what would be better than something {\em implicit}?)
-\end{center}
-
-\subsection{The Zen of Python}
-\\
-\begin{center}
-    Errors should never pass silently. \\
-\addvspace{.2in}
-	\small
-	(That would be implicitly accepted failure.) \\
-\addvspace{.2in}
-	(You know what would be better than something {\em implicit}?) \\
-\addvspace{.2in}
-	(Why, of course, something {\em explicit}!)
-\end{center}
-
-\subsection{The Zen of Python}
-\\
-\begin{center}
-    Errors should never pass silently. \\
-\addvspace{.5in}
-    Unless explicitly silenced.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-    In the face of ambiguity, refuse the temptation to guess.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-    There should be one -- and preferably only one -- obvious way to do it.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-    There should be one -- and preferably only one -- obvious way to do it.
-
-\addvspace{.5in}
-
-    Although that way may not be obvious at first unless you're Dutch. \\
-\vspace*{\fill}
-	\includegraphics[scale=0.5]{pics/sign.eps}
-\end{center}
-
-
-\subsection{The Zen of Python}
-\begin{center}
-    Now is better than never.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-    Now is better than never.  \\
-
-\addvspace{.5in}
-
-    Although never is often better than *right* now.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-    If the implementation is hard to explain, it's a bad idea.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-    If the implementation is easy to explain, \\
-	it {\em may} be a good idea.
-\end{center}
-
-\subsection{A simple interface, easy to explain.  Yet...}
-\\
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.1]{pics/elevator_buttons-reverse.eps}
-\end{center}
-\vspace*{\fill}
-
-
-\subsection{The Zen of Python}
-\begin{center}
-    Namespaces are one honking great idea -- let's do more of those!
-\end{center}
-\Normalsize
-
-\subsection{Documentation}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.9]{pics/manual.eps}
-	\hspace{.5in}
-	\includegraphics[scale=0.9]{pics/manual2.eps}
-	\\
-	\vspace{.2in}
-	\Huge
-	{\bf WTFM}
-	\Normalsize
-\end{center}
-\vspace*{\fill}
-
-
-\subsection{Consistency}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.0]{pics/consistency.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{Robustness Principle or Postel's Law}
-\\
-\Huge
-\begin{center}
-	Be conservative in what you do; be liberal in what you accept from others.
-\end{center}
-\Normalsize
 
 \subsection{Avoid the Quick Fix}
 \\
@@ -582,19 +537,6 @@ Why are backups needed?
 \end{itemize}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=0.4]{pics/headcrash.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{Backups and Restore Basics}
-Why are backups needed?
-\begin{itemize}
-	\item off-site storage of sensitive data
-	\item long-term data storage
-	\item data loss due to
-\end{itemize}
-\vspace*{\fill}
-\begin{center}
 	\includegraphics[scale=1.0]{pics/headcrash-closeup.eps}
 \end{center}
 \vspace*{\fill}
@@ -621,20 +563,7 @@ Why are backups needed?
 \end{itemize}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=2.2]{pics/disaster1.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{Backups and Restore Basics}
-Why are backups needed?
-\begin{itemize}
-	\item off-site storage of sensitive data
-	\item long-term data storage
-	\item data loss due to
-\end{itemize}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.7]{pics/disaster2.eps}
+	\includegraphics[scale=0.4]{pics/20th-and-C.eps}
 \end{center}
 \vspace*{\fill}
 
@@ -698,22 +627,6 @@ Think of your backups as {\em insurance}:  you invest and pay for it, hoping
 you will never need it.
 
 
-
-\subsection{Backup and Restore Basics}
-Simply adding disks to a system is easy -- determining an efficient backup and
-restore system for these disks is {\em hard}.
-\\
-
-Terminology:
-\begin{itemize}
-	\item the {\em backup of a file system} is often called a {\bf dump}
-	\item a {\em full backup} is referred to as a {\bf level 0 dump}
-	\item subsequent {\em partial dumps} are referred to as {\bf incremental dumps}
-	\item filesystem {\em snapshots} use the same concept, but frequently implement
-		it with {\em hardlinks} to provide a full snapshot instead of an {\em
-		overlay}
-\end{itemize}
-
 \subsection{Key Reasons for Restores}
 Three key reasons for restores: {\em Accidental File Deletion}, {\em Disk
 Failure} and {\em Archival}.
@@ -746,36 +659,6 @@ Failure} and {\em Archival}.
 	\item separate set from regular backups
 	\item usually stored off-site
 	\item store for long time
-\end{itemize}
-
-\subsection{Developing a Backup and Restore System}
-Determine the desired end-result:
-\begin{itemize}
-	\item minimum set of data considered absolutely crucial
-\end{itemize}
-
-\subsection{Developing a Backup and Restore System}
-Determine the desired end-result:
-\begin{itemize}
-	\item minimum set of data considered absolutely crucial
-	\item time frames and downtime
-\end{itemize}
-
-\subsection{Developing a Backup and Restore System}
-Determine the desired end-result:
-\begin{itemize}
-	\item minimum set of data considered absolutely crucial
-	\item time frames and downtime
-	\item length of archival
-\end{itemize}
-
-\subsection{Developing a Backup and Restore System}
-Determine the desired end-result:
-\begin{itemize}
-	\item minimum set of data considered absolutely crucial
-	\item time frames and downtime
-	\item length of archival
-	\item how are files restored
 \end{itemize}
 
 \subsection{Filesystem backup}
@@ -975,14 +858,17 @@ $ diff -bu /tmp/[ab]
 \Normalsize
 
 \subsection{HW \#3}
-Data backup to the cloud \\
+{\tt ifconfig} output parsing:
+\verb+http://www.cs.stevens.edu/~jschauma/615/s13-hw3.html+
+\\
+\verb+http://www.cs.stevens.edu/~jschauma/615/ifcfg-data.txt+
+\\
+\vspace{.5in}
 
-Detailed homework assignment posted at
-\verb+http://www.cs.stevens.edu/~jschauma/615A/s12-hw3.html+
+Data backup to the cloud \\
+\verb+http://www.cs.stevens.edu/~jschauma/615/s13-hw4.html+
 \\
-\verb+http://www.cs.stevens.edu/~jschauma/615A/ec2-start-instance.txt+
-\\
-\verb+http://www.cs.stevens.edu/~jschauma/615A/ec2-backup.txt+
+\verb+http://www.cs.stevens.edu/~jschauma/615/ec2-backup.txt+
 
 \subsection{Reading}
 Perl:
@@ -998,6 +884,7 @@ Python:
 	\item \verb+http://shop.oreilly.com/product/9780596515829.do+
 	\item \verb+http://is.gd/zmxB4V+
 	\item pydoc
+	\item \verb+echo "import this" | python+
 \end{itemize}
 
 \subsection{Reading}
@@ -1008,6 +895,14 @@ Ruby:
 	\item \verb+http://is.gd/DR4aNU+
 \end{itemize}
 
+\subsection{Reading}
+Hurricane Sandy
+\begin{itemize}
+	\item \verb+https://blog.squarespace.com/blog/?month=october-2012+
+	\item \verb+http://is.gd/Y75pEA+
+	\item \verb+http://is.gd/32Az7y+
+	\item \verb+http://is.gd/FhAuFZ+
+\end{itemize}
 
 \subsection{Reading}
 Manual Pages:
