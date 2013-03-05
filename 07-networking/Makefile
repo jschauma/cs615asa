@@ -30,7 +30,15 @@ PICTURES= \
 	pics/dual-stack.eps \
 	pics/test-ipv6.eps \
 	pics/test-ipv6-6.eps \
-	pics/ipv6-launch.eps
+	pics/ipv6-launch.eps \
+	pics/3computers-arp.eps \
+	pics/3computers-ping.eps \
+	pics/traceroute1.eps \
+	pics/traceroute2.eps \
+	pics/traceroute3.eps \
+	pics/traceroute4.eps \
+	pics/tcpip-stack.eps \
+	pics/rirs.eps
 
 #FIGURES=	decision-tree.eps two-rules.eps combined.eps area.eps
 
