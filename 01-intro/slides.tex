@@ -35,6 +35,14 @@
 \end{center}
 \vspace*{\fill}
 
+\subsection{Why are you here?}
+
+\vspace*{\fill}
+\Hugesize
+{\tt https://www.cs.stevens.edu/\~{}jschauma/cgi-bin/615.cgi}
+\Normalsize
+\vspace*{\fill}
+
 \subsection{The Job of a System Administrator}
 What {\bf exactly} does a {\em System Administrator} do?
 
@@ -1063,27 +1071,27 @@ Suggested Reading:
 \addvspace{.5in}
 Grading:
 \begin{itemize}
-	\item a few pop quizzes, worth 20 points each.
+	\item class participation / lightning talks
 	\item a number of homework assignments of varying weight
-	\item 1 presentation/paper, worth 100 points
+	\item a group project towards the end of the semester
 	\item no curve
 \end{itemize}
 
 \subsection{Syllabus}
 %Topics:
 \begin{itemize}
-	\item 2013-01-14: Introduction, Overview, UNIX history and basics
-	\item 2013-01-28: Filesystems and Disks
-	\item 2013-02-04: Software Installation Concepts
-	\item 2013-02-11: User Management, multi-user basics
-	\item 2013-02-19: Automating Administrative Tasks
-	\item 2013-02-25: Backup and Disaster Recovery
-	\item 2013-03-04: Networking
-	\item 2013-03-18: Popular services (DNS, SMTP)
-	\item 2013-03-25: Configuration Management (Guest Lecturer)
-	\item 2013-04-01: Popular services (HTTP, SNMP, SSH)
-	\item 2013-04-08: System Security
-	\item 2013-04-15 -- 2011-04-29: AMA / Misc. topics and presentations
+	\item 2014-01-22: Introduction, Overview, course basics
+	\item 2014-01-27: UNIX history and basics / Filesystems and Disks
+	\item 2014-02-03: Software Installation Concepts
+	\item 2014-02-10: User Management, multi-user basics
+	\item 2014-02-18: Automating Administrative Tasks
+	\item 2014-02-24: Backup and Disaster Recovery
+	\item 2014-03-03: Networking
+	\item 2014-03-17: Popular services (DNS, SMTP)
+	\item 2014-03-24: Configuration Management (Guest Lecturer)
+	\item 2014-03-31: Popular services (HTTP, SNMP, SSH)
+	\item 2014-04-07: System Security
+	\item 2014-04-14 -- 2011-04-28: AMA / Misc. topics / presentations / TBD
 \end{itemize}
 
 \subsection{Syllabus}
@@ -1101,203 +1109,36 @@ Miscellaneous topics and presentations may include:
 
 \subsection{Questions, Answers, Chatter...}
 \begin{itemize}
-	\item 10 minutes of Ask Me Anything / current events at the beginning of the class \\
+	\item 10 minutes of Ask Me Anything / current events / lightning talks at the beginning of the class \\
 		\small that does {\em not} mean you can come 10 minutes late \Normalsize
 	\\
 
 	\item course website, syllabus, assignments, course material:\\
-		\verb+http://www.cs.stevens.edu/~jschauma/615/+
+		\verb+https://www.cs.stevens.edu/~jschauma/615/+
 	\\
 
 	\item discussions and announcements:
 		\verb+https://lists.stevens.edu/cgi-bin/mailman/listinfo/cs615asa+
 	\\
 
-	\item who knows what: \verb+http://twitter.com/cs615asa+
+	\item who knows what: \verb+https://twitter.com/cs615asa+
 \end{itemize}
 
-\newpage
-\vspace*{\fill}
-\begin{center}
-    \Hugesize
-        UNIX \\ [1em]
-    \hspace*{5mm}
-    \blueline\\
-    \hspace*{5mm}\\
-        History and Basics
-\end{center}
-\vspace*{\fill}
+\subsection{Let's do some homework!}
 
+{\tt https://webchat.freenode.net/ -- \#cs615asa} \\
+\vspace{.25in}
 
-\subsection{UNIX history}
+{\tt http://www.cs.stevens.edu/~jschauma/615/s14-hw1.html} \\
+\vspace{.25in}
+
 \begin{itemize}
-	\item Originally developed in 1969 at Bell Labs by Ken Thompson
-		and Dennis Ritchie.
-
-\begin{figure}[hb]
-	\begin{center}
-		\includegraphics[scale=6.0]{pics/pdp11.eps} \\
-	\end{center}
-\end{figure}
-
-	\item 1974: Thompson, Joy, Haley and students at Berkeley develop
-		the Berkeley Software Distribution (BSD) of UNIX
+	\item ensure you have access to {\tt linux-lab.cs.stevens.edu}
+	\item create your website (if you don't already have it)
+	\item create an AWS account
+	\item create an EC2 instance
+	\item access EC2 instance, run commands
 \end{itemize}
-
-\subsection{UNIX Philosophy}
-\begin{figure}[hb]
-	\begin{center}
-		\includegraphics[scale=0.5]{pics/MagrittePipe.eps} \\
-	\end{center}
-\end{figure}
-\begin{center}
-	{\bf Do one thing and do it well.}
-\end{center}
-
-
-
-
-\subsection{UNIX history}
-\begin{itemize}
-	\item 1978: ``Version 7 Unix'' released; AT\&T licenses ``System III'' commercially
-	\item BSD and ``System V'' become the main directions
-	\item 1991: BSD re-written almost entirely from scratch to allow
-		redistribution without AT\&T license as Networking Release 2 ({\em Net/2}),
-		spawning BSD/OS (commercial) and 386BSD, from which both
-		FreeBSD and NetBSD were derived in 1993
-	\item 1992: ``Unix Systems Laboratories'' (USL) sues BSDI and UC Berkely \\
-	      \small {\tt https://en.wikipedia.org/wiki/USL\_v.\_BSDi} \Normalsize
-	\item settlement leads to 4.4BSD-Lite, which feeds back into
-		FreeBSD and NetBSD
-\end{itemize}
-
-\subsection{UNIX history}
-\begin{itemize}
-	\item 1983: the GNU project started to develop another Unix-like operating system
-	\item the Linux kernel is released in 1991 and becomes GNU's
-		kernel in 1992
-	\\
-
-	\item 2001: Mac OS X is released, based on Darwin, which incorporates NeXTSTEP (Mach
-		kernel + BSD userland), FreeBSD, NetBSD
-\end{itemize}
-
-\subsection{UNIX history}
-\vspace*{\fill}
-\begin{figure}[hb]
-	\begin{center}
-		\includegraphics[scale=0.5]{pics/unix_history.eps} \\
-	\end{center}
-\end{figure}
-\vspace*{\fill}
-
-\subsection{Some OS versions}
-How many Unix variations/derivatives can you name?
-
-\subsection{Some OS versions}
-Some Operating Systems variations you may encounter:
-\\
-
-\vspace{.5in}
-\begin{center}
-\begin{tabular}{ c c c c }
-	A/UX & AIX & IRIX & Darwin \\
-	GNU/Hurd & Digital Unix & DragonFly BSD & FreeBSD \\
-	HP-UX & Mac OS X & IOS & JunOS \\
-	MS Windows & zOS & Minix & NetBSD \\
-	Ultrix & OpenBSD & OS/390 Unix & OSF/1 \\
-	Plan 9 & Inferno & QNX RTOS & SCO UnixWare \\
-	SCO Xenix & Solaris & SunOS & Tru64 Unix \\
-\end{tabular}
-\\
-\vspace{.5in}
-	Various Linux flavors
-\end{center}
-
-\subsection{UNIX Basics}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.6]{pics/System-Call-and-Library-Function.eps} \\
-\end{center}
-\vspace*{\fill}
-
-%\subsection{UNIX Basics}
-%\\
-%
-%\begin{center}
-%	\includegraphics[scale=0.7]{pics/kernel-programs.eps} \\
-%\end{center}
-
-\subsection{UNIX Basics}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.7]{pics/unix-parts.eps} \\
-\end{center}
-\vspace*{\fill}
-
-
-\subsection{UNIX Basics}
-The OS is divided into
-\begin{itemize}
-	\item kernel
-	\item shell
-	\item tools \& applications
-\end{itemize}
-\addvspace{.5in}
-Basic UNIX features:
-\begin{itemize}
-	\item multitasking
-	\item multiuser
-	\item portability
-	\item networking capabilities
-\end{itemize}
-
-\subsection{UNIX Basics}
-These features necessitate/result in:
-\begin{itemize}
-	\item multi-user concepts
-		\begin{itemize}
-			\item user privileges
-			\item file permissions
-			\item process ownership and priorities
-			\item communication with users
-			\item disk quotas
-		\end{itemize}
-	\item superuser account
-		\begin{itemize}
-			\item unrestricted access for superuser
-			\item requires strong authentication
-		\end{itemize}
-	\item security considerations
-		\begin{itemize}
-			\item protect users data
-			\item protect communication
-			\item protect superuser account
-		\end{itemize}
-\end{itemize}
-
-\subsection{Homework}
-\begin{itemize}
-	\item General:
-		\begin{itemize}
-			\item make sure you have access to \verb+lab.cs.stevens.edu+
-			\item subscribe to \verb+cs615asa@lists.stevens.edu+
-		\end{itemize}
-		\vspace{.5in}
-
-	\item Research Cloud Computing:
-		\begin{itemize}
-			\item \verb+https://en.wikipedia.org/wiki/Cloud_computing+
-			\item \verb+https://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud+
-		\end{itemize}
-		\vspace{.5in}
-
-	\item Create an Amazon EC2 account:
-		\begin{itemize}
-			\item \verb+https://aws.amazon.com/ec2/+
-		\end{itemize}
-\end{itemize}
-
 
 \subsection{Reading}
 Miscellaneous:

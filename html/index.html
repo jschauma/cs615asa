@@ -24,15 +24,17 @@
 
 				<P>In a networked environment, the need for a skilled system
 				administrator has become increasingly obvious, but what exactly
-				does a System Administrator do? Traditionally, the System
-				Administrator's job has not had a precise definition; instead
-				it covers a large variety of duties and requires at times rather
-				broad, at other times very specific knowledge about a multitude
-				of topics in virtually every area of networked
-				computing.</P>
+				does a System Administrator do?  Traditionally, the System
+				Administrator's job has not had a precise definition; in
+				some places they are referred to as Systems Engineers,
+				Site Reliability Engineers, or perhaps Web Operations.
+				Elsewhere, the boundaries between traditional "dev" and "ops"
+				are being torn down, yielding a collaborative culture of
+				"DevOps".</p>
 
 				<P>In this class, some of the most essential aspects of
-				system administration will be covered, giving students the
+				system administration and the rather broad skillset
+				required in this profession will be covered, giving students the
 				opportunity to develop the skills necessary to architect
 				solutions for as well as analyze and
 				troubleshoot problems arising in every day usage of
@@ -42,9 +44,9 @@
 				configuration, operating system installation, shell
 				programming, security policies, backup deployment and
 				disaster recovery, network design, software installation
-				and maintenance, operating system tuning.</P>
+				and maintenance, and configuration management.</P>
 
-				<P>Students are expected to be comfortable in a
+				<P>Students are expected to be comfortable operating in a
 				UNIX-like environment on a user level and have a solid
 				understanding of TCP/IP networking and Operating System
 				concepts.</P>
@@ -64,67 +66,48 @@
 				possibility for students to gain superuser access to a number of
 				operating systems otherwise not available at Stevens.
 				</p>
-
+				<hr>
 				<table width="100%" border="0">
 					<tr><td valign="top">
 						<H3>Time, Date &amp; Place:</H3>
-						<b>Spring 2013</b>: Mondays, 18:15-20:45, Kiddie 360<br>
+						<b>Spring 2014</b>: Mondays, 18:15-20:45, Morton 205<br>
 
+					        <H3><a name="instructor"></a>Instructor:</H3><A href=
+						"http://www.cs.stevens.edu/~jschauma/">Jan Schaumann</A>
+						[<A href="mailto:jschauma@stevens.edu">jschauma@stevens.edu</A>]
+
+						<hr>
 						<H3>Resources:</H3>
 
 						<UL>
 							<LI><A href="#syllabus">Syllabus</A></LI>
 							<LI><A href="#grading">Grading</A></LI>
-							<LI><A href="#timeformat">Time Format</A></LI>
 							<LI><A href="#hw">Homeworks</A></LI>
-							<LI><A href="#project">Project Description</A></LI>
+							<!-- <LI><A href="#project">Project Description</A></LI> -->
+							<LI><A href="/~jschauma/cgi-bin/615.cgi">Pre-Course Evaluation</A></LI>
 							<LI><A href="/~jschauma/cgi-bin/midterm.cgi">Midterm Evaluation</A></LI>
 							<LI><A href=
 							"https://lists.stevens.edu/cgi-bin/mailman/listinfo/cs615asa">
 							CS615ASA Mailinglist</A></LI>
 							<LI><a href="http://twitter.com/#!/cs615asa">CS615 ASA Twitter Account</a></LI>
+							<LI><a href="https://webchat.freenode.net/">Freenode IRC Webchat</a> -- use #cs615asa</li>
 							<LI><a href="https://github.com/jschauma/cs615asa">Raw course material on github</a></LI>
 							<LI><A href=
 							"http://netbsd.gw.com/cgi-bin/man-cgi/man">
 							NetBSD Manual Pages</A></LI>
-							<LI><A
-href="http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html">AWS Command Line Interface</a></li>
+							<LI><A href="http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html">AWS Command Line Interface</a></li>
 						</UL>
 					</td><td valign="top" align="right">
-						<script src="http://widgets.twimg.com/j/2/widget.js"></script>
-						<script>
-new TWTR.Widget({
-	version: 2,
-	type: 'profile',
-	rpp: 3,
-	interval: 4000,
-	width: 350,
-	height: 150,
-	theme: {
-		shell: {
-			background: '#333333',
-			color: '#ffffff'
-		},
-		tweets: {
-			background: '#000000',
-			color: '#ffffff',
-			links: '#4aed05'
-		}
-	},
-	features: {
-		scrollbar: false,
-		loop: false,
-		live: true,
-		hashtags: true,
-		timestamp: true,
-		avatars: false,
-		behavior: 'all'
-	}
-}).render().setUser('cs615asa').start();
-						</script>
+<a class="twitter-timeline" data-dnt="true" width="400"
+href="https://twitter.com/cs615asa"
+data-widget-id="407334104082817025">Tweets by @cs615asa</a>
+<script>!function(d,s,id){var
+js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
 					</td></tr>
 				</table>
 
+				<hr>
 				<H3>Textbooks:</H3>
 
 				<P>This class does not have any strictly <EM>required</EM>
@@ -133,15 +116,14 @@ new TWTR.Widget({
 				semester. These are:</P>
 
 				<UL>
-					<LI>``Essential System Administration'', 3rd Edition, by
-					<A href="http://www.aeleen.com/">&#198;leen
-					Frisch</A><BR>
-					ISBN: 0-596-00343-9,<BR>
-					Publisher: <A href=
-					"http://www.oreilly.com/catalog/esa3/">O'Reilly &amp;
-					Associates</A><BR>
-					(<a href="http://ezproxy.stevens.edu:2155/book/operating-systems-and-server-administration/unix/0596003439">read online</a>)<br>
+					<LI>``<A href=
+					"http://www.iu.hio.no/SystemAdmin/principlebook.html">Principles
+					of Network and System Administration</A>'', 2nd Edition, by Mark
+					Burgess<BR>
+					ISBN: 0470868074<BR>
+					Publisher: John Wiley &amp; Sons<BR>
 					&#160;</LI>
+
 
 					<LI>``<a href="http://www.amazon.com/o/ASIN/0321492668/tomontime-20">The
 		Practice of System and Network Administration</a>'', by <A href=
@@ -158,20 +140,23 @@ new TWTR.Widget({
 
 				Other suggested reading:
 				<UL>
+					<LI>``Essential System Administration'', 3rd Edition, by
+					<A href="http://www.aeleen.com/">&#198;leen
+					Frisch</A><BR>
+					ISBN: 0-596-00343-9,<BR>
+					Publisher: <A href=
+					"http://www.oreilly.com/catalog/esa3/">O'Reilly &amp;
+					Associates</A><BR>
+					(<a href="http://ezproxy.stevens.edu:2155/book/operating-systems-and-server-administration/unix/0596003439">read online</a>)<br>
+					&#160;</LI>
+
+
 					<LI>``<A href=
 						"http://oreilly.com/catalog/9780596100292/">UNIX in a
 						Nutshell</A>'', 4th Edition, by Arnold Robbins<BR>
 						ISBN: 978-0-596-10029-2<BR>
 						Publisher: O'Reilly &amp; Associates<BR>(<a href="http://ezproxy.stevens.edu:2155/book/operating-systems-and-server-administration/unix/0596100299">read online</a>)<br>
 					&nbsp;</LI>
-					<LI>``<A href=
-					"http://www.iu.hio.no/SystemAdmin/principlebook.html">Principles
-					of Network and System Administration</A>'', 2nd Edition, by Mark
-					Burgess<BR>
-					ISBN: 0470868074<BR>
-					Publisher: John Wiley &amp; Sons<BR>
-					&#160;</LI>
-
 					<LI>``<A href="http://www.admin.com/">Unix System
 					Administration Handbook</A>'', 3rd Edition, by Evi
 					Nemeth, Garth Snyder, Scott Seebass, Trent R. Hein.<BR>
@@ -203,27 +188,19 @@ new TWTR.Widget({
 					<LI><a href="http://nixsrv.com/llthw">Learn Linux The Hard Way</a></LI>
 				</UL>
 
-				<h3>Course Material</h3>
-				If you're interested in the raw course material, ie the
-				<tt>.tex</tt> files that produce the slides etc., you can find
-				everything <a href="https://github.com/jschauma/cs615asa">on
-				github</a>.
-
-				<H3>Instructor:</H3><A href=
-				"http://www.cs.stevens.edu/~jschauma/">Jan
-				Schaumann</A> [<A href=
-				"mailto:jschauma@stevens.edu">jschauma@stevens.edu</A>]
-
+				<hr>
 				<H3><A name="grading">Grading</A>:</H3>There will (probably) be:<BR>
 
 				<UL>
+					<LI>course participation</LI>
 					<LI>a number of homework assignments of varying complexity,
-							including, but not limited to: programming, OS installation, OS
+							possibly including, but not limited to: programming, OS installation, OS
 							security, capture-the-flag-style cracking, security
 							principles</LI>
 
-					<LI>1 presentation; see <A href=
-					"#project">below</A></LI>
+					<LI>a group project towards the end of the semester</LI>
+
+					<LI>some extracurricular activities</LI>
 
 					<LI>no curve</LI>
 
@@ -257,31 +234,29 @@ new TWTR.Widget({
 					in this class, yielding a failing grade.
 				</blockquote>
 
-				<H3><A name="timeformat">Time Format</A>:</H3>
-				All times, due dates etc. are given in the format <tt>YYYY-MM-DD
-				HH:MM:SS</tt> according to our systems local time (EST or EDT).
-				A clock is always a 24-hour clock -- there is no AM or PM.
-				Due dates are always fixed, non-negotiable and late submissions
-				are not accepted.
+				<hr>
 
 				<H3><a name="hw">Homework Assignments</a>:</h3>
+				TBD
 				<ul>
 					<li><a href="hw.txt">General Homework Submission Guidelines</a></li>
-					<li><a href="s13-hw1.html">Homework #1: Setup your environment for EC2 and create an instance</a></li>
+					<li><a href="s14-hw1.html">Homework #1: Setup your environment for EC2 and create an instance</a></li>
+				</ul>
+				<!--
 					<li><a href="s13-hw2.html">Homework #2: Package Management on different OS</a></li>
 					<li><a href="s13-hw3.html">Homework #3: ifconfig output parsing</a></li>
 					<li><a href="s13-hw4.html">Homework #4: EC2 Backup</a></li>
 					<li><a href="s13-hw5.html">Homework #5: Use tcpdump to observe traffic flow</a></li>
 					<li><a href="http-exercise.html">Extra Credit Exercise: HTTP</a></li>
 					<li><a href="traceroute-explained.html">Extra Credit Exercise: Traceroute Explained</a></li>
-<!--
 					<li><a href="s12-hw5.html">Homework #5: Syslog over IPv6</a></li>
 					<li><a href="s11-hw6.html">Homework #6: Encrypted EC2 Backup</a></li>
 					<li><a href="hw6.txt">Homework #6: Practical PGP</a></li>
--->
 				</ul>
+-->
 
-				<H3><A name="project">Project / Presentation Description</A>:</H3>For the
+				<hr>
+<!--				<H3><A name="project">Project / Presentation Description</A>:</H3>For the
 				project, you are required to either write a paper or to prepare a
 				presentation on a specific topic of interest.
 				The topic of the paper or the
@@ -299,14 +274,15 @@ new TWTR.Widget({
 
 				For a presentation, you may pick a topic that will	be
 				covered in class. Your presentation will then be part of that
-				class -- therefore, you will need to coordinate in advance with
+				class - therefore, you will need to coordinate in advance with
 				the instructor.
 				Otherwise, the presentation will be given in one of the
 				last classes. You probably want to prepare some slides,
 				even though you may, of course, speak freely from your
 				notes if you choose to. Your presentation should be no shorter than
 				20 minutes.
-
+				<hr>
+-->
 				<H3><A name="syllabus">Syllabus</A>:</H3>
 
 				Lecture slides and other supporting material will be uploaded as the
@@ -321,7 +297,12 @@ new TWTR.Widget({
 					</TR>
 
 					<TR>
-						<TD>2013-01-14</TD>
+						<TD>2014-01-20</TD>
+						<TD colspan="3"><em>Martin Luther King Day -- No class</em></TD>
+					</TR>
+
+					<TR>
+						<TD>2014-01-22</TD>
 
 						<TD>Introduction, Policies, Overview, UNIX history and
 						basics</TD>
@@ -330,38 +311,33 @@ new TWTR.Widget({
 							<em>Nemeth et al</em>: Chap. 1<BR>
 							<em>Burgess</em>: Chap. 1, 2, 14<BR>
 							<em>Limoncelli &amp; Hogan</em>: Preface, 26<BR>
-							<A href="http://www.cs.stevens.edu/~jschauma/usenix/sage/jobs.pdf">SAGE Job
+							<A href="https://www.cs.stevens.edu/~jschauma/usenix/sage/jobs.pdf">SAGE Job
 							Descriptions for System Administrators</A></TD>
 
-						<TD><a href="slides/lecture01.pdf">Lecture 01 slides</a></td>
+						<TD><em>Note: Wednesday class!</em><br><br><a href="slides/lecture01.pdf">Lecture 01 slides</a><br>
+							<a href="https://www.cs.stevens.edu/~jschauma/cgi-bin/615.cgi">Course Survey</a><br>
+							<a href="s14-hw1.html">HW#1</a></td>
 					</TR>
 
 					<TR>
-						<TD>2013-01-21</TD>
-						<TD colspan="3"><em>Martin Luther King Day -- No class</em></TD>
-					</TR>
-
-					<TR>
-						<TD>2013-01-28</TD>
+						<TD>2014-01-27</TD>
 						<TD>Filesystems and Disks</TD>
 						<TD><em>Frisch</em>: Chap. 10<br>
 								<em>Nemeth et al</em>: Chap. 5, 8</TD>
-						<TD><a href="slides/lecture02.pdf">Lecture 02 slides</a><br>
-							<a href="s13-hw1.html">HW#1</a></td>
+						<TD><a href="slides/lecture02.pdf">Lecture 02 slides</a></td>
 					</TR>
 
 					<TR>
-						<TD>2013-02-04</TD>
+						<TD>2014-02-03</TD>
 						<TD>Software Installation Concepts</TD>
 						<TD><em>Limoncelli &amp; Hogan</em>: Chap. 23 (in first edition) or Chap. 28 (in second edition)<br>
 							<em>Burgess</em> (Principles): Chap. 4.6 - 4.8<br>
 							<em>Frisch</em>: Parts of Chap. 3</TD>
-						<TD><a href="slides/lecture03.pdf">Lecture 03 slides</a><br>
-							<a href="s13-hw2.html">HW#2</a></td>
+						<TD><a href="slides/lecture03.pdf">Lecture 03 slides</a></td>
 					</TR>
 
 					<TR>
-						<TD>2013-02-11</TD>
+						<TD>2014-02-10</TD>
 						<TD>Got root?	Multi-user basics, politics, policies and ethics</TD>
 						<TD><em>Frisch</em>: Chap. 6<br>
 								<em>Burgess</em>: Chap. 5<br>
@@ -373,15 +349,21 @@ new TWTR.Widget({
 					</TR>
 
 					<TR>
-						<TD>2013-02-19</TD>
+						<TD>2014-02-17</TD>
+						<TD colspan="3"><em>President's Day -- No class</em></TD>
+					</TR>
+
+
+					<TR>
+						<TD>2014-02-18</TD>
 						<TD>Automating Administrative Tasks I / Shell Essentials</TD>
 						<TD><em>Frisch</em>: Chap. 14, Append. A<br>
 							<em>Nemeth et al</em>: Chap. 9</TD>
-						<TD><a href="slides/lecture05.pdf">Lecture 05 slides</a><br>
+						<TD><em>Note: Tuesday class!</em><br><br><a href="slides/lecture05.pdf">Lecture 05 slides</a><br>
 							<a href="examples/shexamples">shell basics</a></TD>
 					</TR>
 					<TR>
-						<TD>2013-02-25</TD>
+						<TD>2014-02-24</TD>
 						<TD>Automation II / Backup and Disaster Recovery</td>
 						<TD><em>Frisch</em>: Chap. 11<BR>
 							<em>Nemeth et al</em>: Chap. 10<br>
@@ -393,13 +375,10 @@ new TWTR.Widget({
 							<em>Nemeth et al</em>: Chap. 4, 25<br>
 							<em>Burgess</em>: Chap. 5</TD>
 
-						<TD><a href="slides/lecture06.pdf">Lecture 06 slides</a><br>
-								<a href="s13-hw3.html">HW#3</a><br>
-								<a href="s13-hw4.html">HW#4</a></TD>
-
+						<TD><a href="slides/lecture06.pdf">Lecture 06 slides</a></td>
 					</TR>
 					<TR>
-						<TD>2013-03-04</TD>
+						<TD>2014-03-03</TD>
 						<TD>Networking</TD>
 						<TD><em>Frisch</em>: Chap. 5<BR>
 							<em>Nemeth et al</em>: Chap. 13, 15, 20<br>
@@ -418,12 +397,12 @@ new TWTR.Widget({
 					</TR>
 
 					<TR>
-						<TD>2013-03-11</TD>
+						<TD>2014-03-10</TD>
 						<TD colspan="3"><em>Spring Break -- No class</em></TD>
 					</TR>
 
 					<TR>
-						<TD>2013-03-18</TD>
+						<TD>2014-03-17</TD>
 						<TD>Popular services: DNS</TD>
 
 						<TD><em>Frisch</em>: Chap. 9<BR>
@@ -436,71 +415,57 @@ new TWTR.Widget({
 					</TR>
 
 					<TR>
-						<TD>2013-03-25</TD>
+						<TD>2014-03-24</TD>
 						<TD>Monitoring; Popular services: SMTP</TD>
 						<TD><em>Frisch</em>: Chap. 9<BR>
 							<em>Nemeth et al</em>: Chap. 16, 19, 22<br>
 							<em>Burgess</em>: Chap. 9<br>
 							<em>Limoncelli &amp; Hogan</em>: Chap. 19</TD>
-						<TD><a href="slides/lecture09.pdf">Lecture 09 slides</a><br>
-								<a href="s13-hw5.html">Homework #5</a></td>
-
+						<TD><a href="slides/lecture09.pdf">Lecture 09 slides</a></td>
 					</TR>
 
 					<TR>
-						<TD>2013-04-01</TD>
+						<TD>2014-03-31</TD>
 						<TD>Popular services: SNMP, HTTP</TD>
 						<TD><em>Frisch</em>: Chap. 9<BR>
 							<em>Nemeth et al</em>: Chap. 16, 19, 22<br>
 							<em>Burgess</em>: Chap. 9<br>
 							<em>Limoncelli &amp; Hogan</em>: Chap. 19</TD>
-						<TD><a href="slides/lecture10.pdf">Lecture 10 slides</a><br>
-							<a href="http-exercise.html">HTTP exercise (extra credit)</a></TD>
+						<TD><a href="slides/lecture10.pdf">Lecture 10 slides</a></td>
 		<!--<a href="presentations/mhegador-ssh.pdf">Michael Hegadorn on SSH</a><br> -->
 
 					</TR>
 					<TR>
-						<TD>2013-04-08</TD>
+						<TD>2014-04-07</TD>
 						<TD>System Security</TD>
 						<TD><em>Frisch</em>: Chap. 7<BR>
 							<em>Nemeth et al</em>: Chap. 21<br>
 							<em>Burgess</em>: Chap. 11, 12<br>
 							<em>Limoncelli &amp; Hogan</em>: Chap. 7</TD>
-						<TD><a href="slides/lecture11.pdf">Lecture 11 slides</a><br>
-							Chao Zhang on Kerberos;<br>
-							<a href="traceroute-explained.html">Traceroute Explaiend (extra credit)</a>
-							<!-- <a href="qibenx2djregl.html">extra credit</a>--></TD>
+						<TD><a href="slides/lecture11.pdf">Lecture 11 slides</a></td>
 					</TR>
 
 					</TR>
 
 					<TR>
-						<TD>2013-04-15</TD>
-						<TD>Configuration Management, Troubleshooting Practices</TD>
-						<TD>&nbsp;</TD>
-						<TD>Tianyi Zan on Distributed File Systems<br>Guest Lecturers: <a href="https://en.wikipedia.org/wiki/James_Turnbull">James Turnbull</a><br>
-							<a href="http://www.miketheman.net/">Mike Fiedler</a>
-						</TD>
-					</TR>
-
-					<TR>
-						<TD>2013-04-22</TD>
+						<TD>2014-04-14</TD>
 						<TD>AMA / Misc. Topics / Presentations</TD>
 						<TD>&nbsp;</TD>
-						<TD>Wei Wang on Redundant Memory<br>
-							Renjie Weng on VPNs<br>
-							Yang Sun on Hadoop Installation<br>
-							Hui Zheng on Business Continuity</TD>
+						<TD>&nbsp;</TD>
 					</TR>
 
 					<TR>
-						<TD>2013-04-29</TD>
+						<TD>2014-04-21</TD>
 						<TD>AMA / Misc. Topics / Presentations</TD>
 						<TD>&nbsp;</TD>
-						<TD>Luis Bustamante on Mainframes and z/OS<br>
-							Majed Almakfi on Hardware Maintenance<br>
-							Han Yan's Interview with a System Administration<br>
-							Wei Cao on OpenWRT</TD>
+						<TD>&nbsp;</TD>
+					</TR>
+
+					<TR>
+						<TD>2014-04-28</TD>
+						<TD>AMA / Misc. Topics / Presentations</TD>
+						<TD>&nbsp;</TD>
+						<TD>&nbsp;</TD>
 					</TR>
 				</TABLE>
 			</TD>
