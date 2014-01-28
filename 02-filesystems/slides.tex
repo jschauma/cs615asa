@@ -35,33 +35,154 @@
 %\setcounter{page}{0}
 %\clearpage
 
+\subsection{Let's review HW1}
+{\tt http://www.cs.stevens.edu/\~{}jschauma/615/s14-hw1.html} \\
+\vspace{.5in}
+
+\subsection{Let's review HW1}
+{\tt http://www.cs.stevens.edu/\~{}jschauma/615/s14-hw1.html} \\
+\vspace{.5in}
+
+Running an instance:
+\begin{verbatim}
+$ aws ec2 run-instances --key-name stevens --security-groups stevens \
+        --image-id <AMI-ID>
+\end{verbatim}
+
+\subsection{Let's review HW1}
+{\tt http://www.cs.stevens.edu/\~{}jschauma/615/s14-hw1.html} \\
+\vspace{.5in}
+
+Save yourself some typing:
+\begin{verbatim}
+$ alias instance='aws ec2 run-instances --key-name stevens \
+                        --security-groups stevens --image-id'
+$ instance <AMI-ID>
+\end{verbatim}
+
+\subsection{Let's review HW1}
+{\tt http://www.cs.stevens.edu/\~{}jschauma/615/s14-hw1.html} \\
+\vspace{.5in}
+
+
+Make it permanent:
+\begin{verbatim}
+$ echo "alias instance='aws ec2 run-instances --key-name stevens \
+        --security-groups stevens --image-id'" >> .bashrc
+\end{verbatim}
+
+
+\subsection{Let's review HW1}
+{\tt http://www.cs.stevens.edu/\~{}jschauma/615/s14-hw1.html} \\
+\vspace{.5in}
+
+ssh to an instance:
+\begin{verbatim}
+$ ssh -i ~/.ec2/stevens.pem root@<mumble>.compute-1.amazonaws.com
+\end{verbatim}
+
+
+\subsection{Let's review HW1}
+{\tt http://www.cs.stevens.edu/\~{}jschauma/615/s14-hw1.html} \\
+\vspace{.5in}
+
+Let's save ourselves some typing:
+\begin{verbatim}
+$ cat >>~/.ssh/config <<EOF
+> Host *.amazonaws.com
+>         IdentityFile ~/.ec2/stevens.pem
+>         User         root
+> EOF
+$ ssh <mumble>.compute-1.amazonaws.com
+\end{verbatim}
+
+
 \subsection{Filesystems, Disk, Storage}
-Let's brainstorm...
+\begin{verbatim}
+$ instance ami-35eb835c
+[...]
+$ aws ec2 describe-instances
+[...]
+$ ssh root@ec2-54-198-235-45.compute-1.amazonaws.com
+\end{verbatim}
 
-%\subsection{Related to Filesystems, Disks, Storage}
-%\begin{figure}[hb]
-%	\begin{center}
-%		\includegraphics[scale=0.7]{pics/Installer_edit_partitions.eps} \\
-%	\end{center}
-%\end{figure}
-%
-%\subsection{Related to Filesystems, Disks, Storage}
-%\begin{figure}[hb]
-%	\begin{center}
-%		\includegraphics[scale=2.0]{pics/mounting.eps} \\
-%	\end{center}
-%\end{figure}
-%
-%\subsection{Related to Filesystems, Disks, Storage}
-%\begin{figure}[hb]
-%	\begin{center}
-%		\includegraphics[scale=0.3]{pics/controlpanel.eps} \\
-%	\end{center}
-%\end{figure}
-%
-%
+\subsection{Let's review HW1}
+\begin{verbatim}
+# uname -a
+SunOS domU-12-31-39-0F-1C-BB.compute-1.internal 5.11 omnios-33fdde4 i86pc
+i386 i86xpv Solaris
+#
+\end{verbatim}
 
-\subsection{Topics covered}
+\subsection{Let's review HW1}
+\begin{verbatim}
+# ifconfig -a
+lo0: flags=2001000849<UP,LOOPBACK,RUNNING,MULTICAST,IPv4,VIRTUAL> mtu 8232 index 1
+        inet 127.0.0.1 netmask ff000000
+xnf0: flags=1004843<UP,BROADCAST,RUNNING,MULTICAST,DHCP,IPv4> mtu 1500 index 2
+        inet 10.110.94.225 netmask fffffe00 broadcast 10.110.95.255
+        ether 12:31:39:1c:60:13
+lo0: flags=2002000849<UP,LOOPBACK,RUNNING,MULTICAST,IPv6,VIRTUAL> mtu 8252 index 1
+        inet6 ::1/128
+xnf0: flags=20002000840<RUNNING,MULTICAST,IPv6> mtu 1500 index 2
+        inet6 ::/0
+        ether 12:31:39:1c:60:13
+#
+\end{verbatim}
+
+
+\subsection{Let's review HW1}
+\begin{verbatim}
+# netstat -na | more
+[...]
+TCP: IPv4
+   Local Address        Remote Address    Swind Send-Q Rwind Recv-Q
+State
+-------------------- -------------------- ----- ------ ----- ------ -----------
+127.0.0.1.4999             *.*                0      0 128000      0 LISTEN
+      *.111                *.*                0      0 128000      0 LISTEN
+      *.*                  *.*                0      0 128000      0 IDLE
+      *.111                *.*                0      0 128000      0 LISTEN
+      *.*                  *.*                0      0 128000      0 IDLE
+      *.46457              *.*                0      0 128000      0 LISTEN
+      *.55986              *.*                0      0 128000      0 LISTEN
+      *.22                 *.*                0      0 128000      0 LISTEN
+10.110.94.225.22     155.246.89.107.46137 42304     47 128592      0 ESTABLISHED
+[...]
+\end{verbatim}
+
+\subsection{Let's review HW1}
+\begin{verbatim}
+# man df
+[...]
+# df
+[...]
+# df -hT
+[...]
+# df -i
+[...]
+# df -a
+[...]
+# mount
+[...]
+\end{verbatim}
+
+
+\subsection{Let's review HW1}
+\begin{verbatim}
+# format
+[...]
+format> verify
+[...]
+# zpool list
+[...]
+# zfs list
+[...]
+\end{verbatim}
+
+
+
+\subsection{Filesystems, Disks, Storage}
 Adding, (re-)partitioning, mounting disks requires understanding of:
 \begin{itemize}
 	\item basic disk concepts
@@ -142,6 +263,7 @@ Direct Attached Storage (DAS)
 \begin{center}
 	\includegraphics[scale=0.8]{pics/das.eps} \\
 \end{center}
+\verb+ssh lab 'df -hT /'+
 \vfill
 
 \subsection{Basic Disk Concepts: Storage Models}
@@ -150,6 +272,7 @@ Network Attached Storage (NAS)
 \begin{center}
 	\includegraphics[scale=0.5]{pics/nas.eps} \\
 \end{center}
+\verb+ssh lab 'df -hT /home/$(whoami)'+
 \vfill
 
 \subsection{Basic Disk Concepts: Storage Models}
@@ -167,6 +290,39 @@ Cloud Storage (Examples: EBS, S3)
 	\includegraphics[scale=0.6]{pics/cloud-storage.eps} \\
 \end{center}
 \vfill
+
+\subsection{Basic Disk Concepts: Storage Models: Cloud Storage}
+\begin{verbatim}
+$ aws ec2 describe-instances
+[...]
+/dev/sda1	ebs	None	paravirtual
+BLOCKDEVICEMAPPINGS	/dev/sda
+EBS	2014-01-25T20:18:19.000Z	True	attached vol-a0d000d6
+[...]
+\end{verbatim}
+
+\subsection{Basic Disk Concepts: Storage Models: Cloud Storage}
+\begin{verbatim}
+$ aws ec2 create-volume --size 1 --availability-zone us-east-1d
+[...]
+$ aws ec2 attach-volume --volume-id vol-9d3aeaeb --instance-id \
+        i-dd74f0f3 --device /dev/sdh
+[...]
+$ ssh <hostname>
+# format
+format> fdisk
+format> verify
+format> label
+# newfs /dev/rdsk/c1t2160d0s0
+[...]
+# mount /dev/dsk/c1t2160d0s0 /mnt
+# df -Th /mnt
+[...]
+# fstyp -v /dev/rdsk/c1t2160d0s0  | more
+[...]
+\end{verbatim}
+
+
 
 \newpage
 \vspace*{\fill}
@@ -207,13 +363,6 @@ Cloud Storage (Examples: EBS, S3)
 
 
 \subsection{Basic Disk Concepts: Disk Devices}
-\vfill
-	\begin{center}
-		\includegraphics[scale=1.5]{pics/S50JBOD.eps} \\
-	\end{center}
-\vfill
-
-\subsection{Basic Disk Concepts: Disk Devices}
 	\begin{center}
 		\includegraphics[scale=0.9]{pics/xraid.eps} \\
 	\end{center}
@@ -237,76 +386,13 @@ Cloud Storage (Examples: EBS, S3)
 \vspace*{\fill}
 
 \subsection{Basic Disk Concepts: Disk Interfaces: SCSI}
-	\begin{center}
-		\includegraphics[scale=0.8]{pics/scsi-many.eps} \\
-	\end{center}
-
-
-\subsection{Basic Disk Concepts: Disk Interfaces: SCSI}
-\begin{figure}[hb]
-	\begin{center}
-		\includegraphics[scale=0.7]{pics/scsicard.eps} \\
-	\end{center}
-\end{figure}
-
-\subsection{Basic Disk Concepts: Disk Interfaces: SCSI}
-\vfill
-	\begin{center}
-		\includegraphics[scale=0.8]{pics/cable_scsi.eps} \\
-	\end{center}
-\vfill
-
-%\subsection{Basic Disk Concepts: Disk Interfaces: SCSI}
-%\begin{figure}[hb]
-%	\begin{center}
-%		\includegraphics[scale=1.0]{pics/scsi-types.eps} \\
-%	\end{center}
-%\end{figure}
-
-\subsection{Basic Disk Concepts: Disk Interfaces: SCSI}
 \vfill
 	\begin{center}
 		\includegraphics[scale=1.0]{pics/scsi-disk.eps} \\
 	\end{center}
 \vfill
 
-%\subsection{Basic Disk Concepts: Disk Interfaces: SCSI}
-%\begin{figure}[hb]
-%	\begin{center}
-%		\includegraphics[scale=0.9]{pics/scsi-disk2.eps} \\
-%	\end{center}
-%\end{figure}
-
-\subsection{Basic Disk Concepts: Disk Interfaces: SCSI}
-\vfill
-	\begin{center}
-		\includegraphics[scale=0.7]{pics/scsi-terminator.eps} \\
-	\end{center}
-\vfill
-
-\subsection{Basic Disk Concepts: Disk Interfaces: SCSI}
-Too many variations (Fast, Wide, Ultra, ...).
-\begin{itemize}
-	\item each SCSI device needs a terminator (internal or terminator plug)
-	\item each SCSI device (including the controller) needs a target number
-		(or ID)
-	\item this ID needs to be {\em unique}
-	\item a single slower/older device will bring down speed for {\em all}
-		devices attached to that controller
-	\item hot swappable
-	\item speed: up to 640 MB/s
-	\item max cable length: up to 16 m
-	\item max number of devices: up to 16
-\end{itemize}
-
 % IDE
-\subsection{Basic Disk Concepts: Disk Interfaces: ATA}
-\vfill
-	\begin{center}
-		\includegraphics[scale=0.8]{pics/satavpata.eps} \\
-	\end{center}
-\vfill
-
 \subsection{Basic Disk Concepts: Disk Interfaces: ATA}
 \vfill
 	\begin{center}
@@ -317,108 +403,10 @@ Too many variations (Fast, Wide, Ultra, ...).
 \subsection{Basic Disk Concepts: Disk Interfaces: ATA}
 \vfill
 	\begin{center}
-		\includegraphics[scale=0.75]{pics/sata-ide_lg.eps} \\
+		\includegraphics[scale=0.8]{pics/satavpata.eps} \\
 	\end{center}
 \vfill
 
-
-\subsection{Basic Disk Concepts: Disk Interfaces: ATA}
-``Advanced Technology Attachment''
-\begin{itemize}
-	\item Parallel ATA:
-	\begin{itemize}
-		\item Enhanced Integrated Device Electronics (EIDE)
-		\item Extensions known as Advanced Technology Attachment Packet
-			Interface (ATAPI)
-		\item designed to be simple and inexpensive (controller build
-			into the disk)
-		\item speed: up to 133 MB/s; max cable length: up to 46cm; number of devices: 2
-	\end{itemize}
-	\item Serial ATA:
-	\begin{itemize}
-		\item hot-pluggable
-		\item speed: up to 6 Gb/s (``SATA Revision 3''); up to 1.5 Gb/s (``SATA Revision 1.0'')
-		\item max cable length: 1 m up to 2 m (``eSATA'')
-		\item number of devices: 1
-	\end{itemize}
-\end{itemize}
-
-\subsection{Basic Disk Concepts: Disk Interfaces: SATA}
-%\begin{figure}[hb]
-	\begin{center}
-		\includegraphics[scale=0.77]{pics/Sata_host_expansor_en.eps} \\
-	\end{center}
-%\end{figure}
-
-% USB
-
-\subsection{Basic Disk Concepts: Disk Interfaces: USB}
-\vfill
-	\begin{center}
-		\includegraphics[scale=0.8]{pics/USB_Connector_End.eps} \\
-	\end{center}
-\vfill
-
-\subsection{Basic Disk Concepts: Disk Interfaces: USB}
-\vfill
-	\begin{center}
-		\includegraphics[scale=0.6]{pics/USB_types.eps} \\
-	\end{center}
-\vfill
-
-\subsection{Basic Disk Concepts: Disk Interfaces: USB}
-\vfill
-	\begin{center}
-		\includegraphics[scale=0.6]{pics/usb-hub.eps} \\
-	\end{center}
-\vfill
-
-\subsection{Basic Disk Concepts: Disk Interfaces: USB}
-``Universal Serial Bus''
-\begin{itemize}
-	\item can provide power
-	\item hot-pluggable
-	\item (theoretical) speed: 12 Mb/s in USB 1.0; up to 480 Mb/s in USB 2.0; up to 4 Gb/s in USB 3.0
-	\item max cable length: up to 5 m
-	\item number of devices: up to 127
-\end{itemize}
-
-
-% FW
-
-\subsection{Basic Disk Concepts: Disk Interfaces: FireWire}
-\vfill
-	\begin{center}
-		\includegraphics[scale=0.4]{pics/fw.eps} \\
-	\end{center}
-\vfill
-
-
-\subsection{Basic Disk Concepts: Disk Interfaces: FireWire}
-\vfill
-	\begin{center}
-		\includegraphics[scale=1.2]{pics/FireWire_4_6Pin.eps} \\
-	\end{center}
-\vfill
-
-\subsection{Basic Disk Concepts: Disk Interfaces: FireWire}
-\vfill
-	\begin{center}
-		\includegraphics[scale=2.4]{pics/fw1.eps}
-		\includegraphics[scale=0.8]{pics/fw2.eps}
-		\includegraphics[scale=0.8]{pics/fw3.eps}
-	\end{center}
-\vfill
-
-\subsection{Basic Disk Concepts: Disk Interfaces: FireWire}
-FireWire, aka IEEE 1394
-\begin{itemize}
-	\item speed: 400 Mb/s, 800 Mb/s and even up to 3.2 Gbit/s
-	\item hot-pluggable
-	\item max cable length: up to 100 m
-	\item number of devices: up to 63
-\end{itemize}
-\newpage
 
 % FC
 
@@ -433,13 +421,6 @@ FireWire, aka IEEE 1394
 \vfill
 	\begin{center}
 		\includegraphics[scale=1.5]{pics/fc-optical.eps} \\
-	\end{center}
-\vfill
-
-\subsection{Basic Disk Concepts: Disk Interfaces: Fibre Channel}
-\vfill
-	\begin{center}
-		\includegraphics[scale=0.7]{pics/fc-connectors.eps} \\
 	\end{center}
 \vfill
 
@@ -464,44 +445,7 @@ FireWire, aka IEEE 1394
 	\end{center}
 \vfill
 
-\subsection{Basic Disk Concepts: Disk Interfaces: Fibre Channel}
-Fibre Channel:
-\begin{itemize}
-	\item point-to-point,in arbitrated loop or switched
-	\item hot-pluggable
-	\item speeds: up to 16  Gb/s
-	\item max cable length: up to 20 m (copper) or up to 50 km (Optical)
-	\item number of devices: 2 (point-to-point), 127 (loop), or... $2^{24}$ (switched)
-\end{itemize}
-
-% SAS - Serial Attached SCSI
-\subsection{Basic Disk Concepts: Disk Interfaces: SAS}
-Serial Attached SCSI
-\vfill
-\begin{center}
-	\includegraphics[scale=0.1]{pics/SFF_8086.eps}
-	\includegraphics[scale=0.07]{pics/SFF_8087.eps}
-	\includegraphics[scale=0.1]{pics/SFF_8088.eps}
-	\includegraphics[scale=0.1]{pics/SFF_8470.eps}
-	\includegraphics[scale=0.05]{pics/SFF_8484_angled.eps}
-\end{center}
-\vfill
-
-\subsection{Basic Disk Concepts: Disk Interfaces: SAS}
-Serial Attached SCSI
-\begin{itemize}
-	\item point-to-point, but layered model (physical, PHY, link,
-		port, transport, application)
-	\item transport via SCSI-, SATA-, or fabric managing protocols
-	\item backwards compatible with SATA
-	\item transfer speeds of up to 6Gb/s; up to $2^{16}$ devices
-	\item expanders allow for switched topologies
-\end{itemize}
-
-
-
-% AoE (ATA over Ethernet)
-
+% SANs
 \subsection{Basic Disk Concepts: Disk Interfaces: SANs}
 \begin{itemize}
 	\item ATA over Ethernet ({\em AoE}):
@@ -512,24 +456,6 @@ Serial Attached SCSI
 	\item Fibre Channel over Ethernet ({\em FCoE}):
 		\begin{itemize}
 			\item consolidate IP and FC/SAN networks
-			\item reduce interface cards in servers
-			\item reduce additional cabling and associated costs
-			\item FC encapsulated into Ethernet frames
-		\end{itemize}
-\end{itemize}
-
-\subsection{Basic Disk Concepts: Disk Interfaces: SANs}
-\begin{itemize}
-	\item ATA over Ethernet ({\em AoE}):
-		\begin{itemize}
-			\item create low-cost SAN
-			\item ATA encapsulated into Ethernet frames
-		\end{itemize}
-	\item Fibre Channel over Ethernet ({\em FCoE}):
-		\begin{itemize}
-			\item consolidate IP and FC/SAN networks
-			\item reduce interface cards in servers
-			\item reduce additional cabling and associated costs
 			\item FC encapsulated into Ethernet frames
 		\end{itemize}
 
@@ -539,49 +465,13 @@ Serial Attached SCSI
 			\item restricted to a single Layer 2 network
 			\item no inherent security features
 		\end{itemize}
-\end{itemize}
-
-% iSCSI
-\subsection{Basic Disk Concepts: Disk Interfaces: SANs}
-\vfill
-\begin{center}
-	\includegraphics[scale=0.8]{pics/iscsi-host-bus.eps} \\
-\end{center}
-\vfill
-
-\subsection{Basic Disk Concepts: Disk Interfaces: SANs}
-Internet Small Computer System Interface {\em iSCSI}:
-\begin{itemize}
-	\item SCSI encapsulated in TCP/IP packets
-	\item runs over regular network cables
-	\item security:
+	\item iSCSI
 		\begin{itemize}
-			\item uses Challenge-handshake authentication protocol ({\em CHAP})
-			\item can use {\em IPsec}
+			\item SCSI encapsulated in TCP/IP packets
 		\end{itemize}
-	\item uses {\em iSCSI Initiator}; a hardware initiator such as a SCSI
-		Host Bus Adapter ({\em HBA}) frequently combines a Gb NIC
-		with a TCP/IP Offload Engine ({\em TOE}) and a SCSI Bus
-		Adapter
-	\item storage resource (on server or a storage device) termed the
-		{\em iSCSI target}
 \end{itemize}
 
 \newpage
-%\subsection{Basic Disk Concepts: Disk Interfaces}
-%Standard interfaces for connecting storage devices:
-%\begin{itemize}
-%	\item SCSI
-%	\item ATA (IDE/EIDE and S-ATA)
-%	\item Fibre Channel
-%\end{itemize}
-%\addvspace{0.5in}
-%Other interfaces:
-%\begin{itemize}
-%	\item USB
-%	\item FireWire
-%\end{itemize}
-
 \vspace*{\fill}
 \begin{center}
 	\Hugesize
@@ -611,14 +501,6 @@ Internet Small Computer System Interface {\em iSCSI}:
 \subsection{Basic Disk Concepts: Disk Devices}
 \vfill
 	\begin{center}
-		\includegraphics[scale=1.2]{pics/hard-drive.eps} \\
-	\end{center}
-\vfill
-
-
-\subsection{Basic Disk Concepts: Disk Devices}
-\vfill
-	\begin{center}
 		\includegraphics[scale=0.9]{pics/6platter.eps} \\
 	\end{center}
 \vfill
@@ -629,23 +511,6 @@ Internet Small Computer System Interface {\em iSCSI}:
 		\includegraphics[scale=1.2]{pics/cylinders.eps} \\
 	\end{center}
 \vfill
-
-\subsection{Basic Disk Concepts: Physical Disk Structure}
-Addressing modes:
-\begin{itemize}
-	\item CHS {\tt https://en.wikipedia.org/wiki/Cylinder-head-sector}
-		\begin{itemize}
-			\item 504 MB limitation (BIOS limited cylinders to
-				1024, ATA limited heads to 16, sectors are
-				limited to 6 bits (there is no sector 0))
-			\item 8 GB limit (8 bits for heads)
-		\end{itemize}
-	\item LBA {\tt https://en.wikipedia.org/wiki/Logical\_Block\_Addressing}
-		\begin{itemize}
-			\item uses integer index
-			\item limited to $2^{48}$ bits
-		\end{itemize}
-\end{itemize}
 
 \subsection{Basic Disk Concepts: Physical Disk Structure}
 Hard drive performance determined by:
@@ -731,22 +596,6 @@ e:  56119392  22020768   4.2BSD   4096 32768 58528  # (Cyl.  21846 - 77519)
 
 
 \subsection{Basic Disk Concepts: Partitions}
-IRIX example (from {\tt fx(1M)})
-
-A 8.5 GB disk, with 512 MB swap:
-\begin{verbatim}
-part  type        blocks            Megabytes   (base+size)
-  0: xfs        4096 + 16730568       2 + 8169
-  1: raw    16734664 + 1048576     8171 + 512
-  8: volhdr        0 + 4096           0 + 2
- 10: volume        0 + 17783240       0 + 8683
------ bootinfo-----
- root partition = 0     swap partition = 1    bootfile = /unix
------ directory entries-----
-  0: sgilabel   block    2 size     512  1: sash   block  3 size  266240
-\end{verbatim}
-
-\subsection{Basic Disk Concepts: Partitions}
 Solaris example (from {\tt format(1m)}):
 \begin{verbatim}
 Current partition table (original):
@@ -778,127 +627,21 @@ Units = cylinders of 16065 * 512 = 8225280 bytes
 \end{verbatim}
 
 \subsection{Basic Disk and Filesystem Concepts: RAID and Logical Volumes}
-Logical Volumes:
 \begin{itemize}
 	\item allow file systems to be larger than the physical size of a disk
 	\item inrease I/O performance when {\em striped}
 	\item fault tolerant when {\em mirrored} or {\em plexed}
 \end{itemize}
-
-RAID:
-\begin{itemize}
-	\item basic techniques:
-		\begin{itemize}
-			\item striping
-			\item mirroring
-			\item parity
-		\end{itemize}
-	\item different RAID levels:
-		\begin{itemize}
-			\item level 0 - 6
-			\item level 0+1
-			\item level 10, 30 or 50 (1+0, 3+0, 5+0)
-		\end{itemize}
-\end{itemize}
-
-\subsection{Basic Disk and Filesystem Concepts: RAID and Logical Volumes}
 \vfill
 \begin{center}
-	\includegraphics[scale=0.7]{pics/raid-0.eps}
-	\hspace{.5in}
-	\includegraphics[scale=0.7]{pics/raid-1.eps} \\
-	\vspace{.2in}
-	\includegraphics[scale=0.7]{pics/raid-5.eps}
+        \includegraphics[scale=0.5]{pics/raid-0.eps}
+        \hspace{.5in}
+        \includegraphics[scale=0.5]{pics/raid-1.eps} \\
+        \vspace{.2in}
+        \includegraphics[scale=0.5]{pics/raid-5.eps}
 \end{center}
 \vfill
 
-\subsection{Basic Disk and Filesystem Concepts: RAID and Logical Volumes}
-\vfill
-\begin{center}
-	\includegraphics[scale=0.9]{pics/zfs.eps} \\
-\end{center}
-\vfill
-
-
-
-%\subsection{Basic Disk Concepts: RAID}
-%\begin{figure}[hb]
-%	\begin{center}
-%		\includegraphics[scale=1.1]{pics/RAID-0.eps} \\
-%	\end{center}
-%\end{figure}
-%
-%\subsection{Basic Disk Concepts: RAID}
-%\begin{figure}[hb]
-%	\begin{center}
-%		\includegraphics[scale=1.1]{pics/RAID-1.eps} \\
-%	\end{center}
-%\end{figure}
-%
-%%\subsection{Basic Disk Concepts: RAID}
-%%\begin{figure}[hb]
-%%\begin{center}
-%%\includegraphics[scale=1.1]{pics/RAID-2.eps} \\
-%%\end{center}
-%%\end{figure}
-%
-%\subsection{Basic Disk Concepts: RAID}
-%\begin{figure}[hb]
-%	\begin{center}
-%		\includegraphics[scale=1.1]{pics/RAID-3.eps} \\
-%	\end{center}
-%\end{figure}
-%
-%%\subsection{Basic Disk Concepts: RAID}
-%%\begin{figure}[hb]
-%%	\begin{center}
-%%		\includegraphics[scale=1.1]{pics/RAID-4.eps} \\
-%%	\end{center}
-%%\end{figure}
-%
-%\subsection{Basic Disk Concepts: RAID}
-%\begin{figure}[hb]
-%	\begin{center}
-%		\includegraphics[scale=1.1]{pics/RAID-5.eps} \\
-%	\end{center}
-%\end{figure}
-%
-%%\subsection{Basic Disk Concepts: RAID}
-%%\begin{figure}[hb]
-%%	\begin{center}
-%%		\includegraphics[scale=1.1]{pics/RAID-6.eps} \\
-%%	\end{center}
-%%\end{figure}
-%%
-%%\subsection{Basic Disk Concepts: RAID}
-%%\begin{figure}[hb]
-%%	\begin{center}
-%%		\includegraphics[scale=1.1]{pics/RAID-7.eps} \\
-%%	\end{center}
-%%\end{figure}
-%
-%
-%\subsection{Basic Disk Concepts: RAID}
-%\begin{figure}[hb]
-%	\begin{center}
-%		\includegraphics[scale=1.1]{pics/RAID-10.eps} \\
-%	\end{center}
-%\end{figure}
-%
-%\subsection{Basic Disk Concepts: RAID}
-%\begin{figure}[hb]
-%	\begin{center}
-%		\includegraphics[scale=1.1]{pics/RAID-0+1.eps} \\
-%	\end{center}
-%\end{figure}
-%
-%
-%\subsection{Basic Disk Concepts: RAID}
-%\begin{figure}[hb]
-%	\begin{center}
-%		\includegraphics[scale=1.1]{pics/RAID-53.eps} \\
-%	\end{center}
-%\end{figure}
 
 \newpage
 \vspace*{\fill}
@@ -994,34 +737,6 @@ corsario.cs.stevens-tech.edu:/export/faculty         /mnt/legacy/faculty nfs rw,
 
 \end{verbatim}
 \Normalsize
-
-\subsection{Basic Filesystem Concepts}
-All partitions -- with the exception of the {\em root} (or \verb+/+) partition
--- can be {\em mounted} anywhere in the filesystem hierarchy.
-\\
-
-The file \verb+/etc/fstab+ (see fstab(5)) specifies which disks / partitions
-to mount where:
-\\
-\small
-\begin{verbatim}
-#device         device          mount           FS      fsck    mount   mount
-#to mount       to fsck         point           type    pass    at boot options
-#
-fd              -               /dev/fd         fd      -       no      -
-/proc           -               /proc           proc    -       no      -
-/dev/dsk/c0d0s1 -               -               swap    -       no      -
-/dev/dsk/c0d0s0 /dev/rdsk/c0d0s0  /             ufs     1       no      -
-/dev/dsk/c0d0p0:boot  -         /boot           pcfs    -       no      -
-/dev/dsk/c0d0s7 /dev/rdsk/c0d0s7  /export/home  ufs     2       yes
--
-/devices        -               /devices        devfs   -       no      -
-ctfs            -               /system/contract ctfs   -       no      -
-objfs           -               /system/object  objfs   -       no      -
-swap            -               /tmp            tmpfs   -       yes     -
-\end{verbatim}
-\Normalsize
-
 
 
 \subsection{Basic Filesystem Concepts}
@@ -1189,6 +904,7 @@ Components of the Berkeley Fast Filesystem:
 \begin{itemize}
 	\item set of {\em inode} storage cells
 \end{itemize}
+{\tt df -i}
 & \multirow{2}{*}{\includegraphics[scale=0.5]{pics/buckets.eps}} \\
 \end{tabular}
 
@@ -1206,6 +922,7 @@ Components of the Berkeley Fast Filesystem:
 	\item set of {\em inode} storage cells
 	\item set of scattered ``superblocks''
 \end{itemize}
+{\tt newfs -N /dev/rdsk/c1t2160d0s0}
 & \multirow{2}{*}{\includegraphics[scale=0.3]{pics/lego.eps}} \\
 \end{tabular}
 
@@ -1243,6 +960,7 @@ Components of the Berkeley Fast Filesystem:
 	\item map of disk blocks
 	\item block usage summary
 \end{itemize}
+{\tt fstyp -v /dev/rdsk/c1t2160d0s0  | more}
 & \multirow{2}{*}{\includegraphics[scale=0.5]{pics/tetris.eps}} \\
 \end{tabular}
 
@@ -1271,19 +989,6 @@ Components of the Berkeley Fast Filesystem:
 	\includegraphics[scale=0.8]{pics/ufs-details.eps} \\
 \end{center}
 \vspace*{\fill}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-\begin{verbatim}
-$ ec2-run-instances -g stevens -k stevens ami-3c47a355
-$ ec2-describe-instances
-$ ssh <hostname>
-# mount
-# cat /etc/fstab
-# df
-# df -i
-# dumpe2fs /dev/sda1 | less
-\end{verbatim}
-
 
 \subsection{Basic Filesystem Concepts: The UNIX Filesystem}
 Information stored in an {\em inode}:
@@ -1379,9 +1084,6 @@ Information stored in an {\em inode}:
 
 \begin{verbatim}
 $ stat /etc/passwd
-$ ln /etc/passwd /tmp/passwd
-$ stat /tmp/passwd
-$ stat -L /tmp/passwd
 \end{verbatim}
 
 \subsection{Basic Filesystem Concepts: The UNIX Filesystem}
@@ -1495,11 +1197,22 @@ $ stat /tmp/fifo | tee /tmp/fifo
 $ cat /tmp/out
 \end{verbatim}
 
-\subsection{HW\#1}
-Setup your environment for EC2 and create an instance
-\vfill
-\verb+http://www.cs.stevens.edu/~jschauma/615/s13-hw1.html+
-\vfill
+\subsection{Homework}
+Repeat the examples from class.  Make sure you understand the commands and
+how they relate to the concepts we discussed.  Repeat for a different OS,
+for example: \\
+
+\begin{itemize}
+	\item {\tt ami-b232d0db} -- Fedora 8
+	\item {\tt ami-23dae94a} -- FreeBSD 10.0
+	\item {\tt ami-65a7f30c} -- NetBSD 6.1.2
+	\item {\tt ami-35eb835c} -- OmniOS 5.11
+\end{itemize}
+
+\vspace{.5in}
+Remember to {\em shut down} your EC2 instances and to {\em delete} any unused ESB
+volumes!
+
 
 \subsection{Reading}
 \begin{itemize}
@@ -1519,39 +1232,28 @@ Disk Interfaces:
 	\item ATA:
 		\begin{itemize}
 			\item \verb+http://www.ata-atapi.com/+
-			\item \verb+http://wikipedia.org/wiki/Advanced_Technology_Attachment+
-			\item \verb+http://en.wikipedia.org/wiki/Sata+
-		\end{itemize}
-	\item USB:
-		\begin{itemize}
-			\item \verb+http://en.wikipedia.org/wiki/Usb+
-			\item \verb+http://www.usb.org/+
-			\item usb(4)
+			\item \verb+https://en.wikipedia.org/wiki/Advanced_Technology_Attachment+
+			\item \verb+https://en.wikipedia.org/wiki/Sata+
 		\end{itemize}
 \end{itemize}
 
 \subsection{Reading}
 Disk Interfaces:
 \begin{itemize}
-	\item FireWire:
-		\begin{itemize}
-			\item \verb+http://www.apple.com/firewire/+
-			\item \verb+http://en.wikipedia.org/wiki/Firewire+
-		\end{itemize}
 	\item Serial attached SCSI:
 		\begin{itemize}
 			\item \verb+https://en.wikipedia.org/wiki/Serial_attached_SCSI+
 		\end{itemize}
 	\item Fibre Channel:
 		\begin{itemize}
-			\item \verb+http://hsi.web.cern.ch/HSI/fcs/fcs.html+
-			\item \verb+http://en.wikipedia.org/wiki/Fibrechannel+
+			\item \verb+https://hsi.web.cern.ch/HSI/fcs/fcs.html+
+			\item \verb+https://en.wikipedia.org/wiki/Fibrechannel+
 		\end{itemize}
 	\item AoE, FCoE, iSCSI:
 		\begin{itemize}
-			\item \verb+http://en.wikipedia.org/wiki/ATA_over_Ethernet+
-			\item \verb+http://en.wikipedia.org/wiki/FCoE+
-			\item \verb+http://en.wikipedia.org/wiki/ISCSI+
+			\item \verb+https://en.wikipedia.org/wiki/ATA_over_Ethernet+
+			\item \verb+https://en.wikipedia.org/wiki/FCoE+
+			\item \verb+https://en.wikipedia.org/wiki/ISCSI+
 		\end{itemize}
 \end{itemize}
 
@@ -1564,11 +1266,11 @@ Basic Disk Concepts:
 \end{itemize}
 RAID:
 \begin{itemize}
-	\item \verb+http://en.wikipedia.org/wiki/RAID+
+	\item \verb+https://en.wikipedia.org/wiki/RAID+
 \end{itemize}
 Basic Filesystem Concepts:
 \begin{itemize}
-	\item \verb+http://is.gd/Ha8QLW+
+	\item \verb+http://is.gd/8KHnQj+
 	\item \verb+http://is.gd/YMm3JL+
 	\item newfs(8)
 \end{itemize}
