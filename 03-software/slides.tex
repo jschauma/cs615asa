@@ -32,32 +32,16 @@
 		Stevens Institute of Technology\\
 		Jan Schaumann\\
 		\verb+jschauma@stevens.edu+ \\
-		\verb+http://www.cs.stevens.edu/~jschauma/615/+
+		\verb+https://www.cs.stevens.edu/~jschauma/615/+
 \end{center}
 \vspace*{\fill}
 
-\subsection{Last week...}
-\begin{center}
-	\includegraphics[scale=0.8]{pics/nytimes.eps}
-\end{center}
-
-\subsection{Last week...}
-\begin{center}
-	\includegraphics[scale=0.8]{pics/wsj.eps} \\
-\end{center}
-
-\subsection{Last week...}
-\begin{center}
-	\includegraphics[scale=0.8,angle=-90]{pics/twitter2.eps} \\
-	\[...\] \
-	\includegraphics[scale=0.8,angle=-90]{pics/twitter.eps} \\
-	\vspace{.5in}
-	\small
-	{\tt http://is.gd/AXWoQD}
-	\Normalsize
-\end{center}
-
 \subsection{Typical Boot Sequence}
+\vspace*{\fill}
+\begin{verbatim}
+$ aws ec2 run-instances --image-id ami-3b361952
+\end{verbatim}
+\vspace*{\fill}
 
 \subsection{Typical Boot Sequence}
 \begin{itemize}
@@ -68,6 +52,16 @@
 	\item load kernel
 	\item kernel transfers control to {\tt init(8)}
 \end{itemize}
+
+\subsection{Typical Boot Sequence}
+\vspace*{\fill}
+\begin{verbatim}
+$ aws ec2 run-instances --image-id ami-3b361952
+[wait... wait... wait...]
+$ aws ec2 get-console-output --instance-id i-2fdb4701 | more
+\end{verbatim}
+\vspace*{\fill}
+
 
 \subsection{Types of Software}
 
@@ -100,13 +94,42 @@
 
 \subsection{Kernel}
 \begin{center}
-	\includegraphics[scale=0.95,angle=-90]{pics/engine-kernel.eps}
+        \includegraphics[scale=0.95,angle=-90]{pics/engine-kernel.eps}
 \end{center}
 
 \subsection{Kernel}
-\begin{center}
-	\includegraphics[scale=0.7,angle=-90]{pics/kernel-dmesg.eps}
-\end{center}
+\small
+\begin{verbatim}
+Copyright (c) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
+    2006, 2007, 2008, 2009, 2010, 2011, 2012
+    The NetBSD Foundation, Inc.  All rights reserved.
+
+Copyright (c) 1982, 1986, 1989, 1991, 1993
+    The Regents of the University of California.  All rights reserved.
+
+NetBSD 6.1.2 (XEN3PAE_DOMU)
+total memory = 615 MB
+avail memory = 597 MB
+mainbus0 (root)
+hypervisor0 at mainbus0: Xen version 3.4.3.amazon
+vcpu0 at hypervisor0: Intel(R) Xeon(R) CPU E5-2650 0 @ 2.00GHz, id 0x206d7
+xenbus0 at hypervisor0: Xen Virtual Bus Interface
+xencons0 at hypervisor0: Xen Virtual Console Driver
+npx0 at hypervisor0: using exception 16
+xbd0 at xenbus0 id 2049: Xen Virtual Block Device Interface
+xbd1 at xenbus0 id 2050: Xen Virtual Block Device Interface
+xennet0 at xenbus0 id 0: Xen Virtual Network Interface
+xennet0: MAC address 22:00:0a:47:89:0e
+balloon0 at xenbus0 id 0: Xen Balloon driver
+balloon0: current reservation: 629760 KiB
+xennet0: using RX copy mode
+balloon0: current reservation: 157440 pages => target: 157440 pages
+boot device: xbd1
+root on xbd1a dumps on xbd1b
+root file system type: ffs
+Sat Feb  1 21:46:17 UTC 2014
+\end{verbatim}
+\Normalsize
 
 \subsection{OS}
 \begin{center}
@@ -165,13 +188,47 @@
 \subsection{File System Hierarchy}
 Layout of filesystem {\em should} be standardized.  Some UNIX versions adhere
 to these standards, some are strongly influenced by tradition.
+\\
+
+{\tt man hier}
 
 \subsection{File System Hierarchy}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.5,angle=-90]{pics/fhs.eps}
-\end{center}
-\vspace*{\fill}
+\small
+\begin{verbatim}
+                     /          root directory of the system
+
+                     /bin/      utilities used in both single and multi-user environments
+
+                     /dev/      block, character and other special device files
+
+                     /etc/      system configuration files and scripts
+
+                     /lib/      dynamic linked libraries used by dynamic linked programs (such
+                                as those in /bin/ and /sbin/) that cannot rely upon /usr/lib/
+                                being available.
+
+                     /sbin/     system programs and administration utilities used in both sin-
+                                gle-user and multi-user environments
+
+                     /tmp/      temporary files, usually a mfs(8) memory-based filesystem (the
+                                contents of /tmp are usually not preserved across a system
+                                reboot)
+
+                     /usr/      contains the majority of the system utilities and files
+
+
+                                bin/      common utilities, programming tools, and applica-
+                                          tions
+
+                                lib/      archive, profiled, position independent archive, and
+                                          shared libraries
+
+                                sbin/     system daemons and system utilities (normally exe-
+                                          cuted by the super-user)
+
+                                share/    architecture-independent text files
+\end{verbatim}
+\Normalsize
 
 \subsection{File System Hierarchy}
 Layout of filesystem {\em should} be standardized.  Some UNIX versions adhere
@@ -311,39 +368,23 @@ Examples:
 \end{tabular}
 \end{center}
 
+\newpage
+\vspace*{\fill}
+\begin{center}
+	\Hugesize
+		Software Installation Concepts \\ [1em]
+	\hspace*{5mm}
+	\blueline\\
+	\hspace*{5mm}\\
+		Operating System Installation
+\end{center}
+\vspace*{\fill}
 
-
-\subsection{File System Hierarchy}
-\begin{itemize}
-	\item the root file system, or \verb+/+, needs to be adequate
-		to boot, restore, recover, and/or repair the system.
-	\item \verb+/usr+: often shareable, read-only data
-	\item \verb+/usr/local+: truly {\em local} data; often mirrors
-		\verb+/+ to a certain extent
-	\item \verb+/var+: multi-purpose log, temporary, transient, and spool
-		files; includes shareable and non-shareable data
-\end{itemize}
-See also: {\tt hier(7)}
-\vspace{.5in}
-Some Operating Systems may use other schemas.  Know thy enemy!
-
-\subsection{OS Installation}
 
 \subsection{OS Installation}
 \begin{center}
-	\includegraphics[scale=0.7,angle=-90]{pics/irix-install.eps}
+	\includegraphics[scale=0.7,angle=-90]{pics/netbsd-install.eps}
 \end{center}
-
-\subsection{OS Installation}
-\begin{center}
-	\includegraphics[scale=0.8,angle=-90]{pics/netbsd-install.eps}
-\end{center}
-
-\subsection{OS Installation}
-\begin{center}
-	\includegraphics[scale=0.8,angle=-90]{pics/solaris-install.eps}
-\end{center}
-
 
 \subsection{OS Installation}
 Before installing, consider
@@ -699,14 +740,6 @@ Boot options:      timeout 5, flags 0, speed 9600, ioaddr 0, console pc
 \end{center}
 \vspace*{\fill}
 
-\subsection{OS Installation}
-``Any sufficiently advanced technology is indistinguishable from magic.''
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.5]{pics/magic_hat.eps}
-\end{center}
-\vspace*{\fill}
-
 \newpage
 \vspace*{\fill}
 \begin{center}
@@ -845,41 +878,23 @@ Consider:
 	\item proprietary third party software
 \end{itemize}
 
-\subsection{More fun than...}
+
+\newpage
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=0.7]{pics/bmonkey.eps}
+	\Hugesize
+		Software Installation Concepts \\ [1em]
+	\hspace*{5mm}
+	\blueline\\
+	\hspace*{5mm}\\
+		Practical Exercises
 \end{center}
+\vspace*{\fill}
 
-\subsection{Binary vs. Source installation}
-Benefits of binary installation:
-\begin{itemize}
-	\item packaged by "vendor" $\rightarrow$ support
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Benefits of binary installation:
-\begin{itemize}
-	\item packaged by "vendor" $\rightarrow$ support
-	\item faster
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Benefits of binary installation:
-\begin{itemize}
-	\item packaged by "vendor" $\rightarrow$ support
-	\item faster
-	\item uses less space
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Benefits of binary installation:
-\begin{itemize}
-	\item packaged by "vendor" $\rightarrow$ support
-	\item faster
-	\item uses less space
-	\item may be only possibility
-\end{itemize}
+\subsection{Compare pkgsrc and pkgin}
+\vfill
+{\tt https://www.cs.stevens.edu/\~{}jschauma/615/pkg-exercise.html}
+\vfill
 
 \subsection{Binary vs. Source installation}
 Benefits of binary installation:
@@ -895,100 +910,12 @@ Benefits of binary installation:
 Disadvantages of binary installation:
 \begin{itemize}
 	\item complex dependencies
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Disadvantages of binary installation:
-\begin{itemize}
-	\item complex dependencies
-	\item installation procedure may be cumbersome
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Disadvantages of binary installation:
-\begin{itemize}
-	\item complex dependencies
-	\item installation procedure may be cumbersome
-	\item your OS may not be officially supported
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Disadvantages of binary installation:
-\begin{itemize}
-	\item complex dependencies
-	\item installation procedure may be cumbersome
-	\item your OS may not be officially supported
-	\item installation scripts may be busted
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Disadvantages of binary installation:
-\begin{itemize}
-	\item complex dependencies
-	\item installation procedure may be cumbersome
-	\item your OS may not be officially supported
-	\item installation scripts may be busted
-	\item limited control over where files are installed
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Disadvantages of binary installation:
-\begin{itemize}
-	\item complex dependencies
-	\item installation procedure may be cumbersome
-	\item your OS may not be officially supported
-	\item installation scripts may be busted
-	\item limited control over where files are installed
-	\item binaries not optimized for your systems
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Disadvantages of binary installation:
-\begin{itemize}
-	\item complex dependencies
 	\item installation procedure may be cumbersome
 	\item your OS may not be officially supported
 	\item installation scripts may be busted
 	\item limited control over where files are installed
 	\item binaries not optimized for your systems
 	\item you have to trust the package provider
-\end{itemize}
-
-
-\subsection{Binary vs. Source installation}
-Benefits of source installation:
-\begin{itemize}
-	\item full control over
-		\begin{itemize}
-			\item installation location
-			\item compiler flags and optimization
-			\item dependencies
-		\end{itemize}
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Benefits of source installation:
-\begin{itemize}
-	\item full control over
-		\begin{itemize}
-			\item installation location
-			\item compiler flags and optimization
-			\item dependencies
-		\end{itemize}
-	\item make things work even if your OS is not officially supported
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Benefits of source installation:
-\begin{itemize}
-	\item full control over
-		\begin{itemize}
-			\item installation location
-			\item compiler flags and optimization
-			\item dependencies
-		\end{itemize}
-	\item make things work even if your OS is not officially supported
-	\item ability to patch source (features, security etc.)
 \end{itemize}
 
 \subsection{Binary vs. Source installation}
@@ -1009,46 +936,6 @@ Benefits of source installation:
 Disadvantages of source installation:
 \begin{itemize}
 	\item complex dependencies
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Disadvantages of source installation:
-\begin{itemize}
-	\item complex dependencies
-	\item may take time
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Disadvantages of source installation:
-\begin{itemize}
-	\item complex dependencies
-	\item may take time
-	\item requires more detailed knowledge
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Disadvantages of source installation:
-\begin{itemize}
-	\item complex dependencies
-	\item may take time
-	\item requires more detailed knowledge
-	\item a lot of software is done poorly
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Disadvantages of source installation:
-\begin{itemize}
-	\item complex dependencies
-	\item may take time
-	\item requires more detailed knowledge
-	\item a lot of software is done poorly
-	\item not all software is available in source form
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Disadvantages of source installation:
-\begin{itemize}
-	\item complex dependencies
 	\item may take time
 	\item requires more detailed knowledge
 	\item a lot of software is done poorly
@@ -1057,322 +944,22 @@ Disadvantages of source installation:
 \end{itemize}
 
 
-
-\subsection{More fun than...}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.7]{pics/headwall.eps}
-\end{center}
-
-\subsection{Here's the kicker:}
+\subsection{Also: you don't get to choose.}
 \Huge
 \vfill
 \begin{center}
-	You regularly have to do both, build from source {\em and} package it.
+	You regularly have to do both: build from source {\em and} package it.
 \end{center}
 \vfill
 \Normalsize
 
-\newpage
-\vspace*{\fill}
-\begin{center}
-	\Hugesize
-		Software Installation Concepts \\ [1em]
-	\hspace*{5mm}
-	\blueline\\
-	\hspace*{5mm}\\
-		Package Management Systems
-\end{center}
-\vspace*{\fill}
-
-%\subsection{More fun than...}
-%\vspace*{\fill}
-%\begin{center}
-%	\includegraphics[scale=0.45]{pics/barrel_of_donkey.eps}
-%\end{center}
-%
-
-\subsection{Why use a Package Management System?}
-\begin{itemize}
-	\item easy and scalable installation of software
-\end{itemize}
-
-\subsection{Why use a Package Management System?}
-\begin{itemize}
-	\item easy and scalable installation of software
-	\item automatic resolution of software dependencies
-\end{itemize}
-
-\subsection{Complexity of Dependencies}
-An example: Let's install some software to produce nice slides! \\
-
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.0]{pics/xdvipresent.1.ps}
-\end{center}
-
-\subsection{Complexity of Dependencies}
-An example: Let's install some software to produce nice slides! \\
-
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.0]{pics/xdvipresent.2.ps}
-\end{center}
-
-\subsection{Complexity of Dependencies}
-An example: Let's install some software to produce nice slides! \\
-
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.8]{pics/xdvipresent.3.ps}
-\end{center}
-
-\subsection{Complexity of Dependencies}
-An example: Let's install some software to produce nice slides (with
-graphs)! \\
-
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.65]{pics/xdvipresent.graphviz.ps}
-\end{center}
-
-
-
-\subsection{Why use a Package Management System?}
-\begin{itemize}
-	\item easy and scalable installation of software
-	\item automatic resolution of software dependencies
-	\item package and file inventory \\
-\begin{verbatim}
-linux-lab$ dpkg -l
-[...]
-linux-lab$ dpkg -L tcpdump
-[...]
-linux-lab$ dpkg-query -S /usr/lib/libsqlite3.la /usr/bin/sqlite3
-[...]
-
-\end{verbatim}
-\end{itemize}
-
-\subsection{Why use a Package Management System?}
-\begin{itemize}
-	\item easy and scalable installation of software
-	\item automatic resolution of software dependencies
-	\item package and file inventory
-	\item package and file integrity checks \\
-\begin{verbatim}
-$ rpm -Va
-[...]
-missing     /etc/pki/CA/private (Permission denied)
-S.5.....  c /etc/pki/tls/certs/ca-bundle.crt
-S.5.....  c /etc/openldap/ldap.conf
-.......T  c /etc/libuser.conf
-missing     /etc/cron.daily/prelink
-..?.....  c /etc/tcsd.conf
-missing   c /etc/logrotate.d/syslog
-[...]
-\end{verbatim}
-\end{itemize}
-
-\subsection{But!}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.4]{pics/cards.eps}
-\end{center}
-\vspace*{\fill}
-\subsection{Package Managment}
-Some popular package managment systems are:
-\begin{itemize}
-	\item Darwin and Mac OS X {\em fink} (and none)
-	\item Debian packages (\verb+dpkg+, \verb+apt-get+)
-	\item FreeBSD/OpenBSD {\em Ports}
-	\item Gentoo Linux {\em portage}
-	\item IRIX {\em tardist}
-	\item NetBSD Packages Collection ({\em pkgsrc}) -- available for a
-		wide range of platforms (*BSD, Linux, Solaris, Darwin, IRIX,
-		HP-UX, AIX, ...)
-	\item RedHat Package Manager (\verb+rpm+)
-	\item Slackware Linux \verb+tgz+
-	\item Solaris \verb+pkg+
-	\item {\em Depot} and {\em GNU Stow}
-\end{itemize}
-
-\subsection{Managing Security Patches and Software Upgrades}
-Always investigate {\em all} security issues relevant to your system!
-\begin{itemize}
-	\item consider escalation of low-level vulnerability to higher level
-\end{itemize}
-
-\subsection{Managing Security Patches and Software Upgrades}
-Always investigate {\em all} security issues relevant to your system!
-\begin{itemize}
-	\item consider escalation of low-level vulnerability to higher level
-	\item regularly check known resources
-\end{itemize}
-
-\subsection{Managing Security Patches and Software Upgrades}
-Always investigate {\em all} security issues relevant to your system!
-\begin{itemize}
-	\item consider escalation of low-level vulnerability to higher level
-	\item regularly check known resources
-	\item use your vendor's security checking mechanism (if existent)
-\end{itemize}
-
-\subsection{Managing Security Patches and Software Upgrades}
-Always investigate {\em all} security issues relevant to your system!
-\begin{itemize}
-	\item consider escalation of low-level vulnerability to higher level
-	\item regularly check known resources
-	\item use your vendor's security checking mechanism (if existent)
-	\item consider impact of patches/upgrades
-\end{itemize}
-
-\subsection{Managing Security Patches and Software Upgrades}
-Always investigate {\em all} security issues relevant to your system!
-\begin{itemize}
-	\item consider escalation of low-level vulnerability to higher level
-	\item regularly check known resources
-	\item use your vendor's security checking mechanism (if existent)
-	\item consider impact of patches/upgrades
-		\begin{itemize}
-			\item dependencies
-				\begin{itemize}
-					\item shared libraries:  backwards compatibility, ABI
-						changes?
-					\item static libraries:  require update/rebuild
-				\end{itemize}
-		\end{itemize}
-\end{itemize}
-
-\subsection{Managing Security Patches and Software Upgrades}
-Always investigate {\em all} security issues relevant to your system!
-\begin{itemize}
-	\item consider escalation of low-level vulnerability to higher level
-	\item regularly check known resources
-	\item use your vendor's security checking mechanism (if existent)
-	\item consider impact of patches/upgrades
-		\begin{itemize}
-			\item dependencies
-				\begin{itemize}
-					\item shared libraries:  backwards compatibility, ABI
-						changes?
-					\item static libraries:  require update/rebuild
-				\end{itemize}
-			\item restart of binaries (reboot?)
-		\end{itemize}
-\end{itemize}
-
-\subsection{Managing Security Patches and Software Upgrades}
-Always investigate {\em all} security issues relevant to your system!
-\begin{itemize}
-	\item consider escalation of low-level vulnerability to higher level
-	\item regularly check known resources
-	\item use your vendor's security checking mechanism (if existent)
-	\item consider impact of patches/upgrades
-		\begin{itemize}
-			\item dependencies
-				\begin{itemize}
-					\item shared libraries:  backwards compatibility, ABI
-						changes?
-					\item static libraries:  require update/rebuild
-				\end{itemize}
-			\item restart of binaries (reboot?)
-			\item configuration file changes
-		\end{itemize}
-\end{itemize}
-
-\subsection{Managing Security Patches and Software Upgrades}
-Always investigate {\em all} security issues relevant to your system!
-\begin{itemize}
-	\item consider escalation of low-level vulnerability to higher level
-	\item regularly check known resources
-	\item use your vendor's security checking mechanism (if existent)
-	\item consider impact of patches/upgrades
-		\begin{itemize}
-			\item dependencies
-				\begin{itemize}
-					\item shared libraries:  backwards compatibility, ABI
-						changes?
-					\item static libraries:  require update/rebuild
-				\end{itemize}
-			\item restart of binaries (reboot?)
-			\item configuration file changes
-			\item user interface
-		\end{itemize}
-\end{itemize}
-
-\subsection{Managing Security Patches and Software Upgrades}
-Always investigate {\em all} security issues relevant to your system!
-\begin{itemize}
-	\item consider escalation of low-level vulnerability to higher level
-	\item regularly check known resources
-	\item use your vendor's security checking mechanism (if existent)
-	\item consider impact of patches/upgrades
-		\begin{itemize}
-			\item dependencies
-				\begin{itemize}
-					\item shared libraries:  backwards compatibility, ABI
-						changes?
-					\item static libraries:  require update/rebuild
-				\end{itemize}
-			\item restart of binaries (reboot?)
-			\item configuration file changes
-			\item user interface
-			\item conflict with system requirements
-		\end{itemize}
-\end{itemize}
-
-\subsection{Managing Security Patches and Software Upgrades}
-Always investigate {\em all} security issues relevant to your system!
-\begin{itemize}
-	\item consider escalation of low-level vulnerability to higher level
-	\item regularly check known resources
-	\item use your vendor's security checking mechanism (if existent)
-	\item consider impact of patches/upgrades
-		\begin{itemize}
-			\item dependencies
-				\begin{itemize}
-					\item shared libraries:  backwards compatibility, ABI
-						changes?
-					\item static libraries:  require update/rebuild
-				\end{itemize}
-			\item restart of binaries (reboot?)
-			\item configuration file changes
-			\item user interface
-			\item conflict with system requirements
-		\end{itemize}
-	\item verify your vendor's patches integrity
-\end{itemize}
-
-\subsection{Managing Security Patches and Software Upgrades}
-Always investigate {\em all} security issues relevant to your system!
-\begin{itemize}
-	\item consider escalation of low-level vulnerability to higher level
-	\item regularly check known resources
-	\item use your vendor's security checking mechanism (if existent)
-	\item consider impact of patches/upgrades
-		\begin{itemize}
-			\item dependencies
-				\begin{itemize}
-					\item shared libraries:  backwards compatibility, ABI
-						changes?
-					\item static libraries:  require update/rebuild
-				\end{itemize}
-			\item restart of binaries (reboot?)
-			\item configuration file changes
-			\item user interface
-			\item conflict with system requirements
-		\end{itemize}
-	\item verify your vendor's patches integrity
-	\item if no patches are available, {\em make your own}
-\end{itemize}
-
 \subsection{HW \#2}
+
 Package Management on different OS
 \\
 
 Detailed homework assignment posted at
-\verb+http://www.cs.stevens.edu/~jschauma/615/s13-hw2.html+
+\verb+https://www.cs.stevens.edu/~jschauma/615/s14-hw2.html+
 
 
 \subsection{Links}

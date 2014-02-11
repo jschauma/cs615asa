@@ -86,6 +86,7 @@
 							<!-- <LI><A href="#project">Project Description</A></LI> -->
 							<LI><A href="/~jschauma/cgi-bin/615.cgi">Pre-Course Evaluation</A></LI>
 							<LI><A href="/~jschauma/cgi-bin/midterm.cgi">Midterm Evaluation</A></LI>
+							<LI><a href="https://www.srcit.stevens.edu/wiki/index.php/Linux_Lab">Information about the Stevens Linux Lab</a></li>
 							<LI><A href=
 							"https://lists.stevens.edu/cgi-bin/mailman/listinfo/cs615asa">
 							CS615ASA Mailinglist</A></LI>
@@ -241,9 +242,9 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
 				<ul>
 					<li><a href="hw.txt">General Homework Submission Guidelines</a></li>
 					<li><a href="s14-hw1.html">Homework #1: Setup your environment for EC2 and create an instance</a></li>
+					<li><a href="s14-hw2.html">Homework #2: Software packaging</a></li>
 				</ul>
 				<!--
-					<li><a href="s13-hw2.html">Homework #2: Package Management on different OS</a></li>
 					<li><a href="s13-hw3.html">Homework #3: ifconfig output parsing</a></li>
 					<li><a href="s13-hw4.html">Homework #4: EC2 Backup</a></li>
 					<li><a href="s13-hw5.html">Homework #5: Use tcpdump to observe traffic flow</a></li>
@@ -329,23 +330,19 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
 
 					<TR>
 						<TD>2014-02-03</TD>
-						<TD>Software Installation Concepts</TD>
-						<TD><em>Limoncelli &amp; Hogan</em>: Chap. 23 (in first edition) or Chap. 28 (in second edition)<br>
-							<em>Burgess</em> (Principles): Chap. 4.6 - 4.8<br>
-							<em>Frisch</em>: Parts of Chap. 3</TD>
-						<TD><a href="slides/lecture03.pdf">Lecture 03 slides</a></td>
+						<TD colspan="3"><em>Snowday - no class!</em></TD>
 					</TR>
 
 					<TR>
 						<TD>2014-02-10</TD>
-						<TD>Got root?	Multi-user basics, politics, policies and ethics</TD>
-						<TD><em>Frisch</em>: Chap. 6<br>
-								<em>Burgess</em>: Chap. 5<br>
-								<em>Nemeth et al</em>: Chap. 3, 6, 27</TD>
-						<TD><a href="slides/lecture04.pdf">Lecture 04 slides</a><br>
-							<a href="http://www.cs.stevens.edu/~jschauma/usenix/sage/policy.pdf">SAGE
-								Booklet: A Guide to Developing Computing Policy Documents</a><br>
-							<a href="https://www.usenix.org/sites/default/files/code_of_ethics_diploma.pdf">System Administrators' Code of Ethics</a></TD>
+						<TD>Software Installation Concepts</TD>
+						<TD><em>Limoncelli &amp; Hogan</em>: Chap. 23 (in first edition) or Chap. 28 (in second edition)<br>
+							<em>Burgess</em> (Principles): Chap. 4.6 - 4.8<br>
+							<em>Frisch</em>: Parts of Chap. 3</TD>
+						<TD><a href="slides/lecture03.pdf">Lecture 03 slides</a><br>
+							<a href="boot-sequence/">boot sequences for different OS</a><br>
+							<a href="pkg-exercise.html">Exercise: Compare the use of pkgsrc and pkgin</a><br><br>
+							<a href="s14-hw2.html">HW#2</a></td>
 					</TR>
 
 					<TR>
@@ -353,17 +350,29 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
 						<TD colspan="3"><em>President's Day -- No class</em></TD>
 					</TR>
 
-
 					<TR>
 						<TD>2014-02-18</TD>
+						<TD>Got root?	Multi-user basics, politics, policies and ethics</TD>
+						<TD><em>Frisch</em>: Chap. 6<br>
+								<em>Burgess</em>: Chap. 5<br>
+								<em>Nemeth et al</em>: Chap. 3, 6, 27</TD>
+						<TD><em>Note: Tuesday class!</em><br><br<a href="slides/lecture04.pdf">Lecture 04 slides</a><br>
+							<a href="http://www.cs.stevens.edu/~jschauma/usenix/sage/policy.pdf">SAGE
+								Booklet: A Guide to Developing Computing Policy Documents</a><br>
+							<a href="https://www.usenix.org/sites/default/files/code_of_ethics_diploma.pdf">System Administrators' Code of Ethics</a></TD>
+					</TR>
+
+					<TR>
+						<TD>2014-02-24</TD>
 						<TD>Automating Administrative Tasks I / Shell Essentials</TD>
 						<TD><em>Frisch</em>: Chap. 14, Append. A<br>
 							<em>Nemeth et al</em>: Chap. 9</TD>
-						<TD><em>Note: Tuesday class!</em><br><br><a href="slides/lecture05.pdf">Lecture 05 slides</a><br>
+						<TD><a href="slides/lecture05.pdf">Lecture 05 slides</a><br>
 							<a href="examples/shexamples">shell basics</a></TD>
 					</TR>
+
 					<TR>
-						<TD>2014-02-24</TD>
+						<TD>2014-03-03</TD>
 						<TD>Automation II / Backup and Disaster Recovery</td>
 						<TD><em>Frisch</em>: Chap. 11<BR>
 							<em>Nemeth et al</em>: Chap. 10<br>
@@ -377,8 +386,14 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
 
 						<TD><a href="slides/lecture06.pdf">Lecture 06 slides</a></td>
 					</TR>
+
 					<TR>
-						<TD>2014-03-03</TD>
+						<TD>2014-03-10</TD>
+						<TD colspan="3"><em>Spring Break -- No class</em></TD>
+					</TR>
+
+					<TR>
+						<TD>2014-03-17</TD>
 						<TD>Networking</TD>
 						<TD><em>Frisch</em>: Chap. 5<BR>
 							<em>Nemeth et al</em>: Chap. 13, 15, 20<br>
@@ -396,13 +411,9 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
 						 </TD>
 					</TR>
 
-					<TR>
-						<TD>2014-03-10</TD>
-						<TD colspan="3"><em>Spring Break -- No class</em></TD>
-					</TR>
 
 					<TR>
-						<TD>2014-03-17</TD>
+						<TD>2014-03-24</TD>
 						<TD>Popular services: DNS</TD>
 
 						<TD><em>Frisch</em>: Chap. 9<BR>
@@ -415,7 +426,7 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
 					</TR>
 
 					<TR>
-						<TD>2014-03-24</TD>
+						<TD>2014-03-31</TD>
 						<TD>Monitoring; Popular services: SMTP</TD>
 						<TD><em>Frisch</em>: Chap. 9<BR>
 							<em>Nemeth et al</em>: Chap. 16, 19, 22<br>
@@ -425,7 +436,7 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
 					</TR>
 
 					<TR>
-						<TD>2014-03-31</TD>
+						<TD>2014-04-07</TD>
 						<TD>Popular services: SNMP, HTTP</TD>
 						<TD><em>Frisch</em>: Chap. 9<BR>
 							<em>Nemeth et al</em>: Chap. 16, 19, 22<br>
@@ -436,22 +447,13 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
 
 					</TR>
 					<TR>
-						<TD>2014-04-07</TD>
+						<TD>2014-04-14</TD>
 						<TD>System Security</TD>
 						<TD><em>Frisch</em>: Chap. 7<BR>
 							<em>Nemeth et al</em>: Chap. 21<br>
 							<em>Burgess</em>: Chap. 11, 12<br>
 							<em>Limoncelli &amp; Hogan</em>: Chap. 7</TD>
 						<TD><a href="slides/lecture11.pdf">Lecture 11 slides</a></td>
-					</TR>
-
-					</TR>
-
-					<TR>
-						<TD>2014-04-14</TD>
-						<TD>AMA / Misc. Topics / Presentations</TD>
-						<TD>&nbsp;</TD>
-						<TD>&nbsp;</TD>
 					</TR>
 
 					<TR>

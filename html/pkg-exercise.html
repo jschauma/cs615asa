@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<HTML>
+<HEAD>
+
+  <TITLE>CS615A -- Aspects of System Administration</TITLE>
+  <STYLE type="text/css">
+  body {
+  background-color: #FFFFFf;
+  }
+  </STYLE>
+  <STYLE type="text/css">
+  li.c1 {list-style: none}
+  </STYLE>
+
+</HEAD>
+
+<BODY>
+  <TABLE border="1" align="center" cellpadding="15">
+    <TR>
+      <TD valign="top">
+        <H2>CS615A -- Aspects of System Administration - Spring 2014 - Exercise: pkgsrc vs. pkgin</H2>
+
+        <H3>Exercise: Compare the use of <em>pkgsrc</em> and <em>pkgin</em></H3>
+
+	<hr>
+        <H4>Run a NetBSD EC2 instance</H4>
+
+	<blockquote><pre><tt>$ aws ec2 run-instances --instance-type t1.micro --image-id ami-65a7f30c</tt></pre></blockquote>
+
+        <H4>Binary Packages</H4>
+
+	<blockquote><pre><tt>$ /usr/bootstrap.sh binpkg
+$ pkg_info | wc -l
+$ man pkgin</tt></pre></blockquote>
+
+	<p>Use <tt>pkgin(1)</tt> to install the <em>nginx</em> webserver.</p>
+
+	<p>When done, also run:</p>
+
+	<blockquote><pre><tt>$ pkg_info | wc -l
+$ pkg_info -D -a | more
+$ /usr/pkg/sbin/pkg_admin fetch-pkg-vulnerabilities
+$ /usr/pkg/sbin/pkg_admin audit</tt></pre></blockquote>
+
+	<H4>Source packages</H4>
+
+	<blockquote><pre><tt>$ /usr/bootstrap.sh pkgsrc
+$ pkg_delete nginx pcre
+$ cd /usr/pkgsrc/www/nginx
+$ make install
+$ pkg_info | wc -l</tt></pre></blockquote>
+
+	<H4>Build manually from source</H4>
+
+	<blockquote><pre><tt>$ ftp http://nginx.org/download/nginx-1.5.10.tar.gz
+$ tar zxvf nginx-1.5.10.tar.gz
+$ cd nginx-1.5.10
+$ ./configure</tt></pre></blockquote>
+	<hr>
+
+        <H4>Run a Fedora instance</H4>
+
+	<blockquote><pre><tt>$ aws ec2 run-instances --instance-type t1.micro --image-id ami-3b361952</tt></pre></blockquote>
+
+        <H4>Binary Packages</H4>
+
+	<blockquote><pre><tt>$ rpm -qa | wc -l
+$ yum install nginx
+$ rpm -qa | wc -l</pre></tt></blockquote>
+
+	<H4>Source packages</H4>
+
+	<blockquote><pre><tt>$ ftp ftp://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc.tar.bz2
+$ tar jxvf pkgsrc.tar.bz2
+$ cd pkgsrc/bootstrap
+$ sh bootstrap
+$ cd ../www/nginx
+$ bmake install
+</tt></pre></blockquote>
+
+	<H4>Build manually from source</H4>
+
+	<blockquote><pre><tt>$ curl http://nginx.org/download/nginx-1.5.10.tar.gz &gt; nginx-1.5.10.tar.gz
+$ tar zxvf nginx-1.5.10.tar.gz
+$ cd nginx-1.5.10
+$ ./configure</tt></pre></blockquote>
+
+       </p>
+      <hr>
+      [<a href="index.html">Course Website</a>]
+</BODY>
+</HTML>
