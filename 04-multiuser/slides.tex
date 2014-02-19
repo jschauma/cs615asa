@@ -21,7 +21,7 @@
 \lhead{\slidetitle}                               % default:\lhead{\slidetitle}
 \chead{CS615 - Aspects of System Administration}% default:\chead{\relax}
 \rhead{Slide \thepage}                       % default:\rhead{\sectiontitle}
-\lfoot{\Gray{Documentation, Multiuser Basics}}% default:\lfoot{\slideauthor}
+\lfoot{\Gray{Software Packaging, Multiuser Fundamentals, Ethics}}% default:\lfoot{\slideauthor}
 \cfoot{\relax}                               % default:\cfoot{\relax}
 \rfoot{\Gray{\today}}
 
@@ -29,7 +29,7 @@
 \begin{center}
 	\Hugesize
 		CS615 - Aspects of System Administration\\ [1em]
-		Documentation, Multiuser Basics\\ [1em]
+		Software Packaging, Multiuser Fundamentals, Ethics\\ [1em]
 	\hspace*{5mm}\blueline\\ [1em]
 	\Normalsize
 		Department of Computer Science\\
@@ -40,142 +40,299 @@
 \end{center}
 \vspace*{\fill}
 
-\subsection{Homework}
-Review your submissions.  Ask yourself:
+\subsection{Why use a Package Management System?}
+\begin{verbatim}
+$ aws ec2 run-instances --image-id ami-6de0dd04 # Ubuntu
+$ aws ec2 run-instances --image-id ami-3b361952 # Fedora
+\end{verbatim}
+
+\subsection{Why use a Package Management System?}
 \begin{itemize}
-	\item What's the difference in output across operating systems?
-	\item What do the different numbers mean?
-	\item Why did I open access to port 80?
-	\item Why does Solaris mount libc?
-	\item Why does {\tt fdisk(8)} claim that {\tt /dev/xvde1 doesn't
-		contain a valid partition table}?
-	\item Why does Solaris say things like {\tt /dev/dsk/c3d0s0 is
-		part of active ZFS pool rpool. Please see zpool(1M).} ?
-	\item Why do Solaris partitions show as {\tt unassigned}?
-	\item Which partitions are overlapping?  Why?
-	\item Do the numbers I produced match?  Do they make sense?
+	\item easy and scalable installation of software
+	\item automatic resolution of software dependencies
+	\item package and file inventory \\
+\begin{verbatim}
+linux-lab$ dpkg -l
+[...]
+linux-lab$ dpkg -L tcpdump
+[...]
+linux-lab$ dpkg-query -S /usr/lib/libsqlite.so.0.8.6 /usr/bin/sqlite3
+[...]
+
+\end{verbatim}
 \end{itemize}
 
-\subsection{Homework}
-Review your submissions.  Ask yourself:
-\vfill
-\Huge
-\begin{center}
-       When I look for information, do I pay attention or do I just copy
-       whatever is written on some website?
-\end{center}
-\Normalsize
-\vfill
-
-\subsection{Documentation Techniques}
-\vfill
-\begin{center}
-\Huge
-Yes, you should write documentation. \\
-\small
-(Emphasis on either word optional.)
-\Normalsize
-\end{center}
-\vfill
-
-\subsection{Documentation Techniques}
-Why?
+\subsection{Why use a Package Management System?}
 \begin{itemize}
-	\item ``this is: ...''
-	\item ``this is why...''
-	\item ``this is how...''
-	\item ``just so you know...''
-	\item ``in case you're interested...''
+	\item easy and scalable installation of software
+	\item automatic resolution of software dependencies
+	\item package and file inventory
+	\item integration into OS
+		\begin{itemize}
+			\item OS-specific defaults / config files
+			\item creation of service accounts (if needed)
+			\item startup scripts / daemon control / service management
+		\end{itemize}
 \end{itemize}
 
-\subsection{Documentation Techniques}
-Why?
+\subsection{Detour: service management}
+Some software:
 \begin{itemize}
-	\item so you don't forget
-	\item so users know how to use the system
-	\item so other administrators can repeat what you've done
-	\item so {\em you} can repeat what you've done
-	\item so you actually do things right
+	\item needs to start automatically at boot time
+	\item run for a very long time
+	\item need to be automatically be restarted when they stop
+	\item must / can not have multiple instances running simultaneously
+	\item may be depended upon by other software
 \end{itemize}
 
-\subsection{Documentation Techniques}
-Types of documents:
-
+\subsection{Detour: service management}
+"I know how to solve this problem!"
 \begin{itemize}
-	\item HOWTO
-	\item policies
-	\item architecture / design
-	\item program documentation / specification
-	\item runbook
-	\item research
+	\item System V derived {\tt inittab(5)}
+	\item BSD style {\tt rc(8)}
+	\item OS X {\tt launchd(8)} (combineѕ
+	\item {\tt daemontools} by djb
+	\item Solaris derived {\em Service Management Facility} (SMF)
+	\item {\tt systemd}, {\tt upstart}, ...
 \end{itemize}
-
-
-\subsection{Documentation Techniques}
-Basics:
-\begin{itemize}
-	\item know your target audience
-	\item don't make assumptions
-	\item explicitly note your assumptions
-	\item include pointers/references to your assumptions
-	\item include screen captures where appropriate
-	\item include verbatim examples to illustrate common use
-\end{itemize}
-
-\subsection{Documentation Techniques}
-Documentation is an {\em ongoing} task.
-
-\begin{itemize}
-	\item keep track of changes (use a revision control system)
-	\item date your documents
-\end{itemize}
+\vspace{.25in}
+{\tt linux-lab.cs.stevens.edu:/etc/init.d/ssh}
 
 \vspace{.25in}
-Documentation is a {\em collaborative} task.
+Fedora:
+\begin{verbatim}
+$ systemctl show sshd.service
+$ more /usr/lib/systemd/system/sshd.service
+\end{verbatim}
 
+
+\subsection{Why use a Package Management System?}
 \begin{itemize}
-	\item ensure remote access
-	\item ensure distributed collaboration
-	\item ensure platform/version independence
+	\item easy and scalable installation of software
+	\item automatic resolution of software dependencies
+	\item package and file inventory
+	\item integration into OS
+	\item package and file integrity checks \\
+\begin{verbatim}
+$ rpm -Va
+[...]
+missing     /etc/pki/CA/private (Permission denied)
+S.5.....  c /etc/pki/tls/certs/ca-bundle.crt
+.......T  c /etc/libuser.conf
+..?.....  c /etc/tcsd.conf
+missing   c /etc/logrotate.d/syslog
+[...]
+\end{verbatim}
 \end{itemize}
 
-\vspace{.25in}
-Documentation is an {\em accumulative} task.
+\subsection{Managing Security Patches and Software Upgrades}
+How many known vulnerabilities (unique CVEs and affected packages) exist
+in each of the Fedora and Ubuntu instances?
 
+\begin{verbatim}
+ubuntu$ sudo apt-get install debsecan
+ubuntu$ debsecan
+\end{verbatim}
+
+\begin{verbatim}
+fedora$ sudo yum install yum-plugin-security
+fedora$ yum list₋sec
+\end{verbatim}
+
+\subsection{Managing Security Patches and Software Upgrades}
+Always investigate {\em all} security issues relevant to your system!
 \begin{itemize}
-	\item make sure you have a searchable index
-	\item identify and flag out-dated documentation
-	\item remove false or unhelpful documentation
+	\item consider escalation of low-level vulnerability to higher level
+\end{itemize}
+
+\subsection{Managing Security Patches and Software Upgrades}
+Always investigate {\em all} security issues relevant to your system!
+\begin{itemize}
+	\item consider escalation of low-level vulnerability to higher level
+	\item regularly check known resources
+\end{itemize}
+
+\subsection{Managing Security Patches and Software Upgrades}
+Always investigate {\em all} security issues relevant to your system!
+\begin{itemize}
+	\item consider escalation of low-level vulnerability to higher level
+	\item regularly check known resources
+	\item use your vendor's security checking mechanism (if existent)
+\end{itemize}
+
+\subsection{Managing Security Patches and Software Upgrades}
+Always investigate {\em all} security issues relevant to your system!
+\begin{itemize}
+	\item consider escalation of low-level vulnerability to higher level
+	\item regularly check known resources
+	\item use your vendor's security checking mechanism (if existent)
+	\item consider impact of patches/upgrades
+\end{itemize}
+
+\subsection{Managing Security Patches and Software Upgrades}
+Always investigate {\em all} security issues relevant to your system!
+\begin{itemize}
+	\item consider escalation of low-level vulnerability to higher level
+	\item regularly check known resources
+	\item use your vendor's security checking mechanism (if existent)
+	\item consider impact of patches/upgrades
+		\begin{itemize}
+			\item dependencies
+				\begin{itemize}
+					\item shared libraries:  backwards compatibility, ABI
+						changes?
+					\item static libraries:  require update/rebuild
+				\end{itemize}
+		\end{itemize}
+\end{itemize}
+
+\subsection{Managing Security Patches and Software Upgrades}
+Always investigate {\em all} security issues relevant to your system!
+\begin{itemize}
+	\item consider escalation of low-level vulnerability to higher level
+	\item regularly check known resources
+	\item use your vendor's security checking mechanism (if existent)
+	\item consider impact of patches/upgrades
+		\begin{itemize}
+			\item dependencies
+				\begin{itemize}
+					\item shared libraries:  backwards compatibility, ABI
+						changes?
+					\item static libraries:  require update/rebuild
+				\end{itemize}
+			\item restart of binaries (reboot?)
+		\end{itemize}
+\end{itemize}
+
+\subsection{Managing Security Patches and Software Upgrades}
+Always investigate {\em all} security issues relevant to your system!
+\begin{itemize}
+	\item consider escalation of low-level vulnerability to higher level
+	\item regularly check known resources
+	\item use your vendor's security checking mechanism (if existent)
+	\item consider impact of patches/upgrades
+		\begin{itemize}
+			\item dependencies
+				\begin{itemize}
+					\item shared libraries:  backwards compatibility, ABI
+						changes?
+					\item static libraries:  require update/rebuild
+				\end{itemize}
+			\item restart of binaries (reboot?)
+			\item configuration file changes
+		\end{itemize}
+\end{itemize}
+
+\subsection{Managing Security Patches and Software Upgrades}
+Always investigate {\em all} security issues relevant to your system!
+\begin{itemize}
+	\item consider escalation of low-level vulnerability to higher level
+	\item regularly check known resources
+	\item use your vendor's security checking mechanism (if existent)
+	\item consider impact of patches/upgrades
+		\begin{itemize}
+			\item dependencies
+				\begin{itemize}
+					\item shared libraries:  backwards compatibility, ABI
+						changes?
+					\item static libraries:  require update/rebuild
+				\end{itemize}
+			\item restart of binaries (reboot?)
+			\item configuration file changes
+			\item user interface
+		\end{itemize}
+\end{itemize}
+
+\subsection{Managing Security Patches and Software Upgrades}
+Always investigate {\em all} security issues relevant to your system!
+\begin{itemize}
+	\item consider escalation of low-level vulnerability to higher level
+	\item regularly check known resources
+	\item use your vendor's security checking mechanism (if existent)
+	\item consider impact of patches/upgrades
+		\begin{itemize}
+			\item dependencies
+				\begin{itemize}
+					\item shared libraries:  backwards compatibility, ABI
+						changes?
+					\item static libraries:  require update/rebuild
+				\end{itemize}
+			\item restart of binaries (reboot?)
+			\item configuration file changes
+			\item user interface
+			\item conflict with system requirements
+		\end{itemize}
+\end{itemize}
+
+\subsection{Managing Security Patches and Software Upgrades}
+Always investigate {\em all} security issues relevant to your system!
+\begin{itemize}
+	\item consider escalation of low-level vulnerability to higher level
+	\item regularly check known resources
+	\item use your vendor's security checking mechanism (if existent)
+	\item consider impact of patches/upgrades
+		\begin{itemize}
+			\item dependencies
+				\begin{itemize}
+					\item shared libraries:  backwards compatibility, ABI
+						changes?
+					\item static libraries:  require update/rebuild
+				\end{itemize}
+			\item restart of binaries (reboot?)
+			\item configuration file changes
+			\item user interface
+			\item conflict with system requirements
+		\end{itemize}
+	\item verify your vendor's patches integrity
+\end{itemize}
+
+\subsection{Managing Security Patches and Software Upgrades}
+Always investigate {\em all} security issues relevant to your system!
+\begin{itemize}
+	\item consider escalation of low-level vulnerability to higher level
+	\item regularly check known resources
+	\item use your vendor's security checking mechanism (if existent)
+	\item consider impact of patches/upgrades
+		\begin{itemize}
+			\item dependencies
+				\begin{itemize}
+					\item shared libraries:  backwards compatibility, ABI
+						changes?
+					\item static libraries:  require update/rebuild
+				\end{itemize}
+			\item restart of binaries (reboot?)
+			\item configuration file changes
+			\item user interface
+			\item conflict with system requirements
+		\end{itemize}
+	\item verify your vendor's patches integrity
+	\item if no patches are available, {\em make your own}
+\end{itemize}
+
+\subsection{Special Purpose Package Managers}
+Most programming languages or environments come with their own "package
+management" solutions, often integrating/mixing with a "build system".
+\begin{itemize}
+	\item Common Lisp $=>$ quicklisp
+	\item NodeJS $=>$ npm
+	\item Perl $=>$ CPAN
+	\item Python $=>$ easy-install, pip, pants, setuptools, ...
+	\item Ruby $=>$ gems, rvm, rake
+	\item Scala $=>$ sbt
+	\item YourFavoriteThing $=>$ ItsOwnGizmo
 \end{itemize}
 
 \newpage
 \vspace*{\fill}
 \begin{center}
     \Hugesize
-        Of Users and Groups\\ [1em]
+        Hooray! \\ [1em]
     \hspace*{5mm}
     \blueline\\
     \hspace*{5mm}\\
-	...and Trust
+        5 Minute Break
 \end{center}
 \vspace*{\fill}
-
-\subsection{You are a Super User!}
-\begin{center}
-	\includegraphics[scale=1.0]{pics/superman.eps} \\
-	\small
-	Yes, you are!
-	\Normalsize
-\end{center}
-
-\subsection{You are a Super User!}
-\begin{center}
-	\includegraphics[scale=4.0]{pics/uncle-ben.eps} \\
-	\addvspace{.2in}
-	\Huge
-	``With great power comes great responsibility.''
-	\Normalsize
-\end{center}
 
 \subsection{Implications of a Multi-User System}
 \vspace*{\fill}
@@ -231,8 +388,6 @@ Things to consider:
 	\Normalsize
 \end{center}
 \vfill
-
-
 
 \subsection{Implications of a Multi-User System}
 \vspace*{\fill}
@@ -360,213 +515,45 @@ At any but the smallest environments, we find:
 	\includegraphics[scale=0.8]{pics/groups-machines.eps}
 \end{center}
 
-
-\subsection{Adding and Removing Accounts}
-\begin{center}
-	\includegraphics[scale=0.8]{pics/friedlander_revolving_door.eps}
-\end{center}
-
+%\subsection{Adding and Removing Accounts}
+%
+%\vfill
+%In-class exercise: \\
+%{\tt https://www.cs.stevens.edu/~jschauma/615/useradd-exercise.html}
+%\vfill
+%
 \subsection{Adding and Removing Accounts}
 \vfill
+%In-class exercise: \\
+%{\tt https://www.cs.stevens.edu/~jschauma/615/useradd-exercise.html} \\
+%
+%\vspace{.5in}
 Accounts management is done centrally; changes are applied to machines via a
 configuration management system and/or directory service.
 \vfill
-
-\subsection{Adding accounts}
-Things to consider:
-\begin{itemize}
-	\item create/assign username, UID, primary group, supplementary groups,
-		choose shell
-\end{itemize}
-
-\subsection{Adding accounts}
-Things to consider:
-\begin{itemize}
-	\item create/assign username, UID, primary group, supplementary groups,
-		choose shell
-	\item assign a password
-\end{itemize}
-
-\subsection{Adding accounts}
-Things to consider:
-\begin{itemize}
-	\item create/assign username, UID, primary group, supplementary groups,
-		choose shell
-	\item assign a password
-	\item create a home directory
-\end{itemize}
-
-\subsection{Adding accounts}
-Things to consider:
-\begin{itemize}
-	\item create/assign username, UID, primary group, supplementary groups,
-		choose shell
-	\item assign a password
-	\item create a home directory
-	\item place initialialization files in the user's home directory
-\end{itemize}
-
-\subsection{Adding accounts}
-Things to consider:
-\begin{itemize}
-	\item create/assign username, UID, primary group, supplementary groups,
-		choose shell
-	\item assign a password
-	\item create a home directory
-	\item place initialialization files in the user's home directory
-	\item set other parameters (password aging, resource limits...)
-\end{itemize}
-
-\subsection{Adding accounts}
-Things to consider:
-\begin{itemize}
-	\item create/assign username, UID, primary group, supplementary groups,
-		choose shell
-	\item assign a password
-	\item create a home directory
-	\item place initialialization files in the user's home directory
-	\item set other parameters (password aging, resource limits...)
-	\item add user to other facilities (enable disk quota, mail filters,
-		printer subsystem...)
-\end{itemize}
-
-\subsection{Adding accounts}
-Things to consider:
-\begin{itemize}
-	\item create/assign username, UID, primary group, supplementary groups,
-		choose shell
-	\item assign a password
-	\item create a home directory
-	\item place initialialization files in the user's home directory
-	\item set other parameters (password aging, resource limits...)
-	\item add user to other facilities (enable disk quota, mail filters,
-		printer subsystem...)
-	\item perform any other site-specific initialization tasks
-\end{itemize}
-
-\subsection{Disabling and Removing User Accounts}
-Things to consider:
-\begin{itemize}
-	\item change other passwords
-\end{itemize}
-
-\subsection{Disabling and Removing User Accounts}
-Things to consider:
-\begin{itemize}
-	\item change other passwords
-	\item terminate running processes
-\end{itemize}
-
-\subsection{Disabling and Removing User Accounts}
-Things to consider:
-\begin{itemize}
-	\item change other passwords
-	\item terminate running processes
-	\item remove user from secondary groups
-\end{itemize}
-
-\subsection{Disabling and Removing User Accounts}
-Things to consider:
-\begin{itemize}
-	\item change other passwords
-	\item terminate running processes
-	\item remove user from secondary groups
-	\item (re)define a mail alias or redirect mail
-\end{itemize}
-
-\subsection{Disabling and Removing User Accounts}
-Things to consider:
-\begin{itemize}
-	\item change other passwords
-	\item terminate running processes
-	\item remove user from secondary groups
-	\item (re)define a mail alias or redirect mail
-	\item remove any cronjobs or other pending tasks for that user
-\end{itemize}
-
-\subsection{Disabling and Removing User Accounts}
-Things to consider:
-\begin{itemize}
-	\item change other passwords
-	\item terminate running processes
-	\item remove user from secondary groups
-	\item (re)define a mail alias or redirect mail
-	\item remove any cronjobs or other pending tasks for that user
-	\item backup all of the users files
-\end{itemize}
-
-\subsection{Disabling and Removing User Accounts}
-Things to consider:
-\begin{itemize}
-	\item change other passwords
-	\item terminate running processes
-	\item remove user from secondary groups
-	\item (re)define a mail alias or redirect mail
-	\item remove any cronjobs or other pending tasks for that user
-	\item backup all of the users files
-	\item perform any other site-specific tasks
-\end{itemize}
-
-\subsection{Practical Policies}
-
-\begin{center}
-	\includegraphics[scale=0.7]{pics/documents.eps}
-\end{center}
-
-\subsection{Practical Policies}
-Some important policy documents you may need:
-\begin{itemize}
-	\item service level agreements (SLAs) for routine tasks
-	\item administrative service policies
-	\item rights and responsibilities of users
-	\item policies regarding sysadmin or other users with special
-		privileges
-	\item guest account policies
-	\item disaster recovery plan
-	\item security incidence response plan
-	\item software licensing (inbound, in-house, outbound)
-	\item ...
-\end{itemize}
-
-\subsection{Practical Policies}
-\begin{center}
-	\includegraphics[scale=0.9]{pics/dogfood.eps}
-\end{center}
-
-\subsection{Policy Enforcement}
-In order to enforce a policy you need to make sure, that
-\begin{itemize}
-	\item all involved parties are informed of the policy
-\end{itemize}
-
-\subsection{Policy Enforcement}
-In order to enforce a policy you need to make sure, that
-\begin{itemize}
-	\item all involved parties are informed of the policy
-	\item you log relevant information
-\end{itemize}
-
-\subsection{Policy Enforcement}
-In order to enforce a policy you need to make sure, that
-\begin{itemize}
-	\item all involved parties are informed of the policy
-	\item you log relevant information
-	\item logs cannot be tempered with and are secure
-\end{itemize}
-
-\subsection{Policy Enforcement}
-In order to enforce a policy you need to make sure, that
-\begin{itemize}
-	\item all involved parties are informed of the policy
-	\item you log relevant information
-	\item logs cannot be tempered with and are secure
-	\item you have buy-in from all stakeholders
-\end{itemize}
 
 \subsection{Ethics}
 \begin{center}
 	\includegraphics[scale=2.5]{pics/angel-devil.eps}
 \end{center}
+
+\subsection{You are a Super User!}
+\begin{center}
+	\includegraphics[scale=1.0]{pics/superman.eps} \\
+	\small
+	Yes, you are!
+	\Normalsize
+\end{center}
+
+\subsection{You are a Super User!}
+\begin{center}
+	\includegraphics[scale=4.0]{pics/uncle-ben.eps} \\
+	\addvspace{.2in}
+	\Huge
+	``With great power comes great responsibility.''
+	\Normalsize
+\end{center}
+
 
 \subsection{Ethics}
 The LISA Code of Ethics:
@@ -586,6 +573,11 @@ The LISA Code of Ethics:
 \end{itemize}
 & \multirow{20}{*}{\includegraphics[scale=1.3]{pics/angel.eps}} \\
 \end{tabular}
+
+\subsection{Ethics: This stuff isn't easy!}
+\begin{center}
+	\includegraphics[scale=0.3]{pics/snowden.eps}
+\end{center}
 
 \subsection{Ethics: Professionalism}
 \vfill
@@ -706,44 +698,25 @@ colleagues and co-workers in following this code of ethics.
 User Management:
 \begin{itemize}
 	\item {\em Frisch}: Ch 6; {\em Burgess}: Ch 5;
-	\item \verb+passwd(5)+, \verb+passwd.conf(5)+, \verb+login.conf(5)+,
-		\verb+vipw(8)+
-	\item \verb+group(5)+
-	\item \verb+useradd(8)+, \verb+usermod(8)+, \verb+user(8)+,
-		\verb+usermgmt.conf(5)+
-	\item \verb+userdel(8)+
 \end{itemize}
 \vspace{.5in}
 \begin{itemize}
-	\item http://www.dartmouth.edu/~rc/help/faq/permissions.html
 	\item http://nixsrv.com/llthw/ex23
 \end{itemize}
-
-\subsection{Reading}
+\vspace{.5in}
 Ethics:
 \begin{itemize}
 	\item \verb+https://www.usenix.org/lisa/system-administrators-code-ethics+
 	\item \verb+http://www.acm.org/about/code-of-ethics+
 \end{itemize}
 
-
-\subsection{Reading}
-Licenses:
-\begin{itemize}
-	\item \verb+http://www.opensource.org/licenses/+
-	\item \verb+http://www.netbsd.org/about/redistribution.html+
-	\item \verb+http://www.gnu.org/licenses/licenses.html+
-	\item \verb+http://java.sun.com/j2se/1.5.0/scsl_5.0-license.txt+
-	\item \verb+http://faqs.org/faqs/law/copyright/faq/+
-\end{itemize}
-
 \subsection{Professional Organizations}
 \begin{itemize}
-	\item \verb+http://www.usenix.org/+ and \verb+https://www.usenix.org/lisa+
+	\item \verb+https://www.usenix.org/+ and \verb+https://www.usenix.org/lisa+
 	\item \verb+http://www.lopsa.org/+
 	\item \verb+http://www.acm.org/+
-	\item \verb+http://www.isoc.org/+
-	\item \verb+http://www.nanog.org/+
+	\item \verb+https://www.internetsociety.org/+
+	\item \verb+https://www.nanog.org/+
 \end{itemize}
 
 \end{document}

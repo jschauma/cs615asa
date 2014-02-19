@@ -12,21 +12,15 @@ PDFTOTEXT=	pdftotext
 PICTURES=	\
 		pics/angel-devil.eps \
 		pics/angel.eps \
-		pics/chain-reaction.eps \
 		pics/documents.eps \
-		pics/dogfood.eps \
 		pics/headless.eps \
-		pics/muppets.eps \
-		pics/simple-reaction.eps \
 		pics/teamwork.eps \
 		pics/thumbsup-borat.eps \
 		pics/user.eps \
-		pics/gollum.eps \
 		pics/exponential_growth.eps \
 		pics/animal_farm.eps \
 		pics/responsibility.eps \
 		pics/baseball.eps \
-		pics/friedlander_revolving_door.eps \
 		pics/bow-before-me-white.eps \
 		pics/user-sets0.eps \
 		pics/user-sets1.eps \
@@ -36,7 +30,8 @@ PICTURES=	\
 		pics/hyperbolic_tangent.eps \
 		pics/superman.eps \
 		pics/groups-machines.eps \
-		pics/ls-l.eps
+		pics/ls-l.eps \
+		pics/snowden.eps
 
 #FIGURES=	decision-tree.eps two-rules.eps combined.eps area.eps
 

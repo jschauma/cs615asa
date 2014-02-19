@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<HTML>
+<HEAD>
+
+  <TITLE>CS615A -- Aspects of System Administration</TITLE>
+  <STYLE type="text/css">
+  body {
+  background-color: #FFFFFf;
+  }
+  </STYLE>
+  <STYLE type="text/css">
+  li.c1 {list-style: none}
+  </STYLE>
+
+</HEAD>
+
+<BODY>
+  <TABLE border="1" align="center" cellpadding="15">
+    <TR>
+      <TD valign="top">
+        <H2>CS615A -- Aspects of System Administration - Spring 2014 - Exercise: adding users</H2>
+
+        <H3>Exercise: Create your user account on different OS</H3>
+
+	<hr>
+	<H4>Help each other on IRC</H4>
+
+	<p><a href="https://webchat.freenode.net/">#cs615asa</a> on Freenode.</p>
+
+        <H4>Run a FreeBSD, Omnios, and Fedora EC2 instance</H4>
+
+	<blockquote><pre><tt>$ aws ec2 run-instances --instance-type t1.micro --image-id ami-23dae94a
+$ aws ec2 run-instances --instance-type t1.micro --image-id ami-4e2c9727
+$ aws ec2 run-instances --instance-type t1.micro --image-id ami-3b361952</tt></pre></blockquote>
+
+        <H4>Create your own user</H4>
+
+	<p>On each system, create your own user account.  The user account
+	should be identical in all regards to your user account on
+	<tt>linux-lab.cs.stevens.edu</tt>.  That is, it should have the
+	same username, UID, primary group, supplementary groups, login
+	shell, etc.</p>
+
+	<p>What tools did you use to identify this information?</p>
+	<p>Do the tools to create the accounts on each instance differ?</p>
+	<p>Suppose you had to sync dozens or hundreds of accounts across
+	hundreds or thousands of hosts -- how could you automate this
+	process?</p>
+      <hr>
+      [<a href="index.html">Course Website</a>]
+</BODY>
+</HTML>
