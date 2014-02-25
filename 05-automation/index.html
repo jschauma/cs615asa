@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>CS615 - Aspects of System Administration - Automation and Scripting</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/simple.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>Aspects of System Administration</h1>
+					<hr>
+					<h3>Automation and Scripting</h2>
+					<p>
+						<br>
+						<br>
+						<small><a href="https://www.cs.stevens.edu/~jschauma/615/">https://www.cs.stevens.edu/~jschauma/615/</a></small>
+						<br>
+						<small><a href="mailto:jschauma@stevens.edu">jschauma@stevens.edu</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h3>Current Events: CVE-2014-1266</h3>
+					<p>&nbsp;</p>
+					<p>
+						<a href="http://support.apple.com/kb/HT6147">http://support.apple.com/kb/HT6147</a>
+					</p>
+				</section>
+
+				<section>
+					<h3>Current Events: CVE-2014-1266</h3>
+					<p>
+						<a href="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-1266">NIST</a> has (a few) more details:
+						<blockquote cite="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-1266">
+						The SSLVerifySignedServerKeyExchange function in
+						libsecurity_ssl/lib/sslKeyExchange.c in the Secure Transport feature in
+						the Data Security component in Apple iOS 6.x before 6.1.6 and 7.x before
+						7.0.6, Apple TV 6.x before 6.0.2, and Apple OS X 10.9.x before 10.9.2 does
+						not check the signature in a TLS Server Key Exchange message, which allows
+						man-in-the-middle attackers to spoof SSL servers by (1) using an arbitrary
+						private key for the signing step or (2) omitting the signing step.
+						</blockquote>
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h3>Current Events: CVE-2014-1266</h3>
+						<p>&nbsp;</p>
+						<p>
+							<a href="https://twitter.com/agl__">Adam Langley</a> has more details:<br>
+							<a href="https://www.imperialviolet.org/2014/02/22/applebug.html">https://www.imperialviolet.org/2014/02/22/applebug.html</a>
+						</p>
+					</section>
+					<section>
+						<h3>Current Events: CVE-2014-1266</h3>
+						<p>&nbsp;</p>
+						<p>
+							And here's the code diff:<br>
+							<a href="https://gist.github.com/alexyakoubian/9151610/revisions">https://gist.github.com/alexyakoubian/9151610/revisions</a>
+						</p>
+					</section>
+					<section>
+						<h3>Current Events: CVE-2014-1266</h3>
+						<img src="pics/CVE-2014-1266.diff.png">
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>Current Events: CVE-2014-1266</h3>
+						<p>&nbsp;</p>
+						<p>
+							So let's try this...
+						</p>
+						<p>
+							<a href="https://www.imperialviolet.org:1266/">https://www.imperialviolet.org:1266/</a>
+						</p>
+					</section>
+					<section>
+						<h3>Current Events: CVE-2014-1266</h3>
+						<img src="pics/firefox.png">
+					</section>
+					<section>
+						<h3>Current Events: CVE-2014-1266</h3>
+						<img src="pics/chrome.png">
+					</section>
+					<section>
+						<h3>Current Events: CVE-2014-1266</h3>
+						<img src="pics/safari.png">
+					</section>
+					<section>
+						<h3>Current Events: CVE-2014-1266</h3>
+						<img src="pics/curl.png">
+					</section>
+				</section>
+
+				<section>
+					<h3>Current Events: CVE-2014-1266</h3>
+					<p>&nbsp;</p>
+					<img src="pics/timebomb.jpg">
+				</section>
+
+				<section>
+					<h2>Automation</h2>
+				</section>
+
+				<section>
+					<h3>What kind of things do we automate?</h3>
+					<p>&nbsp;</p>
+					<ul class="fragment">
+						<li>software installation / upgrades / audits</li>
+						<li>account creation / deletion</li>
+						<li>system configuration changes</li>
+						<li>log and event processing</li>
+					</ul>
+					<p>&nbsp;</p>
+					<p class="fragment">...and anything / everything else in between!</p>
+				</section>
+
+				<section>
+					<h3>Why automate anything?</h3>
+					<p>&nbsp;</p>
+					<ul>
+						<li class="fragment">we're lazy</li>
+						<li class="fragment">we're unreliable</li>
+						<li class="fragment">we're forgetful</li>
+					</ul>
+					<p class="fragment"><br>Computers... are none of those things.</p>
+				</section>
+
+				<section>
+					<h3>Who do we automate things for?</h3>
+					<p>&nbsp;</p>
+					<ul>
+						<li class="fragment">ourselves</li>
+						<li class="fragment">our peers</li>
+						<li class="fragment">our users</li>
+						<li class="fragment">anybody else</li>
+					</ul>
+				</section>
+
+				<section>
+					<section>
+						<h2>Tools</h2>
+						<img src="pics/hammer.jpg">
+					</section>
+					<section>
+						<h2>Tools</h2>
+						<img src="pics/nails.jpg">
+					</section>
+					<section>
+						<h2>Tools</h2>
+						<img src="pics/hammer-screw.jpg">
+					</section>
+					<section>
+						<h2>Tools</h2>
+						<img src="pics/tools.jpg">
+					</section>
+				</section>
+
+				<section>
+					<h3>The right tool for the job?</h3>
+					<p>&nbsp;</p>
+					<p>Bourne shell (<tt>/bin/sh</tt>)</p>
+					<ul>
+						<li class="fragment">lowest common denominator</li>
+						<li class="fragment">available and reliable on most platforms (but beware of non-portable <tt>bash(1)</tt> "enhancements")</li>
+						<li class="fragment">beware of "quick-and-dirty" solutions, they grow to become unmaintainable</li>
+						<li class="fragment">treat shell as any other programming language:
+							<ul>
+								<li>use functions</li>
+								<li>use suitably scoped variables</li>
+								<li>follow Unix philosophy</li>
+								<li>properly package your tool</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>The right tool for the job?</h3>
+					<p>&nbsp;</p>
+					<p>Perl, Python, Ruby, ...</p>
+					<ul>
+						<li class="fragment">suitable for moderately complex tasks</li>
+						<li class="fragment">move to these when <tt>sed(1)</tt>, <tt>awk(1)</tt>, etc. become too cumbersome</li>
+						<li class="fragment">text manipulation frequently easier</li>
+						<li class="fragment">beware of "quick-and-dirty" solutions, they grow to become unmaintainable</li>
+						<li class="fragment">try to build self-contained modules that can be tested independent of the “main” program</li>
+						<li class="fragment">wealth of libraries available -- use them! (And remember to explicitly <em>require</em> them.)
+						<li class="fragment">properly package your tool</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>The right tool for the job?</h3>
+					<p>&nbsp;</p>
+					<p>Perl, PHP, Tcl, JavaScript, CoffeeScript, ...</p>
+					<ul>
+						<li class="fragment">http/web server interfaces</li>
+						<li class="fragment">CGI "scripts" / server-side execution (via, for example, NodeJS in the case of JavaScript)</li>
+						<li class="fragment">interface with/utilize APIs in a specific domain/vendor products</li>
+						<li class="fragment">frequent cause of all sorts of security problems due to interface with user data / exposure on the internet</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>The right tool for the job?</h3>
+					<p>&nbsp;</p>
+					<p>Java, Scala, Clojure, Rhino...</p>
+					<ul>
+						<li class="fragment">know your primary applications</li>
+						<li class="fragment">interface with / extend / tie into JVM</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>The right tool for the job?</h3>
+					<p>&nbsp;</p>
+					<p>C, C++, Go, ...</p>
+					<ul>
+						<li class="fragment">performance benefits</li>
+						<li class="fragment">portability</li>
+						<li class="fragment">sufficient low-levelness</li>
+						<li class="fragment">systems understanding</li>
+						<li class="fragment">fix/patch your other tools / the system</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Development Cycle</h3>
+					<p>&nbsp;</p>
+					<img src="pics/compiling.png"><br>
+					<small><tt><a href="https://xkcd.com/303/">https://xkcd.com/303/</a></tt></small>
+				</section>
+
+				<section>
+					<h3>Interpreted Languages</h3>
+					<p>&nbsp;</p>
+					<p>General advantages:</p>
+					<ul>
+						<li class="fragment">short development cycle</li>
+						<li class="fragment">normally facilitate things like string manipulation, arithmetic and more complex regular expressions</li>
+						<li class="fragment">easily handle multiple file handles and other I/O</li>
+						<li class="fragment">some security features</li>
+						<li class="fragment">tens of thousands of special- and general-purpose modules available</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Interpreted Languages</h3>
+					<p>&nbsp;</p>
+					<p>General disadvantages:</p>
+					<ul>
+						<li class="fragment">no one tool fits all purposes</li>
+						<li class="fragment">tens of thousands of special- and general-purpose modules available =&gt; lots of duplication, stale code, questionable quality</li>
+						<li class="fragment">security features frequently neglected or circumvented ("too hard" or more precisely "inconvenient")</li>
+						<li class="fragment">everybody has their particular favorite (and dislikes one or the other)</li>
+						<li class="fragment">interpreter not (necessarily) universally available / installed</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Three basic categories:</h3>
+					<p>&nbsp;</p>
+					<ul>
+						<li>scripting</li>
+						<li>programming</li>
+						<li>software development</li>
+					</ul>
+				</section>
+
+				<section>
+					<section>
+						<h3>Scripting</h3>
+						<img src="pics/hammer.jpg">
+					</section>
+					<section>
+						<h3>Scripting</h3>
+						<p>&nbsp;</p>
+						<ul>
+							<li>automating <em>very</em> simple tasks</li>
+							<li>customization of user environment</li>
+							<li>often only suitable for one individual user</li>
+							<li>usually eventually evolves into larger programs</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>Programming</h3>
+						<img src="pics/power-tools.jpg">
+					</section>
+					<section>
+						<h3>Programming</h3>
+						<p>&nbsp;</p>
+						<ul>
+							<li>suitable for simple to moderately complex tasks</li>
+							<li>results frequently used by a small base of users</li>
+							<li>uses basic framework or common toolkits</li>
+							<li>provides consistent interface</li>
+							<li>may evolve into full product</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>Software / Product Development</h3>
+						<img src="pics/assembly.gif">
+					</section>
+					<section>
+						<h3>Software / Product Development</h3>
+						<p>&nbsp;</p>
+						<ul>
+							<li>required for any reasonably complex task</li>
+							<li>uses formal software engineering approach (measurable goals, requirements, specifications, ...)</li>
+							<li>may evolve from previous prototypes</li>
+							<li>requires ongoing continous maintenance / development efforts</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<h3>Make sure to understand:</h3>
+					<p>&nbsp;</p>
+					<ul>
+						<li>motivation / goals</li>
+						<li>target audience</li>
+						<li>scope</li>
+						<li>dependencies</li>
+					</ul>
+				</section>
+
+				<section>
+					<section>
+						<h3>Hammer Time!</h3>
+						<img src="pics/hammer.jpg">
+					</section>
+					<section>
+						<h3>Hammer Time!</h3>
+						<p>&nbsp;</p>
+						<p>
+							<a href="http://dumps.wikimedia.org/other/pagecounts-raw/">http://dumps.wikimedia.org/other/pagecounts-raw/</a>
+						</p>
+						<p>&nbsp;</p>
+						<pre>
+$ ssh linux-lab.cs.stevens.edu
+$ du -h ~jschauma/public_html/615/pagecounts-20140201-000000.gz
+92M	/home/jschauma/public_html/615/pagecounts-20140201-000000.gz
+$ </pre>
+						<p>&nbsp;</p>
+						<p>
+							<a href="https://webchat.freenode.net/">IRC: #CS615ASA</a>
+						</p>
+					</section>
+					<section>
+						<h3>Hammer Time!</h3>
+						<p>&nbsp;</p>
+						<p>How many unique objects were requested in that hour in total?</p>
+						<p>&nbsp;</p>
+						<p>For en only:</p>
+						<ul>
+							<li>How many unique objects were requested?</li>
+							<li>Which is the most often requested object?</li>
+							<li>How many requests in total?</li>
+							<li>How much data was transferred in total?</li>
+							<li>Which was the largest object requested?</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Hammer Time!</h3>
+						<p>&nbsp;</p>
+						<p>What is the longest word found on the ten most frequently retrieved pages?</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h3>How many unique objects were requested?</h3>
+						<p>&nbsp;</p>
+						<pre>$ FILE=/home/jschauma/public_html/615/pagecounts-20140201-000000.gz
+$ zcat ${FILE} | wc -l</pre>
+					</section>
+					<section>
+						<h3>How many unique objects were requested for <em>en</em> only?</h3>
+						<p>&nbsp;</p>
+						<pre>$ gzip -d ${FILE} &gt; pagecounts
+$ grep "^en " ${FILE} | tee en | wc -l</pre>
+					</section>
+					<section>
+						<h3>Which is the most often requested object for <em>en</em>?</h3>
+						<p>&nbsp;</p>
+						<pre>$ sort -k3 -n en | tail -1</pre>
+					</section>
+					<section>
+						<h3>How many requests where there in total for <em>en</em>?</h3>
+						<p>&nbsp;</p>
+						<pre>$ awk '{ sum=sum+$(NF-1); }; END { print sum; }' en</pre>
+					</section>
+					<section>
+						<h3>How much data was transferred in total for <em>en</em>?</h3>
+						<p>&nbsp;</p>
+						<pre>$ echo $(( $(awk '{ sum=sum+$NF; }; END { print sum; }' en)/1024/1024/1024 )) </pre>
+					</section>
+					<section>
+						<h3>Which was the largets object in <em>en</em>?</h3>
+						<p>&nbsp;</p>
+						<pre>$ awk '{ s=$NF/$(NF-1); if (s&gt;l) { l=s; n=$0; }}; END { print n; }' en</pre>
+					</section>
+
+					<section>
+						<h3>What is the longest word found on the ten most frequently retrieved pages?</h3>
+						<p>&nbsp;</p>
+						<pre>$ for f in $(cat en | sort -k3 -n | tail -10 |
+        sed -e ’s/en \(.*\) [0-9]* [0-9]*/\1/’); do
+        links -dump http://en.wikipedia.org/wiki/${f}
+done |
+tr '[:space:]' '\n' |
+tr '[:upper:]' '[:lower:]' |
+egrep '^[a-z]+$' |
+awk '{ print length() " " $0; }' |
+sort -n |
+tail -1</pre>
+					</section>
+				</section>
+
+				<section>
+					<h3>Shell Essentials</h3>
+					<p>&nbsp;</p>
+					<ul>
+						<li>pipes</li>
+						<li>ls(1), find(1)</li>
+						<li>grep(1), awk(1), sed(1)</li>
+						<li>tr(1)</li>
+						<li>sort(1)</li>
+						<li>regular expressions</li>
+						<li>ssh(1)/scp(1)</li>
+						<li>wc(1)</li>
+						<li>expect(1)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>HW#3: ifconfig output parsing</h3>
+					<p>&nbsp;</p>
+					<p><a href="https://www.cs.stevens.edu/~jschauma/615/s14-hw3.html">https://www.cs.stevens.edu/~jschauma/615/s14-hw3.html</a></p>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
