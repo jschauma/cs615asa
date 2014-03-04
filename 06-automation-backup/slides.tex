@@ -15,15 +15,17 @@
 \lhead{\slidetitle}                               % default:\lhead{\slidetitle}
 \chead{CS615 - Aspects of System Administration}% default:\chead{\relax}
 \rhead{Slide \thepage}                       % default:\rhead{\sectiontitle}
-\lfoot{\Gray{Automation Part II / Backup and Disaster Recovery}}% default:\lfoot{\slideauthor}
+\lfoot{\Gray{Development Practices / Backup and Disaster Recovery}}% default:\lfoot{\slideauthor}
 \cfoot{\relax}                               % default:\cfoot{\relax}
 \rfoot{\Gray{\today}}
+
+\newcommand{\smallish}{\fontsize{15}{20}\selectfont}
 
 \vspace*{\fill}
 \begin{center}
 	\Hugesize
 		CS615 - Aspects of System Administration\\ [1em]
-		Automation Part II \\ [1em]
+		Development Practices \\ [1em]
 		Backup and Disaster Recovery \\ [1em]
 	\hspace*{5mm}\blueline\\ [1em]
 	\Normalsize
@@ -35,273 +37,23 @@
 \end{center}
 \vspace*{\fill}
 
-\newpage
+\subsection{Midterm Course Survey}
 \vspace*{\fill}
-\begin{center}
-    \Hugesize
-        Hooray! \\ [1em]
-    \hspace*{5mm}
-    \blueline\\
-    \hspace*{5mm}\\
-        5 Minute Break
-\end{center}
-\vspace*{\fill}
-
-\subsection{Regular Expressions}
-A regular expression is a pattern that describes a set of strings. \\
-
-\begin{itemize}
-	\item patterns can be a combination of
-		\begin{itemize}
-			\item a fixed string (\verb+abc+)
-		\end{itemize}
-\end{itemize}
-\vspace{.5in}
-\begin{verbatim}
-$ ifconfig -a | egrep "inet"
-\end{verbatim}
-
-\subsection{Regular Expressions}
-A regular expression is a pattern that describes a set of strings. \\
-
-\begin{itemize}
-	\item patterns can be a combination of
-		\begin{itemize}
-			\item a fixed string (\verb+abc+)
-			\item a bracket expression, such as
-				\begin{itemize}
-					\item a number of characters -- \verb+[aK2l,]+
-				\end{itemize}
-		\end{itemize}
-\end{itemize}
-\vspace{.5in}
-\begin{verbatim}
-$ ifconfig -a | egrep "[UBS]"
-\end{verbatim}
-
-\subsection{Regular Expressions}
-A regular expression is a pattern that describes a set of strings. \\
-
-\begin{itemize}
-	\item patterns can be a combination of
-		\begin{itemize}
-			\item a fixed string (\verb+abc+)
-			\item a bracket expression, such as
-				\begin{itemize}
-					\item a number of characters -- \verb+[aK2l,]+
-					\item a range expression -- \verb+[a-z]+
-				\end{itemize}
-		\end{itemize}
-\end{itemize}
-\vspace{.5in}
-\begin{verbatim}
-$ ifconfig -a | egrep "[A-Z]"
-\end{verbatim}
-
-
-
-\subsection{Regular Expressions}
-A regular expression is a pattern that describes a set of strings. \\
-
-\begin{itemize}
-	\item patterns can be a combination of
-		\begin{itemize}
-			\item a fixed string (\verb+abc+)
-			\item a bracket expression, such as
-				\begin{itemize}
-					\item a number of characters -- \verb+[aK2l,]+
-					\item a range expression -- \verb+[a-z]+
-					\item a negated bracket expression -- \verb+[^0-9]+
-				\end{itemize}
-		\end{itemize}
-\end{itemize}
-\vspace{.5in}
-\begin{verbatim}
-$ ifconfig -a | egrep "[^a-zA-Z0-9      <>%,:.()]"
-\end{verbatim}
-
-
-
-\subsection{Regular Expressions}
-A regular expression is a pattern that describes a set of strings. \\
-
-\begin{itemize}
-	\item patterns can be a combination of
-		\begin{itemize}
-			\item a fixed string (\verb+abc+)
-			\item a bracket expression, such as
-				\begin{itemize}
-					\item a number of characters -- \verb+[aK2l,]+
-					\item a range expression -- \verb+[a-z]+
-					\item a negated bracket expression -- \verb+[^0-9]+
-				\end{itemize}
-			\item a character with a special meaning, such as
-				\begin{itemize}
-					\item \verb+.+ -- any single character
-				\end{itemize}
-		\end{itemize}
-\end{itemize}
-\vspace{.5in}
-\begin{verbatim}
-$ ifconfig -a | egrep "flags."
-\end{verbatim}
-
-
-
-\subsection{Regular Expressions}
-A regular expression is a pattern that describes a set of strings. \\
-
-\begin{itemize}
-	\item patterns can be a combination of
-		\begin{itemize}
-			\item a fixed string (\verb+abc+)
-			\item a bracket expression, such as
-				\begin{itemize}
-					\item a number of characters -- \verb+[aK2l,]+
-					\item a range expression -- \verb+[a-z]+
-					\item a negated bracket expression -- \verb+[^0-9]+
-				\end{itemize}
-			\item a character with a special meaning, such as
-				\begin{itemize}
-					\item \verb+.+ -- any single character
-					\item \verb+^+ -- beginning of line
-					\item \verb+$+ -- end of line
-				\end{itemize}
-		\end{itemize}
-\end{itemize}
-\vspace{.5in}
-\begin{verbatim}
-$ ifconfig -a | egrep "[0-9]$"
-\end{verbatim}
-
-\subsection{Regular Expressions}
-\begin{itemize}
-	\item patterns can be followed by qualifiers and quantifiers
-		\begin{itemize}
-			\item \verb+?+ -- the pattern is optional and matched at most once
-			\item \verb+*+ -- the pattern will be matched zero or more times
-			\item \verb|+| -- the pattern will be matched one or more times
-			\item \verb+{n}+ -- the pattern is matched exactly \verb+n+ times
-			\item \verb+{n,}+ -- the pattern is matched \verb+n+ or more times
-			\item \verb+{n,m}+ -- the pattern is matched at least \verb+n+,
-				but no more than \verb+m+ times
-		\end{itemize}
-	\item patterns can be logically grouped together \verb+(1[a-z]2|a[0-9]z)+
-	\item matched patterns can be remembered and referenced lateron
-\end{itemize}
-
-\subsection{Regular Expressions}
-Identify all network interfaces:
-\begin{verbatim}
-$ ifconfig -a | sed -n -E 's/^([a-z]+[0-9]).*/\1/p'
-$ ifconfig -a | sed -n -E 's/^([a-z]+(([0-9]+)|:[0-9]+)?).*/\1/p'
-\end{verbatim}
-\vspace{.5in}
-Now you:
-\begin{itemize}
-	\item extract all IP addresses
-	\item extract all MAC addresses
-	\item extract all netmasks
-\end{itemize}
-
-\subsection{Remember to use the right tool for the job}
-Bourne shell ({\tt /bin/sh}):
-\begin{itemize}
-	\item lowest common denominator
-	\item available and reliable on most platforms (but beware of
-		non-portable {\tt bash(1)} ``enhancements'')
-	\item beware of ``quick-and-dirty'' solutions, they grow to become
-		unmaintainable
-	\item treat shell as any other programming language:
-		\begin{itemize}
-			\item use functions
-			\item use suitably scoped variables
-			\item follow Unix philosophy
-			\item properly package your tool
-		\end{itemize}
-\end{itemize}
-
-\subsection{Remember to use the right tool for the job}
-Perl, Python, Ruby, ...
-\begin{itemize}
-	\item suitable for moderately complex tasks
-	\item move to these when {\tt sed(1)}, {\tt awk(1)} and friends
-		become too cumbersome
-	\item text manipulation frequently ``easier'' in perl
-	\item beware of ``quick-and-dirty'' solutions, they grow to become
-		unmaintainable
-	\item try to build self-contained {\em modules} that can be tested
-		independent of the ``main'' program
-	\item wealth of libraries available
-		\begin{itemize}
-			\item use them!
-			\item remember to explicitly {\em require} them
-				(dependencies)
-		\end{itemize}
-	\item properly package your tool
-\end{itemize}
-
-\subsection{Remember to use the right tool for the job}
-Perl, Python, PHP, Ruby, JavaScript, ...
-\begin{itemize}
-	\item http/web server interfaces
-	\item CGI ``scripts''
-	\item server-side execution
-	\item interface with/utilize APIs in a specific domain/vendor products
-	\item frequent cause of all sorts of security problems due to
-		interface with user data / exposure on the internet
-\end{itemize}
-
-\subsection{Remember to use the right tool for the job}
-Java, Scala, Clojure, ...
-\begin{itemize}
-	\item know your primary applications
-	\item interface with / extend / tie into JVM
-\end{itemize}
-\vspace{.5in}
-C, C++, Go, ...
-\begin{itemize}
-	\item performance benefits
-	\item portability
-	\item sufficient low-levelness
-	\item systems understanding
-	\item fix/patch your tools
-\end{itemize}
-
-\subsection{Of course...}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.65]{pics/WrongProgramming.eps}
-\end{center}
+{\tt https://www.cs.stevens.edu/\~{}jschauma/cgi-bin/midterm.cgi}
 \vspace*{\fill}
 
 
-\subsection{Scripting / interpreted Languages}
-General advantages:
-\begin{itemize}
-	\item short development cycle
-	\item normally facilitates things like string manipulation,
-		arithmetic and more complex regular expressions
-	\item easily handles multiple file handles and other I/O
-	\item some security features
-	\item tens of thousands of special- and general-purpose modules
-		available
-\end{itemize}
-
-\subsection{Scripting / interpreted Languages}
-General disadvantages:
-\begin{itemize}
-	\item no one tool fits all purposes
-	\item tens of thousands of special- and general-purpose modules
-		available $\rightarrow$ lots of duplication, stale code,
-		questionable quality
-	\item security features frequently neglected or circumvented ("too
-		hard" / "inconvenient")
-	\item everybody has their particular favorite (and dislikes one or
-		the other)
-	\item interpreter not (necessarily) universally available /
-		installed
-\end{itemize}
+\subsection{HW3 Demo / Recap}
+\begin{verbatim}
+$ ssh linux-lab.cs.stevens.edu
+$ export DIR="/home/jschauma/public_html/615/ifcfg-data"
+$ for os in fedora freebsd linux-lab netbsd omnios; do
+        for flag in i m n; do
+                cat ${DIR}/${os} | ifcfg-data -${flag}
+        done
+done
+$
+\end{verbatim}
 
 \subsection{User Interface}
 \\
@@ -310,6 +62,7 @@ General disadvantages:
 	\includegraphics[scale=3]{pics/switch.eps}
 \end{center}
 \vspace*{\fill}
+
 
 \subsection{Unix Philosophy}
 \\
@@ -323,13 +76,36 @@ General disadvantages:
 \end{center}
 \Normalsize
 
-\subsection{The KISS Principle}
-\\
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.3]{pics/kiss.eps}
-\end{center}
-\vspace*{\fill}
+\subsection{Know your languages / eco-system}
+Some advice transcends language: \\
+
+\small
+\begin{verbatim}
+$ echo import this | python
+The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+\end{verbatim}
+\Normalsize
+
 
 \subsection{POLA}
 Principle of Least Astonishment
@@ -340,12 +116,14 @@ Principle of Least Astonishment
 \end{center}
 \vspace*{\fill}
 
-\subsection{Test Driven}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=2.0]{pics/tdd.eps}
-\end{center}
-\vspace*{\fill}
+\subsection{Know your Users}
+Who do we automate things for?
+\begin{itemize}
+	\item ourselves
+	\item our peers
+	\item our "users"
+	\item anybody else
+\end{itemize}
 
 \subsection{Avoid the Quick Fix}
 \\
@@ -361,18 +139,47 @@ Principle of Least Astonishment
 \begin{center}
 	\includegraphics[scale=0.65]{pics/donkey.eps} \\
 	\small
-	Nice Ass!
+	Looks like {\em you} are the ass.
 \end{center}
 \vspace*{\fill}
 
-\subsection{Take a good look in the mirror!}
-\\
-\Huge
-\begin{center}
-	Until you can {\em prove} otherwise, \\
-	assume that {\em you} are the Ass!
-\end{center}
-\Normalsize
+\subsection{Learn to write a detailed bug report}
+Pre-requisite:
+\begin{itemize}
+	\item RTFM
+	\item Internet Search
+	\item Know Your Community
+\end{itemize}
+
+\subsection{Learn to write a detailed bug report}
+Pre-requisite: Do your homework. \\
+
+Required:
+\begin{itemize}
+	\item Description Of Problem
+	\item Steps To Reproduce
+	\item Expected Results
+	\item Actual Results
+\end{itemize}
+
+\subsection{Learn to write a detailed bug report}
+Pre-requisite: Do your homework. \\
+
+Required:
+\begin{itemize}
+	\item Description Of Problem
+	\item Steps To Reproduce
+	\item Expected Results
+	\item Actual Results
+\end{itemize}
+\vspace{.125in}
+
+Optional / recommended:
+\begin{itemize}
+	\item Screenshots / copy and paste terminal I/O
+	\item Suggested Remediation
+	\item Code Patch
+\end{itemize}
 
 \subsection{Avoid the Project That Was Never Finished}
 \\
@@ -433,13 +240,6 @@ Principle of Least Astonishment
 \vspace*{\fill}
 \begin{center}
 	\includegraphics[scale=3]{pics/waste.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{Starting fresh}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=2]{pics/clean-slate.eps}
 \end{center}
 \vspace*{\fill}
 
@@ -518,22 +318,22 @@ Principle of Least Astonishment
 \end{itemize}
 
 \subsection{Backups and Restore Basics}
-Why are backups needed?
+When do we need backups?
 
 \subsection{Backups and Restore Basics}
-Why are backups needed?
+When do we need backups?
 \begin{itemize}
-	\item off-site storage of sensitive data
-	\item long-term data storage
-	\item data loss
+	\item disaster recovery: off-site storage of sensitive data
+	\item long-term storage requirements
+	\item recover from data loss
 \end{itemize}
 
 \subsection{Backups and Restore Basics}
-Why are backups needed?
+When do we need backups?
 \begin{itemize}
-	\item off-site storage of sensitive data
-	\item long-term data storage
-	\item data loss due to
+	\item disaster recovery: off-site storage of sensitive data
+	\item long-term storage requirements
+	\item recover from data loss due to
 \end{itemize}
 \vspace*{\fill}
 \begin{center}
@@ -542,11 +342,11 @@ Why are backups needed?
 \vspace*{\fill}
 
 \subsection{Backups and Restore Basics}
-Why are backups needed?
+When do we need backups?
 \begin{itemize}
-	\item off-site storage of sensitive data
-	\item long-term data storage
-	\item data loss due to
+	\item disaster recovery: off-site storage of sensitive data
+	\item long-term storage requirements
+	\item recover from data loss due to
 \end{itemize}
 \vspace*{\fill}
 \begin{center}
@@ -555,11 +355,11 @@ Why are backups needed?
 \vspace*{\fill}
 
 \subsection{Backups and Restore Basics}
-Why are backups needed?
+When do we need backups?
 \begin{itemize}
-	\item off-site storage of sensitive data
-	\item long-term data storage
-	\item data loss due to
+	\item disaster recovery: off-site storage of sensitive data
+	\item long-term storage requirements
+	\item recover from data loss due to
 \end{itemize}
 \vspace*{\fill}
 \begin{center}
@@ -568,11 +368,11 @@ Why are backups needed?
 \vspace*{\fill}
 
 \subsection{Backups and Restore Basics}
-Why are backups needed?
+When do we need backups?
 \begin{itemize}
-	\item off-site storage of sensitive data
-	\item long-term data storage
-	\item data loss due to
+	\item disaster recovery: off-site storage of sensitive data
+	\item long-term storage requirements
+	\item recover from data loss due to
 \end{itemize}
 \vspace*{\fill}
 \begin{center}
@@ -581,11 +381,11 @@ Why are backups needed?
 \vspace*{\fill}
 
 \subsection{Backups and Restore Basics}
-Why are backups needed?
+When do we need backups?
 \begin{itemize}
-	\item off-site storage of sensitive data
-	\item long-term data storage
-	\item data loss due to
+	\item disaster recovery: off-site storage of sensitive data
+	\item long-term storage requirements
+	\item recover from data loss due to
 \end{itemize}
 \vspace*{\fill}
 \begin{center}
@@ -594,11 +394,11 @@ Why are backups needed?
 \vspace*{\fill}
 
 \subsection{Backups and Restore Basics}
-Why are backups needed?
+When do we need backups?
 \begin{itemize}
-	\item off-site storage of sensitive data
-	\item long-term data storage
-	\item data loss due to
+	\item disaster recovery: off-site storage of sensitive data
+	\item long-term storage requirements
+	\item recover from data loss due to
 		\begin{itemize}
 			\item equipment failure
 			\item bozotic users
@@ -609,11 +409,11 @@ Why are backups needed?
 \end{itemize}
 
 \subsection{Backups and Restore Basics}
-Why are backups needed?
+When do we need backups?
 \begin{itemize}
-	\item off-site storage of sensitive data
-	\item long-term data storage
-	\item data loss due to
+	\item disaster recovery: off-site storage of sensitive data
+	\item long-term storage requirements
+	\item recover from data loss due to
 		\begin{itemize}
 			\item equipment failure
 			\item bozotic users
@@ -662,6 +462,16 @@ Failure} and {\em Archival}.
 \end{itemize}
 
 \subsection{Filesystem backup}
+{\tt dump(8)} / {\tt restore(8)}
+\begin{itemize}
+	\item in use since \~{}1975
+	\item full filesystem level backups
+	\item direct interaction with tape devices
+	\item integration with {\tt /etc/fstab}
+	\item efficient incremental backups
+\end{itemize}
+
+\subsection{Filesystem backup}
 \vspace*{\fill}
 \begin{center}
 	\includegraphics[scale=0.7]{pics/flux-capacitor.eps}
@@ -700,14 +510,6 @@ Example: Mac OS X ``Time Machine'':
 \end{itemize}
 
 \subsection{Filesystem backup}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.0]{pics/waffles.eps}
-\end{center}
-\vspace*{\fill}
-
-
-\subsection{Filesystem backup}
 Example: WAFL (Write Anywhere File Layout)
 \begin{itemize}
 	\item used by NetApp's ``Data ONTAP'' OS
@@ -716,6 +518,12 @@ Example: WAFL (Write Anywhere File Layout)
 	\item uses regular snapshots (``consistency points'', every 10 seconds)
 		to allow for speedy recovery from crashes
 \end{itemize}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.75]{pics/waffles.eps}
+\end{center}
+\vspace*{\fill}
+
 
 \subsection{Filesystem backup}
 Example: WAFL (Write Anywhere File Layout)
@@ -768,12 +576,11 @@ Example: ZFS snapshots
 \end{itemize}
 
 \subsection{ZFS Snapshots}
-\newcommand{\smallish}{\fontsize{15}{20}\selectfont}
 \smallish
 \begin{verbatim}
 $ pwd
 /home/jschauma
-$ ls -la .z*
+$ ls -l .z*
 ls: cannot access .z*: No such file or directory
 $
 \end{verbatim}
@@ -784,10 +591,10 @@ $
 \begin{verbatim}
 $ pwd
 /home/jschauma
-$ ls -la .z*
+$ ls -l .z*
 ls: cannot access .z*: No such file or directory
-$ ls -laid .zfs
-1 dr-xr-xr-x+ 3 root root 3 Dec 11  2008 .zfs
+$ ls -lid .zfs
+1 dr-xr-xr-x 3 root root 3 Jan 10  2013 .zfs
 $
 \end{verbatim}
 \Normalsize
@@ -797,16 +604,16 @@ $
 \begin{verbatim}
 $ pwd
 /home/jschauma
-$ ls -la .z*
+$ ls -l .z*
 ls: cannot access .z*: No such file or directory
-$ ls -laid .zfs
-1 dr-xr-xr-x+ 3 root root 3 Dec 11  2008 .zfs
+$ ls -lid .zfs
+1 dr-xr-xr-x 3 root root 3 Jan 10  2013 .zfs
 $ ls -lai .zfs/snapshot
-total 5
-2 dr-xr-xr-x+  2 root     root       2 Feb 25 02:50 .
-1 dr-xr-xr-x+  3 root     root       3 Dec 11  2008 ..
-3 drwx--x--x+ 23 jschauma professor 51 Feb 21 22:29 amanda-_export_home_jschauma-0
-3 drwx--x--x+ 23 jschauma professor 51 Feb 21 22:29 amanda-_export_home_jschauma-1
+total 13
+2 dr-xr-xr-x  4 root     root       4 Feb 28 21:00 .
+1 dr-xr-xr-x  3 root     root       3 Jan 10  2013 ..
+4 drwx--x--x 37 jschauma professor 88 Feb 24 22:32 amanda-_export_home_jschauma-0
+4 drwx--x--x 37 jschauma professor 88 Feb 26 11:47 amanda-_export_home_jschauma-1
 $
 \end{verbatim}
 \Normalsize
@@ -816,22 +623,22 @@ $
 \begin{verbatim}
 $ pwd
 /home/jschauma
-$ ls -la .z*
+$ ls -l .z*
 ls: cannot access .z*: No such file or directory
-$ ls -laid .zfs
-1 dr-xr-xr-x+ 3 root root 3 Dec 11  2008 .zfs
+$ ls -lid .zfs
+1 dr-xr-xr-x 3 root root 3 Jan 10  2013 .zfs
 $ ls -lai .zfs/snapshot
-total 5
-2 dr-xr-xr-x+  2 root     root       2 Feb 25 02:50 .
-1 dr-xr-xr-x+  3 root     root       3 Dec 11  2008 ..
-3 drwx--x--x+ 23 jschauma professor 51 Feb 21 22:29 amanda-_export_home_jschauma-0
-3 drwx--x--x+ 23 jschauma professor 51 Feb 21 22:29 amanda-_export_home_jschauma-1
+total 13
+2 dr-xr-xr-x  4 root     root       4 Feb 28 21:00 .
+1 dr-xr-xr-x  3 root     root       3 Jan 10  2013 ..
+4 drwx--x--x 37 jschauma professor 88 Feb 24 22:32 amanda-_export_home_jschauma-0
+4 drwx--x--x 37 jschauma professor 88 Feb 26 11:47 amanda-_export_home_jschauma-1
 $ cd .zfs/snapshot
 $ echo foo > amanda-_export_home_jschauma-0/oink
 -ksh: amanda-_export_home_jschauma-0/oink: cannot create [Read-only file system]
 $ ls -laid . /
-2 dr-xr-xr-x+  4 root root    4 Feb 25 02:50 .
-2 drwxr-xr-x  23 root root 4096 Feb  3 12:04 /
+2 dr-xr-xr-x  4 root root    4 Feb 28 21:00 .
+2 drwxr-xr-x 26 root root 4096 Jan 27 11:44 /
 \end{verbatim}
 \Normalsize
 
@@ -843,62 +650,38 @@ $ pwd
 $ ls -lai amanda-_export_home_jschauma-0 >/tmp/a
 $ ls -lai amanda-_export_home_jschauma-1 >/tmp/b
 $ diff -bu /tmp/[ab]
---- /tmp/a      2010-02-28 19:53:50.000000000 -0500
-+++ /tmp/b      2010-02-28 19:53:55.000000000 -0500
-@@ -21,7 +21,7 @@
-  3248 -rw-------+  1 jschauma professor        22 Feb 27  2009 .project
- 40034 drwx------+  2 jschauma professor         5 Feb 11 10:45 .screen-profiles
- 40038 -rw-------+  1 jschauma professor         0 Feb 11 10:45 .screenrc
--40372 -rw-------+  1 jschauma professor     12948 Feb 25 22:08 .sh_history
-+40372 -rw-------+  1 jschauma professor     12954 Feb 26 22:18 .sh_history
-  1891 drwx------+  3 jschauma professor         7 Feb 25 10:33 .ssh
- 40401 -rw-------+  1 jschauma professor     18409 Feb 25 10:33 .viminfo
- 39544 -rw-------+  1 jschauma professor      4393 Jan 18 16:01 .vimrc
+--- /tmp/a	2014-03-01 22:55:49.000000000 -0500
++++ /tmp/b	2014-03-01 22:55:59.000000000 -0500
+@@ -35,7 +35,7 @@
+ 57723 drwx------  3 jschauma professor         6 Dec 31 15:08 .subversion
+ 49431 -rw-------  1 jschauma professor         6 Dec 22 12:25 .sws.pid
+    20 drwx------  2 jschauma professor         3 Jan 26 10:30 .vim
+-61768 -rw-------  1 jschauma professor     14538 Feb 24 22:32 .viminfo
++61775 -rw-------  1 jschauma professor     14557 Feb 26 09:23 .viminfo
+   173 -rw-------  1 jschauma professor      4355 Sep 17  2012 .vimrc
+ 45744 -rw-r--r--  1 jschauma professor         0 Jul 28  2013 .xsession-errors
+    21 drwxr-xr-x  3 jschauma professor         6 Apr  4  2010 CS615A
+$
 \end{verbatim}
 \Normalsize
 
-\subsection{HW \#3}
-{\tt ifconfig} output parsing:
-\verb+http://www.cs.stevens.edu/~jschauma/615/s13-hw3.html+
-\\
-\verb+http://www.cs.stevens.edu/~jschauma/615/ifcfg-data.txt+
-\\
-\vspace{.5in}
-
+\subsection{HW \#4}
 Data backup to the cloud \\
-\verb+http://www.cs.stevens.edu/~jschauma/615/s13-hw4.html+
+\verb+http://www.cs.stevens.edu/~jschauma/615/s14-hw4.html+
 \\
 \verb+http://www.cs.stevens.edu/~jschauma/615/ec2-backup.txt+
 
 \subsection{Reading}
-Perl:
 \begin{itemize}
-	\item \verb+http://www.perl.com+
-	\item \verb+http://www.cpan.org+
-	\item \verb+perl(1)+, \verb+perldoc(1)+, \verb+perlfaq(1)+
-\end{itemize}
-Python:
-\begin{itemize}
-	\item \verb+http://www.python.org+
-	\item \verb+http://is.gd/zCpz9H+
-	\item \verb+http://shop.oreilly.com/product/9780596515829.do+
-	\item \verb+http://is.gd/zmxB4V+
-	\item pydoc
-	\item \verb+echo "import this" | python+
-\end{itemize}
-
-\subsection{Reading}
-Ruby:
-\begin{itemize}
-	\item \verb+http://www.ruby-lang.org/en/+
-	\item \verb+http://is.gd/cE7iFR+
-	\item \verb+http://is.gd/DR4aNU+
+	\item \verb+https://en.wikipedia.org/wiki/Unix_philosophy+
+	\item \verb+http://is.gd/jDDGpW+
+	\item \verb+http://is.gd/bXG9of+
 \end{itemize}
 
 \subsection{Reading}
 Hurricane Sandy
 \begin{itemize}
-	\item \verb+https://blog.squarespace.com/blog/?month=october-2012+
+	\item \verb+http://is.gd/aaxzvI+
 	\item \verb+http://is.gd/Y75pEA+
 	\item \verb+http://is.gd/32Az7y+
 	\item \verb+http://is.gd/FhAuFZ+
