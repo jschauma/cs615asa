@@ -38,7 +38,9 @@ PICTURES= \
 	pics/traceroute3.eps \
 	pics/traceroute4.eps \
 	pics/tcpip-stack.eps \
-	pics/rirs.eps
+	pics/rirs.eps \
+	pics/syria-disappears.eps \
+	pics/tubes.eps
 
 #FIGURES=	decision-tree.eps two-rules.eps combined.eps area.eps
 

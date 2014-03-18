@@ -39,31 +39,6 @@
 \end{center}
 \vspace*{\fill}
 
-\subsection{Midterm Course Survey}
-\vspace{.5in}
-\begin{center}
-\verb+http://www.cs.stevens.edu/~jschauma/cgi-bin/midterm.cgi+
-\end{center}
-
-\subsection{HW\#2}
-Always provide comments and insights/lessons learned.
-\\
-
-Don't blindly copy or follow instructions found on the internet.  Make
-sure to understand them first!
-
-\begin{verbatim}
-# /usr/sbin/useradd makerpm
-# usermod -a -G mock makerpm
-# passwd makerpm
-\end{verbatim}
-
-Why are you executing these steps? \\
-
-When using '\verb+wget --no-certificate-check+',... what are the implications?
-Are there other ways to solve the problem? \\
-
-
 \subsection{Networking Buzzwords}
 \\
 
@@ -169,6 +144,29 @@ Stringing cables across the oceans' floors since 1866!
 \end{center}
 \vspace*{\fill}
 
+\subsection{Networking}
+``The Net interprets censorship as damage and routes around it.'' \\
+
+...except when it can't.
+
+\begin{center}
+\vspace*{\fill}
+	\includegraphics[scale=0.4]{pics/syria-disappears.eps} \\
+\vspace*{\fill}
+
+{\tt http://blog.cloudflare.com/how-syria-turned-off-the-internet} \\
+{\tt http://player.vimeo.com/video/54630037}
+\end{center}
+
+\subsection{Networking}
+\begin{center}
+\vspace*{\fill}
+	\includegraphics[scale=0.9]{pics/tubes.eps} \\
+\vspace*{\fill}
+{\tt http://amzn.com/0061994952}
+\end{center}
+
+
 
 
 
@@ -188,7 +186,7 @@ $ telnet www.google.com 80
 \begin{center}
 \begin{verbatim}
 $ telnet www.google.com 80
-Trying 173.194.73.99...
+Trying 2607:f8b0:400c:c03::67...
 Connected to www.google.com.
 Escape character is '^]'.
 GET / HTTP/1.0
@@ -203,13 +201,13 @@ GET / HTTP/1.0
 \begin{center}
 \begin{verbatim}
 $ telnet www.google.com 80
-Trying 173.194.73.99...
+Trying 2607:f8b0:400c:c03::67...
 Connected to www.google.com.
 Escape character is '^]'.
 GET / HTTP/1.0
 
 HTTP/1.0 200 OK
-Date: Sat, 02 Mar 2013 20:29:10 GMT
+Date: Mon, 17 Mar 2014 16:15:01 GMT
 Content-Type: text/html; charset=ISO-8859-1
 Server: gws
 [...]
@@ -245,6 +243,20 @@ How exactly do we look up a hostname?
 	\item ask DNS server to resolve hostname
 	\item get back IP
 \end{itemize}
+
+\subsection{A simple example}
+\\
+\Hugesize
+\begin{center}
+\begin{verbatim}
+$ start-fedora
+$ ssh fedora@ec2-....
+$ sudo yum install -y tcpdump telnet strace
+[...]
+\end{verbatim}
+\end{center}
+\Normalsize
+\vspace*{\fill}
 
 \subsection{A simple example}
 \\
@@ -1076,522 +1088,528 @@ User Datagram Protocol over IPv6
 \end{center}
 \vspace*{\fill}
 
-\subsection{IPv4 Basics}
-\vspace{.5in}
-\Hugesize
-\begin{center}
-\begin{verbatim}
-      10011011111101100101100100010110
-\end{verbatim}
-\vspace{.5in}
-IPv4 addresses are 32-bit numbers.
-\end{center}
-\Normalsize
-
-\subsection{IPv4 Basics}
-\vspace{.5in}
-\Hugesize
-\begin{center}
-\begin{verbatim}
-     1001101111110110  0101100100010110
-\end{verbatim}
-\vspace{.5in}
-IPv4 addresses are divided into a {\em network part} and a {\em host part}.
-\end{center}
-\Normalsize
-
-\subsection{IPv4 Basics}
-\vspace{.5in}
-\Hugesize
-\begin{center}
-\begin{verbatim}
-     10  01101111110110  0101100100010110
-\end{verbatim}
-\vspace{.5in}
-There are three different {\em classes} of IPv4 networks.
-\end{center}
-\Normalsize
-
-\subsection{IPv4 Basics}
-\vspace{.5in}
-\Hugesize
-\begin{center}
-\begin{verbatim}
-     10011011  11110110  01011001  00010110
-\end{verbatim}
-\vspace{.5in}
-Each IPv4 address consists of four octets.
-\end{center}
-\Normalsize
-
-\subsection{IPv4 Basics}
-\vspace{.5in}
-\Hugesize
-\begin{center}
-\begin{verbatim}
-    10011011  11110110  01011001  00010110
-
-      155   .   246   .    89   .    22
-\end{verbatim}
-\vspace{.5in}
-Each IPv4 address consists of four octets.
-\end{center}
-\Normalsize
-
-\subsection{Subnets}
-\vspace{.5in}
-\Hugesize
-\begin{center}
-\begin{verbatim}
-    10011011  11110110  01011001  00010110
-
-    11111111  11111111  00000000  00000000
-\end{verbatim}
-\vspace{.5in}
-A {\em netmask} splits the IPv4 address into {\em network} and {\em host}
-parts.
-\end{center}
-\Normalsize
-
-\subsection{Subnets}
-\vspace{.5in}
-\Hugesize
-\begin{center}
-\begin{verbatim}
-    10011011  11110110  01011001  00010110
-
-    11111111  11111111  11111111  00000000
-\end{verbatim}
-\vspace{.5in}
-A {\em netmask} splits the IPv4 address into {\em network} and {\em host}
-parts.
-\end{center}
-\Normalsize
-
-\subsection{Subnets}
-\begin{verbatim}
-$ ipcalc -n 155.246.89.22/16
-Address:   155.246.89.22        10011011.11110110. 01011001.00010110
-Netmask:   255.255.0.0 = 16     11111111.11111111. 00000000.00000000
-Wildcard:  0.0.255.255          00000000.00000000. 11111111.11111111
-=>
-Network:   155.246.0.0/16       10011011.11110110. 00000000.00000000
-HostMin:   155.246.0.1          10011011.11110110. 00000000.00000001
-HostMax:   155.246.255.254      10011011.11110110. 11111111.11111110
-Broadcast: 155.246.255.255      10011011.11110110. 11111111.11111111
-Hosts/Net: 65534                 Class B
-\end{verbatim}
-\vspace{.5in}
-Try also: \verb+sipcalc -a 155.246.89.22/16+
-
-\subsection{Subnets}
-\begin{verbatim}
-$ ipcalc -n 155.246.89.22/24
-Address:   155.246.89.22        10011011.11110110.01011001. 00010110
-Netmask:   255.255.255.0 = 24   11111111.11111111.11111111. 00000000
-Wildcard:  0.0.0.255            00000000.00000000.00000000. 11111111
-=>
-Network:   155.246.89.0/24      10011011.11110110.01011001. 00000000
-HostMin:   155.246.89.1         10011011.11110110.01011001. 00000001
-HostMax:   155.246.89.254       10011011.11110110.01011001. 11111110
-Broadcast: 155.246.89.255       10011011.11110110.01011001. 11111111
-Hosts/Net: 254                   Class B
-\end{verbatim}
-\vspace{.5in}
-Try also: \verb+sipcalc -a 155.246.89.22/16+
-
-\subsection{CIDR cheat sheet}
-A.B.C.D/N
-\begin{itemize}
-	\item $N$ = bits describing network portion of address
-	\item $M=32-N$ = bits in host portion of address
-	\item $2^M$ = number of addresses on this subnet
-	\item $2^M - 2$ = number of possible hosts
-		\begin{itemize}
-			\item first address on subnet = network address
-			\item last address on subnet = broadcast address
-		\end{itemize}
-	\item subnet division need not occur on dotted boundary only
-		\begin{itemize}
-			\item for example, you can divide 155.246.89.0/24
-				into four /26 networks
-			\item networks starting at .0, .64, .128, .192
-		\end{itemize}
-\end{itemize}
-\addvspace{.5in}
-Which of the following is not a valid netmask? \\
-\verb+255.255.253.0, 255.255.250.0, 255.255.240.0+
-
-\subsection{Mommy, where do IP addresses come from?}
-\Huge
-\vfill
-\begin{center}
-The Internet Assigned Numbers Authority (IANA) oversees global IP
-address/AS number allocation, root zone management etc.
-\\
-\vspace{.5in}
-\verb+https://www.iana.org/+
-\end{center}
-\vfill
-\Normalsize
-
-\subsection{Mommy, where do IP addresses come from?}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.5]{pics/rirs.eps} \\
-	\vspace{.5in}
-	Regional Internet Registries (RIR) manage the allocation and
-registration of Internet number resources within a region of the world.
-\end{center}
-\vspace*{\fill}
-
-\subsection{Mommy, where do IP addresses come from?}
-\vspace*{\fill}
-\begin{center}
-{\bf RIR}s assign blocks of IP addresses to the Local Internet Registries (LIR).
-\\
-\vspace{.5in}
-
-LIRs are either ISPs, enterprises using a lot of addresses, or academic
-institutions.
-\end{center}
-\vspace*{\fill}
-
-\subsection{IPv6 Exhaustion}
-Past and predicted: \\
-
-\begin{tabular}{l r}
-IANA Address Pool Exhaustion: & 2011-02-03 \\
-APNIC reached final {\tt /8}: & 2011-04-15 \\
-RIPENCC: & 2012-08-08 \\
-ARIN: & 2013-06-24 \\
-LACNIC: & 2014-02-04 \\
-AFRINIC: & 2014-11-09 \\
-\end{tabular}
-
-\subsection{IPv6 Basics}
-\vspace{.5in}
-\Hugesize
-\begin{center}
-\begin{verbatim}
-       10011011111101100101100100010110
-\end{verbatim}
-\vspace{.5in}
-IPv4 addresses are 32-bit numbers.
-\end{center}
-\Normalsize
-
-
-\subsection{IPv6 Basics}
-\Hugesize
-\begin{center}
-\begin{verbatim}
-              0010000000000001
-              0000010011111000
-              0000000000000100
-              0000000000000111
-              0000001011100000
-              1000000111111111
-              1111111001010010
-              1001101001101011
-\end{verbatim}
-\vspace{.5in}
-IPv6 addresses are 128 bits.
-\end{center}
-\Normalsize
-
-\subsection{IPv6 Basics}
-\Hugesize
-\begin{center}
-IPv4: 32 bits $=>$ $2^{32}$ addresses \\
-\vspace{.5in}
-IPv6: 128 bits $=>$ $2^{128}$ addresses
-\end{center}
-\Normalsize
-
-\subsection{IPv6 Basics}
-\Hugesize
-\begin{center}
-IPv4: 32 bits $=>$ $4,294,967,296$ addresses \\
-\vspace{.5in}
-IPv6: 128 bits $=>$ $2^{128}$ addresses
-\end{center}
-\Normalsize
-
-\subsection{IPv6 Basics}
-\Hugesize
-\begin{center}
-IPv4: 32 bits $=>$ $4,294,967,296$ addresses \\
-\vspace{.5in}
-IPv6: 128 bits $=>$ $340,282,366,920,938,463,463,374,607,431,768,211,456$ addresses \\
-\vspace{.5in}
-\verb+http://www.potaroo.net/papers/isoc/2005-07/ipv6size.html+
-\end{center}
-\Normalsize
-
-\subsection{IPv6 Basics}
-\verb|https://www.wolframalpha.com/input/?i=2^128+%2F+number+of+cells+in+human+body|
-\verb|https://www.wolframalpha.com/input/?i=2^128+%2F+number+of+atoms+in+human+body|
-\verb|%2F+number+of+people+on+earth|
-
-
-\subsection{IPv6 Basics}
-\begin{itemize}
-	\item 8x16 bit fields (words) in case insensitive colon hexadecimal
-		representation
-\begin{verbatim}
-           2031:0000:0000:130F:0000:0000:076A:130B
-\end{verbatim}
-\end{itemize}
-
-\subsection{IPv6 Basics}
-\begin{itemize}
-	\item 8x16 bit fields (words) in case insensitive colon hexadecimal
-		representation
-\begin{verbatim}
-           2031:0000:0000:130F:0000:0000:076A:130B
-\end{verbatim}
-	\item Leading zeros in a field are optional:
-\begin{verbatim}
-           2031:0:0:130F:0:0:76A:130B
-\end{verbatim}
-\end{itemize}
-
-\subsection{IPv6 Basics}
-\begin{itemize}
-	\item 8x16 bit fields (words) in case insensitive colon hexadecimal
-		representation
-\begin{verbatim}
-           2031:0000:0000:130F:0000:0000:076A:130B
-\end{verbatim}
-	\item Leading zeros in a field are optional:
-\begin{verbatim}
-           2031:0:0:130F:0:0:76A:130B
-\end{verbatim}
-	\item Successive fields of 0 represented as ::, but only once in
-			an address:
-\begin{verbatim}
-          2031::130F:0:0:76A:130B         ok
-          2031:0:0:130F::76A:130B         ok
-          2031::130F::76A:130B            not ok
-\end{verbatim}
-\end{itemize}
-
-\subsection{IPv6 Basics}
-\begin{itemize}
-	\item 8x16 bit fields (words) in case insensitive colon hexadecimal
-		representation
-\begin{verbatim}
-           2031:0000:0000:130F:0000:0000:076A:130B
-\end{verbatim}
-	\item Leading zeros in a field are optional:
-\begin{verbatim}
-           2031:0:0:130F:0:0:76A:130B
-\end{verbatim}
-	\item Successive fields of 0 represented as ::, but only once in
-			an address:
-\begin{verbatim}
-          2031::130F:0:0:76A:130B         ok
-          2031:0:0:130F::76A:130B         ok
-          2031::130F::76A:130B            not ok
-\end{verbatim}
-	\item
-\begin{verbatim}
-          0000:0000:0000:0000:0000:0000:0000:00001 =>
-                                   0:0:0:0:0:0:0:1 => ::1
-\end{verbatim}
-\end{itemize}
-
-\subsection{IPv6 Basics - Address Oddities}
-\begin{itemize}
-	\item Address may include a link name:
-\begin{verbatim}
-          2001:470:1f07:3d1::1%eth0
-\end{verbatim}
-\end{itemize}
-
-\subsection{IPv6 Basics - Address Oddities}
-\begin{itemize}
-	\item Address may include a link name:
-\begin{verbatim}
-          2001:470:1f07:3d1::1%eth0
-\end{verbatim}
-	\item IPv4-mapped addresses
-\begin{verbatim}
-          0:0:0:0:0:ffff:66.163.162.9
-          ::ffff:66.163.162.9
-\end{verbatim}
-\end{itemize}
-
-\subsection{IPv6 Basics - Address Oddities}
-\begin{itemize}
-	\item Address may include a link name:
-\begin{verbatim}
-          2001:470:1f07:3d1::1%eth0
-\end{verbatim}
-	\item IPv4-mapped addresses
-\begin{verbatim}
-          0:0:0:0:0:ffff:66.163.162.9
-          ::ffff:66.163.162.9
-\end{verbatim}
-	\item You need brackets to distinguish a port from an address:
-		\begin{itemize}
-			\item IPv4: \verb+66.163.162.9:22+
-			\item IPv6: \verb+[2001:470:1f07:3d1::1]:22+
-		\end{itemize}
-\end{itemize}
-
-\subsection{IPv6 Basics -- Address Scope}
-\begin{itemize}
-	\item Link-Local (example: \verb+fe80::e276:63ff:fe72:3900%xennet0+)
-		\begin{itemize}
-			\item Used on a single link
-			\item Packets with link-local source or destination addresses are not
-				forwarded to other links
-		\end{itemize}
-\end{itemize}
-
-\subsection{IPv6 Basics -- Address Scope}
-\begin{itemize}
-	\item Link-Local (example: \verb+fe80::e276:63ff:fe72:3900%xennet0+)
-		\begin{itemize}
-			\item Used on a single link
-			\item Packets with link-local source or destination addresses are not
-				forwarded to other links
-		\end{itemize}
-	\item Unique-Local (\verb+fc00::/7+)
-		\begin{itemize}
-			\item Used for private IPv6 networks
-			\item not globally routable
-			\item Applications similar to RFC 1918
-		\end{itemize}
-\end{itemize}
-
-\subsection{IPv6 Basics -- Address Scope}
-\begin{itemize}
-	\item Link-Local (example: \verb+fe80::e276:63ff:fe72:3900%xennet0+)
-		\begin{itemize}
-			\item Used on a single link
-			\item Packets with link-local source or destination addresses are not
-				forwarded to other links
-		\end{itemize}
-	\item Unique-Local (\verb+fc00::/7+)
-		\begin{itemize}
-			\item Used for private IPv6 networks
-			\item not globally routable
-			\item Applications similar to RFC 1918
-		\end{itemize}
-	\item Global (example: \verb+2001:470:1f07:3d1::1+)
-		\begin{itemize}
-			\item A globally unique address
-			\item Packets with global addresses can be forwarded to any part of
-				the global network
-		\end{itemize}
-\end{itemize}
-
-\subsection{IPv6 Configuration Types}
-\begin{itemize}
-	\item Static Configuration
-	\item Stateful Autoconfiguration (DHCPv6)
-	\item Stateless Address Autoconfiguration (SLAC)
-\end{itemize}
-
-\subsection{IPv6 Configuration Types}
-\begin{itemize}
-	\item Static Configuration
-	\item Stateful Autoconfiguration (DHCPv6)
-	\item Stateless Address Autoconfiguration (SLAC)
-	\begin{itemize}
-		\item RFC2462
-		\item use of autonomously configured link-local address
-			using its EUI-64 address
-\begin{verbatim}
-          fe80::213:d3ff:fe9c:1840%eth0
-\end{verbatim}
-		\item at boot time, send Router Solicitation (RS) to
-			request Router Advertisements (RAs)
-	\end{itemize}
-\end{itemize}
-
-\subsection{IPv6 Subnets}
-\begin{verbatim}
-$ sipcalc 2001:470:30:84:e276:63ff:fe72:3900/64
--[ipv6 : 2001:470:30:84:e276:63ff:fe72:3900/64] - 0
-
-[IPV6 INFO]
-Expanded Address        - 2001:0470:0030:0084:e276:63ff:fe72:3900
-Compressed address      - 2001:470:30:84:e276:63ff:fe72:3900
-Subnet prefix (masked)  - 2001:470:30:84:0:0:0:0/64
-Address ID (masked)     - 0:0:0:0:e276:63ff:fe72:3900/64
-Prefix address          - ffff:ffff:ffff:ffff:0:0:0:0
-Prefix length           - 64
-Address type            - Aggregatable Global Unicast Addresses
-Network range           - 2001:0470:0030:0084:0000:0000:0000:0000 -
-                          2001:0470:0030:0084:ffff:ffff:ffff:ffff
-
-\end{verbatim}
-
-\subsection{IPv6 Subnets: Common CIDRs}
-\small
-\begin{verbatim}
-2001:0db8:0123:4567:89ab:cdef:1234:5678
-|||| |||| |||| |||| |||| |||| |||| |||128   Single end-points and loopback
-|||| |||| |||| |||| |||| |||| |||| ||124
-|||| |||| |||| |||| |||| |||| |||| |120
-|||| |||| |||| |||| |||| |||| |||| 116
-|||| |||| |||| |||| |||| |||| |||112
-|||| |||| |||| |||| |||| |||| ||108
-|||| |||| |||| |||| |||| |||| |104
-|||| |||| |||| |||| |||| |||| 100
-|||| |||| |||| |||| |||| |||96
-|||| |||| |||| |||| |||| ||92
-|||| |||| |||| |||| |||| |88
-|||| |||| |||| |||| |||| 84
-|||| |||| |||| |||| |||80
-|||| |||| |||| |||| ||76
-|||| |||| |||| |||| |72
-|||| |||| |||| |||| 68
-|||| |||| |||| |||64                        Single End-user LAN (default prefix size for SLAAC)
-|||| |||| |||| ||60
-|||| |||| |||| |56                          Proposed minimal end sites assignment
-|||| |||| |||| 52
-|||| |||| |||48                             Default end sites assignment
-|||| |||| ||44
-|||| |||| |40
-|||| |||| 36
-|||| |||32                                  Local Internet registry minimum allocations
-|||| ||28                                   Local Internet registry medium allocations
-|||| |24                                    Local Internet registry large allocations
-|||| 20                                     Local Internet registry extra large allocations
-|||16
-||12                                        Regional Internet Registry allocations from IANA
-|8
-\end{verbatim}
-\Normalsize
-
-\subsection{How to know if you will be in trouble...}
-Go to \verb+http://test-ipv6.com+:
-\begin{center}
-	\includegraphics[scale=0.7]{pics/test-ipv6.eps}
-\end{center}
-
-\subsection{How to know if you will be in trouble...}
-Go to \verb+http://test-ipv6.com+:
-\begin{center}
-	\includegraphics[scale=0.7]{pics/test-ipv6-6.eps}
-\vspace{.25in}
-
-If you don't have native IPv6 connectivity, Use a tunnelbroker to connect
-IPv4-only hosts to the IPv6 internet. \\
-
-\verb+http://tunnelbroker.net/+
-\end{center}
-
+% \subsection{IPv4 Basics}
+% \vspace{.5in}
+% \Hugesize
+% \begin{center}
+% \begin{verbatim}
+%       10011011111101100101100100010110
+% \end{verbatim}
+% \vspace{.5in}
+% IPv4 addresses are 32-bit numbers.
+% \end{center}
+% \Normalsize
+%
+% \subsection{IPv4 Basics}
+% \vspace{.5in}
+% \Hugesize
+% \begin{center}
+% \begin{verbatim}
+%      1001101111110110  0101100100010110
+% \end{verbatim}
+% \vspace{.5in}
+% IPv4 addresses are divided into a {\em network part} and a {\em host part}.
+% \end{center}
+% \Normalsize
+%
+% \subsection{IPv4 Basics}
+% \vspace{.5in}
+% \Hugesize
+% \begin{center}
+% \begin{verbatim}
+%      10  01101111110110  0101100100010110
+% \end{verbatim}
+% \vspace{.5in}
+% There are three different {\em classes} of IPv4 networks.
+% \end{center}
+% \Normalsize
+%
+% \subsection{IPv4 Basics}
+% \vspace{.5in}
+% \Hugesize
+% \begin{center}
+% \begin{verbatim}
+%      10011011  11110110  01011001  00010110
+% \end{verbatim}
+% \vspace{.5in}
+% Each IPv4 address consists of four octets.
+% \end{center}
+% \Normalsize
+%
+% \subsection{IPv4 Basics}
+% \vspace{.5in}
+% \Hugesize
+% \begin{center}
+% \begin{verbatim}
+%     10011011  11110110  01011001  00010110
+%
+%       155   .   246   .    89   .    22
+% \end{verbatim}
+% \vspace{.5in}
+% Each IPv4 address consists of four octets.
+% \end{center}
+% \Normalsize
+%
+% \subsection{Subnets}
+% \vspace{.5in}
+% \Hugesize
+% \begin{center}
+% \begin{verbatim}
+%     10011011  11110110  01011001  00010110
+%
+%     11111111  11111111  00000000  00000000
+% \end{verbatim}
+% \vspace{.5in}
+% A {\em netmask} splits the IPv4 address into {\em network} and {\em host}
+% parts.
+% \end{center}
+% \Normalsize
+%
+% \subsection{Subnets}
+% \vspace{.5in}
+% \Hugesize
+% \begin{center}
+% \begin{verbatim}
+%     10011011  11110110  01011001  00010110
+%
+%     11111111  11111111  11111111  00000000
+% \end{verbatim}
+% \vspace{.5in}
+% A {\em netmask} splits the IPv4 address into {\em network} and {\em host}
+% parts.
+% \end{center}
+% \Normalsize
+%
+% \subsection{Subnets}
+% \begin{verbatim}
+% $ ipcalc -n 155.246.89.22/16
+% Address:   155.246.89.22        10011011.11110110. 01011001.00010110
+% Netmask:   255.255.0.0 = 16     11111111.11111111. 00000000.00000000
+% Wildcard:  0.0.255.255          00000000.00000000. 11111111.11111111
+% =>
+% Network:   155.246.0.0/16       10011011.11110110. 00000000.00000000
+% HostMin:   155.246.0.1          10011011.11110110. 00000000.00000001
+% HostMax:   155.246.255.254      10011011.11110110. 11111111.11111110
+% Broadcast: 155.246.255.255      10011011.11110110. 11111111.11111111
+% Hosts/Net: 65534                 Class B
+% \end{verbatim}
+% \vspace{.5in}
+% Try also: \verb+sipcalc -a 155.246.89.22/16+
+%
+% \subsection{Subnets}
+% \begin{verbatim}
+% $ ipcalc -n 155.246.89.22/24
+% Address:   155.246.89.22        10011011.11110110.01011001. 00010110
+% Netmask:   255.255.255.0 = 24   11111111.11111111.11111111. 00000000
+% Wildcard:  0.0.0.255            00000000.00000000.00000000. 11111111
+% =>
+% Network:   155.246.89.0/24      10011011.11110110.01011001. 00000000
+% HostMin:   155.246.89.1         10011011.11110110.01011001. 00000001
+% HostMax:   155.246.89.254       10011011.11110110.01011001. 11111110
+% Broadcast: 155.246.89.255       10011011.11110110.01011001. 11111111
+% Hosts/Net: 254                   Class B
+% \end{verbatim}
+% \vspace{.5in}
+% Try also: \verb+sipcalc -a 155.246.89.22/16+
+%
+% \subsection{CIDR cheat sheet}
+% A.B.C.D/N
+% \begin{itemize}
+% 	\item $N$ = bits describing network portion of address
+% 	\item $M=32-N$ = bits in host portion of address
+% 	\item $2^M$ = number of addresses on this subnet
+% 	\item $2^M - 2$ = number of possible hosts
+% 		\begin{itemize}
+% 			\item first address on subnet = network address
+% 			\item last address on subnet = broadcast address
+% 		\end{itemize}
+% 	\item subnet division need not occur on dotted boundary only
+% 		\begin{itemize}
+% 			\item for example, you can divide 155.246.89.0/24
+% 				into four /26 networks
+% 			\item networks starting at .0, .64, .128, .192
+% 		\end{itemize}
+% \end{itemize}
+% \addvspace{.5in}
+% Which of the following is not a valid netmask? \\
+% \verb+255.255.253.0, 255.255.250.0, 255.255.240.0+
+%
+% \subsection{Mommy, where do IP addresses come from?}
+% \Huge
+% \vfill
+% \begin{center}
+% The Internet Assigned Numbers Authority (IANA) oversees global IP
+% address/AS number allocation, root zone management etc.
+% \\
+% \vspace{.5in}
+% \verb+https://www.iana.org/+
+% \end{center}
+% \vfill
+% \Normalsize
+%
+% \subsection{Mommy, where do IP addresses come from?}
+% \vspace*{\fill}
+% \begin{center}
+% 	\includegraphics[scale=0.5]{pics/rirs.eps} \\
+% 	\vspace{.5in}
+% 	Regional Internet Registries (RIR) manage the allocation and
+% registration of Internet number resources within a region of the world.
+% \end{center}
+% \vspace*{\fill}
+%
+% \subsection{Mommy, where do IP addresses come from?}
+% \vspace*{\fill}
+% \begin{center}
+% {\bf RIR}s assign blocks of IP addresses to the Local Internet Registries (LIR).
+% \\
+% \vspace{.5in}
+%
+% LIRs are either ISPs, enterprises using a lot of addresses, or academic
+% institutions.
+% \end{center}
+% \vspace*{\fill}
+%
+% \subsection{IPv4 Exhaustion}
+% Past and predicted: \\
+%
+% \begin{tabular}{l r}
+% IANA Address Pool Exhaustion: & 2011-02-03 \\
+% APNIC reached final {\tt /8}: & 2011-04-15 \\
+% RIPENCC: & 2012-09-14 \\
+% LACNIC: & 2014-09-05 \\
+% ARIN: & 2015-03-23 \\
+% AFRINIC: & 2020-08-10 \\
+% \end{tabular}
+%
+% \subsection{IPv6 Basics}
+% \vspace{.5in}
+% \Hugesize
+% \begin{center}
+% \begin{verbatim}
+%        10011011111101100101100100010110
+% \end{verbatim}
+% \vspace{.5in}
+% IPv4 addresses are 32-bit numbers.
+% \end{center}
+% \Normalsize
+%
+%
+% \subsection{IPv6 Basics}
+% \Hugesize
+% \begin{center}
+% \begin{verbatim}
+%               0010000000000001
+%               0000010011111000
+%               0000000000000100
+%               0000000000000111
+%               0000001011100000
+%               1000000111111111
+%               1111111001010010
+%               1001101001101011
+% \end{verbatim}
+% \vspace{.5in}
+% IPv6 addresses are 128 bits.
+% \end{center}
+% \Normalsize
+%
+% \subsection{IPv6 Basics}
+% \Hugesize
+% \begin{center}
+% IPv4: 32 bits $=>$ $2^{32}$ addresses \\
+% \vspace{.5in}
+% IPv6: 128 bits $=>$ $2^{128}$ addresses
+% \end{center}
+% \Normalsize
+%
+% \subsection{IPv6 Basics}
+% \Hugesize
+% \begin{center}
+% IPv4: 32 bits $=>$ $4,294,967,296$ addresses \\
+% \vspace{.5in}
+% IPv6: 128 bits $=>$ $2^{128}$ addresses
+% \end{center}
+% \Normalsize
+%
+% \subsection{IPv6 Basics}
+% \Hugesize
+% \begin{center}
+% IPv4: 32 bits $=>$ $4,294,967,296$ addresses \\
+% \vspace{.5in}
+% IPv6: 128 bits $=>$ $340,282,366,920,938,463,463,374,607,431,768,211,456$ addresses \\
+% \vspace{.5in}
+% \end{center}
+% \Normalsize
+%
+% \subsection{IPv6 Basics}
+%
+% ``if the earth were made entirely out of 1 cubic millimetre grains of
+% sand, then you could give a unique IPv6 address to each grain in 300
+% million planets the size of the earth''
+% \\
+% \verb+http://www.potaroo.net/papers/isoc/2005-07/ipv6size.html+
+% \\
+%
+% \verb|https://www.wolframalpha.com/input/?i=2^128+%2F+number+of+cells+in+human+body|
+% \verb|https://www.wolframalpha.com/input/?i=2^128+%2F+number+of+atoms+in+human+body|
+% \verb|%2F+number+of+people+on+earth|
+%
+% \subsection{IPv6 Basics}
+% \begin{itemize}
+% 	\item 8x16 bit fields (words) in case insensitive colon hexadecimal
+% 		representation
+% \begin{verbatim}
+%            2031:0000:0000:130F:0000:0000:076A:130B
+% \end{verbatim}
+% \end{itemize}
+%
+% \subsection{IPv6 Basics}
+% \begin{itemize}
+% 	\item 8x16 bit fields (words) in case insensitive colon hexadecimal
+% 		representation
+% \begin{verbatim}
+%            2031:0000:0000:130F:0000:0000:076A:130B
+% \end{verbatim}
+% 	\item Leading zeros in a field are optional:
+% \begin{verbatim}
+%            2031:0:0:130F:0:0:76A:130B
+% \end{verbatim}
+% \end{itemize}
+%
+% \subsection{IPv6 Basics}
+% \begin{itemize}
+% 	\item 8x16 bit fields (words) in case insensitive colon hexadecimal
+% 		representation
+% \begin{verbatim}
+%            2031:0000:0000:130F:0000:0000:076A:130B
+% \end{verbatim}
+% 	\item Leading zeros in a field are optional:
+% \begin{verbatim}
+%            2031:0:0:130F:0:0:76A:130B
+% \end{verbatim}
+% 	\item Successive fields of 0 represented as ::, but only once in
+% 			an address:
+% \begin{verbatim}
+%           2031::130F:0:0:76A:130B         ok
+%           2031:0:0:130F::76A:130B         ok
+%           2031::130F::76A:130B            not ok
+% \end{verbatim}
+% \end{itemize}
+%
+% \subsection{IPv6 Basics}
+% \begin{itemize}
+% 	\item 8x16 bit fields (words) in case insensitive colon hexadecimal
+% 		representation
+% \begin{verbatim}
+%            2031:0000:0000:130F:0000:0000:076A:130B
+% \end{verbatim}
+% 	\item Leading zeros in a field are optional:
+% \begin{verbatim}
+%            2031:0:0:130F:0:0:76A:130B
+% \end{verbatim}
+% 	\item Successive fields of 0 represented as ::, but only once in
+% 			an address:
+% \begin{verbatim}
+%           2031::130F:0:0:76A:130B         ok
+%           2031:0:0:130F::76A:130B         ok
+%           2031::130F::76A:130B            not ok
+% \end{verbatim}
+% 	\item
+% \begin{verbatim}
+%           0000:0000:0000:0000:0000:0000:0000:00001 =>
+%                                    0:0:0:0:0:0:0:1 => ::1
+% \end{verbatim}
+% \end{itemize}
+%
+% \subsection{IPv6 Basics - Address Oddities}
+% \begin{itemize}
+% 	\item Address may include a link name:
+% \begin{verbatim}
+%           2001:470:1f07:3d1::1%eth0
+% \end{verbatim}
+% \end{itemize}
+%
+% \subsection{IPv6 Basics - Address Oddities}
+% \begin{itemize}
+% 	\item Address may include a link name:
+% \begin{verbatim}
+%           2001:470:1f07:3d1::1%eth0
+% \end{verbatim}
+% 	\item IPv4-mapped addresses
+% \begin{verbatim}
+%           0:0:0:0:0:ffff:66.163.162.9
+%           ::ffff:66.163.162.9
+% \end{verbatim}
+% \end{itemize}
+%
+% \subsection{IPv6 Basics - Address Oddities}
+% \begin{itemize}
+% 	\item Address may include a link name:
+% \begin{verbatim}
+%           2001:470:1f07:3d1::1%eth0
+% \end{verbatim}
+% 	\item IPv4-mapped addresses
+% \begin{verbatim}
+%           0:0:0:0:0:ffff:66.163.162.9
+%           ::ffff:66.163.162.9
+% \end{verbatim}
+% 	\item You need brackets to distinguish a port from an address:
+% 		\begin{itemize}
+% 			\item IPv4: \verb+66.163.162.9:22+
+% 			\item IPv6: \verb+[2001:470:1f07:3d1::1]:22+
+% 		\end{itemize}
+% \end{itemize}
+%
+% \subsection{IPv6 Basics -- Address Scope}
+% \begin{itemize}
+% 	\item Link-Local (example: \verb+fe80::e276:63ff:fe72:3900%xennet0+)
+% 		\begin{itemize}
+% 			\item Used on a single link
+% 			\item Packets with link-local source or destination addresses are not
+% 				forwarded to other links
+% 		\end{itemize}
+% \end{itemize}
+%
+% \subsection{IPv6 Basics -- Address Scope}
+% \begin{itemize}
+% 	\item Link-Local (example: \verb+fe80::e276:63ff:fe72:3900%xennet0+)
+% 		\begin{itemize}
+% 			\item Used on a single link
+% 			\item Packets with link-local source or destination addresses are not
+% 				forwarded to other links
+% 		\end{itemize}
+% 	\item Unique-Local (\verb+fc00::/7+)
+% 		\begin{itemize}
+% 			\item Used for private IPv6 networks
+% 			\item not globally routable
+% 			\item Applications similar to RFC 1918
+% 		\end{itemize}
+% \end{itemize}
+%
+% \subsection{IPv6 Basics -- Address Scope}
+% \begin{itemize}
+% 	\item Link-Local (example: \verb+fe80::e276:63ff:fe72:3900%xennet0+)
+% 		\begin{itemize}
+% 			\item Used on a single link
+% 			\item Packets with link-local source or destination addresses are not
+% 				forwarded to other links
+% 		\end{itemize}
+% 	\item Unique-Local (\verb+fc00::/7+)
+% 		\begin{itemize}
+% 			\item Used for private IPv6 networks
+% 			\item not globally routable
+% 			\item Applications similar to RFC 1918
+% 		\end{itemize}
+% 	\item Global (example: \verb+2001:470:1f07:3d1::1+)
+% 		\begin{itemize}
+% 			\item A globally unique address
+% 			\item Packets with global addresses can be forwarded to any part of
+% 				the global network
+% 		\end{itemize}
+% \end{itemize}
+%
+% \subsection{IPv6 Configuration Types}
+% \begin{itemize}
+% 	\item Static Configuration
+% 	\item Stateful Autoconfiguration (DHCPv6)
+% 	\item Stateless Address Autoconfiguration (SLAC)
+% \end{itemize}
+%
+% \subsection{IPv6 Configuration Types}
+% \begin{itemize}
+% 	\item Static Configuration
+% 	\item Stateful Autoconfiguration (DHCPv6)
+% 	\item Stateless Address Autoconfiguration (SLAC)
+% 	\begin{itemize}
+% 		\item RFC2462
+% 		\item use of autonomously configured link-local address
+% 			using its EUI-64 address
+% \begin{verbatim}
+%           fe80::213:d3ff:fe9c:1840%eth0
+% \end{verbatim}
+% 		\item at boot time, send Router Solicitation (RS) to
+% 			request Router Advertisements (RAs)
+% 	\end{itemize}
+% \end{itemize}
+%
+% \subsection{IPv6 Subnets}
+% \begin{verbatim}
+% $ sipcalc 2001:470:30:84:e276:63ff:fe72:3900/64
+% -[ipv6 : 2001:470:30:84:e276:63ff:fe72:3900/64] - 0
+%
+% [IPV6 INFO]
+% Expanded Address        - 2001:0470:0030:0084:e276:63ff:fe72:3900
+% Compressed address      - 2001:470:30:84:e276:63ff:fe72:3900
+% Subnet prefix (masked)  - 2001:470:30:84:0:0:0:0/64
+% Address ID (masked)     - 0:0:0:0:e276:63ff:fe72:3900/64
+% Prefix address          - ffff:ffff:ffff:ffff:0:0:0:0
+% Prefix length           - 64
+% Address type            - Aggregatable Global Unicast Addresses
+% Network range           - 2001:0470:0030:0084:0000:0000:0000:0000 -
+%                           2001:0470:0030:0084:ffff:ffff:ffff:ffff
+%
+% \end{verbatim}
+%
+% \subsection{IPv6 Subnets: Common CIDRs}
+% \small
+% \begin{verbatim}
+% 2001:0db8:0123:4567:89ab:cdef:1234:5678
+% |||| |||| |||| |||| |||| |||| |||| |||128   Single end-points and loopback
+% |||| |||| |||| |||| |||| |||| |||| ||124
+% |||| |||| |||| |||| |||| |||| |||| |120
+% |||| |||| |||| |||| |||| |||| |||| 116
+% |||| |||| |||| |||| |||| |||| |||112
+% |||| |||| |||| |||| |||| |||| ||108
+% |||| |||| |||| |||| |||| |||| |104
+% |||| |||| |||| |||| |||| |||| 100
+% |||| |||| |||| |||| |||| |||96
+% |||| |||| |||| |||| |||| ||92
+% |||| |||| |||| |||| |||| |88
+% |||| |||| |||| |||| |||| 84
+% |||| |||| |||| |||| |||80
+% |||| |||| |||| |||| ||76
+% |||| |||| |||| |||| |72
+% |||| |||| |||| |||| 68
+% |||| |||| |||| |||64                        Single End-user LAN (default prefix size for SLAAC)
+% |||| |||| |||| ||60
+% |||| |||| |||| |56                          Proposed minimal end sites assignment
+% |||| |||| |||| 52
+% |||| |||| |||48                             Default end sites assignment
+% |||| |||| ||44
+% |||| |||| |40
+% |||| |||| 36
+% |||| |||32                                  Local Internet registry minimum allocations
+% |||| ||28                                   Local Internet registry medium allocations
+% |||| |24                                    Local Internet registry large allocations
+% |||| 20                                     Local Internet registry extra large allocations
+% |||16
+% ||12                                        Regional Internet Registry allocations from IANA
+% |8
+% \end{verbatim}
+% \Normalsize
+%
+% \subsection{How to know if you will be in trouble...}
+% Go to \verb+http://test-ipv6.com+:
+% \begin{center}
+% 	\includegraphics[scale=0.7]{pics/test-ipv6.eps}
+% \end{center}
+%
+% \subsection{How to know if you will be in trouble...}
+% Go to \verb+http://test-ipv6.com+:
+% \begin{center}
+% 	\includegraphics[scale=0.7]{pics/test-ipv6-6.eps}
+% \vspace{.25in}
+%
+% If you don't have native IPv6 connectivity, use a tunnelbroker to connect
+% IPv4-only hosts to the IPv6 internet. \\
+%
+% \verb+http://tunnelbroker.net/+
+% \end{center}
+%
 
 \subsection{Internet Maps and Architecture}
 \begin{itemize}
 	\item \verb+http://www.peer1.com/map-of-the-internet+
-	\item \verb+http://is.gd/DXcddb+
+	\item \verb+http://is.gd/VxsE7S+
 	\item \verb+http://www.submarinecablemap.com/+
 	\item \verb+http://en.wikipedia.org/wiki/Peering+
 	\item \verb+http://is.gd/tpPNE5+
