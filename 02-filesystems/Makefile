@@ -98,6 +98,7 @@ FIGURES=	\
 		pics/usb-hub.eps \
 		pics/ufs-details.eps \
 		pics/xraid.eps \
+		pics/equation-tweet.eps \
 		pics/zfs.eps
 
 .SUFFIXES: .tex .dvi .ps .pdf .txt .fig .eps .jpg .png .gif

@@ -36,6 +36,19 @@
 \end{center}
 \vspace*{\fill}
 
+\subsection{Reminder: Field Trip}
+\vspace{1in}
+
+\Hugesize
+
+2015-02-25: 9:45am \\
+
+Peer1 \\
+
+75 Broad Street, NY, NY
+\Normalsize
+
+
 \subsection{Typical Boot Sequence}
 \vspace*{\fill}
 \begin{verbatim}
@@ -44,11 +57,55 @@ $ aws ec2 run-instances --image-id ami-3b361952
 \vspace*{\fill}
 
 \subsection{Typical Boot Sequence}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.5,angle=-90]{pics/post.eps} \\
+\end{center}
+\vspace*{\fill}
+
+\subsection{Typical Boot Sequence}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.75,angle=-90]{pics/bios.eps} \\
+\end{center}
+\vspace*{\fill}
+
+\subsection{Typical Boot Sequence}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.8,angle=-90]{pics/ufs-details.eps} \\
+\end{center}
+\vspace*{\fill}
+
+\subsection{Typical Boot Sequence: BIOS and MBR}
+\begin{minipage}[c]{0.7\textwidth}
+\begin{itemize}
+	\item first sector (512 bytes) of data storage device
+	\item last two bytes contain signature \verb+0x55 0xAA+
+	\item 64 bytes allocated for partition table (four possible
+		partitions at 16 bytes each)
+	\item 446 bytes for primary boot loader code
+\end{itemize}
+\end{minipage}
+\begin{minipage}[c]{0.1\textwidth}
+\includegraphics[scale=0.7]{pics/stage1.eps} \\
+\end{minipage}
+
+
+\subsection{Typical Boot Sequence}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.8,angle=-90]{pics/grub.eps} \\
+\end{center}
+\vspace*{\fill}
+
+
+\subsection{Typical Boot Sequence}
 \begin{itemize}
 	\item {\bf P}ower-{\bf o}n {\bf S}elf-{\bf T}est
-	\item primary boot loader (BIOS, UEFI, Open Firmware / OpenBoot)
+	\item primary boot loader (e.g. BIOS, UEFI, Open Firmware / OpenBoot)
 	\item transfer of execution to {\bf M}aster {\bf B}oot {\bf R}ecord or perform netbooting
-	\item Second-stage boot loader (GRUB, LILO, etc.)
+	\item Second-stage boot loader (e.g. GRUB)
 	\item load kernel
 	\item kernel transfers control to {\tt init(8)}
 \end{itemize}
@@ -72,10 +129,20 @@ $ aws ec2 get-console-output --instance-id i-2fdb4701 | more
 
 \subsection{Firmware}
 \begin{center}
-	\includegraphics[scale=0.6,angle=-90]{pics/linksys.eps}
-	\includegraphics[scale=0.6,angle=-90]{pics/cell-phone.eps}
-	\includegraphics[scale=0.4,angle=-90]{pics/remote.eps}
+	\includegraphics[scale=0.5,angle=-90]{pics/linksys.eps}
+	\includegraphics[scale=0.5,angle=-90]{pics/cell-phone.eps}
+	\includegraphics[scale=0.3,angle=-90]{pics/remote.eps}
 \end{center}
+
+\subsection{Firmware}
+\begin{center}
+	\includegraphics[scale=0.5,angle=-90]{pics/linksys.eps}
+	\includegraphics[scale=0.5,angle=-90]{pics/cell-phone.eps}
+	\includegraphics[scale=0.3,angle=-90]{pics/remote.eps} \\
+	\includegraphics[scale=0.3,angle=-90]{pics/ide-drive.eps}
+\end{center}
+
+
 
 \subsection{Firmware}
 \begin{center}
@@ -172,19 +239,6 @@ Sat Feb  1 21:46:17 UTC 2014
 \end{center}
 \vfill
 
-\newpage
-\vspace*{\fill}
-\begin{center}
-	\Hugesize
-		Software Installation Concepts \\ [1em]
-	\hspace*{5mm}
-	\blueline\\
-	\hspace*{5mm}\\
-		File System Hierarchy
-\end{center}
-\vspace*{\fill}
-
-
 \subsection{File System Hierarchy}
 Layout of filesystem {\em should} be standardized.  Some UNIX versions adhere
 to these standards, some are strongly influenced by tradition.
@@ -230,144 +284,6 @@ to these standards, some are strongly influenced by tradition.
 \end{verbatim}
 \Normalsize
 
-\subsection{File System Hierarchy}
-Layout of filesystem {\em should} be standardized.  Some UNIX versions adhere
-to these standards, some are strongly influenced by tradition.
-\\
-
-Basic distinction between {\em shareable} and {\em unshareable} as well
-as {\em static} and {\em variable} data.
-
-\subsection{File System Hierarchy}
-Layout of filesystem {\em should} be standardized.  Some UNIX versions adhere
-to these standards, some are strongly influenced by tradition.
-\\
-
-Basic distinction between {\em shareable} and {\em unshareable} as well
-as {\em static} and {\em variable} data.
-\\
-
-Shareable content:
-\begin{itemize}
-	\item essential components that remain the same across multiple hosts
-	\item often possible to mount read-only
-	\item may overlap with {\em local} data
-\end{itemize}
-
-\subsection{File System Hierarchy}
-Layout of filesystem {\em should} be standardized.  Some UNIX versions adhere
-to these standards, some are strongly influenced by tradition.
-\\
-
-Basic distinction between {\em shareable} and {\em unshareable} as well
-as {\em static} and {\em variable} data.
-\\
-
-Shareable content:
-\begin{itemize}
-	\item essential components that remain the same across multiple hosts
-	\item often possible to mount read-only
-	\item may overlap with {\em local} data
-\end{itemize}
-
-Unshareable content:
-\begin{itemize}
-	\item data that needs to be individual to each host
-	\item data that changes often
-	\item may overlap with {\em local} data
-\end{itemize}
-
-\subsection{File System Hierarchy}
-Examples:
-\\
-
-\begin{center}
-\begin{tabular}{| l | l | l |}
-	\hline
-	& shareable content & unshareable content \\
-	\hline
-	static   & & \\
-	         & & \\
-	\hline
-	variable & & \\
-	         & & \\
-	\hline
-\end{tabular}
-\end{center}
-
-
-\subsection{File System Hierarchy}
-Examples:
-\\
-
-\begin{center}
-\begin{tabular}{| l | l | l |}
-	\hline
-	& shareable content & unshareable content \\
-	\hline
-	static   & \verb+/usr+ & \\
-	         & \verb+/opt+ & \\
-	\hline
-	variable & & \\
-	         & & \\
-	\hline
-\end{tabular}
-\end{center}
-
-\subsection{File System Hierarchy}
-Examples:
-\\
-
-\begin{center}
-\begin{tabular}{| l | l | l |}
-	\hline
-	& shareable content & unshareable content \\
-	\hline
-	static   & \verb+/usr+ & \verb+/etc+ \\
-	         & \verb+/opt+ & \verb+/boot+ \\
-	\hline
-	variable & & \\
-	         & & \\
-	\hline
-\end{tabular}
-\end{center}
-
-\subsection{File System Hierarchy}
-Examples:
-\\
-
-\begin{center}
-\begin{tabular}{| l | l | l |}
-	\hline
-	& shareable content & unshareable content \\
-	\hline
-	static   & \verb+/usr+ & \verb+/etc+ \\
-	         & \verb+/opt+ & \verb+/boot+ \\
-	\hline
-	variable & \verb+/var/mail+ & \\
-	         & \verb+/var/spool/news+ & \\
-	\hline
-\end{tabular}
-\end{center}
-
-\subsection{File System Hierarchy}
-Examples:
-\\
-
-\begin{center}
-\begin{tabular}{| l | l | l |}
-	\hline
-	& shareable content & unshareable content \\
-	\hline
-	static   & \verb+/usr+ & \verb+/etc+ \\
-	         & \verb+/opt+ & \verb+/boot+ \\
-	\hline
-	variable & \verb+/var/mail+ & \verb+/var/run+ \\
-	         & \verb+/var/spool/news+ & \verb+/var/lock+ \\
-	\hline
-\end{tabular}
-\end{center}
-
 \newpage
 \vspace*{\fill}
 \begin{center}
@@ -385,100 +301,6 @@ Examples:
 \begin{center}
 	\includegraphics[scale=0.7,angle=-90]{pics/netbsd-install.eps}
 \end{center}
-
-\subsection{OS Installation}
-Before installing, consider
-\begin{itemize}
-	\item purpose of machine
-\end{itemize}
-
-\subsection{OS Installation}
-Before installing, consider
-\begin{itemize}
-	\item purpose of machine
-		\begin{itemize}
-			\item choice of hardware
-		\end{itemize}
-\end{itemize}
-
-\subsection{OS Installation}
-Before installing, consider
-\begin{itemize}
-	\item purpose of machine
-		\begin{itemize}
-			\item choice of hardware
-			\item disk partitioning scheme
-		\end{itemize}
-\end{itemize}
-
-\subsection{OS Installation}
-Before installing, consider
-\begin{itemize}
-	\item purpose of machine
-		\begin{itemize}
-			\item choice of hardware
-			\item disk partitioning scheme
-			\item choice of filesystem
-		\end{itemize}
-\end{itemize}
-
-\subsection{OS Installation}
-Before installing, consider
-\begin{itemize}
-	\item purpose of machine
-		\begin{itemize}
-			\item choice of hardware
-			\item disk partitioning scheme
-			\item choice of filesystem
-			\item which software to install
-		\end{itemize}
-\end{itemize}
-
-\subsection{OS Installation}
-Before installing, consider
-\begin{itemize}
-	\item purpose of machine
-		\begin{itemize}
-			\item choice of hardware
-			\item disk partitioning scheme
-			\item choice of filesystem
-			\item which software to install
-		\end{itemize}
-	\item installation media
-\end{itemize}
-
-\subsection{OS Installation}
-Before installing, consider
-\begin{itemize}
-	\item purpose of machine
-		\begin{itemize}
-			\item choice of hardware
-			\item disk partitioning scheme
-			\item choice of filesystem
-			\item which software to install
-		\end{itemize}
-	\item installation media
-		\begin{itemize}
-			\item network installation
-		\end{itemize}
-\end{itemize}
-
-\subsection{OS Installation}
-Before installing, consider
-\begin{itemize}
-	\item purpose of machine
-		\begin{itemize}
-			\item choice of hardware
-			\item disk partitioning scheme
-			\item choice of filesystem
-			\item which software to install
-		\end{itemize}
-	\item installation media
-		\begin{itemize}
-			\item network installation
-			\item installation CD-ROMs
-		\end{itemize}
-\end{itemize}
 
 \subsection{OS Installation}
 Before installing, consider
@@ -531,143 +353,15 @@ Before installing, consider
 High-level overview:
 \begin{itemize}
 	\item hardware identification, provisioning, and registration
-\end{itemize}
-
-\subsection{OS Installation}
-High-level overview:
-\begin{itemize}
-	\item hardware identification, provisioning, and registration
-	\item base OS installation
-\end{itemize}
-
-\subsection{OS Installation}
-High-level overview:
-\begin{itemize}
-	\item hardware identification, provisioning, and registration
 	\item base OS installation
 	\item installation of add-on applications
-\end{itemize}
-
-\subsection{OS Installation}
-High-level overview:
-\begin{itemize}
-	\item hardware identification, provisioning, and registration
-	\item base OS installation
-	\item installation of add-on applications
-	\item initial minimum system configuration
-\end{itemize}
-
-\subsection{OS Installation}
-High-level overview:
-\begin{itemize}
-	\item hardware identification, provisioning, and registration
-	\item base OS installation
-	\item installation of add-on applications
-	\item initial minimum system configuration
-	\item system registration
-\end{itemize}
-
-\subsection{OS Installation}
-High-level overview:
-\begin{itemize}
-	\item hardware identification, provisioning, and registration
-	\item base OS installation
-	\item installation of add-on applications
-	\item initial minimum system configuration
+	\item initial minimum system configuration [*]
 	\item system registration
 	\item system restart
 \end{itemize}
-
-
-\subsection{Base OS Installation}
-General steps:
-\begin{itemize}
-	\item boot from boot media (CD, network, ...)
-\end{itemize}
-
-\subsection{Base OS Installation}
-General steps:
-\begin{itemize}
-	\item boot from boot media (CD, network, ...)
-	\item identify root device
-\end{itemize}
-
-\subsection{Base OS Installation}
-General steps:
-\begin{itemize}
-	\item boot from boot media (CD, network, ...)
-	\item identify root device
-	\item optionally identify additional devices
-\end{itemize}
-
-\subsection{Base OS Installation}
-General steps:
-\begin{itemize}
-	\item boot from boot media (CD, network, ...)
-	\item identify root device
-	\item optionally identify additional devices
-	\item create partition table / disklabel
-\end{itemize}
-
-\subsection{Base OS Installation}
-General steps:
-\begin{itemize}
-	\item boot from boot media (CD, network, ...)
-	\item identify root device
-	\item optionally identify additional devices
-	\item create partition table / disklabel
-	\item create filesystem(s)
-\end{itemize}
-
-\subsection{Base OS Installation}
-General steps:
-\begin{itemize}
-	\item boot from boot media (CD, network, ...)
-	\item identify root device
-	\item optionally identify additional devices
-	\item create partition table / disklabel
-	\item create filesystem(s)
-	\item install MBR, bootblocks etc.
-\end{itemize}
-
-\subsection{Base OS Installation}
-General steps:
-\begin{itemize}
-	\item boot from boot media (CD, network, ...)
-	\item identify root device
-	\item optionally identify additional devices
-	\item create partition table / disklabel
-	\item create filesystem(s)
-	\item install MBR, bootblocks etc.
-	\item install / copy / extract OS
-\end{itemize}
-
-\subsection{Base OS Installation}
-General steps:
-\begin{itemize}
-	\item boot from boot media (CD, network, ...)
-	\item identify root device
-	\item optionally identify additional devices
-	\item create partition table / disklabel
-	\item create filesystem(s)
-	\item install MBR, bootblocks etc.
-	\item install / copy / extract OS
-	\item optionally add application software
-\end{itemize}
-
-\subsection{Base OS Installation}
-General steps:
-\begin{itemize}
-	\item boot from boot media (CD, network, ...)
-	\item identify root device
-	\item optionally identify additional devices
-	\item create partition table / disklabel
-	\item create filesystem(s)
-	\item install MBR, bootblocks etc.
-	\item install / copy / extract OS
-	\item optionally add application software
-	\item perform basic system configuration
-\end{itemize}
+\vspace*{\fill}
+[*] system {\em deployment} $\cap$ system {\em configuration} \\
+$ => $ configuration management
 
 \subsection{Base OS Installation}
 General steps:
@@ -765,13 +459,6 @@ Boot options:      timeout 5, flags 0, speed 9600, ioaddr 0, console pc
 \vspace*{\fill}
 
 \subsection{What's what?}
-\subsection{What's what?}
-\begin{center}
-	\includegraphics[scale=0.9,angle=-90]{pics/kernel.eps}
-\end{center}
-
-
-\subsection{What's what?}
 \begin{center}
 	\includegraphics[scale=0.7]{pics/os.eps}
 \end{center}
@@ -783,6 +470,12 @@ Boot options:      timeout 5, flags 0, speed 9600, ioaddr 0, console pc
 	\includegraphics[scale=0.8,angle=-90]{pics/apache.eps} \\
 	\includegraphics[scale=0.3,angle=-90]{pics/mysql.eps}
 	\includegraphics[scale=0.3,angle=-90]{pics/php-logo.eps}
+\end{center}
+
+\subsection{What's what?}
+\begin{center}
+	\includegraphics[scale=0.9]{pics/leftshark.eps} \\
+Superfish
 \end{center}
 
 \subsection{Types of Software}
@@ -891,7 +584,7 @@ Consider:
 \end{center}
 \vspace*{\fill}
 
-\subsection{Compare pkgsrc and pkgin}
+\subsection{Package management basics}
 \vfill
 {\tt https://www.cs.stevens.edu/\~{}jschauma/615/pkg-exercise.html}
 \vfill
@@ -899,10 +592,11 @@ Consider:
 \subsection{Binary vs. Source installation}
 Benefits of binary installation:
 \begin{itemize}
-	\item packaged by "vendor" $\rightarrow$ support
+	\item packaged by "vendor" $\rightarrow$ support, ease of installation
 	\item faster
 	\item uses less space
 	\item may be only possibility
+	\item able to integrate into your full OS image build
 	\item may be possible to deploy across large numbers of hosts
 \end{itemize}
 
@@ -914,7 +608,7 @@ Disadvantages of binary installation:
 	\item your OS may not be officially supported
 	\item installation scripts may be busted
 	\item limited control over where files are installed
-	\item binaries not optimized for your systems
+	\item missing or not-needed features enabled
 	\item you have to trust the package provider
 \end{itemize}
 
@@ -924,7 +618,7 @@ Benefits of source installation:
 	\item full control over
 		\begin{itemize}
 			\item installation location
-			\item compiler flags and optimization
+			\item compiler flags, optimization, enabled features
 			\item dependencies
 		\end{itemize}
 	\item make things work even if your OS is not officially supported
@@ -944,22 +638,99 @@ Disadvantages of source installation:
 \end{itemize}
 
 
-\subsection{Also: you don't get to choose.}
+\subsection{Why use a Package Management System?}
+\begin{itemize}
+	\item easy and scalable installation of software
+	\item automatic resolution of software dependencies
+	\item package and file inventory \\
+\begin{verbatim}
+linux-lab$ dpkg -l
+[...]
+linux-lab$ dpkg -L tcpdump
+[...]
+linux-lab$ dpkg-query -S /usr/lib/libsqlite.so.0.8.6 /usr/bin/sqlite3
+[...]
+
+\end{verbatim}
+\end{itemize}
+
+\subsection{Why use a Package Management System?}
+\begin{itemize}
+	\item easy and scalable installation of software
+	\item automatic resolution of software dependencies
+	\item package and file inventory
+	\item integration into OS
+	\item package and file integrity checks \\
+\begin{verbatim}
+$ rpm -Va
+[...]
+missing     /etc/pki/CA/private (Permission denied)
+S.5.....  c /etc/pki/tls/certs/ca-bundle.crt
+.......T  c /etc/libuser.conf
+..?.....  c /etc/tcsd.conf
+missing   c /etc/logrotate.d/syslog
+[...]
+\end{verbatim}
+\end{itemize}
+
+\subsection{Managing Security Patches and Software Upgrades}
+How many known vulnerabilities (unique CVEs and affected packages) exist
+in each of the Fedora and Ubuntu instances?
+
+\begin{verbatim}
+ubuntu$ sudo apt-get install debsecan
+ubuntu$ debsecan
+\end{verbatim}
+
+\begin{verbatim}
+fedora$ yum list-security
+fedora$ yum info-security
+\end{verbatim}
+
+\subsection{Special Purpose Package Managers}
+\vfill
+\begin{center}
+	\includegraphics[scale=0.8,angle=-90]{pics/pip.eps}
+\end{center}
+\vfill
+
+\subsection{Special Purpose Package Managers}
+\vfill
+\begin{center}
+	\includegraphics[scale=0.8,angle=-90]{pics/bower.eps}
+\end{center}
+\vfill
+
+
+\subsection{Special Purpose Package Managers}
+Most programming languages or environments come with their own "package
+management" solutions, often integrating/mixing with a "build system".
+\begin{itemize}
+	\item Common Lisp $=>$ quicklisp
+	\item NodeJS $=>$ npm
+	\item Perl $=>$ CPAN
+	\item Python $=>$ easy-install, pip, pants, setuptools, ...
+	\item Ruby $=>$ gems, rvm, rake
+	\item Scala $=>$ sbt
+	\item YourFavoriteThing $=>$ ItsOwnGizmo
+\end{itemize}
+
+\subsection{You don't get to choose.}
 \Huge
 \vfill
 \begin{center}
-	You regularly have to do both: build from source {\em and} package it.
+	You routinely have to build from source {\em and} (re-)package your software.
 \end{center}
 \vfill
 \Normalsize
 
 \subsection{HW \#2}
 
-Package Management on different OS
+Create an RPM for 'awscli'.
 \\
 
 Detailed homework assignment posted at
-\verb+https://www.cs.stevens.edu/~jschauma/615/s14-hw2.html+
+\verb+https://www.cs.stevens.edu/~jschauma/615/s15-hw2.html+
 
 
 \subsection{Links}

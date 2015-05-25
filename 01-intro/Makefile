@@ -19,8 +19,6 @@ FIGURES=	pics/Cable_Tie.eps	\
 		pics/armchair.eps	\
 		pics/big-red-button.eps	\
 		pics/blades.eps	\
-		pics/cable-mess.eps	\
-		pics/cable_mess.eps	\
 		pics/cables2.eps	\
 		pics/wrong-usability.eps	\
 		pics/better-usability.eps	\
@@ -29,7 +27,6 @@ FIGURES=	pics/Cable_Tie.eps	\
 		pics/usability-security.eps	\
 		pics/patch-bandaid.eps	\
 		pics/camera.eps	\
-		pics/cappuccino.eps	\
 		pics/circularsaw.eps	\
 		pics/cloud.eps	\
 		pics/coffee.eps	\
@@ -47,7 +44,7 @@ FIGURES=	pics/Cable_Tie.eps	\
 		pics/google_whiteboard_large.eps	\
 		pics/hand-scanner.eps	\
 		pics/hats.eps	\
-		pics/home-brain.eps	\
+		pics/homer-brain.eps	\
 		pics/internet.eps	\
 		pics/juniper.eps	\
 		pics/kernel-programs.eps	\
@@ -65,7 +62,6 @@ FIGURES=	pics/Cable_Tie.eps	\
 		pics/raid.eps	\
 		pics/remote_hands.eps	\
 		pics/screwdrivers.eps	\
-		pics/spam.eps	\
 		pics/switches.eps	\
 		pics/unix-parts.eps	\
 		pics/unix_history.eps	\
@@ -74,7 +70,8 @@ FIGURES=	pics/Cable_Tie.eps	\
 		pics/vierspaenner.eps \
 		pics/lego-block.eps \
 		pics/millennium-falcon.eps \
-		pics/t.eps
+		pics/as-seen-by.eps \
+		pics/as-seen-by-not-helping.eps
 
 
 .SUFFIXES: .tex .dvi .ps .pdf .txt .fig .eps .png .jpg .gif

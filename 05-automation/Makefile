@@ -9,33 +9,29 @@ DVIPS	=	dvips -o
 PS2PDF	=	ps2pdf
 PDFTOTEXT=	pdftotext
 
-PICTURES= pics/DinnerForOne.eps \
-	pics/waldo.eps \
-	pics/waldo2.eps \
-	pics/big-tool.eps \
-	pics/donquixote.eps \
-	pics/flexibility.eps \
-	pics/growmoney.eps \
-	pics/hammer.eps \
-	pics/hammer-screw.eps \
-	pics/ingenuity-can-should.eps \
-	pics/ingenuity.eps \
-	pics/mchammer.eps \
-	pics/mchammer2.eps \
-	pics/money-tree.eps \
-	pics/nails.eps \
-	pics/patience.eps \
-	pics/power-tools.eps \
-	pics/tools.eps \
-	pics/try_try_again.eps \
-	pics/height_of_laziness.eps
-
-#FIGURES=	decision-tree.eps two-rules.eps combined.eps area.eps
+PICTURES= \
+		pics/switch.eps \
+		pics/switch.eps \
+		pics/complexity.eps \
+		pics/sign.eps \
+		pics/elevator_buttons-reverse.eps \
+		pics/manual.eps \
+		pics/manual2.eps \
+		pics/kinder-surprise.eps \
+		pics/donkey.eps \
+		pics/feeping.eps \
+		pics/bert-ernie.eps \
+		pics/broken-windows.eps \
+		pics/waste.eps \
+		pics/donkey.eps \
+		pics/feeping.eps \
+		pics/bert-ernie.eps \
+		pics/broken-windows.eps \
+		pics/waste.eps 
 
 .SUFFIXES: .tex .dvi .ps .pdf .txt .fig .eps .png .jpg .gif
 
 all:	$(PICTURES) $(PICTURES) $(TARGET).dvi
-#	${BIBTEX} $(TARGET)
 
 show: $(PICTURES) ${TARGET}.dvi
 	xdvipresent xga ${TARGET}.dvi -paper 25.8x19.3 -geometry 1024x764-0-0

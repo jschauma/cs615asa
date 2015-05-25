@@ -47,6 +47,7 @@ Lecture 02 (Filesystems, Disks, Storage)
 Lecture 03 (Software Installation Concepts)
 \begin{itemize}
 	\item boot sequence, firmware
+	\item OEM added software (Superfish)
 	\item software package management and updates
 	\item patch management
 \end{itemize}
@@ -54,35 +55,37 @@ Lecture 03 (Software Installation Concepts)
 \subsection{Where/how does 'security' come into play?}
 Lecture 04 (Packaging, Multiuser Fundamentals, Ethics)
 \begin{itemize}
-	\item bulnerability tracking
+	\item Xen vulnerabilities
+	\item vulnerability tracking
 	\item privileges and trust models
 	\item privacy, obligation to protect users, social responsibility
 \end{itemize}
 \vspace{.5in}
 Lecture 05 (Automation)
 \begin{itemize}
-	\item \#GotoFail (CVE-2012-1266)
+	\item FREAK attack (CVE-2015-0204)
 	\item using the wrong tool for the job => writing insecure code
 	\item understanding language / framework pitfalls
 \end{itemize}
 
 \subsection{Where/how does 'security' come into play?}
-Lecture 06 (Backup and Disaster Recovery)
-\begin{itemize}
-	\item disasters include security breaches
-	\item safety of backups (encrypted backups?)
-\end{itemize}
-\vspace{.5in}
-Lecture 07 (Networking)
+Lecture 06 (Networking)
 \begin{itemize}
 	\item network censorship
 	\item protocols and visibility of data on different layers
 	\item tcpdump can read all packets
 	\item location of attacker on network implies capabilities
 \end{itemize}
+\vspace{.5in}
+Lecture 07 (Backup and Disaster Recovery)
+\begin{itemize}
+	\item DDoS attack on GitHub / GreatFire.org
+	\item disasters include security breaches
+	\item safety of backups (encrypted backups?)
+\end{itemize}
 
 \subsection{Where/how does 'security' come into play?}
-Lecture 08 (IP Basics / DNS)
+Lecture 08 (DNS)
 \begin{itemize}
 	\item traffic censorship
 	\item DNS registrars as attack points
@@ -100,57 +103,23 @@ Lecture 09 (SMTP, HTTP)
 \end{itemize}
 
 \subsection{Where/how does 'security' come into play?}
-Lecture 10 (Monitoring, SNMP)
+Lecture 10 (SSH)
+\begin{itemize}
+	\item Confidentiality, Integrity, Authenticity
+	\item threat modeling
+	\item asymmetric encryption
+\end{itemize}
+\vspace{.5in}
+Lecture 11 (Monitoring, SNMP)
 \begin{itemize}
 	\item availability of logs to establish context
 	\item sensitive data in logs
 	\item outsourcing monitoring services
 \end{itemize}
-\vspace{.5in}
-Lecture 11 (SSL, SSH)
-\begin{itemize}
-	\item Heartbleed
-	\item certificates and X.509
-	\item MitM attacks
-	\item public and private keys
-\end{itemize}
 
-\subsection{When is a computer system secure?}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.6]{pics/computerwithworld.eps}
-\end{center}
-\vspace*{\fill}
+\subsection{How do we secure a system?}
 
-\subsection{When is a computer system secure?}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.6]{pics/unplug.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{When is a computer system secure?}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.3]{pics/unplugged.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{When is a computer system secure?}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.7]{pics/computer_in_safe.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{When is a computer system secure?}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.3]{pics/broken-safe.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{When is a computer system secure?}
+\subsection{How do we secure a system?}
 \Huge
 \vspace*{\fill}
 \begin{center}
@@ -160,17 +129,6 @@ Lecture 11 (SSL, SSH)
 	(Context required.)
 \end{center}
 \vspace*{\fill}
-
-
-%\subsection{When is a computer system secure?}
-%\vspace*{\fill}
-%\begin{center}
-%	\includegraphics[scale=0.6]{pics/security-usability.eps}
-%\end{center}
-%\vspace*{\fill}
-%
-
-\subsection{What is security?}
 
 \subsection{What is security?}
 \Huge
@@ -245,6 +203,19 @@ risk
 	\item monetary loss due to physical items of actual value
 \end{itemize}
 
+\subsection{Suffering harm or loss of {\em what}?}
+
+\begin{itemize}
+	\item access to data
+	\item integrity of data
+	\item availability of services
+	\item reputation
+	\item monetary loss due to any of the above
+	\item monetary loss due to physical items of actual value
+	\item ...
+\end{itemize}
+
+
 \subsection{How to determine {\em risk}}
 ``Risk Assessment''
 \begin{itemize}
@@ -313,171 +284,52 @@ A {\em risk} is the {\em likelihood} of a {\em threat} successfully exploiting
 a {\em vulnerability} and the {\em estimated cost} (or potential damage) both
 in the short and long term you may incur as a result.
 
-\subsection{It's not just 1s and 0s}
-\vspace{.5in}
-\Huge
-\begin{center}
-System security is not restricted to {\em software} security.
-\end{center}
-\Normalsize
+\subsection{Threat Model}
+For each system/component/product/service/...
 
-\subsection{Physical Security}
-\vspace{.5in}
-
-\Huge
-\begin{center}
-If you have even only temporary physical access to a machine, you own it.
-\end{center}
-\Normalsize
-
-\subsection{Physical Security}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.0]{pics/cold-boot-attack.eps}
-\end{center}
-\vspace*{\fill}
-
-
-\subsection{It's not just 1s and 0s}
-\vspace{.5in}
-\Huge
-\begin{center}
-The thing that makes security difficult is not the software or hardware
-components.  It's the human component.
-\end{center}
-\Normalsize
-
-\subsection{It's not just 1s and 0s}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.3]{pics/security.eps}
-\end{center}
-\vspace*{\fill}
-
-
-
-\subsection{Secure by default}
-\vspace{.5in}
-\Huge
-\begin{center}
-Users care about usability, not about security.
-\end{center}
-\Normalsize
-
-\subsection{Secure by default}
-\vspace{.5in}
-\Huge
-\begin{center}
-Users will not change their default settings.
-\end{center}
-\Normalsize
-
-\subsection{Secure by default}
-\vspace{.5in}
-\Huge
-\begin{center}
-Users will not change their default settings. \\
-\Normalsize
-(Unless a less secure option is available.)
-\end{center}
-
-\subsection{Secure by default}
-\vspace{.5in}
-\Huge
-\begin{center}
-Giving freedom is easier than taking it away. \\
-\end{center}
-\Normalsize
-
-\subsection{Secure by default}
-Examples:
 \begin{itemize}
-	\item permissions on \verb+/home/*+ directories
-	\item default umask in \verb+/etc/profile+
-	\item default temporary location
-	\item HTTP services offered via SSL
-	\item disallow password authentication in favor of or only in
-		combination with multi-factor authentication
-	\item ...
+	\item identify {\em what} you're protecting
+	\item identify {\em whom} you're protecting it {\em from}
+		\begin{itemize}
+			\item identify {\em goals} of the attacker
+			\item identify {\em motivation} of the attacker
+			\item identify {\em capabilities} of the attacker
+		\end{itemize}
+	\item identify threats you cannot defend against (within this
+		system or in general)
 \end{itemize}
 
-
-\subsection{Types of Software Vulnerabilities}
-
-\subsection{(Some) Types of Software Vulnerabilities}
-Backdoors and Trojans
+\subsection{Defense in Depth}
+\vspace*{\fill}
+\Huge
 \begin{center}
-	\includegraphics[scale=0.9]{pics/backdoor-trojans.eps}
+	Security is like an onion: \\
+	the more layers you peel away, the more it stinks.
 \end{center}
+\Normalsize
+\vspace*{\fill}
 
-\subsection{(Some) Types of Software Vulnerabilities}
-(SQL) Injection
-\begin{center}
-	\includegraphics[scale=1.0]{pics/bobby-tables.eps} \\
-	\verb+https://xkcd.com/327/+
-\end{center}
-
-\subsection{(Some) Types of Software Vulnerabilities}
-Information Disclosure
-\begin{center}
-	\includegraphics[scale=1.0]{pics/leaking-bucket.eps}
-\end{center}
-
-\subsection{(Some) Types of Software Vulnerabilities}
-Privilege Escalation
-\begin{center}
-	\includegraphics[scale=0.6]{pics/escalation.eps}
-\end{center}
-
-\subsection{(Some) Types of Attacks}
-Brute Force
-\begin{center}
-	\includegraphics[scale=1.3]{pics/dice-combinations.eps} \\
-\end{center}
-
-\subsection{(Some) Types of Attacks}
-(Distributed) Denial of Service
-\begin{center}
-	\includegraphics[scale=1.0]{pics/ddos.eps}
-\end{center}
-
-\subsection{(Some) Types of Attacks}
-Man in the Middle
-
-\begin{center}
-	\includegraphics[scale=0.8]{pics/livesofothers.eps} \\
-	{\tt http://www.imdb.com/title/tt0405094/}
-\end{center}
-
-\subsection{(Some) Types of Attacks}
-Drive-by / Watering Hole \\
-
-\begin{center}
-	\includegraphics[scale=0.5]{pics/wateringhole.eps}
-\end{center}
-
-
-
-\subsection{(Some) Types of Attacks}
-Social Engineering (including phishing)
-\begin{center}
-	\includegraphics[scale=1.0]{pics/social_engineering.eps}
-	\includegraphics[scale=0.8]{pics/fishing.eps}
-\end{center}
-
-\subsection{Of course...}
+\subsection{The biggest threat comes from the inside}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=1.0]{pics/adapters.eps}  \\
-	\verb+http://fffff.at/free-universal-construction-kit/+ \\
+	\includegraphics[scale=1.0]{pics/kane.eps}
 \end{center}
 \vspace*{\fill}
 
-\subsection{Encryption}
-{\em Encryption} can help mitigate {\em some} of the risks {\em sometimes}.
+\subsection{The biggest threat comes from the inside}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.0]{pics/Killchain.eps} \\
+	\verb+http://is.gd/6sREQh+
+\end{center}
+\vspace*{\fill}
 
-\subsection{Encryption}
-{\em Encryption} can help mitigate {\em some} of the risks {\em sometimes}.
+\subsection{Cryptography}
+\Normalsize
+{\em Cryptography} can help mitigate {\em some} of the risks {\em sometimes}.
+
+\subsection{Cryptography}
+{\em Cryptography} can help mitigate {\em some} of the risks {\em sometimes}.
 \\
 
 It may provide security in the areas of:
@@ -488,8 +340,8 @@ It may provide security in the areas of:
 		\end{itemize}
 \end{itemize}
 
-\subsection{Encryption}
-{\em Encryption} can help mitigate {\em some} of the risks {\em sometimes}.
+\subsection{Cryptography}
+{\em Cryptography} can help mitigate {\em some} of the risks {\em sometimes}.
 \\
 
 It may provide security in the areas of:
@@ -504,8 +356,8 @@ It may provide security in the areas of:
 		\end{itemize}
 \end{itemize}
 
-\subsection{Encryption}
-{\em Encryption} can help mitigate {\em some} of the risks {\em sometimes}.
+\subsection{Cryptography}
+{\em Cryptography} can help mitigate {\em some} of the risks {\em sometimes}.
 \\
 
 It may provide security in the areas of:
@@ -525,42 +377,40 @@ who I think it is / they claim they are?}
 		\end{itemize}
 \end{itemize}
 
-\subsection{Encryption}
-\vspace{1in}
-\begin{center}
-\Huge
-Note:\\
-\vspace{1in}
-{\em Authentication} \verb+!=+ {\em Authorization}
-\Normalsize
-\end{center}
+\subsection{Cryptography}
+Note:
+\begin{itemize}
+	\item {\em Authentication} \verb+!=+ {\em Authorization}
+	\item cryptography does not handle authorization
+	\item you generally need all three: confidentiality, integrity, authenticity
+	\item cryptography cannot prevent against incorrect use \\
+		(usability is hard, let's go shopping)
+\end{itemize}
+\addvspace{.5in}
+Know your threat model!
 
 \subsection{Basic Security Concepts: Confidentiality}
 \begin{itemize}
-	\item Alice and Bob agree on a way to transform data
+	\item Alice and Bob agree on a way to transform plain text into ciphertext
 	\item transformed data is sent over insecure channel
-	\item Alice and Bob are able to get data out of the transformation
+	\item Alice and Bob are able to reverse transformation
 \end{itemize}
-\addvspace{.5in}
-\begin{center}
-	\includegraphics[scale=0.75]{pics/symmetric-key-crypto.eps}
-\end{center}
 
 \subsection{Basic Security Concepts: Confidentiality}
+\begin{itemize}
+	\item Alice and Bob agree on a way to transform plain text into ciphertext
+	\item transformed data is sent over insecure channel
+	\item Alice and Bob are able to reverse transformation
+\end{itemize}
+\addvspace{.5in}
 Different approaches:
 \begin{itemize}
 	\item secret key cryptography (example: {\em DES})
 		\begin{itemize}
-			\item Alice and Bob share a secret
-			\item Alice can prove to Bob that she knows a secret
+			\item Alice and Bob share a secret key
 		\end{itemize}
 \end{itemize}
- \begin{center}
-        \includegraphics[scale=0.42]{pics/DES-f-function.eps} \\
- \end{center}
-
-\subsection{Basic Security Concepts: Confidentiality}
-Different approaches:
+\addvspace{.25in}
 \begin{itemize}
 	\item public key cryptography (example: {\em RSA})
 		\begin{itemize}
@@ -570,18 +420,12 @@ Different approaches:
 			\item public key can be shared with anybody (via insecure means)
 		\end{itemize}
 \end{itemize}
-\begin{center}
-	\includegraphics[scale=0.43]{pics/Public_key_encryption.eps}
- \end{center}
 
-\subsection{Basic Security Concepts: Confidentiality}
-Examples: SSH, TLS \\
-
-\vspace{.5in}
-Some possible threats:
+\subsection{Threats to Confidentiality}
 \begin{itemize}
-	\item lack of {\em authenticity} (i.e. \#GotoFail)
-	\item key disclosure (i.e. Heartbleed)
+	\item lack of {\em authenticity}
+	\item key exchange
+	\item key disclosure
 \end{itemize}
 
 \subsection{Basic Security Concepts: Integrity}
@@ -613,29 +457,6 @@ digest or checksum (often a one-way hash).  Popular choices:
 \end{itemize}
 
 \subsection{Basic Security Concepts: Integrity}
-In order to protect against forgery or data manipulation, provide some sort of
-digest or checksum (often a one-way hash).  Popular choices:
-
-\begin{itemize}
-	\item {\tt 5f4dcc3b5aa765d61d8327deb882cf99} (MD5)
-	\item {\tt 5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8} (SHA-1)
-	\item {\tt 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62 \
-                   a11ef721d1542d8} (SHA256)
-	\item {\tt b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5 \
-                   e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a \
-                   2ea6d103fd07c95385ffab0cacbc86} (SHA512)
-\end{itemize}
-
-
-Caveats:
-\begin{itemize}
-	\item ``rainbow tables'' / internet search engines allow for easy reverse
-		lookup of un-salted hashes.
-	\item integrity only ensured if authenticity of information itself is
-		guaranteed
-\end{itemize}
-
-\subsection{Basic Security Concepts: Integrity}
 Examples: host based IDS, package manager signatures
 
 \vspace{.5in}
@@ -645,6 +466,8 @@ Some possible threats:
 	\item lack of {\em authenticity} (Where did I get the checksum?)
 	\item lack of {\em integrity} (Was the checksum tampered to match the (tampered) data?)
 	\item ``verification'' with compromised tools
+	\item ``rainbow tables'' / internet search engines allow for easy reverse
+		lookup of un-salted hashes.
 \end{itemize}
 
 \subsection{Basic Security Concepts: Authenticity}
@@ -706,22 +529,6 @@ Three general ways of proving that you are who you say you are:
 		\end{itemize}
 \end{itemize}
 
-
-
-\subsection{Basic Security Concepts: Proving Authenticity}
-\begin{itemize}
-	\item in private key cryptography, authenticity is (often) assumed/implied
-	\item in public key cryptography, often accomplished via a separate
-		signature
-	\item ways to establish assurance of authenticity for parties that have
-		never met:
-		\begin{itemize}
-			\item public key infrastructures (PKI) and certificate
-				authorities (CA)
-			\item ``web of trust''
-		\end{itemize}
-\end{itemize}
-
 \subsection{Basic Security Concepts: Authenticity}
 Some possible threats:
 \begin{itemize}
@@ -729,7 +536,66 @@ Some possible threats:
 	\item lack of {\em integrity}
 	\item reliance on fragile infrastructure
 	\item usability
+	\item conflation with {\em authorization}
 \end{itemize}
+
+\subsection{Principle of Least Privilege}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.9]{pics/turbolift_access_denied.eps}
+\end{center}
+\vspace*{\fill}
+
+\subsection{It's not just 1s and 0s}
+\vspace{.5in}
+\Huge
+\begin{center}
+System security is not restricted to {\em software} security.
+\end{center}
+\Normalsize
+
+\subsection{It's not just 1s and 0s}
+\vspace{.5in}
+\Huge
+\begin{center}
+The thing that makes security difficult is not the software or hardware
+components.  It's the human component.
+\end{center}
+\Normalsize
+
+\subsection{It's not just 1s and 0s}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.3]{pics/security.eps}
+\end{center}
+\vspace*{\fill}
+
+
+
+\subsection{Secure by default}
+\vspace{.5in}
+\Huge
+\begin{center}
+Users care about usability, not about security.
+\end{center}
+\Normalsize
+
+\subsection{Secure by default}
+\vspace{.5in}
+\Huge
+\begin{center}
+Users will not change their default settings.
+\end{center}
+\Normalsize
+
+\subsection{Secure by default}
+\vspace{.5in}
+\Huge
+\begin{center}
+Users will not change their default settings. \\
+\Normalsize
+(Unless a less secure option is available.)
+\end{center}
 
 \newpage
 \vspace*{\fill}
@@ -825,16 +691,7 @@ can't think of how to break it.'' \\
 	\verb+http://cm.bell-labs.com/who/ken/trust.html+
 \end{center}
 \vspace*{\fill}
-
-\subsection{Further Reflections on Trust}
-Compromised EC2 image includes root access SSH key -
-{\tt http://pastebin.com/q1VH4rmF}
-\\
-
-Intentional? Malicious? Accidental?
-\\
-
-Does it matter?
+\Normalsize
 
 \subsection{Outsourcing Services}
 \begin{itemize}
@@ -859,14 +716,19 @@ Hanlon's Razor
 \Normalsize
 \vspace*{\fill}
 
-\subsection{Toning down the Paranoia}
+\subsection{Sysadmin $\cap$ Infosec}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.0]{pics/sysadmin_infosec.eps} \\
+	\verb+https://www.netmeister.org/blog/infosec-basics.html+
+\end{center}
+\vspace*{\fill}
+
+\subsection{Sysadmin $\cap$ Infosec}
 \vspace*{\fill}
 \Huge
 \begin{center}
-Nothing is always absolutely so. \\
-\vspace{.25in}
-\Normalsize
-Sturgeon's Law (first adage):
+	Nothing is always absolutely so.
 \end{center}
 \Normalsize
 \vspace*{\fill}
@@ -881,27 +743,12 @@ Sturgeon's Law (first adage):
 \Normalsize
 \vspace*{\fill}
 
-\subsection{Reading}
-Helpful Tools:
-\begin{itemize}
-	\item \verb+mtree(1)+
-	\item \verb+gpg(1)+
-	\item \verb+openssl(1)+
-\end{itemize}
-\addvspace{.5in}
-Helpful Information:
-\begin{itemize}
-	\item CSRC NIST \verb+http://csrc.nist.gov/+
-	\item SecurityFocus \verb+http://www.securityfocus.com/+
-	\item CryptoGram \verb+https://www.schneier.com/crypto-gram.html+
-\end{itemize}
-\addvspace{.5in}
-Misc:
-\\
-
-\verb+http://archive.cert.uni-stuttgart.de/isn/2006/01/msg00055.html+
-\\
-
-\verb+http://is.gd/p9Q0pU+
+\subsection{HW6}
+\vspace*{\fill}
+\begin{center}
+	\verb+https://www.cs.stevens.edu/~jschauma/615/s15-ctf.html+
+\end{center}
+\Normalsize
+\vspace*{\fill}
 
 \end{document}

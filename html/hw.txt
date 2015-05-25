@@ -1,0 +1,47 @@
+
+CS615A - Homework Assignments General Information
+
+
+Unless stated otherwise in the individual assignment, the following applies:
+
+- All homework assignments are to be done on lab.cs.stevens.edu.
+
+  It is your responsibility to ensure that you have an account on these
+  systems.
+
+- For programming assignments:
+
+  - Code that does not compile or contains syntax errors will receive 0 points.
+    Before you submit anything, make sure to test it.  Even if you just make
+    a one-character change in the last minute, test it before submitting the
+    source code.
+
+  - Code needs to be readable.  The clearer the code is structured, the
+    easier it is to read, which means the easier it is to understand and
+    the easier it is to grade and give partial credit if something is not
+    working as intended.
+
+  - Code should contain _useful_ commentary _where necessary_.
+
+  - All programs should exhibit standard unix behaviour with respect to return
+    values, handling of errors, handling of stdin, stdout and stderr,
+    command-line flags etc.
+
+  - All programs should follow the principle of least surprise for the user.
+
+- When submitting files, please always name them *exactly* as requested.  That
+  is, if the assignment specifies that the file to submit should be named
+  "$USER-hw1.txt", then any submission named "cs615a-FullName.hw1" or similar
+  will be penalized with 5 points.
+
+- When submitting multiple files, always submit a tar(1) archive of a
+  directory named after your username.  Do not submit .zip, .rar, or other
+  archives.
+
+- When submitting documents, always submit plain text ascii files created
+  on linux-lab.cs.stevens.edu.  Do not submit .doc, .xls, .pdf, .mov, or
+  other unsuitable formats.
+
+- The due date is always given in the date format YYYY-MM-DD HH:MM:SS,
+  according to our systems local time (EST or EDT), using a 24 hour clock.
+  The due date is always fixed, and no late submissions are accepted.

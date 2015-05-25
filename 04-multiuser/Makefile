@@ -1,7 +1,6 @@
 # $Id: Makefile,v 1.4 2004/03/30 00:13:55 jschauma Exp $
 
 TARGET	=	slides
-BIBLIO	=	slides.bib
 
 LATEX	=	latex
 BIBTEX	=	bibtex
@@ -12,33 +11,31 @@ PDFTOTEXT=	pdftotext
 PICTURES=	\
 		pics/angel-devil.eps \
 		pics/angel.eps \
-		pics/documents.eps \
 		pics/headless.eps \
 		pics/teamwork.eps \
 		pics/thumbsup-borat.eps \
-		pics/user.eps \
 		pics/exponential_growth.eps \
 		pics/animal_farm.eps \
-		pics/responsibility.eps \
-		pics/baseball.eps \
-		pics/bow-before-me-white.eps \
 		pics/user-sets0.eps \
 		pics/user-sets1.eps \
 		pics/user-sets2.eps \
 		pics/uncle-ben.eps \
 		pics/kids_fighting.eps \
-		pics/hyperbolic_tangent.eps \
 		pics/superman.eps \
 		pics/groups-machines.eps \
 		pics/ls-l.eps \
-		pics/snowden.eps
-
-#FIGURES=	decision-tree.eps two-rules.eps combined.eps area.eps
+		pics/snowden.eps \
+		pics/tools.eps \
+		pics/hammer.eps \
+		pics/nails.eps \
+		pics/hammer-screw.eps \
+		pics/big-tool.eps \
+		pics/power-tools.eps \
+		pics/xsa.eps
 
 .SUFFIXES: .tex .dvi .ps .pdf .txt .fig .eps .jpg .png .gif
 
 all:	$(PICTURES) $(TARGET).dvi
-#	${BIBTEX} $(TARGET)
 
 show: ${TARGET}.dvi
 	xdvipresent xga ${TARGET}.dvi -paper 25.8x19.3 -geometry 1024x764-0-0

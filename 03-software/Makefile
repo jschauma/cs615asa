@@ -50,11 +50,17 @@ PICTURES=	pics/bandaid.eps \
 		pics/os.eps \
 		pics/beastie.eps \
 		pics/build-automation.eps \
-		pics/nytimes.eps \
-		pics/wsj.eps \
-		pics/twitter.eps \
-		pics/twitter2.eps \
-		pics/types-of-software.eps
+		pics/types-of-software.eps \
+		pics/ufs-details.eps \
+		pics/post.eps \
+		pics/bios.eps \
+		pics/grub.eps \
+		pics/stage1.eps \
+		pics/pip.eps \
+		pics/bower.eps \
+		pics/ide-drive.eps \
+		pics/leftshark.eps \
+		pics/ufs-details.eps
 
 
 

@@ -1,0 +1,585 @@
+% CS615 Aspects of System Administration
+% Author: Jan Schaumann <jschauma@netmeister.org>
+% $Id: slides.tex,v 1.6 2006/03/07 13:55:55 jschauma Exp $
+
+\documentclass[xga]{xdvislides}
+\usepackage[landscape]{geometry}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{colordvi}
+
+\begin{document}
+\setfontphv
+
+%%% Headers and footers
+\lhead{\slidetitle}                               % default:\lhead{\slidetitle}
+\chead{CS615 - Aspects of System Administration}% default:\chead{\relax}
+\rhead{Slide \thepage}                       % default:\rhead{\sectiontitle}
+\lfoot{\Gray{Backup and Disaster Recovery}}% default:\lfoot{\slideauthor}
+\cfoot{\relax}                               % default:\cfoot{\relax}
+\rfoot{\Gray{\today}}
+
+\newcommand{\smallish}{\fontsize{15}{20}\selectfont}
+
+\vspace*{\fill}
+\begin{center}
+	\Hugesize
+		CS615 - Aspects of System Administration\\ [1em]
+		Backup and Disaster Recovery \\ [1em]
+	\hspace*{5mm}\blueline\\ [1em]
+	\Normalsize
+		Department of Computer Science\\
+		Stevens Institute of Technology\\
+		Jan Schaumann\\
+		\verb+jschauma@stevens-tech.edu+
+		\verb+http://www.cs.stevens-tech.edu/~jschauma/615A/+
+\end{center}
+\vspace*{\fill}
+
+\subsection{Current Events}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.7]{pics/github-unicorn.eps} \\
+\end{center}
+\vspace*{\fill}
+
+\subsection{Current Events}
+\vspace*{\fill}
+\begin{center}
+    \includegraphics[scale=0.8]{pics/donkey_too_small_for_load.eps}
+\end{center}
+\vspace*{\fill}
+
+\subsection{Current Events}
+\begin{itemize}
+	\item \verb+https://status.github.com/messages+
+	\item \verb+http://insight-labs.org/?p=1682+
+	\item \verb+http://jsbeautifier.org/+
+	\item \verb+http://map.ipviking.com/+
+	\item \verb+http://www.secureworks.com/cyber-threat-intelligence/threats/ddos/+
+\end{itemize}
+
+\subsection{Know a Unix Command}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.9]{pics/tar.eps} \\
+	\verb+https://www.xkcd.com/1168/+ \\
+	\verb+https://www.cs.stevens.edu/~jschauma/615/tar.html+
+\end{center}
+\vspace*{\fill}
+
+\subsection{Backups}
+\begin{itemize}
+	\item backup vs. restore
+\end{itemize}
+
+\subsection{Backups}
+\begin{itemize}
+	\item backup vs. restore
+	\item backup devices and media
+\end{itemize}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=2.0]{pics/daily-tapes.eps}
+\end{center}
+\vspace*{\fill}
+
+\subsection{Backups}
+\begin{itemize}
+	\item backup vs. restore
+	\item backup devices and media
+\end{itemize}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.8]{pics/dlt-library.eps}
+\end{center}
+\vspace*{\fill}
+
+\subsection{Backups}
+\begin{itemize}
+	\item backup vs. restore
+	\item backup devices and media
+\end{itemize}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.0]{pics/libraries.eps}
+\end{center}
+\vspace*{\fill}
+
+\subsection{Backups}
+\begin{itemize}
+	\item backup vs. restore
+	\item backup devices and media
+	\item filesystem considerations
+\end{itemize}
+
+\subsection{Backups}
+\begin{itemize}
+	\item backup vs. restore
+	\item backup devices and media
+	\item filesystem considerations
+	\item backup strategies
+\end{itemize}
+
+\subsection{Backups}
+\begin{itemize}
+	\item backup vs. restore
+	\item backup devices and media
+	\item filesystem considerations
+	\item backup strategies
+	\item planning for disasters
+\end{itemize}
+
+\subsection{Backups and Restore Basics}
+When do we need backups?
+
+\subsection{Backups and Restore Basics}
+When do we need backups?
+\begin{itemize}
+	\item disaster recovery: off-site storage of sensitive data
+	\item long-term storage requirements
+	\item recover from data loss
+\end{itemize}
+
+\subsection{Backups and Restore Basics}
+When do we need backups?
+\begin{itemize}
+	\item disaster recovery: off-site storage of sensitive data
+	\item long-term storage requirements
+	\item recover from data loss due to
+\end{itemize}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.0]{pics/headcrash-closeup.eps}
+\end{center}
+\vspace*{\fill}
+
+\subsection{Backups and Restore Basics}
+When do we need backups?
+\begin{itemize}
+	\item disaster recovery: off-site storage of sensitive data
+	\item long-term storage requirements
+	\item recover from data loss due to
+\end{itemize}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.2]{pics/dumb-user.eps}
+\end{center}
+\vspace*{\fill}
+
+\subsection{Backups and Restore Basics}
+When do we need backups?
+\begin{itemize}
+	\item disaster recovery: off-site storage of sensitive data
+	\item long-term storage requirements
+	\item recover from data loss due to
+\end{itemize}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.4]{pics/20th-and-C.eps}
+\end{center}
+\vspace*{\fill}
+
+\subsection{Backups and Restore Basics}
+When do we need backups?
+\begin{itemize}
+	\item disaster recovery: off-site storage of sensitive data
+	\item long-term storage requirements
+	\item recover from data loss due to
+\end{itemize}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.6]{pics/hacker.eps}
+\end{center}
+\vspace*{\fill}
+
+\subsection{Backups and Restore Basics}
+When do we need backups?
+\begin{itemize}
+	\item disaster recovery: off-site storage of sensitive data
+	\item long-term storage requirements
+	\item recover from data loss due to
+\end{itemize}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.6]{pics/bugs.eps}
+\end{center}
+\vspace*{\fill}
+
+\subsection{Backups and Restore Basics}
+When do we need backups?
+\begin{itemize}
+	\item disaster recovery: off-site storage of sensitive data
+	\item long-term storage requirements
+	\item recover from data loss due to
+		\begin{itemize}
+			\item equipment failure
+			\item bozotic users
+			\item natural disaster
+			\item security breach
+			\item software bugs
+		\end{itemize}
+\end{itemize}
+
+\subsection{Backups and Restore Basics}
+When do we need backups?
+\begin{itemize}
+	\item disaster recovery: off-site storage of sensitive data
+	\item long-term storage requirements
+	\item recover from data loss due to
+		\begin{itemize}
+			\item equipment failure
+			\item bozotic users
+			\item natural disaster
+			\item security breach
+			\item software bugs
+		\end{itemize}
+\end{itemize}
+\addvspace{.5in}
+Think of your backups as {\em insurance}:  you invest and pay for it, hoping
+you will never need it.
+
+
+\subsection{Key Reasons for Restores}
+Three key reasons for restores: {\em Accidental File Deletion}, {\em Disk
+Failure} and {\em Archival}.
+\\
+
+1. Accidental File Deletion
+\begin{itemize}
+	\item ability to restore a file within a certain time frame
+	\item restore time, including
+		\begin{itemize}
+			\item actual time spent restoring
+			\item waiting until resources permit the restore
+			\item staff availability
+		\end{itemize}
+	\item self-service restore
+\end{itemize}
+
+\subsection{Key Reasons for Restores}
+2. Disk Failure
+\begin{itemize}
+	\item loss of entire file system
+	\item leads to downtime
+	\item RAID may help
+	\item takes long time to restore
+\end{itemize}
+\addvspace{.5in}
+3. Archival
+\begin{itemize}
+	\item {\em full} set of level 0 backups
+	\item separate set from regular backups
+	\item usually stored off-site
+	\item store for long time
+\end{itemize}
+
+\subsection{Filesystem backup}
+{\tt dump(8)} / {\tt restore(8)}
+\begin{itemize}
+	\item in use since \~{}1975
+	\item full filesystem level backups
+	\item direct interaction with tape devices
+	\item integration with {\tt /etc/fstab}
+	\item efficient incremental backups
+\end{itemize}
+
+\subsection{Filesystem backup}
+\begin{itemize}
+	\item start an Ubuntu EC2 instance (e.g. \verb+ami-6de0dd04+)
+	\item create a full filesystem backup using \verb+dump(8)+
+	\item add the 'apache2' package
+	\item create an incremental backup
+	\item delete the 'apache2' package
+	\item restore all files from the incremental backup using the \verb+restore(8)+ command
+	\item verify that the 'apache2' package is fully installed
+\end{itemize}
+
+\subsection{Filesystem backup}
+\begin{verbatim}
+ssh ec2-instance "sudo dump -u -0 -f - /" | bzip2 -c -9 >tmp/ubuntu.0.bz2
+  DUMP: Date of this level 0 dump: Thu Mar 26 19:25:06 2015
+  DUMP: Dumping /dev/xvda1 (/) to standard output
+  DUMP: Label: cloudimg-rootfs
+  DUMP: Writing 10 Kilobyte records
+  DUMP: mapping (Pass I) [regular files]
+  DUMP: mapping (Pass II) [directories]
+  DUMP: estimated 823759 blocks.
+  DUMP: Volume 1 started with block 1 at: Thu Mar 26 19:25:07 2015
+  DUMP: dumping (Pass III) [directories]
+  DUMP: dumping (Pass IV) [regular files]
+  DUMP: Volume 1 completed at: Thu Mar 26 19:28:21 2015
+  DUMP: Volume 1 820690 blocks (801.46MB)
+  DUMP: Volume 1 took 0:03:14
+  DUMP: Volume 1 transfer rate: 4230 kB/s
+  DUMP: 820690 blocks (801.46MB)
+  DUMP: finished in 194 seconds, throughput 4230 kBytes/sec
+  DUMP: Date of this level 0 dump: Thu Mar 26 19:25:06 2015
+  DUMP: Date this dump completed:  Thu Mar 26 19:28:21 2015
+  DUMP: Average transfer rate: 4230 kB/s
+  DUMP: DUMP IS DONE
+\end{verbatim}
+
+
+\subsection{Filesystem backup}
+\begin{verbatim}
+$ cat /var/lib/dumpdates 
+/dev/xvda1 0 Thu Mar 26 19:25:06 2015 +0000
+$ sudo apt-get install apache2
+[...]
+$ ssh ec2-instance "sudo dump -u -1 -f - /" | bzip2 -c -9 >tmp/ubuntu.1.bz2
+  DUMP: Date of this level 2 dump: Thu Mar 26 19:56:45 2015
+  DUMP: Date of last level 1 dump: Thu Mar 26 19:48:58 2015
+  DUMP: Dumping /dev/xvda1 (/) to standard output
+  DUMP: Label: cloudimg-rootfs
+  DUMP: Writing 10 Kilobyte records
+  DUMP: mapping (Pass I) [regular files]
+  DUMP: mapping (Pass II) [directories]
+  DUMP: estimated 39644 blocks.
+  DUMP: Volume 1 started with block 1 at: Thu Mar 26 19:56:50 2015
+  DUMP: dumping (Pass III) [directories]
+  DUMP: dumping (Pass IV) [regular files]
+  DUMP: Volume 1 completed at: Thu Mar 26 19:56:56 2015
+  DUMP: Volume 1 39820 blocks (38.89MB)
+  DUMP: Volume 1 took 0:00:06
+  DUMP: Volume 1 transfer rate: 6636 kB/s
+  DUMP: 39820 blocks (38.89MB)
+  DUMP: finished in 5 seconds, throughput 7964 kBytes/sec
+  DUMP: Date of this level 2 dump: Thu Mar 26 19:56:45 2015
+  DUMP: Date this dump completed:  Thu Mar 26 19:56:56 2015
+  DUMP: Average transfer rate: 6636 kB/s
+  DUMP: DUMP IS DONE
+\end{verbatim}
+
+\subsection{Filesystem backup}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.7]{pics/flux-capacitor.eps}
+\end{center}
+\vspace*{\fill}
+
+\subsection{Filesystem backup}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=2.5]{pics/flux-capacitor2.eps}
+\end{center}
+\vspace*{\fill}
+
+\subsection{Filesystem backup}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.6]{pics/Time_Machine.eps}
+\end{center}
+\vspace*{\fill}
+
+
+\subsection{Filesystem backup}
+Example: Mac OS X ``Time Machine'':
+\begin{itemize}
+	\item automatically creates a full backup (equivalent of a "level 0 dump")
+		to separate device or NAS, recording (specifically) last-modified date
+		of all directories
+	\item every hour, creates a full copy via {\em hardlinks} (hence no
+		additional disk space consumed) for files that have not changed,
+		new copy of files that have changed
+		\item changed files are determined by inspecting last-modified date of
+			directories (cheaper than doing comparison of all files'
+			last-modified date or data)
+	\item saves hourly backups for 24 hours, daily backups for
+		the past month, and weekly backups for everything older than a month.
+\end{itemize}
+
+\subsection{Filesystem backup}
+Example: WAFL (Write Anywhere File Layout)
+\begin{itemize}
+	\item used by NetApp's ``Data ONTAP'' OS
+	\item a snapshot is a read-only copy of a file system (cheap and near
+		instantaneous, due to CoW)
+	\item uses regular snapshots (``consistency points'', every 10 seconds)
+		to allow for speedy recovery from crashes
+\end{itemize}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.75]{pics/waffles.eps}
+\end{center}
+\vspace*{\fill}
+
+
+\subsection{Filesystem backup}
+Example: WAFL (Write Anywhere File Layout)
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.0]{pics/wafl0.eps}
+\end{center}
+\vspace*{\fill}
+
+
+\subsection{Filesystem backup}
+Example: WAFL (Write Anywhere File Layout)
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.0]{pics/wafl1.eps}
+\end{center}
+\vspace*{\fill}
+
+
+\subsection{Filesystem backup}
+Example: WAFL (Write Anywhere File Layout)
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.0]{pics/wafl2.eps}
+\end{center}
+\vspace*{\fill}
+
+
+\subsection{Filesystem backup}
+Example: WAFL (Write Anywhere File Layout)
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.0]{pics/wafl.eps}
+\end{center}
+\vspace*{\fill}
+
+
+\subsection{Filesystem backup}
+Example: ZFS snapshots
+\begin{itemize}
+	\item ZFS uses a copy-on-write transactional object model (new data does
+		not overwrite existing data, instead modifications are written to a
+		new location with existing data being referenced), similar to WAFL
+	\item a snapshot is a read-only copy of a file system (cheap and near
+		instantaneous, due to CoW)
+	\item initially consumes no additional disk space; the writable filesystem
+		is made available as a ``clone''
+	\item conceptually provides a branched view of the filesystem; normally
+		only the ``active'' filesystem is writable
+\end{itemize}
+
+\subsection{ZFS Snapshots}
+\smallish
+\begin{verbatim}
+$ pwd
+/home/jschauma
+$ ls -l .z*
+ls: cannot access .z*: No such file or directory
+$
+\end{verbatim}
+\Normalsize
+
+\subsection{ZFS Snapshots}
+\smallish
+\begin{verbatim}
+$ pwd
+/home/jschauma
+$ ls -l .z*
+ls: cannot access .z*: No such file or directory
+$ ls -lid .zfs
+1 dr-xr-xr-x 3 root root 3 Jan 10  2013 .zfs
+$
+\end{verbatim}
+\Normalsize
+
+\subsection{ZFS Snapshots}
+\smallish
+\begin{verbatim}
+$ pwd
+/home/jschauma
+$ ls -l .z*
+ls: cannot access .z*: No such file or directory
+$ ls -lid .zfs
+1 dr-xr-xr-x 3 root root 3 Jan 10  2013 .zfs
+$ ls -lai .zfs/snapshot
+total 13
+2 dr-xr-xr-x  4 root     root       4 Feb 28 21:00 .
+1 dr-xr-xr-x  3 root     root       3 Jan 10  2013 ..
+4 drwx--x--x 37 jschauma professor 88 Feb 24 22:32 amanda-_export_home_jschauma-0
+4 drwx--x--x 37 jschauma professor 88 Feb 26 11:47 amanda-_export_home_jschauma-1
+$
+\end{verbatim}
+\Normalsize
+
+\subsection{ZFS Snapshots}
+\smallish
+\begin{verbatim}
+$ pwd
+/home/jschauma
+$ ls -l .z*
+ls: cannot access .z*: No such file or directory
+$ ls -lid .zfs
+1 dr-xr-xr-x 3 root root 3 Jan 10  2013 .zfs
+$ ls -lai .zfs/snapshot
+total 13
+2 dr-xr-xr-x  4 root     root       4 Feb 28 21:00 .
+1 dr-xr-xr-x  3 root     root       3 Jan 10  2013 ..
+4 drwx--x--x 37 jschauma professor 88 Feb 24 22:32 amanda-_export_home_jschauma-0
+4 drwx--x--x 37 jschauma professor 88 Feb 26 11:47 amanda-_export_home_jschauma-1
+$ cd .zfs/snapshot
+$ echo foo > amanda-_export_home_jschauma-0/oink
+-ksh: amanda-_export_home_jschauma-0/oink: cannot create [Read-only file system]
+$ ls -laid . /
+2 dr-xr-xr-x  4 root root    4 Feb 28 21:00 .
+2 drwxr-xr-x 26 root root 4096 Jan 27 11:44 /
+\end{verbatim}
+\Normalsize
+
+\subsection{ZFS Snapshots}
+\smallish
+\begin{verbatim}
+$ pwd
+/home/jschauma/.zfs/snapshot
+$ ls -lai amanda-_export_home_jschauma-0 >/tmp/a
+$ ls -lai amanda-_export_home_jschauma-1 >/tmp/b
+$ diff -bu /tmp/[ab]
+--- /tmp/a	2014-03-01 22:55:49.000000000 -0500
++++ /tmp/b	2014-03-01 22:55:59.000000000 -0500
+@@ -35,7 +35,7 @@
+ 57723 drwx------  3 jschauma professor         6 Dec 31 15:08 .subversion
+ 49431 -rw-------  1 jschauma professor         6 Dec 22 12:25 .sws.pid
+    20 drwx------  2 jschauma professor         3 Jan 26 10:30 .vim
+-61768 -rw-------  1 jschauma professor     14538 Feb 24 22:32 .viminfo
++61775 -rw-------  1 jschauma professor     14557 Feb 26 09:23 .viminfo
+   173 -rw-------  1 jschauma professor      4355 Sep 17  2012 .vimrc
+ 45744 -rw-r--r--  1 jschauma professor         0 Jul 28  2013 .xsession-errors
+    21 drwxr-xr-x  3 jschauma professor         6 Apr  4  2010 CS615A
+$
+\end{verbatim}
+\Normalsize
+
+\subsection{HW \#4}
+Data backup to the cloud \\
+\verb+https://www.cs.stevens.edu/~jschauma/615/s15-hw5.html+
+\\
+\verb+https://www.cs.stevens.edu/~jschauma/615/ec2-backup.txt+
+
+\subsection{Reading}
+\begin{itemize}
+	\item \verb+https://en.wikipedia.org/wiki/Unix_philosophy+
+	\item \verb+http://is.gd/jDDGpW+
+	\item \verb+http://is.gd/bXG9of+
+\end{itemize}
+
+\subsection{Reading}
+Hurricane Sandy
+\begin{itemize}
+	\item \verb+http://is.gd/aaxzvI+
+	\item \verb+http://is.gd/Y75pEA+
+	\item \verb+http://is.gd/32Az7y+
+	\item \verb+http://is.gd/FhAuFZ+
+\end{itemize}
+
+\subsection{Reading}
+Manual Pages:
+\begin{itemize}
+	\item \verb+dump(8)+ and \verb+restore(8)+
+\end{itemize}
+Filesystem snapshots:
+\begin{itemize}
+	\item \verb+https://en.wikipedia.org/wiki/Snapshot_(computer_storage)+
+	\item \verb+https://en.wikipedia.org/wiki/Time_Machine_(Apple_software)+
+	\item \verb+http://comet.lehman.cuny.edu/jung/cmp426697/WAFL.pdf+
+	\item \verb+http://www.cs.tau.ac.il/~ohadrode/slides/WAFL.pdf+
+\end{itemize}
+\vspace{.5in}
+Book: \verb+http://www.oreilly.com/catalog/unixbr/+
+
+\end{document}

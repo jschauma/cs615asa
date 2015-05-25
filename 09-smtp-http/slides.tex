@@ -34,20 +34,46 @@
 \end{center}
 \vspace*{\fill}
 
-\subsection{Send me mail!}
+\subsection{Send me an email!}
 
 \vspace*{\fill}
 Start an EC2 instance and send a mail from it to {\tt
-jschauma@stevens.edu} with a subject line of "CS615 - SMTP Exercise".
+jschauma@stevens.edu} with a subject line of "CS615 - SMTP Exercise". \\
 \vspace*{\fill}
 
-\subsection{Email... still popular}
-\begin{itemize}
-	\item {\bf \~{}144 billion} – Average number of email messages per day.
-	\item {\bf \~{}2.4 billion} – The number of email accounts worldwide.
-	\item {\bf \~{}69\%} – The percentage of emails that were spam.
-	\item {\bf \~{}0.22\%} – The percentage of emails that comprised some form of phishing attack.
-\end{itemize}
+%you may need mailx, postfix
+%
+%mail jschauma@stevens.edu
+%
+%more dead.letter
+
+\subsection{{\tt /var/log/maillog}}
+Sending...
+\begin{verbatim}
+Apr 11 21:23:47 localhost postfix/pickup[7534]: A57862E4B: uid=1000 from=<fedora>
+Apr 11 21:23:47 localhost postfix/cleanup[7561]: A57862E4B: message-id=<20150411
+  212347.A57862E4B@ip-10-65-168-165.localdomain>
+Apr 11 21:23:47 localhost postfix/qmgr[7535]: A57862E4B: from=<fedora@ip-10-65-1
+  68-165.localdomain>, size=496, nrcpt=1 (queue active)
+Apr 11 21:23:48 localhost postfix/smtp[7563]: A57862E4B: to=<jschauma@stevens.ed
+  u>, relay=stevens.edu.s9a1.psmtp.com[74.125.148.10]:25, delay=1.2, delays=0.05/0
+  .01/0.18/1, dsn=2.0.0, status=sent (250 Thanks)
+Apr 11 21:23:48 localhost postfix/qmgr[7535]: A57862E4B: removed
+\end{verbatim}
+
+\subsection{{\tt /var/log/maillog}}
+Receiving...
+\begin{verbatim}
+<mail.info>Apr 11 17:27:04 panix postfix/smtpd[19962]: connect from
+  na3sys009aog122.obsmtp.com[74.125.149.147]
+<mail.info>Apr 11 17:27:05 panix postfix/smtpd[19962]: NOQUEUE: reject:
+  RCPT from na3sys009aog122.obsmtp.com[74.125.149.147]: 450 4.1.8
+  <fedora@ip-10-65-168-165.localdomain>: Sender address rejected: Domain not
+  found; from=<fedora@ip-10-65-168-165.localdomain>
+  to=<jschauma@netmeister.org> proto=SMTP helo=<na3sys009aog122.obsmtp.com>
+<mail.info>Apr 11 17:27:05 panix postfix/smtpd[19962]: disconnect from
+  na3sys009aog122.obsmtp.com[74.125.149.147]
+\end{verbatim}
 
 \subsection{The Mail System}
 Divided into
@@ -61,25 +87,98 @@ Divided into
 
 
 \subsection{Sending email}
+Let's try this again...
 \begin{verbatim}
-$ mail -s "Act I, Scene I" jschauma@stevens.edu
+$ ssh linux-lab.cs.stevens.edu
+$ mail jschauma@stevens.edu
+Cc:  
+Subject: Act I, Scene I
 When shall we three meet again?
 In thunder, lightning, or in rain?
 ^D
 $
 \end{verbatim}
 
+\subsection{Sending email}
+Let's try this again...
+\begin{verbatim}
+$ ssh linux-lab.cs.stevens.edu
+$ mail jschauma@stevens.edu
+Cc:  
+Subject: Act I, Scene I
+When shall we three meet again?
+In thunder, lightning, or in rain?
+^D
+$
+
+http://shakespeare.mit.edu/macbeth/full.html
+\end{verbatim}
+
+
+\subsection{Receiving mail}
+\begin{verbatim}
+<mail.info>Apr 11 20:22:39 panix postfix/smtpd[313]: connect from
+  na3sys009aog131.obsmtp.com[74.125.149.247]
+<mail.info>Apr 11 20:22:39 panix postfix/smtpd[313]: B4A68356959:
+  client=na3sys009aog131.obsmtp.com[74.125.149.247]
+<mail.info>Apr 11 20:22:40 panix postfix/cleanup[19415]: B4A68356959:
+  message-id=<20150412002232.2D5681460C7@avalon.srcit.stevens-tech.edu>
+<mail.info>Apr 11 20:22:40 panix spamd[15581]: spamd: processing message
+  <20150412002232.2D5681460C7@avalon.srcit.stevens-tech.edu> for spamd:1004
+<mail.info>Apr 11 20:22:47 panix postfix/qmgr[639]: B4A68356959: removed
+\end{verbatim}
+
+
 \subsection{Anatomy of an email message}
 \begin{verbatim}
-Date: Sat, 29 Mar 2014 21:09:05 -0400 (EDT)
-From: Jan Schaumann <jschauma@stevens.edu>
-To: jschauma@stevens.edu
-Subject: Act I, Scene I
+Date: Sat, 11 Apr 2015 20:22:32 -0400 (EDT)                                                         
+From: Jan Schaumann <jschauma@stevens.edu>                                                          
+To: jschauma@stevens.edu                                                                            
+Subject: Act I, Scene I                                                                             
+X-Mailer: mail (GNU Mailutils 2.2)                                                                  
 
 When shall we three meet again?
 In thunder, lightning, or in rain?
 
 \end{verbatim}
+
+\subsection{Anatomy of an email message}
+\small
+\begin{verbatim}
+From jschauma@stevens.edu  Sat Apr 11 20:22:47 2015
+X-Original-To: jschauma@netmeister.org
+Received: by panix.netmeister.org (Postfix, from userid 1004)
+        id B79633584A3; Sat, 11 Apr 2015 20:22:47 -0400 (EDT)
+Received: from na3sys009aog131.obsmtp.com (na3sys009aog131.obsmtp.com [74.125.149.247])
+        by panix.netmeister.org (Postfix) with SMTP id B4A68356959
+        for <jschauma@netmeister.org>; Sat, 11 Apr 2015 20:22:39 -0400 (EDT)
+Received: from warp2.stevens.edu ([155.246.14.17]) by na3sys009aob131.postini.com ([74.125.148.12]) with SMTP
+        ID DSNKVSm6z+EZN/3UM4TuoBFFSQzvUj5B8fMf@postini.com; Sat, 11 Apr 2015 17:22:39 PDT
+Received: from psmtp.com (na3sys009amx170.postini.com [74.125.149.96])
+        by warp2.stevens.edu (Postfix) with SMTP id 20F3811FF6B
+        for <jschauma@stevens.edu>; Sat, 11 Apr 2015 20:22:38 -0400 (EDT)
+Received: from na3sys009aog122.obsmtp.com ([74.125.149.147]) by na3sys009amx170.postini.com ([74.125.148.10]) with SMTP;
+        Sun, 12 Apr 2015 00:22:38 GMT
+Received: from nexus.stevens.edu ([155.246.14.12]) by na3sys009aob122.postini.com ([74.125.148.12]) with SMTP
+        ID DSNKVSm6yA2Ec9zZoknNKL98Cwt6ut+WaT0l@postini.com; Sat, 11 Apr 2015 17:22:38 PDT
+Received: from avalon.srcit.stevens-tech.edu (nemo.srcit.stevens-tech.edu [155.246.89.102])
+        by nexus.stevens.edu (Postfix) with ESMTP id 3893D181DB8
+        for <jschauma@stevens.edu>; Sat, 11 Apr 2015 20:22:32 -0400 (EDT)
+Received: by avalon.srcit.stevens-tech.edu (Postfix, from userid 10235)
+        id 2D5681460C7; Sat, 11 Apr 2015 20:22:32 -0400 (EDT)
+To: <jschauma@stevens.edu>
+Subject: Act I, Scene I
+X-Mailer: mail (GNU Mailutils 2.2)
+Message-Id: <20150412002232.2D5681460C7@avalon.srcit.stevens-tech.edu>
+Date: Sat, 11 Apr 2015 20:22:32 -0400 (EDT)
+From: jschauma@stevens.edu (Jan Schaumann)
+Content-Length: 67
+Lines: 2
+
+When shall we three meet again?
+In thunder, lightning, or in rain?
+\end{verbatim}
+\Normalsize
 
 \subsection{Anatomy of an email message}
 An email consists of:
@@ -88,54 +187,6 @@ An email consists of:
 	\item optional headers (such as "From: ", "To: ", "Subject: ", ...)
 	\item the (optional) body of the message
 \end{itemize}
-
-
-\subsection{Anatomy of an email message}
-\small
-\begin{verbatim}
-From jschauma@stevens.edu  Sat Mar 29 21:09:16 2014
-Return-Path: jschauma@stevens.edu
-X-Original-To: jschauma@netmeister.org
-Delivered-To: jschauma@netmeister.org
-Received: by panix.netmeister.org (Postfix, from userid 1004)
-        id 0264A356ACC; Sat, 29 Mar 2014 21:09:15 -0400 (EDT)
-Received: from na3sys009aog138.obsmtp.com (na3sys009aog138.obsmtp.com [74.125.149.19])
-        by panix.netmeister.org (Postfix) with SMTP id 9F043356AAD
-        for <jschauma@netmeister.org>; Sat, 29 Mar 2014 21:09:07 -0400 (EDT)
-Received: from warp2.stevens.edu ([155.246.14.17]) by na3sys009aob138.postini.com ([74.125.148.12])
-        with SMTP ID DSNKUzdus0U7/18n+gkoIEligpNCwWMOBR3u@postini.com; Sat, 29 Mar 2014 18:09:07 PDT
-Received: from psmtp.com (na3sys009amx208.postini.com [74.125.149.48])
-        by warp2.stevens.edu (Postfix) with SMTP id 36A7411FF51
-        for <jschauma@stevens.edu>; Sat, 29 Mar 2014 21:09:06 -0400 (EDT)
-Received: from na3sys009aog135.obsmtp.com ([74.125.149.84]) by na3sys009amx208.postini.com
-        ([74.125.148.10]) with SMTP; Sat, 29 Mar 2014 18:09:06 PDT
-Received: from nexus.stevens.edu ([155.246.14.12]) by na3sys009aob135.postini.com ([74.125.148.12])
-        with SMTP ID DSNKUzdusST/Ao05xVu7tZO3NQJWYmKJRgAO@postini.com; Sat, 29 Mar 2014 18:09:06 PDT
-Received: from avalon.srcit.stevens-tech.edu (gits.srcit.stevens-tech.edu [155.246.89.104])
-        by nexus.stevens.edu (Postfix) with ESMTP id 8BA7A18237A
-        for <jschauma@stevens.edu>; Sat, 29 Mar 2014 21:09:05 -0400 (EDT)
-Received: by avalon.srcit.stevens-tech.edu (Postfix, from userid 10235)
-        id 80768D6736; Sat, 29 Mar 2014 21:09:05 -0400 (EDT)
-Subject: Act I, Scene I
-To: jschauma@stevens.edu
-X-Mailer: mail (GNU Mailutils 2.2)
-Message-Id: <20140330010905.80768D6736@avalon.srcit.stevens-tech.edu>
-Date: Sat, 29 Mar 2014 21:09:05 -0400 (EDT)
-From: Jan Schaumann <jschauma@stevens.edu>
-
-When shall we three meet again?
-In thunder, lightning, or in rain?
-\end{verbatim}
-\Normalsize
-
-\subsection{Sending email}
-\begin{verbatim}
-$ mail -s "Act I, Scene I" jschauma@stevens.edu
-When shall we three meet again?
-In thunder, lightning, or in rain?
-^D
-$
-\end{verbatim}
 
 \subsection{Who to hand the mail to?}
 \newcommand{\smallish}{\fontsize{16}{16}\selectfont}
@@ -173,12 +224,12 @@ $ telnet stevens.edu.s9a1.psmtp.com 25
 Trying 74.125.148.10...
 Connected to stevens.edu.s9a1.psmtp.com.
 Escape character is '^]'.
-220 Postini ESMTP 202 y6_37_0c5 ready.  CA Business and Professions Code
-Section 17538.45 forbids use of this system for unsolicited electronic
-mail advertisements.
-helo panix.netmeister.org
+220 Postini ESMTP 225 y713_pstn_c4 ready.  CA Business and Professions
+Code Section 17538.45 forbids use of this system for unsolicited
+electronic mail advertisements.
+helo avalon.srcit.stevens-tech.edu
 250 Postini says hello back
-mail from: <jschauma@netmeister.org>
+mail from: <jschauma@stevens.edu>
 250 Ok
 rcpt to: <jschauma@stevens.edu>
 250 Ok
@@ -193,26 +244,6 @@ In thunder, lightning, or in rain?
 quit
 221 Catch you later
 Connection closed by foreign host.
-\end{verbatim}
-\Normalsize
-
-\subsection{Sending the mail}
-\begin{verbatim}
-IP 166.84.7.99.51845 > 74.125.148.10.25: S 404385236:404385236(0)
-IP 74.125.148.10.25 > 166.84.7.99.51845: S 1228051958:1228051958(0) ack 404385237
-IP 166.84.7.99.51845 > 74.125.148.10.25: . ack 1
-IP 74.125.148.10.25 > 166.84.7.99.51845: P 1:170(169) ack 1
-IP 166.84.7.99.51845 > 74.125.148.10.25: P 1:28(27) ack 170
-IP 74.125.148.10.25 > 166.84.7.99.51845: . ack 28
-[...]
-IP 74.125.148.10.25 > 166.84.7.99.51845: . ack 508
-IP 74.125.148.10.25 > 166.84.7.99.51845: P 266:278(12) ack 508
-IP 166.84.7.99.51845 > 74.125.148.10.25: P 508:514(6) ack 278
-IP 166.84.7.99.51845 > 74.125.148.10.25: F 514:514(0) ack 278
-IP 74.125.148.10.25 > 166.84.7.99.51845: . ack 514
-IP 74.125.148.10.25 > 166.84.7.99.51845: P 278:299(21) ack 514
-IP 74.125.148.10.25 > 166.84.7.99.51845: F 299:299(0) ack 514
-IP 74.125.148.10.25 > 166.84.7.99.51845: . ack 515
 \end{verbatim}
 \Normalsize
 
@@ -231,6 +262,26 @@ SMTP codes consist of three digits in five classes:
 	\item {\bf 5xx} --  Mail server has encountered a fatal error. Your
 		request can't be processed.
 \end{itemize}
+
+\subsection{Sending the mail}
+\begin{verbatim}
+IP 166.84.7.99.51845 > 74.125.148.10.25: S 404385236:404385236(0)
+IP 74.125.148.10.25 > 166.84.7.99.51845: S 1228051958:1228051958(0) ack 404385237
+IP 166.84.7.99.51845 > 74.125.148.10.25: . ack 1
+IP 74.125.148.10.25 > 166.84.7.99.51845: P 1:170(137) ack 1
+IP 166.84.7.99.51845 > 74.125.148.10.25: P 1:28(27) ack 170
+IP 74.125.148.10.25 > 166.84.7.99.51845: . ack 28
+[...]
+IP 74.125.148.10.25 > 166.84.7.99.51845: . ack 508
+IP 74.125.148.10.25 > 166.84.7.99.51845: P 266:278(12) ack 508
+IP 166.84.7.99.51845 > 74.125.148.10.25: P 508:514(6) ack 278
+IP 166.84.7.99.51845 > 74.125.148.10.25: F 514:514(0) ack 278
+IP 74.125.148.10.25 > 166.84.7.99.51845: . ack 514
+IP 74.125.148.10.25 > 166.84.7.99.51845: P 278:299(21) ack 514
+IP 74.125.148.10.25 > 166.84.7.99.51845: F 299:299(0) ack 514
+IP 74.125.148.10.25 > 166.84.7.99.51845: . ack 515
+\end{verbatim}
+\Normalsize
 
 \subsection{Receiving the mail}
 \begin{verbatim}
@@ -282,8 +333,25 @@ IP 74.125.149.69.59141 > 166.84.7.99.25: . ack 185
 	\item high volume traffic demands fine-tuned systems
 	\item high volume traffic implications on logging
 \end{itemize}
+\vspace{.5in}
+See also:
+\begin{itemize}
+	\item {\tt http://is.gd/JQp1zM}
+	\item {\tt http://is.gd/cXyrwX}
+	\item {\tt http://is.gd/o6Y5f8}
+\end{itemize}
 
-{\tt http://is.gd/JQp1zM}
+\newpage
+\vspace*{\fill}
+\begin{center}
+    \Hugesize
+        Hooray! \\ [1em]
+    \hspace*{5mm}
+    \blueline\\
+    \hspace*{5mm}\\
+        5 Minute Break
+\end{center}
+\vspace*{\fill}
 
 \newpage
 \vspace*{\fill}
@@ -449,11 +517,12 @@ Escape character is '^]'.
 GET / HTTP/1.0
 
 HTTP/1.1 302 Found
-Date: Mon, 01 Apr 2013 20:58:35 GMT
-Server: Apache/2.2.16 (Debian)
-Location: http://www.stevens.edu/compsci
+Date: Sun, 12 Apr 2015 20:37:23 GMT
+Server: Apache/2.2.22 (Debian)
+Location: http://www.stevens.edu/ses/cs
 Vary: Accept-Encoding
-Content-Length: 312
+Content-Length: 297
+Connection: close
 Content-Type: text/html; charset=iso-8859-1
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
@@ -461,11 +530,9 @@ Content-Type: text/html; charset=iso-8859-1
 <title>302 Found</title>
 </head><body>
 <h1>Found</h1>
-<p>The document has moved <a
-href="http://www.stevens.edu/compsci">here</a>.</p>
+<p>The document has moved <a href="http://www.stevens.edu/ses/cs">here</a>.</p>
 <hr>
-<address>Apache/2.2.22 (Debian) Server at www.cs.stevens.edu Port
-80</address>
+<address>Apache/2.2.22 (Debian) Server at www.cs.stevens.edu Port 80</address>
 </body></html>
 \end{verbatim}
 \Normalsize
@@ -474,144 +541,29 @@ href="http://www.stevens.edu/compsci">here</a>.</p>
 \smallish
 \begin{verbatim}
 $ telnet www.stevens.edu 80
-Trying 54.243.80.146...
+Trying 54.243.199.233...
 Connected to mc-4471-1746286150.us-east-1.elb.amazonaws.com.
 Escape character is '^]'.
-GET /compsci HTTP/1.0
-
-HTTP/1.1 404 Not Found
-Accept-Ranges: bytes
-Age: 0
-Content-Type: text/html
-Date: Sun, 30 Mar 2014 01:46:50 GMT
-Server: nginx
-Via: 1.1 varnish
-X-Cache: MISS
-X-Varnish: 2034677690
-Content-Length: 971
-Connection: Close
-\end{verbatim}
-\Normalsize
-
-\subsection{HTTP: A client request}
-\smallish
-\begin{verbatim}
-$ telnet www.stevens.edu 80
-Trying 54.243.80.146...
-Connected to mc-4471-1746286150.us-east-1.elb.amazonaws.com.
-Escape character is '^]'.
-GET /compsci HTTP/1.1
+GET /ses/cs HTTP/1.1
 Host: www.stevens.edu
 
-HTTP/1.1 301 Moved Permanently
-Content-Type: text/html; charset=iso-8859-1
-Date: Sun, 30 Mar 2014 01:49:12 GMT
-Expires: Thu, 10 Apr 2014 01:29:25 GMT
-Location: http://web.stevens.edu/compsci
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Date: Sun, 12 Apr 2015 20:19:58 GMT
+Last-Modified: Sun, 12 Apr 2015 19:44:48 GMT
 Server: nginx
-Content-Length: 238
+X-Generator: Drupal 7 (http://drupal.org)
+X-Request-ID: v-4a62ae68-e151-11e4-bfda-1231381d545c
+X-Varnish: 1777167175
+transfer-encoding: chunked
 Connection: keep-alive
 
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<html><head>
-<title>301 Moved Permanently</title>
-</head><body>
-<h1>Moved Permanently</h1>
-<p>The document has moved <a
-href="http://web.stevens.edu/compsci">here</a>.</p>
-</body></html>
-\end{verbatim}
-\Normalsize
-
-\subsection{HTTP: A client request}
-\smallish
-\begin{verbatim}
-$ telnet web.stevens.edu 80
-Trying 155.246.21.84...
-Connected to rweb.cc.stevens.edu.
-Escape character is '^]'.
-GET /compsci HTTP/1.1
-Host: web.stevens.edu
-
-HTTP/1.1 301 Moved Permanently
-Date: Sun, 30 Mar 2014 01:50:36 GMT
-Server: Apache/2.2.16 (Debian)
-Location: http://web.stevens.edu/compsci/
-Content-Length: 320
-Content-Type: text/html; charset=iso-8859-1
-
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<html><head>
-<title>301 Moved Permanently</title>
-</head><body>
-<h1>Moved Permanently</h1>
-<p>The document has moved <a
-href="http://web.stevens.edu/compsci/">here</a>.</p>
-<hr>
-<address>Apache/2.2.16 (Debian) Server at web.stevens.edu Port
-80</address>
-\end{verbatim}
-\Normalsize
-
-\subsection{HTTP: A client request}
-\smallish
-\begin{verbatim}
-$ telnet web.stevens.edu 80
-Trying 155.246.21.84...
-Connected to rweb.cc.stevens.edu.
-Escape character is '^]'.
-GET /compsci/ HTTP/1.1
-Host: web.stevens.edu
-
-HTTP/1.1 302 Moved Temporarily
-Date: Sun, 30 Mar 2014 01:52:03 GMT
-Server: Apache/2.2.16 (Debian)
-X-Powered-By: PHP/5.3.3-7+squeeze8
-location: home.php
-Vary: Accept-Encoding
-Content-Length: 0
-Content-Type: text/html
-Via: 1.1 www.stevens.edu
-\end{verbatim}
-
-\subsection{HTTP: A client request}
-\smallish
-\begin{verbatim}
-$ telnet web.stevens.edu 80
-Trying 155.246.21.84...
-Connected to rweb.cc.stevens.edu.
-Escape character is '^]'.
-GET /compsci/home.php HTTP/1.1
-Host: web.stevens.edu
-
-HTTP/1.1 200 OK
-Date: Sun, 30 Mar 2014 01:53:23 GMT
-Server: Apache/2.2.16 (Debian)
-X-Powered-By: PHP/5.3.3-7+squeeze8
-Vary: Accept-Encoding
-Content-Type: text/html
-Via: 1.1 www.stevens.edu
-Transfer-Encoding: chunked
-
-1e3a
-<!DOCTYPE html
-	PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html>
+35e2
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
-
 \end{verbatim}
-
-\subsection{Slightly easier...}
-\begin{center}
-	\includegraphics[scale=0.7]{pics/firebug.eps}
-\end{center}
-\addvspace{.25in}
-\begin{center}
-	\includegraphics[scale=0.5]{pics/chrome-tools.eps}
-\end{center}
-
-
-
+\Normalsize
 
 \subsection{HTTP - more than just text}
 HTTP is a {\em Transfer Protocol} -- serving {\em data}, not any specific
@@ -681,7 +633,7 @@ Ways to mitigate HTTP overload:
 \begin{itemize}
 	\item DNS round-robin to many web servers
 	\item load balancing
-	\item web cache / accelerators
+	\item web cache / accelerators (reverse proxies)
 	\item content delivery networks
 \end{itemize}
 
@@ -737,6 +689,7 @@ the environment.
 SMTP:
 \begin{itemize}
 	\item \verb+http://bit.ly/5zIadJ+
+	\item \verb+http://is.gd/o6Y5f8+
 	\item RFC 821, 2821
 	\item \verb+aliases(5)+, \verb+mail(1)+
 	\item \verb+sendmail(8)+, \verb+postfix(8)+

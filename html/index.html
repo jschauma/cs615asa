@@ -70,7 +70,7 @@
 				<table width="100%" border="0">
 					<tr><td valign="top">
 						<H3>Time, Date &amp; Place:</H3>
-						<b>Spring 2014</b>: Mondays, 18:15-20:45, Morton 205<br>
+						<b>Spring 2015</b>: Mondays, 18:15-20:45, McLean 106<br>
 
 					        <H3><a name="instructor"></a>Instructor:</H3><A href=
 						"http://www.cs.stevens.edu/~jschauma/">Jan Schaumann</A>
@@ -84,14 +84,13 @@
 							<LI><A href="#grading">Grading</A></LI>
 							<LI><A href="#hw">Homeworks</A></LI>
 							<!-- <LI><A href="#project">Project Description</A></LI> -->
-							<LI><A href="/~jschauma/cgi-bin/615.cgi">Pre-Course Evaluation</A></LI>
 							<LI><A href="/~jschauma/cgi-bin/midterm.cgi">Midterm Evaluation</A></LI>
 							<LI><a href="https://www.srcit.stevens.edu/wiki/index.php/Linux_Lab">Information about the Stevens Linux Lab</a></li>
 							<LI><A href=
 							"https://lists.stevens.edu/cgi-bin/mailman/listinfo/cs615asa">
 							CS615ASA Mailinglist</A></LI>
 							<LI><a href="http://twitter.com/#!/cs615asa">CS615 ASA Twitter Account</a></LI>
-							<LI><a href="https://webchat.freenode.net/">Freenode IRC Webchat</a> -- use #cs615asa</li>
+							<LI><a href="https://webchat.freenode.net/">Freenode IRC Webchat</a> -- use #cs615asa (<a href="https://www.netmeister.org/tmp/cs615-s15.log">chat logs</a>)</li>
 							<LI><a href="https://github.com/jschauma/cs615asa">Raw course material on github</a></LI>
 							<LI><A href=
 							"http://netbsd.gw.com/cgi-bin/man-cgi/man">
@@ -240,15 +239,17 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
 				<H3><a name="hw">Homework Assignments</a>:</h3>
 				<ul>
 					<li><a href="hw.txt">General Homework Submission Guidelines</a></li>
-					<li><a href="s14-hw1.html">Homework #1: Setup your environment for EC2 and create an instance</a></li>
-					<li><a href="s14-hw2.html">Homework #2: Software packaging</a></li>
-					<li><a href="s14-hw3.html">Homework #3: ifconfig output parsing</a></li>
-					<li><a href="s14-hw4.html">Homework #4: EC2 Backup</a></li>
-					<li><a href="s14-hw5.html">Homework #5: Use tcpdump to observe traffic flow</a></li>
+					<li><a href="s15-meetup.html">Homework #N: Attend a relevant Meetup/Talk/community event</a></li>
+					<li><a href="s15-hw1.html">Homework #1: Setup your environment for EC2 and create an instance</a></li>
+					<li><a href="s15-hw2.html">Homework #2: Software packaging</a></li>
+					<li><a href="s15-hw3.html">Homework #3: ifconfig output parsing</a></li>
+					<li><a href="s15-hw4.html">Homework #4: Traceroute explained</a></li>
+					<li><a href="s15-hw5.html">Homework #5: EC2 Backup</a></li>
+<!--
+					<li><a href="s14-hw5.html">Homework #5: Use tcpdump to observe traffic flow</a></li> -->
 				</ul>
 				<!--
 					<li><a href="http-exercise.html">Extra Credit Exercise: HTTP</a></li>
-					<li><a href="traceroute-explained.html">Extra Credit Exercise: Traceroute Explained</a></li>
 					<li><a href="s12-hw5.html">Homework #5: Syslog over IPv6</a></li>
 					<li><a href="s11-hw6.html">Homework #6: Encrypted EC2 Backup</a></li>
 					<li><a href="hw6.txt">Homework #6: Practical PGP</a></li>
@@ -285,8 +286,9 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
 -->
 				<H3><A name="syllabus">Syllabus</A>:</H3>
 
-				Lecture slides and other supporting material will be uploaded as the
-				semester progresses.
+				Lecture slides and other supporting material listed here is from the
+				Spring 2014 semester and may be updated/changed throughout the Spring
+				2015 semester.  Updated materials will be uploaded here after each class.
 
 				<TABLE border="1" cellpadding="5">
 					<TR>
@@ -297,12 +299,23 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
 					</TR>
 
 					<TR>
-						<TD>2014-01-20</TD>
+						<TD>2015-01-19</TD>
 						<TD colspan="3"><em>Martin Luther King Day -- No class</em></TD>
 					</TR>
 
 					<TR>
-						<TD>2014-01-22</TD>
+						<TD>2015-01-26</TD>
+						<TD colspan="3"><em>Snowpocalypse -- No class</em></TD>
+					</TR>
+
+					<TR>
+						<TD>2015-02-02</TD>
+						<TD colspan="3"><em>Another Snow Day -- No class</em></TD>
+					</TR>
+
+
+					<TR>
+						<TD>2015-02-09</TD>
 
 						<TD>Introduction, Policies, Overview, UNIX history and
 						basics</TD>
@@ -314,95 +327,90 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
 							<A href="https://www.cs.stevens.edu/~jschauma/usenix/sage/jobs.pdf">SAGE Job
 							Descriptions for System Administrators</A></TD>
 
-						<TD><em>Note: Wednesday class!</em><br><br><a href="slides/lecture01.pdf">Lecture 01 slides</a><br>
-							<a href="https://www.cs.stevens.edu/~jschauma/cgi-bin/615.cgi">Course Survey</a><br>
-							<a href="s14-hw1.html">HW#1</a></td>
+						<TD>
+							<a href="https://www.cs.stevens.edu/~jschauma/cgi-bin/CS615-S15-01.cgi">Pre-class questionnaire</a><br>
+							<a href="slides/lecture01.pdf">Lecture 01 slides</a><br>
+							<a href="s15-hw1.html">HW#1</a></td>
 					</TR>
 
 					<TR>
-						<TD>2014-01-27</TD>
-						<TD>Filesystems and Disks</TD>
-						<TD><em>Frisch</em>: Chap. 10<br>
-								<em>Nemeth et al</em>: Chap. 5, 8</TD>
-						<TD><a href="slides/lecture02.pdf">Lecture 02 slides</a></td>
-					</TR>
-
-					<TR>
-						<TD>2014-02-03</TD>
-						<TD colspan="3"><em>Snowday - no class!</em></TD>
-					</TR>
-
-					<TR>
-						<TD>2014-02-10</TD>
-						<TD>Software Installation Concepts</TD>
-						<TD><em>Limoncelli &amp; Hogan</em>: Chap. 23 (in first edition) or Chap. 28 (in second edition)<br>
-							<em>Burgess</em> (Principles): Chap. 4.6 - 4.8<br>
-							<em>Frisch</em>: Parts of Chap. 3</TD>
-						<TD><a href="slides/lecture03.pdf">Lecture 03 slides</a><br>
-							<a href="boot-sequence/">boot sequences for different OS</a><br>
-							<a href="pkg-exercise.html">Exercise: Compare the use of pkgsrc and pkgin</a><br><br>
-							<a href="s14-hw2.html">HW#2</a></td>
-					</TR>
-
-					<TR>
-						<TD>2014-02-17</TD>
+						<TD>2015-02-16</TD>
 						<TD colspan="3"><em>President's Day -- No class</em></TD>
 					</TR>
 
 					<TR>
-						<TD>2014-02-18</TD>
+						<TD>2015-02-17</TD>
+						<TD>Filesystems and Disks</TD>
+						<TD><em>Frisch</em>: Chap. 10<br>
+								<em>Nemeth et al</em>: Chap. 5, 8</TD>
+						<TD><em>Note: Tuesday class!</em><br><br>
+							<a href="https://www.cs.stevens.edu/~jschauma/cgi-bin/CS615-S15-02.cgi">Pre-class questionnaire</a><br>
+							<a href="slides/lecture02.pdf">Lecture 02 slides</a><br>
+						</td>
+					</TR>
+
+					<TR>
+						<TD>2015-02-23</TD>
+						<TD>Software Installation Concepts</TD>
+						<TD><em>Limoncelli &amp; Hogan</em>: Chap. 23 (in first edition) or Chap. 28 (in second edition)<br>
+							<em>Burgess</em> (Principles): Chap. 4.6 - 4.8<br>
+							<em>Frisch</em>: Parts of Chap. 3</TD>
+						<TD>
+							<a href="https://www.cs.stevens.edu/~jschauma/cgi-bin/CS615-S15-03.cgi">Pre-class questionnaire</a><br>
+							<a href="slides/lecture03.pdf">Lecture 03 slides</a><br>
+							<a href="boot-sequence/">boot sequences for different OS</a><br>
+							<a href="pkg-exercise.html">Exercise: Package Management basics</a><br><br>
+							<a href="s15-hw2.html">HW#2</a></td>
+					</TR>
+
+					<TR>
+						<TD>2015-02-25</TD>
+						<TD colspan="3"><em>Field trip to <a
+href="http://www.peer1.com/infrastructure/datacenter-new-york">Peer1 Hosting</a></em></td>
+					</TR>
+
+					<TR>
+						<TD>2015-03-02</TD>
 						<TD>Got root?	Multi-user basics, politics, policies and ethics</TD>
 						<TD><em>Frisch</em>: Chap. 6<br>
 								<em>Burgess</em>: Chap. 5<br>
 								<em>Nemeth et al</em>: Chap. 3, 6, 27</TD>
-						<TD><em>Note: Tuesday class!</em><br><br><a href="slides/lecture04.pdf">Lecture 04 slides</a><br>
-							<a href="http://www.lisa.org/content/54/Code-of-Ethics.aspx">LISA Code of Ethics</a><br>
+						<TD><a href="slides/lecture04.pdf">Lecture 04 slides</a><br>
 							<a href="https://www.usenix.org/sites/default/files/code_of_ethics_diploma.pdf">System Administrators' Code of Ethics</a><br>
 							<a
 href="useradd-exercise.html">Exercise: adding users</a></TD>
 					</TR>
 
 					<TR>
-						<TD>2014-02-24</TD>
+						<TD>2015-03-09</TD>
 						<TD>Automating Administrative Tasks I / Shell Essentials</TD>
 						<TD><em>Frisch</em>: Chap. 14, Append. A<br>
 							<em>Nemeth et al</em>: Chap. 9</TD>
-						<TD><a href="05-automation-scripting/">Lecture 05 slides</a><br>
+						<TD><a href="slides/lecture05.pdf">Lecture 05 slides</a><br>
+							<a
+href="s15-hw3.html">HW#3: ifconfig output parsing</a><br>
 							<a href="examples/shexamples">shell basics</a><br>
-							<a href="s14-hw3.html">HW#3</a></li>
+							<!-- <a href="s14-hw3.html">HW#3</a> --></li>
 							</TD>
 					</TR>
 
 					<TR>
-						<TD>2014-03-03</TD>
-						<TD>Automation II / Backup and Disaster Recovery</td>
-						<TD><em>Frisch</em>: Chap. 11<BR>
-							<em>Nemeth et al</em>: Chap. 10<br>
-							<em>Burgess</em>: Chap. 12.1 - 12.4<br>
-							<em>Limoncelli &amp; Hogan</em>: Chap. 8, 21<br>
-							<a href="http://www.cs.stevens.edu/~jschauma/usenix/sage/backups.pdf">
-							SAGE Booklet: Backups and Recovery</a><br><br>
-							<em>Frisch</em>: Chap. 15, 16<br>
-							<em>Nemeth et al</em>: Chap. 4, 25<br>
-							<em>Burgess</em>: Chap. 5</TD>
-
-						<TD><a href="slides/lecture06.pdf">Lecture 06 slides</a><br>
-							<a href="s14-hw4.html">HW#4: EC2 Backup</a></td>
-					</TR>
-
-					<TR>
-						<TD>2014-03-10</TD>
+						<TD>2015-03-16</TD>
 						<TD colspan="3"><em>Spring Break -- No class</em></TD>
 					</TR>
 
 					<TR>
-						<TD>2014-03-17</TD>
-						<TD>Networking</TD>
+						<TD>2015-03-23</TD>
+						<TD>Networking</td>
 						<TD><em>Frisch</em>: Chap. 5<BR>
 							<em>Nemeth et al</em>: Chap. 13, 15, 20<br>
 							<em>Burgess</em>: Chap. 3, 10<br>
 							<em>Limoncelli &amp; Hogan</em>: Chap. 18</TD>
-						<TD><a href="slides/lecture07.pdf">Lecture 07 slides</a><br>
+
+						<TD><a href="slides/lecture06.pdf">Lecture 06 slides</a><br>
+							<a
+href="s15-hw4.html">HW#4: Traceroute Explained</a><br>
+<br>
 							<a href="strace.out">telnet strace</a><br>
 							<a href="commands.out">EC2 script output</a><br>
 							<a href="tcpdump.out">EC2 binary tcpdump output</a><br>
@@ -414,72 +422,82 @@ href="useradd-exercise.html">Exercise: adding users</a></TD>
 						 </TD>
 					</TR>
 
+					<TR>
+						<TD>2015-03-30</TD>
+						<TD>Datacenter Design<br>
+							Backup and Disaster Recovery</TD>
+						<TD>
+							<em>Frisch</em>: Chap. 11<br>
+							<em>Nemeth et al</em>: Chap. 10<br>
+							<em>Burgess</em>: Chap. 12.1 - 12.4<br>
+							<em>Limoncelli &amp; Hogan</em>: Chap. 8, 21<br>
+							<a href="//~jschauma/usenix/sage/backups.pdf">SAGE Booklet: Backups and Recovery</a></TD>
+						<TD><em>Guest Lecturer: Doug Hughes</em> (<a href="https://www.periscope.tv/w/Vvr-8DU0MDM4MnwxMzEwODUw4IEhG1uWLDXbt52ZXMGYILDZprPkNqaTTFnOsnGjbzg=">Periscope Replay</a>)<br><br>
+							<a
+href="tar.html">Know a Unix Command: tar(1)</a><br>
+							<a href="slides/lecture07.pdf">Lecture 07 slides</a> (<a href="https://www.periscope.tv/w/VvsRJzU0MDM4MnwxMzMwOTYymPRmZ76eKn3ACsYm563TzgpeOOENopPasFbtwRkTZCU=">Periscope Replay</a>)<br>
+							<a
+href="s15-hw5.html">HW#5: EC2 Backup</a>
+						 </TD>
+					</TR>
 
 					<TR>
-						<TD>2014-03-24</TD>
-						<TD>Popular services: DNS</TD>
+						<TD>2015-04-06</TD>
+						<TD><a href="guest-lecture-distributed-computing">Distributed Computing</a><br>DNS</TD>
 
 						<TD><em>Frisch</em>: Chap. 9<BR>
 							<em>Nemeth et al</em>: Chap. 16, 19, 22<br>
 							<em>Burgess</em>: Chap. 9<br>
 							<em>Limoncelli &amp; Hogan</em>: Chap. 19</TD>
-						<TD><a href="slides/lecture08.pdf">Lecture 08 slides</a><br>
+						<TD><em>Guest lecturer: <a href="https://twitter.com/yesthattom">Thomas A. Limoncelli</a></em><br>
+(<a
+href="videos/2015-04-06-Limoncelli.mp4">video</a>)<br><br>
+							<a href="slides/lecture08.pdf">Lecture 08 slides</a><br>
+(<a
+href="videos/2015-04-06-lecture08-DNS.mov">video</a>)
 		<!-- <a href="s12-hw4.html">Homework #4</a>&nbsp;--></td>
 					</TR>
-
 					<TR>
-						<TD>2014-03-31</TD>
-						<TD>Popular services: SMTP / HTTP</TD>
-						<TD><em>Frisch</em>: Chap. 9<BR>
+						<TD>2015-04-13</TD>
+						<TD>SMTP, HTTP</TD>
+						<TD>
+							<em>Frisch</em>: Chap. 9<BR>
 							<em>Nemeth et al</em>: Chap. 16, 19, 22<br>
 							<em>Burgess</em>: Chap. 9<br>
 							<em>Limoncelli &amp; Hogan</em>: Chap. 19</TD>
-						<TD><a href="slides/lecture09.pdf">Lecture 09 slides</a></td>
+						<TD><a href="slides/lecture09.pdf">Lecture 09 slides</a><br>
+							<!-- <a href="slides/lecture11.pdf">Lecture 11 slides</a> --></td>
 					</TR>
-
 					<TR>
-						<TD>2014-04-07</TD>
-						<TD>SNMP, Monitoring</TD>
+						<TD>2015-04-20</TD>
+						<TD>High Performance Computing / Configuration Management with Chef</TD>
+						<TD>&nbsp;</TD>
+						<TD><em>Guest lecturers:<br>
+<a href="http://prentice.bisbal.co/">Prentice Bisbal</a> (<a
+href="videos/2015-04-20-Bisbal.mov">video</a>)<br>
+<a href="https://twitter.com/julian_dunn">Julian C. Dunn</a> (<a href="videos/2015-04-20-Dunn.mov">video</a>)</em><br><br><!--  <a href="s14-hw5.html">"Homework" 5: Use tcpdump to observe traffic flow</a>--></TD>
+					</TR>
+					<TR>
+						<TD>2015-04-27</TD>
+						<TD>SSH, SNMP, Monitoring</TD>
 						<TD><em>Frisch</em>: Chap. 9<BR>
 							<em>Nemeth et al</em>: Chap. 16, 19, 22<br>
 							<em>Burgess</em>: Chap. 9<br>
 							<em>Limoncelli &amp; Hogan</em>: Chap. 19</TD>
-						<TD><a href="slides/lecture10.pdf">Lecture 10 slides</a></td>
+						<TD><em>Guest Lecturer: <a href="http://www.qoxp.net/">Richard E. Silverman</a></em> (<a href="videos/2015-04-27-silverman.mov">video</a>)<br><a href="slides/lecture10.pdf">Lecture 10 slides</a></td>
 		<!--<a href="presentations/mhegador-ssh.pdf">Michael Hegadorn on SSH</a><br> -->
-
-					</TR>
-					<TR>
-						<TD>2014-04-14</TD>
-						<TD><a href="2014-04-14">Online Class</a></TD>
-						<TD>&nbsp;</TD>
-						<TD><a href="s14-hw5.html">"Homework" 5: Use tcpdump to observe traffic flow</a></TD>
 					</TR>
 
 					<TR>
-						<TD>2014-04-21</TD>
-						<TD>SSL, SSH, ...</TD>
-						<TD>&nbsp;</TD>
-						<TD><a href="slides/lecture11.pdf">Lecture 11 slides</a></TD>
-					</TR>
-
-					<TR>
-						<TD>2014-04-28</TD>
+						<TD>2015-05-04</TD>
 						<TD>System Security</TD>
 						<TD><em>Frisch</em>: Chap. 7<BR>
 							<em>Nemeth et al</em>: Chap. 21<br>
 							<em>Burgess</em>: Chap. 11, 12<br>
 							<em>Limoncelli &amp; Hogan</em>: Chap. 7</TD>
-						<TD><a href="slides/lecture12.pdf">Lecture 12 slides</a></td>
+						<TD><a href="slides/lecture12.pdf">Lecture 12 slides</a><br><br>
+<a href="s15-ctf.html">Capture the Flag!</a></td>
 					</TR>
-					<TR>
-						<TD>2014-05-01</TD>
-						<TD>Capture The Flag!</TD>
-						<TD>&nbsp;</TD>
-						<TD><a
-href="ctf.html">instructions</a><br>
-						<a href="https://lists.stevens.edu/pipermail/cs615asa/2014-May/001034.html">Wrap-Up</a></TD>
-					</TR>
-
 				</TABLE>
 			</TD>
 		</TR>

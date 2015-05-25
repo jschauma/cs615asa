@@ -35,152 +35,6 @@
 %\setcounter{page}{0}
 %\clearpage
 
-\subsection{Let's review HW1}
-{\tt http://www.cs.stevens.edu/\~{}jschauma/615/s14-hw1.html} \\
-\vspace{.5in}
-
-\subsection{Let's review HW1}
-{\tt http://www.cs.stevens.edu/\~{}jschauma/615/s14-hw1.html} \\
-\vspace{.5in}
-
-Running an instance:
-\begin{verbatim}
-$ aws ec2 run-instances --key-name stevens --security-groups stevens \
-        --image-id <AMI-ID>
-\end{verbatim}
-
-\subsection{Let's review HW1}
-{\tt http://www.cs.stevens.edu/\~{}jschauma/615/s14-hw1.html} \\
-\vspace{.5in}
-
-Save yourself some typing:
-\begin{verbatim}
-$ alias instance='aws ec2 run-instances --key-name stevens \
-                        --security-groups stevens --image-id'
-$ instance <AMI-ID>
-\end{verbatim}
-
-\subsection{Let's review HW1}
-{\tt http://www.cs.stevens.edu/\~{}jschauma/615/s14-hw1.html} \\
-\vspace{.5in}
-
-
-Make it permanent:
-\begin{verbatim}
-$ echo "alias instance='aws ec2 run-instances --key-name stevens \
-        --security-groups stevens --image-id'" >> .bashrc
-\end{verbatim}
-
-
-\subsection{Let's review HW1}
-{\tt http://www.cs.stevens.edu/\~{}jschauma/615/s14-hw1.html} \\
-\vspace{.5in}
-
-ssh to an instance:
-\begin{verbatim}
-$ ssh -i ~/.ec2/stevens.pem root@<mumble>.compute-1.amazonaws.com
-\end{verbatim}
-
-
-\subsection{Let's review HW1}
-{\tt http://www.cs.stevens.edu/\~{}jschauma/615/s14-hw1.html} \\
-\vspace{.5in}
-
-Let's save ourselves some typing:
-\begin{verbatim}
-$ cat >>~/.ssh/config <<EOF
-> Host *.amazonaws.com
->         IdentityFile ~/.ec2/stevens.pem
->         User         root
-> EOF
-$ ssh <mumble>.compute-1.amazonaws.com
-\end{verbatim}
-
-
-\subsection{Filesystems, Disk, Storage}
-\begin{verbatim}
-$ instance ami-35eb835c
-[...]
-$ aws ec2 describe-instances
-[...]
-$ ssh root@ec2-54-198-235-45.compute-1.amazonaws.com
-\end{verbatim}
-
-\subsection{Let's review HW1}
-\begin{verbatim}
-# uname -a
-SunOS domU-12-31-39-0F-1C-BB.compute-1.internal 5.11 omnios-33fdde4 i86pc
-i386 i86xpv Solaris
-#
-\end{verbatim}
-
-\subsection{Let's review HW1}
-\begin{verbatim}
-# ifconfig -a
-lo0: flags=2001000849<UP,LOOPBACK,RUNNING,MULTICAST,IPv4,VIRTUAL> mtu 8232 index 1
-        inet 127.0.0.1 netmask ff000000
-xnf0: flags=1004843<UP,BROADCAST,RUNNING,MULTICAST,DHCP,IPv4> mtu 1500 index 2
-        inet 10.110.94.225 netmask fffffe00 broadcast 10.110.95.255
-        ether 12:31:39:1c:60:13
-lo0: flags=2002000849<UP,LOOPBACK,RUNNING,MULTICAST,IPv6,VIRTUAL> mtu 8252 index 1
-        inet6 ::1/128
-xnf0: flags=20002000840<RUNNING,MULTICAST,IPv6> mtu 1500 index 2
-        inet6 ::/0
-        ether 12:31:39:1c:60:13
-#
-\end{verbatim}
-
-
-\subsection{Let's review HW1}
-\begin{verbatim}
-# netstat -na | more
-[...]
-TCP: IPv4
-   Local Address        Remote Address    Swind Send-Q Rwind Recv-Q
-State
--------------------- -------------------- ----- ------ ----- ------ -----------
-127.0.0.1.4999             *.*                0      0 128000      0 LISTEN
-      *.111                *.*                0      0 128000      0 LISTEN
-      *.*                  *.*                0      0 128000      0 IDLE
-      *.111                *.*                0      0 128000      0 LISTEN
-      *.*                  *.*                0      0 128000      0 IDLE
-      *.46457              *.*                0      0 128000      0 LISTEN
-      *.55986              *.*                0      0 128000      0 LISTEN
-      *.22                 *.*                0      0 128000      0 LISTEN
-10.110.94.225.22     155.246.89.107.46137 42304     47 128592      0 ESTABLISHED
-[...]
-\end{verbatim}
-
-\subsection{Let's review HW1}
-\begin{verbatim}
-# man df
-[...]
-# df
-[...]
-# df -hT
-[...]
-# df -i
-[...]
-# df -a
-[...]
-# mount
-[...]
-\end{verbatim}
-
-
-\subsection{Let's review HW1}
-\begin{verbatim}
-# format
-[...]
-format> verify
-[...]
-# zpool list
-[...]
-# zfs list
-[...]
-\end{verbatim}
-
-
 
 \subsection{Filesystems, Disks, Storage}
 Adding, (re-)partitioning, mounting disks requires understanding of:
@@ -301,6 +155,27 @@ EBS	2014-01-25T20:18:19.000Z	True	attached vol-a0d000d6
 [...]
 \end{verbatim}
 
+
+\subsection{Basic Disk Concepts: Storage Models: Cloud Storage}
+
+30 min. exercise: \\
+
+\begin{itemize}
+	\item create two OmniOS instances
+	\item create a 1GB volume and attach it to one of the instances
+	\item create a new filesystem on the volume and mount it
+	\item create a file on the new filesystem
+	\item terminate the first instance
+	\item attach the volume to the second instance
+	\item retrieve the file from the volume via the second instance
+\end{itemize}
+
+If time permits, repeat using a Linux instance.
+\vspace{.25in}
+Useful commands: \\
+{\tt aws ec2 create-volume}, {\tt aws ec2 attach-volume}, {\tt
+format(1M)}, {\tt newfs(1M)}, {\tt mount(8)}
+
 \subsection{Basic Disk Concepts: Storage Models: Cloud Storage}
 \begin{verbatim}
 $ aws ec2 create-volume --size 1 --availability-zone us-east-1d
@@ -341,6 +216,13 @@ format> label
 	\begin{center}
 		\includegraphics[scale=0.9]{pics/ide-drive.eps} \\
 	\end{center}
+
+\subsection{Basic Disk Concepts: Disk Devices}
+Security affects everything. \\
+\begin{center}
+	\includegraphics[scale=0.9]{pics/equation-tweet.eps} \\
+	\verb+http://t.co/eM6XpATITQ+
+\end{center}
 
 \subsection{Basic Disk Concepts: Disk Devices}
 	\begin{center}

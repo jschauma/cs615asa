@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<HTML>
+<HEAD>
+
+  <TITLE>CS615A -- Aspects of System Administration</TITLE>
+  <STYLE type="text/css">
+  body {
+  background-color: #FFFFFf;
+  }
+  </STYLE>
+  <STYLE type="text/css">
+  li.c1 {list-style: none}
+  </STYLE>
+
+</HEAD>
+
+<BODY>
+  <TABLE border="1" align="center" cellpadding="15">
+    <TR>
+      <TD valign="top">
+        <H2>CS615A -- Aspects of System Administration - HW#2</H2>
+
+        <H3>HW#2: Software packaging</H3>
+
+        <H4>Summary:</H4>
+        <p>
+          The objective of this assignment is for you to create a
+	  reliable, useful binary software package for a moderately
+	  complex piece of software with a few dependencies.  The
+	  resulting package will be able to be installed on a newly
+	  created, RPM based EC2 instance simply by copying it to the host
+	  and running the appropriate <tt>rpm(1)</tt> command.  The
+	  location of the files installed by the package will follow the
+	  file system hierarchy standard (ie. <tt>hier(7)</tt>), and best
+	  packaging practices.
+	</p>
+
+	<h4>Details</h4>
+	<p><em><small>25 points</small></em></p>
+	<p>
+	  On a Fedora instance (<em>ami-3b361952</em>), create an RPM for
+	  the <a href="https://aws.amazon.com/cli/">AWS command-line utilities</a>,
+	  or "awscli" software.
+	  Verify that the resulting package can be installed on a new
+	  instance.
+	</p>
+
+	<H4>Deliverables and Due Date</H4>
+	<p>
+	  As before, your deliverable is a document describing what you did
+	  to produce the RPM in a manner that would allow somebody else to
+	  reproduce the steps.  In addition, you will provide the
+	  <em>spec</em> file from which a binary package can be created as
+	  well as the <tt>rpm(1)</tt> command(s) used to generate the
+	  package.
+	</p>
+	<p>
+	  The files will be made available on your course folder under
+	  <tt>https://www.cs.stevens.edu/~your-username/CS615/HW2/</tt>.
+	  Please attach a copy of the files to an email sent from your
+	  <tt>@stevens.edu</tt> email address to <a
+	  href="mailto:jschauma@stevens.edu?subject=[CS615] HW2">jschauma@stevens.edu</a>
+	  with a subject of "[CS615] HW2".
+       </p>
+       <p>
+         The due date for this assignment is 2015-03-09 16:00 Eastern.
+       </p>
+      <hr>
+      [<a href="index.html">Course Website</a>]
+</BODY>
+</HTML>

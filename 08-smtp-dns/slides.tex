@@ -16,7 +16,7 @@
 \lhead{\slidetitle}                               % default:\lhead{\slidetitle}
 \chead{CS615 - Aspects of System Administration}% default:\chead{\relax}
 \rhead{Slide \thepage}                       % default:\rhead{\sectiontitle}
-\lfoot{\Gray{Popular Services - DNS}}% default:\lfoot{\slideauthor}
+\lfoot{\Gray{DNS}}% default:\lfoot{\slideauthor}
 \cfoot{\relax}                               % default:\cfoot{\relax}
 \rfoot{\Gray{\today}}
 
@@ -24,7 +24,7 @@
 \begin{center}
 	\Hugesize
 		CS615 - Aspects of System Administration\\ [1em]
-		Popular Services - DNS\\ [1em]
+		DNS\\ [1em]
 	\hspace*{5mm}\blueline\\ [1em]
 	\Normalsize
 		Department of Computer Science\\
@@ -69,6 +69,14 @@
 	\includegraphics[scale=0.8]{pics/3computers-2.eps} \\
 \end{center}
 \vspace*{\fill}
+
+\subsection{In the beginning...}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.8]{pics/arpanet1.eps} \\
+\end{center}
+\vspace*{\fill}
+
 
 \subsection{In the beginning...}
 \begin{verbatim}
@@ -240,9 +248,10 @@
 	\Normalsize
 	\begin{verbatim}
 wget -O - ftp://rs.internic.net/domain/root.zone | \
-        grep "IN\s*NS\s" | awk '{print $1}' | sort -u | wc -l
+        grep "IN<tab>*NS<tab>" | awk '{print $1}' | sort -u | wc -l
 \end{verbatim}
 	\vspace{.25in}
+	\verb+http://data.iana.org/TLD/tlds-alpha-by-domain.txt+ \\
 	\verb+https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains+
 \end{center}
 \Normalsize
@@ -425,7 +434,8 @@ $
 \begin{center}
 	\includegraphics[scale=0.4]{pics/chicken-egg.eps} \\
 	\addvspace{.2in}
-	\verb+$ ftp -o - ftp.internic.net:/domain/db.cache | more+
+	\verb+$ ftp -o - ftp.internic.net:/domain/db.cache | more+ \\
+	\verb+http://www.internic.net/zones/named.root+
 	\vspace*{\fill}
 \end{center}
 
@@ -436,8 +446,6 @@ $
 	\addvspace{.2in}
 	\verb+http://pastebin.com/XZ3EGsbc+ \\
 	\addvspace{.1in}
-	\small
-	Btw, read this, too: \verb+https://en.wikipedia.org/wiki/Guy_Fawkes+
 \end{center}
 \vspace*{\fill}
 
@@ -486,7 +494,7 @@ $
 \subsection{DNS: A distributed system}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=0.5]{pics/root-servers.eps}
+	\includegraphics[scale=0.65]{pics/root-servers.eps}
 \end{center}
 \vspace*{\fill}
 
@@ -539,7 +547,9 @@ $ host -t ptr 192.5.6.30
 
 \subsection{Creative uses of DNS Resource Records}
 \begin{itemize}
-	\item identifying sources of SPAM (see next section)
+	\item identifying sources of SPAM
+	\item find out if the internet is on fire: \\
+		\verb|dig +short txt istheinternetonfire.com|
 	\item find ASN numbers by IP addresses: \\
 		\verb|dig +short 159.89.246.155.origin.asn.cymru.com TXT|
 	\item check a resolver's source port randomization (to help
@@ -547,11 +557,10 @@ $ host -t ptr 192.5.6.30
 		\verb|dig +short porttest.dns-oarc.net TXT|
 	\item using DNS to publish SSH key fingerprints (RFC4255,
 ssh\_config(5) \verb+VerifyHostKeyDNS+; for best results combine with DNSSEC): \\
-		\verb|dig +short ftp.netbsd.org SSHFP| \\
+		\verb|dig +short ftp.netbsd.org SSHFP|
 		\begin{verbatim}
 ssh -o "VerifyHostKeyDNS yes" ftp.netbsd.org
-The authenticity of host 'ftp.netbsd.org (199.233.217.249)' can't be established.
-RSA key fingerprint is b9:04:78:bc:aa:1a:09:34:f9:17:e6:2e:ef:9c:3f:ab.
+[...]
 Matching host key fingerprint found in DNS.
 Are you sure you want to continue connecting (yes/no)?
 \end{verbatim}

@@ -1,0 +1,430 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<HTML>
+<HEAD>
+
+  <TITLE>Know A Unix Command: tar(1)</TITLE>
+  <STYLE type="text/css">
+  body {
+  background-color: #FFFFFf;
+  }
+  </STYLE>
+  <STYLE type="text/css">
+  li.c1 {list-style: none}
+  </STYLE>
+
+
+</HEAD>
+
+<BODY>
+  <TABLE border="1" align="center" cellpadding="15">
+    <TR>
+      <TD valign="top">
+        <H2>CS615 -- Aspects of System Administration</H2>
+
+        <H3>Know A Unix Command: <tt>tar(1)</tt></H3>
+
+        <p>
+          <pre>
+NAME
+     tar -- tape archiver
+
+SYNOPSIS
+     tar [-]{crtux}[-014578befHhjklmOoPpqSvwXZz] [archive] [blocksize]
+         [-C directory] [-s replstr] [-T file] [file ...]
+
+DESCRIPTION
+     The tar command creates, adds files to, or extracts files from an archive
+     file in ``tar'' format.  A tar archive is often stored on a magnetic
+     tape, but can be stored equally well on a floppy, CD-ROM, or in a regular
+     disk file.
+          </pre>
+        </p>
+        <h4><a name="toc">Table of Contents</a></h4>
+        <ul>
+         <li><a href="#history">History and Command-Line Options Parsing</a></li>
+         <li><a href="#format">File Format</a></li>
+         <li><a href="#invocations">Common Invocations</a>
+           <ul>
+             <li><a href="#viewing">Viewing Contents</a></li>
+             <li><a href="#extracting">Extracting Contents</a></li>
+             <li><a href="#extracting-partial">Extracting Partial Contents</a></li>
+             <li><a href="#creating">Creating an Archive</a></li>
+           </ul>
+         <li><a href="#compression">Compression</a></li>
+         <li><a href="#pipes">This One Weird Trick</a></li>
+         <li><a href="#similar">Similar Tools</a></li>
+         <li><a href="#see-also">See Also</a></li>
+        </ul>
+        <H4><a name="history"></a>History and Command-Line Options Parsing</H4>
+        <p>
+          As the name suggests, <tt>tar(1)</tt> was originally created to
+          <em>ar</em>chive files on magnetic <em>t</em>ape.  As per the
+          manual page, the command first appeared in Version 7 AT&amp;T
+          UNIX.  Since then, different implementations have been
+          distributed, including the popular, BSD-licensed <a
+          href="http://libarchive.org/">libarchive</a> and GPL licensed <a
+          href="https://www.gnu.org/software/tar/">GNU tar</a> versions.
+        </p>
+        <p>
+          The older UNIX commands had not yet standardized on using
+          command-line options prefixed with a '<tt>-</tt>' (or, later, the
+          <tt>--long-options</tt>).  <tt>tar(1)</tt> (and a number of other
+          commands) interpreted the first argument string as a list of
+          single-letter options, and this behavior was retained for
+          backwards compatibility.
+        </p>
+        <p>
+          Many a sysadmin's muscle memory has been primed on typing, for
+          example, "<tt>tar tvf file.tar</tt>", when specifying
+          dash-prefixed options would work as well.  For consistency, we
+          will use '<tt>-flags</tt>' throughout this document.
+        </p>
+        <H4><a name="format"></a>File Format</H4>
+        <p>
+          <tt>tar(1)</tt> operates on data in a specific archive format,
+          the <em>Uniform Standard Tape ARchive</em> or <em>UStar</em>
+          format, described in the <tt>tar(5)</tt> manual page.  Following
+          its history of being used with tape drives, this format is a
+          series of 512 byte records.
+        </p>
+        <p>
+          Let's look at a <tt>tar(5)</tt> file:
+          <blockquote><pre>$ wget -q http://ftp.gnu.org/gnu/tar/tar-latest.tar.gz
+$ gzip -d tar-latest.tar.gz
+$ file tar-latest.tar
+tar-latest.tar: POSIX tar archive
+$ hexdump -c tar-latest.tar | more
+0000000   t   a   r   -   1   .   2   8   /  \0  \0  \0  \0  \0  \0  \0
+0000010  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+*
+0000060  \0  \0  \0  \0   0   0   0   0   7   5   5  \0   0   0   0   1
+0000070   7   5   0  \0   0   0   0   1   7   5   0  \0   0   0   0   0
+0000080   0   0   0   0   0   0   0  \0   1   2   3   6   5   2   6   2
+0000090   3   6   6  \0   0   1   2   2   3   3  \0       5  \0  \0  \0
+00000a0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+*
+0000100  \0   u   s   t   a   r  \0   0   0   g   r   a   y  \0  \0  \0
+0000110  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+0000120  \0  \0  \0  \0  \0  \0  \0  \0  \0   g   r   a   y  \0  \0  \0
+0000130  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+0000140  \0  \0  \0  \0  \0  \0  \0  \0  \0   0   0   0   0   0   0   0
+0000150  \0   0   0   0   0   0   0   0  \0  \0  \0  \0  \0  \0  \0  \0
+0000160  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+*
+0000200   t   a   r   -   1   .   2   8   /   a   c   i   n   c   l   u
+0000210   d   e   .   m   4  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+0000220  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+*
+0000260  \0  \0  \0  \0   0   0   0   0   6   4   4  \0   0   0   0   1
+0000270   7   5   0  \0   0   0   0   1   7   5   0  \0   0   0   0   0
+--More-- 
+</pre></blockquote>
+        </p>
+        <p>
+          Comparing the above output with the file format description from
+          the <tt>tar(5)</tt> manual page, we can see that this archive
+          contains a directory named <tt>tar-1.28</tt>, a file named
+          <tt>tar-1.28/acinclude.m4</tt>, etc. etc.
+        </p>
+        <p>
+          (Note: the <tt>file(1)</tt> command identified the correct file
+          type by looking at the "magic" sequence at offset 257: <tt>u s t
+          a r \0 0 0</tt>.)
+        </p>
+
+        <H4><a name="invocations"></a>Common Invocations</H4>
+        <p>
+          <tt>tar(1)</tt> has the following primary use cases:
+          <ul>
+            <li>viewing contents of an archive, using the <tt>-t</tt> option</li>
+            <li>extracting contents of an archive, using the <tt>-x</tt> option</li>
+            <li>creating an archive, using the <tt>-c</tt> option</li>
+            <li>updating an existing archive, using the <tt>-r</tt> option</li>
+          </ul>
+          Hence, <tt>tar(1)</tt> requires at least one of these options to
+          be present.
+        </p>
+        <p>
+          <tt>tar(1)</tt> also frequently requires a filename to operate
+          on; this may be the name of an actual file, a pathname for a
+          tape device, or, per Unix convention, the string "-" to denote
+          that it should operate on standard in. Different
+          implementations may default to standard in, a default tape
+          device such as <tt>/dev/nrst0</tt>, or the value of an
+          environment variable if no file is specified via the <tt>-f</tt>
+          flag.</p>
+        </p>
+        <p>
+          Finally, you will frequently want to enable verbose output to
+          see <tt>tar(1)</tt>'s progress by adding the <tt>-v</tt> flag.
+        </p>
+
+        <H5><a name="viewing"></a>Viewing Contents</H5>
+        <p>
+          One of the most common use cases for <tt>tar(1)</tt> is to
+          extract software distributed in such an archive file.  Before
+          doing so, however, it may be desirable to view the contents of
+          the archive.
+        </p>
+        <p>
+          An example of the most common invocation here would then be:
+<blockquote><pre>$ tar -tvf tar-latest.tar | more
+drwxr-xr-x gray/gray         0 2014-07-27 16:45 tar-1.28/
+-rw-r--r-- gray/gray      3126 2014-02-14 17:13 tar-1.28/acinclude.m4
+-rw-r--r-- gray/gray    206633 2013-09-24 03:19 tar-1.28/ChangeLog.1
+-rw-r--r-- gray/gray     86714 2014-07-27 16:34 tar-1.28/config.h.in
+-rw-r--r-- gray/gray      3359 2014-02-03 14:46 tar-1.28/Make.rules
+drwxr-xr-x gray/gray         0 2014-07-27 16:45 tar-1.28/doc/
+-rw-r--r-- gray/gray       439 2014-02-10 12:42 tar-1.28/doc/value.texi
+...
+</pre></blockquote>
+          Note how the entries listed here (file names, types, sizes,
+          owner, etc.) reflect the data we saw in the raw
+          <tt>hexdump(1)</tt> output above.
+        </p>
+
+        <H5><a name="extracting"></a>Extracting Contents</H5>
+        <p>
+          Extracting contents using the same example file would then look
+          like this:
+<blockquote><pre>$ tar -xf tar-latest.tar
+$ ls -l tar-1.28
+total 2299
+-rw------- 1 jschauma professor  79584 Sep 29  2013 ABOUT-NLS
+-rw------- 1 jschauma professor    601 Sep 24  2013 AUTHORS
+-rw------- 1 jschauma professor  35147 Sep 24  2013 COPYING
+-rw------- 1 jschauma professor 477038 Jul 27  2014 ChangeLog
+-rw------- 1 jschauma professor 206633 Sep 24  2013 ChangeLog.1
+-rw------- 1 jschauma professor  15752 Mar 24  2014 INSTALL
+-rw------- 1 jschauma professor   3359 Feb  3  2014 Make.rules
+-rw------- 1 jschauma professor   1243 Jul  7  2014 Makefile.am
+-rw------- 1 jschauma professor  65796 Jul 27  2014 Makefile.in
+-rw------- 1 jschauma professor  57810 Jul 27  2014 NEWS
+-rw------- 1 jschauma professor   9868 Feb 10  2014 README
+-rw------- 1 jschauma professor  20118 Feb 14  2014 THANKS
+-rw------- 1 jschauma professor   2168 Feb 10  2014 TODO
+-rw------- 1 jschauma professor   3126 Feb 14  2014 acinclude.m4
+...
+</pre></blockquote>
+          Note that we skipped the <tt>-v</tt> flag when extracting.  Note
+          also that <tt>tar(1)</tt> changed the ownership and permissions
+          on the files it extracted to the current user and <em>umask</em>.
+        </p>
+        <p>
+          Adding the <tt>-p</tt> flag allows <tt>tar(1)</tt> to preserve
+          the permissions when extracting.  Since setting/changing file
+          ownership requires superuser privileges, the file owner will
+          still remain the current user.  (Different implementations may
+          behave differently or require additional flags to (attempt to)
+          retain the ownership as prescribed in the archive.)
+        </p>
+        <H5><a name="extracting-partial"></a>Extracting Partial Contents</H5>
+        <p>
+          Sometimes you may wish to not extract <em>all</em> files from an
+          archive.  You can tell <tt>tar(1)</tt> which files you are
+          looking for by specifying them on the command-line:
+<blockquote><pre>$ tar -xvf tar-latest.tar tar-1.28/README tar-1.28/ChangeLog
+tar-1.28/README
+tar-1.28/ChangeLog
+$ 
+</pre></blockquote>
+        </p>
+        <p>
+          You can specify wildcards to extract multiple files, although
+          different implementations may require you to use different syntax.
+          For example, using GNU <tt>tar(1)</tt>, you could extract only
+          the C source files like so:
+<blockquote><pre>$ tar -xf tar-latest.tar --wildcards '*.[ch]'
+$ find tar-1.28 -name '*.[ch]' -print | wc -l
+417
+$ 
+</pre></blockquote>
+          Note that the wildcards are single-quoted to prevent the current
+          shell from interpreting the globs.  If you had files ending in
+          <tt>.c</tt> or <tt>.h</tt> in the current working directory and
+          didn't quote the wildcards, your command would have failed:
+<blockquote><pre>$ touch foo.c bar.h
+$ tar -xf tar-latest.tar --wildcards *.[ch]
+tar: bar.h: Not found in archive
+tar: foo.c: Not found in archive
+tar: Exiting with failure status due to previous errors
+$ 
+</pre></blockquote>
+        </p>
+
+        <H5><a name="creating"></a>Creating an Archive</H5>
+        <p>
+          Creating an archive is trivial by specifying the name of the
+          archive you wish to create and the files or directories to
+          include:
+<blockquote><pre>$ tar -cvf archive.tar /bin ../../some/path file1 dir2/
+tar: Removing leading `/' from member names
+/bin/
+/bin/bzmore
+/bin/ed
+...
+tar: Removing leading `../../' from member names
+../../some/path
+file1
+dir2/
+dir2/file
+dir2/subdir/
+...
+</pre></blockquote>
+          Note that <tt>tar(1)</tt> will descend into any directories
+          given and will retain the resulting hierarchy.  As a security
+          precaution to prevent you from accidentally destroying files, it
+          will remove pathname prefixes outside of the current working
+          directory, both absolute and relative.  That is,
+          "<tt>/bin/ed</tt>" will become "<tt>bin/ed</tt>" in your
+          archive; "<tt>../../some/path</tt>" would become
+          "<tt>some/path</tt>".  You can verify this by inspecting the
+          contents of the archive you just created.
+        </p>
+        <p>
+        </p>
+
+        <H4><a name="compression"></a>Compression</H4>
+        <p>
+          Nowadays, <tt>tar(5)</tt> files are frequently compressed using,
+          for example, Lempel-Ziv (<tt>compress(1)</tt>), LZ77 (<tt>gzip(1)</tt>),
+          or Burrows-Wheeler (<tt>bzip2</tt>) coding, and most <tt>tar(1)</tt>
+          implementations have support for compression built in.  Most
+          commonly, you can use the <tt>-z</tt> flag to enable
+          <tt>gzip(1)</tt> compression handling, or the <tt>-j</tt> flag
+          for <tt>bzip2(1)</tt> compression handling.  Some
+          implementations may also let you specify any arbitrary command
+          to invoke to handle compression.
+        </p>
+        <p>
+          Archives are now usually distributed using a filename ending in
+          <tt>.tar.gz</tt> (or <tt>.tgz</tt>) to indicate <tt>gzip(1)</tt>
+          compression, or <tt>.tar.bz2</tt> (or <tt>.tbz</tt>) to indicate
+          <tt>bzip2(1)</tt> compression.
+        </p>
+        <p>
+          In other words, what used to be separate commands:
+          <blockquote><pre>$ gzip -d tar-latest.tar.gz
+$ tar -tvf tar-latest.tar.gz
+...
+</pre></blockquote>
+          or, more idiomatic:
+          <blockquote><pre>$ gzip -d -c tar-latest.tar.gz | tar -tvf -</pre></blockquote>
+          can usually be handled by using:
+          <blockquote><pre>$ tar -ztvf tar-latest.tar.gz</pre></blockquote>
+          and similarly for archive creation of extraction.
+        </p>
+        <p>
+          To illustrate the use of another, external compression program,
+          consider the use of <tt>xz(1)</tt>:
+          <blockquote><pre>$ tar -cf archive.tar.xz --use-compress-program=xz directory
+$ file archive.tar.xz
+archive.tar.xz: XZ compressed data
+$ tar -tvf archive.tar.xz --use-compress-program=xz
+directory/
+...
+$ xz -c -d archive.tar.xz | tar -tvf -
+directory/
+...
+</pre></blockquote>
+        </p>
+
+        <H4><a name="pipes"></a>This One Weird Trick</H4>
+        <p>
+          Like many a good Unix utility, <tt>tar(1)</tt> can read input from
+          stdin and write to stdout, making it a flexible tool to use in
+          a pipe.
+        </p>
+        <p>
+          For example, to copy a directory hierarchy from one part of the
+          filesystem to another, one might run:
+          <blockquote><pre>$ tar -cf - -C /usr share | tar -xf - -C /backup</pre></blockquote>
+          Here, we are effectively copying the contents of
+          <tt>/usr/share</tt> to <tt>/backup/share</tt>.
+          Note the use of the <tt>-C</tt> flag to change the working
+          directory of <tt>tar(1)</tt> during archive creation and
+          extraction.
+        </p>
+        <p>
+          This concept becomes powerful when you realize that you can use
+          this approach to copy files from one host to another.  Consider,
+          for example, two hosts <em>hostA</em> and <em>hostB</em> on which
+          you have an account, but which can't talk to each other directly
+          (for example due to firewall restrictions).
+        </p>
+        <p>
+          From your current system, you could copy a file system hierarchy
+          from one host to the other without any intermediary files by
+          running:
+          <blockquote><pre>ssh hostA "tar -czf - dir" | ssh hostB "tar -xzf -"</pre></blockquote>
+        </p>
+
+
+        <H4><a name="similar"></a>Similar Tools</H4>
+        <h5>cpio(1)</h5>
+        <p>
+          Another popular archiving tool is <tt>cpio(1)</tt>, which
+          nowadays finds it most widespread use by way of the
+          <tt>rpm(1)</tt> package manager as well as part of the
+          <em>initramfs</em> during the Linux boot process.
+ 
+       </p>
+        <h5>pax(1)</h5>
+        <p>
+          The original archive format did not include all the information
+          about a file one might wish to retain, and POSIX.1 provided a
+          definition for a new file format as implemented by the
+          <tt>pax(1)</tt> utility.  This tool is backwards compatible and
+          generally read and write <tt>tar(1)</tt> archives but allows for
+          additional features.  However, <tt>tar(1)</tt> remains the most
+          popular archive utility, even though on some systems it actually
+          is implemented by way of <em>pax-as-tar</em> (i.e., the
+          <tt>pax(1)</tt>, when invoked <em>as</em> <tt>tar(1)</tt>).
+        </p>
+        <p>
+          <tt>pax(1)</tt> can also read <tt>cpio(1)</tt> format.
+        </p>
+
+        <h5><tt>tar(1)</tt>, <tt>pax(1)</tt>, and <tt>cpio(1)</tt> equivalent invocations</h5>
+        <table border="1">
+          <tr>
+            <td>&nbsp;</td>
+            <td><tt>tar(1)</tt></td>
+            <td><tt>pax(1)</tt></td>
+            <td><tt>cpio(1)</tt></td>
+          </tr>
+          <tr>
+            <td>viewing contents</td>
+            <td><tt>tar -tvf archive.tar</tt></td>
+            <td><tt>pax &lt; archive.tar</tt></td>
+            <td><tt>cpio -i -t &lt; archive.cpio</tt></td>
+          </tr>
+          <tr>
+            <td>extracting contents</td>
+            <td><tt>tar -xvf archive.tar</tt></td>
+            <td><tt>pax -rv &lt; archive.tar</tt></td>
+            <td><tt>cpio -i -v -d &lt; archive.cpio</tt></td>
+          </tr>
+          <tr>
+            <td>creating an archive</td>
+            <td><tt>tar -cvf archive.tar directory file1 file2</tt></td>
+            <td><tt>pax -wvf archive.tar directory file1 file2</tt></td>
+            <td><tt>find directory file1 file2 -print | cpio -ov &gt; archive.cpio</tt></td>
+          </tr>
+        </table>
+
+        <H4><a name="see-also"></a>See also</H4>
+        <ul>
+          <li><a href="https://en.wikipedia.org/wiki/Tar_%28computing%29">https://en.wikipedia.org/wiki/Tar_(computing)</a></li>
+          <li><a href="http://libarchive.org/">libarchive</a></li>
+          <li><a href="https://www.gnu.org/software/tar/">GNU tar</a></li>
+          <li><a href="http://netbsd.gw.com/cgi-bin/man-cgi?tar+5+NetBSD-current">UStar Format</a></li>
+          <li><a href="http://pubs.opengroup.org/onlinepubs/9699919799/utilities/pax.html">pax(1)</a></li>
+          <li><a href="http://netbsd.gw.com/cgi-bin/man-cgi?cpio+5+NetBSD-current">cpio(5) format</a></li>
+        </ul>
+
+      <hr>
+      [<a href="index.html">Course Website</a>]
+</BODY>
+</HTML>

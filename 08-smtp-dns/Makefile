@@ -25,7 +25,8 @@ PICTURES=	pics/phonebook.eps \
 		pics/resolution.eps \
 		pics/chicken-egg.eps \
 		pics/anonymous.eps \
-		pics/anonymous-tweet.eps
+		pics/anonymous-tweet.eps \
+		pics/arpanet1.eps
 
 
 .SUFFIXES: .tex .dvi .ps .pdf .txt .fig .eps .jpg .gif .png

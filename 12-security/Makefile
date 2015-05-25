@@ -9,34 +9,13 @@ DVIPS	=	dvips -o
 PS2PDF	=	ps2pdf
 PDFTOTEXT=	pdftotext
 
-PICTURES=	pics/dice-combinations.eps \
-		pics/livesofothers.eps \
-		pics/drive-by.eps \
-		pics/cold-boot-attack.eps \
+PICTURES=	\
+		pics/sysadmin_infosec.eps \
+		pics/kane.eps \
+		pics/Killchain.eps \
+		pics/turbolift_access_denied.eps \
 		pics/two-questions.eps \
-		pics/wateringhole.eps \
-		pics/broken-safe.eps \
-		pics/computer_in_safe.eps \
-		pics/computerwithworld.eps \
-		pics/security.eps \
-		pics/unplug.eps \
-		pics/unplugged.eps \
-		pics/sledgehammer.eps \
-		pics/paranoid.eps \
-		pics/symmetric-key-crypto.eps \
-		pics/DES-f-function.eps \
-		pics/Public_key_encryption.eps \
-		pics/ddos.eps \
-		pics/escalation.eps \
-		pics/backdoor-trojans.eps \
-		pics/leaking-bucket.eps \
-		pics/social_engineering.eps \
-		pics/computerwithworld.eps \
-		pics/adapters.eps \
-		pics/bobby-tables.eps \
-		pics/security-usability.eps \
-		pics/fishing.eps \
-		pics/spamhaus.eps
+		pics/security.eps
 
 
 

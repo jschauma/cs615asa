@@ -19,46 +19,11 @@
   <TABLE border="1" align="center" cellpadding="15">
     <TR>
       <TD valign="top">
-        <H2>CS615A -- Aspects of System Administration - Spring 2014 - Exercise: pkgsrc vs. pkgin</H2>
+        <H2>CS615A -- Aspects of System Administration - Exercise</H2>
 
-        <H3>Exercise: Compare the use of <em>pkgsrc</em> and <em>pkgin</em></H3>
+        <H3>Exercise: Package management basics</H3>
 
 	<hr>
-        <H4>Run a NetBSD EC2 instance</H4>
-
-	<blockquote><pre><tt>$ aws ec2 run-instances --instance-type t1.micro --image-id ami-65a7f30c</tt></pre></blockquote>
-
-        <H4>Binary Packages</H4>
-
-	<blockquote><pre><tt>$ /usr/bootstrap.sh binpkg
-$ pkg_info | wc -l
-$ man pkgin</tt></pre></blockquote>
-
-	<p>Use <tt>pkgin(1)</tt> to install the <em>nginx</em> webserver.</p>
-
-	<p>When done, also run:</p>
-
-	<blockquote><pre><tt>$ pkg_info | wc -l
-$ pkg_info -D -a | more
-$ /usr/pkg/sbin/pkg_admin fetch-pkg-vulnerabilities
-$ /usr/pkg/sbin/pkg_admin audit</tt></pre></blockquote>
-
-	<H4>Source packages</H4>
-
-	<blockquote><pre><tt>$ /usr/bootstrap.sh pkgsrc
-$ pkg_delete nginx pcre
-$ cd /usr/pkgsrc/www/nginx
-$ make install
-$ pkg_info | wc -l</tt></pre></blockquote>
-
-	<H4>Build manually from source</H4>
-
-	<blockquote><pre><tt>$ ftp http://nginx.org/download/nginx-1.5.10.tar.gz
-$ tar zxvf nginx-1.5.10.tar.gz
-$ cd nginx-1.5.10
-$ ./configure</tt></pre></blockquote>
-	<hr>
-
         <H4>Run a Fedora instance</H4>
 
 	<blockquote><pre><tt>$ aws ec2 run-instances --instance-type t1.micro --image-id ami-3b361952</tt></pre></blockquote>
@@ -69,22 +34,28 @@ $ ./configure</tt></pre></blockquote>
 $ yum install nginx
 $ rpm -qa | wc -l</pre></tt></blockquote>
 
-	<H4>Source packages</H4>
-
-	<blockquote><pre><tt>$ ftp ftp://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc.tar.bz2
-$ tar jxvf pkgsrc.tar.bz2
-$ cd pkgsrc/bootstrap
-$ sh bootstrap
-$ cd ../www/nginx
-$ bmake install
-</tt></pre></blockquote>
+	<h5>How many packages were added?</h5>
+	<h5>Are all added packages necessary to run the software?</h5>
+	<h5>What (optional) features does the installed server support?</h5>
+	<h5>Which version of <em>nginx</em> did you end up with?</h5>
+	<h5>Which directories did the software get installed into?</h5>
+	<h5>How do you know you didn't get any backdoors installed?</h5>
 
 	<H4>Build manually from source</H4>
 
-	<blockquote><pre><tt>$ curl http://nginx.org/download/nginx-1.5.10.tar.gz &gt; nginx-1.5.10.tar.gz
-$ tar zxvf nginx-1.5.10.tar.gz
-$ cd nginx-1.5.10
-$ ./configure</tt></pre></blockquote>
+	<blockquote><pre><tt>$ curl http://nginx.org/download/nginx-1.7.9.tar.gz &gt; nginx-1.7.9.tar.gz
+$ tar zxvf nginx-1.7.9.tar.gz 
+$ cd nginx-1.7.9
+$ ./configure
+$ make
+$ sudo make install</tt></pre></blockquote>
+
+	<h5>What additional software did you have to install?</h5>
+	<h5>Did this software use any of the added packages you had
+installed in the previous step? Why / why not?</h5>
+	<h5>What (optional) features does the installed server support?</h5>
+	<h5>Which directories did the software get installed into?</h5>
+	<h5>How do you know you didn't get any backdoors installed?</h5>
 
        </p>
       <hr>
