@@ -1,0 +1,19 @@
+You are now ready to capture the final flag.
+
+To make things a bit easier for you, I have added the
+bash(1) shell for you.  Unfortunately, I was only able
+to find an older version; I hope you won't mind.
+
+This level is quite tricky.  There is a password stored for
+you in the Foghorn Leghorn Secure File System (flsfs(4)),
+but what is it used for?  All I know is that the flock
+is getting a bit looney now, putting ascii art into
+random places.
+
+     ____                 _   _            _    _ 
+    / ___| ___   ___   __| | | |_   _  ___| | _| |
+   | |  _ / _ \ / _ \ / _` | | | | | |/ __| |/ / |
+   | |_| | (_) | (_) | (_| | | | |_| | (__|   <|_|
+    \____|\___/ \___/ \__,_| |_|\__,_|\___|_|\_(_)
+
+

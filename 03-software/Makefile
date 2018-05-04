@@ -36,7 +36,7 @@ PICTURES=	pics/bandaid.eps \
 		pics/dashboard-system-software.eps \
 		pics/ignition-firmware.eps \
 		pics/linksys.eps \
-		pics/cell-phone.eps \
+		pics/car-firmware.eps \
 		pics/remote.eps \
 		pics/sun-firmware.eps \
 		pics/kernel-dmesg.eps \
@@ -60,7 +60,9 @@ PICTURES=	pics/bandaid.eps \
 		pics/bower.eps \
 		pics/ide-drive.eps \
 		pics/leftshark.eps \
-		pics/ufs-details.eps
+		pics/ufs-details.eps \
+		pics/unikernel.eps \
+		pics/usb-icon.eps
 
 
 

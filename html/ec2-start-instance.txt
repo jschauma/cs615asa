@@ -1,0 +1,71 @@
+
+EC2-START-INSTANCE(1)     BSD General Commands Manual    EC2-START-INSTANCE(1)
+
+NAME
+     ec2-start-instance -- start an EC2 instance and wait for it to be running
+
+SYNOPSIS
+     ec2-start-instance [-hv] [-a ami]
+
+DESCRIPTION
+     The ec2-start-instance tool will start an EC2 instance and wait for it to
+     be running, then print to STDOUT the instance identifier and the host-
+     name.  As the tool honors a number of environment variables as noted in
+     the section ENVIRONMENT, it is useful for scripting other, more advanced
+     tools.
+
+OPTIONS
+     ec2-start-instance accepts the following command-line flags:
+
+     -a AMI  Start an instance of the given AMI.  If not specified,
+             ec2-start-instance will default to ami-b232d0db.
+
+     -h      Print a usage statement and exit.
+
+     -v      Be verbose.  If not specified, ec2-start-instance will not gener-
+             ate any output other than the final instance identifier and the
+             hostname.
+
+OUTPUT
+     Unless the -v flag is given, the only output generated on STDOUT is a
+     pair of strings: the instance identifier and the hostname of the new run-
+     ning instance.  See the section EXAMPLES for expected output.
+
+     If the -v flag is given, ec2-start-instance may print out some useful
+     information about what steps it is currently performing.
+
+     Any errors encountered cause a meaningful error message to be printed to
+     STDERR.
+
+EXIT STATUS
+     The ec2-start-instance will exit with a return status of 0 under normal
+     circumstances.  If an error occurred, ec2-start-instance will exit with a
+     value >0.
+
+EXAMPLES
+     The following examples illustrate common usage of this tool.
+
+           $ ec2-start-instance -a ami-19a34270
+           i-db464ab7 ec2-75-101-236-71.compute-1.amazonaws.com
+           $
+
+ENVIRONMENT
+     ec2-start-instance assumes that the user has set up their environment for
+     general use with the EC2 tools.  That is, it will not set or modify the
+     variables EC2_CERT, EC2_HOME and EC2_PRIVATE_KEY.
+
+     ec2-start-instance allows the user to add custom flags to the
+     ec2-run-instances(1) command via the EC2_RUN_INSTANCES_FLAGS environment
+     variable.  If this variable is not set, ec2-start-instance will not
+     append any flags to the command besides -a ami.
+
+SEE ALSO
+     ec2-run-instances(1), ec2-describe-instances(1), ping(8)
+
+HISTORY
+     ec2-start-instance was originally assigned by Jan Schaumann
+     <jschauma@cs.stevens.edu> as a homework assignment for the class "Aspects
+     of System Administration" at Stevens Institute of Technology in the
+     Spring of 2011.
+
+BSD                             March 06, 2011                             BSD

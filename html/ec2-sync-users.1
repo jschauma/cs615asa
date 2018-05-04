@@ -1,0 +1,87 @@
+.Dd March 03, 2010
+.Dt EC2-SYNC-USERS 1
+.Os
+.Sh NAME
+.Nm ec2-sync-users
+.Nd create user accounts from the running system to a given EC2 instance
+.Sh SYNOPSIS
+.Nm
+.Op Fl hv
+.Fl i Ar instance
+.Ar user Oo ... Oc
+.Sh DESCRIPTION
+The
+.Nm
+tool will create accounts for the given users on the given EC2 instance in
+sync with the system it is running on.
+That is, for each user given on the command-line,
+.Nm
+will extract all login information (the uid, gid, gecos, and shell) from the
+running system and then create the same account on the given EC2 instance with
+these values.
+.Sh OPTIONS
+.Nm
+accepts the following command-line flags:
+.Bl -tag -width i_instance_
+.It Fl h
+Print a usage statement and exit.
+.It Fl i Ar instance
+Use the given EC2 instance.
+.It Fl v
+Be verbose.
+.El
+.Sh DETAILS
+.Nm
+takes as input an EC2 instance name (such as "i-dd18eeb6") and a list of
+usernames.
+For each user, the uid, gid, gecos and shell are determined from the running
+system.
+Once the instance is determined to be running,
+.Nm
+will create all user accounts on the instance using precisely these
+parameters.
+If a user with the given username already exists on the remote instance, then
+.Nm
+will not perform any changes to the account information.
+.Pp
+If a local user has a file named "aws.pub" in their ~/.ssh directory,
+.Nm
+will append it on the remote instance to that user's ~/.ssh/authorized_keys
+file.
+.Sh OUTPUT
+Unless the
+.Fl v
+flag is given, no output is generated unless an error occurs.
+Otherwise,
+.Nm
+may print out some useful information about what steps it is currently
+performing.
+.Pp
+Any errors encountered cause a meaningful error message to be printed to
+STDERR.
+.Sh EXIT STATUS
+The
+.Nm
+will exit with a return status of 0 under normal circumstances.
+If an error occurred,
+.Nm
+will exit with a value >0.
+.Sh EXAMPLES
+The following examples illustrate common usage of this tool.
+.Pp
+.Bd -literal -offset indent
+ec2-sync-users -i i-dd18eeb6 jschauma bloom djd
+.Ed
+.Sh SEE ALSO
+.Xr ldapsearch 1 ,
+.Xr finger 1 ,
+.Xr id 1 ,
+.Xr getpwent 3 ,
+.Xr useradd 8
+.Sh HISTORY
+.Nm
+was originally assigned by
+.An Jan Schaumann
+.Aq jschauma@cs.stevens.edu
+as a homework assignment for the class "Aspects of System Administration" at
+Stevens Institute of Technology in the Spring of 2010.

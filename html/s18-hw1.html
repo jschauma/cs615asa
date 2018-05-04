@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+
+  <title>CS615A -- Aspects of System Administration -- HW#1</title>
+  <style type="text/css">
+  body {
+  background-color: #FFFFFf;
+  }
+  </style>
+  <style type="text/css">
+  li.c1 {list-style: none}
+  </style>
+
+
+
+
+  <table cellpadding="15" border="1" align="center">
+    <tbody><tr>
+      <td valign="top">
+        <h2>CS615A -- Aspects of System Administration</h2>
+
+        <h3>HW#1: Setup your environment for EC2 and create an instance</h3>
+
+        <p><em>Please carefully read this document in its entirety.</em></p>
+
+        <h4>Summary:</h4>
+        <p>
+          The objective of this assignment is for you to set up your
+          working environment <!-- on <a
+          href="linux-lab.html">linux-lab.cs.stevens.edu</a> -->
+          to make it easy for you to interact with the
+          <a href="https://aws.amazon.com/ec2/">Amazon Compute Cloud</a>.
+          In addition to setting up your first instance, you will also
+          familiarize yourself with some of the commands relating to filesystems,
+          disks and storage as we will discuss in lecture #2.
+        </p>
+        <p>
+          This assignment is worth 15 points.
+        </p>
+
+        <h4>Review provided documentation</h4>
+        <p>
+          Make sure to carefully read through the following documentation:
+          </p><ul>
+            <li><a href="http://aws.amazon.com/ec2/">http://aws.amazon.com/ec2/</a></li>
+            <li><a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html">Getting
+Started with Amazon EC2 Linux Instances</a></li>
+            <li><a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html">AWS Command Line Interface</a></li>
+           </ul>
+         <p></p>
+	<p>
+	<em>Note</em>: some of the documentation you may find on the
+	internet may not be up to date,
+        find online on your own) may by now be outdated, use
+        older tools or be flat out wrong. Do not blindly follow the instructions,
+        do not merely copy commands -- you need to show that you <em>understood</em>
+        them.
+        </p>
+
+       <h4>Set up your environment</h4>
+       <p>
+           You need to set up your environment for interaction with the Amazon
+           Cloud.  You need to create a
+           document outlining what steps you took to customize or update your
+           setup, such as changes to your shell's startup files, environment variables etc.
+           On <tt>linux-lab.cs.stevens.edu</tt> the Amazon EC2 and related cloud
+           tools should already be installed; use the <tt>aws</tt>
+           command found in <tt>/usr/local/bin</tt> -- see <tt>aws help</tt>.
+       </p>
+	<p>
+	(If the tools are not found in that location, please follow the
+	user guide linked above to install them under your
+	<tt>~/.local/bin</tt> directory via <tt>pip</tt>.)
+	</p>
+       <p>
+          Please note that we will only focus on using the command-line
+	   tools for EC2.  That is, nowhere in the process of setting
+	things up should you have a need to refer to menu items, or
+	which button to click.  This class is command-line all the way.
+       </p>
+
+       <h4>Create an EC2 instance</h4>
+       <p>
+           Create an EC2 instance of <a href="https://wiki.netbsd.org/amazon_ec2/amis/">NetBSD 7.x</a> and start it.
+           Once it is running, log in on the virtual host
+           and run the required commands to:
+         </p><ul>
+           <li>display basic system information</li>
+           <li>display the partition table</li>
+           <li>display the currently mounted filesystems</li>
+           <li>display available disk space</li>
+         </ul>
+           After you are done, remember to shut down your instance.
+       <p></p>
+
+       <h4>Deliverables</h4>
+       <p>
+	Please submit a plain text file containing
+	any findings or notes about any issues you had to
+	overcome.  Then, please append the output of the following
+	commands:
+             </p><ul>
+               <li><tt>uname -a</tt></li>
+               <li><tt>whoami</tt></li>
+               <li><tt>date</tt></li>
+               <li><tt>w</tt></li>
+               <li><tt>ifconfig -a</tt></li>
+               <li><tt>netstat -na</tt></li>
+               <li>the commands you determine to be used to display the
+                      partition table, currently mounted filesystems, disk
+                      space</li>
+              </ul>
+        <p></p>
+        <p>
+          <em>Note</em>: It is perfectly acceptable to publicly ask (and answer!)
+          questions, for example in the <a href="http://developer.amazonwebservices.com/connect/forum.jspa?forumID=30">AWS
+          Forum</a> or our course mailing list.
+        </p>
+
+        <p>
+             The due date for this assignment is 2018-01-29 14:00.  Please
+             attach a copy of the file to an email sent from your <tt>@stevens.edu</tt>
+             email address to <a href="mailto:jschauma@stevens.edu?subject=[CS615]%20HW1">jschauma@stevens.edu</a>
+             with a subject of "[CS615] HW1".
+        </p>
+        <hr>
+        [<a href="index.html">Course Website</a>]
+
+
+</td></tr></tbody></table></div></body></html>

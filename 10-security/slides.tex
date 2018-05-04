@@ -34,65 +34,92 @@
 \end{center}
 \vspace*{\fill}
 
-\subsection{Joke Day}
-\vspace*{\fill}
-\begin{center}
+\subsection{Where/how does 'security' come into play?}
+
+\subsection{Where/how does 'security' come into play?}
+Lecture 02 (Filesystems, Disks, Storage)
+\begin{itemize}
+	\item storage model (DAS, NAS, SAN, Cloud)
+	\item partitions / mount options
+	\item filesystem features (permissions, access control lists)
+	\item DoS on disk space
+	\item firmware compromise on hard drives
+\end{itemize}
+\vspace{.5in}
+Lecture 03 (Software Installation Concepts)
+\begin{itemize}
+	\item CVE-2015-7547: glibc getaddrinfo stack-based buffer overflow
+	\item software package management and updates
+	\item patch management
+	\item package integrity checking
+\end{itemize}
+
+\subsection{Where/how does 'security' come into play?}
+Lecture 04 (Multiuser Fundamentals, Ethics)
+\begin{itemize}
+	\item Linux Mint ISOs compromised
+	\item Apple resists court order to unlock iPhone
+	\item privileges and trust models
+	\item privacy, obligation to protect users, social responsibility
+\end{itemize}
+\vspace{.5in}
+Lecture 05 (Automation)
+\begin{itemize}
+	\item DROWN attack (CVE-2016-0800)
+	\item using the wrong tool for the job $=>$ writing insecure code
+	\item understanding language / framework pitfalls
+\end{itemize}
+
+\subsection{Where/how does 'security' come into play?}
+Lecture 06 (Networking)
+\begin{itemize}
+	\item protocols and visibility of data on different layers
+	\item tcpdump can read all packets
+	\item location of attacker on network implies capabilities
+	\item network censorship
+\end{itemize}
+\vspace{.5in}
+Lecture 07 (DNS; Backup and Disaster Recovery)
+\begin{itemize}
+	\item DNS cache poisoning
+	\item DNS registrars as attack points
+	\item use of DNS as another channel for host verification (SSHFP records)
+	\item trustworthiness of DNS (DNSSEC)
+	\item disasters include security breaches
+	\item safety of backups (encrypted backups?)
+\end{itemize}
+
+\subsection{Where/how does 'security' come into play?}
+Lecture 08 (SMTP, HTTP)
+\begin{itemize}
+	\item email as attack methods (spam, phishing)
+	\item email privacy implications
+	\item email relaying
+	\item HTTP as universal network entry point
+	\item HTTP fronting applications and handling data
+\end{itemize}
+\vspace{.5in}
+Lecture 09 (HTTPS, Monitoring)
+\begin{itemize}
+	\item transport security and authentication
+	\item protocol downgrade and MitM attacks
+	\item availability of logs to establish context
+	\item sensitive data in logs
+	\item outsourcing monitoring services
+\end{itemize}
+
+\subsection{How do we secure a system?}
+
+\subsection{How do we secure a system?}
 \Huge
-WHO HAS ANY ARP JOKES?
+\vspace*{\fill}
+\begin{center}
+	It depends. \\
+\vspace{.5in}
 \Normalsize
+	(Context required.)
 \end{center}
 \vspace*{\fill}
-
-\subsection{When is a computer system secure?}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.6]{pics/computerwithworld.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{When is a computer system secure?}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.6]{pics/unplug.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{When is a computer system secure?}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.3]{pics/unplugged.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{When is a computer system secure?}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.3]{pics/ComputerChainedDown.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{When is a computer system secure?}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.7]{pics/computer_in_safe.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{When is a computer system secure?}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.3]{pics/broken-safe.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{When is a computer system secure?}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.6]{pics/security-usability.eps}
-\end{center}
-\vspace*{\fill}
-
-
 
 \subsection{What is security?}
 \Huge
@@ -116,26 +143,20 @@ risk
 \end{verbatim}
 \Normalsize
 
-\subsection{What danger are you facing?}
-Suffering harm or loss of {\em what}?
-
-\subsection{What danger are you facing?}
-Suffering harm or loss of {\em what}?
+\subsection{Suffering harm or loss of {\em what}?}
 
 \begin{itemize}
 	\item access to data
 \end{itemize}
 
-\subsection{What danger are you facing?}
-Suffering harm or loss of {\em what}?
+\subsection{Suffering harm or loss of {\em what}?}
 
 \begin{itemize}
 	\item access to data
 	\item integrity of data
 \end{itemize}
 
-\subsection{What danger are you facing?}
-Suffering harm or loss of {\em what}?
+\subsection{Suffering harm or loss of {\em what}?}
 
 \begin{itemize}
 	\item access to data
@@ -143,8 +164,7 @@ Suffering harm or loss of {\em what}?
 	\item availability of services
 \end{itemize}
 
-\subsection{What danger are you facing?}
-Suffering harm or loss of {\em what}?
+\subsection{Suffering harm or loss of {\em what}?}
 
 \begin{itemize}
 	\item access to data
@@ -153,8 +173,7 @@ Suffering harm or loss of {\em what}?
 	\item reputation
 \end{itemize}
 
-\subsection{What danger are you facing?}
-Suffering harm or loss of {\em what}?
+\subsection{Suffering harm or loss of {\em what}?}
 
 \begin{itemize}
 	\item access to data
@@ -164,8 +183,7 @@ Suffering harm or loss of {\em what}?
 	\item monetary loss due to any of the above
 \end{itemize}
 
-\subsection{What danger are you facing?}
-Suffering harm or loss of {\em what}?
+\subsection{Suffering harm or loss of {\em what}?}
 
 \begin{itemize}
 	\item access to data
@@ -175,6 +193,19 @@ Suffering harm or loss of {\em what}?
 	\item monetary loss due to any of the above
 	\item monetary loss due to physical items of actual value
 \end{itemize}
+
+\subsection{Suffering harm or loss of {\em what}?}
+
+\begin{itemize}
+	\item access to data
+	\item integrity of data
+	\item availability of services
+	\item reputation
+	\item monetary loss due to any of the above
+	\item monetary loss due to physical items of actual value
+	\item ...
+\end{itemize}
+
 
 \subsection{How to determine {\em risk}}
 ``Risk Assessment''
@@ -244,136 +275,76 @@ A {\em risk} is the {\em likelihood} of a {\em threat} successfully exploiting
 a {\em vulnerability} and the {\em estimated cost} (or potential damage) both
 in the short and long term you may incur as a result.
 
-\subsection{Joke Day}
-\vspace*{\fill}
-\begin{center}
-\Huge
-I wrote down a Perl joke six months ago, but now I can’t read it.
-\Normalsize
-\end{center}
-\vspace*{\fill}
+\subsection{Threat Model}
+For each system/component/product/service/...
 
-\subsection{It's not just 1s and 0s}
-\vspace{.5in}
-
-\Huge
-\begin{center}
-System security is not restricted to {\em software} security.
-\end{center}
-\Normalsize
-
-\subsection{Physical Security}
-\vspace{.5in}
-
-\Huge
-\begin{center}
-If you have even only temporary physical access to a machine, you own it.
-\end{center}
-\Normalsize
-
-\subsection{Joke Day}
-\vspace*{\fill}
-\begin{center}
-\Huge
-There are no bad Apple jokes, you simply tell them wrong.
-\Normalsize
-\end{center}
-\vspace*{\fill}
-
-
-\subsection{Types of Software Vulnerabilities}
-(Distributed) Denial of Service
-\begin{center}
-	\includegraphics[scale=1.0]{pics/ddos.eps}
-\end{center}
-
-\subsection{Types of Software Vulnerabilities}
-Privilege Escalation
-\begin{center}
-	\includegraphics[scale=0.6]{pics/escalation.eps}
-\end{center}
-
-\subsection{Types of Software Vulnerabilities}
-Backdoors and Trojans
-\begin{center}
-	\includegraphics[scale=0.9]{pics/backdoor-trojans.eps}
-\end{center}
-
-\subsection{Types of Software Vulnerabilities}
-Information Disclosure
-\begin{center}
-	\includegraphics[scale=1.0]{pics/leaking-bucket.eps}
-\end{center}
-
-\subsection{Types of Software Vulnerabilities}
-Social Engineering (such as phishing)
-\begin{center}
-	\includegraphics[scale=1.0]{pics/social_engineering.eps}
-	\includegraphics[scale=0.8]{pics/fishing.eps}
-\end{center}
-
-\subsection{Types of Software Vulnerabilities}
-SQL Injection
-\begin{center}
-	\includegraphics[scale=1.0]{pics/bobby-tables.eps} \\
-	\verb+https://xkcd.com/327/+
-\end{center}
-
-
-\subsection{Of course...}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.0]{pics/adapters.eps}  \\
-	\verb+http://fffff.at/free-universal-construction-kit/+ \\
-\end{center}
-\vspace*{\fill}
-
-\subsection{Joke Day}
-\vspace*{\fill}
-\begin{center}
-\Huge
-The great thing about rsync jokes is that it only tells them if you
-haven't heard them before.
-\Normalsize
-\end{center}
-\vspace*{\fill}
-
-
-\subsection{Encryption}
-{\em Encryption} can help mitigate {\em some} of the risks {\em sometimes}.
-
-\subsection{Encryption}
-{\em Encryption} can help mitigate {\em some} of the risks {\em sometimes}.
-\\
-
-It may provide security in the areas of:
 \begin{itemize}
-	\item Secrecy or Confidentiality
+	\item identify {\em what} you're protecting
+	\item identify {\em whom} you're protecting it {\em from}
+		\begin{itemize}
+			\item identify {\em goals} of the attacker
+			\item identify {\em motivation} of the attacker
+			\item identify {\em capabilities} of the attacker
+		\end{itemize}
+	\item identify threats you cannot defend against (within this
+		system or in general)
 \end{itemize}
 
-\subsection{Encryption}
-{\em Encryption} can help mitigate {\em some} of the risks {\em sometimes}.
-\\
+\subsection{Threat Model}
+\vspace*{\fill}
+\Huge
+\begin{center}
+Your adversaries are determined human actors with
+specific goals.
+\end{center}
+\Normalsize
+\vspace*{\fill}
 
-It may provide security in the areas of:
-\begin{itemize}
-	\item Secrecy or Confidentiality
-	\item Accuracy or Integrity
-\end{itemize}
+\subsection{Imperatives}
+\vspace*{\fill}
+\Huge
+\begin{center}
+Constantly seek to reduce your attack surface. \\
+Identify and eliminate attack vectors.\\
 
-\subsection{Encryption}
-{\em Encryption} can help mitigate {\em some} of the risks {\em sometimes}.
-\\
+\addvspace{.5in}
+You can't do this alone:\\
+lead by example, seek allies.
+\end{center}
+\Normalsize
+\vspace*{\fill}
 
-It may provide security in the areas of:
-\begin{itemize}
-	\item Secrecy or Confidentiality
-	\item Accuracy or Integrity
-	\item Authenticity
-\end{itemize}
+\subsection{Defense in Depth}
+\vspace*{\fill}
+\Huge
+\begin{center}
+	Security is like an onion: \\
+	the more layers you peel away, the more it stinks.
+\end{center}
+\Normalsize
+\vspace*{\fill}
 
-\subsection{Encryption}
-{\em Encryption} can help mitigate {\em some} of the risks {\em sometimes}.
+\subsection{The biggest threat comes from the inside}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.0]{pics/kane.eps}
+\end{center}
+\vspace*{\fill}
+
+\subsection{The biggest threat comes from the inside}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.0]{pics/Killchain.eps} \\
+	\verb+http://is.gd/6sREQh+
+\end{center}
+\vspace*{\fill}
+
+\subsection{Cryptography}
+\Normalsize
+{\em Cryptography} can help mitigate {\em some} of the risks {\em sometimes}.
+
+\subsection{Cryptography}
+{\em Cryptography} can help mitigate {\em some} of the risks {\em sometimes}.
 \\
 
 It may provide security in the areas of:
@@ -382,12 +353,10 @@ It may provide security in the areas of:
 		\begin{itemize}
 			\item {\em Did/could anybody else see (parts of) the message?}
 		\end{itemize}
-	\item Accuracy or Integrity
-	\item Authenticity
 \end{itemize}
 
-\subsection{Encryption}
-{\em Encryption} can help mitigate {\em some} of the risks {\em sometimes}.
+\subsection{Cryptography}
+{\em Cryptography} can help mitigate {\em some} of the risks {\em sometimes}.
 \\
 
 It may provide security in the areas of:
@@ -400,11 +369,10 @@ It may provide security in the areas of:
 		\begin{itemize}
 			\item {\em Was the message (could it have been) modified before I received it?}
 		\end{itemize}
-	\item Authenticity
 \end{itemize}
 
-\subsection{Encryption}
-{\em Encryption} can help mitigate {\em some} of the risks {\em sometimes}.
+\subsection{Cryptography}
+{\em Cryptography} can help mitigate {\em some} of the risks {\em sometimes}.
 \\
 
 It may provide security in the areas of:
@@ -424,75 +392,40 @@ who I think it is / they claim they are?}
 		\end{itemize}
 \end{itemize}
 
-\subsection{Basic Security Concepts: Confidentiality}
+\subsection{Cryptography}
+Note:
 \begin{itemize}
-	\item Alice and Bob agree on a way to transform data
-	\item transformed data is sent over insecure channel
-	\item Alice and Bob are able to get data out of the transformation
+	\item {\em Authentication} \verb+!=+ {\em Authorization}
+	\item cryptography does not handle authorization
+	\item you generally need all three: confidentiality, integrity, authenticity
+	\item cryptography cannot prevent against incorrect use \\
+		(usability is hard, let's go shopping)
 \end{itemize}
 \addvspace{.5in}
-\begin{verbatim}
-$ cat secret
-Oehpr Fpuarvre rkcrpgf gur Fcnavfu Vadhvfvgvba!
-$
-\end{verbatim}
+Know your threat model!
 
 \subsection{Basic Security Concepts: Confidentiality}
 \begin{itemize}
-	\item Alice and Bob agree on a way to transform data
+	\item Alice and Bob agree on a way to transform plain text into ciphertext
 	\item transformed data is sent over insecure channel
-	\item Alice and Bob are able to get data out of the transformation
+	\item Alice and Bob are able to reverse transformation
 \end{itemize}
-\addvspace{.5in}
-\begin{verbatim}
-$ cat secret
-Oehpr Fpuarvre rkcrpgf gur Fcnavfu Vadhvfvgvba!
-$ cat secret | rot13
-Bruce Schneier expects the Spanish Inquisition!
-$
-\end{verbatim}
 
-%\subsection{Basic Security Concepts: Confidentiality}
-%\begin{itemize}
-%	\item Alice and Bob agree on a way to transform data
-%	\item transformed data is sent over insecure channel
-%	\item Alice and Bob are able to get data out of the transformation
-%\end{itemize}
-%\addvspace{.5in}
-%\begin{verbatim}
-%$ cat secret
-%Jrbk.pycbi x.y,..b ekrpat abe ',.pyf jab ugbjycrb ao a ocmln. ogxoycygycrb jfld.p!
-%$ cat secret | qibenx2djregl
-%[...]
-%$
-%\end{verbatim}
-%
 \subsection{Basic Security Concepts: Confidentiality}
 \begin{itemize}
-	\item Alice and Bob agree on a way to transform data
+	\item Alice and Bob agree on a way to transform plain text into ciphertext
 	\item transformed data is sent over insecure channel
-	\item Alice and Bob are able to get data out of the transformation
+	\item Alice and Bob are able to reverse transformation
 \end{itemize}
 \addvspace{.5in}
-\begin{center}
-	\includegraphics[scale=0.75]{pics/symmetric-key-crypto.eps}
-\end{center}
-
-\subsection{Basic Security Concepts: Confidentiality}
 Different approaches:
 \begin{itemize}
 	\item secret key cryptography (example: {\em DES})
 		\begin{itemize}
-			\item Alice and Bob share a secret
-			\item Alice can prove to Bob that she knows a secret
+			\item Alice and Bob share a secret key
 		\end{itemize}
 \end{itemize}
- \begin{center}
-        \includegraphics[scale=0.42]{pics/DES-f-function.eps} \\
- \end{center}
-
-\subsection{Basic Security Concepts: Confidentiality}
-Different approaches:
+\addvspace{.25in}
 \begin{itemize}
 	\item public key cryptography (example: {\em RSA})
 		\begin{itemize}
@@ -502,9 +435,13 @@ Different approaches:
 			\item public key can be shared with anybody (via insecure means)
 		\end{itemize}
 \end{itemize}
-\begin{center}
-	\includegraphics[scale=0.43]{pics/Public_key_encryption.eps}
- \end{center}
+
+\subsection{Threats to Confidentiality}
+\begin{itemize}
+	\item lack of {\em authenticity}
+	\item key exchange
+	\item key disclosure
+\end{itemize}
 
 \subsection{Basic Security Concepts: Integrity}
 In order to protect against forgery or data manipulation, provide some sort of
@@ -535,26 +472,17 @@ digest or checksum (often a one-way hash).  Popular choices:
 \end{itemize}
 
 \subsection{Basic Security Concepts: Integrity}
-In order to protect against forgery or data manipulation, provide some sort of
-digest or checksum (often a one-way hash).  Popular choices:
+Examples: host based IDS, package manager signatures
 
+\vspace{.5in}
+Some possible threats:
 \begin{itemize}
-	\item {\tt 5f4dcc3b5aa765d61d8327deb882cf99} (MD5)
-	\item {\tt 5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8} (SHA-1)
-	\item {\tt 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62 \
-                   a11ef721d1542d8} (SHA256)
-	\item {\tt b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5 \
-                   e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a \
-                   2ea6d103fd07c95385ffab0cacbc86} (SHA512)
-\end{itemize}
-
-
-Caveats:
-\begin{itemize}
+	\item collisions in algorithm
+	\item lack of {\em authenticity} (Where did I get the checksum?)
+	\item lack of {\em integrity} (Was the checksum tampered to match the (tampered) data?)
+	\item ``verification'' with compromised tools
 	\item ``rainbow tables'' / internet search engines allow for easy reverse
 		lookup of un-salted hashes.
-	\item integrity only ensured if authenticity of information itself is
-		guaranteed
 \end{itemize}
 
 \subsection{Basic Security Concepts: Authenticity}
@@ -611,115 +539,80 @@ Three general ways of proving that you are who you say you are:
 	\item something you are
 		\begin{itemize}
 			\item physical, physiological or behavioral traits
-			\item can not (easily or at all) be given to or
+			\item cannot (easily or at all) be given to or
 				used by somebody else
+			\item cannot (easily or at all) be changed once
+				compromised
 		\end{itemize}
 \end{itemize}
 
-
-
-\subsection{Basic Security Concepts: Proving Authenticity}
+\subsection{Basic Security Concepts: Authenticity}
+Some possible threats:
 \begin{itemize}
-	\item in private key cryptography, authenticity is (often) assumed/implied
-	\item in public key cryptography, often accomplished via a separate
-		signature
-	\item ways to establish assurance of authenticity for parties that have
-		never met:
-		\begin{itemize}
-			\item public key infrastructures (PKI) and certificate
-				authorities (CA)
-			\item ``web of trust''
-		\end{itemize}
+	\item lack of {\em confidentiality}
+	\item lack of {\em integrity}
+	\item reliance on fragile infrastructure
+	\item usability
+	\item conflation with {\em authorization}
 \end{itemize}
 
-%\subsection{Basic Security Concepts: PKI}
-%\vspace*{\fill}
-%\begin{center}
-%	\includegraphics[scale=0.55]{pics/pki.eps}
-%\end{center}
-%\vspace*{\fill}
-%
-%\subsection{Basic Security Concepts: Web of Trust}
-%\begin{center}
-%	\includegraphics[scale=0.6]{pics/belushi-bacon1.eps}
-%\end{center}
-%\subsection{Basic Security Concepts: Web of Trust}
-%\small
-%John Belushi, Donald Sutherland (Animal House)
-%\begin{center}
-%	\includegraphics[scale=0.6]{pics/belushi-bacon2.eps}
-%\end{center}
-%
-%\subsection{Basic Security Concepts: Web of Trust}
-%\small
-%Donald Sutherland, Pauly Shore (Lost Angels)
-%\begin{center}
-%	\includegraphics[scale=0.6]{pics/belushi-bacon3.eps}
-%\end{center}
-%
-%\subsection{Basic Security Concepts: Web of Trust}
-%\small
-%Pauly Shore, Andy Dick (In the Army now)
-%\begin{center}
-%	\includegraphics[scale=0.6]{pics/belushi-bacon4.eps}
-%\end{center}
-%
-%\subsection{Basic Security Concepts: Web of Trust}
-%\small
-%Andy Dick, Claudia Schiffer (Zoolander)
-%\begin{center}
-%	\includegraphics[scale=0.6]{pics/belushi-bacon5.eps}
-%\end{center}
-%
-%\subsection{Basic Security Concepts: Web of Trust}
-%\small
-%Claudia Schiffer, Sarah Jessica Parker (Life without Dick)
-%\begin{center}
-%	\includegraphics[scale=0.6]{pics/belushi-bacon6.eps}
-%\end{center}
-%
-%\subsection{Basic Security Concepts: Web of Trust}
-%\small
-%Sarah Jessica Parker, Kevin Bacon (Footloose)
-%\begin{center}
-%	\includegraphics[scale=0.6]{pics/belushi-bacon6.eps}
-%\end{center}
-%\Normalsize
-%
-%\subsection{Basic Security Concepts: Web of Trust}
-%Problems with the Web of Trust:
-%\begin{center}
-%	\includegraphics[scale=0.8]{pics/pauly-shore.eps}
-%	\hspace*{15mm}
-%	\includegraphics[scale=1.0]{pics/andy0dick.eps}
-%\end{center}
-%
-%\subsection{Basic Security Concepts: Web of Trust}
-%Better:
-%\begin{center}
-%	\includegraphics[scale=0.8]{pics/bacon-belushi.eps}
-%\end{center}
-%
-%\subsection{Basic Security Concepts: Web of Trust}
-%\begin{itemize}
-%	\item you have to trust every signing entity in your trustpath
-%	\item the shorter the trustpath, the better
-%	\item the more nodes, the better
-%	\item the more edges, the better
-%	\item the fewer leaves, the better
-%	\item the more signatures a key has, the better
-%\end{itemize}
-%
-
-\subsection{Joke Day}
+\subsection{Principle of Least Privilege}
 \vspace*{\fill}
 \begin{center}
-\Huge
-I'll keep telling this TCP joke until you get it.
-\Normalsize
+	\includegraphics[scale=0.9]{pics/turbolift_access_denied.eps}
 \end{center}
 \vspace*{\fill}
 
+\subsection{It's not just 1s and 0s}
+\vspace{.5in}
+\Huge
+\begin{center}
+System security is not restricted to {\em software} security.
+\end{center}
+\Normalsize
+
+\subsection{It's not just 1s and 0s}
+\vspace{.5in}
+\Huge
+\begin{center}
+The thing that makes security difficult is not the software or hardware
+components.  It's the human component.
+\end{center}
+\Normalsize
+
+\subsection{It's not just 1s and 0s}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.3]{pics/security.eps}
+\end{center}
+\vspace*{\fill}
+
+
+
+\subsection{Secure by default}
+\vspace{.5in}
+\Huge
+\begin{center}
+Users care about usability, not about security.
+\end{center}
+\Normalsize
+
+\subsection{Secure by default}
+\vspace{.5in}
+\Huge
+\begin{center}
+Users will not change their default settings.
+\end{center}
+\Normalsize
+
+\subsection{Secure by default}
+\vspace{.5in}
+\Huge
+\begin{center}
+Users will not change their default settings. \\
+\Normalsize
+(Unless a less secure option is available.)
+\end{center}
 
 \newpage
 \vspace*{\fill}
@@ -733,154 +626,89 @@ I'll keep telling this TCP joke until you get it.
 \end{center}
 \vspace*{\fill}
 
-
-\subsection{Understanding your realistic threats}
+\subsection{Security Fallacies and Pitfalls}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=1.3]{pics/security.eps}
+    \Hugesize
+        Proving a Negative \\
+	\vspace{.25in}
+	\Normalsize
+	(Evidence of Absences vs. Absence of Evidence)
 \end{center}
 \vspace*{\fill}
 
 
-\subsection{Some Words of Wisdom}
-Bruce Schneier:
-\\
-
-\Huge
-\begin{center}
-Complexity is the worst enemy of security.
-\end{center}
-\Normalsize
-
-\subsection{Some Words of Wisdom}
-Bruce Schneier:
-\\
-
-\Huge
-\begin{center}
-Complexity is the worst enemy of security.
-\\
-\addvspace{.5in}
-The more secure you make something, the less secure it becomes.
-\end{center}
-\Normalsize
-
-\subsection{Joke Day}
+\subsection{Security Fallacies and Pitfalls}
 \vspace*{\fill}
 \begin{center}
-\Huge
-The best part about a CISSP joke, is you don't have to know anything about
-security to get it.
-\Normalsize
+    \Hugesize
+        Security by Obscurity
 \end{center}
 \vspace*{\fill}
 
-
-
-\subsection{A practical example}
-CVE-2006-3555
-\\
-
-``The TLS protocol, and the SSL protocol 3.0 and possibly earlier, as used in
-Microsoft Internet Information Services (IIS) 7.0, mod\_ssl in the Apache HTTP
-Server 2.2.14 and earlier, OpenSSL before 0.9.8l, GnuTLS 2.8.5 and earlier,
-Mozilla Network Security Services (NSS) 3.12.4 and earlier, multiple Cisco
-products, and other products, does not properly associate renegotiation
-handshakes with an existing connection, which allows man-in-the-middle
-attackers to insert data into HTTPS sessions, and possibly other types of
-sessions protected by TLS or SSL, by sending an unauthenticated request that
-is processed retroactively by a server in a post-renegotiation context,
-related to a "plaintext injection" attack''
-\vspace*{\fill}
-
-\subsection{TLS Renegotation Attack}
-\begin{itemize}
-	\item TLS allows for ``re-negotation'' {\em within} the existing TLS
-		connection
-\end{itemize}
-
-\subsection{TLS Renegotation Attack}
-\begin{itemize}
-	\item TLS allows for ``re-negotation'' {\em within} the existing TLS
-		connection
-	\item MitM {\em cannot} get plain text from cypher text
-\end{itemize}
-
-\subsection{TLS Renegotation Attack}
-\begin{itemize}
-	\item TLS allows for ``re-negotation'' {\em within} the existing TLS
-		connection
-	\item MitM {\em cannot} get plain text from cypher text
-	\item MitM may be able to inject plain text into encrypted connection
-\end{itemize}
-
-\subsection{TLS Renegotation Attack}
-\begin{itemize}
-	\item TLS allows for ``re-negotation'' {\em within} the existing TLS
-		connection
-	\item MitM {\em cannot} get plain text from cypher text
-	\item MitM may be able to inject plain text into encrypted connection
-	\item a clever MitM can either cause unauthorized actions to be performed
-		or even cause information disclosure
-\end{itemize}
-
-\subsection{TLS Renegotation Attack}
-\begin{itemize}
-	\item TLS allows for ``re-negotation'' {\em within} the existing TLS
-		connection
-	\item MitM {\em cannot} get plain text from cypher text
-	\item MitM may be able to inject plain text into encrypted connection
-	\item a clever MitM can either cause unauthorized actions to be performed
-		or even cause information disclosure
-\end{itemize}
-\addvspace{.5in}
-
-\begin{itemize}
-	\item initially dismissed as too academic or theoretical to be practical
-\end{itemize}
-
-\subsection{TLS Renegotation Attack}
-\begin{itemize}
-	\item TLS allows for ``re-negotation'' {\em within} the existing TLS
-		connection
-	\item MitM {\em cannot} get plain text from cypher text
-	\item MitM may be able to inject plain text into encrypted connection
-	\item a clever MitM can either cause unauthorized actions to be performed
-		or even cause information disclosure
-\end{itemize}
-\addvspace{.5in}
-
-\begin{itemize}
-	\item initially dismissed as too academic or theoretical to be practical
-	\item until Twitter was hit and users' accounts were broken into using
-		precisely this vulnerability
-\end{itemize}
-
-\subsection{Joke Day}
+\subsection{Security Fallacies and Pitfalls}
 \vspace*{\fill}
 \begin{center}
-\Huge
-There are 10 types of people in the world: Those who understand binary,
-and those who don't.
-\Normalsize
+    \Hugesize
+        Perfect is the Enemy of the Good \\
+	\vspace{.25in}
+	\Normalsize
+	(Differentiate between futile efforts and raising the bar.)
 \end{center}
 \vspace*{\fill}
 
+\subsection{Security Fallacies and Pitfalls}
+\vspace*{\fill}
+\begin{center}
+    \Hugesize
+        One in a million is next Tuesday. \\
+	\vspace{.25in}
+	\Normalsize
+	\verb+http://is.gd/Isb20K+
+\end{center}
+\vspace*{\fill}
+
+\subsection{Security Fallacies and Pitfalls}
+\vspace*{\fill}
+\begin{center}
+    \Hugesize
+        ``Any person can invent a security system so clever that she or he
+can't think of how to break it.'' \\
+	\vspace{.25in}
+	\Normalsize
+	Schneier's Law \verb+http://is.gd/hW82dt+
+\end{center}
+\vspace*{\fill}
+
+\subsection{Security Fallacies and Pitfalls}
+\vspace*{\fill}
+\begin{center}
+    \Hugesize
+        Don't invent your own crypto. \\
+	\vspace{.25in}
+	\Normalsize
+	(Seriously, don't.)
+\end{center}
+\vspace*{\fill}
+
+\subsection{Security Fallacies and Pitfalls}
+\vspace*{\fill}
+\begin{center}
+    \Hugesize
+	Complexity is the worst enemy of security. \\
+	\vspace{.25in}
+	\Normalsize
+	(The more secure you make something, the less secure it becomes.)
+\end{center}
+\vspace*{\fill}
 
 \subsection{Whom do you trust?}
+\vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=1.0]{pics/sledgehammer.eps}
+	\verb+http://cm.bell-labs.com/who/ken/trust.html+
 \end{center}
-
-\subsection{Further Reflections on Trust}
-Compromised EC2 image includes root access SSH key -
-{\tt http://pastebin.com/q1VH4rmF}
-\\
-
-Intentional? Malicious? Accidental?
-\\
-
-Does it matter?
+\vspace*{\fill}
+\Normalsize
 
 \subsection{Outsourcing Services}
 \begin{itemize}
@@ -889,6 +717,7 @@ Does it matter?
 		invested, changing back is hard)
 	\item you trust the provider/vendor to keep their infrastructure
 		safe
+	\item you trust the provider/vendor's employees
 	\item you are ok with the traffic going across the public internet
 \end{itemize}
 
@@ -899,109 +728,97 @@ Does it matter?
 		invested, changing back is hard)
 	\item you trust the provider/vendor to keep their infrastructure
 		safe
+	\item you trust the provider/vendor's employees
 	\item you are ok with the traffic going across the public internet
 \end{itemize}
-\vspace{.5in}
+\addvspace{.5in}
+Bottom-line: are you increasing or decreasing your
+attack surface?
 
-Note: in some cases, outsourcing happens one way or another (gmail,
-anybody?).
-
-
-\subsection{Toning down the Paranoia}
-Hanlon's Razor:
-\\
-
-\Huge
-\begin{center}
-Never attribute to malice that which can be adequately explained by stupidity.
-\end{center}
-\Normalsize
-
-\subsection{Toning down the Paranoia}
-Sturgeon's Law (first adage):
-\\
-
-\Huge
-\begin{center}
-Nothing is always absolutely so.
-\end{center}
-\Normalsize
-
-
-\subsection{What to do in the case of an emergency}
-
-As usual, this {\em depends}.  Some the smarter things to do if you detect an
-intrusion include:
-
-\begin{itemize}
-	\item keep system online to monitor what the attacker does or how she
-		gained access, {\em or}
-	\item take system offline, possible entirely into single user mode
-	\item take a complete snapshot of the system to separate media
-	\item keep system offline while you investigate
-	\item reinstall
-\end{itemize}
-
-Remember that you can't trust {\em any} data on the compromised system!
-
-\subsection{Miscellaneous}
-Things probably mentioned before, but worth repeating:
-\begin{itemize}
-	\item subscribe to your vendors security alert mailinglist
-	\item subscribe to independent security alert mailinglists
-	\item checksum and verify any and all packages and patches
-	\item regularly audit the installed software
-	\item require strong passwords
-	\item inform your users of security issues
-	\item guard against threats from outside as well as inside the network
-		(ie revisit whom you think you can trust)
-\end{itemize}
-
-\subsection{Joke Day}
+\subsection{Embrace Automation}
 \vspace*{\fill}
-\begin{center}
 \Huge
-The problem with 802.11 jokes is they probably go over your head.
-\Normalsize
+\begin{center}
+	Vulnerabilities are dense. \\
+\addvspace{.5in}
+	Eliminate {\em classes} of attacks, not
+	individual flaws. \\
 \end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Build Robust Infrastructures and Service}
+\vspace*{\fill}
+\Huge
+\begin{center}
+	Your endpoint security model should assume the
+	network is compromised; \\
+	your network security model should assume the
+	endpoint is. \\
+\addvspace{.5in}
+	Both in fact are.
+\end{center}
+\Normalsize
 \vspace*{\fill}
 
 
-
-\subsection{Be Paranoid!}
+\subsection{Toning down the Paranoia}
+\vspace*{\fill}
+\Huge
 \begin{center}
-	\includegraphics[scale=0.55]{pics/paranoid.eps}
-\end{center}
-
-\subsection{Reading}
-TLS MitM attack:
-\\
-
-\verb+http://www.securegoose.org/2009/11/tls-renegotiation-vulnerability-cve.html+ \\
-
-\verb+http://www.educatedguesswork.org/2009/11/understanding_the_tls_renegoti.html+
+Never attribute to malice that which can be adequately explained by stupidity. \\
+\vspace{.25in}
 \Normalsize
+Hanlon's Razor
+\end{center}
+\Normalsize
+\vspace*{\fill}
 
-\subsection{Reading}
-Helpful Tools:
-\begin{itemize}
-	\item \verb+mtree(1)+
-	\item \verb+gpg(1)+
-\end{itemize}
-\addvspace{.5in}
-Helpful Information:
-\begin{itemize}
-	\item CSRC NIST \verb+http://csrc.nist.gov/+
-	\item SecurityFocus \verb+http://www.securityfocus.com/+
-	\item CryptoGram \verb+http://www.counterpane.com/crypto-gram.html+
-\end{itemize}
-\addvspace{.5in}
-Misc:
-\\
+\subsection{Sysadmin $\cap$ Infosec}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.0]{pics/sysadmin_infosec.eps} \\
+	\verb+https://www.netmeister.org/blog/infosec-basics.html+
+\end{center}
+\vspace*{\fill}
 
-\verb+http://archive.cert.uni-stuttgart.de/isn/2006/01/msg00055.html+
-\\
+\subsection{Sysadmin $\cap$ Infosec}
+\vspace*{\fill}
+\Huge
+\begin{center}
+	Nothing is always absolutely so.
+\end{center}
+\Normalsize
+\vspace*{\fill}
 
-\verb+http://is.gd/p9Q0pU+
+\subsection{Two Questions}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.67]{pics/two-questions.eps} \\
+\small
+	\verb+https://www.netmeister.org/blog/two-questions.html+
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Infosec Foundation}
+\vspace*{\fill}
+\Huge
+\begin{center}
+	Don't be lazy.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Additional Reading}
+\begin{verbatim}
+http://www.slideshare.net/zanelackey/attackdriven-defense
+https://www.netmeister.org/blog/moving-the-needle.html
+https://twitter.com/jschauma/status/713118376550404096
+https://t.co/DRHbEKXod8
+http://danielmiessler.com/study/security_and_obscurity/
+http://is.gd/sGnRVL
+\end{verbatim}
+
 
 \end{document}

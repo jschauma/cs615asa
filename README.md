@@ -3,7 +3,7 @@ CS615ASA - Aspects Of System Administration
 
 In this repository you can find the files I use for my class "[CS615 -
 Aspects of System
-Administration](http://www.cs.stevens.edu/~jschauma/615/)", which is
+Administration](https://www.cs.stevens.edu/~jschauma/615/)", which is
 currently offered at [Stevens Institute of
 Technology](http://www.cs.stevens.edu/).
 
@@ -22,20 +22,26 @@ Sometimes a given lecture's directory may include additional notes or
 scripts.
 
 The organization of the this directory tree is by lecture, and I will
-commit/update the contents throughout the Spring 2012 semester as we go
-along.
+commit/update the contents each semester (when I
+remember).
 
 License
 -------
 
-The syllabus of the class and all materials in here (with the exception of
-various graphics or images used as illustration in the slides) were
-created by Jan Schaumann &lt;jschauma@netmeister.org&gt; and all copyright
-is retained.  You are free to use the materials in any manner you wish so
-long as you give credit for it.  Pointing people to this repository or the
-[course website](http://www.cs.stevens.edu/~jschauma/615/) is sufficient
-and appreciated.  Likewise, you are encouraged to contact me with any
-questions, suggestions, corrections, concerns or comments relating to this
+The syllabus of the class and all materials in here
+(with the exception of various graphics or images used
+as illustration in the slides) were created by Jan
+Schaumann &lt;jschauma@netmeister.org&gt; and all
+copyright is retained.  You are free to use the
+materials in any manner you wish so long as you give
+credit for it.  Pointing people to this repository,
+the [course
+website](https://www.cs.stevens.edu/~jschauma/615/),
+or my [Twitter account
+@jschauma](https://twitter.com/jschauma) is sufficient
+and appreciated.  Likewise, you are encouraged to
+contact me with any questions, suggestions,
+corrections, concerns or comments relating to this
 content.
 
 <div style="float: center"><table border="1" width="75%" align="center" style="float: center">

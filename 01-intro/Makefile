@@ -9,7 +9,9 @@ DVIPS	=	dvips -o
 PS2PDF	=	ps2pdf
 PDFTOTEXT=	pdftotext
 
-FIGURES=	pics/Cable_Tie.eps	\
+FIGURES=	pics/sysadmin-personalities.eps	\
+		pics/chicken-egg.eps		\
+		pics/Cable_Tie.eps	\
 		pics/Caffeine_molecule.eps	\
 		pics/DuckTape.eps	\
 		pics/MagrittePipe.eps	\
@@ -25,7 +27,6 @@ FIGURES=	pics/Cable_Tie.eps	\
 		pics/kiss.eps	\
 		pics/car-duct-tape.eps	\
 		pics/usability-security.eps	\
-		pics/patch-bandaid.eps	\
 		pics/camera.eps	\
 		pics/circularsaw.eps	\
 		pics/cloud.eps	\
@@ -71,7 +72,22 @@ FIGURES=	pics/Cable_Tie.eps	\
 		pics/lego-block.eps \
 		pics/millennium-falcon.eps \
 		pics/as-seen-by.eps \
-		pics/as-seen-by-not-helping.eps
+		pics/as-seen-by-not-helping.eps	\
+		pics/security-usability.eps	\
+		pics/banana-wifi.eps		\
+		pics/wifi.eps	\
+		pics/sample-infrastructure-0.eps \
+		pics/sample-infrastructure-1.eps \
+		pics/sample-infrastructure-2.eps \
+		pics/sample-infrastructure-3.eps \
+		pics/sample-infrastructure-4.eps \
+		pics/sample-infrastructure-5.eps \
+		pics/sample-infrastructure-6.eps \
+		pics/sample-infrastructure-7.eps \
+		pics/hdmi.eps \
+		pics/CS-venn.eps \
+		pics/containers.eps \
+		pics/ship-shipping-ships.eps
 
 
 .SUFFIXES: .tex .dvi .ps .pdf .txt .fig .eps .png .jpg .gif

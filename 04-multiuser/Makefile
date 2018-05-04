@@ -24,6 +24,7 @@ PICTURES=	\
 		pics/superman.eps \
 		pics/groups-machines.eps \
 		pics/ls-l.eps \
+		pics/iphone.eps \
 		pics/snowden.eps \
 		pics/tools.eps \
 		pics/hammer.eps \

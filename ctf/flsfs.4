@@ -1,0 +1,83 @@
+.Dd April 23, 2018
+.Dt flsfs 4
+.Os
+.Sh NAME
+.Nm flsfs
+.Nd the foghorn leghorn secure file system
+.Sh SYNOPSIS
+.Cd pseudo-device flsfs
+.Sh DESCRIPTION
+The Foghorn Leghorn Secure File System
+provides a convenient way of storing and sharing
+secrets with multiple, independent recipients.
+.Pp
+.Nm
+usually is exposed to the end-users by way of a
+pseudo-device, a raw block device, or even as a
+regular file.
+The flexibility of
+.Nm
+allows users to utilize the same format and
+abstraction to access the shared secrets in a secure
+manner, while at the same time providing privacy
+guarantees preventing disclosure to unauthorized
+parties.
+.Pp
+The format of
+.Nm
+is intentionally simple:
+The first 512 bytes comprise the Table of Contents;
+data is stored in the remaining blocks as indexed in
+the table of contents by recipient.
+.Pp
+Specifically, the TOC consists of 16 entries, each
+in turn being comprised of two 16 byte fields.
+The first 16 bytes contain the null-terminated string
+name of the recipient followed by a 16 byte integer
+identifying the offset within the
+.Nm
+where the data for this recipient is located.
+.Pp
+The data at the indices itself is equally simply
+structured:
+At a given index, you will find 4 bytes providing the
+size of the data followed by the data itself.
+.Sh LIMITATIONS
+This is the very first alpha release of
+.Nm ,
+necessarily including certain limitation.
+Notably,
+.Nm
+is currently limited to storing at most 16 files as
+per the fixed length of the TOC.
+Future releases should change the format to first
+provide the size of the TOC followed by the TOC.
+.Pp
+The files stored in
+.Nm
+are currently limited to 64K through the use of a 4
+byte size indicator.
+Future releases should allow larger files to be
+stored.
+.Pp
+Lastly,
+.Nm
+is not actually very secure.
+It relies on the data it stores to have been encrypted
+prior to writing it to the blocks.
+.Sh USAGE
+.Nm
+is accessed primarily via the convenient
+.Xr dd 1
+utility using the
+.Ar /dev/flsfs
+pathname.
+.Sh SEE ALSO
+.Xr dd 1 ,
+.Xr hexdump 1
+.Sh HISTORY
+.Nm
+was originally written by
+.An Jan Schaumann
+.Aq jschauma@stevens.edu
+in April 2018.

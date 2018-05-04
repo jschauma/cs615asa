@@ -1,0 +1,18 @@
+Congratulations!  You have cleared level 0.
+
+In order to receive the instructions for the next
+level, you must send another message to
+jschauma@stevens.edu, this time with a subject of
+"[CS615] level 1" as well as the correct passphrase:
+
+In the netblock 155.246.64.0/18, there is an IP
+address which resolves to a *Fully* Qualified Domain
+Name with the following sha512 checksum:
+
+a819dacf64ba1d6ff114ff4a55eaf93375dd95813ae427f7074108a26e934c3c5e3f535ccd7d967a5a51b6d19b29c27280c1dd5872c77ae89a98a3869e6d2d26
+
+On that host, find the passphrase to unlock
+the next level.
+
+Good luck!  I hope the tools you use to find the
+passphrase won't unexpectedly crash...

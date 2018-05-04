@@ -10,38 +10,28 @@ PS2PDF	=	ps2pdf
 PDFTOTEXT=	pdftotext
 
 PICTURES= \
-	pics/cloud.eps \
-	pics/map-of-internet.eps \
 	pics/2computers.eps \
 	pics/3computers.eps \
-	pics/routed.eps \
-	pics/peered-networks.eps \
-	pics/car-duct-tape.eps \
-	pics/internet-undersea-cable.eps \
-	pics/internet-undersea-cable.eps \
+	pics/AS-interconnection.eps \
+	pics/Room_641A.eps \
 	pics/cable-layer.eps \
-	pics/osi.eps \
-	pics/CatinBox.eps \
-	pics/natural-stack-boxes-l.eps \
-	pics/osi-encapsulation.eps \
-	pics/4layer-encapsulation.eps \
-	pics/ipv4-exhausted.eps \
-	pics/ipv4-exhausted-stats.eps \
-	pics/dual-stack.eps \
-	pics/test-ipv6.eps \
-	pics/test-ipv6-6.eps \
-	pics/ipv6-launch.eps \
-	pics/3computers-arp.eps \
-	pics/3computers-ping.eps \
-	pics/traceroute1.eps \
-	pics/traceroute2.eps \
-	pics/traceroute3.eps \
-	pics/traceroute4.eps \
-	pics/tcpip-stack.eps \
+	pics/cablemap.eps \
+	pics/car-duct-tape.eps \
+	pics/cerf.eps \
+	pics/classfull.eps \
+	pics/cloud.eps \
+	pics/hub.eps \
+	pics/internet-undersea-cable.eps \
+	pics/map-of-internet.eps \
+	pics/osi-stack.eps \
+	pics/osi-stack2.eps \
+	pics/peered-networks.eps \
 	pics/rirs.eps \
+	pics/routed.eps \
+	pics/router.eps \
+	pics/switch.eps \
 	pics/syria-disappears.eps \
 	pics/tubes.eps \
-	pics/classfull.eps \
 	pics/wolfram.eps
 
 .SUFFIXES: .tex .dvi .ps .pdf .txt .fig .eps .jpg .gif .png

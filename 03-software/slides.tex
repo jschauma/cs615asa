@@ -1,6 +1,6 @@
+ 
 % CS615A Aspects of System Administration
 % Author: Jan Schaumann <jschauma@netmeister.org>
-% $Id: slides.tex,v 1.11 2006/02/07 03:55:59 jschauma Exp $
 
 \special{! TeXDict begin /landplus90{true}store end }
 
@@ -36,37 +36,298 @@
 \end{center}
 \vspace*{\fill}
 
-\subsection{Reminder: Field Trip}
-\vspace{1in}
+%\subsection{Typical Boot Sequence}
+%\vspace*{\fill}
+%\begin{verbatim}
+%$ aws ec2 run-instances --image-id ami-0187f76b
+%\end{verbatim}
+%\vspace*{\fill}
 
-\Hugesize
+\subsection{Down the stack we go}
+Consider a website on an AWS EC2 instance...
 
-2015-02-25: 9:45am \\
+\subsection{Down the stack we go}
+Consider a website on an AWS EC2 instance...
+\\
 
-Peer1 \\
+...it might:
 
-75 Broad Street, NY, NY
-\Normalsize
+\begin{itemize}
+	\item require a web server
+\end{itemize}
 
 
-\subsection{Typical Boot Sequence}
-\vspace*{\fill}
-\begin{verbatim}
-$ aws ec2 run-instances --image-id ami-3b361952
-\end{verbatim}
-\vspace*{\fill}
+\subsection{Down the stack we go}
+Consider a website on an AWS EC2 instance...
+\\
+
+...it might:
+
+\begin{itemize}
+	\item require a web server
+	\item require PHP, Perl, Ruby, Javascript, ...
+\end{itemize}
+
+\subsection{Down the stack we go}
+Consider a website on an AWS EC2 instance...
+\\
+
+...it might:
+
+\begin{itemize}
+	\item require a web server
+	\item require PHP, Perl, Ruby, Javascript, ...
+	\item which uses generic library functions
+\end{itemize}
+
+\subsection{Down the stack we go}
+Consider a website on an AWS EC2 instance...
+\\
+
+...it might:
+
+\begin{itemize}
+	\item require a web server
+	\item require PHP, Perl, Ruby, Javascript, ...
+	\item which uses generic library functions
+	\item which make various system calls
+\end{itemize}
+
+\subsection{Down the stack we go}
+Consider a website on an AWS EC2 instance...
+\\
+
+...it might:
+
+\begin{itemize}
+	\item require a web server
+	\item require PHP, Perl, Ruby, Javascript, ...
+	\item which uses generic library functions
+	\item which make various system calls
+	\item which the kernel handles for the OS
+\end{itemize}
+
+\subsection{Down the stack we go}
+Consider a website on an AWS EC2 instance...
+\\
+
+...it might:
+
+\begin{itemize}
+	\item require a web server
+	\item require PHP, Perl, Ruby, Javascript, ...
+	\item which uses generic library functions
+	\item which make various system calls
+	\item which the kernel handles for the OS
+	\item which is running in a virtual machine
+\end{itemize}
+
+\subsection{Down the stack we go}
+Consider a website on an AWS EC2 instance...
+\\
+
+...it might:
+
+\begin{itemize}
+	\item require a web server
+	\item require PHP, Perl, Ruby, Javascript, ...
+	\item which uses generic library functions
+	\item which make various system calls
+	\item which the kernel handles for the OS
+	\item which is running in a virtual machine
+	\item which is running on top of a hypervisor
+\end{itemize}
+
+\subsection{Down the stack we go}
+Consider a website on an AWS EC2 instance...
+\\
+
+...it might:
+
+\begin{itemize}
+	\item require a web server
+	\item require PHP, Perl, Ruby, Javascript, ...
+	\item which uses generic library functions
+	\item which make various system calls
+	\item which the kernel handles for the OS
+	\item which is running in a virtual machine
+	\item which is running on top of a hypervisor
+	\item which uses firmware to manage various components
+\end{itemize}
+
+\subsection{Down the stack we go}
+Consider a website on an AWS EC2 instance...
+\\
+
+...it might:
+
+\begin{itemize}
+	\item require a web server
+	\item require PHP, Perl, Ruby, Javascript, ...
+	\item which uses generic library functions
+	\item which make various system calls
+	\item which the kernel handles for the OS
+	\item which is running in a virtual machine
+	\item which is running on top of a hypervisor
+	\item which uses firmware to manage various components
+	\item which is running on some hardware
+\end{itemize}
+
+\subsection{...and back up again}
+Bringin up this web service might include...
+\\
+
+\begin{itemize}
+	\item power on hardware
+\end{itemize}
+
+\subsection{...and back up again}
+Bringin up this web service might include...
+\\
+
+\begin{itemize}
+	\item power on hardware
+	\item POST and other firmware initialization
+\end{itemize}
+
+\subsection{...and back up again}
+Bringin up this web service might include...
+\\
+
+\begin{itemize}
+	\item power on hardware
+	\item POST and other firmware initialization
+	\item first stage boot loader
+\end{itemize}
+
+\subsection{...and back up again}
+Bringin up this web service might include...
+\\
+
+\begin{itemize}
+	\item power on hardware
+	\item POST and other firmware initialization
+	\item first stage boot loader
+	\item second stage boot loader
+\end{itemize}
+
+\subsection{...and back up again}
+Bringin up this web service might include...
+\\
+
+\begin{itemize}
+	\item power on hardware
+	\item POST and other firmware initialization
+	\item first stage boot loader
+	\item second stage boot loader
+	\item hypervisor kernel dom0 starts
+\end{itemize}
+
+\subsection{...and back up again}
+Bringin up this web service might include...
+\\
+
+\begin{itemize}
+	\item power on hardware
+	\item POST and other firmware initialization
+	\item first stage boot loader
+	\item second stage boot loader
+	\item hypervisor kernel dom0 starts
+	\item domU is started
+\end{itemize}
+
+\subsection{...and back up again}
+Bringin up this web service might include...
+\\
+
+\begin{itemize}
+	\item power on hardware
+	\item POST and other firmware initialization
+	\item first stage boot loader
+	\item second stage boot loader
+	\item hypervisor kernel dom0 starts
+	\item domU is started
+	\item guest OS kernel starts
+\end{itemize}
+
+\subsection{...and back up again}
+Bringin up this web service might include...
+\\
+
+\begin{itemize}
+	\item power on hardware
+	\item POST and other firmware initialization
+	\item first stage boot loader
+	\item second stage boot loader
+	\item hypervisor kernel dom0 starts
+	\item domU is started
+	\item guest OS kernel starts
+	\item kernel initializes (virtual) hardware
+\end{itemize}
+
+\subsection{...and back up again}
+Bringin up this web service might include...
+\\
+
+\begin{itemize}
+	\item power on hardware
+	\item POST and other firmware initialization
+	\item first stage boot loader
+	\item second stage boot loader
+	\item hypervisor kernel dom0 starts
+	\item domU is started
+	\item guest OS kernel starts
+	\item kernel initializes (virtual) hardware
+	\item {\tt init(8)} (or similar) starts
+\end{itemize}
+
+\subsection{...and back up again}
+Bringin up this web service might include...
+\\
+
+\begin{itemize}
+	\item power on hardware
+	\item POST and other firmware initialization
+	\item first stage boot loader
+	\item second stage boot loader
+	\item hypervisor kernel dom0 starts
+	\item domU is started
+	\item guest OS kernel starts
+	\item kernel initializes (virtual) hardware
+	\item {\tt init(8)} (or similar) starts
+	\item system processes / daemons start
+\end{itemize}
+
+\subsection{...and back up again}
+Bringin up this web service might include...
+\\
+
+\begin{itemize}
+	\item power on hardware
+	\item POST and other firmware initialization
+	\item first stage boot loader
+	\item second stage boot loader
+	\item hypervisor kernel dom0 starts
+	\item domU is started
+	\item guest OS kernel starts
+	\item kernel initializes (virtual) hardware
+	\item {\tt init(8)} (or similar) starts
+	\item system processes / daemons start
+	\item web server runs, binds network socket, serves content
+\end{itemize}
+
 
 \subsection{Typical Boot Sequence}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=0.5,angle=-90]{pics/post.eps} \\
+	\includegraphics[scale=0.55,angle=-90]{pics/post.eps} \\
 \end{center}
 \vspace*{\fill}
 
 \subsection{Typical Boot Sequence}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=0.75,angle=-90]{pics/bios.eps} \\
+	\includegraphics[scale=1.0,angle=-90]{pics/BIOS.eps} \\
 \end{center}
 \vspace*{\fill}
 
@@ -91,6 +352,43 @@ $ aws ec2 run-instances --image-id ami-3b361952
 \includegraphics[scale=0.7]{pics/stage1.eps} \\
 \end{minipage}
 
+\subsection{Recall HW1}
+\begin{verbatim}
+# fdisk /dev/xbd0
+fdisk: primary partition table invalid, no magic in sector 0
+Disk: /dev/xbd0d
+
+BIOS disk geometry:
+cylinders: 1023, heads: 255, sectors/track: 63 (16065 sectors/cylinder)
+total sectors: 69206016
+
+Partition table:
+0: <UNUSED>
+1: <UNUSED>
+2: <UNUSED>
+3: <UNUSED>
+Bootselector disabled.
+No active partition.
+\end{verbatim}
+
+\subsection{Recall HW1}
+\begin{verbatim}
+# fdisk /dev/xbd4
+Disk: /dev/rxbd4d
+
+BIOS disk geometry:
+cylinders: 1023, heads: 255, sectors/track: 63 (16065 sectors/cylinder)
+total sectors: 69206016
+
+Partition table:
+0: NetBSD (sysid 169)
+    start 63, size 69205825 (33792 MB, Cyls 0-4307/221/10), Active
+1: <UNUSED>
+2: <UNUSED>
+3: <UNUSED>
+Bootselector disabled.
+First active partition: 0
+\end{verbatim}
 
 \subsection{Typical Boot Sequence}
 \vspace*{\fill}
@@ -109,16 +407,27 @@ $ aws ec2 run-instances --image-id ami-3b361952
 	\item load kernel
 	\item kernel transfers control to {\tt init(8)}
 \end{itemize}
+\vspace{.5in}
+Note: in virtualized environments, some of these steps
+are skipped, repeated, or simulated.
 
-\subsection{Typical Boot Sequence}
+\subsection{Typical Boot Sequences}
+\verb+https://www.cs.stevens.edu/~jschauma/615/boot-sequence/+
 \vspace*{\fill}
 \begin{verbatim}
-$ aws ec2 run-instances --image-id ami-3b361952
-[wait... wait... wait...]
-$ aws ec2 get-console-output --instance-id i-2fdb4701 | more
+$ aws ec2 run-instances --instance-type t1.micro --image-id ami-569ed93c
+$ id=$(aws ec2 describe-instances --query 'Reservations[].Instances[].InstanceId')
+$ aws ec2 get-console-output --instance-id ${id} | more
 \end{verbatim}
-\vspace*{\fill}
+\vspace{.5in}
+Compare the dislabel on the {\tt /boot} device to the
+output of {\tt df(1)} on the mounted partition.
+What's different? \\
 
+Review the full console output; pay attention to the
+filesystem specific parts.  Can you explain what's
+happening?
+\vspace*{\fill}
 
 \subsection{Types of Software}
 
@@ -130,16 +439,17 @@ $ aws ec2 get-console-output --instance-id i-2fdb4701 | more
 \subsection{Firmware}
 \begin{center}
 	\includegraphics[scale=0.5,angle=-90]{pics/linksys.eps}
-	\includegraphics[scale=0.5,angle=-90]{pics/cell-phone.eps}
 	\includegraphics[scale=0.3,angle=-90]{pics/remote.eps}
+	\includegraphics[scale=0.5,angle=-90]{pics/car-firmware.eps}
 \end{center}
 
 \subsection{Firmware}
 \begin{center}
 	\includegraphics[scale=0.5,angle=-90]{pics/linksys.eps}
-	\includegraphics[scale=0.5,angle=-90]{pics/cell-phone.eps}
-	\includegraphics[scale=0.3,angle=-90]{pics/remote.eps} \\
+	\includegraphics[scale=0.3,angle=-90]{pics/remote.eps}
+	\includegraphics[scale=0.5,angle=-90]{pics/car-firmware.eps} \\
 	\includegraphics[scale=0.3,angle=-90]{pics/ide-drive.eps}
+	\includegraphics[scale=0.8,angle=-90]{pics/usb-icon.eps}
 \end{center}
 
 
@@ -151,7 +461,7 @@ $ aws ec2 get-console-output --instance-id i-2fdb4701 | more
 
 \subsection{Firmware}
 \begin{center}
-	\includegraphics[scale=0.9,angle=-90]{pics/BIOS.eps}
+	\includegraphics[scale=1.0,angle=-90]{pics/BIOS.eps}
 \end{center}
 
 \subsection{...}
@@ -239,7 +549,14 @@ Sat Feb  1 21:46:17 UTC 2014
 \end{center}
 \vfill
 
-\subsection{File System Hierarchy}
+\subsection{...and then there are unikernels and containers.}
+\vfill
+\begin{center}
+	\includegraphics[scale=0.7,angle=-90]{pics/unikernel.eps}
+\end{center}
+\vfill
+
+\subsection{Where do we put all these files?}
 Layout of filesystem {\em should} be standardized.  Some UNIX versions adhere
 to these standards, some are strongly influenced by tradition.
 \\
@@ -472,89 +789,12 @@ Boot options:      timeout 5, flags 0, speed 9600, ioaddr 0, console pc
 	\includegraphics[scale=0.3,angle=-90]{pics/php-logo.eps}
 \end{center}
 
-\subsection{What's what?}
-\begin{center}
-	\includegraphics[scale=0.9]{pics/leftshark.eps} \\
-Superfish
-\end{center}
-
 \subsection{Types of Software}
 \vfill
 \begin{center}
 	\includegraphics[scale=0.8,angle=-90]{pics/types-of-software.eps}
 \end{center}
 \vfill
-
-
-
-
-\subsection{System Software vs. Third Party Software}
-Consider:
-\begin{itemize}
-	\item OS upgrades vs. software upgrades
-\end{itemize}
-
-\subsection{System Software vs. Third Party Software}
-Consider:
-\begin{itemize}
-	\item OS upgrades vs. software upgrades
-	\item location of configuration files
-\end{itemize}
-
-\subsection{System Software vs. Third Party Software}
-Consider:
-\begin{itemize}
-	\item OS upgrades vs. software upgrades
-	\item location of configuration files
-	\item duplicates or conflicting versions in the base system vs. the
-		add-ons
-\end{itemize}
-
-\subsection{System Software vs. Third Party Software}
-Consider:
-\begin{itemize}
-	\item OS upgrades vs. software upgrades
-	\item location of configuration files
-	\item duplicates or conflicting versions in the base system vs. the
-		add-ons
-	\item startup scripts, d{\ae}mons
-\end{itemize}
-
-\subsection{System Software vs. Third Party Software}
-Consider:
-\begin{itemize}
-	\item OS upgrades vs. software upgrades
-	\item location of configuration files
-	\item duplicates or conflicting versions in the base system vs. the
-		add-ons
-	\item startup scripts, d{\ae}mons
-	\item location of third party software
-\end{itemize}
-
-\subsection{System Software vs. Third Party Software}
-Consider:
-\begin{itemize}
-	\item OS upgrades vs. software upgrades
-	\item location of configuration files
-	\item duplicates or conflicting versions in the base system vs. the
-		add-ons
-	\item startup scripts, d{\ae}mons
-	\item location of third party software
-	\item dependencies
-\end{itemize}
-
-\subsection{System Software vs. Third Party Software}
-Consider:
-\begin{itemize}
-	\item OS upgrades vs. software upgrades
-	\item location of configuration files
-	\item duplicates or conflicting versions in the base system vs. the
-		add-ons
-	\item startup scripts, d{\ae}mons
-	\item location of third party software
-	\item dependencies
-	\item installation by hand and/or installation using a package manager
-\end{itemize}
 
 
 \subsection{System Software vs. Third Party Software}
@@ -570,24 +810,6 @@ Consider:
 	\item installation by hand and/or installation using a package manager
 	\item proprietary third party software
 \end{itemize}
-
-
-\newpage
-\vspace*{\fill}
-\begin{center}
-	\Hugesize
-		Software Installation Concepts \\ [1em]
-	\hspace*{5mm}
-	\blueline\\
-	\hspace*{5mm}\\
-		Practical Exercises
-\end{center}
-\vspace*{\fill}
-
-\subsection{Package management basics}
-\vfill
-{\tt https://www.cs.stevens.edu/\~{}jschauma/615/pkg-exercise.html}
-\vfill
 
 \subsection{Binary vs. Source installation}
 Benefits of binary installation:
@@ -675,17 +897,43 @@ missing   c /etc/logrotate.d/syslog
 
 \subsection{Managing Security Patches and Software Upgrades}
 How many known vulnerabilities (unique CVEs and affected packages) exist
-in each of the Fedora and Ubuntu instances?
+in each of the Fedora and Debian instances?
 
 \begin{verbatim}
-ubuntu$ sudo apt-get install debsecan
-ubuntu$ debsecan
+debian$ sudo apt-get install debsecan
+debian$ debsecan
+debian$ sudo apt-get update
+debian$ sudo apt-get upgrade
+debian$ debsecan
 \end{verbatim}
 
 \begin{verbatim}
 fedora$ yum list-security
 fedora$ yum info-security
 \end{verbatim}
+
+\subsection{Managing Security Patches and Software Upgrades}
+How many known vulnerabilities (unique CVEs and affected packages) exist
+in each of the Fedora and Debian instances?
+
+\begin{verbatim}
+debian$ sudo apt-get install debsecan
+debian$ debsecan
+debian$ sudo apt-get update
+debian$ sudo apt-get upgrade
+debian$ debsecan
+\end{verbatim}
+
+\begin{verbatim}
+fedora$ yum list-security
+fedora$ yum info-security
+fedora$ sudo yum update
+fedora$ yum list-security
+\end{verbatim}
+
+\vspace{.5in}
+Excellent! Now what about all the stuff you installed that
+wasn't packaged?
 
 \subsection{Special Purpose Package Managers}
 \vfill
@@ -707,12 +955,13 @@ Most programming languages or environments come with their own "package
 management" solutions, often integrating/mixing with a "build system".
 \begin{itemize}
 	\item Common Lisp $=>$ quicklisp
+	\item Go $=>$ go get
 	\item NodeJS $=>$ npm
 	\item Perl $=>$ CPAN
 	\item Python $=>$ easy-install, pip, pants, setuptools, ...
 	\item Ruby $=>$ gems, rvm, rake
 	\item Scala $=>$ sbt
-	\item YourFavoriteThing $=>$ ItsOwnGizmo
+	\item ...
 \end{itemize}
 
 \subsection{You don't get to choose.}
@@ -724,14 +973,122 @@ management" solutions, often integrating/mixing with a "build system".
 \vfill
 \Normalsize
 
-\subsection{HW \#2}
+\subsection{Dependencies, Integrity, and Trust}
+OS provider repositories:
+\begin{itemize}
+	\item {\tt yum update} / {\tt yum install}
+	\item {\tt apt-get}
+\end{itemize}
+\vspace{.5in}
+Language-specific community repositories:
+\begin{itemize}
+	\item {\tt gem install foo}
+	\item {\tt go get github.com/randomAccount/randomRepository}
+	\item {\tt npm install -g foo}
+	\item {\tt perl -MCPAN -e 'install Something::YouWant'}
+	\item {\tt pip install foo}
+\end{itemize}
+\vspace{.5in}
 
-Create an RPM for 'awscli'.
+What could possibly go wrong?
+
+\subsection{Dependencies, Integrity, and Trust}
+Fun fact: \\
+
+\begin{verbatim}
+$ wget http://somewhere/some.tar.gz
+$ tar zxf some.tar.gz
+$ cd some
+$ ./configure
+$ make
+$ sudo make install
+\end{verbatim}
+\vspace{.5in}
+is not inherently better than \\
+
+\begin{verbatim}
+$ curl http://somewhere/script.sh | sudo bash
+\end{verbatim}
+
+\subsection{Dependencies, Integrity, and Trust}
+\begin{center}
+Mirroring untrusted, unverified dependencies\\
+does not solve any of your problems. \\
+\vspace{.5in}
+
+Integrity verification is meaningless \\
+without assurance of trust. \\
+\vspace{.5in}
+
+Dependencies are called dependencies \\
+because you {\em depend} on them. \\
+\vspace{.5in}
+
+Dependency trust and integrity is recursive. \\
+\vspace{.5in}
+\end{center}
+
+\subsection{Dependencies, Integrity, and Trust}
+\begin{center}
+Mirroring untrusted, unverified dependencies\\
+does not solve any of your problems. \\
+\vspace{.5in}
+
+Integrity verification is meaningless \\
+without assurance of trust. \\
+\vspace{.5in}
+
+Dependencies are called dependencies \\
+because you {\em depend} on them. \\
+\vspace{.5in}
+
+Dependency trust and integrity is recursive. \\
+\vspace{.5in}
+
+{\em Remember Left-Pad!}
+\end{center}
+
+\subsection{Left-Pad}
+\begin{verbatim}
+function leftPad (str, len, ch) {
+  str = str + '';                // convert `str` to a `string`
+  len = len - str.length;        // `len` is the `pad`'s length now
+  if (len <= 0) return str;      // doesn't need to pad 
+  if (!ch && ch !== 0) ch = ' '; // `ch` defaults to `' '`
+  ch = ch + '';                  // convert `ch` to a `string` cuz it could be a number
+  var pad = '';                  // `pad` starts with an empty string
+  while (true) {                 // loop
+    if (len & 1) pad += ch;      // add `ch` to `pad` if `len` is odd
+    len >>= 1;                   // divide `len` by 2, ditch the remainder
+    if (len) ch += ch;
+    else break;                  // `len` is 0, exit the loop
+  }
+  return pad + str;              // pad `str`!
+}
+\end{verbatim}
+
+\subsection{HW \#3}
+
+Package management basics.
 \\
 
 Detailed homework assignment posted at
-\verb+https://www.cs.stevens.edu/~jschauma/615/s15-hw2.html+
+\verb+https://www.cs.stevens.edu/~jschauma/615/s18-hw3.html+
 
+\subsection{Links}
+Booting virtual machines:
+\begin{itemize}
+	\item {\tt https://wiki.xen.org/wiki/PvGrub}
+	\item {\tt https://is.gd/JnD9jM}
+	\item {\tt https://is.gd/TAVCQF}
+	\item {\tt https://is.gd/EiOu6v}
+\end{itemize}
+
+\subsection{Links}
+NPM and LeftPad: \\
+{\tt http://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm} \\
+{\tt http://www.haneycodes.net/npm-left-pad-have-we-forgotten-how-to-program/} \\
+{\tt http://www.businessinsider.com/npm-left-pad-controversy-explained-2016-3}
 
 \subsection{Links}
 \begin{itemize}

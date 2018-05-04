@@ -15,7 +15,10 @@ PICTURES=	\
 		pics/Killchain.eps \
 		pics/turbolift_access_denied.eps \
 		pics/two-questions.eps \
-		pics/security.eps
+		pics/security.eps \
+		pics/touchid.eps \
+		pics/threat-model.eps \
+		pics/threat-model2.eps
 
 
 

@@ -1,0 +1,126 @@
+.Dd March 03, 2013
+.Dt EC2-BACKUP 1
+.Os
+.Sh NAME
+.Nm ec2-backup
+.Nd backup a directory into Elastic Block Storage (EBS)
+.Sh SYNOPSIS
+.Nm
+.Op Fl hv
+.Op Fl e Ar recipient
+.Op Fl i Ar instance
+.OP Fl m Ar method
+.Fl d Ar dir
+.Sh DESCRIPTION
+The
+.Nm
+tool performs a backup of the given directory into Amazon Elastic Block
+Storage (EBS).
+This is achieved by creating a volume of the appropriate size, attaching
+it to an EC2 instance and finally copying the files from the given
+directory into this volume.
+.Sh OPTIONS
+.Nm
+accepts the following command-line flags:
+.Bl -tag -width e_recipient_
+.It Fl h
+Print a usage statement and exit.
+.It Fl e Ar recipient
+Encrypt the data for the specified recipient.
+.It Fl i Ar instance
+Attach the volume in question to the given instance.
+.It Fl m Ar method
+Use the given method to perform the backup.
+Valid methods are 'dd' and 'rsync'; default is 'dd'.
+.It Fl v
+Be verbose.
+If not specified,
+.Nm
+will not generate any output at all (unless an error is encountered).
+.El
+.Sh DETAILS
+.Nm
+will perform a backup of the given directory to an ESB volume.
+The backup is done in one of two ways: via direct write to the volume
+(utilizing
+.Xr tar 1
+on the local host and
+.Xr dd 1
+on the remote instance), or via a (possibly incremental) filesystem sync
+(utilizing
+.Xr rsync 1 Ns ).
+.Pp
+.Nm
+will create a new volume, which will be at least two times the size of
+the directory to be backed up.
+.Pp
+Unless an instance is given using the
+.Fl i
+flag,
+.Nm
+will create an instance suitable to perform the backup, attach the volume
+in question and then back up the data from the given directory using the
+specified method and then shut down the instance it created.
+.Sh ENCRYPTION
+If
+.Fl e Ar recipient
+was specified, then
+.Nm
+will encrypt the data for the specified recipient.
+This implies a backup method of 'dd' -- specifying 'rsync' with
+.Fl e
+is thus an error condition.
+.Pp
+.Nm
+will let the
+.Xr gpg 1
+tool perform the encryption, and hence recipients are specified in any
+manner that
+.Xr gpg 1
+allows.
+Multiple recipients are allowed.
+.Sh OUTPUT
+Unless the
+.Fl v
+flag is given,
+.Nm
+will not generate any output unless any errors are encountered.
+Otherwise, it may print out some useful information about what steps it
+is currently performing.
+.Pp
+Any errors encountered cause a meaningful error message to be printed to
+STDERR.
+.Sh EXIT STATUS
+The
+.Nm
+will exit with a return status of 0 under normal circumstances.
+If an error occurred,
+.Nm
+will exit with a value >0.
+.Sh EXAMPLES
+The following examples illustrate common usage of this tool.
+.Pp
+To back up the entire filesystem using
+.Xr rsync 1 Ns :
+.Bd -literal -offset indent
+ec2-backup -m rsync -d /
+.Ed
+.Pp
+To create a complete backup of the current working directory using
+defaults and encrypting for multiple recipients:
+.Bd -literal -offset indent
+ec2-backup -e 6F6BD3D7 -e jschauma@cs.stevens.edu -d .
+.Ed
+.Sh SEE ALSO
+.Xr dd 1 ,
+.Xr ec2-start-instance 1 ,
+.Xr gpg 1 ,
+.Xr tar 1 ,
+.Xr rsync 1
+.Sh HISTORY
+.Nm
+was originally assigned by
+.An Jan Schaumann
+.Aq jschauma@cs.stevens.edu
+as a homework assignment for the class "Aspects of System Administration" at
+Stevens Institute of Technology in the Spring of 2011.

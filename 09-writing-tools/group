@@ -1,0 +1,5 @@
+cd ../grades
+for u in *; do
+	sum=$(echo $u | openssl dgst -sha512)
+	echo "$sum $u"
+done | sort | awk '{print $NF};!(NR%2){print ""}'

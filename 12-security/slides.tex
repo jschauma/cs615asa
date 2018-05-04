@@ -1,6 +1,3 @@
-% CS765 Aspects of System Administration
-% Author: Jan Schaumann <jschauma@netmeister.org>
-% $Id: slides.tex,v 1.7 2004/07/06 20:05:22 jschauma Exp $
 \special{! TeXDict begin /landplus90{true}store end }
 
 \documentclass[xga]{xdvislides}
@@ -8,6 +5,9 @@
 \usepackage{graphics}
 \usepackage{graphicx}
 \usepackage{colordvi}
+\usepackage[normalem]{ulem}
+
+\newcommand{\smallish}{\fontsize{16}{16}\selectfont}
 
 \begin{document}
 \setfontphv
@@ -30,9 +30,26 @@
 		Stevens Institute of Technology\\
 		Jan Schaumann\\
 		\verb+jschauma@stevens.edu+ \\
-		\verb+http://www.cs.stevens.edu/~jschauma/615/+
+		\verb+https://www.cs.stevens.edu/~jschauma/615/+
 \end{center}
 \vspace*{\fill}
+
+\subsection{This lecture}
+What I won't tell you:
+\begin{itemize}
+	\item How to make your system "secure".
+	\item How to break into other systems.
+	\item Everything you need to know.
+\end{itemize}
+\vspace{.5in}
+What I will tell you:
+\begin{itemize}
+	\item What you need to know to {\em start looking}.
+	\item What concepts are critical to understand.
+	\item What conceptual pitfalls you are likely to encounter.
+	\item A few {\em always} and {\em never}s.
+\end{itemize}
+
 
 \subsection{Where/how does 'security' come into play?}
 
@@ -42,79 +59,88 @@ Lecture 02 (Filesystems, Disks, Storage)
 	\item storage model (DAS, NAS, SAN, Cloud)
 	\item partitions / mount options
 	\item filesystem features (permissions, access control lists)
+	\item DoS on disk space
+	\item firmware compromise on hard drives
 \end{itemize}
 \vspace{.5in}
 Lecture 03 (Software Installation Concepts)
 \begin{itemize}
-	\item boot sequence, firmware
-	\item OEM added software (Superfish)
 	\item software package management and updates
+	\item VMs, containers, etc.
 	\item patch management
+	\item package integrity checking
 \end{itemize}
 
 \subsection{Where/how does 'security' come into play?}
-Lecture 04 (Packaging, Multiuser Fundamentals, Ethics)
+Lecture 04 (Multiuser Fundamentals)
 \begin{itemize}
-	\item Xen vulnerabilities
-	\item vulnerability tracking
 	\item privileges and trust models
-	\item privacy, obligation to protect users, social responsibility
+	\item authentication methods, multi-factor authentication
+	\item file access controls
+	\item raising privileges
 \end{itemize}
 \vspace{.5in}
-Lecture 05 (Automation)
+Lecture 05 / 06 (Networking)
 \begin{itemize}
-	\item FREAK attack (CVE-2015-0204)
-	\item using the wrong tool for the job => writing insecure code
-	\item understanding language / framework pitfalls
-\end{itemize}
-
-\subsection{Where/how does 'security' come into play?}
-Lecture 06 (Networking)
-\begin{itemize}
-	\item network censorship
 	\item protocols and visibility of data on different layers
 	\item tcpdump can read all packets
 	\item location of attacker on network implies capabilities
-\end{itemize}
-\vspace{.5in}
-Lecture 07 (Backup and Disaster Recovery)
-\begin{itemize}
-	\item DDoS attack on GitHub / GreatFire.org
-	\item disasters include security breaches
-	\item safety of backups (encrypted backups?)
+	\item network censorship
 \end{itemize}
 
 \subsection{Where/how does 'security' come into play?}
-Lecture 08 (DNS)
+Lecture 07 (DNS; HTTP)
 \begin{itemize}
-	\item traffic censorship
+	\item If you control the DNS, you control the domain
 	\item DNS registrars as attack points
 	\item use of DNS as another channel for host verification (SSHFP records)
 	\item trustworthiness of DNS (DNSSEC)
-\end{itemize}
-\vspace{.5in}
-Lecture 09 (SMTP, HTTP)
-\begin{itemize}
-	\item email as attack methods (spam, phishing)
-	\item email privacy implications
-	\item email relaying
-	\item HTTP as universal network entry point
-	\item HTTP fronting applications and handling data
+	\item HTTP as the universal entry into any network
+	\item code execution context (CGI vs. server-side vs. client-side)
+	\item content control and inspection capabilities of e.g. CDNs
 \end{itemize}
 
 \subsection{Where/how does 'security' come into play?}
-Lecture 10 (SSH)
+Lecture 08 (SMTP, HTTPS)
 \begin{itemize}
-	\item Confidentiality, Integrity, Authenticity
-	\item threat modeling
-	\item asymmetric encryption
+	\item observation of packets via {\tt tcpdump(1)}
+	\item email as attack methods (spam, phishing)
+	\item email privacy implications
+	\item SMTP plain text vs. opportunistic encryption
+	\item mail abuse and spam
+	\item recipient and sender authentication, open relays
+	\item TLS authentication
+	\item PKI, Certificate Authorities
+	\item protocol downgrade and MitM attacks
+\end{itemize}
+
+\subsection{Where/how does 'security' come into play?}
+Lecture 09 (Writing System Tool)
+\begin{itemize}
+	\item automation as a defensive weapon
+	\item using the wrong tool for the job $=>$ writing insecure code
+	\item understanding language / framework pitfalls
+	\item simplicity reduces attack surface
+	\item all code has bugs
 \end{itemize}
 \vspace{.5in}
-Lecture 11 (Monitoring, SNMP)
+
+\subsection{Where/how does 'security' come into play?}
+Lecture 10 (Backup and Disaster Recovery, Monitoring)
 \begin{itemize}
-	\item availability of logs to establish context
+	\item disasters include security breaches
+	\item data loss as a risk
+	\item safety of backups (encrypted backups?)
+	\item incident detection via events, metrics, and context
 	\item sensitive data in logs
 	\item outsourcing monitoring services
+\end{itemize}
+\vspace{.2in}
+Lecture 11 (Configuration Management)
+\begin{itemize}
+	\item role based access control
+	\item inherent trust, full control
+	\item CAP theorem may impact security controls
 \end{itemize}
 
 \subsection{How do we secure a system?}
@@ -123,6 +149,16 @@ Lecture 11 (Monitoring, SNMP)
 \Huge
 \vspace*{\fill}
 \begin{center}
+	Rub some crypto on it - duh. \\
+\end{center}
+\vspace*{\fill}
+
+\subsection{How do we secure a system?}
+\Huge
+\vspace*{\fill}
+\begin{center}
+	\sout{Rub some crypto on it - duh.} \\
+\vspace{.5in}
 	It depends. \\
 \vspace{.5in}
 \Normalsize
@@ -219,16 +255,24 @@ risk
 \subsection{How to determine {\em risk}}
 ``Risk Assessment''
 \begin{itemize}
-	\item identify {\em assets}
+	\item identify {\em assets} (that which you wish to protect, what you {\em value})
 \end{itemize}
 
 \subsection{How to determine {\em risk}}
 ``Risk Assessment''
 \begin{itemize}
 	\item identify {\em assets}
-	\item identify {\em threats}
+	\item identify {\em threats} (possible dangers to your assets, bad things that might happen)
 \end{itemize}
 
+
+\subsection{How to determine {\em risk}}
+``Risk Assessment''
+\begin{itemize}
+	\item identify {\em assets}
+	\item identify {\em threats}
+	\item identify {\em vulnerabilities} (weaknesses in a system, component, protocol, ...)
+\end{itemize}
 
 \subsection{How to determine {\em risk}}
 ``Risk Assessment''
@@ -236,6 +280,7 @@ risk
 	\item identify {\em assets}
 	\item identify {\em threats}
 	\item identify {\em vulnerabilities}
+	\item determine {\em likelihood of damage} (considering mitigating or exacerbating factors)
 \end{itemize}
 
 \subsection{How to determine {\em risk}}
@@ -245,6 +290,7 @@ risk
 	\item identify {\em threats}
 	\item identify {\em vulnerabilities}
 	\item determine {\em likelihood of damage}
+	\item estimate {\em cost of recovery} (including recovery of data, immediate revenue loss, replacing physical items, ...)
 \end{itemize}
 
 \subsection{How to determine {\em risk}}
@@ -255,17 +301,7 @@ risk
 	\item identify {\em vulnerabilities}
 	\item determine {\em likelihood of damage}
 	\item estimate {\em cost of recovery}
-\end{itemize}
-
-\subsection{How to determine {\em risk}}
-``Risk Assessment''
-\begin{itemize}
-	\item identify {\em assets}
-	\item identify {\em threats}
-	\item identify {\em vulnerabilities}
-	\item determine {\em likelihood of damage}
-	\item estimate {\em cost of recovery}
-	\item estimate {\em cost of defense}
+	\item estimate {\em cost of defense} (objectively, without consideration of your budget; include partial defense or mitigating strategies)
 \end{itemize}
 
 \subsection{How to determine {\em risk}}
@@ -284,12 +320,36 @@ A {\em risk} is the {\em likelihood} of a {\em threat} successfully exploiting
 a {\em vulnerability} and the {\em estimated cost} (or potential damage) both
 in the short and long term you may incur as a result.
 
+\subsection{How to determine {\em risk}}
+\vspace*{\fill}
+\Huge
+\begin{center}
+{\em Never} waste resources on unspecified, vague risks or FUD. \\
+\addvspace{.5in}
+{\em Always} remember that risks are {\em scoped} and {\em specific}.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{How do we secure a system?}
+\vspace*{\fill}
+\Huge
+\begin{center}
+You can't ``secure'' a system; you can only minimize
+specific risks by e.g. closing an attack vector,
+eliminating a vulnerability, reducing the attack
+surface, or changing the economics of the adversary.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+
 \subsection{Threat Model}
 For each system/component/product/service/...
 
 \begin{itemize}
 	\item identify {\em what} you're protecting
-	\item identify {\em whom} you're protecting it {\em from}
+	\item identify {\em from whom} you're protecting it
 		\begin{itemize}
 			\item identify {\em goals} of the attacker
 			\item identify {\em motivation} of the attacker
@@ -299,20 +359,92 @@ For each system/component/product/service/...
 		system or in general)
 \end{itemize}
 
+\subsection{Threat Model}
+\vspace*{\fill}
+\Huge
+\begin{center}
+Your adversaries are determined human actors with
+specific goals. \\
+\addvspace{.5in}
+Threat actors have their own risk profile, -tolerance, and cost/benefit calculations.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Threat Model}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.57]{pics/threat-model.eps} \\
+\vspace{.2in}
+\small
+	\verb+https://www.netmeister.org/blog/threat-model-101.html.html+
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Threat Model}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.75]{pics/threat-model2.eps} \\
+\vspace{.2in}
+\small
+	\verb+https://www.netmeister.org/blog/threat-model-101.html.html+
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+
+
+\subsection{Imperatives}
+\vspace*{\fill}
+\Huge
+\begin{center}
+Constantly seek to reduce your attack surface. \\
+Identify and eliminate attack vectors.\\
+
+\addvspace{.5in}
+You can't do this alone:\\
+lead by example, seek allies.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Imperatives}
+\vspace*{\fill}
+\Huge
+\begin{center}
+{\em Never} think you're the only one who understands
+or cares about security. \\
+
+\addvspace{.5in}
+{\em Always} consult with subject matter experts,
+especially those {\em not} on your team.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
 \subsection{Defense in Depth}
 \vspace*{\fill}
 \Huge
 \begin{center}
-	Security is like an onion: \\
-	the more layers you peel away, the more it stinks.
-\end{center}
+	Security is like an onion:
+	the more layers you peel away, the more it stinks. \\
+\addvspace{.5in}
 \Normalsize
+{\em Never} assume any one protection mechanism is sufficient. \\
+\addvspace{.25in}
+{\em Always} assume the other protections you deployed
+can be circumvented or broken.
+\end{center}
 \vspace*{\fill}
 
 \subsection{The biggest threat comes from the inside}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=1.0]{pics/kane.eps}
+	\includegraphics[scale=1.0]{pics/kane.eps} \\
+\small
+	{\em Never} ignore quarantine regulations.
+\Normalsize
 \end{center}
 \vspace*{\fill}
 
@@ -320,7 +452,10 @@ For each system/component/product/service/...
 \vspace*{\fill}
 \begin{center}
 	\includegraphics[scale=1.0]{pics/Killchain.eps} \\
-	\verb+http://is.gd/6sREQh+
+\small
+	\verb+http://is.gd/6sREQh+ \\
+	\verb+https://www.netmeister.org/blog/attack-life-cycle.html+
+\Normalsize
 \end{center}
 \vspace*{\fill}
 
@@ -380,21 +515,15 @@ who I think it is / they claim they are?}
 \subsection{Cryptography}
 Note:
 \begin{itemize}
+	\item {\em Never} write your own crypto or invent your own protocol.
 	\item {\em Authentication} \verb+!=+ {\em Authorization}
 	\item cryptography does not handle authorization
 	\item you generally need all three: confidentiality, integrity, authenticity
 	\item cryptography cannot prevent against incorrect use \\
-		(usability is hard, let's go shopping)
+		-- usability is hard!
 \end{itemize}
 \addvspace{.5in}
 Know your threat model!
-
-\subsection{Basic Security Concepts: Confidentiality}
-\begin{itemize}
-	\item Alice and Bob agree on a way to transform plain text into ciphertext
-	\item transformed data is sent over insecure channel
-	\item Alice and Bob are able to reverse transformation
-\end{itemize}
 
 \subsection{Basic Security Concepts: Confidentiality}
 \begin{itemize}
@@ -407,14 +536,14 @@ Different approaches:
 \begin{itemize}
 	\item secret key cryptography (example: {\em DES})
 		\begin{itemize}
-			\item Alice and Bob share a secret key
+			\item Alice and Bob share a secret key (e.g. WEP, WPA−PSK, ...)
 		\end{itemize}
 \end{itemize}
 \addvspace{.25in}
 \begin{itemize}
 	\item public key cryptography (example: {\em RSA})
 		\begin{itemize}
-			\item Alice has a private and a public key
+			\item Alice has a private and a public key (e.g. TLS, SSH, PGP, ...)
 			\item data encrypted with her private key can only be decrypted by
 				her public key and vice versa
 			\item public key can be shared with anybody (via insecure means)
@@ -425,22 +554,12 @@ Different approaches:
 \begin{itemize}
 	\item lack of {\em authenticity}
 	\item key exchange
+	\item lack of key rotation
 	\item key disclosure
 \end{itemize}
-
-\subsection{Basic Security Concepts: Integrity}
-In order to protect against forgery or data manipulation, provide some sort of
-digest or checksum (often a one-way hash).  Popular choices:
-
-\begin{itemize}
-	\item {\tt 5f4dcc3b5aa765d61d8327deb882cf99}
-	\item {\tt 5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8}
-	\item {\tt 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62 \
-                   a11ef721d1542d8}
-	\item {\tt b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5 \
-                   e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a \
-                   2ea6d103fd07c95385ffab0cacbc86}
-\end{itemize}
+\addvspace{.5in}
+{\em Never} store secrets in code! \\
+{\em Always} use a key management system.
 
 \subsection{Basic Security Concepts: Integrity}
 In order to protect against forgery or data manipulation, provide some sort of
@@ -470,6 +589,17 @@ Some possible threats:
 		lookup of un-salted hashes.
 \end{itemize}
 
+\subsection{Basic Security Concepts: Hashing Passwords}
+{\em Never} confuse {\em hashing} and {\em encryption}! \\
+
+{\em Never} encrypt your users' passwords to store them -- {\em always} hash them. \\
+
+\addvspace{.25in}
+{\em Always} salt your hashes. \\
+
+{\em Always} use adaptive or key-stretching functions
+such as e.g. {\tt bcrypt}, {\tt PBKDF2}, {\tt Argon2}.
+
 \subsection{Basic Security Concepts: Authenticity}
 Three general ways of proving that you are who you say you are:
 \begin{itemize}
@@ -489,6 +619,18 @@ Three general ways of proving that you are who you say you are:
 	\item something you have
 	\item something you are
 \end{itemize}
+
+\subsection{Basic Security Concepts: Authenticity}
+\begin{verbatim}
+NetBSD/amd64 (SERVER) (console)
+
+login: jschauma
+password: *********************************
+NetBSD 7.0.2 (SERVER) #2: Tue Jan 24 02:33:13 EST 2017
+
+Welcome to NetBSD!
+hostname$ 
+\end{verbatim}
 
 \subsection{Basic Security Concepts: Authenticity}
 Three general ways of proving that you are who you say you are:
@@ -506,6 +648,22 @@ Three general ways of proving that you are who you say you are:
 		\end{itemize}
 	\item something you are
 \end{itemize}
+
+\subsection{Basic Security Concepts: Authenticity}
+\begin{verbatim}
+$ ssh-keygen -l -f /dev/stdin <<<$(aws ec2 get-console-output \
+        i-0990f1eb069c853c4 | grep ^ecdsa)
+256 19:af:35:01:0b:2a:ee:3d:30:0f:69:11:cc:55:7c:20 (ECDSA)
+$ ssh -i ~/.ssh/myawskey ec2-54-227-16-184.compute-1.amazonaws.com
+The authenticity of host 'ec2-54-227-16-184.compute-1.amazonaws.com
+(54.227.16.184)' can't be established.
+ECDSA key fingerprint is 19:af:35:01:0b:2a:ee:3d:30:0f:69:11:cc:55:7c:20.
+Are you sure you want to continue connecting (yes/no)?  yes
+NetBSD 7.0.2 (SERVER) #2: Tue Jan 24 02:33:13 EST 2017
+
+Welcome to NetBSD!
+hostname$ 
+\end{verbatim}
 
 \subsection{Basic Security Concepts: Authenticity}
 Three general ways of proving that you are who you say you are:
@@ -524,10 +682,19 @@ Three general ways of proving that you are who you say you are:
 	\item something you are
 		\begin{itemize}
 			\item physical, physiological or behavioral traits
-			\item can not (easily or at all) be given to or
+			\item cannot (easily or at all) be given to or
 				used by somebody else
+			\item cannot (easily or at all) be changed once
+				compromised
 		\end{itemize}
 \end{itemize}
+
+\subsection{Basic Security Concepts: Authenticity}
+\vfill
+\begin{center}
+	\includegraphics[scale=1.0]{pics/touchid.eps}
+\end{center}
+\vfill
 
 \subsection{Basic Security Concepts: Authenticity}
 Some possible threats:
@@ -545,6 +712,22 @@ Some possible threats:
 	\includegraphics[scale=0.9]{pics/turbolift_access_denied.eps}
 \end{center}
 \vspace*{\fill}
+
+\subsection{Principle of Least Privilege}
+
+{\em Never} run services as root; {\em always} use a
+dedicated account. \\
+
+{\em Never} log in as root; {\em always} use {\tt
+sudo(1)}. \\
+
+{\em Never} rely on implicit privileges; {\em always}
+grant access explicitly. \\
+
+{\em Never} grant permanent overly broad access; {\em
+always} use periodic access renewal and Role Based
+Access Controls (RBAC).
+
 
 \subsection{It's not just 1s and 0s}
 \vspace{.5in}
@@ -609,23 +792,71 @@ Users will not change their default settings. \\
 \end{center}
 \vspace*{\fill}
 
+\subsection{Classes of Vulnerabilities}
+\Normalsize
+\begin{itemize}
+	\item memory management
+		\begin{itemize}
+			\item use of uninitialized memory
+			\item buffer overflow / stack smashing
+			\item use-after-free / dangling pointer
+		\end{itemize}
+	\item input validation
+		\begin{itemize}
+			\item code and command injections
+			\item format attacks
+			\item Little Bobby Tables ({\tt https://www.xkcd.com/327/})
+		\end{itemize}
+	\item race contitions
+		\begin{itemize}
+			\item non-atomic TOCTOU
+			\item symlink attacks
+		\end{itemize}
+\end{itemize}
+
+\subsection{Classes of Vulnerabilities}
+\begin{itemize}
+	\item privilege escalation and confusion
+		\begin{itemize}
+			\item XSS, CSRF
+			\item setuid with untrusted environment
+		\end{itemize}
+	\item social engineering
+		\begin{itemize}
+			\item phishing
+			\item watering hole attacks
+		\end{itemize}
+	\item brute-force attacks
+		\begin{itemize}
+			\item namespace iteration
+			\item denial of service
+		\end{itemize}
+	\item information disclosure
+		\begin{itemize}
+			\item MitM
+			\item insufficient permissions
+			\item lack of encryption, authN, authZ
+		\end{itemize}
+\end{itemize}
+
 \subsection{Security Fallacies and Pitfalls}
 \vspace*{\fill}
 \begin{center}
-    \Hugesize
-        Proving a Negative \\
-	\vspace{.25in}
-	\Normalsize
-	(Evidence of Absences vs. Absence of Evidence)
+	\Hugesize
+        Security by Obscurity \\
 \end{center}
 \vspace*{\fill}
 
-
 \subsection{Security Fallacies and Pitfalls}
 \vspace*{\fill}
 \begin{center}
-    \Hugesize
-        Security by Obscurity
+	\Hugesize
+	Know what you're doing. \\
+\addvspace{.25in}
+	\Normalsize
+	{\em Never} blindly apply nor dismiss a security mechanism. \\
+\addvspace{.125in}
+	{\em Always} know which threat you're mitigating.
 \end{center}
 \vspace*{\fill}
 
@@ -688,7 +919,11 @@ can't think of how to break it.'' \\
 \subsection{Whom do you trust?}
 \vspace*{\fill}
 \begin{center}
-	\verb+http://cm.bell-labs.com/who/ken/trust.html+
+\Huge
+	Reflections on Trusting Trust \\
+
+\Normalsize
+	\verb+https://is.gd/RUX4zY+
 \end{center}
 \vspace*{\fill}
 \Normalsize
@@ -704,6 +939,62 @@ can't think of how to break it.'' \\
 	\item you are ok with the traffic going across the public internet
 \end{itemize}
 
+\subsection{Outsourcing Services}
+\begin{itemize}
+	\item you trust the provider/vendor to honor the agreement
+	\item you ``hope'' they won't change their agreement (once
+		invested, changing back is hard)
+	\item you trust the provider/vendor to keep their infrastructure
+		safe
+	\item you trust the provider/vendor's employees
+	\item you are ok with the traffic going across the public internet
+\end{itemize}
+\addvspace{.5in}
+Bottom-line: are you increasing or decreasing your
+attack surface? \\
+
+\addvspace{.25in}
+{\em Always} make a conscious decision; {\em never} blindly follow
+the promises without understanding the trade-offs.
+
+\subsection{Embrace Automation}
+\vspace*{\fill}
+\Huge
+\begin{center}
+	Vulnerabilities are dense. \\
+\addvspace{.5in}
+	Eliminate {\em classes} of attacks, not
+	individual flaws. \\
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Build Robust Infrastructures and Service}
+\vspace*{\fill}
+\Huge
+\begin{center}
+	Your endpoint security model should assume the
+	network is compromised; \\
+	your network security model should assume the
+	endpoint is. \\
+\addvspace{.5in}
+	Both in fact are.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Toning down the Paranoia}
+\vspace*{\fill}
+\begin{center}
+    \Hugesize
+        Proving a Negative \\
+	\vspace{.25in}
+	\Normalsize
+	(Evidence of Absences vs. Absence of Evidence)
+\end{center}
+\vspace*{\fill}
+
+
 \subsection{Toning down the Paranoia}
 \vspace*{\fill}
 \Huge
@@ -715,6 +1006,20 @@ Hanlon's Razor
 \end{center}
 \Normalsize
 \vspace*{\fill}
+
+\subsection{Toning down the Paranoia}
+\vspace*{\fill}
+\Huge
+\begin{center}
+Know which threat you're facing. \\
+\vspace{.25in}
+Know which mechanisms can help you. \\
+Don't dismiss those.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+
 
 \subsection{Sysadmin $\cap$ Infosec}
 \vspace*{\fill}
@@ -743,12 +1048,50 @@ Hanlon's Razor
 \Normalsize
 \vspace*{\fill}
 
-\subsection{HW6}
+\subsection{Last Words of Advice}
+\begin{itemize}
+	\item keep your asset inventory accurate
+	\item don't shell out; parametrize arguments and {\tt exec(3)}
+	\item don't trust the environment
+	\item use multi-factor authentication
+	\item use a password manager
+	\item use a key management system
+	\item rotate your secrets frequently
+	\item {\tt curl -k} is a (contagious) symptom
+	\item don't MitM your own users
+	\item disable Flash; use an ad-blocker
+	\item sign your software, configs; verify all signatures
+	\item ensure secure defaults (e.g. umask, shell history, ...)
+\end{itemize}
+
+\subsection{Infosec Foundation}
 \vspace*{\fill}
+\Huge
 \begin{center}
-	\verb+https://www.cs.stevens.edu/~jschauma/615/s15-ctf.html+
+	Don't be lazy.
 \end{center}
 \Normalsize
 \vspace*{\fill}
+
+\subsection{Final Project}
+Group project: Capture the Flag \\
+
+\vspace{.5in}
+\begin{verbatim}
+https://www.cs.stevens.edu/~jschauma/615/ctf.html
+\end{verbatim}
+
+\subsection{Additional Reading}
+\begin{verbatim}
+https://www.slideshare.net/zanelackey/attackdriven-defense
+https://www.netmeister.org/blog/moving-the-needle.html
+https://www.netmeister.org/blog/attack-life-cycle.html
+https://www.netmeister.org/blog/threat-model-101.html
+https://twitter.com/jschauma/status/713118376550404096
+https://t.co/DRHbEKXod8
+https://danielmiessler.com/study/security_and_obscurity/
+https://is.gd/sGnRVL
+\end{verbatim}
+
 
 \end{document}

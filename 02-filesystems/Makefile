@@ -20,9 +20,6 @@ FIGURES=	\
 		pics/USB_Connector_End.eps \
 		pics/USB_types.eps \
 		pics/block.eps \
-		pics/bucket-barbies.eps \
-		pics/bucket-fragmented.eps \
-		pics/bucket-full-of-stones.eps \
 		pics/bucket.eps \
 		pics/buckets.eps \
 		pics/busted-disk.eps \
@@ -99,7 +96,11 @@ FIGURES=	\
 		pics/ufs-details.eps \
 		pics/xraid.eps \
 		pics/equation-tweet.eps \
-		pics/zfs.eps
+		pics/zfs.eps \
+		pics/many-cats-in-basket.eps \
+		pics/numbered-cats.eps \
+		pics/several-cats.eps
+
 
 .SUFFIXES: .tex .dvi .ps .pdf .txt .fig .eps .jpg .png .gif
 

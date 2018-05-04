@@ -1,0 +1,952 @@
+%!PS-Adobe-2.0
+%%Creator: dot version 1.10 (Wed Jan 28 15:15:42 EST 2004)
+%%For: (jschauma)
+%%Title: installed packages
+%%Pages: (atend)
+%%BoundingBox: 35 35 1051 377
+%%EndComments
+save
+%%BeginProlog
+/DotDict 200 dict def
+DotDict begin
+
+/setupLatin1 {
+mark
+/EncodingVector 256 array def
+ EncodingVector 0
+
+ISOLatin1Encoding 0 255 getinterval putinterval
+
+EncodingVector
+  dup 306 /AE
+  dup 301 /Aacute
+  dup 302 /Acircumflex
+  dup 304 /Adieresis
+  dup 300 /Agrave
+  dup 305 /Aring
+  dup 303 /Atilde
+  dup 307 /Ccedilla
+  dup 311 /Eacute
+  dup 312 /Ecircumflex
+  dup 313 /Edieresis
+  dup 310 /Egrave
+  dup 315 /Iacute
+  dup 316 /Icircumflex
+  dup 317 /Idieresis
+  dup 314 /Igrave
+  dup 334 /Udieresis
+  dup 335 /Yacute
+  dup 376 /thorn
+  dup 337 /germandbls
+  dup 341 /aacute
+  dup 342 /acircumflex
+  dup 344 /adieresis
+  dup 346 /ae
+  dup 340 /agrave
+  dup 345 /aring
+  dup 347 /ccedilla
+  dup 351 /eacute
+  dup 352 /ecircumflex
+  dup 353 /edieresis
+  dup 350 /egrave
+  dup 355 /iacute
+  dup 356 /icircumflex
+  dup 357 /idieresis
+  dup 354 /igrave
+  dup 360 /dcroat
+  dup 361 /ntilde
+  dup 363 /oacute
+  dup 364 /ocircumflex
+  dup 366 /odieresis
+  dup 362 /ograve
+  dup 365 /otilde
+  dup 370 /oslash
+  dup 372 /uacute
+  dup 373 /ucircumflex
+  dup 374 /udieresis
+  dup 371 /ugrave
+  dup 375 /yacute
+  dup 377 /ydieresis
+
+% Set up ISO Latin 1 character encoding
+/starnetISO {
+        dup dup findfont dup length dict begin
+        { 1 index /FID ne { def }{ pop pop } ifelse
+        } forall
+        /Encoding EncodingVector def
+        currentdict end definefont
+} def
+/Times-Roman starnetISO def
+/Times-Italic starnetISO def
+/Times-Bold starnetISO def
+/Times-BoldItalic starnetISO def
+/Helvetica starnetISO def
+/Helvetica-Oblique starnetISO def
+/Helvetica-Bold starnetISO def
+/Helvetica-BoldOblique starnetISO def
+/Courier starnetISO def
+/Courier-Oblique starnetISO def
+/Courier-Bold starnetISO def
+/Courier-BoldOblique starnetISO def
+cleartomark
+} bind def
+
+%%BeginResource: procset
+/coord-font-family /Times-Roman def
+/default-font-family /Times-Roman def
+/coordfont coord-font-family findfont 8 scalefont def
+
+/InvScaleFactor 1.0 def
+/set_scale {
+	dup 1 exch div /InvScaleFactor exch def
+	dup scale
+} bind def
+
+% styles
+/solid { [] 0 setdash } bind def
+/dashed { [9 InvScaleFactor mul dup ] 0 setdash } bind def
+/dotted { [1 InvScaleFactor mul 6 InvScaleFactor mul] 0 setdash } bind def
+/invis {/fill {newpath} def /stroke {newpath} def /show {pop newpath} def} bind def
+/bold { 2 setlinewidth } bind def
+/filled { } bind def
+/unfilled { } bind def
+/rounded { } bind def
+/diagonals { } bind def
+
+% hooks for setting color
+/nodecolor { sethsbcolor } bind def
+/edgecolor { sethsbcolor } bind def
+/graphcolor { sethsbcolor } bind def
+/nopcolor {pop pop pop} bind def
+
+/beginpage {	% i j npages
+	/npages exch def
+	/j exch def
+	/i exch def
+	/str 10 string def
+	npages 1 gt {
+		gsave
+			coordfont setfont
+			0 0 moveto
+			(\() show i str cvs show (,) show j str cvs show (\)) show
+		grestore
+	} if
+} bind def
+
+/set_font {
+	findfont exch
+	scalefont setfont
+} def
+
+% draw aligned label in bounding box aligned to current point
+/alignedtext {			% width adj text
+	/text exch def
+	/adj exch def
+	/width exch def
+	gsave
+		width 0 gt {
+			text stringwidth pop adj mul 0 rmoveto
+		} if
+		[] 0 setdash
+		text show
+	grestore
+} def
+
+/boxprim {				% xcorner ycorner xsize ysize
+		4 2 roll
+		moveto
+		2 copy
+		exch 0 rlineto
+		0 exch rlineto
+		pop neg 0 rlineto
+		closepath
+} bind def
+
+/ellipse_path {
+	/ry exch def
+	/rx exch def
+	/y exch def
+	/x exch def
+	matrix currentmatrix
+	newpath
+	x y translate
+	rx ry scale
+	0 0 1 0 360 arc
+	setmatrix
+} bind def
+
+/endpage { showpage } bind def
+/showpage { } def
+
+/layercolorseq
+	[	% layer color sequence - darkest to lightest
+		[0 0 0]
+		[.2 .8 .8]
+		[.4 .8 .8]
+		[.6 .8 .8]
+		[.8 .8 .8]
+	]
+def
+
+/layerlen layercolorseq length def
+
+/setlayer {/maxlayer exch def /curlayer exch def
+	layercolorseq curlayer 1 sub layerlen mod get
+	aload pop sethsbcolor
+	/nodecolor {nopcolor} def
+	/edgecolor {nopcolor} def
+	/graphcolor {nopcolor} def
+} bind def
+
+/onlayer { curlayer ne {invis} if } def
+
+/onlayers {
+	/myupper exch def
+	/mylower exch def
+	curlayer mylower lt
+	curlayer myupper gt
+	or
+	{invis} if
+} def
+
+/curlayer 0 def
+
+%%EndResource
+%%EndProlog
+%%BeginSetup
+14 default-font-family set_font
+1 setmiterlimit
+% /arrowlength 10 def
+% /arrowwidth 5 def
+
+% make sure pdfmark is harmless for PS-interpreters other than Distiller
+/pdfmark where {pop} {userdict /pdfmark /cleartomark load put} ifelse
+% make '<<' and '>>' safe on PS Level 1 devices
+/languagelevel where {pop languagelevel}{1} ifelse
+2 lt {
+    userdict (<<) cvn ([) cvn load put
+    userdict (>>) cvn ([) cvn load put
+} if
+
+%%EndSetup
+%%Page: 1 1
+%%PageBoundingBox: 36 36 1051 377
+%%PageOrientation: Portrait
+gsave
+35 35 1016 342 boxprim clip newpath
+36 36 translate
+0 0 1 beginpage
+0 0 translate 0 rotate
+0.000 0.000 0.000 graphcolor
+14.00 /Times-Roman set_font
+
+%	digest-20021220
+gsave 10 dict begin
+134 314 30 18 ellipse_path
+stroke
+gsave 10 dict begin
+134 309 moveto 39 -0.5 (digest) alignedtext
+end grestore
+end grestore
+
+%	dialog-0.6znb3
+gsave 10 dict begin
+815 242 31 18 ellipse_path
+stroke
+gsave 10 dict begin
+815 237 moveto 41 -0.5 (dialog) alignedtext
+end grestore
+end grestore
+
+%	teTeX-bin-2.0.2nb5
+gsave 10 dict begin
+796 170 45 18 ellipse_path
+stroke
+gsave 10 dict begin
+796 165 moveto 69 -0.5 (teTeX-bin) alignedtext
+end grestore
+end grestore
+
+%	dialog-0.6znb3 -> teTeX-bin-2.0.2nb5
+gsave 10 dict begin
+newpath 810 224 moveto
+808 216 806 206 803 197 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 806 197 moveto
+801 188 lineto
+801 198 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 806 197 moveto
+801 188 lineto
+801 198 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	expat-1.95.8nb1
+gsave 10 dict begin
+29 242 29 18 ellipse_path
+stroke
+gsave 10 dict begin
+29 237 moveto 37 -0.5 (expat) alignedtext
+end grestore
+end grestore
+
+%	graphviz-1.12
+gsave 10 dict begin
+209 170 41 18 ellipse_path
+stroke
+gsave 10 dict begin
+209 165 moveto 61 -0.5 (graphviz) alignedtext
+end grestore
+end grestore
+
+%	expat-1.95.8nb1 -> graphviz-1.12
+gsave 10 dict begin
+newpath 52 231 moveto
+57 228 62 226 67 224 curveto
+101 210 139 195 168 184 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 168 187 moveto
+177 181 lineto
+167 182 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 168 187 moveto
+177 181 lineto
+167 182 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	freetype2-2.1.9
+gsave 10 dict begin
+120 242 44 18 ellipse_path
+stroke
+gsave 10 dict begin
+120 237 moveto 66 -0.5 (freetype2) alignedtext
+end grestore
+end grestore
+
+%	freetype2-2.1.9 -> graphviz-1.12
+gsave 10 dict begin
+newpath 140 226 moveto
+153 216 168 203 182 192 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 183 194 moveto
+189 186 lineto
+180 191 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 183 194 moveto
+189 186 lineto
+180 191 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	ghostscript-fonts-6.0
+gsave 10 dict begin
+360 242 68 18 ellipse_path
+stroke
+gsave 10 dict begin
+360 237 moveto 114 -0.5 (ghostscript-fonts) alignedtext
+end grestore
+end grestore
+
+%	ghostscript-gnu-7.07
+gsave 10 dict begin
+427 170 63 18 ellipse_path
+stroke
+gsave 10 dict begin
+427 165 moveto 105 -0.5 (ghostscript-gnu) alignedtext
+end grestore
+end grestore
+
+%	ghostscript-fonts-6.0 -> ghostscript-gnu-7.07
+gsave 10 dict begin
+newpath 377 224 moveto
+385 215 395 205 404 195 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 406 197 moveto
+411 188 lineto
+402 193 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 406 197 moveto
+411 188 lineto
+402 193 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	latex2html-2002.2.1nb3
+gsave 10 dict begin
+545 98 47 18 ellipse_path
+stroke
+gsave 10 dict begin
+545 93 moveto 73 -0.5 (latex2html) alignedtext
+end grestore
+end grestore
+
+%	ghostscript-gnu-7.07 -> latex2html-2002.2.1nb3
+gsave 10 dict begin
+newpath 454 154 moveto
+471 144 493 129 512 118 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 513 120 moveto
+520 113 lineto
+510 116 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 513 120 moveto
+520 113 lineto
+510 116 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	png-1.2.8
+gsave 10 dict begin
+473 242 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+473 237 moveto 26 -0.5 (png) alignedtext
+end grestore
+end grestore
+
+%	png-1.2.8 -> ghostscript-gnu-7.07
+gsave 10 dict begin
+newpath 462 225 moveto
+457 216 450 206 444 196 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 446 195 moveto
+438 188 lineto
+442 198 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 446 195 moveto
+438 188 lineto
+442 198 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	png-1.2.8 -> graphviz-1.12
+gsave 10 dict begin
+newpath 452 230 moveto
+447 228 442 226 437 224 curveto
+377 201 303 186 256 178 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 258 176 moveto
+248 176 lineto
+257 181 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 258 176 moveto
+248 176 lineto
+257 181 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	netpbm-10.26.1
+gsave 10 dict begin
+545 170 37 18 ellipse_path
+stroke
+gsave 10 dict begin
+545 165 moveto 53 -0.5 (netpbm) alignedtext
+end grestore
+end grestore
+
+%	png-1.2.8 -> netpbm-10.26.1
+gsave 10 dict begin
+newpath 488 227 moveto
+498 217 511 204 522 193 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 524 195 moveto
+529 186 lineto
+520 191 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 524 195 moveto
+529 186 lineto
+520 191 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	png-1.2.8 -> teTeX-bin-2.0.2nb5
+gsave 10 dict begin
+newpath 493 230 moveto
+498 228 504 225 509 224 curveto
+600 194 628 207 723 188 curveto
+731 187 741 184 749 182 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 749 185 moveto
+758 180 lineto
+748 180 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 749 185 moveto
+758 180 lineto
+748 180 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	jpeg-6bnb3
+gsave 10 dict begin
+413 314 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+413 309 moveto 29 -0.5 (jpeg) alignedtext
+end grestore
+end grestore
+
+%	jpeg-6bnb3 -> graphviz-1.12
+gsave 10 dict begin
+newpath 388 307 moveto
+360 299 316 284 283 260 curveto
+259 242 238 214 224 194 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 227 194 moveto
+220 187 lineto
+223 197 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 227 194 moveto
+220 187 lineto
+223 197 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	tiff-3.7.1nb3
+gsave 10 dict begin
+545 242 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+545 237 moveto 23 -0.5 (tiff) alignedtext
+end grestore
+end grestore
+
+%	jpeg-6bnb3 -> tiff-3.7.1nb3
+gsave 10 dict begin
+newpath 434 303 moveto
+456 290 491 271 516 258 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 516 261 moveto
+524 254 lineto
+514 256 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 516 261 moveto
+524 254 lineto
+514 256 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	tk-8.4.6nb3
+gsave 10 dict begin
+209 242 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+209 237 moveto 14 -0.5 (tk) alignedtext
+end grestore
+end grestore
+
+%	tk-8.4.6nb3 -> graphviz-1.12
+gsave 10 dict begin
+newpath 209 224 moveto
+209 216 209 207 209 198 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 212 198 moveto
+209 188 lineto
+207 198 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 212 198 moveto
+209 188 lineto
+207 198 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	xdvipresent-0.6.1.14nb2
+gsave 10 dict begin
+545 26 51 18 ellipse_path
+stroke
+gsave 10 dict begin
+545 21 moveto 80 -0.5 (xdvipresent) alignedtext
+end grestore
+end grestore
+
+%	latex2html-2002.2.1nb3 -> xdvipresent-0.6.1.14nb2
+gsave 10 dict begin
+newpath 545 80 moveto
+545 72 545 63 545 54 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 548 54 moveto
+545 44 lineto
+543 54 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 548 54 moveto
+545 44 lineto
+543 54 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	netpbm-10.26.1 -> latex2html-2002.2.1nb3
+gsave 10 dict begin
+newpath 545 152 moveto
+545 144 545 135 545 126 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 548 126 moveto
+545 116 lineto
+543 126 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 548 126 moveto
+545 116 lineto
+543 126 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	teTeX-bin-2.0.2nb5 -> latex2html-2002.2.1nb3
+gsave 10 dict begin
+newpath 759 159 moveto
+715 146 641 125 593 112 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 593 109 moveto
+583 109 lineto
+592 114 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 593 109 moveto
+583 109 lineto
+592 114 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	libwww-5.4.0nb3
+gsave 10 dict begin
+903 242 39 18 ellipse_path
+stroke
+gsave 10 dict begin
+903 237 moveto 56 -0.5 (libwww) alignedtext
+end grestore
+end grestore
+
+%	libwww-5.4.0nb3 -> teTeX-bin-2.0.2nb5
+gsave 10 dict begin
+newpath 881 227 moveto
+865 217 844 202 827 191 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 829 189 moveto
+819 186 lineto
+826 193 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 829 189 moveto
+819 186 lineto
+826 193 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	perl-5.8.6nb2
+gsave 10 dict begin
+617 242 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+617 237 moveto 26 -0.5 (perl) alignedtext
+end grestore
+end grestore
+
+%	perl-5.8.6nb2 -> netpbm-10.26.1
+gsave 10 dict begin
+newpath 602 227 moveto
+592 217 579 204 568 193 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 570 191 moveto
+561 186 lineto
+566 195 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 570 191 moveto
+561 186 lineto
+566 195 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	pkgdepgraph-2.7
+gsave 10 dict begin
+657 170 57 18 ellipse_path
+stroke
+gsave 10 dict begin
+657 165 moveto 92 -0.5 (pkgdepgraph) alignedtext
+end grestore
+end grestore
+
+%	perl-5.8.6nb2 -> pkgdepgraph-2.7
+gsave 10 dict begin
+newpath 626 225 moveto
+631 217 637 206 642 196 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 644 198 moveto
+647 188 lineto
+640 195 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 644 198 moveto
+647 188 lineto
+640 195 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	tiff-3.7.1nb3 -> netpbm-10.26.1
+gsave 10 dict begin
+newpath 545 224 moveto
+545 216 545 207 545 198 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 548 198 moveto
+545 188 lineto
+543 198 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 548 198 moveto
+545 188 lineto
+543 198 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	t1lib-5.0.2nb3
+gsave 10 dict begin
+987 242 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+987 237 moveto 26 -0.5 (t1lib) alignedtext
+end grestore
+end grestore
+
+%	t1lib-5.0.2nb3 -> teTeX-bin-2.0.2nb5
+gsave 10 dict begin
+newpath 966 230 moveto
+961 228 956 226 951 224 curveto
+915 209 872 194 841 184 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 842 182 moveto
+832 181 lineto
+841 187 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 842 182 moveto
+832 181 lineto
+841 187 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	tcl-8.4.6nb5
+gsave 10 dict begin
+209 314 27 18 ellipse_path
+stroke
+gsave 10 dict begin
+209 309 moveto 16 -0.5 (tcl) alignedtext
+end grestore
+end grestore
+
+%	tcl-8.4.6nb5 -> tk-8.4.6nb3
+gsave 10 dict begin
+newpath 209 296 moveto
+209 288 209 279 209 270 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 212 270 moveto
+209 260 lineto
+207 270 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 212 270 moveto
+209 260 lineto
+207 270 lineto
+closepath
+stroke
+end grestore
+end grestore
+
+%	teTeX-share-2.0.2
+gsave 10 dict begin
+714 242 52 18 ellipse_path
+stroke
+gsave 10 dict begin
+714 237 moveto 83 -0.5 (teTeX-share) alignedtext
+end grestore
+end grestore
+
+%	teTeX-share-2.0.2 -> teTeX-bin-2.0.2nb5
+gsave 10 dict begin
+newpath 733 225 moveto
+745 216 758 203 770 193 curveto
+stroke
+gsave 10 dict begin
+solid
+1 setlinewidth
+0.000 0.000 0.000 edgecolor
+newpath 771 195 moveto
+777 187 lineto
+768 192 lineto
+closepath
+fill
+0.000 0.000 0.000 edgecolor
+newpath 771 195 moveto
+777 187 lineto
+768 192 lineto
+closepath
+stroke
+end grestore
+end grestore
+endpage
+showpage
+grestore
+%%PageTrailer
+%%EndPage: 1
+%%Trailer
+%%Pages: 1
+end
+restore
+%%EOF

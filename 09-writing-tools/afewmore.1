@@ -1,0 +1,141 @@
+.Dd March 27, 2017
+.Dt AFEWMORE 1
+.Os
+.Sh NAME
+.Nm afewmore
+.Nd duplicate EC2 instances with their data directory
+.Sh SYNOPSIS
+.Nm
+.Op Fl hv
+.Op Fl d Ar dir
+.Op Fl n Ar num
+.Ar instance
+.Sh DESCRIPTION
+The
+.Nm
+tool can be used to duplicate a given EC2 instance.
+When doing so, it creates multiple new instances and
+populates their data directory by copying the data
+from the original.
+.Sh OPTIONS
+The source instance is specified via the mandatory
+argument to
+.Nm .
+In addition, the following command-line options are
+supported:
+.Bl -tag -width _d_dir_
+.It Fl d Ar dir
+Copy the contents of this data directory from the
+orignal source instance to all the new instances.
+If not specified, defaults to
+.Ar /data .
+.It Fl h
+Print a usage statement and exit.
+.It Fl n Ar num
+Create this many new instances.
+If not specified, defaults to 10.
+.It Fl v
+Be verbose.
+.El
+.Sh DETAILS
+Frequently, it is necessary to duplicate a given
+server's configuration or setup.
+While configuration management and service
+orchestration systems may be able to perform this
+task, the
+.Nm
+tool allows for a trivial initial bootstrapping that
+only concerns itself with data duplication, not host
+configuration.
+.Pp
+Upon invocation,
+.Nm
+will identify the type of EC2 instance in question and
+launch the requested number of duplicates.
+It will then copy the contents of the given directory
+from the source instance to all of the newly created
+instances.
+.Sh OUTPUT
+By default,
+.Nm
+prints the instance IDs of the newly created EC2
+instances as the only output.
+Unless an error occurs, no other output is generated.
+.Pp
+If the
+.Fl v
+flag is given,
+.Nm
+may print meaningful diagnostic messages as it
+progresses to stdout.
+.Pp
+Any errors encountered cause a meaningful error
+message to be printed to STDERR.
+.Sh ENVIRONMENT
+The
+.Nm
+tool is suitable to be used by any user and does not
+have any user-specific settings or credentials hard
+coded.
+.Pp
+.Nm
+assumes that the user has set up their environment for
+general use with the EC2 tools.
+That is, it will not set or modify any environment variables.
+.Pp
+.Nm
+also assumes that the user has set up their
+.Ar ~/.ssh/config
+file to access instances in EC2 via
+.Xr ssh 1
+without any additional settings.
+.Sh EXIT STATUS
+The
+.Nm
+will exit with a return status of 0 under normal circumstances.
+If an error occurred,
+.Nm
+will exit with a value >0.
+.Sh EXAMPLES
+The following examples illustrate common usage of this tool.
+.Pp
+To create ten more instances of the EC2 instance
+i-0a1b2c3d4f and copy the contents of the '/data'
+directory from that instance:
+.Bd -literal -offset indent
+$ afewmore i-0a1b2c3d4f
+i-0a1b2c3d4f
+i-1a1b2c3d4f
+i-2a1b2c3d4f
+i-3a1b2c3d4f
+i-4a1b2c3d4f
+i-5a1b2c3d4f
+i-6a1b2c3d4f
+i-7a1b2c3d4f
+i-8a1b2c3d4f
+i-9a1b2c3d4f
+$ echo $?
+0
+$
+.Ed
+.Pp
+To create just one more instance and copy the contents
+of the directory '/usr/local/share':
+.Bd -literal -offset indent
+$ afewmore -n 1 i-0a1b2c3d4f
+i-1a1b2c3d4f
+$
+.Ed
+.Sh SEE ALSO
+aws help,
+.Xr ssh 1 ,
+.Xr tar 1 ,
+.Xr rsync 1
+.Sh HISTORY
+.Nm
+was originally assigned by
+.An Jan Schaumann
+.Aq jschauma@cs.stevens.edu
+as a homework assignment for the class "Aspects of
+System Administration" at Stevens Institute of
+Technology in the Spring of 2017.

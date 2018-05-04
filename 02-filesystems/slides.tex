@@ -1,3 +1,5 @@
+https://en.wikipedia.org/wiki/Advanced_Format
+
 \documentclass[xga]{xdvislides}
 \usepackage[landscape]{geometry}
 \usepackage{array}
@@ -29,15 +31,332 @@
 		Stevens Institute of Technology\\
 		Jan Schaumann\\
 		\verb+jschauma@stevens.edu+ \\
-		\verb+http://www.cs.stevens.edu/~jschauma/615A/+
+		\verb+https://www.cs.stevens.edu/~jschauma/615A/+
 \end{center}
 \vspace*{\fill}
 %\setcounter{page}{0}
 %\clearpage
 
+\subsection{Let's review HW1}
+\vspace{.5in}
+Start all assignments on {\tt
+linux-lab.cs.stevens.edu}! \\
+\vspace{.5in}
+Submit plain text. \\
+\vspace{.5in}
+No resubmissions.
+
+\subsection{Let's review HW1}
+\vspace{.5in}
+
+Running an instance:
+\begin{verbatim}
+$ aws ec2 run-instances --instance-type t1.micro \
+        --key-name stevens --image-id ami-569ed93c
+\end{verbatim}
+
+\subsection{Let's review HW1}
+\vspace{.5in}
+
+Save yourself some typing:
+\begin{verbatim}
+$ alias instance='aws ec2 run-instances --key-name stevens --image-id'
+$ instance ami-569ed93c --instance-type t1.micro
+\end{verbatim}
+
+\subsection{Let's review HW1}
+\vspace{.5in}
+
+Make it permanent:
+\begin{verbatim}
+$ echo "alias instance='aws ec2 run-instances --key-name stevens --image-id'" \
+        >> ~/.bashrc
+$ . ~/.bashrc
+$ alias
+alias instance='aws ec2 run-instances --key-name stevens --image-id'
+$ 
+\end{verbatim}
+
+\subsection{Let's review HW1}
+\vspace{.5in}
+
+Add the other common AMIs we'll use:
+\begin{verbatim}
+$ alias
+aws='aws --output text'
+del-volume='aws ec2 delete-volume --volume-id'
+instance='aws ec2 run-instances --key-name stevens --image-id'
+instances='aws ec2 describe-instances'
+term-instances='aws ec2 terminate-instances --instance-ids'
+start-fedora='instance ami-0187f76b --instance-type t1.micro'
+start-freebsd='instance ami-d0b520b8 --instance-type t1.micro'
+start-netbsd='instance ami-569ed93c --instance-type t1.micro'
+start-omnios='instance ami-9fbbfaf5 --instance-type t1.micro'
+start-ubuntu='instance ami-6de0dd04 --instance-type t1.micro'
+volumes='aws ec2 describe-volumes'
+$ 
+\end{verbatim}
+
+
+\subsection{Let's review HW1}
+\vspace{.5in}
+
+ssh to an instance:
+\begin{verbatim}
+$ ssh -i ~/.ssh/ec2 root@<mumble>.compute-1.amazonaws.com
+\end{verbatim}
+
+\subsection{Let's review HW1}
+\vspace{.5in}
+
+Let's save ourselves some typing:
+\begin{verbatim}
+$ cat >>~/.ssh/config <<EOF
+> Host *.amazonaws.com
+>         IdentityFile ~/.ssh/ec2
+>         User         root
+> EOF
+$ ssh <mumble>.compute-1.amazonaws.com
+\end{verbatim}
+
+\subsection{Let's review HW1}
+\vspace{.5in}
+
+How do we know what host we're connecting to?
+\begin{verbatim}
+$ ssh ec2-54-227-16-184.compute-1.amazonaws.com
+The authenticity of host 'ec2-54-227-16-184.compute-1.amazonaws.com
+(54.227.16.184)' can't be established.
+ECDSA key fingerprint is 19:af:35:01:0b:2a:ee:3d:30:0f:69:11:cc:55:7c:20.
+Are you sure you want to continue connecting (yes/no)? 
+\end{verbatim}
+
+\subsection{Let's review HW1}
+\begin{verbatim}
+$ instance ami-0187f76b # Fedora
+$ aws ec2 get-console-output --instance-id i-18fd6d98
+[...]
+<14>Feb  6 18:37:59 ec2: #############################################################
+<14>Feb  6 18:37:59 ec2: -----BEGIN SSH HOST KEY FINGERPRINTS-----
+<14>Feb  6 18:37:59 ec2: 256 SHA256:3kQfQTV+sfk/BDa9jGdvvea8i28TwWOgWt8lZKdALgA /etc/ssh/ssh_host_ecdsa_key.pub (ECDSA)
+<14>Feb  6 18:37:59 ec2: 256 SHA256:R3/H4kFMu/JZZCxQL7ZYODZoKwGFNBN6Cpfbsx/PFDQ /etc/ssh/ssh_host_ed25519_key.pub (ED25519)
+<14>Feb  6 18:37:59 ec2: 2048 SHA256:WjIFQE4ZEQfSR0bfCVgRbR7Q0780RFug8CZNXcEam0I /etc/ssh/ssh_host_rsa_key.pub (RSA)
+<14>Feb  6 18:37:59 ec2: -----END SSH HOST KEY FINGERPRINTS-----
+-----BEGIN SSH HOST KEY KEYS-----
+ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBP4RT8CDVexvKozWaKH4eOnGaDkm+EucrbmZzMTiYgSmXmkOkwL1Rwt18jrXRtKm1z+MqNu3plAxkiTeT62HxfY=
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBTpcfKZcASSjicvMPAx6UAQSac9ZH0UeO+/A9m6EuFO
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC48feKNKyaS+c+zJmu6/L6o9L7VkW6YMuwu0//Uo5uS46YhMO5GY/cyerlS/o404ZKVuRbBhpRTPWlccMFpDBtE5jdoejdEl5lWK0w9MNfQ7lmSTjnCbqRy+0GWi/ig7zI6lBYFoh85PNCJxh+FQFOpBtQVz+L6Wo4GPWFVpqO0NUkNt4IlTfXTQIoRJ3uY6qHcdhA0pihb55QIlImG8EXStbVOBQXVceKMWmQhXsHtDrEu+zHYfUNffCbryBwb9uIn0kkmL105VaegoPayv7hoUqM3+RuHHBzt4xdNFS4QYVNSYJRTLGQ+tFEmgWNIbRHlqB2TKlsH5JLRwcjFOkb
+-----END SSH HOST KEY KEYS-----
+\end{verbatim}
+
+
+\subsection{Let's review HW1}
+\vspace{.5in}
+
+How do we know what host we're connecting to?
+\begin{verbatim}
+$ start-fedora
+$ ssh-keygen -l -f /dev/stdin <<<$(console i-0990f1eb069c853c4 | grep ^ecdsa)
+256 19:af:35:01:0b:2a:ee:3d:30:0f:69:11:cc:55:7c:20 (ECDSA)
+$ ssh fedora@ec2-54-227-16-184.compute-1.amazonaws.com
+The authenticity of host 'ec2-54-227-16-184.compute-1.amazonaws.com
+(54.227.16.184)' can't be established.
+ECDSA key fingerprint is 19:af:35:01:0b:2a:ee:3d:30:0f:69:11:cc:55:7c:20.
+Are you sure you want to continue connecting (yes/no)? yes
+[fedora@ip-10-170-2-33 ~]$ 
+\end{verbatim}
+
+\subsection{Let's review HW1}
+\begin{verbatim}
+# uname -a
+NetBSD ip-10-236-59-3.ec2.internal 7.0 NetBSD 7.0 (XEN3PAE_DOMU.201509250726Z) i386
+\end{verbatim}
+
+\subsection{Let's review HW1}
+\begin{verbatim}
+# ifconfig -a
+xennet0: flags=8863<UP,BROADCAST,NOTRAILERS,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+        capabilities=2800<TCP4CSUM_Tx,UDP4CSUM_Tx>
+        enabled=0
+        address: 22:00:0a:ec:3b:03
+        inet 10.236.59.3 netmask 0xffffffc0 broadcast 10.236.59.63
+        inet6 fe80::179d:36b7:129c:68d3%xennet0 prefixlen 64 scopeid 0x1
+lo0: flags=8049<UP,LOOPBACK,RUNNING,MULTICAST> mtu 33184
+        inet 127.0.0.1 netmask 0xff000000
+        inet6 ::1 prefixlen 128
+        inet6 fe80::1%lo0 prefixlen 64 scopeid 0x2
+\end{verbatim}
+
+
+\subsection{Let's review HW1}
+\begin{verbatim}
+# netstat -na | more
+Active Internet connections (including servers)
+Proto Recv-Q Send-Q  Local Address          Foreign Address        State
+tcp        0     36  10.236.59.3.22         98.139.248.67.55452    ESTABLISHED
+tcp        0      0  *.22                   *.*                    LISTEN
+udp        0      0  *.68                   *.*
+Active Internet6 connections (including servers)
+Proto Recv-Q Send-Q  Local Address          Foreign Address        (state)
+tcp6       0      0  *.22                   *.*                    LISTEN
+Active UNIX domain sockets
+Address  Type   Recv-Q Send-Q    Inode     Conn Refs  Nextref Addr
+[...]
+\end{verbatim}
+
+\subsection{Let's review HW1}
+\begin{verbatim}
+# df -hi
+Filesystem         Size       Used      Avail %Cap iUsed   iAvail %iCap Mounted on
+/dev/xbd1a         959M       485M       426M  53% 23243   507251   4% /
+/dev/xbd0a         246M       2.2M       231M   0%    15    65521   0% /grub
+kernfs             1.0K       1.0K         0B 100%     0        0   0% /kern
+ptyfs              1.0K       1.0K         0B 100%     0        0   0% /dev/pts
+procfs             4.0K       4.0K         0B 100%    15      517   2% /proc
+# mount
+/dev/xbd1a on / type ffs (local)
+/dev/xbd0a on /grub type ext2fs (local)
+kernfs on /kern type kernfs (local)
+ptyfs on /dev/pts type ptyfs (local)
+procfs on /proc type procfs (local)
+\end{verbatim}
+
+
+\subsection{Let's review HW1}
+\small
+\begin{verbatim}
+# fdisk /dev/xbd0
+fdisk: primary partition table invalid, no magic in sector 0
+fdisk: Cannot determine the number of heads
+Disk: /dev/xbd0d
+NetBSD disklabel disk geometry:
+cylinders: 1024, heads: 1, sectors/track: 2048 (2048 sectors/cylinder)
+total sectors: 2097152, bytes/sector: 512
+
+BIOS disk geometry:
+cylinders: 130, heads: 255, sectors/track: 63 (16065 sectors/cylinder)
+total sectors: 2097152
+
+Partitions aligned to 16065 sector boundaries, offset 63
+
+Partition table:
+0: <UNUSED>
+1: <UNUSED>
+2: <UNUSED>
+3: <UNUSED>
+Bootselector disabled.
+No active partition.
+Drive serial number: 0 (0x00000000)
+\end{verbatim}
+\Normalsize
+
+\subsection{Let's review HW1}
+\small
+\begin{verbatim}
+# disklabel /dev/rxbd0
+# /dev/rxbd0d:
+type: ESDI
+disk: Xen Virtual ESDI
+label: fictitious
+flags:
+bytes/sector: 512
+sectors/track: 2048
+tracks/cylinder: 1
+sectors/cylinder: 2048
+cylinders: 1024
+total sectors: 2097152
+rpm: 3600
+interleave: 1
+trackskew: 0
+cylinderskew: 0
+headswitch: 0           # microseconds
+track-to-track seek: 0  # microseconds
+drivedata: 0 
+
+4 partitions:
+#        size    offset     fstype [fsize bsize cpg/sgs]
+ a:   2097152         0     4.2BSD      0     0     0 # (Cyl.      0 -   1023)
+ d:   2097152         0     unused      0     0       # (Cyl.      0 -   1023)
+disklabel: boot block size 0
+disklabel: super block size 0
+\end{verbatim}
+\Normalsize
 
 \subsection{Filesystems, Disks, Storage}
-Adding, (re-)partitioning, mounting disks requires understanding of:
+\begin{verbatim}
+$ ssh linux-lab.cs.stevens.edu
+$ dh -hT
+\end{verbatim}
+
+\begin{verbatim}
+$ dd if=/dev/zero of=/tmp/big bs=1G
+[...]
+\end{verbatim}
+
+Now try to {\tt ssh} to that host...
+
+\subsection{Filesystems, Disks, Storage}
+
+File sizes are not always what they seem to be.
+
+\begin{verbatim}
+$ mkdir /tmp/${USER}
+$ export LARGE=/tmp/${USER}/large
+$ truncate -s $(df /tmp | awk '/^\// { print $4; }')0000 ${LARGE}
+$ ls -l ${LARGE}
+$ du ${LARGE}
+$ stat ${LARGE}
+$ cp ${LARGE} ${LARGE}2
+$ du ${LARGE}2
+$ cat ${LARGE} > ${LARGE}2
+$ ls -l ${LARGE}*
+$ du ${LARGE}*
+\end{verbatim}
+
+\subsection{Filesystems, Disks, Storage}
+How many files can be created on {\tt /tmp}?
+
+\begin{verbatim}
+$ ssh linux-lab.cs.stevens.edu
+$ rm /tmp/${USER}/large2
+$ dh -i /tmp
+\end{verbatim}
+
+\subsection{Filesystems, Disks, Storage}
+How many files can be created on {\tt /tmp}?
+
+\begin{verbatim}
+$ ssh linux-lab.cs.stevens.edu
+$ df -i /tmp
+\end{verbatim}
+
+\subsection{Filesystems, Disks, Storage}
+
+\begin{verbatim}
+$ ssh linux-lab.cs.stevens.edu
+$ cd /tmp
+$ dh -i /tmp
+$ touch newfile
+$ cc -Wall ~jschauma/tmp/mkfiles.c
+$ ./a.out
+$ ls -ld /tmp/$(id -u)
+$ ls /tmp/$(id -u) | wc -l
+$ touch newerfile
+$ echo "hello hello hello" >> newfile
+$ rm -fr /tmp/$(id -u)
+\end{verbatim}
+
+\subsection{Filesystems, Disks, Storage}
+Important lessons: \\
+
+File sizes are not always what they seem to be. \\
+
+Error messages aren't always what they seem to be! \\
+
+All resources are finite.
+
+
+\subsection{Filesystems, Disks, Storage}
 \begin{itemize}
 	\item basic disk concepts
 	\item basic filesystem concepts
@@ -45,7 +364,6 @@ Adding, (re-)partitioning, mounting disks requires understanding of:
 \end{itemize}
 
 \subsection{Topics covered}
-Adding, (re-)partitioning, mounting disks requires understanding of:
 \begin{itemize}
 	\item basic disk concepts
 		\begin{itemize}
@@ -59,7 +377,6 @@ Adding, (re-)partitioning, mounting disks requires understanding of:
 \end{itemize}
 
 \subsection{Topics covered}
-Adding, (re-)partitioning, mounting disks requires understanding of:
 \begin{itemize}
 	\item basic disk concepts
 		\begin{itemize}
@@ -78,7 +395,6 @@ Adding, (re-)partitioning, mounting disks requires understanding of:
 \end{itemize}
 
 \subsection{Topics covered}
-Adding, (re-)partitioning, mounting disks requires understanding of:
 \begin{itemize}
 	\item basic disk concepts
 		\begin{itemize}
@@ -145,59 +461,57 @@ Cloud Storage (Examples: EBS, S3)
 \end{center}
 \vfill
 
-\subsection{Basic Disk Concepts: Storage Models: Cloud Storage}
-\begin{verbatim}
-$ aws ec2 describe-instances
-[...]
-/dev/sda1	ebs	None	paravirtual
-BLOCKDEVICEMAPPINGS	/dev/sda
-EBS	2014-01-25T20:18:19.000Z	True	attached vol-a0d000d6
-[...]
-\end{verbatim}
-
-
-\subsection{Basic Disk Concepts: Storage Models: Cloud Storage}
-
-30 min. exercise: \\
-
-\begin{itemize}
-	\item create two OmniOS instances
-	\item create a 1GB volume and attach it to one of the instances
-	\item create a new filesystem on the volume and mount it
-	\item create a file on the new filesystem
-	\item terminate the first instance
-	\item attach the volume to the second instance
-	\item retrieve the file from the volume via the second instance
-\end{itemize}
-
-If time permits, repeat using a Linux instance.
-\vspace{.25in}
-Useful commands: \\
-{\tt aws ec2 create-volume}, {\tt aws ec2 attach-volume}, {\tt
-format(1M)}, {\tt newfs(1M)}, {\tt mount(8)}
-
-\subsection{Basic Disk Concepts: Storage Models: Cloud Storage}
-\begin{verbatim}
-$ aws ec2 create-volume --size 1 --availability-zone us-east-1d
-[...]
-$ aws ec2 attach-volume --volume-id vol-9d3aeaeb --instance-id \
-        i-dd74f0f3 --device /dev/sdh
-[...]
-$ ssh <hostname>
-# format
-format> fdisk
-format> verify
-format> label
-# newfs /dev/rdsk/c1t2160d0s0
-[...]
-# mount /dev/dsk/c1t2160d0s0 /mnt
-# df -Th /mnt
-[...]
-# fstyp -v /dev/rdsk/c1t2160d0s0  | more
-[...]
-\end{verbatim}
-
-
+%\subsection{Basic Disk Concepts: Storage Models: Cloud Storage}
+%\begin{verbatim}
+%$ aws ec2 describe-instances
+%[...]
+%/dev/sda1	ebs	None	paravirtual
+%BLOCKDEVICEMAPPINGS	/dev/sda
+%EBS	2014-01-25T20:18:19.000Z	True	attached vol-a0d000d6
+%[...]
+%\end{verbatim}
+%
+%
+%\subsection{Basic Disk Concepts: Storage Models: Cloud Storage}
+%
+%30 min. exercise: \\
+%
+%\begin{itemize}
+%	\item create two instances
+%	\item create a 1GB volume and attach it to one of the instances
+%	\item create a new filesystem on the volume and mount it
+%	\item create a file on the new filesystem
+%	\item terminate the first instance
+%	\item attach the volume to the second instance
+%	\item retrieve the file from the volume via the second instance
+%\end{itemize}
+%
+%If time permits, repeat using a Linux instance.
+%\vspace{.25in}
+%Useful commands: \\
+%{\tt aws ec2 create-volume}, {\tt aws ec2 attach-volume}, {\tt
+%format(1M)}, {\tt newfs(1M)}, {\tt mount(8)}
+%
+%\subsection{Basic Disk Concepts: Storage Models: Cloud Storage}
+%\begin{verbatim}
+%$ aws ec2 create-volume --size 1 --availability-zone us-east-1d
+%[...]
+%$ aws ec2 attach-volume --volume-id vol-9d3aeaeb --instance-id \
+%        i-dd74f0f3 --device /dev/sdh
+%[...]
+%$ ssh <hostname>
+%# format
+%format> fdisk
+%format> verify
+%format> label
+%# newfs /dev/rdsk/c1t2160d0s0
+%[...]
+%# mount /dev/dsk/c1t2160d0s0 /mnt
+%# df -Th /mnt
+%[...]
+%# fstyp -v /dev/rdsk/c1t2160d0s0  | more
+%[...]
+%\end{verbatim}
 
 \newpage
 \vspace*{\fill}
@@ -221,7 +535,7 @@ format> label
 Security affects everything. \\
 \begin{center}
 	\includegraphics[scale=0.9]{pics/equation-tweet.eps} \\
-	\verb+http://t.co/eM6XpATITQ+
+	\verb+https://t.co/eM6XpATITQ+
 \end{center}
 
 \subsection{Basic Disk Concepts: Disk Devices}
@@ -698,6 +1012,28 @@ The filesystem is responsible for storing the data on the disk.
 So to read/write data, it needs to know in which physical blocks the actual
 data is located; ie how to map files to the disk blocks.
 
+\subsection{Let's pretend we're a filesystem...}
+
+\begin{verbatim}
+aws ec2 create-volume --size 1 --availability-zone us-east-1a
+
+aws ec2 attach-volume --volume-id  XXX --instance-id XXX --device /dev/sda2
+
+dmesg
+
+echo hello | dd of=/dev/xbd2
+
+dd if=/dev/xbd2 count=6 | hexdump -C
+
+echo hello | dd of=/dev/xbd2 seek=1024
+
+dd if=/dev/xbd2 count=2048 2>/dev/null | hexdump -C
+
+printf "\x7\x4\x4hello" | dd of=/dev/xbd2
+\end{verbatim}
+
+
+
 
 \subsection{Basic Filesystem Concepts: The UNIX Filesystem}
 \vspace*{\fill}
@@ -755,20 +1091,20 @@ data is located; ie how to map files to the disk blocks.
 
 \subsection{Basic Filesystem Concepts: The UNIX Filesystem}
 \begin{center}
-\includegraphics[scale=0.8]{pics/bucket-barbies.eps} \\
+\includegraphics[scale=0.9]{pics/several-cats.eps} \\
 \end{center}
 
 \subsection{Basic Filesystem Concepts: The UNIX Filesystem}
 \vspace*{\fill}
 \begin{center}
-\includegraphics[scale=0.95]{pics/bucket-full-of-stones.eps} \\
+\includegraphics[scale=0.9]{pics/many-cats-in-basket.eps} \\
 \end{center}
 \vspace*{\fill}
 
 \subsection{Basic Filesystem Concepts: The UNIX Filesystem}
 \vspace*{\fill}
 \begin{center}
-\includegraphics[scale=1.2]{pics/bucket-fragmented.eps} \\
+\includegraphics[scale=1.0]{pics/numbered-cats.eps} \\
 \end{center}
 \vspace*{\fill}
 
@@ -1085,22 +1421,25 @@ how they relate to the concepts we discussed.  Repeat for a different OS,
 for example: \\
 
 \begin{itemize}
-	\item {\tt ami-b232d0db} -- Fedora 8
-	\item {\tt ami-23dae94a} -- FreeBSD 10.0
-	\item {\tt ami-65a7f30c} -- NetBSD 6.1.2
-	\item {\tt ami-35eb835c} -- OmniOS 5.11
+	\item {\tt ami-3b361952} -- Fedora 23
+	\item {\tt ami-f709a29c} -- FreeBSD 10.2
+	\item {\tt ami-569ed93c} -- NetBSD 7.0
+	\item {\tt ami-50ecc847} -- OmniOS 5.11
 \end{itemize}
 
 \vspace{.5in}
 Remember to {\em shut down} your EC2 instances and to {\em delete} any unused ESB
 volumes!
 
+\vspace{.5in}
+{\tt https://www.cs.stevens.edu/\~{}jschauma/615/s18-hw2.html}
+
 
 \subsection{Reading}
 \begin{itemize}
-	\item \verb+http://is.gd/5mndwA+
-	\item \verb+http://is.gd/ig4QP5+
-	\item \verb+http://is.gd/9YeIKh+
+	\item \verb+https://is.gd/5mndwA+
+	\item \verb+https://is.gd/ig4QP5+
+	\item \verb+https://is.gd/9YeIKh+
 \end{itemize}
 
 \subsection{Reading}
@@ -1108,7 +1447,7 @@ Disk Interfaces:
 \begin{itemize}
 	\item SCSI:
 		\begin{itemize}
-			\item \verb+http://en.wikipedia.org/wiki/Scsi+
+			\item \verb+https://en.wikipedia.org/wiki/Scsi+
 			\item scsi(4), scsictl(8);
 		\end{itemize}
 	\item ATA:
@@ -1142,7 +1481,6 @@ Disk Interfaces:
 \subsection{Reading}
 Basic Disk Concepts:
 \begin{itemize}
-	\item \verb+http://is.gd/3SXn5N+
 	\item disklabel(8), fdisk(8)
 	\item format(1m)
 \end{itemize}
@@ -1152,10 +1490,10 @@ RAID:
 \end{itemize}
 Basic Filesystem Concepts:
 \begin{itemize}
-	\item \verb+http://is.gd/8KHnQj+
-	\item \verb+http://is.gd/YMm3JL+
+	\item \verb+https://is.gd/8KHnQj+
+	\item \verb+https://is.gd/wGgJ0e+
 	\item newfs(8)
 \end{itemize}
-NFS: \verb+http://www.cis.udel.edu/~srisatha/NFS/sld001.htm+
+NFS: \verb+https://is.gd/70yqMZ+
 
 \end{document}

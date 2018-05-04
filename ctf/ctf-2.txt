@@ -1,0 +1,6 @@
+Congratulations!  You have cleared level 1.
+
+To receive the instructions for the next level,
+fill out this form:
+
+http:/ec2-54-166-128-209.compute-1.amazonaws.com/cgi-bin/level2.cgi

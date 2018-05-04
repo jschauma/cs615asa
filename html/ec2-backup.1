@@ -1,4 +1,4 @@
-.Dd March 03, 2014
+.Dd April 30, 2018
 .Dt EC2-BACKUP 1
 .Os
 .Sh NAME
@@ -7,7 +7,8 @@
 .Sh SYNOPSIS
 .Nm
 .Op Fl h
-.Op Fl m Ar method
+.Op Fl l Ar filter
+.Op Fl r Ar filter
 .Op Fl v Ar volume-id
 .Ar dir
 .Sh DESCRIPTION
@@ -17,30 +18,57 @@ tool performs a backup of the given directory into Amazon Elastic Block
 Storage (EBS).
 This is achieved by creating a volume of the appropriate size, attaching
 it to an EC2 instance and finally copying the files from the given
-directory into this volume.
+directory onto this volume.
 .Sh OPTIONS
 .Nm
 accepts the following command-line flags:
 .Bl -tag -width _v_volume_id
 .It Fl h
 Print a usage statement and exit.
-.It Fl m Ar method
-Use the given method to perform the backup.
-Valid methods are 'dd' and 'rsync'; default is 'dd'.
+.It Fl l Ar filter
+Pass data through the given
+.Ar filter
+command on the local host before copying the data to
+the remote system.
+.It Fl r Ar filter
+Pass data through the given
+.Ar filter
+command on the remote host before writing the data to
+the volume.
 .It Fl v Ar volume-id
 Use the given volume instead of creating a new one.
 .El
 .Sh DETAILS
 .Nm
 will perform a backup of the given directory to an ESB volume.
-The backup is done in one of two ways: via direct write to the volume as a
-block device (utilizing
+The backup is done with the help of the
 .Xr tar 1
-on the local host and
+command on the local host, writing the resulting
+archive directly to the block device.
+That is,
+.Nm
+does not create or use a filesystem on the volume.
+Instead,
+.Nm
+utilizes the
 .Xr dd 1
-on the remote instance), or via a (possibly incremental) filesystem sync
-(utilizing
-.Xr rsync 1 Ns ).
+command to write out the data to the raw volume.
+In essence,
+.Nm
+wraps the following pipeline:
+.Bd -literal -offset indent
+tar cf - <dir> | ssh ec2-instance "dd of=/dev/sda3"
+.Ed
+.Pp
+.Nm
+does not use any temporary files, nor creates a local
+copy of the archive it writes to the volume.
+.Pp
+.Nm
+can pass the archive it creates through a filter
+command on either the local or the remote host.
+This allows the user to e.g. perform encryption of the
+backup.
 .Pp
 Unless the
 .Fl v
@@ -51,16 +79,24 @@ size of the directory to be backed up.
 .Pp
 .Nm
 will create an instance suitable to perform the backup, attach the volume
-in question and then back up the data from the given directory using the
-specified method and then shut down and terminate the instance it created.
+in question and then back up the data from the given directory.
+Afterwards,
+.Nm
+will terminate the instance it created.
 .Sh OUTPUT
+If successful,
+.Nm
+will print the volume-id of the volume to which it
+backed up the data as the only output.
+.Pp
 Unless the
 .Ar EC2_BACKUP_VERBOSE
 environment variable is set,
 .Nm
-will not generate any output unless any errors are encountered.
-Otherwise, it may print out some useful information about what steps it
-is currently performing.
+will not generate any other output unless any errors are encountered.
+If that variable is set, it may print out some useful
+information about what steps it is currently
+performing.
 .Pp
 Any errors encountered cause a meaningful error message to be printed to
 STDERR.
@@ -104,17 +140,18 @@ will exit with a value >0.
 .Sh EXAMPLES
 The following examples illustrate common usage of this tool.
 .Pp
-To back up the entire filesystem using
-.Xr rsync 1 Ns :
+To back up the entire filesystem:
 .Bd -literal -offset indent
-ec2-backup -m rsync /
+$ ec2-backup /
+vol-1a2b3c4d
 .Ed
 .Pp
 To create a complete backup of the current working directory using
-defaults (and thus not requiring a filesystem to exist on the volume) to
-the volume with the ID vol-1a2b3c4d:
+defaults to the volume with the ID vol-1a2b3c4d,
+possibly overwriting any data previously stored there:
 .Bd -literal -offset indent
-ec2-backup -v vol-1a2b3c4d .
+$ ec2-backup -v vol-1a2b3c4d .
+vol-1a2b3c4d
 .Ed
 .Pp
 Suppose a user has their ~/.ssh/config set up to use the private key
@@ -123,22 +160,37 @@ but wishes to use the key
 .Ar ~/.ssh/ec2-key
 instead:
 .Bd -literal -offset indent
-export EC2_BACKUP_FLAGS_SSH="-i ~/.ssh/ec2-key"
-ec2-backup .
+$ export EC2_BACKUP_FLAGS_SSH="-i ~/.ssh/ec2-key"
+$ ec2-backup .
+vol-1a2b3c4d
 .Ed
 .Pp
 To force creation of an instance type of
 .Ar t1.micro
 instead of whatever defaults might apply
 .Bd -literal -offset indent
-export EC2_BACKUP_FLAGS_AWS="--instance-type t1.micro"
-ec2-backup .
+$ export EC2_BACKUP_FLAGS_AWS="--instance-type t1.micro"
+$ ec2-backup .
+vol-1a2b3c4d
+.Ed
+.Pp
+To locally encrypt the backup of the '/var/secrets' directory:
+.Bd -literal -offset indent
+$ ec2-backup -l 'gpg -e -r 9BED3DD7' /var/secrets
+vol-1a2b3c4d
+.Ed
+.Pp
+The same as above, but perform encryption on the remote system:
+.Bd -literal -offset indent
+$ ec2-backup -r 'gpg -e -r 9BED3DD7' /var/secrets
+vol-1a2b3c4d
 .Ed
 .Sh SEE ALSO
 aws help,
+.Xr cat 1 ,
 .Xr dd 1 ,
-.Xr tar 1 ,
-.Xr rsync 1
+.Xr ssh 1 ,
+.Xr tar 1
 .Sh HISTORY
 .Nm
 was originally assigned by

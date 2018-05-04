@@ -1,0 +1,128 @@
+.Dd April 17, 2011
+.Dt EC2-RESTORE 1
+.Os
+.Sh NAME
+.Nm ec2-restore
+.Nd restore a backup of a directory from Elastic Block Storage (EBS)
+.Sh SYNOPSIS
+.Nm
+.Op Fl ehv
+.Op Fl i Ar instance
+.OP Fl m Ar method
+.Op Fl t Ar tag
+.Fl d Ar dir
+.Sh DESCRIPTION
+The
+.Nm
+tool retores the contents of a previously backed up directory from Amazon
+Elastic Block Storage (EBS).
+It is the complementary tool to the
+.Xr ec2-backup 1
+utility.
+.Sh OPTIONS
+.Nm
+accepts the following command-line flags:
+.Bl -tag -width e_recipient_
+.It Fl e
+Data was encrypted during backup, so decrypt.
+.It Fl h
+Print a usage statement and exit.
+.It Fl i Ar instance
+Attach the volume in question to the given instance.
+.It Fl m Ar method
+Use the given method to perform the restore.
+Valid methods are 'dd' and 'rsync'; default is 'dd'.
+.It Fl t Ar tag
+Use the volume with the given tag.
+If no tag is specified, use 'ec2-backup'.
+.It Fl v
+Be verbose.
+If not specified,
+.Nm
+will not generate any output at all (unless an error is encountered).
+.El
+.Sh DETAILS
+.Nm
+will restore data from a backup in an ESB volume into the given directory.
+The restore is done in one of two ways: via direct read from the volume
+(utilizing
+.Xr dd 1
+on the remote instance and
+.Xr tar 1
+on the local host), or via a (possibly incremental) filesystem sync
+(utilizing
+.Xr rsync 1 Ns ).
+.Pp
+.Nm
+will create the directory specified via the
+.Fl d
+flag if it does not exist.
+.Pp
+Unless an instance is given using the
+.Fl i
+flag,
+.Nm
+will create an instance suitable to retrieve the data from the volume,
+attach the volume in question and restore the data into the given directory
+using the specified method and then shut down the instance it created.
+.Sh ENCRYPTION
+If
+.Fl e
+was specified, then
+.Nm
+will assume the backups was initially encrypted and thus attempt to
+decrypt it.
+This implies a restore method of 'dd' -- specifying 'rsync' with
+.Fl e
+is thus an error condition.
+.Pp
+.Nm
+will let the
+.Xr gpg 1
+tool perform the decryption.
+.Sh OUTPUT
+Unless the
+.Fl v
+flag is given,
+.Nm
+will not generate any output unless any errors are encountered.
+Otherwise, it may print out some useful information about what steps it
+is currently performing.
+.Pp
+Any errors encountered cause a meaningful error message to be printed to
+STDERR.
+.Sh EXIT STATUS
+The
+.Nm
+will exit with a return status of 0 under normal circumstances.
+If an error occurred,
+.Nm
+will exit with a value >0.
+.Sh EXAMPLES
+The following examples illustrate common usage of this tool.
+.Pp
+To restore the data found on the volume tagged as 'backup' over the
+root filesystem using .Xr rsync 1 Ns :
+.Bd -literal -offset indent
+ec2-restore -t backup -m rsync -d /
+.Ed
+.Pp
+To restore the encrypted data from the default volume into the current
+directory:
+.Bd -literal -offset indent
+ec2-restore -e -d .
+.Ed
+.Sh SEE ALSO
+.Xr dd 1 ,
+.Xr ec2-backup 1 ,
+.Xr ec2-start-instance 1 ,
+.Xr gpg 1 ,
+.Xr tar 1 ,
+.Xr rsync 1
+.Sh HISTORY
+.Nm
+was originally assigned by
+.An Jan Schaumann
+.Aq jschauma@cs.stevens.edu
+as a homework assignment for the class "Aspects of System Administration" at
+Stevens Institute of Technology in the Spring of 2011.

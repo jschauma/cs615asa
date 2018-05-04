@@ -27,7 +27,13 @@ PICTURES= \
 		pics/feeping.eps \
 		pics/bert-ernie.eps \
 		pics/broken-windows.eps \
-		pics/waste.eps 
+		pics/drown.eps \
+		pics/tools.eps \
+		pics/hammer.eps \
+		pics/nails.eps \
+		pics/big-tool.eps \
+		pics/power-tools.eps \
+		pics/hammer-screw.eps 
 
 .SUFFIXES: .tex .dvi .ps .pdf .txt .fig .eps .png .jpg .gif
 

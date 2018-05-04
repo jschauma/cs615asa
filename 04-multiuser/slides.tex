@@ -12,6 +12,8 @@
 \usepackage{tabularx}
 \usepackage{multirow}
 
+\newcommand{\smallish}{\fontsize{16}{16}\selectfont}
+
 \begin{document}
 \setfontphv
 
@@ -19,7 +21,7 @@
 \lhead{\slidetitle}                               % default:\lhead{\slidetitle}
 \chead{CS615 - Aspects of System Administration}% default:\chead{\relax}
 \rhead{Slide \thepage}                       % default:\rhead{\sectiontitle}
-\lfoot{\Gray{Multiuser Fundamentals, Ethics, Automation I}}% default:\lfoot{\slideauthor}
+\lfoot{\Gray{Multiuser Fundamentals}}% default:\lfoot{\slideauthor}
 \cfoot{\relax}                               % default:\cfoot{\relax}
 \rfoot{\Gray{\today}}
 
@@ -27,34 +29,16 @@
 \begin{center}
 	\Hugesize
 		CS615 - Aspects of System Administration\\ [1em]
-		Multiuser Fundamentals, Ethics; Automation I\\ [1em]
+		Multiuser Fundamentals\\ [1em]
 	\hspace*{5mm}\blueline\\ [1em]
 	\Normalsize
 		Department of Computer Science\\
 		Stevens Institute of Technology\\
 		Jan Schaumann\\
 		\verb+jschauma@stevens.edu+\\
-		\verb+http://www.cs.stevens.edu/~jschauma/615/+
+		\verb+https://www.cs.stevens.edu/~jschauma/615/+
 \end{center}
 \vspace*{\fill}
-
-\subsection{Current Events}
-\verb+http://xenbits.xen.org/xsa/+
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.8]{pics/xsa.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{Current Events}
-\verb+http://xenbits.xen.org/xsa/+ \\
-
-\verb+https://aws.amazon.com/premiumsupport/maintenance-2015-03/+ \\
-
-\verb+https://community.rackspace.com/general/f/53/t/4978+ \\
-
-\verb+http://status.linode.com/incidents/2dyvn29ds5mz+
-
 
 \subsection{Multiuser}
 
@@ -112,20 +96,15 @@ Things to consider:
 \end{center}
 
 \subsection{Granting Privileges requires Trust}
-\vfill
-\begin{center}
-	\Huge
-	Trust, but (be able to) verify.
-	\Normalsize
-\end{center}
-\vfill
+\Huge
+We are considering {\em computer-human systems}. \\
 
-\subsection{Implications of a Multi-User System}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.9]{pics/animal_farm.eps}
-\end{center}
-\vspace*{\fill}
+\vspace{.5in}
+For humans, trust, but (be able to) verify. \\
+
+\vspace{.5in}
+For computers, apply the {\em Least Privilege} principle. \\
+\Normalsize
 
 \subsection{Implications of a Multi-User System}
 \begin{itemize}
@@ -187,6 +166,148 @@ Things to consider:
 	{\tt nobody}
 \end{center}
 
+%\subsection{Implications of a Multi-User System}
+%\vspace*{\fill}
+%\begin{center}
+%	\includegraphics[scale=0.9]{pics/animal_farm.eps}
+%\end{center}
+%\vspace*{\fill}
+%
+\subsection{Authentication}
+
+\begin{itemize}
+	\item proof of identity, not proof of {\em authorization}
+\end{itemize}
+
+\subsection{Authentication}
+
+\begin{itemize}
+	\item proof of identity, not proof of {\em authorization}
+	\item something you know, something you have, something you are
+\end{itemize}
+
+\subsection{Authentication}
+
+\begin{itemize}
+	\item proof of identity, not proof of {\em authorization}
+	\item something you know, something you have, something you are
+	\item multi-factor authentication combines these to help protect against different threats
+\end{itemize}
+
+\subsection{Authentication}
+
+\begin{itemize}
+	\item proof of identity, not proof of {\em authorization}
+	\item something you know, something you have, something you are
+	\item multi-factor authentication combines these to help protect against different threats
+	\item mutual authentication may be a requirement
+\end{itemize}
+
+\subsection{Authentication}
+Common examples:
+
+\begin{verbatim}
+NetBSD/amd64 (SERVER) (console)
+
+login: jschauma
+password: *********************************
+NetBSD 7.0.2 (SERVER) #2: Tue Jan 24 02:33:13 EST 2017
+
+Welcome to NetBSD!
+hostname$ 
+\end{verbatim}
+
+\subsection{Authentication}
+Common examples:
+
+\begin{verbatim}
+$ ssh-keygen -l -f /dev/stdin <<<$(aws ec2 get-console-output \
+        i-0990f1eb069c853c4 | grep ^ecdsa)
+256 19:af:35:01:0b:2a:ee:3d:30:0f:69:11:cc:55:7c:20 (ECDSA)
+$ ssh -i ~/.ssh/myawskey ec2-54-227-16-184.compute-1.amazonaws.com
+The authenticity of host 'ec2-54-227-16-184.compute-1.amazonaws.com
+(54.227.16.184)' can't be established.
+ECDSA key fingerprint is 19:af:35:01:0b:2a:ee:3d:30:0f:69:11:cc:55:7c:20.
+Are you sure you want to continue connecting (yes/no)?  yes
+NetBSD 7.0.2 (SERVER) #2: Tue Jan 24 02:33:13 EST 2017
+
+Welcome to NetBSD!
+hostname$ 
+\end{verbatim}
+
+\subsection{Authentication}
+Common examples:
+
+\begin{verbatim}
+$ kinit
+Password for jschauma@DOMAIN: ********************************
+$ klist
+Ticket cache: /tmp/krb5cc_ttypa
+     Default principal: jschauma@DOMAIN
+     
+     Valid starting     Expires            Service principal
+     02/13/17 13:50:21  02/13/17 21:50:20  krbtgt/KDC@DOMAIN
+$ ssh somehost
+somehost$ 
+\end{verbatim}
+
+\subsection{Authentication}
+Common examples:
+
+\smallish
+\begin{verbatim}
+localhost$ ssh sshca
+YubiKey for `jschauma': ********************************
+Password: ********************************
+localhost$ ssh-add -l
+2048 SHA256:TzwuHGc5BKBe+VJSnGoVyh92J8XKBUkaL7MGQn8ML0Y (RSA)
+2048 SHA256:TzwuHGc5BKBe+VJSnGoVyh92J8XKBUkaL7MGQn8ML0Y (RSA-CERT)
+localhost$ ssh somehost
+Duo two-factor login for jschauma
+
+Enter a passcode or select one of the following options:
+
+ 1. Duo Push to XXX-XXX-0712
+ 2. Phone call to XXX-XXX-0712
+ 3. SMS passcodes to XXX-XXX-0712
+
+Passcode or option (1-3): 1
+Success. Logging you in...
+Last login: Thu Jan 26 17:39:30 2017 from 10.1.2.3
+
+somehost$ 
+\end{verbatim}
+\Normalsize
+
+\subsection{Authentication}
+Common examples:
+\vfill
+\begin{center}
+	\includegraphics[scale=0.25]{pics/iphone.eps}
+\end{center}
+\vfill
+
+\subsection{Authentication}
+Common examples:
+\begin{itemize}
+	\item passwords, PINs
+	\item ssh keys, PGP keys, X.509 certificates
+	\item security tokens: OTPs in hardware or software, RFIDs
+	\item physical biometrics: fingerprint, retina scan, facial recognition
+	\item behavioral biometrics: speech pattern, gait, keystroke dynamics...
+\end{itemize}
+\vspace{.5in}
+
+Mix and match the above to yield multi-factor
+authentication:
+\begin{itemize}
+	\item password + PIN via e.g. SMS
+	\item ssh key + TOTP from e.g. mobile device
+	\item fingerprint + security token
+	\item ...
+\end{itemize}
+
+
 \subsection{UNIX Fundamentals: User Accounts and File Permissions}
 Every account
 \begin{itemize}
@@ -220,6 +341,61 @@ Every file
 \end{center}
 \vfill
 
+\subsection{Raising privileges}
+Some tasks require special privileges:
+\begin{itemize}
+	\item binding a port $< 1024$ (e.g. 22, 25, 80, 443)
+	\item operating on raw sockets (e.g. {\tt ping(1)}, {\tt traceroute(8)})
+	\item changing local passwords
+	\item accessing files/directories without explicit permissions
+	\item just about anything involving file systems
+	\item ...
+\end{itemize}
+
+\subsection{Raising privileges}
+Options:
+
+\begin{verbatim}
+somehost$ exit
+$ ssh root@somehost
+# 
+\end{verbatim}
+
+\subsection{Raising privileges}
+Options:
+
+\begin{verbatim}
+$ su user2 -c 'some command'
+Password:
+$ su - root
+Password:
+# 
+\end{verbatim}
+
+\subsection{Raising privileges}
+Options:
+
+\begin{verbatim}
+somehost$ sudo bash
+jschauma is not allowed to run sudo on somehost.  This incident will be reported.
+\end{verbatim}
+
+\subsection{Raising privileges}
+Options:
+
+\begin{verbatim}
+jschauma@somehost$ ls dir
+ls: cannot open directory dir: Permission denied
+jschauma@somehost$ sudo bash
+Sorry, user jschauma is not allowed to execute '/bin/bash' as root on somehost.
+jschauma@somehost$ sudo ls dir
+Sorry, user jschauma is not allowed to execute '/bin/ls' as root on somehost.
+jschauma@somehost$ sudo -u otheruser ls dir
+Password: ********************************
+file1   file2
+jschauma@somehost$ 
+\end{verbatim}
+
 \subsection{Unix Groups}
 \begin{itemize}
 	\item enables {\em arbitrary} collections of users to share resources
@@ -229,7 +405,7 @@ Every file
 		user
 	\item most Unix systems have a common default group for new users (some
 		Linux versions deviate)
-	\item some Unix systems have group shadow files
+	\item some Unix systems have/had group shadow files
 \end{itemize}
 
 \subsection{Group Access}
@@ -240,12 +416,27 @@ At any but the smallest environments, we find:
 	\item access to systems is granted primarily by such group membership
 	\item privileges on a system are also granted by such group membership
 \end{itemize}
+\vspace{.5in}
+The privileges granted in this manner are commonly
+broken down and controlled via {\em role-based access
+control} (RBAC).
 
 \subsection{Group Access}
 \begin{center}
 	\includegraphics[scale=0.8]{pics/groups-machines.eps}
 \end{center}
 
+\subsection{Multiuser Truths}
+\begin{itemize}
+	\item {\em All users are equal.}
+	\item {\em Some users are more equal than others.}
+	\item {\em The principle of least privilege applies to all.}
+	\item {\em Humans require trust.}
+	\item {\em Trust does not scale.}
+	\item {\em You will always face trade-offs.}
+\end{itemize}
+
+
 \subsection{Adding and Removing Accounts}
 
 \vfill
@@ -253,632 +444,232 @@ In-class exercise: \\
 \verb+https://www.cs.stevens.edu/~jschauma/615/useradd-exercise.html+
 \vfill
 
-\subsection{Adding and Removing Accounts}
-\vfill
-In-class exercise: \\
-\verb+https://www.cs.stevens.edu/~jschauma/615/useradd-exercise.html+
-
-\vspace{.5in}
-Accounts management is done centrally; changes are applied to machines via a
-configuration management system and/or directory service.
-\vfill
-
-\subsection{Ethics}
-\begin{center}
-	\includegraphics[scale=2.5]{pics/angel-devil.eps}
-\end{center}
-
-\subsection{You are a Super User!}
-\begin{center}
-	\includegraphics[scale=1.0]{pics/superman.eps} \\
-	\small
-	Yes, you are!
-	\Normalsize
-\end{center}
-
-\subsection{You are a Super User!}
-\begin{center}
-	\includegraphics[scale=4.0]{pics/uncle-ben.eps} \\
-	\addvspace{.2in}
-	\Huge
-	``With great power comes great responsibility.''
-	\Normalsize
-\end{center}
-
-\subsection{sudo(8)}
-\vspace*{\fill}
-\begin{verbatim}
-We trust you have received the usual lecture from the local System
-Administrator. It usually boils down to these three things:
-#1) Respect the privacy of others.
-#2) Think before you type.
-#3) With great power comes great responsibility.
-\end{verbatim}
-\vspace*{\fill}
-
-\subsection{Ethics}
-The LISA Code of Ethics:
-\\
-
-\newcolumntype{S}{>{\centering\arraybackslash} m{.4\linewidth} }
-\begin{tabular}{ p{10cm} S }
-\begin{itemize}
-	\item Professionalism
-	\item Personal Integrity
-	\item Privacy
-	\item Laws and Policies
-	\item System Integrity
-	\item Education
-	\item Social Responsibility
-	\item Ethical Responsibility
-\end{itemize}
-& \multirow{20}{*}{\includegraphics[scale=1.3]{pics/angel.eps}} \\
-\end{tabular}
-
-\subsection{Ethics: This stuff isn't easy!}
-\begin{center}
-	\includegraphics[scale=0.3]{pics/snowden.eps}
-\end{center}
-
-\subsection{Ethics: Professionalism}
-\vfill
-\begin{center}
-I will maintain professional conduct in the workplace and will not allow
-personal feelings or beliefs to cause me to treat people unfairly or
-unprofessionally.
-\end{center}
-\vfill
-
-\subsection{Ethics: Personal Integrity}
-\vfill
-\begin{center}
-I will be honest in my professional dealings and forthcoming about my
-competence and the impact of my mistakes. I will seek assistance from
-others when required. \\
-\vspace{.5in}
-
-I will avoid conflicts of interest and biases whenever possible. When my
-advice is sought, if I have a conflict of interest or bias, I will declare
-it if appropriate, and recuse myself if necessary.
-\end{center}
-\vfill
-
-
-\subsection{Ethics: Privacy}
-\vfill
-\begin{center}
-I will access private information on computer systems only when it is
-necessary in the course of my technical duties. I will maintain and
-protect the confidentiality of any information to which I may have access,
-regardless of the method by which I came into knowledge of it.
-\end{center}
-\vfill
-
-\subsection{Ethics: Laws and Policies}
-\vfill
-\begin{center}
-I will educate myself and others on relevant laws, regulations, and
-policies regarding the performance of my duties.
-\end{center}
-\vfill
-
-\subsection{Ethics: Communication}
-\vfill
-\begin{center}
-I will communicate with management, users, and colleagues about computer
-matters of mutual interest. I will strive to listen to and understand the
-needs of all parties.
-\end{center}
-\vfill
-
-\subsection{Ethics: System Integrity}
-\vfill
-\begin{center}
-I will strive to ensure the necessary integrity, reliability, and
-availability of the systems for which I am responsible. \\
-\vspace{.5in}
-
-I will design and maintain each system in a manner to support the
-purpose of the system to the organization.
-\end{center}
-\vfill
-
-\subsection{Ethics: Education}
-\vfill
-\begin{center}
-I will continue to update and enhance my technical knowledge and other
-work-related skills. I will share my knowledge and experience with others.
-\end{center}
-\vfill
-
-\subsection{Ethics: Responsibility to the Computing Community}
-\vfill
-\begin{center}
-I will cooperate with the larger computing community to maintain the
-integrity of network and computing resources.
-\end{center}
-\vfill
-
-\subsection{Ethics: Social Responsibility}
-\vfill
-\begin{center}
-As an informed professional, I will encourage the writing and adoption of
-relevant policies and laws consistent with these ethical principles.
-\end{center}
-\vfill
-
-\subsection{Ethics: Ethical Responsibility}
-\vfill
-\begin{center}
-I will strive to build and maintain a safe, healthy, and productive
-workplace. \\
-\vspace{.5in}
-
-I will do my best to make decisions consistent with the safety, privacy,
-and well-being of my community and the public, and to disclose promptly
-factors that might pose unexamined risks or dangers. \\
-\vspace{.5in}
-
-I will accept and offer honest criticism of technical work as appropriate
-and will credit properly the contributions of others. \\
-\vspace{.5in}
-
-I will lead by example, maintaining a high ethical standard and degree
-of professionalism in the performance of all my duties. I will support
-colleagues and co-workers in following this code of ethics.
-
-\end{center}
-\vfill
-
-\subsection{At the end of the day...}
-\begin{center}
-	\includegraphics[scale=0.5]{pics/thumbsup-borat.eps}
-\end{center}
-
-
-\newpage
-\vspace*{\fill}
-\begin{center}
-    \Hugesize
-        Hooray! \\ [1em]
-    \hspace*{5mm}
-    \blueline\\
-    \hspace*{5mm}\\
-        5 Minute Break
-\end{center}
-\vspace*{\fill}
-
-\newpage
-\vspace*{\fill}
-\begin{center}
-	\Hugesize
-		Automation and Scripting \\ [1em]
-	\hspace*{5mm}
-	\blueline\\
-	\hspace*{5mm}\\
-		Part I
-\end{center}
-\vspace*{\fill}
-
-\subsection{What should be automated?}
-
-\begin{itemize}
-	\item software installation / upgrades / audits
-	\item account creation / deletion
-	\item system configuration changes
-	\item log and event processing
-\end{itemize}
-\vspace{.5in}
-...and anything / everything else in between!
-
-\subsection{Words of Wisdom}
-\\
-
-\newcommand{\gargantuan}{\fontsize{60}{65}\selectfont}
-\gargantuan
-\begin{center}
-Anything you do more than once is worth automating.
-\end{center}
-\Normalsize
-
-
-
-\subsection{Why automate anything?}
-
-\subsection{Why automate anything?}
-\begin{itemize}
-	\item we're lazy
-\end{itemize}
-
-\subsection{Why automate anything?}
-\begin{itemize}
-	\item we're lazy
-	\item we're unreliable and make mistakes
-\end{itemize}
-
-\subsection{Why automate anything?}
-\begin{itemize}
-	\item we're lazy
-	\item we're unreliable and make mistakes
-	\item we're forgetful
-\end{itemize}
-
-\subsection{Who do we automate things for?}
-\subsection{Who do we automate things for?}
-\begin{itemize}
-	\item ourselves
-\end{itemize}
-
-\subsection{Who do we automate things for?}
-\begin{itemize}
-	\item ourselves
-	\item our peers
-\end{itemize}
-
-\subsection{Who do we automate things for?}
-\begin{itemize}
-	\item ourselves
-	\item our peers
-	\item our users
-\end{itemize}
-
-\subsection{Who do we automate things for?}
-\begin{itemize}
-	\item ourselves
-	\item our peers
-	\item our users
-	\item anybody else
-\end{itemize}
-
-\subsection{Tools}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.4]{pics/tools.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{The right tool?}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.6]{pics/hammer.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{The right tool?}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=2.5]{pics/nails.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{The right tool?}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=3]{pics/hammer-screw.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{The right tool?}
-Bourne shell (/bin/sh) \\
-
-\begin{itemize}
-	\item lowest common denominator
-	\item available and reliable on most platforms (but beware of non-portable
-		bash(1) "enhancements")
-	\item beware of "quick-and-dirty" solutions, they grow to become
-		unmaintainable
-	\item treat shell as any other programming language:
-		\begin{itemize}
-			\item use functions
-			\item use suitably scoped variables
-			\item follow Unix philosophy
-			\item properly package your tool
-		\end{itemize}
-\end{itemize}
-
-
-\subsection{The right tool?}
-Perl, Python, Ruby, ... \\
-
-\begin{itemize}
-	\item suitable for moderately complex tasks
-	\item move to these when sed(1), awk(1), etc. become too cumbersome
-	\item text manipulation frequently easier
-	\item beware of "quick-and-dirty" solutions, they grow to become
-		unmaintainable
-	\item try to build self-contained modules that can be tested independent of
-		the "main" program
-	\item wealth of libraries available -- use them! (And remember to explicitly
-		require them.)
-	\item properly package your tool
-\end{itemize}
-
-\subsection{The right tool?}
-Perl, PHP, Tcl, JavaScript, CoffeeScript, ... \\
-
-\begin{itemize}
-	\item http/web server interfaces
-	\item CGI "scripts" / server-side execution (e.g. NodeJS)
-	\item interface with/utilize APIs in a specific domain/vendor products
-	\item frequent cause of all sorts of security problems due to interface with
-		user data / exposure on the internet
-\end{itemize}
-
-\subsection{The right tool?}
-Java, Scala, Clojure, Rhino, ... \\
-
-\begin{itemize}
-	\item know your primary applications
-	\item interface with / extend / tie into JVM
-\end{itemize}
-
-\subsection{The right tool?}
-C, C++, Go, Rust, ... \\
-
-\begin{itemize}
-	\item performance benefits
-	\item portability
-	\item sufficient low-levelness
-	\item systems understanding
-	\item fix/patch your other tools / the system
-\end{itemize}
-
-\subsection{Interpreted Languages}
-General advantages: \\
-
-\begin{itemize}
-	\item short development cycle
-	\item normally facilitate things like string manipulation, arithmetic and
-		more complex regular expressions
-	\item easily handle multiple file handles and other I/O
-	\item some security features
-	\item tens of thousands of special- and general-purpose modules available
-\end{itemize}
-
-\subsection{Interpreted Languages}
-General Disadvantages: \\
-
-\begin{itemize}
-	\item no one tool fits all purposes
-	\item tens of thousands of special- and general-purpose modules available $=>$
-		lots of duplication, stale code, questionable quality
-	\item security features frequently neglected or circumvented ("too hard" or
-		more precisely "inconvenient")
-	\item everybody has their particular favorite (and dislikes one or the
-		other)
-	\item interpreter not (necessarily) universally available / installed
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item scripting
-	\item programming
-	\item software engineering
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-\begin{itemize}
-	\item scripting
-\end{itemize}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.5]{pics/hammer.eps}
-\end{center}
-\vspace*{\fill}
-
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item scripting
-		\begin{itemize}
-			\item automating {\em very} simple tasks
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item scripting
-		\begin{itemize}
-			\item automating {\em very} simple tasks
-			\item customization of user environment
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item scripting
-		\begin{itemize}
-			\item automating {\em very} simple tasks
-			\item customization of user environment
-			\item often only suitable for one individual user
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item scripting
-		\begin{itemize}
-			\item automating {\em very} simple tasks
-			\item customization of user environment
-			\item often only suitable for one individual user
-			\item usually eventually evolves into larger programs
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item programming
-\end{itemize}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.8]{pics/power-tools.eps}
-\end{center}
-\vspace*{\fill}
-
-
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item programming
-		\begin{itemize}
-			\item suitable for simple to moderately complex tasks
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item programming
-		\begin{itemize}
-			\item suitable for simple to moderately complex tasks
-			\item results frequently used by a small base of users
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item programming
-		\begin{itemize}
-			\item suitable for simple to moderately complex tasks
-			\item results frequently used by a small base of users
-			\item uses basic framework or common toolkits
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item programming
-		\begin{itemize}
-			\item suitable for simple to moderately complex tasks
-			\item results frequently used by a small base of users
-			\item uses basic framework or common toolkits
-			\item provides consistent interface
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item programming
-		\begin{itemize}
-			\item suitable for simple to moderately complex tasks
-			\item results frequently used by a small base of users
-			\item uses basic framework or common toolkits
-			\item provides consistent interface
-			\item may evolve into full product
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item software development
-\end{itemize}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.25]{pics/big-tool.eps}
-\end{center}
-\vspace*{\fill}
-
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item software development
-		\begin{itemize}
-			\item required for any reasonably complex task
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item software development
-		\begin{itemize}
-			\item required for any reasonably complex task
-			\item uses formal software engineering approach (measurable goals,
-				requirements, specifications, ...)
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item software development
-		\begin{itemize}
-			\item required for any reasonably complex task
-			\item uses formal software engineering approach (measurable goals,
-				requirements, specifications, ...)
-			\item may evolve from previous prototypes
-		\end{itemize}
-\end{itemize}
-
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item software development
-		\begin{itemize}
-			\item required for any reasonably complex task
-			\item uses formal software engineering approach (measurable goals,
-				requirements, specifications, ...)
-			\item may evolve from previous prototypes
-			\item requires ongoing continous maintenance / development efforts
-		\end{itemize}
-\end{itemize}
-
-\subsection{Where are you?}
-Make sure to understand your requirements:
-
-\begin{itemize}
-	\item motivation / goals
-	\item target audience
-	\item scope
-	\item dependencies
-\end{itemize}
+%\subsection{Adding and Removing Accounts}
+%\vfill
+%In-class exercise: \\
+%\verb+http://www.cs.stevens.edu/~jschauma/615/useradd-exercise.html+
+%
+%\vspace{.5in}
+%Accounts management is done centrally; changes are applied to machines via a
+%configuration management system and/or directory service.
+%\vfill
+
+%\subsection{Ethics}
+%\begin{center}
+%	\includegraphics[scale=2.5]{pics/angel-devil.eps}
+%\end{center}
+%
+%\subsection{You are a Super User!}
+%\begin{center}
+%	\includegraphics[scale=1.0]{pics/superman.eps} \\
+%	\small
+%	Yes, you are!
+%	\Normalsize
+%\end{center}
+%
+%\subsection{You are a Super User!}
+%\begin{center}
+%	\includegraphics[scale=4.0]{pics/uncle-ben.eps} \\
+%	\addvspace{.2in}
+%	\Huge
+%	``With great power comes great responsibility.''
+%	\Normalsize
+%\end{center}
+%
+%\subsection{sudo(8)}
+%\vspace*{\fill}
+%\begin{verbatim}
+%We trust you have received the usual lecture from the local System
+%Administrator. It usually boils down to these three things:
+%#1) Respect the privacy of others.
+%#2) Think before you type.
+%#3) With great power comes great responsibility.
+%\end{verbatim}
+%\vspace*{\fill}
+%
+%\subsection{Ethics}
+%The LISA Code of Ethics:
+%\\
+%
+%\newcolumntype{S}{>{\centering\arraybackslash} m{.4\linewidth} }
+%\begin{tabular}{ p{10cm} S }
+%\begin{itemize}
+%	\item Professionalism
+%	\item Personal Integrity
+%	\item Privacy
+%	\item Laws and Policies
+%	\item System Integrity
+%	\item Education
+%	\item Social Responsibility
+%	\item Ethical Responsibility
+%\end{itemize}
+%& \multirow{20}{*}{\includegraphics[scale=1.3]{pics/angel.eps}} \\
+%\end{tabular}
+%
+%\subsection{Ethics: This stuff isn't easy!}
+%\begin{center}
+%	\includegraphics[scale=0.3]{pics/snowden.eps}
+%\end{center}
+%
+%\subsection{Ethics: Professionalism}
+%\vfill
+%\begin{center}
+%I will maintain professional conduct in the workplace and will not allow
+%personal feelings or beliefs to cause me to treat people unfairly or
+%unprofessionally.
+%\end{center}
+%\vfill
+%
+%\subsection{Ethics: Personal Integrity}
+%\vfill
+%\begin{center}
+%I will be honest in my professional dealings and forthcoming about my
+%competence and the impact of my mistakes. I will seek assistance from
+%others when required. \\
+%\vspace{.5in}
+%
+%I will avoid conflicts of interest and biases whenever possible. When my
+%advice is sought, if I have a conflict of interest or bias, I will declare
+%it if appropriate, and recuse myself if necessary.
+%\end{center}
+%\vfill
+%
+%
+%\subsection{Ethics: Privacy}
+%\vfill
+%\begin{center}
+%I will access private information on computer systems only when it is
+%necessary in the course of my technical duties. I will maintain and
+%protect the confidentiality of any information to which I may have access,
+%regardless of the method by which I came into knowledge of it.
+%\end{center}
+%\vfill
+%
+%\subsection{Ethics: Laws and Policies}
+%\vfill
+%\begin{center}
+%I will educate myself and others on relevant laws, regulations, and
+%policies regarding the performance of my duties.
+%\end{center}
+%\vfill
+%
+%\subsection{Ethics: Communication}
+%\vfill
+%\begin{center}
+%I will communicate with management, users, and colleagues about computer
+%matters of mutual interest. I will strive to listen to and understand the
+%needs of all parties.
+%\end{center}
+%\vfill
+%
+%\subsection{Ethics: System Integrity}
+%\vfill
+%\begin{center}
+%I will strive to ensure the necessary integrity, reliability, and
+%availability of the systems for which I am responsible. \\
+%\vspace{.5in}
+%
+%I will design and maintain each system in a manner to support the
+%purpose of the system to the organization.
+%\end{center}
+%\vfill
+%
+%\subsection{Ethics: Education}
+%\vfill
+%\begin{center}
+%I will continue to update and enhance my technical knowledge and other
+%work-related skills. I will share my knowledge and experience with others.
+%\end{center}
+%\vfill
+%
+%\subsection{Ethics: Responsibility to the Computing Community}
+%\vfill
+%\begin{center}
+%I will cooperate with the larger computing community to maintain the
+%integrity of network and computing resources.
+%\end{center}
+%\vfill
+%
+%\subsection{Ethics: Social Responsibility}
+%\vfill
+%\begin{center}
+%As an informed professional, I will encourage the writing and adoption of
+%relevant policies and laws consistent with these ethical principles.
+%\end{center}
+%\vfill
+%
+%\subsection{Ethics: Ethical Responsibility}
+%\vfill
+%\begin{center}
+%I will strive to build and maintain a safe, healthy, and productive
+%workplace. \\
+%\vspace{.5in}
+%
+%I will do my best to make decisions consistent with the safety, privacy,
+%and well-being of my community and the public, and to disclose promptly
+%factors that might pose unexamined risks or dangers. \\
+%\vspace{.5in}
+%
+%I will accept and offer honest criticism of technical work as appropriate
+%and will credit properly the contributions of others. \\
+%\vspace{.5in}
+%
+%I will lead by example, maintaining a high ethical standard and degree
+%of professionalism in the performance of all my duties. I will support
+%colleagues and co-workers in following this code of ethics.
+%
+%\end{center}
+%\vfill
+%
+%\subsection{SysAdmin realities}
+%\begin{itemize}
+%	\item you are in a {\em privileged} position
+%\end{itemize}
+%
+%\subsection{SysAdmin realities}
+%\begin{itemize}
+%	\item you are in a {\em privileged} position
+%	\item you {\em are} a target
+%\end{itemize}
+%
+%\subsection{SysAdmin realities}
+%\begin{itemize}
+%	\item you are in a {\em privileged} position
+%	\item you {\em are} a target
+%	\item you are {\em obligated} to act in your users' interest
+%\end{itemize}
+%
+%\subsection{SysAdmin realities}
+%\begin{itemize}
+%	\item you are in a {\em privileged} position
+%	\item you {\em are} a target
+%	\item you are {\em obligated} to act in your users' interest
+%	\item you {\em will} face tough choices
+%\end{itemize}
+%
+%\subsection{SysAdmin realities}
+%\begin{itemize}
+%	\item you are in a {\em privileged} position
+%	\item you {\em are} a target
+%	\item you are {\em obligated} to act in your users' interest
+%	\item you {\em will} face tough choices
+%	\item there is {\em no rulebook} to help you decide
+%\end{itemize}
+%
+%\subsection{SysAdmin realities}
+%\begin{itemize}
+%	\item you are in a {\em privileged} position
+%	\item you {\em are} a target
+%	\item you are {\em obligated} to act in your users' interest
+%	\item you {\em will} face tough choices
+%	\item there is {\em no rulebook} to help you decide
+%	\item you {\em can} make a difference
+%\end{itemize}
+%
+%\subsection{At the end of the day...}
+%\begin{center}
+%	\includegraphics[scale=0.5]{pics/thumbsup-borat.eps}
+%\end{center}
 
 \subsection{Reading}
 User Management:
@@ -887,32 +678,25 @@ User Management:
 \end{itemize}
 \vspace{.5in}
 \begin{itemize}
-	\item http://nixsrv.com/llthw/ex23
-\end{itemize}
-\vspace{.5in}
-Ethics:
-\begin{itemize}
-	\item \verb+https://www.usenix.org/lisa/system-administrators-code-ethics+
-	\item \verb+http://www.acm.org/about/code-of-ethics+
+	\item {\tt https://is.gd/wg5OsE}
+	\item {\tt https://www.netmeister.org/book/06-users-and-groups.pdf}
 \end{itemize}
 
-\subsection{Professional Organizations}
-\begin{itemize}
-	\item \verb+https://www.usenix.org/+ and \verb+https://www.usenix.org/lisa+
-	\item \verb+http://www.lopsa.org/+
-	\item \verb+http://www.acm.org/+
-	\item \verb+https://www.internetsociety.org/+
-	\item \verb+https://www.nanog.org/+
-\end{itemize}
-
-\subsection{Reading}
-Shell:
-\begin{itemize}
-	\item \verb+http://www.tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html+
-	\item \verb+http://www.tldp.org/LDP/abs/html/+
-	\item \verb+http://sed.sourceforge.net/sed1line.txt+
-	\item \verb+csh(1)+, \verb+ksh(1)+, \verb+sh(1)+
-	\item {\em Frisch}: Chapter 3, 14
-\end{itemize}
+%\vspace{.5in}
+%Ethics:
+%\begin{itemize}
+%	\item \verb+https://www.usenix.org/lisa/system-administrators-code-ethics+
+%	\item \verb+http://www.acm.org/about/code-of-ethics+
+%	\item \verb+https://www.netmeister.org/blog/primum-non-nocere.html+
+%\end{itemize}
+%
+%\subsection{Professional Organizations}
+%\begin{itemize}
+%	\item \verb+https://www.usenix.org/+ and \verb+https://www.usenix.org/lisa+
+%	\item \verb+http://www.lopsa.org/+
+%	\item \verb+http://www.acm.org/+
+%	\item \verb+https://www.internetsociety.org/+
+%	\item \verb+https://www.nanog.org/+
+%\end{itemize}
 %
 \end{document}

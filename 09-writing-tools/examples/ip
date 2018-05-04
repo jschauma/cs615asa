@@ -1,0 +1,14 @@
+(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)
+
+See also:
+http://download.dartware.com/thirdparty/test-ipv6-regex.pl
+
+better:
+
+        if (inet_pton(AF_INET, $ip)) {
+                # AF_INET
+        } elsif (inet_pton(AF_INET6, $ip)) {
+                # AF_INET6
+        } else {
+		# not an IP address
+        }
