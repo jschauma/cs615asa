@@ -27,6 +27,7 @@ PICTURES=	\
 		pics/distributed-database.eps \
 		pics/resolution.eps \
 		pics/chicken-egg.eps \
+		pics/tzmap-namerica.eps \
 		pics/anonymous.eps \
 		pics/anonymous-tweet.eps \
 		pics/arpanet1.eps \

@@ -1,3 +1,12 @@
+%https://ferd.ca/operable-software.html
+%
+%IBM bluehack; stevens.edu/bluehack
+%
+%https://youtu.be/OxB70pg5Tsg
+%https://fireoakstrategies.com/exporting-and-importing-aws-ec2-server-disk-images/
+%https://initblog.com/2019/dirty-sock/
+%https://arstechnica.com/information-technology/2019/02/catastrophic-hack-on-email-provider-destroys-almost-two-decades-of-data/
+%
 % CS615A Aspects of System Administration
 % Author: Jan Schaumann <jschauma@netmeister.org>
 % $Id: slides.tex,v 1.12 2006/02/12 23:15:03 jschauma Exp $
@@ -29,14 +38,419 @@
 \begin{center}
 	\Hugesize
 		CS615 - Aspects of System Administration\\ [1em]
-		Multiuser Fundamentals\\ [1em]
+		Software Installation Concepts / Multiuser Fundamentals\\ [1em]
 	\hspace*{5mm}\blueline\\ [1em]
 	\Normalsize
 		Department of Computer Science\\
 		Stevens Institute of Technology\\
 		Jan Schaumann\\
 		\verb+jschauma@stevens.edu+\\
-		\verb+https://www.cs.stevens.edu/~jschauma/615/+
+		\verb+https://stevens.netmeister.org/615/+
+\end{center}
+\vspace*{\fill}
+
+\newpage
+\vspace*{\fill}
+\begin{center}
+    \Hugesize
+        Hooray! \\ [1em]
+    \hspace*{5mm}
+    \blueline\\
+    \hspace*{5mm}\\
+        5 Minute Break
+\end{center}
+\vspace*{\fill}
+
+\subsection{Team Missions}
+\vfill
+\begin{center}
+\includegraphics[scale=0.8]{pics/blue-hat.eps}
+\hspace{.5in}
+\includegraphics[scale=1.0]{pics/red-hat.eps}
+\end{center}
+\vfill
+
+\newpage
+\vspace*{\fill}
+\begin{center}
+	\Hugesize
+		Software Installation Concepts \\ [1em]
+	\hspace*{5mm}
+	\blueline\\
+	\hspace*{5mm}\\
+		Operating System Installation
+\end{center}
+\vspace*{\fill}
+
+
+\subsection{OS Installation}
+\begin{center}
+	\includegraphics[scale=0.7]{pics/netbsd-install.eps}
+\end{center}
+
+\subsection{OS Installation}
+\small
+\begin{verbatim}
+# fdisk -f -u 0 -s 169/63/4194241 /dev/rwd0d
+# fdisk -f -c /usr/mdec/mbr /dev/rwd0d
+# fdisk -f -a -0 /dev/rwd0d
+# disklabel -e -I wd0
+[...]
+4 partitions:
+#      size   offset fstype [fsize bsize cpg/sgs]
+a:  4194241       63 4.2BSD    0     0      0 # (Cyl.      0*- 4161*)
+c:  4194241       63 4.2BSD    0     0      0 # (Cyl.      0*- 4161*)
+d:  4194304        0 unused    0     0      0 # (Cyl.      0 - 4161*)
+# /sbin/newfs -O 2 /dev/rwd0a
+/dev/rwd0a: 2048.0MB (4194240 sectors) block size 16384,
+        fragment size 2048 using 12 cylinder groups of
+        170.67MB, 10923 blks, 21504 inodes.
+super-block backups (for fsck_ffs -b #) at:
+32, 349568, 699104, 1048640, 1398176, 1747712, 2097248, 2446784,
+....................................................................
+# mount -o async /dev/wd0a /mnt
+# for pkg in base comp etc games man misc modules text kern-GENERIC; do
+tar zxpf /i386/binary/sets/${pkg}.tgz -C /mnt
+done
+# cp /mnt/usr/mdec/boot /mnt/boot
+# /usr/sbin/installboot -v -o timeout=5 /dev/rwd0a \
+        /mnt/usr/mdec/bootxx_ffsv2
+File system:       /dev/rwd0a
+Primary bootstrap: /usr/mdec/bootxx_ffsv2
+Boot options:      timeout 5, flags 0, speed 9600, ioaddr 0, console pc
+# cd /mnt/dev && ./MAKEDEV all
+# shutdown -r now
+\end{verbatim}
+\Normalsize
+
+\subsection{OS Installation}
+General steps:
+\begin{itemize}
+	\item power up
+	\item PXE or iPXE boot
+	\begin{itemize}
+		\item network configuration / BOOTP/DHCP
+		\item boot from network via e.g., tftp miniroot
+	\end{itemize}
+	\item identify root device and optional additional disks
+	\item create partition table / disklabel
+	\item create filesystem(s)
+	\item install MBR, bootblocks etc.
+	\item fetch OS software (e.g., via HTTPS, iSCSI, ...)
+	\item install / copy / extract OS
+	\item optionally add application software
+	\item perform basic system configuration
+	\item reboot
+\end{itemize}
+
+
+\subsection{OS Installation}
+Most of the difficult parts happen outside of the
+building system:
+\begin{itemize}
+	\item hardware identification, provisioning, and registration
+	\item base OS installation
+	\item installation of add-on applications
+	\item initial minimum system configuration [*]
+	\item system registration
+	\item system restart
+\end{itemize}
+\vspace*{\fill}
+[*] system {\em deployment} $\cap$ system {\em configuration} \\
+$ => $ configuration management
+
+\subsection{Post Installation}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.4]{pics/duck_tape.eps}
+\end{center}
+\vspace*{\fill}
+
+\newpage
+\vspace*{\fill}
+\begin{center}
+	\Hugesize
+		Software Installation Concepts \\ [1em]
+	\hspace*{5mm}
+	\blueline\\
+	\hspace*{5mm}\\
+		System Software vs. Third Party Software
+\end{center}
+\vspace*{\fill}
+
+\subsection{System Software vs. Third Party Software}
+\\
+
+\vspace{.5in}
+\begin{tabularx}{\textwidth}{X | X | X | X }
+{\bf Example} & {\bf System / OS} & {\bf 3rd Party} & {\bf Packaged} \\
+\hline
+kernel & & & \\
+drivers & & & \\
+firmware & & & \\
+{\tt libc} & & & \\
+shell & & & \\
+compiler & & & \\
+{\tt ssh(1)} / {\tt sshd(8)} & & & \\
+mail server & & & \\
+web server & & & \\
+database & & & \\
+python & & & \\
+\end{tabularx}
+
+\subsection{Types of Software}
+\vfill
+\begin{center}
+	\includegraphics[scale=0.8]{pics/types-of-software.eps}
+\end{center}
+\vfill
+
+
+\subsection{System Software vs. Third Party Software}
+Consider:
+\begin{itemize}
+	\item OS upgrades vs. software upgrades
+	\item location of configuration files
+	\item duplicates or conflicting versions in the base system vs. the
+		add-ons
+	\item startup scripts, d{\ae}mons
+	\item location of third party software
+	\item dependencies
+	\item installation by hand and/or installation using a package manager
+	\item proprietary third party software
+\end{itemize}
+
+
+\subsection{Package Manager Features}
+\begin{itemize}
+	\item easy and scalable installation of software
+	\item automatic resolution of software dependencies
+	\item package and file inventory \\
+\begin{verbatim}
+linux-lab$ dpkg -l
+[...]
+linux-lab$ dpkg -L tcpdump
+[...]
+linux-lab$ dpkg-query -S /usr/lib/libDeployPkg.so.0
+[...]
+
+\end{verbatim}
+\end{itemize}
+
+\subsection{Package Manager Features}
+\begin{itemize}
+	\item easy and scalable installation of software
+	\item automatic resolution of software dependencies
+	\item package and file inventory
+	\item integration into OS
+	\item package and file integrity checks \\
+\begin{verbatim}
+$ rpm -Va
+[...]
+missing     /etc/pki/CA/private (Permission denied)
+S.5.....  c /etc/pki/tls/certs/ca-bundle.crt
+.......T  c /etc/libuser.conf
+..?.....  c /etc/tcsd.conf
+missing   c /etc/logrotate.d/syslog
+[...]
+\end{verbatim}
+\end{itemize}
+
+\subsection{Managing Security Patches and Software Upgrades}
+How many known vulnerabilities (unique CVEs and affected packages) exist
+in each of the Fedora and Debian instances?
+
+\begin{verbatim}
+debian$ sudo apt-get install debsecan
+debian$ debsecan
+debian$ sudo apt-get update
+debian$ sudo apt-get upgrade
+debian$ debsecan
+\end{verbatim}
+
+\begin{verbatim}
+fedora$ yum list-security
+fedora$ yum info-security
+\end{verbatim}
+
+\subsection{Team Missions}
+
+\vspace*{\fill}
+\begin{center}
+\includegraphics[scale=0.35]{pics/black-hat.eps}
+\end{center}
+\vspace*{\fill}
+
+
+\subsection{Managing Security Patches and Software Upgrades}
+How many known vulnerabilities (unique CVEs and affected packages) exist
+in each of the Fedora and Debian instances?
+
+\begin{verbatim}
+debian$ sudo apt-get install debsecan
+debian$ debsecan
+debian$ sudo apt-get update
+debian$ sudo apt-get upgrade
+debian$ debsecan
+\end{verbatim}
+
+\begin{verbatim}
+fedora$ yum list-security
+fedora$ yum info-security
+fedora$ sudo yum update
+fedora$ yum list-security
+\end{verbatim}
+
+\vspace{.5in}
+Excellent! Now what about all the stuff you installed that
+wasn't packaged?
+
+\subsection{Special Purpose Package Managers}
+\vfill
+\begin{center}
+	\includegraphics[scale=0.8]{pics/pip.eps}
+\end{center}
+\vfill
+
+\subsection{Special Purpose Package Managers}
+\vfill
+\begin{center}
+	\includegraphics[scale=0.8]{pics/bower.eps}
+\end{center}
+\vfill
+
+
+\subsection{Special Purpose Package Managers}
+Most programming languages or environments come with their own "package
+management" solutions, often integrating/mixing with a "build system".
+\begin{itemize}
+	\item Common Lisp $=>$ quicklisp
+	\item Go $=>$ go get
+	\item NodeJS $=>$ npm
+	\item Perl $=>$ CPAN
+	\item Python $=>$ easy-install, pip, pants, setuptools, ...
+	\item Ruby $=>$ gems, rvm, rake
+	\item Scala $=>$ sbt
+	\item ...
+\end{itemize}
+
+\subsection{You don't get to choose.}
+\Huge
+\vfill
+\begin{center}
+	You routinely have to build from source {\em and} (re-)package your software.
+\end{center}
+\vfill
+\Normalsize
+
+\subsection{Dependencies, Integrity, and Trust}
+OS provider repositories:
+\begin{itemize}
+	\item {\tt yum update} / {\tt yum install}
+	\item {\tt apt-get}
+\end{itemize}
+\vspace{.5in}
+Language-specific community repositories:
+\begin{itemize}
+	\item {\tt gem install foo}
+	\item {\tt go get github.com/randomAccount/randomRepository}
+	\item {\tt npm install -g foo}
+	\item {\tt perl -MCPAN -e 'install Something::YouWant'}
+	\item {\tt pip install foo}
+\end{itemize}
+\vspace{.5in}
+
+What could possibly go wrong?
+
+\subsection{Dependencies, Integrity, and Trust}
+Fun fact: \\
+
+\begin{verbatim}
+$ wget http://somewhere/some.tar.gz
+$ tar zxf some.tar.gz
+$ cd some
+$ ./configure
+$ make
+$ sudo make install
+\end{verbatim}
+\vspace{.5in}
+is not inherently better than \\
+
+\begin{verbatim}
+$ curl http://somewhere/script.sh | sudo bash
+\end{verbatim}
+
+\subsection{Dependencies, Integrity, and Trust}
+\begin{center}
+Mirroring untrusted, unverified dependencies\\
+does not solve any of your problems. \\
+\vspace{.5in}
+
+Integrity verification is meaningless \\
+without assurance of trust. \\
+\vspace{.5in}
+
+Dependencies are called dependencies \\
+because you {\em depend} on them. \\
+\vspace{.5in}
+
+Dependency trust and integrity is recursive. \\
+\vspace{.5in}
+\end{center}
+
+\subsection{Dependencies, Integrity, and Trust}
+\begin{center}
+Mirroring untrusted, unverified dependencies\\
+does not solve any of your problems. \\
+\vspace{.5in}
+
+Integrity verification is meaningless \\
+without assurance of trust. \\
+\vspace{.5in}
+
+Dependencies are called dependencies \\
+because you {\em depend} on them. \\
+\vspace{.5in}
+
+Dependency trust and integrity is recursive. \\
+\vspace{.5in}
+
+{\em Remember Left-Pad!}
+\end{center}
+
+\subsection{Exercises}
+All recommended, none graded: \\
+\verb+https://stevens.netmeister.org/615/package-exercise.html+
+
+\vspace{.25in}
+Identify a piece of software you use, but that's not
+packaged for a given package manager.  Create a
+package for it, then contribute upstream.
+
+\vspace{.25in}
+Create a cheat sheet for 4 different package managers,
+listing the more important equivalent commands.
+
+\vspace{.25in}
+How does your preferred OS update firmware?
+
+\vspace{.25in}
+How does the concept of {\em reproducable builds}
+relate to what we discussed here?
+
+\vspace{.25in}
+What is the overlap with system {\em configuration}? Can a
+package manager assert state?
+
+\newpage
+\vspace*{\fill}
+\begin{center}
+    \Hugesize
+        Hooray! \\ [1em]
+    \hspace*{5mm}
+    \blueline\\
+    \hspace*{5mm}\\
+        5 Minute Break
 \end{center}
 \vspace*{\fill}
 
@@ -440,8 +854,8 @@ control} (RBAC).
 \subsection{Adding and Removing Accounts}
 
 \vfill
-In-class exercise: \\
-\verb+https://www.cs.stevens.edu/~jschauma/615/useradd-exercise.html+
+Recommended exercise: \\
+\verb+https://stevens.netmeister.org/615/useradd-exercise.html+
 \vfill
 
 %\subsection{Adding and Removing Accounts}

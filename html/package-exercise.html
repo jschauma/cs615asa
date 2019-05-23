@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<HTML>
+<HEAD>
+
+  <TITLE>CS615A -- Aspects of System Administration -- Package Manager Exercise</TITLE>
+  <STYLE type="text/css">
+  body {
+  background-color: #FFFFFf;
+  }
+  </STYLE>
+  <STYLE type="text/css">
+  li.c1 {list-style: none}
+  </STYLE>
+
+</HEAD>
+
+<BODY>
+  <TABLE border="1" align="center" cellpadding="15">
+    <TR>
+      <TD valign="top">
+        <H2>CS615A -- Aspects of System Administration -- Package Manager Exercise</H2>
+
+	<p>The objective of this exercise is for you to compare the
+	process of installing software using a package manager to that of
+	installing software "manually".</p>
+
+	<p>In particular, you are to install the <em>nginx</em> web server
+	on a Fedora instance of AMI Id <em>ami-0187f76b</em>.  Do this
+	twice, on distinct instances.  You will use the local
+	package manager (section "binary packages") on one instance and
+	build the software from source on a second instance.</p>
+
+	<p>For each section below, answer the questions in as much detail
+	as needed; elaborate on anything noteworthy.</p>
+
+        <H4>Binary Packages</H4>
+
+	<p>Use the systems' native package manager to install
+	<em>nginx</em>.</p>
+
+	<h5>How many packages were added?</h5>
+	<h5>How many new files were added?</h5>
+	<h5>Are all added packages necessary to run the software?</h5>
+	<h5>Which version of <em>nginx</em> did you end up with?</h5>
+	<h5>Which directories did the software get installed into?</h5>
+	<h5>How do you know you didn't get any backdoors installed?</h5>
+
+	<H4>Build manually from source</H4>
+
+	<p><em>Do not use the same instance as for the previous part.
+	Create a new, separate instance.</em></p>
+
+	<p>Retrieve the latest sources of <em>nginx</em> from <a
+	href="http://nginx.org/download/">http://nginx.org/download/</a>
+	and build and install the software without using the package
+	manager.</P>
+
+	<h5>What additional software did you have to install?</h5>
+	<h5>How did you install these pre-requisites?  Can you do this
+without using any package manager at all (i.e. everything from source)?
+	<h5>How many new files were added?</h5>
+	<h5>Did this software use any of the added packages you had
+installed in the previous step? Why / why not?</h5>
+	<h5>Does this version of the software have feature parity with the
+	binary package above?  Are there some features enabled in one
+	version that are not enabled in the other?</h5>
+	<h5>Which directories did the software get installed into?</h5>
+	<h5>How do you know you didn't get any backdoors installed?</h5>
+
+	</p>
+      <hr>
+      [<a href="index.html">Course Website</a>]
+</BODY>
+</HTML>

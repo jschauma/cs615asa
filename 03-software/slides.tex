@@ -1,14 +1,18 @@
+https://manybutfinite.com/post/how-computers-boot-up/
  
 % CS615A Aspects of System Administration
 % Author: Jan Schaumann <jschauma@netmeister.org>
 
 \special{! TeXDict begin /landplus90{true}store end }
+\newcommand{\smallish}{\fontsize{16}{16}\selectfont}
 
 \documentclass[xga]{xdvislides}
 \usepackage[landscape]{geometry}
 \usepackage{graphics}
 \usepackage{graphicx}
 \usepackage{colordvi}
+\usepackage{tabularx}
+\usepackage{multirow}
 
 \begin{document}
 \setfontphv
@@ -32,16 +36,615 @@
 		Stevens Institute of Technology\\
 		Jan Schaumann\\
 		\verb+jschauma@stevens.edu+ \\
-		\verb+https://www.cs.stevens.edu/~jschauma/615/+
+		\verb+https://stevens.netmeister.org/615/+
 \end{center}
 \vspace*{\fill}
 
-%\subsection{Typical Boot Sequence}
-%\vspace*{\fill}
-%\begin{verbatim}
-%$ aws ec2 run-instances --image-id ami-0187f76b
-%\end{verbatim}
-%\vspace*{\fill}
+\newpage
+\vspace*{\fill}
+\begin{center}
+    \Hugesize
+        Hooray! \\ [1em]
+    \hspace*{5mm}
+    \blueline\\
+    \hspace*{5mm}\\
+        5 Minute Break
+\end{center}
+\vspace*{\fill}
+
+\newpage
+\vspace*{\fill}
+\begin{center}
+	\Hugesize
+		Basic Filesystem Concepts\\ [1em]
+	\hspace*{5mm}
+	\blueline\\
+	\hspace*{5mm}\\
+		Filesystem Layout
+\end{center}
+\vspace*{\fill}
+
+\subsection{Basic Filesystem Concepts}
+All partitions -- with the exception of the {\em root} (or \verb+/+) partition
+-- can be {\em mounted} anywhere in the filesystem hierarchy.
+\\
+
+\begin{center}
+	\includegraphics[scale=0.5]{pics/filesystem-tree-mountpoints.eps} \\
+\end{center}
+
+\subsection{Basic Filesystem Concepts}
+All partitions -- with the exception of the {\em root} (or \verb+/+) partition
+-- can be {\em mounted} anywhere in the filesystem hierarchy.
+\\
+
+The file \verb+/etc/fstab+ (see fstab(5)) specifies which disks / partitions
+to mount where:
+\\
+\begin{verbatim}
+/dev/xbd1a /        ffs    rw 1 1
+/dev/xbd0a /grub    ext2fs rw 2 2
+kernfs     /kern    kernfs rw
+ptyfs      /dev/pts ptyfs  rw
+procfs     /proc    procfs rw
+\end{verbatim}
+\Normalsize
+
+\subsection{Basic Filesystem Concepts}
+All partitions -- with the exception of the {\em root} (or \verb+/+) partition
+-- can be {\em mounted} anywhere in the filesystem hierarchy.
+\\
+
+The file \verb+/etc/fstab+ (see fstab(5)) specifies which disks / partitions
+to mount where:
+\\
+\begin{verbatim}
+$ cat /etc/fstab
+# /etc/fstab: static file system information.
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+/dev/mapper/nemo--vg-root /               ext4    errors=remount-ro 0       1
+# /boot was on /dev/sda1 during installation
+UUID=e5abfdb9-1d53-4df7-9894-1c5a08b7f8c7 /boot           ext2    defaults        0       2
+/dev/mapper/nemo--vg-swap_1 none            swap    sw              0       0
+\end{verbatim}
+
+
+\subsection{Basic Filesystem Concepts}
+All partitions -- with the exception of the {\em root} (or \verb+/+) partition
+-- can be {\em mounted} anywhere in the filesystem hierarchy.
+\\
+
+To see what filesystems are currently mounted, run \verb+mount(8)+:
+\\
+
+\begin{verbatim}
+/dev/xbd1a on / type ffs (local)
+/dev/xbd0a on /grub type ext2fs (local)
+kernfs on /kern type kernfs (local)
+ptyfs on /dev/pts type ptyfs (local)
+procfs on /proc type procfs (local)
+/dev/xbd2a on /mnt type ffs (local)
+\end{verbatim}
+
+
+\subsection{Basic Filesystem Concepts}
+\\
+
+\begin{verbatim}
+$ mount
+proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)
+udev on /dev type devtmpfs (rw,nosuid,relatime,size=1002928k,nr_inodes=250732,mode=755)
+devpts on /dev/pts type devpts (rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000)
+tmpfs on /run type tmpfs (rw,nosuid,noexec,relatime,size=204804k,mode=755)
+/dev/mapper/nemo--vg-root on / type ext4 (rw,relatime,errors=remount-ro,data=ordered)
+cgroup on /sys/fs/cgroup/memory type cgroup (rw,nosuid,nodev,noexec,relatime,memory)
+cgroup on /sys/fs/cgroup/cpuset type cgroup (rw,nosuid,nodev,noexec,relatime,cpuset)
+/dev/vda1 on /boot type ext2 (rw,relatime,block_validity,barrier,user_xattr,acl)
+ldap:nirvana.phy.stevens-tech.edu:ou=auto.home,dc=phy,dc=stevens-tech,dc=edu on /home type autofs (rw,relatime,fd=6,pgrp=1345,timeout=60,minproto=5,maxproto=5,indirect)
+kronos.srcit.stevens-tech.edu:/xraid0-1/export/home/jschauma on /home/jschauma type nfs (rw,relatime,sync,vers=3,rsize=32768,wsize=32768,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=155.246.89.203,mountvers=3,mountport=53643,mountproto=udp,local_lock=none,addr=155.246.89.203)
+\end{verbatim}
+
+\subsection{Where do we put all of our files?}
+Layout of filesystem {\em should} be standardized.  Some UNIX versions adhere
+to these standards, some are strongly influenced by tradition.
+\\
+
+{\tt man hier}
+
+\subsection{File System Hierarchy}
+\small
+\begin{verbatim}
+                     /          root directory of the system
+
+                     /bin/      utilities used in both single and multi-user environments
+
+                     /dev/      block, character and other special device files
+
+                     /etc/      system configuration files and scripts
+
+                     /lib/      dynamic linked libraries used by dynamic linked programs (such
+                                as those in /bin/ and /sbin/) that cannot rely upon /usr/lib/
+                                being available.
+
+                     /sbin/     system programs and administration utilities used in both sin-
+                                gle-user and multi-user environments
+
+                     /tmp/      temporary files, usually a mfs(8) memory-based filesystem (the
+                                contents of /tmp are usually not preserved across a system
+                                reboot)
+
+                     /usr/      contains the majority of the system utilities and files
+
+
+                                bin/      common utilities, programming tools, and applica-
+                                          tions
+
+                                lib/      archive, profiled, position independent archive, and
+                                          shared libraries
+
+                                sbin/     system daemons and system utilities (normally exe-
+                                          cuted by the super-user)
+
+                                share/    architecture-independent text files
+\end{verbatim}
+\Normalsize
+
+\subsection{Basic Filesystem Concepts}
+Some of the different kinds of filesystems:
+
+\subsection{Basic Filesystem Concepts}
+Some of the different kinds of filesystems:
+\begin{itemize}
+	\item ``Regular'' File Systems
+	\item Journaling File Systems
+	\item Network File Systems
+	\item Various
+\end{itemize}
+
+\subsection{Team Missions}
+
+\vspace*{\fill}
+\begin{center}
+\includegraphics[scale=1.3]{pics/green-hat.eps}
+\end{center}
+\vspace*{\fill}
+
+
+\newpage
+\vspace*{\fill}
+\begin{center}
+	\Hugesize
+		Basic Filesystem Concepts\\ [1em]
+	\hspace*{5mm}
+	\blueline\\
+	\hspace*{5mm}\\
+		The UNIX Filesystem
+\end{center}
+\vspace*{\fill}
+
+\subsection{Let's pretend we're a filesystem...}
+
+\begin{verbatim}
+aws ec2 create-volume --size 1 --availability-zone us-east-1a
+
+aws ec2 attach-volume --volume-id  XXX --instance-id XXX --device /dev/sda2
+
+dmesg
+
+echo hello | dd of=/dev/xbd2
+
+dd if=/dev/xbd2 count=6 | hexdump -C
+
+echo hello | dd of=/dev/xbd2 seek=1024
+
+dd if=/dev/xbd2 count=2048 2>/dev/null | hexdump -C
+
+printf "\x7\x4\x4hello" | dd of=/dev/xbd2
+\end{verbatim}
+
+\subsection{Let's pretend we're a filesystem...}
+\begin{verbatim}
+echo Hello > /root/newfile
+
+tar cf - /root | dd of=/dev/xbd2
+
+dd if=/dev/xbd2 | tar tvf -
+\end{verbatim}
+\vspace{1in}
+See also: \verb+https://stevens.netmeister.org/615/tar.html+
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+The filesystem is responsible for storing the data on the disk.
+So to read/write data, it needs to know in which physical blocks the actual
+data is located; ie how to map files to the disk blocks.
+
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+\vspace*{\fill}
+\begin{center}
+\includegraphics[scale=0.95]{pics/bucket.eps} \\
+\end{center}
+\vspace*{\fill}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+\begin{center}
+\includegraphics[scale=0.95]{pics/two-buckets.eps} \\
+\end{center}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+\vspace*{\fill}
+\begin{center}
+\includegraphics[scale=1.0]{pics/three-buckets.eps} \\
+\end{center}
+\vspace*{\fill}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+\vspace*{\fill}
+\begin{center}
+\includegraphics[scale=0.95]{pics/buckets.eps} \\
+\end{center}
+\vspace*{\fill}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+\vspace*{\fill}
+\begin{center}
+\includegraphics[scale=0.95]{pics/labels.eps} \\
+\end{center}
+\vspace*{\fill}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+\begin{center}
+\includegraphics[scale=0.95]{pics/one-bucket-full.eps} \\
+\end{center}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+\vspace*{\fill}
+\begin{center}
+\includegraphics[scale=0.5]{pics/one-bucket-full.eps}
+\hspace*{5mm}
+\includegraphics[scale=0.6]{pics/cat-in-bucket.eps}
+\end{center}
+\vspace*{\fill}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+\vspace*{\fill}
+\begin{center}
+\includegraphics[scale=0.95]{pics/two-cats-one-bucket.eps} \\
+\end{center}
+\vspace*{\fill}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+\begin{center}
+\includegraphics[scale=0.9]{pics/several-cats.eps} \\
+\end{center}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+\vspace*{\fill}
+\begin{center}
+\includegraphics[scale=0.225]{pics/nutrition-facts.eps} \\
+\end{center}
+\vspace*{\fill}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+\vspace*{\fill}
+\begin{center}
+\includegraphics[scale=1.0]{pics/numbered-cats.eps}
+\end{center}
+\vspace*{\fill}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+The filesystem is responsible for storing the data on the disk.
+So to read/write data, it needs to know in which physical blocks the actual
+data is located; ie how to map files to the disk blocks.
+\\
+
+Components of the Berkeley Fast Filesystem:
+\\
+
+\newcolumntype{S}{>{\centering\arraybackslash} m{.4\linewidth} }
+\begin{tabular}{ p{10cm} S }
+\begin{itemize}
+	\item set of {\em inode} storage cells
+\end{itemize}
+{\tt df -i}
+& \multirow{2}{*}{\includegraphics[scale=0.5]{pics/buckets.eps}} \\
+\end{tabular}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+The filesystem is responsible for storing the data on the disk.
+So to read/write data, it needs to know in which physical blocks the actual
+data is located; ie how to map files to the disk blocks.
+\\
+
+Components of the Berkeley Fast Filesystem:
+\\
+
+\begin{tabular}{ p{10cm} S }
+\begin{itemize}
+	\item set of {\em inode} storage cells
+	\item set of scattered ``superblocks''
+\end{itemize}
+{\tt newfs -N /dev/rdsk/c1t2160d0s0}
+& \multirow{2}{*}{\includegraphics[scale=0.3]{pics/lego.eps}} \\
+\end{tabular}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+The filesystem is responsible for storing the data on the disk.
+So to read/write data, it needs to know in which physical blocks the actual
+data is located; ie how to map files to the disk blocks.
+\\
+
+Components of the Berkeley Fast Filesystem:
+\\
+
+\begin{tabular}{ p{10cm} S }
+\begin{itemize}
+	\item set of {\em inode} storage cells
+	\item set of scattered ``superblocks''
+	\item map of disk blocks
+\end{itemize}
+& \multirow{2}{*}{\includegraphics[scale=0.5]{pics/map.eps}} \\
+\end{tabular}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+The filesystem is responsible for storing the data on the disk.
+So to read/write data, it needs to know in which physical blocks the actual
+data is located; ie how to map files to the disk blocks.
+\\
+
+Components of the Berkeley Fast Filesystem:
+\\
+
+\begin{tabular}{ p{10cm} S }
+\begin{itemize}
+	\item set of {\em inode} storage cells
+	\item set of scattered ``superblocks''
+	\item map of disk blocks
+	\item block usage summary
+\end{itemize}
+{\tt fstyp -v /dev/rdsk/c1t2160d0s0  | more}
+& \multirow{2}{*}{\includegraphics[scale=0.5]{pics/tetris.eps}} \\
+\end{tabular}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+The filesystem is responsible for storing the data on the disk.
+So to read/write data, it needs to know in which physical blocks the actual
+data is located; ie how to map files to the disk blocks.
+\\
+
+Components of the Berkeley Fast Filesystem:
+\\
+
+\begin{tabular}{ p{10cm} S }
+\begin{itemize}
+	\item set of {\em inode} storage cells
+	\item set of scattered ``superblocks''
+	\item map of disk blocks
+	\item block usage summary
+	\item set of data blocks
+\end{itemize}
+& \multirow{2}{*}{\includegraphics[scale=0.3]{pics/block.eps}} \\
+\end{tabular}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+\begin{center}
+	\includegraphics[scale=0.8]{pics/ufs-details.eps} \\
+\end{center}
+\vspace*{\fill}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+Information stored in an {\em inode}:
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+Information stored in an {\em inode}:
+\begin{itemize}
+	\item user owner and group owner ID's
+\end{itemize}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+Information stored in an {\em inode}:
+\begin{itemize}
+	\item user owner and group owner ID's
+	\item file type
+\end{itemize}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+Information stored in an {\em inode}:
+\begin{itemize}
+	\item user owner and group owner ID's
+	\item file type
+	\item access mode (permissions)
+\end{itemize}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+Information stored in an {\em inode}:
+\begin{itemize}
+	\item user owner and group owner ID's
+	\item file type
+	\item access mode (permissions)
+	\item file access and modification time
+\end{itemize}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+Information stored in an {\em inode}:
+\begin{itemize}
+	\item user owner and group owner ID's
+	\item file type
+	\item access mode (permissions)
+	\item file access and modification time
+	\item file status modification time
+\end{itemize}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+Information stored in an {\em inode}:
+\begin{itemize}
+	\item user owner and group owner ID's
+	\item file type
+	\item access mode (permissions)
+	\item file access and modification time
+	\item file status modification time
+	\item number of links to the file
+\end{itemize}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+Information stored in an {\em inode}:
+\begin{itemize}
+	\item user owner and group owner ID's
+	\item file type
+	\item access mode (permissions)
+	\item file access and modification time
+	\item file status modification time
+	\item number of links to the file
+	\item size of the file
+\end{itemize}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+Information stored in an {\em inode}:
+\begin{itemize}
+	\item user owner and group owner ID's
+	\item file type
+	\item access mode (permissions)
+	\item file access and modification time
+	\item file status modification time
+	\item number of links to the file
+	\item size of the file
+	\item disk device containing this file
+\end{itemize}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+Information stored in an {\em inode}:
+\begin{itemize}
+	\item user owner and group owner ID's
+	\item file type
+	\item access mode (permissions)
+	\item file access and modification time
+	\item file status modification time
+	\item number of links to the file
+	\item size of the file
+	\item disk device containing this file
+\end{itemize}
+
+\begin{verbatim}
+$ stat /etc/passwd
+\end{verbatim}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+File types:
+\\
+
+\begin{tabular}{ p{10cm} S }
+\begin{itemize}
+	\item regular files
+\end{itemize}
+& \multirow{2}{*}{\includegraphics[scale=0.7]{pics/file.eps}} \\
+\end{tabular}
+\\
+
+\verb+$ stat /etc/passwd+
+
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+File types:
+\\
+
+\begin{tabular}{ p{10cm} S }
+\begin{itemize}
+	\item regular files
+	\item directories
+\end{itemize}
+& \multirow{2}{*}{\includegraphics[scale=1.5]{pics/directory.eps}} \\
+\end{tabular}
+\\
+
+\verb+$ stat /+
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+File types:
+\\
+
+\begin{tabular}{ p{10cm} S }
+\begin{itemize}
+	\item regular files
+	\item directories
+	\item special files
+\end{itemize}
+& \multirow{2}{*}{\includegraphics[scale=1.0]{pics/devices.eps}} \\
+\end{tabular}
+\\
+
+\verb+$ file /dev/* | more+
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+File types:
+\\
+
+\begin{tabular}{ p{10cm} S }
+\begin{itemize}
+	\item regular files
+	\item directories
+	\item special files
+	\item links
+\end{itemize}
+& \multirow{2}{*}{\includegraphics[scale=0.6]{pics/link.eps}} \\
+\end{tabular}
+\\
+
+\begin{verbatim}
+$ touch /tmp/foo
+$ ln /tmp/foo /tmp/bar
+$ stat /tmp/foo /tmp/bar
+$ ln -sf /tmp/foo /tmp/bar
+$ stat /tmp/foo /tmp/bar
+\end{verbatim}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+File types:
+\\
+
+\begin{tabular}{ p{10cm} S }
+\begin{itemize}
+	\item regular files
+	\item directories
+	\item special files
+	\item links
+	\item sockets
+\end{itemize}
+& \multirow{2}{*}{\includegraphics[scale=0.8]{pics/socket.eps}} \\
+\end{tabular}
+\\
+
+\verb+$ stat /dev/log+
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+File types:
+\\
+
+\begin{tabular}{ p{10cm} S }
+\begin{itemize}
+	\item regular files
+	\item directories
+	\item special files
+	\item links
+	\item sockets
+	\item named pipes
+\end{itemize}
+& \multirow{2}{*}{\includegraphics[scale=1.0]{pics/pipe.eps}} \\
+\end{tabular}
+\\
+
+\begin{verbatim}
+$ mkfifo /tmp/fifo
+$ cat /tmp/fifo > /tmp/out &
+$ stat /tmp/fifo | tee /tmp/fifo
+$ cat /tmp/out
+\end{verbatim}
+
+\subsection{HW2}
+\\
+
+\vspace{2in}
+\verb+https://stevens.netmeister.org/615/s19-hw2.html+
 
 \subsection{Down the stack we go}
 Consider a website on an AWS EC2 instance...
@@ -320,21 +923,21 @@ Bringin up this web service might include...
 \subsection{Typical Boot Sequence}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=0.55,angle=-90]{pics/post.eps} \\
+	\includegraphics[scale=0.8]{pics/post.eps} \\
 \end{center}
 \vspace*{\fill}
 
 \subsection{Typical Boot Sequence}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=1.0,angle=-90]{pics/BIOS.eps} \\
+	\includegraphics[scale=1.5]{pics/BIOS.eps} \\
 \end{center}
 \vspace*{\fill}
 
 \subsection{Typical Boot Sequence}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=0.8,angle=-90]{pics/ufs-details.eps} \\
+	\includegraphics[scale=0.8]{pics/ufs-details.eps} \\
 \end{center}
 \vspace*{\fill}
 
@@ -371,31 +974,54 @@ Bootselector disabled.
 No active partition.
 \end{verbatim}
 
-\subsection{Recall HW1}
+\subsection{Boot partitions}
+\smallish
 \begin{verbatim}
-# fdisk /dev/xbd4
-Disk: /dev/rxbd4d
+# fdisk xbd2
+Disk: /dev/rxbd2d
 
-BIOS disk geometry:
-cylinders: 1023, heads: 255, sectors/track: 63 (16065 sectors/cylinder)
-total sectors: 69206016
+Partitions aligned to 16065 sector boundaries, offset 63
 
 Partition table:
 0: NetBSD (sysid 169)
-    start 63, size 69205825 (33792 MB, Cyls 0-4307/221/10), Active
-1: <UNUSED>
+    bootmenu: NetBSD
+    start 63, size 1044162 (510 MB, Cyls 0-64)
+1: Linux extended (sysid 133)
+    bootmenu: Linux
+    start 1044225, size 1052927 (514 MB, Cyls 65-130/138/8)
 2: <UNUSED>
 3: <UNUSED>
-Bootselector disabled.
+Extended partition table:
+E0: Linux native (sysid 131)
+    start 1044288, size 530082 (259 MB, Cyls 65-97)
+E1: Linux native (sysid 131)
+    start 1574433, size 522719 (255 MB, Cyls 98-130/138/8)
+Bootselector enabled, timeout 10 seconds.
 First active partition: 0
+Drive serial number: 0 (0x00000000)
+# 
 \end{verbatim}
+\Normalsize
 
 \subsection{Typical Boot Sequence}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=0.8,angle=-90]{pics/grub.eps} \\
+	\includegraphics[scale=0.8]{pics/grub.eps} \\
 \end{center}
 \vspace*{\fill}
+
+\subsection{Typical Boot Sequence}
+\begin{itemize}
+	\item {\bf P}ower-{\bf o}n {\bf S}elf-{\bf T}est
+	\item primary boot loader (e.g. BIOS, UEFI, Open Firmware / OpenBoot)
+	\item transfer of execution to {\bf M}aster {\bf B}oot {\bf R}ecord or perform netbooting
+	\item Second-stage boot loader (e.g. GRUB)
+	\item load kernel
+	\item kernel transfers control to {\tt init(8)}
+\end{itemize}
+\vspace{.5in}
+Note: in virtualized environments, some of these steps
+are skipped, repeated, or simulated. \\
 
 
 \subsection{Typical Boot Sequence}
@@ -409,10 +1035,15 @@ First active partition: 0
 \end{itemize}
 \vspace{.5in}
 Note: in virtualized environments, some of these steps
-are skipped, repeated, or simulated.
+are skipped, repeated, or simulated. \\
+
+\vspace{.25in}
+How do you know if your system is trustworthy once it
+boots up? Review ``remote attestation'' of software,
+``secure boot'' mechanisms, and Trusted Computing.
 
 \subsection{Typical Boot Sequences}
-\verb+https://www.cs.stevens.edu/~jschauma/615/boot-sequence/+
+\verb+https://stevens.netmeister.org/615/boot-sequence/+
 \vspace*{\fill}
 \begin{verbatim}
 $ aws ec2 run-instances --instance-type t1.micro --image-id ami-569ed93c
@@ -433,45 +1064,45 @@ happening?
 
 \subsection{Firmware}
 \begin{center}
-	\includegraphics[scale=0.6,angle=-90]{pics/ignition-firmware.eps}
+	\includegraphics[scale=2.2]{pics/ignition-firmware.eps}
 \end{center}
 
 \subsection{Firmware}
 \begin{center}
-	\includegraphics[scale=0.5,angle=-90]{pics/linksys.eps}
-	\includegraphics[scale=0.3,angle=-90]{pics/remote.eps}
-	\includegraphics[scale=0.5,angle=-90]{pics/car-firmware.eps}
+	\includegraphics[scale=0.8]{pics/linksys.eps}
+	\includegraphics[scale=0.3]{pics/remote.eps}
+	\includegraphics[scale=0.5]{pics/car-firmware.eps}
 \end{center}
 
 \subsection{Firmware}
 \begin{center}
-	\includegraphics[scale=0.5,angle=-90]{pics/linksys.eps}
-	\includegraphics[scale=0.3,angle=-90]{pics/remote.eps}
-	\includegraphics[scale=0.5,angle=-90]{pics/car-firmware.eps} \\
-	\includegraphics[scale=0.3,angle=-90]{pics/ide-drive.eps}
-	\includegraphics[scale=0.8,angle=-90]{pics/usb-icon.eps}
+	\includegraphics[scale=0.8]{pics/linksys.eps}
+	\includegraphics[scale=0.3]{pics/remote.eps}
+	\includegraphics[scale=0.5]{pics/car-firmware.eps} \\
+	\includegraphics[scale=0.4]{pics/ide-drive.eps}
+	\includegraphics[scale=0.9]{pics/usb-icon.eps}
 \end{center}
 
 
 
 \subsection{Firmware}
 \begin{center}
-	\includegraphics[scale=0.9,angle=-90]{pics/sun-firmware.eps}
+	\includegraphics[scale=1.0]{pics/sun-firmware.eps}
 \end{center}
 
 \subsection{Firmware}
 \begin{center}
-	\includegraphics[scale=1.0,angle=-90]{pics/BIOS.eps}
+	\includegraphics[scale=1.5]{pics/BIOS.eps}
 \end{center}
 
 \subsection{...}
 \begin{center}
-	\includegraphics[scale=0.9]{pics/kfc1.eps}
+	\includegraphics[scale=1.3]{pics/kfc1.eps}
 \end{center}
 
 \subsection{Kernel}
 \begin{center}
-        \includegraphics[scale=0.95,angle=-90]{pics/engine-kernel.eps}
+        \includegraphics[scale=1.7]{pics/engine-kernel.eps}
 \end{center}
 
 \subsection{Kernel}
@@ -510,246 +1141,44 @@ Sat Feb  1 21:46:17 UTC 2014
 
 \subsection{OS}
 \begin{center}
-	\includegraphics[scale=0.7,angle=-90]{pics/engine-os.eps}
+	\includegraphics[scale=0.4]{pics/engine-os.eps}
 \end{center}
 
 \subsection{OS}
 \begin{center}
-	\includegraphics[scale=0.6,angle=-90]{pics/os-screenshot.eps}
+	\includegraphics[scale=0.6]{pics/os-screenshot.eps}
 \end{center}
 
 \subsection{System Software}
 \begin{center}
-	\includegraphics[scale=0.6,angle=-90]{pics/dashboard-system-software.eps}
+	\includegraphics[scale=1.6]{pics/dashboard-system-software.eps}
 \end{center}
 
 \subsection{System Software}
 \begin{center}
-	\includegraphics[scale=0.7,angle=-90]{pics/system-software.eps}
+	\includegraphics[scale=0.6]{pics/system-software.eps}
 \end{center}
 
 \subsection{Applications}
 \begin{center}
-	\includegraphics[scale=0.9,angle=-90]{pics/car_radio-applications.eps}
+	\includegraphics[scale=1.6]{pics/car_radio-applications.eps}
 \end{center}
 
 \subsection{Applications}
 \begin{center}
-	\includegraphics[scale=0.3,angle=-90]{pics/python.eps}
-	\includegraphics[scale=0.3,angle=-90]{pics/logo_oracle.eps}
-	\includegraphics[scale=0.8,angle=-90]{pics/apache.eps} \\
-	\includegraphics[scale=0.3,angle=-90]{pics/mysql.eps}
-	\includegraphics[scale=0.3,angle=-90]{pics/php-logo.eps}
+	\includegraphics[scale=0.3]{pics/python.eps}
+	\includegraphics[scale=0.3]{pics/logo_oracle.eps}
+	\includegraphics[scale=0.8]{pics/apache.eps} \\
+	\includegraphics[scale=0.3]{pics/mysql.eps}
+	\includegraphics[scale=0.3]{pics/php-logo.eps}
 \end{center}
-
-\subsection{Types of Software}
-\vfill
-\begin{center}
-	\includegraphics[scale=0.8,angle=-90]{pics/types-of-software.eps}
-\end{center}
-\vfill
 
 \subsection{...and then there are unikernels and containers.}
 \vfill
 \begin{center}
-	\includegraphics[scale=0.7,angle=-90]{pics/unikernel.eps}
+	\includegraphics[scale=0.4]{pics/unikernel.eps}
 \end{center}
 \vfill
-
-\subsection{Where do we put all these files?}
-Layout of filesystem {\em should} be standardized.  Some UNIX versions adhere
-to these standards, some are strongly influenced by tradition.
-\\
-
-{\tt man hier}
-
-\subsection{File System Hierarchy}
-\small
-\begin{verbatim}
-                     /          root directory of the system
-
-                     /bin/      utilities used in both single and multi-user environments
-
-                     /dev/      block, character and other special device files
-
-                     /etc/      system configuration files and scripts
-
-                     /lib/      dynamic linked libraries used by dynamic linked programs (such
-                                as those in /bin/ and /sbin/) that cannot rely upon /usr/lib/
-                                being available.
-
-                     /sbin/     system programs and administration utilities used in both sin-
-                                gle-user and multi-user environments
-
-                     /tmp/      temporary files, usually a mfs(8) memory-based filesystem (the
-                                contents of /tmp are usually not preserved across a system
-                                reboot)
-
-                     /usr/      contains the majority of the system utilities and files
-
-
-                                bin/      common utilities, programming tools, and applica-
-                                          tions
-
-                                lib/      archive, profiled, position independent archive, and
-                                          shared libraries
-
-                                sbin/     system daemons and system utilities (normally exe-
-                                          cuted by the super-user)
-
-                                share/    architecture-independent text files
-\end{verbatim}
-\Normalsize
-
-\newpage
-\vspace*{\fill}
-\begin{center}
-	\Hugesize
-		Software Installation Concepts \\ [1em]
-	\hspace*{5mm}
-	\blueline\\
-	\hspace*{5mm}\\
-		Operating System Installation
-\end{center}
-\vspace*{\fill}
-
-
-\subsection{OS Installation}
-\begin{center}
-	\includegraphics[scale=0.7,angle=-90]{pics/netbsd-install.eps}
-\end{center}
-
-\subsection{OS Installation}
-Before installing, consider
-\begin{itemize}
-	\item purpose of machine
-		\begin{itemize}
-			\item choice of hardware
-			\item disk partitioning scheme
-			\item choice of filesystem
-			\item which software to install
-		\end{itemize}
-	\item installation media
-		\begin{itemize}
-			\item network installation
-			\item installation CD-ROMs
-			\item customized boot media
-		\end{itemize}
-\end{itemize}
-
-%\subsection{OS Installation}
-%\vspace*{\fill}
-%\begin{center}
-%	\includegraphics[scale=0.8,angle=-90]{pics/inst-disklabel-partitions.eps}
-%\end{center}
-%\vspace*{\fill}
-%
-%\subsection{OS Installation}
-%\vspace*{\fill}
-%\begin{center}
-%	\includegraphics[scale=0.55]{pics/disk.setup.eps}
-%\end{center}
-%\vspace*{\fill}
-%
-%\subsection{OS Installation}
-%\vspace*{\fill}
-%\begin{center}
-%	\includegraphics[scale=0.8]{pics/install-ftp.eps}
-%\end{center}
-%\vspace*{\fill}
-%
-%\subsection{OS Installation}
-%\vspace*{\fill}
-%\begin{center}
-%	\includegraphics[scale=0.8]{pics/nfssetup.eps}
-%\end{center}
-%\vspace*{\fill}
-%
-
-\subsection{OS Installation}
-High-level overview:
-\begin{itemize}
-	\item hardware identification, provisioning, and registration
-	\item base OS installation
-	\item installation of add-on applications
-	\item initial minimum system configuration [*]
-	\item system registration
-	\item system restart
-\end{itemize}
-\vspace*{\fill}
-[*] system {\em deployment} $\cap$ system {\em configuration} \\
-$ => $ configuration management
-
-\subsection{Base OS Installation}
-General steps:
-\begin{itemize}
-	\item boot from boot media (CD, network, ...)
-	\item identify root device
-	\item optionally identify additional devices
-	\item create partition table / disklabel
-	\item create filesystem(s)
-	\item install MBR, bootblocks etc.
-	\item install / copy / extract OS
-	\item optionally add application software
-	\item perform basic system configuration
-	\item reboot
-\end{itemize}
-
-\subsection{OS Installation}
-\small
-\begin{verbatim}
-# fdisk -f -u 0 -s 169/63/4194241 /dev/rwd0d
-# fdisk -f -c /usr/mdec/mbr /dev/rwd0d
-# fdisk -f -a -0 /dev/rwd0d
-# disklabel -e -I wd0
-[...]
-4 partitions:
-#      size   offset fstype [fsize bsize cpg/sgs]
-a:  4194241       63 4.2BSD    0     0      0 # (Cyl.      0*- 4161*)
-c:  4194241       63 4.2BSD    0     0      0 # (Cyl.      0*- 4161*)
-d:  4194304        0 unused    0     0      0 # (Cyl.      0 - 4161*)
-# /sbin/newfs -O 2 /dev/rwd0a
-/dev/rwd0a: 2048.0MB (4194240 sectors) block size 16384,
-        fragment size 2048 using 12 cylinder groups of
-        170.67MB, 10923 blks, 21504 inodes.
-super-block backups (for fsck_ffs -b #) at:
-32, 349568, 699104, 1048640, 1398176, 1747712, 2097248, 2446784,
-....................................................................
-# mount -o async /dev/wd0a /mnt
-# for pkg in base comp etc games man misc modules text kern-GENERIC; do
-tar zxpf /i386/binary/sets/${pkg}.tgz -C /mnt
-done
-# cp /mnt/usr/mdec/boot /mnt/boot
-# /usr/sbin/installboot -v -o timeout=5 /dev/rwd0a \
-        /mnt/usr/mdec/bootxx_ffsv2
-File system:       /dev/rwd0a
-Primary bootstrap: /usr/mdec/bootxx_ffsv2
-Boot options:      timeout 5, flags 0, speed 9600, ioaddr 0, console pc
-# cd /mnt/dev && ./MAKEDEV all
-# shutdown -r now
-\end{verbatim}
-\Normalsize
-
-\subsection{Post Installation}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.8,angle=-90]{pics/delete.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{Post Installation}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.7]{pics/bandaid.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{Post Installation}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.0,angle=-90]{pics/duck_tape.eps}
-\end{center}
-\vspace*{\fill}
 
 \newpage
 \vspace*{\fill}
@@ -763,345 +1192,433 @@ Boot options:      timeout 5, flags 0, speed 9600, ioaddr 0, console pc
 \end{center}
 \vspace*{\fill}
 
-\newpage
-\vspace*{\fill}
-\begin{center}
-	\Hugesize
-		Software Installation Concepts \\ [1em]
-	\hspace*{5mm}
-	\blueline\\
-	\hspace*{5mm}\\
-		System Software vs. Third Party Software
-\end{center}
-\vspace*{\fill}
-
-\subsection{What's what?}
-\begin{center}
-	\includegraphics[scale=0.7]{pics/os.eps}
-\end{center}
-
-\subsection{What's what?}
-\begin{center}
-	\includegraphics[scale=0.3,angle=-90]{pics/python.eps}
-	\includegraphics[scale=0.3,angle=-90]{pics/logo_oracle.eps}
-	\includegraphics[scale=0.8,angle=-90]{pics/apache.eps} \\
-	\includegraphics[scale=0.3,angle=-90]{pics/mysql.eps}
-	\includegraphics[scale=0.3,angle=-90]{pics/php-logo.eps}
-\end{center}
-
-\subsection{Types of Software}
-\vfill
-\begin{center}
-	\includegraphics[scale=0.8,angle=-90]{pics/types-of-software.eps}
-\end{center}
-\vfill
-
-
-\subsection{System Software vs. Third Party Software}
-Consider:
-\begin{itemize}
-	\item OS upgrades vs. software upgrades
-	\item location of configuration files
-	\item duplicates or conflicting versions in the base system vs. the
-		add-ons
-	\item startup scripts, d{\ae}mons
-	\item location of third party software
-	\item dependencies
-	\item installation by hand and/or installation using a package manager
-	\item proprietary third party software
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Benefits of binary installation:
-\begin{itemize}
-	\item packaged by "vendor" $\rightarrow$ support, ease of installation
-	\item faster
-	\item uses less space
-	\item may be only possibility
-	\item able to integrate into your full OS image build
-	\item may be possible to deploy across large numbers of hosts
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Disadvantages of binary installation:
-\begin{itemize}
-	\item complex dependencies
-	\item installation procedure may be cumbersome
-	\item your OS may not be officially supported
-	\item installation scripts may be busted
-	\item limited control over where files are installed
-	\item missing or not-needed features enabled
-	\item you have to trust the package provider
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Benefits of source installation:
-\begin{itemize}
-	\item full control over
-		\begin{itemize}
-			\item installation location
-			\item compiler flags, optimization, enabled features
-			\item dependencies
-		\end{itemize}
-	\item make things work even if your OS is not officially supported
-	\item ability to patch source (features, security etc.)
-	\item able to integrate into your full OS image build
-\end{itemize}
-
-\subsection{Binary vs. Source installation}
-Disadvantages of source installation:
-\begin{itemize}
-	\item complex dependencies
-	\item may take time
-	\item requires more detailed knowledge
-	\item a lot of software is done poorly
-	\item not all software is available in source form
-	\item you have to trust the source code provider
-\end{itemize}
-
-
-\subsection{Why use a Package Management System?}
-\begin{itemize}
-	\item easy and scalable installation of software
-	\item automatic resolution of software dependencies
-	\item package and file inventory \\
-\begin{verbatim}
-linux-lab$ dpkg -l
-[...]
-linux-lab$ dpkg -L tcpdump
-[...]
-linux-lab$ dpkg-query -S /usr/lib/libsqlite.so.0.8.6 /usr/bin/sqlite3
-[...]
-
-\end{verbatim}
-\end{itemize}
-
-\subsection{Why use a Package Management System?}
-\begin{itemize}
-	\item easy and scalable installation of software
-	\item automatic resolution of software dependencies
-	\item package and file inventory
-	\item integration into OS
-	\item package and file integrity checks \\
-\begin{verbatim}
-$ rpm -Va
-[...]
-missing     /etc/pki/CA/private (Permission denied)
-S.5.....  c /etc/pki/tls/certs/ca-bundle.crt
-.......T  c /etc/libuser.conf
-..?.....  c /etc/tcsd.conf
-missing   c /etc/logrotate.d/syslog
-[...]
-\end{verbatim}
-\end{itemize}
-
-\subsection{Managing Security Patches and Software Upgrades}
-How many known vulnerabilities (unique CVEs and affected packages) exist
-in each of the Fedora and Debian instances?
-
-\begin{verbatim}
-debian$ sudo apt-get install debsecan
-debian$ debsecan
-debian$ sudo apt-get update
-debian$ sudo apt-get upgrade
-debian$ debsecan
-\end{verbatim}
-
-\begin{verbatim}
-fedora$ yum list-security
-fedora$ yum info-security
-\end{verbatim}
-
-\subsection{Managing Security Patches and Software Upgrades}
-How many known vulnerabilities (unique CVEs and affected packages) exist
-in each of the Fedora and Debian instances?
-
-\begin{verbatim}
-debian$ sudo apt-get install debsecan
-debian$ debsecan
-debian$ sudo apt-get update
-debian$ sudo apt-get upgrade
-debian$ debsecan
-\end{verbatim}
-
-\begin{verbatim}
-fedora$ yum list-security
-fedora$ yum info-security
-fedora$ sudo yum update
-fedora$ yum list-security
-\end{verbatim}
-
-\vspace{.5in}
-Excellent! Now what about all the stuff you installed that
-wasn't packaged?
-
-\subsection{Special Purpose Package Managers}
-\vfill
-\begin{center}
-	\includegraphics[scale=0.8,angle=-90]{pics/pip.eps}
-\end{center}
-\vfill
-
-\subsection{Special Purpose Package Managers}
-\vfill
-\begin{center}
-	\includegraphics[scale=0.8,angle=-90]{pics/bower.eps}
-\end{center}
-\vfill
-
-
-\subsection{Special Purpose Package Managers}
-Most programming languages or environments come with their own "package
-management" solutions, often integrating/mixing with a "build system".
-\begin{itemize}
-	\item Common Lisp $=>$ quicklisp
-	\item Go $=>$ go get
-	\item NodeJS $=>$ npm
-	\item Perl $=>$ CPAN
-	\item Python $=>$ easy-install, pip, pants, setuptools, ...
-	\item Ruby $=>$ gems, rvm, rake
-	\item Scala $=>$ sbt
-	\item ...
-\end{itemize}
-
-\subsection{You don't get to choose.}
-\Huge
-\vfill
-\begin{center}
-	You routinely have to build from source {\em and} (re-)package your software.
-\end{center}
-\vfill
-\Normalsize
-
-\subsection{Dependencies, Integrity, and Trust}
-OS provider repositories:
-\begin{itemize}
-	\item {\tt yum update} / {\tt yum install}
-	\item {\tt apt-get}
-\end{itemize}
-\vspace{.5in}
-Language-specific community repositories:
-\begin{itemize}
-	\item {\tt gem install foo}
-	\item {\tt go get github.com/randomAccount/randomRepository}
-	\item {\tt npm install -g foo}
-	\item {\tt perl -MCPAN -e 'install Something::YouWant'}
-	\item {\tt pip install foo}
-\end{itemize}
-\vspace{.5in}
-
-What could possibly go wrong?
-
-\subsection{Dependencies, Integrity, and Trust}
-Fun fact: \\
-
-\begin{verbatim}
-$ wget http://somewhere/some.tar.gz
-$ tar zxf some.tar.gz
-$ cd some
-$ ./configure
-$ make
-$ sudo make install
-\end{verbatim}
-\vspace{.5in}
-is not inherently better than \\
-
-\begin{verbatim}
-$ curl http://somewhere/script.sh | sudo bash
-\end{verbatim}
-
-\subsection{Dependencies, Integrity, and Trust}
-\begin{center}
-Mirroring untrusted, unverified dependencies\\
-does not solve any of your problems. \\
-\vspace{.5in}
-
-Integrity verification is meaningless \\
-without assurance of trust. \\
-\vspace{.5in}
-
-Dependencies are called dependencies \\
-because you {\em depend} on them. \\
-\vspace{.5in}
-
-Dependency trust and integrity is recursive. \\
-\vspace{.5in}
-\end{center}
-
-\subsection{Dependencies, Integrity, and Trust}
-\begin{center}
-Mirroring untrusted, unverified dependencies\\
-does not solve any of your problems. \\
-\vspace{.5in}
-
-Integrity verification is meaningless \\
-without assurance of trust. \\
-\vspace{.5in}
-
-Dependencies are called dependencies \\
-because you {\em depend} on them. \\
-\vspace{.5in}
-
-Dependency trust and integrity is recursive. \\
-\vspace{.5in}
-
-{\em Remember Left-Pad!}
-\end{center}
-
-\subsection{Left-Pad}
-\begin{verbatim}
-function leftPad (str, len, ch) {
-  str = str + '';                // convert `str` to a `string`
-  len = len - str.length;        // `len` is the `pad`'s length now
-  if (len <= 0) return str;      // doesn't need to pad 
-  if (!ch && ch !== 0) ch = ' '; // `ch` defaults to `' '`
-  ch = ch + '';                  // convert `ch` to a `string` cuz it could be a number
-  var pad = '';                  // `pad` starts with an empty string
-  while (true) {                 // loop
-    if (len & 1) pad += ch;      // add `ch` to `pad` if `len` is odd
-    len >>= 1;                   // divide `len` by 2, ditch the remainder
-    if (len) ch += ch;
-    else break;                  // `len` is 0, exit the loop
-  }
-  return pad + str;              // pad `str`!
-}
-\end{verbatim}
-
-\subsection{HW \#3}
-
-Package management basics.
-\\
-
-Detailed homework assignment posted at
-\verb+https://www.cs.stevens.edu/~jschauma/615/s18-hw3.html+
-
-\subsection{Links}
-Booting virtual machines:
-\begin{itemize}
-	\item {\tt https://wiki.xen.org/wiki/PvGrub}
-	\item {\tt https://is.gd/JnD9jM}
-	\item {\tt https://is.gd/TAVCQF}
-	\item {\tt https://is.gd/EiOu6v}
-\end{itemize}
-
-\subsection{Links}
-NPM and LeftPad: \\
-{\tt http://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm} \\
-{\tt http://www.haneycodes.net/npm-left-pad-have-we-forgotten-how-to-program/} \\
-{\tt http://www.businessinsider.com/npm-left-pad-controversy-explained-2016-3}
-
-\subsection{Links}
-\begin{itemize}
-	\item \verb+http://www.pathname.com/fhs/+
-	\item hier(7)
-	\item your package managers' manual pages
-		\begin{itemize}
-			\item pkg\_info(1)
-			\item pkginfo(1), pkgadd(1M)
-			\item rpm(1)
-			\item ...
-		\end{itemize}
-	\item \verb+http://www.pkgsrc.org/+
-\end{itemize}
-
+%\subsection{Team Missions}
+%\vfill
+%\begin{center}
+%\includegraphics[scale=0.8]{pics/blue-hat.eps}
+%\hspace{.5in}
+%\includegraphics[scale=1.0]{pics/red-hat.eps}
+%\end{center}
+%\vfill
+%
+%\newpage
+%\vspace*{\fill}
+%\begin{center}
+%	\Hugesize
+%		Software Installation Concepts \\ [1em]
+%	\hspace*{5mm}
+%	\blueline\\
+%	\hspace*{5mm}\\
+%		Operating System Installation
+%\end{center}
+%\vspace*{\fill}
+%
+%
+%\subsection{OS Installation}
+%\begin{center}
+%	\includegraphics[scale=0.7]{pics/netbsd-install.eps}
+%\end{center}
+%
+%\subsection{OS Installation}
+%\small
+%\begin{verbatim}
+%# fdisk -f -u 0 -s 169/63/4194241 /dev/rwd0d
+%# fdisk -f -c /usr/mdec/mbr /dev/rwd0d
+%# fdisk -f -a -0 /dev/rwd0d
+%# disklabel -e -I wd0
+%[...]
+%4 partitions:
+%#      size   offset fstype [fsize bsize cpg/sgs]
+%a:  4194241       63 4.2BSD    0     0      0 # (Cyl.      0*- 4161*)
+%c:  4194241       63 4.2BSD    0     0      0 # (Cyl.      0*- 4161*)
+%d:  4194304        0 unused    0     0      0 # (Cyl.      0 - 4161*)
+%# /sbin/newfs -O 2 /dev/rwd0a
+%/dev/rwd0a: 2048.0MB (4194240 sectors) block size 16384,
+%        fragment size 2048 using 12 cylinder groups of
+%        170.67MB, 10923 blks, 21504 inodes.
+%super-block backups (for fsck_ffs -b #) at:
+%32, 349568, 699104, 1048640, 1398176, 1747712, 2097248, 2446784,
+%....................................................................
+%# mount -o async /dev/wd0a /mnt
+%# for pkg in base comp etc games man misc modules text kern-GENERIC; do
+%tar zxpf /i386/binary/sets/${pkg}.tgz -C /mnt
+%done
+%# cp /mnt/usr/mdec/boot /mnt/boot
+%# /usr/sbin/installboot -v -o timeout=5 /dev/rwd0a \
+%        /mnt/usr/mdec/bootxx_ffsv2
+%File system:       /dev/rwd0a
+%Primary bootstrap: /usr/mdec/bootxx_ffsv2
+%Boot options:      timeout 5, flags 0, speed 9600, ioaddr 0, console pc
+%# cd /mnt/dev && ./MAKEDEV all
+%# shutdown -r now
+%\end{verbatim}
+%\Normalsize
+%
+%\subsection{OS Installation}
+%General steps:
+%\begin{itemize}
+%	\item power up
+%	\item PXE or iPXE boot
+%	\begin{itemize}
+%		\item network configuration / BOOTP/DHCP
+%		\item boot from network via e.g., tftp miniroot
+%	\end{itemize}
+%	\item identify root device and optional additional disks
+%	\item create partition table / disklabel
+%	\item create filesystem(s)
+%	\item install MBR, bootblocks etc.
+%	\item fetch OS software (e.g., via HTTPS, iSCSI, ...)
+%	\item install / copy / extract OS
+%	\item optionally add application software
+%	\item perform basic system configuration
+%	\item reboot
+%\end{itemize}
+%
+%
+%\subsection{OS Installation}
+%Most of the difficult parts happen outside of the
+%building system:
+%\begin{itemize}
+%	\item hardware identification, provisioning, and registration
+%	\item base OS installation
+%	\item installation of add-on applications
+%	\item initial minimum system configuration [*]
+%	\item system registration
+%	\item system restart
+%\end{itemize}
+%\vspace*{\fill}
+%[*] system {\em deployment} $\cap$ system {\em configuration} \\
+%$ => $ configuration management
+%
+%\subsection{Post Installation}
+%\vspace*{\fill}
+%\begin{center}
+%	\includegraphics[scale=0.8]{pics/delete.eps}
+%\end{center}
+%\vspace*{\fill}
+%
+%\subsection{Post Installation}
+%\vspace*{\fill}
+%\begin{center}
+%	\includegraphics[scale=1.4]{pics/duck_tape.eps}
+%\end{center}
+%\vspace*{\fill}
+%
+%\newpage
+%\vspace*{\fill}
+%\begin{center}
+%    \Hugesize
+%        Hooray! \\ [1em]
+%    \hspace*{5mm}
+%    \blueline\\
+%    \hspace*{5mm}\\
+%        5 Minute Break
+%\end{center}
+%\vspace*{\fill}
+%
+%\newpage
+%\vspace*{\fill}
+%\begin{center}
+%	\Hugesize
+%		Software Installation Concepts \\ [1em]
+%	\hspace*{5mm}
+%	\blueline\\
+%	\hspace*{5mm}\\
+%		System Software vs. Third Party Software
+%\end{center}
+%\vspace*{\fill}
+%
+%\subsection{System Software vs. Third Party Software}
+%\\
+%
+%\vspace{.5in}
+%\begin{tabularx}{\textwidth}{X | X | X | X }
+%{\bf Example} & {\bf System / OS} & {\bf 3rd Party} & {\bf Packaged} \\
+%\hline
+%kernel & & & \\
+%drivers & & & \\
+%firmware & & & \\
+%{\tt libc} & & & \\
+%shell & & & \\
+%compiler & & & \\
+%{\tt ssh(1)} / {\tt sshd(8)} & & & \\
+%mail server & & & \\
+%web server & & & \\
+%database & & & \\
+%python & & & \\
+%\end{tabularx}
+%
+%\subsection{Types of Software}
+%\vfill
+%\begin{center}
+%	\includegraphics[scale=0.8]{pics/types-of-software.eps}
+%\end{center}
+%\vfill
+%
+%
+%\subsection{System Software vs. Third Party Software}
+%Consider:
+%\begin{itemize}
+%	\item OS upgrades vs. software upgrades
+%	\item location of configuration files
+%	\item duplicates or conflicting versions in the base system vs. the
+%		add-ons
+%	\item startup scripts, d{\ae}mons
+%	\item location of third party software
+%	\item dependencies
+%	\item installation by hand and/or installation using a package manager
+%	\item proprietary third party software
+%\end{itemize}
+%
+%\subsection{Team Missions}
+%
+%\vspace*{\fill}
+%\begin{center}
+%\includegraphics[scale=0.35]{pics/black-hat.eps}
+%\end{center}
+%\vspace*{\fill}
+%
+%
+%
+%\subsection{Package Manager Features}
+%\begin{itemize}
+%	\item easy and scalable installation of software
+%	\item automatic resolution of software dependencies
+%	\item package and file inventory \\
+%\begin{verbatim}
+%linux-lab$ dpkg -l
+%[...]
+%linux-lab$ dpkg -L tcpdump
+%[...]
+%linux-lab$ dpkg-query -S /usr/lib/libsqlite.so.0.8.6 /usr/bin/sqlite3
+%[...]
+%
+%\end{verbatim}
+%\end{itemize}
+%
+%\subsection{Package Manager Features}
+%\begin{itemize}
+%	\item easy and scalable installation of software
+%	\item automatic resolution of software dependencies
+%	\item package and file inventory
+%	\item integration into OS
+%	\item package and file integrity checks \\
+%\begin{verbatim}
+%$ rpm -Va
+%[...]
+%missing     /etc/pki/CA/private (Permission denied)
+%S.5.....  c /etc/pki/tls/certs/ca-bundle.crt
+%.......T  c /etc/libuser.conf
+%..?.....  c /etc/tcsd.conf
+%missing   c /etc/logrotate.d/syslog
+%[...]
+%\end{verbatim}
+%\end{itemize}
+%
+%\subsection{Managing Security Patches and Software Upgrades}
+%How many known vulnerabilities (unique CVEs and affected packages) exist
+%in each of the Fedora and Debian instances?
+%
+%\begin{verbatim}
+%debian$ sudo apt-get install debsecan
+%debian$ debsecan
+%debian$ sudo apt-get update
+%debian$ sudo apt-get upgrade
+%debian$ debsecan
+%\end{verbatim}
+%
+%\begin{verbatim}
+%fedora$ yum list-security
+%fedora$ yum info-security
+%\end{verbatim}
+%
+%\subsection{Managing Security Patches and Software Upgrades}
+%How many known vulnerabilities (unique CVEs and affected packages) exist
+%in each of the Fedora and Debian instances?
+%
+%\begin{verbatim}
+%debian$ sudo apt-get install debsecan
+%debian$ debsecan
+%debian$ sudo apt-get update
+%debian$ sudo apt-get upgrade
+%debian$ debsecan
+%\end{verbatim}
+%
+%\begin{verbatim}
+%fedora$ yum list-security
+%fedora$ yum info-security
+%fedora$ sudo yum update
+%fedora$ yum list-security
+%\end{verbatim}
+%
+%\vspace{.5in}
+%Excellent! Now what about all the stuff you installed that
+%wasn't packaged?
+%
+%\subsection{Special Purpose Package Managers}
+%\vfill
+%\begin{center}
+%	\includegraphics[scale=0.8]{pics/pip.eps}
+%\end{center}
+%\vfill
+%
+%\subsection{Special Purpose Package Managers}
+%\vfill
+%\begin{center}
+%	\includegraphics[scale=0.8]{pics/bower.eps}
+%\end{center}
+%\vfill
+%
+%
+%\subsection{Special Purpose Package Managers}
+%Most programming languages or environments come with their own "package
+%management" solutions, often integrating/mixing with a "build system".
+%\begin{itemize}
+%	\item Common Lisp $=>$ quicklisp
+%	\item Go $=>$ go get
+%	\item NodeJS $=>$ npm
+%	\item Perl $=>$ CPAN
+%	\item Python $=>$ easy-install, pip, pants, setuptools, ...
+%	\item Ruby $=>$ gems, rvm, rake
+%	\item Scala $=>$ sbt
+%	\item ...
+%\end{itemize}
+%
+%\subsection{You don't get to choose.}
+%\Huge
+%\vfill
+%\begin{center}
+%	You routinely have to build from source {\em and} (re-)package your software.
+%\end{center}
+%\vfill
+%\Normalsize
+%
+%\subsection{Dependencies, Integrity, and Trust}
+%OS provider repositories:
+%\begin{itemize}
+%	\item {\tt yum update} / {\tt yum install}
+%	\item {\tt apt-get}
+%\end{itemize}
+%\vspace{.5in}
+%Language-specific community repositories:
+%\begin{itemize}
+%	\item {\tt gem install foo}
+%	\item {\tt go get github.com/randomAccount/randomRepository}
+%	\item {\tt npm install -g foo}
+%	\item {\tt perl -MCPAN -e 'install Something::YouWant'}
+%	\item {\tt pip install foo}
+%\end{itemize}
+%\vspace{.5in}
+%
+%What could possibly go wrong?
+%
+%\subsection{Dependencies, Integrity, and Trust}
+%Fun fact: \\
+%
+%\begin{verbatim}
+%$ wget http://somewhere/some.tar.gz
+%$ tar zxf some.tar.gz
+%$ cd some
+%$ ./configure
+%$ make
+%$ sudo make install
+%\end{verbatim}
+%\vspace{.5in}
+%is not inherently better than \\
+%
+%\begin{verbatim}
+%$ curl http://somewhere/script.sh | sudo bash
+%\end{verbatim}
+%
+%\subsection{Dependencies, Integrity, and Trust}
+%\begin{center}
+%Mirroring untrusted, unverified dependencies\\
+%does not solve any of your problems. \\
+%\vspace{.5in}
+%
+%Integrity verification is meaningless \\
+%without assurance of trust. \\
+%\vspace{.5in}
+%
+%Dependencies are called dependencies \\
+%because you {\em depend} on them. \\
+%\vspace{.5in}
+%
+%Dependency trust and integrity is recursive. \\
+%\vspace{.5in}
+%\end{center}
+%
+%\subsection{Dependencies, Integrity, and Trust}
+%\begin{center}
+%Mirroring untrusted, unverified dependencies\\
+%does not solve any of your problems. \\
+%\vspace{.5in}
+%
+%Integrity verification is meaningless \\
+%without assurance of trust. \\
+%\vspace{.5in}
+%
+%Dependencies are called dependencies \\
+%because you {\em depend} on them. \\
+%\vspace{.5in}
+%
+%Dependency trust and integrity is recursive. \\
+%\vspace{.5in}
+%
+%{\em Remember Left-Pad!}
+%\end{center}
+%
+%\subsection{Exercises}
+%All recommended, none graded: \\
+%\verb+https://stevens.netmeister.org/615/package-exercise.html+
+%
+%\vspace{.25in}
+%Identify a piece of software you use, but that's not
+%packaged for a given package manager.  Create a
+%package for it, then contribute upstream.
+%
+%\vspace{.25in}
+%Create a cheat sheet for 4 different package managers,
+%listing the more important equivalent commands.
+%
+%\vspace{.25in}
+%How does your preferred OS update firmware?
+%
+%\vspace{.25in}
+%How does the concept of {\em reproducable builds}
+%relate to what we discussed here?
+%
+%\vspace{.25in}
+%What is the overlap with system {\em configuration}? Can a
+%package manager assert state?
+%
+%\subsection{Links}
+%Booting virtual machines:
+%\begin{itemize}
+%	\item {\tt https://wiki.xen.org/wiki/PvGrub}
+%	\item {\tt https://is.gd/JnD9jM}
+%	\item {\tt https://is.gd/TAVCQF}
+%	\item {\tt https://is.gd/EiOu6v}
+%\end{itemize}
+%
+%\subsection{Links}
+%NPM and LeftPad: \\
+%{\tt http://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm} \\
+%{\tt http://www.haneycodes.net/npm-left-pad-have-we-forgotten-how-to-program/} \\
+%{\tt http://www.businessinsider.com/npm-left-pad-controversy-explained-2016-3}
+%
+%\subsection{Links}
+%\begin{itemize}
+%	\item \verb+http://www.pathname.com/fhs/+
+%	\item hier(7)
+%	\item your package managers' manual pages
+%		\begin{itemize}
+%			\item pkg\_info(1)
+%			\item pkginfo(1), pkgadd(1M)
+%			\item rpm(1)
+%			\item ...
+%		\end{itemize}
+%	\item \verb+http://www.pkgsrc.org/+
+%\end{itemize}
+%
 \end{document}

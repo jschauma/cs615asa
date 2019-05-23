@@ -12,13 +12,19 @@ PDFTOTEXT=	pdftotext
 PICTURES=	\
 		pics/sysadmin_infosec.eps \
 		pics/kane.eps \
+		pics/redhat.eps \
+		pics/osi-stack2.eps \
+		pics/bluehat.eps \
+		pics/blackhat.eps \
+		pics/greenhat.eps \
 		pics/Killchain.eps \
 		pics/turbolift_access_denied.eps \
 		pics/two-questions.eps \
 		pics/security.eps \
 		pics/touchid.eps \
 		pics/threat-model.eps \
-		pics/threat-model2.eps
+		pics/threat-model2.eps \
+		pics/usability.eps
 
 
 

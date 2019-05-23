@@ -14,6 +14,8 @@ PICTURES=	pics/OSI_Model.eps	\
 		pics/csr-process.eps	\
 		pics/roots.eps		\
 		pics/wireshark-smtp.eps	\
+		pics/wireshark-smtp-server.eps	\
+		pics/stevens-ec2.eps	\
 		pics/spam.eps \
 		pics/wireshark-smtp-tls.eps
 

@@ -1,5 +1,3 @@
-https://en.wikipedia.org/wiki/Advanced_Format
-
 \documentclass[xga]{xdvislides}
 \usepackage[landscape]{geometry}
 \usepackage{array}
@@ -31,24 +29,76 @@ https://en.wikipedia.org/wiki/Advanced_Format
 		Stevens Institute of Technology\\
 		Jan Schaumann\\
 		\verb+jschauma@stevens.edu+ \\
-		\verb+https://www.cs.stevens.edu/~jschauma/615A/+
+		\verb+https://stevens.netmeister.org/615/+
 \end{center}
 \vspace*{\fill}
 %\setcounter{page}{0}
 %\clearpage
 
-\subsection{Let's review HW1}
-\vspace{.5in}
-Start all assignments on {\tt
-linux-lab.cs.stevens.edu}! \\
-\vspace{.5in}
-Submit plain text. \\
-\vspace{.5in}
-No resubmissions.
+\subsection{Current Events}
+\vfill
+\begin{center}
+	\includegraphics[scale=0.8]{pics/dnsflagday.eps} \\
+	\verb+https://dnsflagday.net/+
+\end{center}
+\vfill
+
+\subsection{Current Events}
+\vfill
+\begin{center}
+	\includegraphics[scale=2.5]{pics/icecubelayingcables.eps} \\
+	\verb+https://is.gd/mHmoLu/+ \\
+	\verb+https://is.gd/2r3DNp+
+\end{center}
+\vfill
+
+\subsection{Current Events}
+\vfill
+\begin{center}
+	\includegraphics[scale=0.8]{pics/Facebook-Research-Install-Root-Certificate.eps} \\
+	\verb+https://techcrunch.com/2019/01/29/facebook-project-atlas/+
+\end{center}
+\vfill
+
+\subsection{Staying up to date}
+
+\begin{itemize}
+        \item {\tt https://www.devopsweekly.com/}
+        \item {\tt https://sreweekly.com/}
+        \item {\tt https://www.nanog.org/}
+        \item {\tt https://puck.nether.net/mailman/listinfo/outages}
+	\item {\tt https://www.oreilly.com/webops-perf/newsletter.html}
+	\item @nixCraft {\tt https://is.gd/cKEpWc} 
+	\item {\tt https://www.cronweekly.com/}
+\end{itemize}
+
+\newpage
+\vspace*{\fill}
+\begin{center}
+	\Hugesize
+		And now for something completely different... \\ [1em]
+	\hspace*{5mm}
+	\blueline\\
+	\hspace*{5mm}\\
+		Free Books!
+\end{center}
+\vspace*{\fill}
+
+\newpage
+%\subsection{Let's review HW1}
+%\vspace{.5in}
+%Start all assignments on {\tt
+%linux-lab.cs.stevens.edu}! \\
+%\vspace{.5in}
+%Submit plain text. \\
+%\vspace{.5in}
+%No resubmissions.
+%
+%\subsection{Let's review HW1}
+%\vspace{.5in}
 
 \subsection{Let's review HW1}
 \vspace{.5in}
-
 Running an instance:
 \begin{verbatim}
 $ aws ec2 run-instances --instance-type t1.micro \
@@ -78,22 +128,22 @@ $
 \end{verbatim}
 
 \subsection{Let's review HW1}
-\vspace{.5in}
-
-Add the other common AMIs we'll use:
 \begin{verbatim}
 $ alias
-aws='aws --output text'
-del-volume='aws ec2 delete-volume --volume-id'
-instance='aws ec2 run-instances --key-name stevens --image-id'
-instances='aws ec2 describe-instances'
-term-instances='aws ec2 terminate-instances --instance-ids'
-start-fedora='instance ami-0187f76b --instance-type t1.micro'
-start-freebsd='instance ami-d0b520b8 --instance-type t1.micro'
-start-netbsd='instance ami-569ed93c --instance-type t1.micro'
-start-omnios='instance ami-9fbbfaf5 --instance-type t1.micro'
-start-ubuntu='instance ami-6de0dd04 --instance-type t1.micro'
-volumes='aws ec2 describe-volumes'
+alias console='aws ec2 get-console-output --instance-id'
+alias hinstances='instances | grep ^INSTANCES | cut -f15'
+alias instance='aws ec2 run-instances --key-name stevens --image-id'
+alias instance-names='aws ec2 describe-instances --query Reservations[*].Instances[*].[PublicDnsName] --filter Name=instance-state-name,Values=running'
+alias instances='aws ec2 describe-instances'
+alias running='aws ec2 describe-instances --query Reservations[*].Instances[*].[InstanceId] --filters Name=instance-state-name,Values=running'
+alias start-debian='instance ami-628ad918 --instance-type t2.micro'
+alias start-fedora='instance ami-0d7a9cc499e108f74 --instance-type t1.micro'
+alias start-freebsd='instance ami-d0b520b8 --instance-type t1.micro'
+alias start-netbsd='instance ami-569ed93c --instance-type t1.micro'
+alias start-netbsd-euw1='aws ec2 run-instances --key-name stevens-euw1 --image-id ami-a460c5d7 --security-group-id sg-4e947833 --region eu-west-1'
+alias start-omnios='instance ami-0b2c7fd1c1f7e91d6 --instance-type t1.micro'
+alias start-ubuntu='instance ami-78cef802 --instance-type t1.micro'
+alias term-instances='aws ec2 terminate-instances --instance-ids'
 $ 
 \end{verbatim}
 
@@ -124,63 +174,64 @@ $ ssh <mumble>.compute-1.amazonaws.com
 
 How do we know what host we're connecting to?
 \begin{verbatim}
-$ ssh ec2-54-227-16-184.compute-1.amazonaws.com
-The authenticity of host 'ec2-54-227-16-184.compute-1.amazonaws.com
-(54.227.16.184)' can't be established.
-ECDSA key fingerprint is 19:af:35:01:0b:2a:ee:3d:30:0f:69:11:cc:55:7c:20.
+$ ssh ec2-3-85-193-42.compute-1.amazonaws.com
+The authenticity of host 'ec2-3-85-193-42.compute-1.amazonaws.com
+(3.85.193.42)' can't be established.
+ECDSA key fingerprint is SHA256:lUB2XhoRshItvOVqrYO5Lo1Mqmz69DUP++GH3Yy1P0I.
 Are you sure you want to continue connecting (yes/no)? 
 \end{verbatim}
 
 \subsection{Let's review HW1}
 \begin{verbatim}
-$ instance ami-0187f76b # Fedora
-$ aws ec2 get-console-output --instance-id i-18fd6d98
+$ aws ec2 get-console-output --instance-id i-0aac317689367a7b8
 [...]
-<14>Feb  6 18:37:59 ec2: #############################################################
-<14>Feb  6 18:37:59 ec2: -----BEGIN SSH HOST KEY FINGERPRINTS-----
-<14>Feb  6 18:37:59 ec2: 256 SHA256:3kQfQTV+sfk/BDa9jGdvvea8i28TwWOgWt8lZKdALgA /etc/ssh/ssh_host_ecdsa_key.pub (ECDSA)
-<14>Feb  6 18:37:59 ec2: 256 SHA256:R3/H4kFMu/JZZCxQL7ZYODZoKwGFNBN6Cpfbsx/PFDQ /etc/ssh/ssh_host_ed25519_key.pub (ED25519)
-<14>Feb  6 18:37:59 ec2: 2048 SHA256:WjIFQE4ZEQfSR0bfCVgRbR7Q0780RFug8CZNXcEam0I /etc/ssh/ssh_host_rsa_key.pub (RSA)
-<14>Feb  6 18:37:59 ec2: -----END SSH HOST KEY FINGERPRINTS-----
------BEGIN SSH HOST KEY KEYS-----
-ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBP4RT8CDVexvKozWaKH4eOnGaDkm+EucrbmZzMTiYgSmXmkOkwL1Rwt18jrXRtKm1z+MqNu3plAxkiTeT62HxfY=
-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBTpcfKZcASSjicvMPAx6UAQSac9ZH0UeO+/A9m6EuFO
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC48feKNKyaS+c+zJmu6/L6o9L7VkW6YMuwu0//Uo5uS46YhMO5GY/cyerlS/o404ZKVuRbBhpRTPWlccMFpDBtE5jdoejdEl5lWK0w9MNfQ7lmSTjnCbqRy+0GWi/ig7zI6lBYFoh85PNCJxh+FQFOpBtQVz+L6Wo4GPWFVpqO0NUkNt4IlTfXTQIoRJ3uY6qHcdhA0pihb55QIlImG8EXStbVOBQXVceKMWmQhXsHtDrEu+zHYfUNffCbryBwb9uIn0kkmL105VaegoPayv7hoUqM3+RuHHBzt4xdNFS4QYVNSYJRTLGQ+tFEmgWNIbRHlqB2TKlsH5JLRwcjFOkb
------END SSH HOST KEY KEYS-----
+ec2: ###########################################################
+ec2: -----BEGIN SSH HOST KEY FINGERPRINTS-----
+ec2: 1024 SHA256:z5n5cOPe0Kxhrw2Uxj6SY/kwTSk5IEZtveCMvUoBwHc root@ip-10-141-117-253.ec2.internal (DSA)
+ec2: 521 SHA256:lUB2XhoRshItvOVqrYO5Lo1Mqmz69DUP++GH3Yy1P0I root@ip-10-141-117-253.ec2.internal (ECDSA)
+ec2: 256 SHA256:zENF+3vI3WWJC3iutGYypF3bKFCcJuTTmdDBRJJ9S14 root@ip-10-141-117-253.ec2.internal (ED25519)
+ec2: 2048 SHA256:pICqhhQyGFsjnw+TosFTY8cXcif2G9R+MxDxrhgaNdk root@ip-10-141-117-253.ec2.internal (RSA)
+ec2: -----END SSH HOST KEY FINGERPRINTS-----
+ec2: ###########################################################
 \end{verbatim}
 
 
 \subsection{Let's review HW1}
-\vspace{.5in}
-
 How do we know what host we're connecting to?
 \begin{verbatim}
-$ start-fedora
-$ ssh-keygen -l -f /dev/stdin <<<$(console i-0990f1eb069c853c4 | grep ^ecdsa)
-256 19:af:35:01:0b:2a:ee:3d:30:0f:69:11:cc:55:7c:20 (ECDSA)
-$ ssh fedora@ec2-54-227-16-184.compute-1.amazonaws.com
-The authenticity of host 'ec2-54-227-16-184.compute-1.amazonaws.com
-(54.227.16.184)' can't be established.
-ECDSA key fingerprint is 19:af:35:01:0b:2a:ee:3d:30:0f:69:11:cc:55:7c:20.
+$ aws ec2 get-console-output --instance-id i-0aac317689367a7b8 | grep "(ECDSA)"
+ec2: 521 SHA256:lUB2XhoRshItvOVqrYO5Lo1Mqmz69DUP++GH3Yy1P0I root@ip-10-141-117-253.ec2.internal (ECDSA)
+$ ssh ec2-3-85-193-42.compute-1.amazonaws.com
+The authenticity of host 'ec2-3-85-193-42.compute-1.amazonaws.com
+(3.85.193.42)' can't be established.
+ECDSA key fingerprint is SHA256:lUB2XhoRshItvOVqrYO5Lo1Mqmz69DUP++GH3Yy1P0I.
 Are you sure you want to continue connecting (yes/no)? yes
-[fedora@ip-10-170-2-33 ~]$ 
+Warning: Permanently added 'ec2-3-85-193-42.compute-1.amazonaws.com,3.85.193.42' (ECDSA) to the list of known hosts.
+NetBSD 7.0 (XEN3PAE_DOMU.201509250726Z)
+Welcome to NetBSD - Amazon EC2 image!
+
+[...]
+We recommend that you create a non-root account and
+use su(1) for root access.
+ip-10-141-117-253#
+
 \end{verbatim}
 
 \subsection{Let's review HW1}
 \begin{verbatim}
 # uname -a
-NetBSD ip-10-236-59-3.ec2.internal 7.0 NetBSD 7.0 (XEN3PAE_DOMU.201509250726Z) i386
+NetBSD ip-10-141-117-253.ec2.internal 7.0 NetBSD 7.0 (XEN3PAE_DOMU.201509250726Z) i386
 \end{verbatim}
 
 \subsection{Let's review HW1}
 \begin{verbatim}
-# ifconfig -a
+ip-10-141-117-253# ifconfig -a
 xennet0: flags=8863<UP,BROADCAST,NOTRAILERS,RUNNING,SIMPLEX,MULTICAST> mtu 1500
         capabilities=2800<TCP4CSUM_Tx,UDP4CSUM_Tx>
         enabled=0
-        address: 22:00:0a:ec:3b:03
-        inet 10.236.59.3 netmask 0xffffffc0 broadcast 10.236.59.63
-        inet6 fe80::179d:36b7:129c:68d3%xennet0 prefixlen 64 scopeid 0x1
+        address: 22:00:0a:8d:75:fd
+        inet 10.141.117.253 netmask 0xffffff00 broadcast 10.141.117.255
+        inet6 fe80::531e:e93c:d231:2b50%xennet0 prefixlen 64 scopeid 0x1
 lo0: flags=8049<UP,LOOPBACK,RUNNING,MULTICAST> mtu 33184
         inet 127.0.0.1 netmask 0xff000000
         inet6 ::1 prefixlen 128
@@ -190,30 +241,30 @@ lo0: flags=8049<UP,LOOPBACK,RUNNING,MULTICAST> mtu 33184
 
 \subsection{Let's review HW1}
 \begin{verbatim}
-# netstat -na | more
 Active Internet connections (including servers)
 Proto Recv-Q Send-Q  Local Address          Foreign Address        State
-tcp        0     36  10.236.59.3.22         98.139.248.67.55452    ESTABLISHED
+tcp        0      0  10.141.117.253.22      207.172.174.21.38764   ESTABLISHED
 tcp        0      0  *.22                   *.*                    LISTEN
-udp        0      0  *.68                   *.*
+udp        0      0  *.68                   *.*                   
 Active Internet6 connections (including servers)
 Proto Recv-Q Send-Q  Local Address          Foreign Address        (state)
 tcp6       0      0  *.22                   *.*                    LISTEN
 Active UNIX domain sockets
-Address  Type   Recv-Q Send-Q    Inode     Conn Refs  Nextref Addr
+Address  Type   Recv-Q Send-Q    Inode     Conn       Refs  Nextref Addr
+c1dc3378 stream      0      0        0 c1dc33c8          0        0 
 [...]
 \end{verbatim}
 
 \subsection{Let's review HW1}
 \begin{verbatim}
-# df -hi
-Filesystem         Size       Used      Avail %Cap iUsed   iAvail %iCap Mounted on
-/dev/xbd1a         959M       485M       426M  53% 23243   507251   4% /
-/dev/xbd0a         246M       2.2M       231M   0%    15    65521   0% /grub
-kernfs             1.0K       1.0K         0B 100%     0        0   0% /kern
-ptyfs              1.0K       1.0K         0B 100%     0        0   0% /dev/pts
-procfs             4.0K       4.0K         0B 100%    15      517   2% /proc
-# mount
+ip-10-141-117-253# df -hi
+Filesystem         Size       Used      Avail %Cap  iUsed   iAvail %iCap Mounted on
+/dev/xbd1a         959M       485M       426M  53%  23240   507254   4%  /
+/dev/xbd0a         246M       2.2M       231M   0%     15    65521   0%  /grub
+kernfs             1.0K       1.0K         0B 100%      0        0   0%  /kern
+ptyfs              1.0K       1.0K         0B 100%      0        0   0%  /dev/pts
+procfs             4.0K       4.0K         0B 100%     15      517   2%  /proc
+ip-10-141-117-253# mount
 /dev/xbd1a on / type ffs (local)
 /dev/xbd0a on /grub type ext2fs (local)
 kernfs on /kern type kernfs (local)
@@ -285,7 +336,7 @@ disklabel: super block size 0
 \subsection{Filesystems, Disks, Storage}
 \begin{verbatim}
 $ ssh linux-lab.cs.stevens.edu
-$ dh -hT
+$ df -hT
 \end{verbatim}
 
 \begin{verbatim}
@@ -318,15 +369,8 @@ How many files can be created on {\tt /tmp}?
 
 \begin{verbatim}
 $ ssh linux-lab.cs.stevens.edu
+$ df -i /tmp
 $ rm /tmp/${USER}/large2
-$ dh -i /tmp
-\end{verbatim}
-
-\subsection{Filesystems, Disks, Storage}
-How many files can be created on {\tt /tmp}?
-
-\begin{verbatim}
-$ ssh linux-lab.cs.stevens.edu
 $ df -i /tmp
 \end{verbatim}
 
@@ -335,16 +379,19 @@ $ df -i /tmp
 \begin{verbatim}
 $ ssh linux-lab.cs.stevens.edu
 $ cd /tmp
-$ dh -i /tmp
+$ df -i /tmp
 $ touch newfile
 $ cc -Wall ~jschauma/tmp/mkfiles.c
-$ ./a.out
-$ ls -ld /tmp/$(id -u)
-$ ls /tmp/$(id -u) | wc -l
+$ ./a.out /tmp/${USER}
+$ ls -ld /tmp/${USER}
+$ ls /tmp/${USER} | wc -l
 $ touch newerfile
 $ echo "hello hello hello" >> newfile
-$ rm -fr /tmp/$(id -u)
+$ rm -fr /tmp/${USER}
 \end{verbatim}
+
+See also:
+\verb+https://is.gd/nX07RR+
 
 \subsection{Filesystems, Disks, Storage}
 Important lessons: \\
@@ -354,6 +401,13 @@ File sizes are not always what they seem to be. \\
 Error messages aren't always what they seem to be! \\
 
 All resources are finite.
+
+\subsection{Team Missions}
+\vfill
+\begin{center}
+	\includegraphics[scale=0.2]{pics/team-drives.eps} \\
+\end{center}
+\vfill
 
 
 \subsection{Filesystems, Disks, Storage}
@@ -433,7 +487,7 @@ Direct Attached Storage (DAS)
 \begin{center}
 	\includegraphics[scale=0.8]{pics/das.eps} \\
 \end{center}
-\verb+ssh lab 'df -hT /'+
+\verb+ssh lab 'df -hiT /'+
 \vfill
 
 \subsection{Basic Disk Concepts: Storage Models}
@@ -442,7 +496,7 @@ Network Attached Storage (NAS)
 \begin{center}
 	\includegraphics[scale=0.5]{pics/nas.eps} \\
 \end{center}
-\verb+ssh lab 'df -hT /home/$(whoami)'+
+\verb+ssh lab 'df -hiT /home/$(whoami)'+
 \vfill
 
 \subsection{Basic Disk Concepts: Storage Models}
@@ -461,57 +515,67 @@ Cloud Storage (Examples: EBS, S3)
 \end{center}
 \vfill
 
-%\subsection{Basic Disk Concepts: Storage Models: Cloud Storage}
-%\begin{verbatim}
-%$ aws ec2 describe-instances
-%[...]
-%/dev/sda1	ebs	None	paravirtual
-%BLOCKDEVICEMAPPINGS	/dev/sda
-%EBS	2014-01-25T20:18:19.000Z	True	attached vol-a0d000d6
-%[...]
-%\end{verbatim}
-%
-%
-%\subsection{Basic Disk Concepts: Storage Models: Cloud Storage}
-%
-%30 min. exercise: \\
-%
-%\begin{itemize}
-%	\item create two instances
-%	\item create a 1GB volume and attach it to one of the instances
-%	\item create a new filesystem on the volume and mount it
-%	\item create a file on the new filesystem
-%	\item terminate the first instance
-%	\item attach the volume to the second instance
-%	\item retrieve the file from the volume via the second instance
-%\end{itemize}
-%
-%If time permits, repeat using a Linux instance.
-%\vspace{.25in}
-%Useful commands: \\
-%{\tt aws ec2 create-volume}, {\tt aws ec2 attach-volume}, {\tt
-%format(1M)}, {\tt newfs(1M)}, {\tt mount(8)}
-%
-%\subsection{Basic Disk Concepts: Storage Models: Cloud Storage}
-%\begin{verbatim}
-%$ aws ec2 create-volume --size 1 --availability-zone us-east-1d
-%[...]
-%$ aws ec2 attach-volume --volume-id vol-9d3aeaeb --instance-id \
-%        i-dd74f0f3 --device /dev/sdh
-%[...]
-%$ ssh <hostname>
-%# format
-%format> fdisk
-%format> verify
-%format> label
-%# newfs /dev/rdsk/c1t2160d0s0
-%[...]
-%# mount /dev/dsk/c1t2160d0s0 /mnt
-%# df -Th /mnt
-%[...]
-%# fstyp -v /dev/rdsk/c1t2160d0s0  | more
-%[...]
-%\end{verbatim}
+\subsection{Team Missions}
+\vfill
+\begin{center}
+	\includegraphics[scale=0.2]{pics/team-drives.eps} \\
+\end{center}
+\vfill
+
+\subsection{Basic Disk Concepts: Storage Models: Cloud Storage}
+\begin{verbatim}
+$ aws ec2 describe-instances
+[...]
+/dev/sda1	ebs	None	paravirtual
+BLOCKDEVICEMAPPINGS	/dev/sda
+EBS	2014-01-25T20:18:19.000Z	True	attached vol-a0d000d6
+[...]
+\end{verbatim}
+
+
+\subsection{Basic Disk Concepts: Storage Models: Cloud Storage}
+
+\begin{itemize}
+	\item create two instances
+	\item create a 1GB volume and attach it to one of the instances
+	\item create a new filesystem on the volume and mount it
+	\item create a file on the new filesystem
+	\item terminate the first instance
+	\item attach the volume to the second instance
+	\item retrieve the file from the volume via the second instance
+\end{itemize}
+
+If time permits, repeat using a Linux instance.
+\vspace{.25in}
+Useful commands: \\
+{\tt aws ec2 create-volume}, {\tt aws ec2 attach-volume}, {\tt
+format(1M)}, {\tt newfs(1M)}, {\tt mount(8)}
+
+\subsection{Basic Disk Concepts: Storage Models: Cloud Storage}
+\begin{verbatim}
+$ aws ec2 create-volume --size 1 --availability-zone us-east-1d
+[...]
+$ aws ec2 attach-volume --volume-id vol-9d3aeaeb --instance-id \
+        i-dd74f0f3 --device /dev/sdh
+[...]
+$ ssh <hostname>
+# format
+format> fdisk
+format> verify
+format> label
+# newfs /dev/rdsk/c1t2160d0s0
+[...]
+# mount /dev/dsk/c1t2160d0s0 /mnt
+# df -Th /mnt
+[...]
+# fstyp -v /dev/rdsk/c1t2160d0s0  | more
+[...]
+\end{verbatim}
+
+% Cross mounting fails, but here's something that does
+% work: NetBSD create filesystem, Ubuntu mount
+% $ sudo mount -t ufs -o ro,ufstype=44bsd /dev/xvdh1
+% /mnt
 
 \newpage
 \vspace*{\fill}
@@ -535,7 +599,7 @@ Cloud Storage (Examples: EBS, S3)
 Security affects everything. \\
 \begin{center}
 	\includegraphics[scale=0.9]{pics/equation-tweet.eps} \\
-	\verb+https://t.co/eM6XpATITQ+
+	\verb+https://is.gd/bK0rwd+
 \end{center}
 
 \subsection{Basic Disk Concepts: Disk Devices}
@@ -667,6 +731,14 @@ Security affects everything. \\
 		\end{itemize}
 \end{itemize}
 
+\subsection{Team Missions}
+\vfill
+\begin{center}
+	\includegraphics[scale=0.2]{pics/team-drives.eps} \\
+\end{center}
+\vfill
+
+
 \newpage
 \vspace*{\fill}
 \begin{center}
@@ -738,21 +810,11 @@ Hard drive performance determined by:
 
 \subsection{Basic Disk Concepts: Partitions}
 	\begin{center}
-		\includegraphics[scale=1.0]{pics/disk-structure.eps} \\
-		\tiny Source: SGI Techpubs \\
-	\end{center}
-
-\subsection{Basic Disk Concepts: Partitions}
-	\begin{center}
-		\includegraphics[scale=0.7]{pics/disk.partition.eps}
+		\includegraphics[scale=0.65]{pics/chs.eps}
+		\includegraphics[scale=0.7]{pics/disk.partition.eps} \\
 	\end{center}
 
 
-\subsection{Basic Disk Concepts: Partitions}
-	\begin{center}
-		\includegraphics[scale=0.9]{pics/partition.eps} \\
-		\tiny Source: NetBSD Guide \\
-	\end{center}
 
 \subsection{Basic Disk Concepts: Partitions}
 NetBSD example (from {\tt disklabel(8)})
@@ -838,6 +900,13 @@ Units = cylinders of 16065 * 512 = 8225280 bytes
 \end{center}
 \vfill
 
+\subsection{Team Missions}
+\vfill
+\begin{center}
+	\includegraphics[scale=0.2]{pics/team-drives.eps} \\
+\end{center}
+\vfill
+
 
 \newpage
 \vspace*{\fill}
@@ -850,589 +919,589 @@ Units = cylinders of 16065 * 512 = 8225280 bytes
         5 Minute Break
 \end{center}
 \vspace*{\fill}
-
-\newpage
-\vspace*{\fill}
-\begin{center}
-	\Hugesize
-		Basic Filesystem Concepts\\ [1em]
-	\hspace*{5mm}
-	\blueline\\
-	\hspace*{5mm}\\
-		Filesystem Layout
-\end{center}
-\vspace*{\fill}
-
-\subsection{Basic Filesystem Concepts}
-All partitions -- with the exception of the {\em root} (or \verb+/+) partition
--- can be {\em mounted} anywhere in the filesystem hierarchy.
-\\
-
-\begin{center}
-	\includegraphics[scale=0.5]{pics/filesystem-tree-mountpoints.eps} \\
-\end{center}
-
+%
+%\newpage
+%\vspace*{\fill}
+%\begin{center}
+%	\Hugesize
+%		Basic Filesystem Concepts\\ [1em]
+%	\hspace*{5mm}
+%	\blueline\\
+%	\hspace*{5mm}\\
+%		Filesystem Layout
+%\end{center}
+%\vspace*{\fill}
+%
 %\subsection{Basic Filesystem Concepts}
 %All partitions -- with the exception of the {\em root} (or \verb+/+) partition
 %-- can be {\em mounted} anywhere in the filesystem hierarchy.
 %\\
 %
 %\begin{center}
-%\includegraphics[scale=0.7]{pics/fs-tree-disks.eps} \\
+%	\includegraphics[scale=0.5]{pics/filesystem-tree-mountpoints.eps} \\
 %\end{center}
 %
-\subsection{Basic Filesystem Concepts}
-All partitions -- with the exception of the {\em root} (or \verb+/+) partition
--- can be {\em mounted} anywhere in the filesystem hierarchy.
-\\
-
-The file \verb+/etc/fstab+ (see fstab(5)) specifies which disks / partitions
-to mount where:
-\\
-\begin{verbatim}
-/dev/wd0a   /        ffs    rw 1 1
-/dev/cgd1a  none     swap   sw 0 0
-/dev/cgd0a  /home    ffs    rw 1 2
-/ignoreme   /tmp     mfs    rw,-b4096,-f512,-s262144 0 0
-kernfs      /kern    kernfs rw
-procfs      /proc    procfs rw,noauto
-ptyfs       /dev/pts ptyfs  rw 0 0
-\end{verbatim}
-\Normalsize
-
-\subsection{Basic Filesystem Concepts}
-All partitions -- with the exception of the {\em root} (or \verb+/+) partition
--- can be {\em mounted} anywhere in the filesystem hierarchy.
-\\
-
-The file \verb+/etc/fstab+ (see fstab(5)) specifies which disks / partitions
-to mount where:
-\\
-\small
-\begin{verbatim}
-# /etc/fstab: static file system information.
-#
-# Use 'vol_id --uuid' to print the universally unique identifier for a
-# device; this may be used with UUID= as a more robust way to name devices
-# that works even if disks are added and removed. See fstab(5).
-#
-# <file system> <mount point>   <type>  <options>       <dump>  <pass>
-proc            /proc           proc    defaults        0       0
-# / was on /dev/sda2 during installation
-LABEL=ROOT      /       ext3    errors=remount-ro,acl   0       1
-# /boot was on /dev/sda1 during installation
-LABEL=BOOT      /boot   ext3    defaults,acl            0       2
-# swap was on /dev/sda5 during installation
-UUID=9329ae83-289d-4c3d-8756-f707c4bbb312 none            swap    sw
-0       0
-/dev/scd0       /media/cdrom0   udf,iso9660 user,noauto,exec,utf8 0       0
-deathstar.phy.stevens-tech.edu:/export/nfs-sw/opt    /opt            nfs ro,rsize=32768,intr,nolock  0 0
-deathstar.phy.stevens-tech.edu:/export/srcit-dist    /mnt/srcit-dist  nfs ro,rsize=32768,intr,nolock  0 0
-corsario.cs.stevens-tech.edu:/export/people          /mnt/legacy/people nfs rw,rsize=32768,wsize=32768,intr,lock   0 0
-corsario.cs.stevens-tech.edu:/export/faculty         /mnt/legacy/faculty nfs rw,rsize=32768,wsize=32768,intr,lock  0 0
-
-\end{verbatim}
-\Normalsize
-
-
-\subsection{Basic Filesystem Concepts}
-All partitions -- with the exception of the {\em root} (or \verb+/+) partition
--- can be {\em mounted} anywhere in the filesystem hierarchy.
-\\
-
-To see what filesystems are currently mounted, run \verb+mount(8)+:
-\\
-
-\begin{verbatim}
-/dev/wd0a on / type ffs (local)
-/dev/cgd0a on /home type ffs (local)
-mfs:276 on /tmp type mfs (synchronous, local)
-kernfs on /kern type kernfs (local)
-ptyfs on /dev/pts type ptyfs (local)
-\end{verbatim}
-
-
-\subsection{Basic Filesystem Concepts}
-\\
-
-\small
-\begin{verbatim}
-$ mount
-/dev/sda2 on / type ext3 (rw,errors=remount-ro,acl)
-tmpfs on /lib/init/rw type tmpfs (rw,nosuid,mode=0755)
-proc on /proc type proc (rw,noexec,nosuid,nodev)
-sysfs on /sys type sysfs (rw,noexec,nosuid,nodev)
-varrun on /var/run type tmpfs (rw,nosuid,mode=0755)
-varlock on /var/lock type tmpfs (rw,noexec,nosuid,nodev,mode=1777)
-udev on /dev type tmpfs (rw,mode=0755)
-tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev)
-devpts on /dev/pts type devpts (rw,noexec,nosuid,gid=5,mode=620)
-fusectl on /sys/fs/fuse/connections type fusectl (rw)
-lrm on /lib/modules/2.6.28-17-generic/volatile type tmpfs (rw,mode=755)
-/dev/sda1 on /boot type ext3 (rw,acl)
-securityfs on /sys/kernel/security type securityfs (rw)
-automount(pid2623) on /home type autofs (rw,fd=4,pgrp=2623,minproto=2,maxproto=4)
-deathstar.phy.stevens-tech.edu:/export/nfs-sw/opt on /opt type nfs (ro,rsize=32768,intr,nolock,addr=155.246.89.4)
-deathstar.phy.stevens-tech.edu:/export/srcit-dist on /mnt/srcit-dist type nfs (ro,rsize=32768,intr,nolock,addr=155.246.89.4)
-corsario.cs.stevens-tech.edu:/export/people on /mnt/legacy/people type nfs (rw,rsize=32768,wsize=32768,intr,lock,addr=155.246.89.20)
-corsario.cs.stevens-tech.edu:/export/faculty on /mnt/legacy/faculty type nfs (rw,rsize=32768,wsize=32768,intr,lock,addr=155.246.89.20)
-binfmt_misc on /proc/sys/fs/binfmt_misc type binfmt_misc (rw,noexec,nosuid,nodev)
-deathstar.phy.stevens-tech.edu:/export/home/kamberov on /home/kamberov type nfs (rw,sync,intr,vers=3,sloppy,addr=155.246.89.4)
-deathstar.phy.stevens-tech.edu:/export/home/mweiss on /home/mweiss type nfs (rw,sync,intr,vers=3,sloppy,addr=155.246.89.4)
-deathstar.phy.stevens-tech.edu:/export/home/jschauma on /home/jschauma type nfs (rw,sync,intr,vers=3,sloppy,addr=155.246.89.4)
-\end{verbatim}
-\Normalsize
-
-\subsection{Basic Filesystem Concepts}
-Some of the different kinds of filesystems:
-
-\subsection{Basic Filesystem Concepts}
-Some of the different kinds of filesystems:
-\begin{itemize}
-	\item ``Regular'' File Systems
-	\item Journaling File Systems
-	\item Network File Systems
-	\item Various
-\end{itemize}
-
-\newpage
-\vspace*{\fill}
-\begin{center}
-	\Hugesize
-		Basic Filesystem Concepts\\ [1em]
-	\hspace*{5mm}
-	\blueline\\
-	\hspace*{5mm}\\
-		The UNIX Filesystem
-\end{center}
-\vspace*{\fill}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-The filesystem is responsible for storing the data on the disk.
-So to read/write data, it needs to know in which physical blocks the actual
-data is located; ie how to map files to the disk blocks.
-
-\subsection{Let's pretend we're a filesystem...}
-
-\begin{verbatim}
-aws ec2 create-volume --size 1 --availability-zone us-east-1a
-
-aws ec2 attach-volume --volume-id  XXX --instance-id XXX --device /dev/sda2
-
-dmesg
-
-echo hello | dd of=/dev/xbd2
-
-dd if=/dev/xbd2 count=6 | hexdump -C
-
-echo hello | dd of=/dev/xbd2 seek=1024
-
-dd if=/dev/xbd2 count=2048 2>/dev/null | hexdump -C
-
-printf "\x7\x4\x4hello" | dd of=/dev/xbd2
-\end{verbatim}
-
-
-
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-\vspace*{\fill}
-\begin{center}
-\includegraphics[scale=0.95]{pics/bucket.eps} \\
-\end{center}
-\vspace*{\fill}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-\begin{center}
-\includegraphics[scale=0.95]{pics/two-buckets.eps} \\
-\end{center}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-\vspace*{\fill}
-\begin{center}
-\includegraphics[scale=1.0]{pics/three-buckets.eps} \\
-\end{center}
-\vspace*{\fill}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-\vspace*{\fill}
-\begin{center}
-\includegraphics[scale=0.95]{pics/buckets.eps} \\
-\end{center}
-\vspace*{\fill}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-\vspace*{\fill}
-\begin{center}
-\includegraphics[scale=0.95]{pics/labels.eps} \\
-\end{center}
-\vspace*{\fill}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-\begin{center}
-\includegraphics[scale=0.95]{pics/one-bucket-full.eps} \\
-\end{center}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-\vspace*{\fill}
-\begin{center}
-\includegraphics[scale=0.5]{pics/one-bucket-full.eps}
-\hspace*{5mm}
-\includegraphics[scale=0.6]{pics/cat-in-bucket.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-\vspace*{\fill}
-\begin{center}
-\includegraphics[scale=0.95]{pics/two-cats-one-bucket.eps} \\
-\end{center}
-\vspace*{\fill}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-\begin{center}
-\includegraphics[scale=0.9]{pics/several-cats.eps} \\
-\end{center}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-\vspace*{\fill}
-\begin{center}
-\includegraphics[scale=0.9]{pics/many-cats-in-basket.eps} \\
-\end{center}
-\vspace*{\fill}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-\vspace*{\fill}
-\begin{center}
-\includegraphics[scale=1.0]{pics/numbered-cats.eps} \\
-\end{center}
-\vspace*{\fill}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-The filesystem is responsible for storing the data on the disk.
-So to read/write data, it needs to know in which physical blocks the actual
-data is located; ie how to map files to the disk blocks.
-\\
-
-Components of the Berkeley Fast Filesystem:
-\\
-
-\newcolumntype{S}{>{\centering\arraybackslash} m{.4\linewidth} }
-\begin{tabular}{ p{10cm} S }
-\begin{itemize}
-	\item set of {\em inode} storage cells
-\end{itemize}
-{\tt df -i}
-& \multirow{2}{*}{\includegraphics[scale=0.5]{pics/buckets.eps}} \\
-\end{tabular}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-The filesystem is responsible for storing the data on the disk.
-So to read/write data, it needs to know in which physical blocks the actual
-data is located; ie how to map files to the disk blocks.
-\\
-
-Components of the Berkeley Fast Filesystem:
-\\
-
-\begin{tabular}{ p{10cm} S }
-\begin{itemize}
-	\item set of {\em inode} storage cells
-	\item set of scattered ``superblocks''
-\end{itemize}
-{\tt newfs -N /dev/rdsk/c1t2160d0s0}
-& \multirow{2}{*}{\includegraphics[scale=0.3]{pics/lego.eps}} \\
-\end{tabular}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-The filesystem is responsible for storing the data on the disk.
-So to read/write data, it needs to know in which physical blocks the actual
-data is located; ie how to map files to the disk blocks.
-\\
-
-Components of the Berkeley Fast Filesystem:
-\\
-
-\begin{tabular}{ p{10cm} S }
-\begin{itemize}
-	\item set of {\em inode} storage cells
-	\item set of scattered ``superblocks''
-	\item map of disk blocks
-\end{itemize}
-& \multirow{2}{*}{\includegraphics[scale=0.5]{pics/map.eps}} \\
-\end{tabular}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-The filesystem is responsible for storing the data on the disk.
-So to read/write data, it needs to know in which physical blocks the actual
-data is located; ie how to map files to the disk blocks.
-\\
-
-Components of the Berkeley Fast Filesystem:
-\\
-
-\begin{tabular}{ p{10cm} S }
-\begin{itemize}
-	\item set of {\em inode} storage cells
-	\item set of scattered ``superblocks''
-	\item map of disk blocks
-	\item block usage summary
-\end{itemize}
-{\tt fstyp -v /dev/rdsk/c1t2160d0s0  | more}
-& \multirow{2}{*}{\includegraphics[scale=0.5]{pics/tetris.eps}} \\
-\end{tabular}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-The filesystem is responsible for storing the data on the disk.
-So to read/write data, it needs to know in which physical blocks the actual
-data is located; ie how to map files to the disk blocks.
-\\
-
-Components of the Berkeley Fast Filesystem:
-\\
-
-\begin{tabular}{ p{10cm} S }
-\begin{itemize}
-	\item set of {\em inode} storage cells
-	\item set of scattered ``superblocks''
-	\item map of disk blocks
-	\item block usage summary
-	\item set of data blocks
-\end{itemize}
-& \multirow{2}{*}{\includegraphics[scale=0.3]{pics/block.eps}} \\
-\end{tabular}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-\begin{center}
-	\includegraphics[scale=0.8]{pics/ufs-details.eps} \\
-\end{center}
-\vspace*{\fill}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
-\begin{itemize}
-	\item user owner and group owner ID's
-\end{itemize}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
-\begin{itemize}
-	\item user owner and group owner ID's
-	\item file type
-\end{itemize}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
-\begin{itemize}
-	\item user owner and group owner ID's
-	\item file type
-	\item access mode (permissions)
-\end{itemize}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
-\begin{itemize}
-	\item user owner and group owner ID's
-	\item file type
-	\item access mode (permissions)
-	\item file access and modification time
-\end{itemize}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
-\begin{itemize}
-	\item user owner and group owner ID's
-	\item file type
-	\item access mode (permissions)
-	\item file access and modification time
-	\item file status modification time
-\end{itemize}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
-\begin{itemize}
-	\item user owner and group owner ID's
-	\item file type
-	\item access mode (permissions)
-	\item file access and modification time
-	\item file status modification time
-	\item number of links to the file
-\end{itemize}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
-\begin{itemize}
-	\item user owner and group owner ID's
-	\item file type
-	\item access mode (permissions)
-	\item file access and modification time
-	\item file status modification time
-	\item number of links to the file
-	\item size of the file
-\end{itemize}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
-\begin{itemize}
-	\item user owner and group owner ID's
-	\item file type
-	\item access mode (permissions)
-	\item file access and modification time
-	\item file status modification time
-	\item number of links to the file
-	\item size of the file
-	\item disk device containing this file
-\end{itemize}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
-\begin{itemize}
-	\item user owner and group owner ID's
-	\item file type
-	\item access mode (permissions)
-	\item file access and modification time
-	\item file status modification time
-	\item number of links to the file
-	\item size of the file
-	\item disk device containing this file
-\end{itemize}
-
-\begin{verbatim}
-$ stat /etc/passwd
-\end{verbatim}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-File types:
-\\
-
-\begin{tabular}{ p{10cm} S }
-\begin{itemize}
-	\item regular files
-\end{itemize}
-& \multirow{2}{*}{\includegraphics[scale=0.7]{pics/file.eps}} \\
-\end{tabular}
-\\
-
-\verb+$ stat /etc/passwd+
-
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-File types:
-\\
-
-\begin{tabular}{ p{10cm} S }
-\begin{itemize}
-	\item regular files
-	\item directories
-\end{itemize}
-& \multirow{2}{*}{\includegraphics[scale=1.5]{pics/directory.eps}} \\
-\end{tabular}
-\\
-
-\verb+$ stat /+
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-File types:
-\\
-
-\begin{tabular}{ p{10cm} S }
-\begin{itemize}
-	\item regular files
-	\item directories
-	\item special files
-\end{itemize}
-& \multirow{2}{*}{\includegraphics[scale=1.0]{pics/devices.eps}} \\
-\end{tabular}
-\\
-
-\verb+$ file /dev/* | more+
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-File types:
-\\
-
-\begin{tabular}{ p{10cm} S }
-\begin{itemize}
-	\item regular files
-	\item directories
-	\item special files
-	\item links
-\end{itemize}
-& \multirow{2}{*}{\includegraphics[scale=0.6]{pics/link.eps}} \\
-\end{tabular}
-\\
-
-\begin{verbatim}
-$ touch /tmp/foo
-$ ln /tmp/foo /tmp/bar
-$ stat /tmp/foo /tmp/bar
-$ ln -sf /tmp/foo /tmp/bar
-$ stat /tmp/foo /tmp/bar
-\end{verbatim}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-File types:
-\\
-
-\begin{tabular}{ p{10cm} S }
-\begin{itemize}
-	\item regular files
-	\item directories
-	\item special files
-	\item links
-	\item sockets
-\end{itemize}
-& \multirow{2}{*}{\includegraphics[scale=0.8]{pics/socket.eps}} \\
-\end{tabular}
-\\
-
-\verb+$ stat /dev/log+
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-File types:
-\\
-
-\begin{tabular}{ p{10cm} S }
-\begin{itemize}
-	\item regular files
-	\item directories
-	\item special files
-	\item links
-	\item sockets
-	\item named pipes
-\end{itemize}
-& \multirow{2}{*}{\includegraphics[scale=1.0]{pics/pipe.eps}} \\
-\end{tabular}
-\\
-
-\begin{verbatim}
-$ mkfifo /tmp/fifo
-$ cat /tmp/fifo > /tmp/out &
-$ stat /tmp/fifo | tee /tmp/fifo
-$ cat /tmp/out
-\end{verbatim}
-
+%%\subsection{Basic Filesystem Concepts}
+%%All partitions -- with the exception of the {\em root} (or \verb+/+) partition
+%%-- can be {\em mounted} anywhere in the filesystem hierarchy.
+%%\\
+%%
+%%\begin{center}
+%%\includegraphics[scale=0.7]{pics/fs-tree-disks.eps} \\
+%%\end{center}
+%%
+%\subsection{Basic Filesystem Concepts}
+%All partitions -- with the exception of the {\em root} (or \verb+/+) partition
+%-- can be {\em mounted} anywhere in the filesystem hierarchy.
+%\\
+%
+%The file \verb+/etc/fstab+ (see fstab(5)) specifies which disks / partitions
+%to mount where:
+%\\
+%\begin{verbatim}
+%/dev/wd0a   /        ffs    rw 1 1
+%/dev/cgd1a  none     swap   sw 0 0
+%/dev/cgd0a  /home    ffs    rw 1 2
+%/ignoreme   /tmp     mfs    rw,-b4096,-f512,-s262144 0 0
+%kernfs      /kern    kernfs rw
+%procfs      /proc    procfs rw,noauto
+%ptyfs       /dev/pts ptyfs  rw 0 0
+%\end{verbatim}
+%\Normalsize
+%
+%\subsection{Basic Filesystem Concepts}
+%All partitions -- with the exception of the {\em root} (or \verb+/+) partition
+%-- can be {\em mounted} anywhere in the filesystem hierarchy.
+%\\
+%
+%The file \verb+/etc/fstab+ (see fstab(5)) specifies which disks / partitions
+%to mount where:
+%\\
+%\small
+%\begin{verbatim}
+%# /etc/fstab: static file system information.
+%#
+%# Use 'vol_id --uuid' to print the universally unique identifier for a
+%# device; this may be used with UUID= as a more robust way to name devices
+%# that works even if disks are added and removed. See fstab(5).
+%#
+%# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+%proc            /proc           proc    defaults        0       0
+%# / was on /dev/sda2 during installation
+%LABEL=ROOT      /       ext3    errors=remount-ro,acl   0       1
+%# /boot was on /dev/sda1 during installation
+%LABEL=BOOT      /boot   ext3    defaults,acl            0       2
+%# swap was on /dev/sda5 during installation
+%UUID=9329ae83-289d-4c3d-8756-f707c4bbb312 none            swap    sw
+%0       0
+%/dev/scd0       /media/cdrom0   udf,iso9660 user,noauto,exec,utf8 0       0
+%deathstar.phy.stevens-tech.edu:/export/nfs-sw/opt    /opt            nfs ro,rsize=32768,intr,nolock  0 0
+%deathstar.phy.stevens-tech.edu:/export/srcit-dist    /mnt/srcit-dist  nfs ro,rsize=32768,intr,nolock  0 0
+%corsario.cs.stevens-tech.edu:/export/people          /mnt/legacy/people nfs rw,rsize=32768,wsize=32768,intr,lock   0 0
+%corsario.cs.stevens-tech.edu:/export/faculty         /mnt/legacy/faculty nfs rw,rsize=32768,wsize=32768,intr,lock  0 0
+%
+%\end{verbatim}
+%\Normalsize
+%
+%
+%\subsection{Basic Filesystem Concepts}
+%All partitions -- with the exception of the {\em root} (or \verb+/+) partition
+%-- can be {\em mounted} anywhere in the filesystem hierarchy.
+%\\
+%
+%To see what filesystems are currently mounted, run \verb+mount(8)+:
+%\\
+%
+%\begin{verbatim}
+%/dev/wd0a on / type ffs (local)
+%/dev/cgd0a on /home type ffs (local)
+%mfs:276 on /tmp type mfs (synchronous, local)
+%kernfs on /kern type kernfs (local)
+%ptyfs on /dev/pts type ptyfs (local)
+%\end{verbatim}
+%
+%
+%\subsection{Basic Filesystem Concepts}
+%\\
+%
+%\small
+%\begin{verbatim}
+%$ mount
+%/dev/sda2 on / type ext3 (rw,errors=remount-ro,acl)
+%tmpfs on /lib/init/rw type tmpfs (rw,nosuid,mode=0755)
+%proc on /proc type proc (rw,noexec,nosuid,nodev)
+%sysfs on /sys type sysfs (rw,noexec,nosuid,nodev)
+%varrun on /var/run type tmpfs (rw,nosuid,mode=0755)
+%varlock on /var/lock type tmpfs (rw,noexec,nosuid,nodev,mode=1777)
+%udev on /dev type tmpfs (rw,mode=0755)
+%tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev)
+%devpts on /dev/pts type devpts (rw,noexec,nosuid,gid=5,mode=620)
+%fusectl on /sys/fs/fuse/connections type fusectl (rw)
+%lrm on /lib/modules/2.6.28-17-generic/volatile type tmpfs (rw,mode=755)
+%/dev/sda1 on /boot type ext3 (rw,acl)
+%securityfs on /sys/kernel/security type securityfs (rw)
+%automount(pid2623) on /home type autofs (rw,fd=4,pgrp=2623,minproto=2,maxproto=4)
+%deathstar.phy.stevens-tech.edu:/export/nfs-sw/opt on /opt type nfs (ro,rsize=32768,intr,nolock,addr=155.246.89.4)
+%deathstar.phy.stevens-tech.edu:/export/srcit-dist on /mnt/srcit-dist type nfs (ro,rsize=32768,intr,nolock,addr=155.246.89.4)
+%corsario.cs.stevens-tech.edu:/export/people on /mnt/legacy/people type nfs (rw,rsize=32768,wsize=32768,intr,lock,addr=155.246.89.20)
+%corsario.cs.stevens-tech.edu:/export/faculty on /mnt/legacy/faculty type nfs (rw,rsize=32768,wsize=32768,intr,lock,addr=155.246.89.20)
+%binfmt_misc on /proc/sys/fs/binfmt_misc type binfmt_misc (rw,noexec,nosuid,nodev)
+%deathstar.phy.stevens-tech.edu:/export/home/kamberov on /home/kamberov type nfs (rw,sync,intr,vers=3,sloppy,addr=155.246.89.4)
+%deathstar.phy.stevens-tech.edu:/export/home/mweiss on /home/mweiss type nfs (rw,sync,intr,vers=3,sloppy,addr=155.246.89.4)
+%deathstar.phy.stevens-tech.edu:/export/home/jschauma on /home/jschauma type nfs (rw,sync,intr,vers=3,sloppy,addr=155.246.89.4)
+%\end{verbatim}
+%\Normalsize
+%
+%\subsection{Basic Filesystem Concepts}
+%Some of the different kinds of filesystems:
+%
+%\subsection{Basic Filesystem Concepts}
+%Some of the different kinds of filesystems:
+%\begin{itemize}
+%	\item ``Regular'' File Systems
+%	\item Journaling File Systems
+%	\item Network File Systems
+%	\item Various
+%\end{itemize}
+%
+%\newpage
+%\vspace*{\fill}
+%\begin{center}
+%	\Hugesize
+%		Basic Filesystem Concepts\\ [1em]
+%	\hspace*{5mm}
+%	\blueline\\
+%	\hspace*{5mm}\\
+%		The UNIX Filesystem
+%\end{center}
+%\vspace*{\fill}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%The filesystem is responsible for storing the data on the disk.
+%So to read/write data, it needs to know in which physical blocks the actual
+%data is located; ie how to map files to the disk blocks.
+%
+%\subsection{Let's pretend we're a filesystem...}
+%
+%\begin{verbatim}
+%aws ec2 create-volume --size 1 --availability-zone us-east-1a
+%
+%aws ec2 attach-volume --volume-id  XXX --instance-id XXX --device /dev/sda2
+%
+%dmesg
+%
+%echo hello | dd of=/dev/xbd2
+%
+%dd if=/dev/xbd2 count=6 | hexdump -C
+%
+%echo hello | dd of=/dev/xbd2 seek=1024
+%
+%dd if=/dev/xbd2 count=2048 2>/dev/null | hexdump -C
+%
+%printf "\x7\x4\x4hello" | dd of=/dev/xbd2
+%\end{verbatim}
+%
+%
+%
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%\vspace*{\fill}
+%\begin{center}
+%\includegraphics[scale=0.95]{pics/bucket.eps} \\
+%\end{center}
+%\vspace*{\fill}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%\begin{center}
+%\includegraphics[scale=0.95]{pics/two-buckets.eps} \\
+%\end{center}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%\vspace*{\fill}
+%\begin{center}
+%\includegraphics[scale=1.0]{pics/three-buckets.eps} \\
+%\end{center}
+%\vspace*{\fill}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%\vspace*{\fill}
+%\begin{center}
+%\includegraphics[scale=0.95]{pics/buckets.eps} \\
+%\end{center}
+%\vspace*{\fill}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%\vspace*{\fill}
+%\begin{center}
+%\includegraphics[scale=0.95]{pics/labels.eps} \\
+%\end{center}
+%\vspace*{\fill}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%\begin{center}
+%\includegraphics[scale=0.95]{pics/one-bucket-full.eps} \\
+%\end{center}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%\vspace*{\fill}
+%\begin{center}
+%\includegraphics[scale=0.5]{pics/one-bucket-full.eps}
+%\hspace*{5mm}
+%\includegraphics[scale=0.6]{pics/cat-in-bucket.eps}
+%\end{center}
+%\vspace*{\fill}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%\vspace*{\fill}
+%\begin{center}
+%\includegraphics[scale=0.95]{pics/two-cats-one-bucket.eps} \\
+%\end{center}
+%\vspace*{\fill}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%\begin{center}
+%\includegraphics[scale=0.9]{pics/several-cats.eps} \\
+%\end{center}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%\vspace*{\fill}
+%\begin{center}
+%\includegraphics[scale=0.9]{pics/many-cats-in-basket.eps} \\
+%\end{center}
+%\vspace*{\fill}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%\vspace*{\fill}
+%\begin{center}
+%\includegraphics[scale=1.0]{pics/numbered-cats.eps} \\
+%\end{center}
+%\vspace*{\fill}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%The filesystem is responsible for storing the data on the disk.
+%So to read/write data, it needs to know in which physical blocks the actual
+%data is located; ie how to map files to the disk blocks.
+%\\
+%
+%Components of the Berkeley Fast Filesystem:
+%\\
+%
+%\newcolumntype{S}{>{\centering\arraybackslash} m{.4\linewidth} }
+%\begin{tabular}{ p{10cm} S }
+%\begin{itemize}
+%	\item set of {\em inode} storage cells
+%\end{itemize}
+%{\tt df -i}
+%& \multirow{2}{*}{\includegraphics[scale=0.5]{pics/buckets.eps}} \\
+%\end{tabular}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%The filesystem is responsible for storing the data on the disk.
+%So to read/write data, it needs to know in which physical blocks the actual
+%data is located; ie how to map files to the disk blocks.
+%\\
+%
+%Components of the Berkeley Fast Filesystem:
+%\\
+%
+%\begin{tabular}{ p{10cm} S }
+%\begin{itemize}
+%	\item set of {\em inode} storage cells
+%	\item set of scattered ``superblocks''
+%\end{itemize}
+%{\tt newfs -N /dev/rdsk/c1t2160d0s0}
+%& \multirow{2}{*}{\includegraphics[scale=0.3]{pics/lego.eps}} \\
+%\end{tabular}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%The filesystem is responsible for storing the data on the disk.
+%So to read/write data, it needs to know in which physical blocks the actual
+%data is located; ie how to map files to the disk blocks.
+%\\
+%
+%Components of the Berkeley Fast Filesystem:
+%\\
+%
+%\begin{tabular}{ p{10cm} S }
+%\begin{itemize}
+%	\item set of {\em inode} storage cells
+%	\item set of scattered ``superblocks''
+%	\item map of disk blocks
+%\end{itemize}
+%& \multirow{2}{*}{\includegraphics[scale=0.5]{pics/map.eps}} \\
+%\end{tabular}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%The filesystem is responsible for storing the data on the disk.
+%So to read/write data, it needs to know in which physical blocks the actual
+%data is located; ie how to map files to the disk blocks.
+%\\
+%
+%Components of the Berkeley Fast Filesystem:
+%\\
+%
+%\begin{tabular}{ p{10cm} S }
+%\begin{itemize}
+%	\item set of {\em inode} storage cells
+%	\item set of scattered ``superblocks''
+%	\item map of disk blocks
+%	\item block usage summary
+%\end{itemize}
+%{\tt fstyp -v /dev/rdsk/c1t2160d0s0  | more}
+%& \multirow{2}{*}{\includegraphics[scale=0.5]{pics/tetris.eps}} \\
+%\end{tabular}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%The filesystem is responsible for storing the data on the disk.
+%So to read/write data, it needs to know in which physical blocks the actual
+%data is located; ie how to map files to the disk blocks.
+%\\
+%
+%Components of the Berkeley Fast Filesystem:
+%\\
+%
+%\begin{tabular}{ p{10cm} S }
+%\begin{itemize}
+%	\item set of {\em inode} storage cells
+%	\item set of scattered ``superblocks''
+%	\item map of disk blocks
+%	\item block usage summary
+%	\item set of data blocks
+%\end{itemize}
+%& \multirow{2}{*}{\includegraphics[scale=0.3]{pics/block.eps}} \\
+%\end{tabular}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%\begin{center}
+%	\includegraphics[scale=0.8]{pics/ufs-details.eps} \\
+%\end{center}
+%\vspace*{\fill}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%Information stored in an {\em inode}:
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%Information stored in an {\em inode}:
+%\begin{itemize}
+%	\item user owner and group owner ID's
+%\end{itemize}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%Information stored in an {\em inode}:
+%\begin{itemize}
+%	\item user owner and group owner ID's
+%	\item file type
+%\end{itemize}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%Information stored in an {\em inode}:
+%\begin{itemize}
+%	\item user owner and group owner ID's
+%	\item file type
+%	\item access mode (permissions)
+%\end{itemize}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%Information stored in an {\em inode}:
+%\begin{itemize}
+%	\item user owner and group owner ID's
+%	\item file type
+%	\item access mode (permissions)
+%	\item file access and modification time
+%\end{itemize}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%Information stored in an {\em inode}:
+%\begin{itemize}
+%	\item user owner and group owner ID's
+%	\item file type
+%	\item access mode (permissions)
+%	\item file access and modification time
+%	\item file status modification time
+%\end{itemize}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%Information stored in an {\em inode}:
+%\begin{itemize}
+%	\item user owner and group owner ID's
+%	\item file type
+%	\item access mode (permissions)
+%	\item file access and modification time
+%	\item file status modification time
+%	\item number of links to the file
+%\end{itemize}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%Information stored in an {\em inode}:
+%\begin{itemize}
+%	\item user owner and group owner ID's
+%	\item file type
+%	\item access mode (permissions)
+%	\item file access and modification time
+%	\item file status modification time
+%	\item number of links to the file
+%	\item size of the file
+%\end{itemize}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%Information stored in an {\em inode}:
+%\begin{itemize}
+%	\item user owner and group owner ID's
+%	\item file type
+%	\item access mode (permissions)
+%	\item file access and modification time
+%	\item file status modification time
+%	\item number of links to the file
+%	\item size of the file
+%	\item disk device containing this file
+%\end{itemize}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%Information stored in an {\em inode}:
+%\begin{itemize}
+%	\item user owner and group owner ID's
+%	\item file type
+%	\item access mode (permissions)
+%	\item file access and modification time
+%	\item file status modification time
+%	\item number of links to the file
+%	\item size of the file
+%	\item disk device containing this file
+%\end{itemize}
+%
+%\begin{verbatim}
+%$ stat /etc/passwd
+%\end{verbatim}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%File types:
+%\\
+%
+%\begin{tabular}{ p{10cm} S }
+%\begin{itemize}
+%	\item regular files
+%\end{itemize}
+%& \multirow{2}{*}{\includegraphics[scale=0.7]{pics/file.eps}} \\
+%\end{tabular}
+%\\
+%
+%\verb+$ stat /etc/passwd+
+%
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%File types:
+%\\
+%
+%\begin{tabular}{ p{10cm} S }
+%\begin{itemize}
+%	\item regular files
+%	\item directories
+%\end{itemize}
+%& \multirow{2}{*}{\includegraphics[scale=1.5]{pics/directory.eps}} \\
+%\end{tabular}
+%\\
+%
+%\verb+$ stat /+
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%File types:
+%\\
+%
+%\begin{tabular}{ p{10cm} S }
+%\begin{itemize}
+%	\item regular files
+%	\item directories
+%	\item special files
+%\end{itemize}
+%& \multirow{2}{*}{\includegraphics[scale=1.0]{pics/devices.eps}} \\
+%\end{tabular}
+%\\
+%
+%\verb+$ file /dev/* | more+
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%File types:
+%\\
+%
+%\begin{tabular}{ p{10cm} S }
+%\begin{itemize}
+%	\item regular files
+%	\item directories
+%	\item special files
+%	\item links
+%\end{itemize}
+%& \multirow{2}{*}{\includegraphics[scale=0.6]{pics/link.eps}} \\
+%\end{tabular}
+%\\
+%
+%\begin{verbatim}
+%$ touch /tmp/foo
+%$ ln /tmp/foo /tmp/bar
+%$ stat /tmp/foo /tmp/bar
+%$ ln -sf /tmp/foo /tmp/bar
+%$ stat /tmp/foo /tmp/bar
+%\end{verbatim}
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%File types:
+%\\
+%
+%\begin{tabular}{ p{10cm} S }
+%\begin{itemize}
+%	\item regular files
+%	\item directories
+%	\item special files
+%	\item links
+%	\item sockets
+%\end{itemize}
+%& \multirow{2}{*}{\includegraphics[scale=0.8]{pics/socket.eps}} \\
+%\end{tabular}
+%\\
+%
+%\verb+$ stat /dev/log+
+%
+%\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+%File types:
+%\\
+%
+%\begin{tabular}{ p{10cm} S }
+%\begin{itemize}
+%	\item regular files
+%	\item directories
+%	\item special files
+%	\item links
+%	\item sockets
+%	\item named pipes
+%\end{itemize}
+%& \multirow{2}{*}{\includegraphics[scale=1.0]{pics/pipe.eps}} \\
+%\end{tabular}
+%\\
+%
+%\begin{verbatim}
+%$ mkfifo /tmp/fifo
+%$ cat /tmp/fifo > /tmp/out &
+%$ stat /tmp/fifo | tee /tmp/fifo
+%$ cat /tmp/out
+%\end{verbatim}
+%
 \subsection{Homework}
 Repeat the examples from class.  Make sure you understand the commands and
 how they relate to the concepts we discussed.  Repeat for a different OS,
 for example: \\
 
 \begin{itemize}
-	\item {\tt ami-3b361952} -- Fedora 23
-	\item {\tt ami-f709a29c} -- FreeBSD 10.2
+	\item {\tt ami-0d7a9cc499e108f74} -- Fedora 29
+	\item {\tt ami-00e61b69944d5d2a3} -- FreeBSD 12.0
 	\item {\tt ami-569ed93c} -- NetBSD 7.0
-	\item {\tt ami-50ecc847} -- OmniOS 5.11
+	\item {\tt ami-0b2c7fd1c1f7e91d6} -- OmniOS 5.11
 \end{itemize}
 
 \vspace{.5in}
 Remember to {\em shut down} your EC2 instances and to {\em delete} any unused ESB
 volumes!
 
-\vspace{.5in}
-{\tt https://www.cs.stevens.edu/\~{}jschauma/615/s18-hw2.html}
+%\vspace{.5in}
+%{\tt https://stevens.netmeister.org/615/s19-hw2.html}
 
 
 \subsection{Reading}

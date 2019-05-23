@@ -3,7 +3,7 @@
 <HTML>
 <HEAD>
 
-  <TITLE>CS615A -- Aspects of System Administration</TITLE>
+  <TITLE>CS615A -- Aspects of System Administration -- HTTP Exercise</TITLE>
   <STYLE type="text/css">
   body {
   background-color: #FFFFFf;
@@ -18,45 +18,50 @@
   <TABLE border="1" align="center" cellpadding="15">
     <TR>
       <TD valign="top">
-        <H2>CS615A -- Aspects of System Administration - Spring 2013</H2>
+        <H2>CS615A -- Aspects of System Administration - HTTP Exercise</H2>
 
-        <H3>Extra Credit Exercise (35 points): HTTP</H3>
+        <H3>Exercise: Set up a web server, serve a CGI, observe traffic</H3>
 
+	<h4>Plain text HTTP</h4>
+
+	<p>Create an EC2 instance, install an HTTP
+	server and configure it to listen on port 80.
+        </p>
+        <p>
+	Create a simple CGI program that prints
+	whatever data is sent to it via the <tt>POST</tt>
+	method.
+	</p>
 	<p>
-	  Start a NetBSD EC2 instance.  On it, install an
-	  HTTP server and configure it to listen on port 8080.
-        </p>
-        <p>
-          (For your convenience, a suitable <tt>PKG_PATH</tt> for
-NetBSD/i386 would be: <a
-href="ftp://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/i386/6.0/All/">ftp://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/i386/6.0/All/</a>)
-        </p>
-        <p>
-          Next, fetch the following two programs:
-          <ul>
-            <li><a href="http://www.cs.stevens.edu/~jschauma/tmp/test.cgi">test.cgi</a></li>
-            <li><a href="http://www.cs.stevens.edu/~jschauma/tmp/test2.cgi">test2.cgi</a></li>
-          </ul>
-        </p>
-        <p>
-          Configure your web server such that a user can go to
-          <tt>http://&lt;your-instance-name:8080&gt;/test.cgi</tt>
-          and sees the message "Hello from &lt;your username&gt;", and to
-          <tt>http://&lt;your-instance-name:8080&gt;/test2.cgi</tt>
-          and sees the message "&lt;your username&gt; says: that was easy".
-        </p>
-        <p>
-          (For the second part, you will probably find the
-           <tt>ktruss(1)</tt> command useful.)
-        </p>
-           <p>
-             The due date for this assignment is 2013-04-15 18:00.  Please
-             attach file containing a description of what you did and what
-	     you learned to an email sent from your <tt>@stevens.edu</tt>
-             email address to <a
-             href="mailto:jschauma@stevens.edu?subject=[CS615] HTTP Exercise">jschauma@stevens.edu</a>
-             with a subject of "[CS615] HTTP Exercise".
-        </p>
+	Make an HTTP <tt>POST</tt> request (for
+	example via <tt>curl(1)</tt> from another
+	system, while simultaneously capturing all
+	network traffic on both your client and the
+	server via <tt>tcpdump(8)</tt>.
+	</p>
+	<p>
+	Analyze the network packets and verify that
+	you can observe the content of the
+	<tt>POST</tt> request in your traffic capture.
+	</p>
+
+	<h4>HTTPS</h4>
+
+	<p>Now serve the same content via HTTPS using
+	either a self-signed certificate or,
+	preferably, get a valid certificate from e.g.,
+	<a href="https://letsencrypt.org">Let's Encrypt</a>.</p>
+
+	<p>Capture packets again while submitting a
+	<tt>POST</tt> request.  Verify that now you
+	can no longer observe the contents of the request.</p>
+
+	<p>However, you do have possession of the
+	private key -- can you use the server's
+	certificate and  private key together with e.g.,
+	Wireshark to decrypt the encrypted
+	packets?</p>
+
       <hr>
       [<a href="index.html">Course Website</a>]
 </BODY>

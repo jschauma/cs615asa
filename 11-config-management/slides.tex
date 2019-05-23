@@ -30,27 +30,10 @@
 		Department of Computer Science\\
 		Stevens Institute of Technology\\
 		Jan Schaumann\\
-		\verb+jschauma@stevens-tech.edu+
-		\verb+https://www.cs.stevens.edu/~jschauma/615A/+
+		\verb+jschauma@stevens-tech.edu+ \\
+		\verb+https://stevens.netmeister.org/615/+
 \end{center}
 \vspace*{\fill}
-
-\subsection{To the backups!}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.8]{pics/schrodinger.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{HW Review}
-\\
-
-\vspace{.5in}
-\Huge
-\begin{center}
-Use your words!
-\end{center}
-\Normalsize
 
 \subsection{Entropy is the Enemy}
 \vfill
@@ -653,6 +636,49 @@ to) operate despite interruptions between its
 components; e.g. intermediate (coordinated) changes
 are not required.
 
+\subsection{Configuration Management Overlap}
+
+Your configuration management system provides or
+enables:
+
+\begin{itemize}
+	\item a remote command execution agent
+	\item a reporting agent
+	\item a reporting infrastructure
+	\item role-based actions and visibility
+\end{itemize}
+\vspace{.5in}
+
+The same principles enabling reliable configuration
+management can thus also be used for information
+security related tasks:
+\begin{itemize}
+	\item detection of deviation of known state
+	\item integrity checks and intrusion detection
+	\item patch management
+	\item automated quarantine
+\end{itemize}
+
+\subsection{Configuration Management Overlap}
+Configuration Management overlaps with numerous other
+areas:
+
+\begin{itemize}
+	\item backup (expendable systems, data classiciation, ...)
+	\item software deployment (base OS, application packages, ..)
+	\item monitoring (central reporting and ad-hoc data collection, ...)
+	\item revision control and audit logs (CM changes are code changes!)
+	\item compliance enforcement (e.g., baseline configurations)
+	\item ...
+\end{itemize}
+
+\subsection{Overlap with other systems}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.6]{pics/cm-overlap.eps} \\
+\end{center}
+\vspace*{\fill}
+
 \subsection{More than just servers...}
 Configuration Management is not just for servers.  You
 also need to manage configurations for:
@@ -665,12 +691,12 @@ also need to manage configurations for:
 	\item ...
 \end{itemize}
 
-\subsection{Overlap with other systems}
-\vspace*{\fill}
+\subsection{Configuration Management Impact}
+Think scale!
+
 \begin{center}
-	\includegraphics[scale=0.6]{pics/cm-overlap.eps} \\
+	\includegraphics[scale=1.2]{pics/shoot-yourself-in-the-foot.eps} \\
 \end{center}
-\vspace*{\fill}
 
 
 \subsection{Reading}
@@ -688,7 +714,7 @@ Relevant links:
 \begin{itemize}
 	\item {\tt http://www.infrastructures.org/bootstrap/recovery.shtml}
 	\item {\tt https://is.gd/paZ7qu}
-	\item {\tt https://blog.engineyard.com/2014/pets-vs-cattle}
+	\item {\tt https://www.engineyard.com/blog/pets-vs-cattle}
 	\item {\tt http://markburgess.org/blog\_cap.html}
 	\item {\tt http://markburgess.org/blog\_cap2.html}
 	\item {\tt https://aws.amazon.com/opsworks/chefautomate/}

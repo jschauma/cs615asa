@@ -30,7 +30,7 @@
 		Stevens Institute of Technology\\
 		Jan Schaumann\\
 		\verb+jschauma@stevens.edu+ \\
-		\verb+https://www.cs.stevens.edu/~jschauma/615/+
+		\verb+https://stevens.netmeister.org/615/+
 \end{center}
 \vspace*{\fill}
 
@@ -50,8 +50,25 @@ What I will tell you:
 	\item A few {\em always} and {\em never}s.
 \end{itemize}
 
+\subsection{This lecture}
+\vspace{.5in}
+\Huge
+\begin{center}
+Security is not an end-goal. \\
+
+\vspace{.5in}
+Security is a trade-off property you may attempt to
+increase resilience against specific risks.
+\end{center}
+\Normalsize
+
 
 \subsection{Where/how does 'security' come into play?}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.7]{pics/osi-stack2.eps} \\
+\end{center}
+\vspace*{\fill}
 
 \subsection{Where/how does 'security' come into play?}
 Lecture 02 (Filesystems, Disks, Storage)
@@ -144,6 +161,13 @@ Lecture 11 (Configuration Management)
 \end{itemize}
 
 \subsection{How do we secure a system?}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.0]{pics/bluehat.eps} \\
+	\vspace{.25in}
+	\verb+https://www.bu.edu/tech/about/security-resources/bestpractice/unix/+
+\end{center}
+\vspace*{\fill}
 
 \subsection{How do we secure a system?}
 \Huge
@@ -176,6 +200,15 @@ security
    Freedom from risk or danger; safety.
 \end{verbatim}
 \Normalsize
+
+\subsection{Cost, Benefit and Acceptable Risks}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.0]{pics/greenhat.eps} \\
+	\vspace{.25in}
+	\verb+https://pdfs.semanticscholar.org/da9d/7d27b11b48733b867cbe2aa7c1466e37982b.pdf+
+\end{center}
+\vspace*{\fill}
 
 \subsection{What is risk?}
 \Huge
@@ -561,6 +594,16 @@ Different approaches:
 {\em Never} store secrets in code! \\
 {\em Always} use a key management system.
 
+\subsection{Key Management Systems}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.4]{pics/blackhat.eps} \\
+	\vspace{.25in}
+	\verb+https://www.hashicorp.com/products/vault/+
+\end{center}
+\vspace*{\fill}
+
+
 \subsection{Basic Security Concepts: Integrity}
 In order to protect against forgery or data manipulation, provide some sort of
 digest or checksum (often a one-way hash).  Popular choices:
@@ -574,6 +617,14 @@ digest or checksum (often a one-way hash).  Popular choices:
                    e07394c706a8bb980b1d7785e5976ec049b46df5f1326af5a \
                    2ea6d103fd07c95385ffab0cacbc86} (SHA512)
 \end{itemize}
+\vspace{.25in}
+
+{\em Note}: MD5 and SHA1 are no longer be acceptable
+choices for cryptographic integrity.
+\\
+
+See also: \\
+\verb+https://latacora.singles/2018/04/03/cryptographic-right-answers.html+
 
 \subsection{Basic Security Concepts: Integrity}
 Examples: host based IDS, package manager signatures
@@ -598,7 +649,10 @@ Some possible threats:
 {\em Always} salt your hashes. \\
 
 {\em Always} use adaptive or key-stretching functions
-such as e.g. {\tt bcrypt}, {\tt PBKDF2}, {\tt Argon2}.
+such as {\em e.g.}: {\tt argon2}, {\tt bcrypt}, {\tt PBKDF2}, {\tt scrypt} \\
+
+Here, $DK = KDF(key, salt, iterations)$, where $salt$
+and $iterations$ are public.
 
 \subsection{Basic Security Concepts: Authenticity}
 Three general ways of proving that you are who you say you are:
@@ -727,6 +781,10 @@ grant access explicitly. \\
 {\em Never} grant permanent overly broad access; {\em
 always} use periodic access renewal and Role Based
 Access Controls (RBAC).
+\\
+
+\vspace{.5in}
+Current popular buzzword: {\em Zero Trust}
 
 
 \subsection{It's not just 1s and 0s}
@@ -780,6 +838,14 @@ Users will not change their default settings. \\
 (Unless a less secure option is available.)
 \end{center}
 
+\subsection{Secure by default}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.9]{pics/usability.eps} \\
+\end{center}
+\vspace*{\fill}
+
+\vspace*{\fill}
 \newpage
 \vspace*{\fill}
 \begin{center}
@@ -792,7 +858,16 @@ Users will not change their default settings. \\
 \end{center}
 \vspace*{\fill}
 
-\subsection{Classes of Vulnerabilities}
+\subsection{(Some) Classes of Vulnerabilities}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.0]{pics/redhat.eps} \\
+	\vspace{.25in}
+	\verb+https://phoenixnap.com/blog/cyber-security-attack-types+
+\end{center}
+\vspace*{\fill}
+
+\subsection{(Some) Classes of Vulnerabilities}
 \Normalsize
 \begin{itemize}
 	\item memory management
@@ -814,7 +889,7 @@ Users will not change their default settings. \\
 		\end{itemize}
 \end{itemize}
 
-\subsection{Classes of Vulnerabilities}
+\subsection{(Some) Classes of Vulnerabilities}
 \begin{itemize}
 	\item privilege escalation and confusion
 		\begin{itemize}
@@ -878,7 +953,7 @@ Users will not change their default settings. \\
         One in a million is next Tuesday. \\
 	\vspace{.25in}
 	\Normalsize
-	\verb+http://is.gd/Isb20K+
+	\verb+https://is.gd/Isb20K+
 \end{center}
 \vspace*{\fill}
 
@@ -890,7 +965,7 @@ Users will not change their default settings. \\
 can't think of how to break it.'' \\
 	\vspace{.25in}
 	\Normalsize
-	Schneier's Law \verb+http://is.gd/hW82dt+
+	Schneier's Law \verb+https://is.gd/hW82dt+
 \end{center}
 \vspace*{\fill}
 
@@ -932,7 +1007,7 @@ can't think of how to break it.'' \\
 \begin{itemize}
 	\item you trust the provider/vendor to honor the agreement
 	\item you ``hope'' they won't change their agreement (once
-		invested, changing back is hard)
+		invested, changing back is hard; vendor lock-in)
 	\item you trust the provider/vendor to keep their infrastructure
 		safe
 	\item you trust the provider/vendor's employees
@@ -943,7 +1018,7 @@ can't think of how to break it.'' \\
 \begin{itemize}
 	\item you trust the provider/vendor to honor the agreement
 	\item you ``hope'' they won't change their agreement (once
-		invested, changing back is hard)
+		invested, changing back is hard; vendor lock-in)
 	\item you trust the provider/vendor to keep their infrastructure
 		safe
 	\item you trust the provider/vendor's employees
@@ -1048,7 +1123,7 @@ Don't dismiss those.
 \Normalsize
 \vspace*{\fill}
 
-\subsection{Last Words of Advice}
+\subsection{Last Words of Advice: Don't be lazy!}
 \begin{itemize}
 	\item keep your asset inventory accurate
 	\item don't shell out; parametrize arguments and {\tt exec(3)}
@@ -1064,22 +1139,12 @@ Don't dismiss those.
 	\item ensure secure defaults (e.g. umask, shell history, ...)
 \end{itemize}
 
-\subsection{Infosec Foundation}
+\subsection{Where/how does 'security' come into play?}
 \vspace*{\fill}
-\Huge
 \begin{center}
-	Don't be lazy.
+	\includegraphics[scale=0.7]{pics/osi-stack2.eps} \\
 \end{center}
-\Normalsize
 \vspace*{\fill}
-
-\subsection{Final Project}
-Group project: Capture the Flag \\
-
-\vspace{.5in}
-\begin{verbatim}
-https://www.cs.stevens.edu/~jschauma/615/ctf.html
-\end{verbatim}
 
 \subsection{Additional Reading}
 \begin{verbatim}

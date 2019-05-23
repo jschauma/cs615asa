@@ -11,7 +11,11 @@ PDFTOTEXT=	pdftotext
 
 PICTURES= \
 	pics/osi.eps \
+	pics/hub.eps \
+	pics/switch.eps \
+	pics/router.eps \
 	pics/3computers-arp.eps \
+	pics/waterfall.eps \
 	pics/3computers-ping.eps \
 	pics/traceroute1.eps \
 	pics/traceroute2.eps \

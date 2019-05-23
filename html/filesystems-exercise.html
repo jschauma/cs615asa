@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <title>CS615A -- Aspects of System Administration -- Filesystem Exercise</title>
+  <style type="text/css">
+  body {
+  background-color: #FFFFFf;
+  }
+  </style>
+  <style type="text/css">
+  li.c1 {list-style: none}
+  </style>
+
+  <table cellpadding="15" border="1" align="center">
+    <tbody><tr>
+      <td valign="top">
+        <h2>CS615A -- Aspects of System Administration</h2>
+
+        <h3>Filesystem Exercise</h3>
+        <p>
+          The objective of this exercise is for you to set up
+          a file system on an EBS volume and to verify the persistance of
+          files created on this file system after an instance is
+          terminated.
+        </p>
+        <p>
+           Perform the following tasks:
+        </p>
+        <p>
+          <ul>
+             <li>create two AWS instances of a given OS (Linux, FreeBSD, NetBSD, OmniOS)</li>
+             <li>create a 1GB volume and attach it to one of the instances</li>
+             <li>create a new filesystem on the volume and mount it</li>
+             <li>create a file on the new filesystem</li>
+             <li>terminate the first instance</li>
+             <li>attach the volume to the second instance</li>
+             <li>retrieve the file from the volume via the second instance</li>
+          </ul>
+           Then, repeat for a different OS.  Note any differences in the
+	   process or tools.  Can you use the same volume / filesystem
+	   across different OS instances?  Why/how/why not?
+        </p>
+        <p>
+          You may find the following manual pages helpful: <tt>aws ec2 create-volume</tt>,
+          <tt>aws ec2 attach-volume</tt>, <tt>format(1M)</tt>, <tt>mkfs(8)</tt>, <tt>mount(8)</tt>,
+          <tt>newfs(8)</tt>.
+        </p>
+        <hr>
+        [<a href="index.html">Course Website</a>]
+      </td>
+    </tr></tbody>
+  </table>
+</body>
+</html>

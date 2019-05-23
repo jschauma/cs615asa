@@ -12,6 +12,7 @@ PDFTOTEXT=	pdftotext
 PICTURES= \
 		pics/20th-and-C.eps \
 		pics/Time_Machine.eps \
+		pics/archive.eps \
 		pics/bugs.eps \
 		pics/cpu-12h.eps	\
 		pics/cpu-30day.eps	\
@@ -39,6 +40,8 @@ PICTURES= \
 		pics/monkey.eps		\
 		pics/schrodinger.eps \
 		pics/tar.eps \
+		pics/traffic-by-cipher.eps \
+		pics/traffic-by-site.eps \
 		pics/waffles.eps \
 		pics/wafl.eps \
 		pics/wafl0.eps \

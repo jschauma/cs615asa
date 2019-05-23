@@ -1,10 +1,10 @@
-EC2-BACKUP(1)		  BSD General Commands Manual		 EC2-BACKUP(1)
+EC2-BACKUP(1)		NetBSD General Commands Manual		 EC2-BACKUP(1)
 
 NAME
-     ec2-backup — backup a directory into Elastic Block Storage (EBS)
+     ec2-backup -- backup a directory into Elastic Block Storage (EBS)
 
 SYNOPSIS
-     ec2-backup [-h] [-l filter] [-r filter] [-v volume-id] dir
+     ec2-backup [-h] [-v volume-id] dir
 
 DESCRIPTION
      The ec2-backup tool performs a backup of the given directory into Amazon
@@ -15,13 +15,7 @@ DESCRIPTION
 OPTIONS
      ec2-backup accepts the following command-line flags:
 
-     -h 	   Print a usage statement and exit.
-
-     -l filter	   Pass data through the given filter command on the local
-		   host before copying the data to the remote system.
-
-     -r filter	   Pass data through the given filter command on the remote
-		   host before writing the data to the volume.
+     -h		   Print a usage statement and exit.
 
      -v volume-id  Use the given volume instead of creating a new one.
 
@@ -38,16 +32,12 @@ DETAILS
      ec2-backup does not use any temporary files, nor creates a local copy of
      the archive it writes to the volume.
 
-     ec2-backup can pass the archive it creates through a filter command on
-     either the local or the remote host.  This allows the user to e.g. per‐
-     form encryption of the backup.
-
      Unless the -v flag is specified, ec2-backup will create a new volume, the
      size of which will be at least two times the size of the directory to be
      backed up.
 
      ec2-backup will create an instance suitable to perform the backup, attach
-     the volume in question and then back up the data from the given direc‐
+     the volume in question and then back up the data from the given direc-
      tory.  Afterwards, ec2-backup will terminate the instance it created.
 
 OUTPUT
@@ -64,8 +54,17 @@ OUTPUT
 
 ENVIRONMENT
      ec2-backup assumes that the user has set up their environment for general
-     use with the EC2 tools.  That is, it will not set or modify the variables
-     AWS_CONFIG_FILE, EC2_CERT, EC2_HOME or EC2_PRIVATE_KEY.
+     use with the EC2 tools and ssh(1) without any special flags on the com-
+     mand-line.	 That is, the user has a suitable section in their ~/.ssh/con-
+     fig file to ensure that running 'ssh ec2-instance.amazonaws.com' suc-
+     ceeds.
+
+     To accomplish this, the user has created an SSH key pair named
+     'ec2-backup' and configured their SSH setup to use that key to connect to
+     EC2 instances.
+
+     Therefor, ec2-backup will not set nor modify the variables AWS_CON-
+     FIG_FILE, EC2_CERT, EC2_HOME or EC2_PRIVATE_KEY.
 
      ec2-backup allows the user to add custom flags to the commands related to
      starting a new EC2 instance via the EC2_BACKUP_FLAGS_AWS environment
@@ -80,7 +79,7 @@ ENVIRONMENT
      generate informational output as it runs.
 
 EXIT STATUS
-     The ec2-backup will exit with a return status of 0 under normal circum‐
+     The ec2-backup will exit with a return status of 0 under normal circum-
      stances.  If an error occurred, ec2-backup will exit with a value >0.
 
 EXAMPLES
@@ -112,23 +111,13 @@ EXAMPLES
 	   $ ec2-backup .
 	   vol-1a2b3c4d
 
-     To locally encrypt the backup of the '/var/secrets' directory:
-
-	   $ ec2-backup -l 'gpg -e -r 9BED3DD7' /var/secrets
-	   vol-1a2b3c4d
-
-     The same as above, but perform encryption on the remote system:
-
-	   $ ec2-backup -r 'gpg -e -r 9BED3DD7' /var/secrets
-	   vol-1a2b3c4d
-
 SEE ALSO
      aws help, cat(1), dd(1), ssh(1), tar(1)
 
 HISTORY
      ec2-backup was originally assigned by Jan Schaumann
-     (jschauma@cs.stevens.edu) as a homework assignment for the class "Aspects
+     <jschauma@cs.stevens.edu> as a homework assignment for the class "Aspects
      of System Administration" at Stevens Institute of Technology in the
      Spring of 2011.
 
-BSD				April 30, 2018				   BSD
+NetBSD 8.0			 April 1, 2019			    NetBSD 8.0

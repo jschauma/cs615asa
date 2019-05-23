@@ -11,7 +11,17 @@ PDFTOTEXT=	pdftotext
 PICTURES=	\
 		pics/angel-devil.eps \
 		pics/angel.eps \
+		pics/netbsd-install.eps \
+		pics/delete.eps \
+		pics/duck_tape.eps \
+		pics/types-of-software.eps \
+		pics/pip.eps \
+		pics/bower.eps \
 		pics/headless.eps \
+		pics/blue-hat.eps \
+		pics/black-hat.eps \
+		pics/green-hat.eps \
+		pics/red-hat.eps \
 		pics/teamwork.eps \
 		pics/thumbsup-borat.eps \
 		pics/exponential_growth.eps \

@@ -140,7 +140,7 @@ $ hexdump -c tar-latest.tar | more
             <li>viewing contents of an archive, using the <tt>-t</tt> option</li>
             <li>extracting contents of an archive, using the <tt>-x</tt> option</li>
             <li>creating an archive, using the <tt>-c</tt> option</li>
-            <li>updating an existing archive, using the <tt>-r</tt> option</li>
+            <li>more rarely: updating an existing archive, using the <tt>-r</tt> option</li>
           </ul>
           Hence, <tt>tar(1)</tt> requires at least one of these options to
           be present.
@@ -306,7 +306,7 @@ dir2/subdir/
         <p>
           In other words, what used to be separate commands:
           <blockquote><pre>$ gzip -d tar-latest.tar.gz
-$ tar -tvf tar-latest.tar.gz
+$ tar -tvf tar-latest.tar
 ...
 </pre></blockquote>
           or, more idiomatic:
@@ -422,6 +422,10 @@ directory/
           <li><a href="http://netbsd.gw.com/cgi-bin/man-cgi?tar+5+NetBSD-current">UStar Format</a></li>
           <li><a href="http://pubs.opengroup.org/onlinepubs/9699919799/utilities/pax.html">pax(1)</a></li>
           <li><a href="http://netbsd.gw.com/cgi-bin/man-cgi?cpio+5+NetBSD-current">cpio(5) format</a></li>
+          <li><a
+href="https://www.cyphar.com/blog/post/20190121-ociv2-images-i-tar">A
+bit of history of tar(1)</a> in the context of open
+containers</li>
         </ul>
 
       <hr>

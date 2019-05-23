@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W4C//DTD HTML 4.01 Transitional//EN">
+
+<HTML>
+<HEAD>
+
+  <TITLE>CS615A -- Aspects of System Administration -- Regex Exercise</TITLE>
+  <STYLE type="text/css">
+  body {
+  background-color: #FFFFFf;
+  }
+  </STYLE>
+  <STYLE type="text/css">
+  li.c1 {list-style: none}
+  </STYLE>
+</HEAD>
+
+<BODY>
+  <TABLE border="1" align="center" cellpadding="15">
+    <TR>
+      <TD valign="top">
+        <H2>CS615A -- Aspects of System Administration - Regex Exercise</H2>
+
+        <H3>Text Processing</H3>
+
+	<p>
+	Write a quick tool that reads input from
+	<tt>stdin</tt> and then extracts exactly
+	and only the following:
+	</p>
+	<p>
+	<ul>
+	<li>valid date strings; examples include
+	03/07/2016, 7.3.2016, 2016-03-07,
+	2016/03/07</li>
+	<li>valid IPv4 addresses; examples include
+	0.0.0.0, 255.255.255.255, 127.0.0.1, 155.246.089.001</li>
+	<li>valid IPv6 addresses; examples include
+	::1, fe80::e276:63ff:fe72:3900%xennet0,
+	2001:470:30:84:e276:63ff:fe72:3900,
+	0:0:0:0:0:ffff:66.163.162.9</li>
+	<li>URLs; examples include
+	http://example.com, ftp://example.com/dir/file.html,
+	https://example.com/?foo=bar&amp;blob=';alert(1);,
+	http://example.com/?redir=http://example.com</li>
+	<li>individual words; examples include
+	word, it's, Name, Henry the 3rd, cross-site
+	scripting</li>
+	</ul>
+	</p>
+      <hr>
+      [<a href="index.html">Course Website</a>]
+</BODY>
+</HTML>

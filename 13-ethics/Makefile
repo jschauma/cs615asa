@@ -9,12 +9,13 @@ PS2PDF	=	ps2pdf
 PDFTOTEXT=	pdftotext
 
 PICTURES=	\
-		pics/angel-devil.eps \
 		pics/angel.eps \
 		pics/thumbsup-borat.eps \
-		pics/uncle-ben.eps \
-		pics/superman.eps \
+		pics/hats.eps \
+		pics/lopsa.eps \
 		pics/snowden.eps \
+		pics/weev.eps \
+		pics/chelsea-manning-and-julian-assange.eps \
 		pics/are-you-a-member.eps \
 		pics/have-you-ever-faced-an-ethical-dilemma.eps \
 		pics/line.eps \

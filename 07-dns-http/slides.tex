@@ -1,6 +1,7 @@
-% CS615 Aspects of System Administration
-% Author: Jan Schaumann <jschauma@netmeister.org>
-% $Id: slides.tex,v 1.6 2006/03/07 13:55:55 jschauma Exp $
+%traceroute -a
+%
+%traceroute -w 1 www.uni-marburg.de | awk '{print $3}' | grep "(" | sed -e 's/(//' -e 's/)//' | xargs -n 1 whois -h whois.cymru.com
+%
 
 \documentclass[xga]{xdvislides}
 \usepackage[landscape]{geometry}
@@ -32,42 +33,48 @@
 		Stevens Institute of Technology\\
 		Jan Schaumann\\
 		\verb+jschauma@stevens-tech.edu+
-		\verb+https://www.cs.stevens.edu/~jschauma/615/+
+		\verb+https://stevens.netmeister.org/615/+
 \end{center}
 \vspace*{\fill}
 
-\subsection{Current Events} \begin{center} 1.35 Tb/s
-DDoS on GitHub \\ \vspace{.25in}
-\includegraphics[scale=0.4]{pics/github-ddos.eps} \\
-\vspace{.25in} {\tt
-https://www.wired.com/story/github-ddos-memcached/} \\
-{\tt
-https://githubengineering.com/ddos-incident-report/}
-\end{center}
-
 \subsection{Current Events}
 
-Reminder: The Cloud is just other people's computers.
-\\
+\$10,000 Scholarship opportunity: \\
+
+"The North American Network Operators' Group (NANOG),
+is the professional association for Internet
+engineering, architecture and operations. Our core
+focus is on continuous improvement of the data
+transmission technologies, practices, and facilities
+that make the Internet function. In an effort to
+support the next generation of network operators,
+NANOG has established a scholarship program to assist
+current undergraduate and graduate-level students
+pursuing a degree in one of the eligible fields listed
+below." \\
+
+\verb+https://www.scholarsapply.org/nanog/+
+
+\subsection{Current Events}
+\vspace*{\fill}
 \begin{center}
-\includegraphics[scale=1.0]{pics/clown-computing.eps} \\
+	\includegraphics[scale=0.7]{pics/tzmap-namerica.eps} \\
+	\verb+https://www.timeanddate.com/time/dst/events.html+
 \end{center}
+\vspace*{\fill}
 
-AWS US-EAST-1 Region downtime leads to outages and
-connectivity degradation for Atlassian's Bitbucket,
-Confluence, and Jira, GitHub, MongoDB, NewVoiceMedia,
-Slack, Twilio, Zillow. \\
+\subsection{Current Events}
+\Huge
+\begin{center}
+Falsehoods Programmers Believe About Time: \\
 
-{\tt https://is.gd/gvI38X}
+\vspace{.5in}
+1. There are always 24 hours in a day. \\
 
-\subsection{Keeping track...}
-
-\begin{itemize}
-	\item {\tt http://www.devopsweekly.com/}
-	\item {\tt https://sreweekly.com/}
-	\item {\tt https://www.nanog.org/}
-	\item {\tt https://puck.nether.net/mailman/listinfo/outages}
-\end{itemize}
+\vspace{.5in}
+\verb+http://FalsehoodsAboutTime.com+
+\end{center}
+\Normalsize
 
 \subsection{In the beginning...}
 \vspace*{\fill}
@@ -630,6 +637,28 @@ in-addr.arpa} domain.  How does this work?
 		\verb|dig +short porttest.dns-oarc.net TXT|
 	\item using DNS to publish SSH key fingerprints (RFC4255,
 ssh\_config(5) \verb+VerifyHostKeyDNS+; for best results combine with DNSSEC)
+\end{itemize}
+
+\subsection{DNS Implications}
+
+\begin{itemize}
+	\item information from the DNS is used for authentication,
+		authorization, and as a source of truth
+	\item DNSSEC is not widely deployed and
+		carries implementation challenges
+	\item DNS traffic is ubiquitous, may escape
+		ACLs and restrictions
+	\item faulty information can lead to
+		unexpected and difficult to troubleshoot
+		failures
+	\item TTLs and caches can prolong outages as
+		you wait for propagation of changes
+	\item if you pwn the DNS, you pwn the entire
+		target (hey, let's attack the registrar!)
+	\item any time you outsource something, you
+		lose control; any time you own solving
+		a problem, you assert that you know
+		how to solve this better than others
 \end{itemize}
 
 \newpage

@@ -17,6 +17,22 @@
 \cfoot{\relax}                               % default:\cfoot{\relax}
 \rfoot{\Gray{\today}}
 
+\subsection{Pop Quiz!}
+\Huge
+What is this IP address? \\
+
+\vspace{.5in}
+10011011111101100101100101100100 \\
+\vspace{.5in}
+
+Encrypt your answer using double-rot13
+and submit here: \\
+
+\verb+https://stevens.netmeister.org/615/rr.html+
+\Normalsize
+
+\newpage
+
 \vspace*{\fill}
 \begin{center}
 	\Hugesize
@@ -29,7 +45,7 @@
 		Stevens Institute of Technology\\
 		Jan Schaumann\\
 		\verb+jschauma@stevens.edu+\\
-		\verb+https://www.cs.stevens.edu/~jschauma/615/+
+		\verb+https://stevens.netmeister.org/615/+
 \end{center}
 \vspace*{\fill}
 
@@ -133,6 +149,11 @@ is worth automating.
 	\includegraphics[scale=0.7]{pics/evolution-of-tools.eps}
 \end{center}
 \vspace*{\fill}
+
+\subsection{Automation Pitfalls}
+\vspace{.5in}
+Blue Team link:
+\verb+https://enterprisersproject.com/article/2018/2/8-it-automation-mistakes-avoid+
 
 \subsection{Automation Pitfalls}
 \begin{itemize}
@@ -613,6 +634,8 @@ Example exercises:
 	\item extract all proper words from a document \\
 		\verb+word, it's, Name, Henry the 3rd, cross-site scripting, ...+
 \end{itemize}
+\vspace{.25in}
+\verb+https://stevens.netmeister.org/615/regex-exercise.html+
 
 \subsection{Regular Expressions}
 IPv4:
@@ -646,6 +669,19 @@ IPv6:
 ([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.
 ){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))
 \end{verbatim}
+
+\subsection{Regular Expressions}
+Green Team links: \\
+
+\verb+https://www.regular-expressions.info/catastrophic.html+
+\\
+
+\vspace{.5in}
+\verb+https://blog.codinghorror.com/regex-performance/+
+\\
+
+\vspace{.5in}
+\verb+https://www.regexbuddy.com/+
 
 \subsection{Regular Expressions}
 {\em Some people, when confronted with a problem,
@@ -736,7 +772,9 @@ enough' is good enough.
 \\
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=3]{pics/switch.eps}
+	\includegraphics[scale=3]{pics/switch.eps} \\
+\vspace{.5in}
+\verb+https://www.netmeister.org/blog/consistent-tools.html+
 \end{center}
 \vspace*{\fill}
 
@@ -787,7 +825,7 @@ Explicit is better than implicit.
 \vspace*{\fill}
 	\includegraphics[scale=0.8]{pics/complexity.eps}
 	\\
-	\small \verb+http://xkcd.com/399/+
+	\small \verb+https://xkcd.com/399/+
 \end{center}
 \vspace*{\fill}
 \Huge
@@ -811,11 +849,6 @@ function names. \\
 \vspace{1in}
 
 Comments should explain {\em why}, not {\em what}. \\
-
-\subsection{The Zen of Python}
-\begin{center}
-    Special cases aren't special enough to break the rules.
-\end{center}
 
 \subsection{The Zen of Python}
 \begin{center}
@@ -880,11 +913,6 @@ Comments should explain {\em why}, not {\em what}. \\
 \subsection{The Zen of Python}
 \begin{center}
     There should be one -- and preferably only one -- obvious way to do it.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-    There should be one -- and preferably only one -- obvious way to do it.
 
 \addvspace{.5in}
 
@@ -896,26 +924,20 @@ Comments should explain {\em why}, not {\em what}. \\
 
 \subsection{The Zen of Python}
 \begin{center}
-    Now is better than never.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
     Now is better than never.  \\
 
 \addvspace{.5in}
 
-    Although never is often better than *right* now.
+    Although never is often better than {\bf right} now.
 \end{center}
 
 \subsection{The Zen of Python}
 \begin{center}
     If the implementation is hard to explain, \\
-it's a bad idea.
-\end{center}
+it's a bad idea. \\
 
-\subsection{The Zen of Python}
-\begin{center}
+\addvspace{.5in}
+
     If the implementation is easy to explain, \\
 	it {\em may} be a good idea.
 \end{center}
@@ -1146,12 +1168,22 @@ See also:
 \subsection{Scalability}
 \begin{itemize}
 	\item Simplify!
+	\item Separate code and config.
+\end{itemize}
+\vspace{.5in}
+Black Team Link: \verb+https://is.gd/RTc0ge+
+
+\subsection{Scalability}
+\begin{itemize}
+	\item Simplify!
+	\item Separate code and config.
 	\item Reduce or eliminate interactions with the user.
 \end{itemize}
 
 \subsection{Scalability}
 \begin{itemize}
 	\item Simplify!
+	\item Separate code and config.
 	\item Reduce or eliminate interactions with the user.
 	\item Premature optimization is the root of all evil.
 \end{itemize}
@@ -1159,6 +1191,7 @@ See also:
 \subsection{Scalability}
 \begin{itemize}
 	\item Simplify!
+	\item Separate code and config.
 	\item Reduce or eliminate interactions with the user.
 	\item Premature optimization is the root of all evil.
 	\item So is excusing shoddy programming.
@@ -1167,6 +1200,7 @@ See also:
 \subsection{Scalability}
 \begin{itemize}
 	\item Simplify!
+	\item Separate code and config.
 	\item Reduce or eliminate interactions with the user.
 	\item Premature optimization is the root of all evil.
 	\item So is excusing shoddy programming.
@@ -1176,6 +1210,7 @@ See also:
 \subsection{Scalability}
 \begin{itemize}
 	\item Simplify!
+	\item Separate code and config.
 	\item Reduce or eliminate interactions with the user.
 	\item Premature optimization is the root of all evil.
 	\item So is excusing shoddy programming.
@@ -1186,6 +1221,7 @@ See also:
 \subsection{Scalability}
 \begin{itemize}
 	\item Simplify!
+	\item Separate code and config.
 	\item Reduce or eliminate interactions with the user.
 	\item Premature optimization is the root of all evil.
 	\item So is excusing shoddy programming.
@@ -1197,6 +1233,7 @@ See also:
 \subsection{Scalability}
 \begin{itemize}
 	\item Simplify!
+	\item Separate code and config.
 	\item Reduce or eliminate interactions with the user.
 	\item Premature optimization is the root of all evil.
 	\item So is excusing shoddy programming.
@@ -1209,6 +1246,7 @@ See also:
 \subsection{Scalability}
 \begin{itemize}
 	\item Simplify!
+	\item Separate code and config.
 	\item Reduce or eliminate interactions with the user.
 	\item Premature optimization is the root of all evil.
 	\item So is excusing shoddy programming.
@@ -1222,6 +1260,7 @@ See also:
 \subsection{Scalability}
 \begin{itemize}
 	\item Simplify!
+	\item Separate code and config.
 	\item Reduce or eliminate interactions with the user.
 	\item Premature optimization is the root of all evil.
 	\item So is excusing shoddy programming.
@@ -1257,7 +1296,7 @@ See also:
 \vspace{.5in}
 \begin{center}
 \begin{verbatim}
-https://www.cs.stevens.edu/~jschauma/615/s18-hw5.html
+https://stevens.netmeister.org/615/s19-ec2-backup.html
 \end{verbatim}
 \end{center}
 

@@ -10,56 +10,80 @@ PS2PDF	=	ps2pdf
 PDFTOTEXT=	pdftotext
 
 PICTURES=	pics/bandaid.eps \
-		pics/barrel_of_donkey.eps \
-		pics/bmonkey.eps \
+		pics/BIOS.eps \
+		pics/apache.eps \
+		pics/beastie.eps \
+		pics/bios.eps \
+		pics/black-hat.eps \
+		pics/nutrition-facts.eps \
+		pics/blue-hat.eps \
+		pics/green-hat.eps \
+		pics/red-hat.eps \
+		pics/block.eps \
+		pics/bower.eps \
+		pics/bucket.eps \
+		pics/buckets.eps \
+		pics/build-automation.eps \
+		pics/car-firmware.eps \
+		pics/car_radio-applications.eps \
 		pics/cards.eps \
+		pics/cat-in-bucket.eps \
+		pics/dashboard-system-software.eps \
 		pics/delete.eps \
+		pics/devices.eps \
+		pics/directory.eps \
 		pics/dogfood.eps \
 		pics/dolly.eps \
 		pics/duck_tape.eps \
-		pics/fhs.eps \
-		pics/headless.eps \
-		pics/headwall.eps \
-		pics/install-method.eps \
-		pics/irix-install.eps \
-		pics/netbsd-install.eps \
-		pics/solaris-install.eps \
-		pics/gollum.eps \
-		pics/sharing.eps \
-		pics/magic_hat.eps \
-		pics/BIOS.eps \
-		pics/kfc1.eps \
-		pics/kernel.eps \
 		pics/engine-kernel.eps \
 		pics/engine-os.eps \
-		pics/car_radio-applications.eps \
-		pics/dashboard-system-software.eps \
-		pics/ignition-firmware.eps \
-		pics/linksys.eps \
-		pics/car-firmware.eps \
-		pics/remote.eps \
-		pics/sun-firmware.eps \
-		pics/kernel-dmesg.eps \
-		pics/os-screenshot.eps \
-		pics/system-software.eps \
-		pics/python.eps \
-		pics/logo_oracle.eps \
-		pics/php-logo.eps \
-		pics/mysql.eps \
-		pics/apache.eps \
-		pics/os.eps \
-		pics/beastie.eps \
-		pics/build-automation.eps \
-		pics/types-of-software.eps \
-		pics/ufs-details.eps \
-		pics/post.eps \
-		pics/bios.eps \
+		pics/fhs.eps \
+		pics/file.eps \
+		pics/filesystem-tree-mountpoints.eps \
+		pics/gollum.eps \
 		pics/grub.eps \
-		pics/stage1.eps \
-		pics/pip.eps \
-		pics/bower.eps \
+		pics/headless.eps \
+		pics/headwall.eps \
 		pics/ide-drive.eps \
+		pics/ignition-firmware.eps \
+		pics/install-method.eps \
+		pics/irix-install.eps \
+		pics/kernel-dmesg.eps \
+		pics/kernel.eps \
+		pics/kfc1.eps \
+		pics/labels.eps \
 		pics/leftshark.eps \
+		pics/lego.eps \
+		pics/link.eps \
+		pics/linksys.eps \
+		pics/logo_oracle.eps \
+		pics/magic_hat.eps \
+		pics/many-cats-in-basket.eps \
+		pics/map.eps \
+		pics/mysql.eps \
+		pics/netbsd-install.eps \
+		pics/numbered-cats.eps \
+		pics/one-bucket-full.eps \
+		pics/os-screenshot.eps \
+		pics/os.eps \
+		pics/php-logo.eps \
+		pics/pip.eps \
+		pics/pipe.eps \
+		pics/post.eps \
+		pics/python.eps \
+		pics/remote.eps \
+		pics/several-cats.eps \
+		pics/sharing.eps \
+		pics/socket.eps \
+		pics/solaris-install.eps \
+		pics/stage1.eps \
+		pics/sun-firmware.eps \
+		pics/system-software.eps \
+		pics/tetris.eps \
+		pics/three-buckets.eps \
+		pics/two-buckets.eps \
+		pics/two-cats-one-bucket.eps \
+		pics/types-of-software.eps \
 		pics/ufs-details.eps \
 		pics/unikernel.eps \
 		pics/usb-icon.eps
@@ -90,13 +114,13 @@ slides:	${PICTURES}
 	dot -Tps $< > $@
 
 .jpg.eps:
-	jpegtopnm $< | pnmtops > $@
+	convert $< $@
 
 .png.eps:
-	pngtopnm $< | pnmtops > $@
+	convert $< $@
 
 .gif.eps:
-	giftopnm $< | pnmtops >$@
+	convert $< $@
 
 ps:     $(TARGET).dvi $(TARGET).ps
 

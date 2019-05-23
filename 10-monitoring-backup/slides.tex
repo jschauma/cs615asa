@@ -1,3 +1,5 @@
+%https://arstechnica.com/information-technology/2019/03/facebook-developers-wrote-apps-that-stored-users-passwords-in-plaintext/?utm_campaign=Security%2BNewsletter&utm_source=Security_Newsletter_co_122
+
 % $Id: slides.tex,v 1.5 2006/04/10 14:22:04 jschauma Exp $
 \special{! TeXDict begin /landplus90{true}store end }
 
@@ -6,6 +8,7 @@
 \usepackage{graphics}
 \usepackage{graphicx}
 \usepackage{colordvi}
+\usepackage{tabularx}
 \usepackage{multirow}
 \usepackage[normalem]{ulem}
 
@@ -33,75 +36,28 @@
 		Stevens Institute of Technology\\
 		Jan Schaumann\\
 		\verb+jschauma@stevens.edu+\\
-		\verb+https://www.cs.stevens.edu/~jschauma/615/+
+		\verb+https://stevens.netmeister.org/615/+
 \end{center}
 \vspace*{\fill}
 
-\subsection{"The website is down..."}
+\subsection{Backups vs. Restores}
+
+\vspace*{\fill}
+\Huge
 \begin{center}
-	\includegraphics[scale=0.55]{pics/monkey.eps}
+``Only wimps use tape backup.  Just upload important
+stuff to FTP and let the rest of the world mirror
+it.'' -- {\em Linus Torvalds} (paraphrased)
 \end{center}
-
-\subsection{"The website is down..."}
-
-\begin{verbatim}
-$ curl -I https://www.cs.stevens-tech.edu/~jschauma/615/
-curl: (51) SSL: no alternative certificate subject name matches
-        target host name 'www.cs.stevens-tech.edu'
-\end{verbatim}
-
-\subsection{"The website is down..."}
-
-\begin{verbatim}
-$ curl -I https://www.cs.stevens.edu/~jschauma
-HTTP/1.1 301 Moved Permanently
-Date: Sat, 31 Mar 2018 21:09:57 GMT
-Server: Apache
-Location: https://www.stevens.edu/ses/cs/errors/404.html
-Vary: Accept-Encoding
-Content-Type: text/html; charset=iso-8859-1
-
-$ curl -I https://www.stevens.edu/ses/cs/errors/404.html
-HTTP/2 404
-[...]
-\end{verbatim}
-
-\subsection{"The website is down..."}
-
-\begin{verbatim}
-$ curl -I https://www.cs.stevens.edu/~jschauma
-HTTP/1.1 301 Moved Permanently
-Date: Sat, 31 Mar 2018 21:09:57 GMT
-Server: Apache
-Location: https://www.stevens.edu/ses/cs/errors/404.html
-Vary: Accept-Encoding
-Content-Type: text/html; charset=iso-8859-1
-
-$ curl -I https://www.stevens.edu/ses/cs/errors/404.html
-HTTP/2 404
-[...]
-
-$ ssh jschauma@git.srcit.stevens-tech.edu
-jschauma@git.srcit.stevens-tech.edu's password:
-\end{verbatim}
-
-
-\subsection{"The website is back up... ish"}
-
-\begin{verbatim}
-$ curl -I https://www.cs.stevens.edu/~jschauma/615/
-HTTP/1.1 200 OK
-Date: Sat, 31 Mar 2018 21:21:39 GMT
-Server: Apache
-Last-Modified: Tue, 25 Apr 2017 16:38:05 GMT
-\end{verbatim}
+\Normalsize
+\vspace*{\fill}
 
 \subsection{Backups vs. Restores}
 \Huge
 \begin{center}
 
-Backups are just a {\em means} to accomplish a specific
-{\em goal}: \\
+Backups are just a {\em means} \\
+to accomplish a specific {\em goal}: \\
 
 \vspace{.5in}
 
@@ -116,31 +72,24 @@ Backups are just a {\em means} to accomplish a specific
 \end{center}
 \vspace*{\fill}
 
-\subsection{Backups and Restore Basics}
-When do we need backups?
-\begin{itemize}
-	\item long-term storage / archival
-	\item recover from data loss
-\end{itemize}
-
 \subsection{Long-term storage}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=2.0]{pics/daily-tapes.eps}
+	\includegraphics[scale=2.5]{pics/daily-tapes.eps}
 \end{center}
 \vspace*{\fill}
 
 \subsection{Long-term storage}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=0.8]{pics/dlt-library.eps}
+	\includegraphics[scale=1.1]{pics/dlt-library.eps}
 \end{center}
 \vspace*{\fill}
 
 \subsection{Long-term storage}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=1.0]{pics/libraries.eps}
+	\includegraphics[scale=1.5]{pics/libraries.eps}
 \end{center}
 \vspace*{\fill}
 
@@ -156,6 +105,17 @@ When do we need backups?
 	\item backup encryption and recovery key management
 \end{itemize}
 
+\subsection{Backups and Restore Basics}
+When do we need backups?
+\begin{itemize}
+	\item long-term storage / archival
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.3]{pics/archive.eps}
+\end{center}
+	\item recover from data loss
+\end{itemize}
+\vspace*{\fill}
 
 \subsection{Backups and Restore Basics}
 When do we need backups?
@@ -249,6 +209,12 @@ Think of your backups as {\em insurance}:  you invest and pay for it, hoping
 you will never need it.
 
 \subsection{Disaster Recovery}
+Black Team link: \\
+
+
+\verb+https://is.gd/zDB8WL+
+
+\subsection{Disaster Recovery}
 \begin{itemize}
 	\item loss of e.g. entire file system
 	\item leads to downtime (of individual systems)
@@ -270,6 +236,19 @@ you will never need it.
 \vspace{.5in}
 Beware: disasters scale up much faster than your
 backup strategy!
+
+\subsection{Trusting your backups}
+
+A backup is a {\em copy} of the data.  If the data is
+corrupt, your backup may become corrupt. \\
+
+To restore data from a trusted backup, you can only
+use trusted tools. \\
+
+Verify the authenticity of your backups! \\
+
+See also: Red Team Link \\
+\verb+https://is.gd/ZawHrG+
 
 \subsection{File deletion recovery}
 Accidentally deleted files ought to be recoverable for
@@ -362,10 +341,12 @@ $ ssh ec2-instance "dump -u -i -f - /" | bzip2 -c -9 >tmp/ec2.1.bz2
 \subsection{Filesystem backup}
 \smallish
 \begin{verbatim}
-$ rm /etc/resolv.conf # oops
-$ restore -i -f /backups/ec2.0
+# rm -fr /usr/pkg
+
+$ bzip2 -d -c ec2.1.bz2 | ssh ec2-instance "cd /; /sbin/restore xf -"
 ...
 \end{verbatim}
+
 
 \subsection{Poor Man's Cloud Backup via {\tt tar(1)}}
 Copying to a file system:
@@ -391,9 +372,80 @@ $ tar cf - data/ | gpg --encrypt -r recipient | ssh ec2-instance "dd of=/dev/rxb
 \begin{center}
 	\includegraphics[scale=0.9]{pics/tar.eps} \\
 	\verb+https://www.xkcd.com/1168/+ \\
-	\verb+https://www.cs.stevens.edu/~jschauma/615/tar.html+
+	\verb+https://stevens.netmeister.org/615/tar.html+
 \end{center}
 \vspace*{\fill}
+
+\subsection{Filesystem considerations}
+Recall from Lecture 03 that our data can often be
+classified like so: \\
+
+\vspace{.5in}
+\Huge
+\begin{tabularx}{\textwidth}{X | X | X }
+& shareable content & unshareable content \\
+\hline
+static data & {\tt /usr} & {\tt /boot} \\
+& {\tt /opt} & {\tt /etc} \\
+\hline
+variable data & {\tt /var/mail} & {\tt /var/run} \\
+& {\tt /var/spool/news} & {\tt /var/lock} \\
+\end{tabularx}
+\Normalsize
+\\
+
+See also: \verb+fstab(5)+ \\
+
+\verb+https://stevens.netmeister.org/615/backup-exercise.html+
+
+\subsection{Backups vs. Snapshots}
+\verb+dump(8)+ preserves files (and file attribute),
+so that deletion of a file can be undone. \\
+
+But what about intended file deletions in incremental
+backups?
+
+\subsection{Backups vs. Snapshots}
+\verb+dump(8)+ preserves files (and file attribute),
+so that deletion of a file can be undone. \\
+
+But what about intended file deletions in incremental
+backups? \\
+
+Enter \verb+rsync(1)+: \\
+
+\begin{verbatim}
+$ rsync -e ssh -az remote:/. backup/.
+$ ssh remote
+remote# pkg_add whatever
+remote# rm some files
+remote# exit
+$ rsync -e ssh -az --delete remote:/. backup/.
+\end{verbatim}
+
+\subsection{Backups vs. Snapshots}
+\verb+dump(8)+ preserves files (and file attribute),
+so that deletion of a file can be undone. \\
+
+But what about intended file deletions in incremental
+backups? \\
+
+Enter \verb+rsync(1)+: \\
+
+\begin{verbatim}
+$ rsync -e ssh -az remote:/. backup/.
+$ ssh remote
+remote# pkg_add whatever
+remote# rm some files
+remote# exit
+$ rsync -e ssh -az --delete remote:/. backup/.
+\end{verbatim}
+
+But now we've lost the ability to restore a file we
+once intended to remove but then (much later) changed
+our mind about.  Grrrr.  I wish there was a way to
+simply go back in time to when the file still
+existed...
 
 \subsection{Filesystem backup}
 \vspace*{\fill}
@@ -502,90 +554,42 @@ Example: ZFS snapshots
 \subsection{ZFS Snapshots}
 \smallish
 \begin{verbatim}
-$ pwd
-/home/jschauma
-$ ls -l .z*
-ls: cannot access .z*: No such file or directory
-$
+$ start-omnios
+$ ssh e2-instance
+# snapshot syspool/ROOT/omnios@201904081035
+# ls -la / | grep zfs
+# ls -la /.zfs
+total 6
+dr-xr-xr-x   4 root     root           4 May  3  2018 .
+drwxr-xr-x  23 root     root          24 Apr  8 14:33 ..
+dr-xr-xr-x   2 root     root           2 May  3  2018 shares
+dr-xr-xr-x   4 root     root           4 Apr  8 14:35 snapshot
+# rm /root/.ssh/authorized_keys
+# echo oh no > /root/file
 \end{verbatim}
 \Normalsize
 
 \subsection{ZFS Snapshots}
+Restoring individual files
 \smallish
 \begin{verbatim}
-$ pwd
-/home/jschauma
-$ ls -l .z*
-ls: cannot access .z*: No such file or directory
-$ ls -lid .zfs
-1 dr-xr-xr-x 3 root root 3 Jan 10  2013 .zfs
-$
+# diff -bur /root/. /.zfs/snapshot/201904081035/root/.
+Only in /root/.: .bash_history
+Common subdirectories: /root/./.ssh and /.zfs/snapshot/201904081035/root/./.ssh
+Only in /root/.: file
+Only in /.zfs/snapshot/201904081035/root/./.ssh: authorized_keys
+# cp /.zfs/snapshot/201904081035/root/./.ssh/authorized_keys /root/.ssh/authorized_keys
 \end{verbatim}
-\Normalsize
 
-\subsection{ZFS Snapshots}
-\smallish
+\vspace{.5in}
+Rolling back:
 \begin{verbatim}
-$ pwd
-/home/jschauma
-$ ls -l .z*
-ls: cannot access .z*: No such file or directory
-$ ls -lid .zfs
-1 dr-xr-xr-x 3 root root 3 Jan 10  2013 .zfs
-$ ls -lai .zfs/snapshot
-total 13
-2 dr-xr-xr-x  4 root     root       4 Feb 28 21:00 .
-1 dr-xr-xr-x  3 root     root       3 Jan 10  2013 ..
-4 drwx--x--x 37 jschauma professor 88 Feb 24 22:32 amanda-_export_home_jschauma-0
-4 drwx--x--x 37 jschauma professor 88 Feb 26 11:47 amanda-_export_home_jschauma-1
-$
-\end{verbatim}
-\Normalsize
-
-\subsection{ZFS Snapshots}
-\smallish
-\begin{verbatim}
-$ pwd
-/home/jschauma
-$ ls -l .z*
-ls: cannot access .z*: No such file or directory
-$ ls -lid .zfs
-1 dr-xr-xr-x 3 root root 3 Jan 10  2013 .zfs
-$ ls -lai .zfs/snapshot
-total 13
-2 dr-xr-xr-x  4 root     root       4 Feb 28 21:00 .
-1 dr-xr-xr-x  3 root     root       3 Jan 10  2013 ..
-4 drwx--x--x 37 jschauma professor 88 Feb 24 22:32 amanda-_export_home_jschauma-0
-4 drwx--x--x 37 jschauma professor 88 Feb 26 11:47 amanda-_export_home_jschauma-1
-$ cd .zfs/snapshot
-$ echo foo > amanda-_export_home_jschauma-0/oink
--ksh: amanda-_export_home_jschauma-0/oink: cannot create [Read-only file system]
-$ ls -laid . /
-2 dr-xr-xr-x  4 root root    4 Feb 28 21:00 .
-2 drwxr-xr-x 26 root root 4096 Jan 27 11:44 /
-\end{verbatim}
-\Normalsize
-
-\subsection{ZFS Snapshots}
-\smallish
-\begin{verbatim}
-$ pwd
-/home/jschauma/.zfs/snapshot
-$ ls -lai amanda-_export_home_jschauma-0 >/tmp/a
-$ ls -lai amanda-_export_home_jschauma-1 >/tmp/b
-$ diff -bu /tmp/[ab]
---- /tmp/a	2014-03-01 22:55:49.000000000 -0500
-+++ /tmp/b	2014-03-01 22:55:59.000000000 -0500
-@@ -35,7 +35,7 @@
- 57723 drwx------  3 jschauma professor         6 Dec 31 15:08 .subversion
- 49431 -rw-------  1 jschauma professor         6 Dec 22 12:25 .sws.pid
-    20 drwx------  2 jschauma professor         3 Jan 26 10:30 .vim
--61768 -rw-------  1 jschauma professor     14538 Feb 24 22:32 .viminfo
-+61775 -rw-------  1 jschauma professor     14557 Feb 26 09:23 .viminfo
-   173 -rw-------  1 jschauma professor      4355 Sep 17  2012 .vimrc
- 45744 -rw-r--r--  1 jschauma professor         0 Jul 28  2013 .xsession-errors
-    21 drwxr-xr-x  3 jschauma professor         6 Apr  4  2010 CS615A
-$
+# rm /root/.ssh/authorized_keys
+# zfs rollback syspool/ROOT/omnios@201904081035
+# ls -l /root/.ssh/authorized_keys
+-rw-------   1 root     root         389 Apr  8 15:19 /root/.ssh/authorized_keys
+# ls /root/file
+/root/file: No such file or directory
 \end{verbatim}
 \Normalsize
 
@@ -1067,7 +1071,7 @@ CPU load - 30 days
 	\item Export counters/timers from within your application.
 	\item Process logs and produce counters/timers:
 \begin{verbatim}
-awk ’{print $9}’ /var/log/httpd/access.log | sort | uniq -c
+awk '{print $9}' /var/log/httpd/access.log | sort | uniq -c
 \end{verbatim}
 \end{itemize}
 
@@ -1096,6 +1100,20 @@ Other / complementary:
 \vspace{.5in}
 %More on monitoring and performance in a future lecture (if time permits).
 
+\subsection{Context doesn't explain everything...}
+...but it helps you look into what to investigate.
+
+\begin{center}
+	\includegraphics[scale=0.6]{pics/traffic-by-cipher.eps}
+\end{center}
+
+\subsection{Context doesn't explain everything...}
+...but it helps you look into what to investigate.
+
+\begin{center}
+	\includegraphics[scale=0.6]{pics/traffic-by-site.eps}
+\end{center}
+
 \subsection{To the cloud!}
 There’s a service for that. In the cloud. \\
 
@@ -1123,7 +1141,7 @@ help in finding the needle.
 \begin{center}
 Increasing the size of your haystack does not always
 help in finding the needle. \\
-\vspace{.4in}
+\vspace{.2in}
 Email is not a scalable network monitoring solution.
 \end{center}
 \Normalsize
@@ -1135,9 +1153,9 @@ Email is not a scalable network monitoring solution.
 \begin{center}
 Increasing the size of your haystack does not always
 help in finding the needle. \\
-\vspace{.4in}
+\vspace{.2in}
 Email is not a scalable network monitoring solution. \\
-\vspace{.4in}
+\vspace{.2in}
 Absence of a signal can itself be a signal.
 \end{center}
 \Normalsize
@@ -1149,11 +1167,31 @@ Absence of a signal can itself be a signal.
 \begin{center}
 Increasing the size of your haystack does not always
 help in finding the needle. \\
-\vspace{.4in}
+\vspace{.2in}
 Email is not a scalable network monitoring solution. \\
-\vspace{.4in}
+\vspace{.2in}
 Absence of a signal can itself be a signal. \\
-\vspace{.4in}
+\vspace{.2in}
+Most of the value of your metrics only becomes evident
+over time.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Monitoring Pitfalls}
+\vspace*{\fill}
+\Huge
+\begin{center}
+Increasing the size of your haystack does not always
+help in finding the needle. \\
+\vspace{.2in}
+Email is not a scalable network monitoring solution. \\
+\vspace{.2in}
+Absence of a signal can itself be a signal. \\
+\vspace{.2in}
+Most of the value of your metrics only becomes evident
+over time. \\
+\vspace{.2in}
 This list is incomplete.
 \end{center}
 \Normalsize
@@ -1197,7 +1235,6 @@ Book: \verb+http://www.oreilly.com/catalog/unixbr/+
 
 Monitoring:
 \begin{itemize}
-	\item {\tt https://www.paperplanes.de/2013/3/28/monitoring-for-humans.html}
 	\item {\tt https://monitorama.com}
 	\item {\tt https://www.slac.stanford.edu/xorg/nmtf/nmtf-tools.html}
 	\item {\tt https://www.datadoghq.com/}

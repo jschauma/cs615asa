@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<HTML>
+<HEAD>
+
+  <TITLE>CS615A -- Aspects of System Administration -- SMTP Exercise</TITLE>
+  <STYLE type="text/css">
+  body {
+  background-color: #FFFFFf;
+  }
+  </STYLE>
+  <STYLE type="text/css">
+  li.c1 {list-style: none}
+  </STYLE>
+
+</HEAD>
+
+<BODY>
+  <TABLE border="1" align="center" cellpadding="15">
+    <TR>
+      <TD valign="top">
+        <H2>CS615A -- Aspects of System Administration - SMTP Exercise</H2>
+
+        <H3>Exercise: Observe SMTP Traffic</H3>
+
+        <H4>Plain text SMTP</H4>
+
+	<p>Create an EC2 instance and send an email
+	from it to yourself.  Capture all related
+	network traffic via <tt>tcpdump(8)</tt> and
+	analyze the output.</p>
+
+	<p>Compare the results of two different
+	iterations:
+	<ul>
+		<li>use the <tt>mail(1)</tt> utility</li>
+		<li>use <tt>telnet(1)</tt> to manually issue the SMTP commands</li>
+	</ul>
+	</p>
+
+	<p>Identify in your <tt>tcpdump(8)</tt> output
+	all related traffic, including any relevant DNS lookups.
+	Verify that you can observe the content of the
+	email from the network traffic capture.</p>
+
+        <H4>SMTP + STARTTLS</H4>
+
+	<p>Repeat the previous exercise, but this time
+	use <tt>openssl(1)</tt>'s <tt>s_client</tt>
+	command to issue a <tt>STARTTLS</tt> command
+	and thus encrypt the communications in
+	transit.</p>
+
+	<p>Verify that you can no longer observe the
+	contents of the email from the network traffic
+	capture.</p>
+
+	<p>What happens if you change your system's
+	trust bundle to remove the CA certs used by
+	the remote SMTP server?  Will your mail still
+	be delievered?</p>
+
+        <H4>Try to fake some headers</H4>
+
+	<p>Probe the remote mail server to see what
+	kind of emails it allows, and what it
+	forbids.</p>
+
+	<p>Try to change the Envelope-From and To
+	headers, the regular From header, try to relay
+	through the mail server, try to impersonate
+	another account etc. -- what defenses can you
+	identify?</p>
+
+	<p>Repeat with different mail servers
+	(e.g., Google, Yahoo, Office 365, Protonmail,
+	...) -- do they differ in their behavior?</p>
+      <hr>
+      [<a href="index.html">Course Website</a>]
+</BODY>
+</HTML>

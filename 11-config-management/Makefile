@@ -12,7 +12,7 @@ PICTURES=	pics/throw.eps \
 		pics/groups-machines.eps \
 		pics/host-sets.eps \
 		pics/cm-overlap.eps \
-		pics/schrodinger.eps
+		pics/shoot-yourself-in-the-foot.eps
 
 .SUFFIXES: .tex .dvi .ps .pdf .txt .fig .eps .jpg .png .gif .1
 

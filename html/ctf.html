@@ -41,7 +41,7 @@
 	<h4>Final Flag</h4>
 	<p>
 	The final flag is to take control of this site: <a
-	href="http://cs615asa.netmeister.org">http://cs615asa.netmeister.org</a>
+	href="https://cs615ctf.stevens.netmeister.org">https://cs615ctf.stevens.netmeister.org</a>
 	by having the site display your team's name and members.  Once you
 	have accomplished this, you need to defend it against take-over by
 	another team.
@@ -49,21 +49,21 @@
 	<h4>Points</h4>
 	<p>
 	Capturing (and defending) the flag will gain each of your team's
-	member 75 points.
+	member 100 points.
 	</p>
 	<p>
 	Individual levels may gain you partial credit along the way.  If
 	you solve all individual levels and capture the flag, you will
-	gain a total of 75 points; if you find another way to capture the
-	flag, you will gain 75 points.  That is, you cannot gain
-	<em>more</em> than 75 points, but if you attempt to capture the
+	gain a total of 100 points; if you find another way to capture the
+	flag, you will gain 100 points.  That is, you cannot gain
+	<em>more</em> than 100 points, but if you attempt to capture the
 	flag without solving any of the levels and then fail, you will not
 	get any points.
 	</p>
 	<h4>Groups</h4>
 	<p>
-	All work is to be done in groups as noted <a
-	href="ctf-groups">here</a>.  All members of
+	All work is to be done in <a href="ctf-groups">groups</a>.
+	All members of
 	the group are expected to participate equally
 	in solving all levels, and are expected to be
 	able to fully explain the solution for any
@@ -77,29 +77,68 @@
         <ul>
           <li>plain ascii text</li>
           <li>well-formatted with paragraphs and line-breaks &lt; 80 chars</li>
+          <li>spell checked</li>
           <li>named README</li>
-          <li>accompanied by detached PGP signatures
-of all team members</li>
+          <li>accompanied by detached PGP signatures of all team members, each named "$user.asc" (where "$user" is the username of the user signing the document)</li>
         </ul>
-	Please send your submissions via email to <a
-	href="mailto:jschauma@stevens.edu">jschauma@stevens.edu</a>.  Note:
-	any failure to meet the above requirements
-	will lead to the submission being rejected
-	as incorrect without any further comments.
+        </p>
+        <p>
+        Your submission must be in the form of a
+        <tt>tar</tt> archive named
+        "<tt>$GROUP-level$level.tar</tt>"
+        (where "$GROUP" is your group's name and
+        "$level" is the level in question) that
+        extracts into a directory named "$GROUP".  For
+        example, a valid submission for level 3 from team "quokka"
+        with team members "jschauma", "setonix", and "brachyurus"
+        could be verified like this:
+        <blockquote><tt><pre>$ tar xvf quokka-level3.tar
+quokka/README
+quokka/brachyurus.asc
+quokka/jschauma.asc
+quokka/setonix.asc
+$ for f in quokka/*asc; do
+        gpg --verify $f quokka/README 2&gt;/dev/null || echo "Invalid signature $f"
+done
+$ </pre></tt></blockquote>
+        </p>
+        <p>
+	Please send your submissions via PGP encrypted email to <a
+	href="mailto:jschauma@stevens.edu">jschauma@stevens.edu</a>,
+        CC'ing all your team members.
+        Within 24 hours of your submission, you will
+        receive a response consisting of either
+        instructions for how to proceed to the next
+        level or the words "incorrect submission".
+        </p>
+        <p>
+        Submissions may be rejected as incorrect for a
+        number of reasons, including failure to follow
+        the format and instructions above, inability
+        to validate the signatures, or an incorrect
+        solution to the problem in question.
+        An invalid submission sets off a 24 hour timer
+        during which time no other submissions are
+        evaluated.
 	</p>
 	<p>
-	48 hours after a level has been solved by any one team, it will be
-	opened up and the points will no longer be available.
+	48 hours after a level (other than level 0)
+        has been solved by any one team, it will be opened up
+        and the points will no longer be available.
+	</p>
+	<p>
+        A scoreboard of the teams' progress is
+        available <a href="ctf-scoreboard.html">here</a>.
 	</p>
 	<hr>
 	<h3>Levels</h3>
 	<ul>
-	<li><a href="ctf-level0.html">Level 0</a> &nbsp;5 point</li>
-	<li><a href="ctf-level1.html">Level 1</a> &nbsp;5 points</li>
-	<li><a href="ctf-level2.html">Level 2</a> 10 points</li>
+	<li><a href="ctf-level0.html">Level 0</a> 10 point</li>
+	<li><a href="ctf-level1.html">Level 1</a> 10 points</li>
+	<li><a href="ctf-level2.html">Level 2</a> 15 points</li>
 	<li><a href="ctf-level3.html">Level 3</a> 15 points</li>
 	<li>Level 4 20 points</li>
-	<li>Level 5 25 points</li>
+	<li>Level 5 30 points</li>
 	</ul>
       <hr>
       [<a href="index.html">Course Website</a>]

@@ -3,7 +3,7 @@
 <HTML>
 <HEAD>
 
-  <TITLE>CS615A -- Aspects of System Administration</TITLE>
+  <TITLE>CS615A -- Aspects of System Administration -- Useradd Exercise</TITLE>
   <STYLE type="text/css">
   body {
   background-color: #FFFFFf;
@@ -19,29 +19,32 @@
   <TABLE border="1" align="center" cellpadding="15">
     <TR>
       <TD valign="top">
-        <H2>CS615A -- Aspects of System Administration - Exercise: adding users</H2>
+        <H2>CS615A -- Aspects of System Administration - Useradd Exercise</H2>
 
         <H3>Exercise: Create your user account on different OS</H3>
 
         <H4>Run a FreeBSD, Omnios, and Fedora EC2 instance</H4>
 
-	<blockquote><pre><tt>$ aws ec2 run-instances --instance-type t1.micro --image-id ami-23dae94a
-$ aws ec2 run-instances --instance-type t1.micro --image-id ami-4e2c9727
-$ aws ec2 run-instances --instance-type t1.micro --image-id ami-3b361952</tt></pre></blockquote>
+	<blockquote><pre><tt>$ aws ec2 run-instances --image-id ami-03b0f822e17669866 # FreeBSD
+$ aws ec2 run-instances --image-id ami-0b2c7fd1c1f7e91d6 # OmniOS
+$ aws ec2 run-instances --image-id ami-0264b7efb664df587 # Ubuntu Linux</tt></pre></blockquote>
+
+	<p>Note: these AMIs are in the <em>us-east-1</em> availability zone.</p>
 
         <H4>Create your own user</H4>
 
 	<p>On each system, create your own user account.  The user account
-	should be identical in all regards to your user account on
+	should be <em>identical</em> in all regards to your user account on
 	<tt>linux-lab.cs.stevens.edu</tt>.  That is, it should have the
 	same username, UID, primary group, supplementary groups, login
 	shell, etc.</p>
 
 	<p>What tools did you use to identify this information?</p>
-	<p>Do the tools to create the accounts on each instance differ?</p>
-	<p>Suppose you had to sync dozens or hundreds of accounts across
-	hundreds or thousands of hosts -- how could you automate this
-	process?</p>
+	<p>Do the tools to create the accounts on each instance differ?  How?</p>
+	<p>Consider, on a high-level, how to sync dozens or hundreds of accounts across
+	hundreds or thousands of hosts.  Consider pitfalls and error
+	scenarios.</p>
+	</p>
       <hr>
       [<a href="index.html">Course Website</a>]
 </BODY>

@@ -1,4 +1,4 @@
-.Dd April 30, 2018
+.Dd April 1, 2019
 .Dt EC2-BACKUP 1
 .Os
 .Sh NAME
@@ -7,8 +7,8 @@
 .Sh SYNOPSIS
 .Nm
 .Op Fl h
-.Op Fl l Ar filter
-.Op Fl r Ar filter
+.\" .Op Fl l Ar filter
+.\".Op Fl r Ar filter
 .Op Fl v Ar volume-id
 .Ar dir
 .Sh DESCRIPTION
@@ -25,16 +25,16 @@ accepts the following command-line flags:
 .Bl -tag -width _v_volume_id
 .It Fl h
 Print a usage statement and exit.
-.It Fl l Ar filter
-Pass data through the given
-.Ar filter
-command on the local host before copying the data to
-the remote system.
-.It Fl r Ar filter
-Pass data through the given
-.Ar filter
-command on the remote host before writing the data to
-the volume.
+.\" .It Fl l Ar filter
+.\" Pass data through the given
+.\" .Ar filter
+.\" command on the local host before copying the data to
+.\" the remote system.
+.\" .It Fl r Ar filter
+.\" Pass data through the given
+.\" .Ar filter
+.\" command on the remote host before writing the data to
+.\" the volume.
 .It Fl v Ar volume-id
 Use the given volume instead of creating a new one.
 .El
@@ -64,11 +64,11 @@ tar cf - <dir> | ssh ec2-instance "dd of=/dev/sda3"
 does not use any temporary files, nor creates a local
 copy of the archive it writes to the volume.
 .Pp
-.Nm
-can pass the archive it creates through a filter
-command on either the local or the remote host.
-This allows the user to e.g. perform encryption of the
-backup.
+.\" .Nm
+.\" can pass the archive it creates through a filter
+.\" command on either the local or the remote host.
+.\" This allows the user to e.g. perform encryption of the
+.\" backup.
 .Pp
 Unless the
 .Fl v
@@ -103,8 +103,20 @@ STDERR.
 .Sh ENVIRONMENT
 .Nm
 assumes that the user has set up their environment for general use with
-the EC2 tools.
-That is, it will not set or modify the variables AWS_CONFIG_FILE, EC2_CERT,
+the EC2 tools and
+.Xr ssh 1
+without any special flags on the command-line.
+That is, the user has a suitable section in their
+~/.ssh/config file to ensure that running 'ssh
+ec2-instance.amazonaws.com' succeeds.
+.Pp
+To accomplish this, the user has created an SSH key
+pair named 'ec2-backup' and configured their SSH setup
+to use that key to connect to EC2 instances.
+.Pp
+Therefor,
+.Nm
+will not set nor modify the variables AWS_CONFIG_FILE, EC2_CERT,
 EC2_HOME or EC2_PRIVATE_KEY.
 .Pp
 .Nm
@@ -173,18 +185,18 @@ $ export EC2_BACKUP_FLAGS_AWS="--instance-type t1.micro"
 $ ec2-backup .
 vol-1a2b3c4d
 .Ed
-.Pp
-To locally encrypt the backup of the '/var/secrets' directory:
-.Bd -literal -offset indent
-$ ec2-backup -l 'gpg -e -r 9BED3DD7' /var/secrets
-vol-1a2b3c4d
-.Ed
-.Pp
-The same as above, but perform encryption on the remote system:
-.Bd -literal -offset indent
-$ ec2-backup -r 'gpg -e -r 9BED3DD7' /var/secrets
-vol-1a2b3c4d
-.Ed
+.\" .Pp
+.\" To locally encrypt the backup of the '/var/secrets' directory:
+.\" .Bd -literal -offset indent
+.\" $ ec2-backup -l 'gpg -e -r 9BED3DD7' /var/secrets
+.\" vol-1a2b3c4d
+.\" .Ed
+.\" .Pp
+.\" The same as above, but perform encryption on the remote system:
+.\" .Bd -literal -offset indent
+.\" $ ec2-backup -r 'gpg -e -r 9BED3DD7' /var/secrets
+.\" vol-1a2b3c4d
+.\" .Ed
 .Sh SEE ALSO
 aws help,
 .Xr cat 1 ,

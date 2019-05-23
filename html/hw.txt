@@ -4,12 +4,24 @@ CS615A - Homework Assignments General Information
 
 Unless stated otherwise in the individual assignment, the following applies:
 
-- All homework assignments are to be done on lab.cs.stevens.edu.
+- All homework assignments are to be done exclusively on the command-line.
 
-  It is your responsibility to ensure that you have an account on these
-  systems.
+- For assignments asking you to submit written text:
+
+  - Submit a single plain ASCII test file, created on a Unix system.
+
+  - Your text should be clearly structued and easily readable.  Spell-check
+    your text and ensure proper grammar.  Consider the recommendations given
+    here: https://www.netmeister.org/blog/the-art-of-plain-text.html
+
+  - Include lessons learned and difficulties you had to overcome.
+
 
 - For programming assignments:
+
+  - Functionality of the program meeting the specification is necessary,
+    but not sufficient for a good grade.  Your code also must meet all of
+    the following requirements.
 
   - Code that does not compile or contains syntax errors will receive 0 points.
     Before you submit anything, make sure to test it.  Even if you just make

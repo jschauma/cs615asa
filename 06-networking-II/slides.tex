@@ -1,7 +1,3 @@
-% Author: Jan Schaumann <jschauma@netmeister.org>
-% $Id: slides.tex,v 1.13 2005/03/14 21:41:25 jschauma Exp $
-
-% CampusDomain!2011
 \special{! TeXDict begin /landplus90{true}store end }
 
 \documentclass[xga]{xdvislides}
@@ -41,7 +37,7 @@
 		Stevens Institute of Technology\\
 		Jan Schaumann\\
 		\verb+jschauma@stevens.edu+\\
-		\verb+http://www.cs.stevens.edu/~jschauma/615A/+
+		\verb+http://stevens.netmeister.org/615/+
 \end{center}
 \vspace*{\fill}
 
@@ -49,19 +45,88 @@
 
 \Hugesize
 \vspace*{\fill}
-Start a FreeBSD instance, then log in on it. \\
-
-{\tt ami-d0b520b8 --instance-type t1.micro} \\
-
-{\tt ssh ec2-user@<instance-name>}
+Start a FreeBSD instance: {\tt ami-03b0f822e17669866}
 \vspace*{\fill}
 \Normalsize
+
+\subsection{HW1 Comments}
+
+\begin{itemize}
+	\item provide more details in your README
+	\item learn to format your README in a
+		readable manner
+	\item if you run into problems, ask on the mailing list
+	\item do not print any output that was not requested
+	\item avoid useless comments
+	\item make no assumptions about the directory
+		from which your program will be invoked
+\end{itemize}
+
+\subsection{HW1 Comments}
+\begin{itemize}
+	\item do not hardcode information that is specific to your own account
+	\item do not hardcode a single AMI; you need
+		to be able to support multiple availability zones
+	\item terminate the instance after your
+		program completes (on success {\em or} error)
+	\item do not specify {\tt -i} to {\tt ssh(1)}
+	\item use {\tt aws ec2 wait} instead of loop-waiting yourself
+\end{itemize}
+
+\subsection{HW1 Comments: avoid waterfall code}
+\begin{center}
+	\includegraphics[scale=0.38]{pics/waterfall.eps} \\
+\end{center}
+
+\subsection{HW1 Comments}
+Writing shell scripts is not very different from
+writing programs in other languages.
+
+\begin{itemize}
+	\item use \verb+getopt(1)+ to parse command-line arguments
+	\item use functions
+	\item check commands and functions for return values 
+\end{itemize}
+\vspace{.5in}
+
+Some useful links:
+\begin{itemize}
+	\item \verb+https://www.netmeister.org/blog/writing-shell-scripts.html+
+	\item \verb+https://github.com/koalaman/shellcheck+
+	\item \verb+https://google.github.io/styleguide/shell.xml+
+\end{itemize}
+
+
+\subsection{Layer 1: Repeater Hub}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.8]{pics/hub.eps} \\
+	Half-duplex, cheap, obsolete.
+\end{center}
+\vspace*{\fill}
+
+\subsection{Layer 2: Network Switch}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.9]{pics/switch.eps} \\
+	MAC bridge, full-duplex, segmentation, CIDR, STP \\
+	\verb+https://is.gd/HPhuRG+
+\end{center}
+\vspace*{\fill}
+
+\subsection{Layer 3: Router}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.2]{pics/router.eps} \\
+	connect networks, forward packets, routing tables, BGP
+\end{center}
+\vspace*{\fill}
 
 \subsection{A simple example}
 \Hugesize
 \begin{center}
 \begin{verbatim}
-$ telnet www.google.com 80
+$ telnet www.yahoo.com 80
 
 \end{verbatim}
 \end{center}
@@ -72,9 +137,9 @@ $ telnet www.google.com 80
 \Hugesize
 \begin{center}
 \begin{verbatim}
-$ telnet www.google.com 80
-Trying 172.217.15.68...
-Connected to www.google.com.
+$ telnet www.yahoo.com 80
+Trying 98.138.219.232...
+Connected to atsv2-fp-shed.wg1.b.yahoo.com.
 Escape character is '^]'.
 HEAD / HTTP/1.0
 
@@ -87,16 +152,16 @@ HEAD / HTTP/1.0
 \Hugesize
 \begin{center}
 \begin{verbatim}
-$ telnet www.google.com 80
-Trying 172.217.15.68...
-Connected to www.google.com.
+$ telnet www.yahoo.com 80
+Trying 98.138.219.232...
+Connected to atsv2-fp-shed.wg1.b.yahoo.com.
 Escape character is '^]'.
 HEAD / HTTP/1.0
 
 HTTP/1.0 200 OK
-Date: Sun, 25 Feb 2018 18:18:45 GMT
-Content-Type: text/html; charset=ISO-8859-1
-Server: gws
+Date: Mon, 04 Mar 2019 17:41:59 GMT
+Via: http/1.1 media-router-fp1010.prod.media.ne1.yahoo.com
+Server: ATS
 [...]
 \end{verbatim}
 \end{center}
@@ -131,11 +196,11 @@ How exactly do we look up a hostname?
 \Hugesize
 \begin{center}
 \begin{verbatim}
-$ ktrace -i telnet www.google.com 80
-Trying 172.217.15.68...
-Connected to www.google.com.
+$ ktrace -i telnet www.yahoo.com 80
+Trying 72.30.35.9...
+Connected to atsv2-fp-shed.wg1.b.yahoo.com.
 Escape character is '^]'.
-GET / HTTP/1.0
+HEAD / HTTP/1.0
 
 [...]
 $ kdump >trace
@@ -152,21 +217,21 @@ $ kdump >trace
    735 ktrace   CALL  execve(0xbfbfe7e0,0xbfbfed00,0xbfbfed10)
    735 ktrace   NAMI  "/usr/bin/telnet"
    735 ktrace   NAMI  "/libexec/ld-elf.so.1"
-   735 telnet   RET   execve 0
+   735 telnet   RET   execve JUSTRETURN
 [...]
-   735 telnet   CALL  open(0x285192e8,0x100000<O_CLOEXEC>,<unused>0x1b6)
+   735 telnet   CALL  open(0x80066edc5,0x100000<O_RDONLY|O_CLOEXEC>)
    735 telnet   NAMI  "/etc/nsswitch.conf"
    735 telnet   RET   open 3
 [...]
-   735 telnet   CALL  open(0x285172f5,0x100000<O_CLOEXEC>,<unused>0x1b6)
+   735 telnet   CALL  open(0x800671afd,0x100000<O_RDONLY|O_CLOEXEC>)
    735 telnet   NAMI  "/etc/hosts"
    735 telnet   RET   open 3
 [...]
-   735 telnet   CALL  open(0x28516f79,0x100000<O_CLOEXEC>,<unused>0x1b6)
+   735 telnet   CALL  open(0x80066e6b5,0x100000<O_RDONLY|O_CLOEXEC>)
    735 telnet   NAMI  "/etc/resolv.conf"
    735 telnet   RET   open 3
 [...]
-   735 telnet   CALL  read(0x3,0x28c31000,0x8000)
+   735 telnet   CALL  read(0x3,0x800c3be40,0x8000)
    735 telnet   GIO   fd 3 read 70 bytes
        "# Generated by resolvconf
         search ec2.internal
@@ -178,21 +243,25 @@ $ kdump >trace
 \smallish
 \begin{verbatim}
 [...]
-   735 telnet   CALL  socket(PF_INET,SOCK_CLOEXEC|SOCK_DGRAM,IPPROTO_IP)
-   735 telnet   RET   socket 4
-   735 telnet   CALL  connect(0x4,0x28547e64,0x10)
+   735 telnet   CALL  socket(PF_INET,0x10000002<SOCK_DGRAM|SOCK_CLOEXEC>,IPPROTO_IP)
+   735 telnet   RET   socket 3
+   735 telnet   CALL  connect(0x3,0x800a43914,0x10)
    735 telnet   STRU  struct sockaddr { AF_INET, 172.16.0.23:53 }
    735 telnet   RET   connect 0
-   735 telnet   CALL  sendto(0x4,0x28c5f000,0x20,0,0,0)
-   735 telnet   GIO   fd 4 wrote 32 bytes
-       0x0000 9a70 0100 0001 0000 0000 0000 0377 7777 0667 6f6f 676c  |.p...........www.googl|
-       0x0016 6503 636f 6d00 0001 0001                                |e.com.....|
+   735 telnet   CALL  sendto(0x3,0x800c96400,0x1f,0,0,0)
+   735 telnet   GIO   fd 3 wrote 31 bytes
+       0x0000 e614 0100 0001 0000 0000 0000 0377 e777       |.............www|
+       0x0010 0579 6168 6f6f 0363 6f6d 0000 0100 01         |.yahoo.com.....|
 [...]
-   735 telnet   CALL  recvfrom(0x4,0x28c4f000,0x10000,0,0xbfbfd5d0,0xbfbfd5cc)
-   735 telnet   GIO   fd 4 read 60 bytes
-       0x0000 d6c6 8180 0001 0001 0000 0000 0377 7777 0667 6f6f 676c  |.............www.googl|
-       0x0016 6503 636f 6d00 001c 0001 c00c 001c 0001 0000 003c 0010  |e.com..............<..|
-       0x002c 2607 f8b0 4004 0807 0000 0000 0000 2004                 |&...@......... .|
+   735 telnet   CALL  recvfrom(0x3,0x800c71e00,0x10000,0,0x7fffffffd640,0x7fffffffd228)
+   735 telnet   GIO   fd 3 read 97 bytes
+       0x0000 e614 8180 0001 0003 0000 0000 0377 7777       |.............www|
+       0x0010 0579 6168 6f6f 0363 6f6d 0000 0100 01c0       |.yahoo.com......|
+       0x0020 0c00 0500 0100 0000 3c00 160d 6174 7376       |........<...atsv|
+       0x0030 322d 6670 2d73 6865 6403 7767 3101 62c0       |2-fp-shed.wg1.b.|
+       0x0040 10c0 2b00 0100 0100 0000 3c00 0448 1e23       |..+.......<..H.#|
+       0x0050 09c0 2b00 0100 0100 0000 3c00 0448 1e23       |..+.......<..H.#|
+       0x0060 0a                                            |.|
 [...]
 \end{verbatim}
 \Normalsize
@@ -213,30 +282,30 @@ And then?
 \subsection{...communicate with the remote host...}
 \smallish
 \begin{verbatim}
-   735 telnet   GIO   fd 1 wrote 25 bytes
-       "Trying 216.58.217.132...
+   735 telnet   GIO   fd 1 wrote 21 bytes
+       "Trying 72.30.35.9...
        "
-   735 telnet   RET   write 25/0x19
-   735 telnet   CALL  socket(PF_INET,SOCK_STREAM,IPPROTO_TCP)
-   735 telnet   CALL  connect(0x3,0x28c0f0f0,0x10)
-   735 telnet   STRU  struct sockaddr { AF_INET, 216.58.217.132:80 }
+   735 telnet   RET   write 21/0x15
+   735 telnet   CALL  socket(PF_INET,0x1<SOCK_STREAM>,IPPROTO_TCP)
+   735 telnet   CALL  connect(0x3,0x8002650f0,0x10)
+   735 telnet   STRU  struct sockaddr { AF_INET, 72.30.35.9:80 }
 [...]
    918 telnet   GIO   fd 0 read 16 bytes
        "HEAD / HTTP/1.0
        "
    918 telnet   RET   read 16/0x10
-   918 telnet   CALL  select(0x4,0x28c0d1b8,0x28c0d1c0,0x28c0d1c8,0x80677b8)
+   918 telnet   CALL  select(0x4,0x80025e1d8,0x80025e1c8,0x80025e1d0,0x229058)
    918 telnet   RET   select 1
-   918 telnet   CALL  sendto(0x3,0x8068048,0x11,0,0,0)
+   918 telnet   CALL  sendto(0x3,0x226490,0x11,0,0,0))
    918 telnet   GIO   fd 3 wrote 17 bytes
        "HEAD / HTTP/1.0\r
        "
 [...]
    918 telnet   RET   select 1
-   918 telnet   CALL  recvfrom(0x3,0x8068870,0x400,0,0,0)
-   918 telnet   GIO   fd 3 read 665 bytes
+   918 telnet   CALL  recvfrom(0x3,0x226040,0x400,0,0,0)
+   918 telnet   GIO   fd 3 read 324 bytes
        "HTTP/1.0 200 OK\r
-        Date: Sun, 25 Feb 2018 18:55:15 GMT\r
+        Date: Mon, 04 Mar 2019 17:44:09 GMT\r
 \end{verbatim}
 \Normalsize
 
@@ -254,18 +323,16 @@ And then?
 laptop$ ssh ec2-user@<instance-name>
 $ su
 # script commands.out
-# ifconfig -a
-# route -n get default
+# ifconfig -a; route -n get default
 # cat /etc/resolv.conf
 # tcpdump -w tcpdump.out port not 22 >&/dev/null &
 # arp -d -a
 # ping -n -c 3 8.8.8.8
-# ktrace -i telnet www.google.com 80
+# ktrace -i telnet www.yahoo.com 80
 HEAD / HTTP/1.0
 # kill %1
 # kdump > kdump.out
-# exit
-# exit
+# chmod a+r kdump.out
 $ exit
 laptop$ scp ec2-user@<instance-name>:*out /tmp/
 \end{verbatim}
@@ -274,67 +341,73 @@ laptop$ scp ec2-user@<instance-name>:*out /tmp/
 Finding the next hop:
 \begin{verbatim}
 $ tcpdump -t -n -r /tmp/tcpdump.out arp
-reading from file tcpdump.out, link-type EN10MB (Ethernet)
-ARP, Request who-has 10.234.105.193 tell 10.234.105.225, length 28
-ARP, Reply 10.234.105.193 is-at fe:ff:ff:ff:ff:ff, length 28
-ARP, Request who-has 10.234.105.225 tell 10.234.105.193, length 28
-ARP, Reply 10.234.105.225 is-at 22:00:0a:ea:69:e1, length 28
+reading from file /tmp/tcpdump.out, link-type EN10MB (Ethernet)
+ARP, Request who-has 10.183.114.1 tell 10.183.114.37, length 28
+ARP, Reply 10.183.114.1 is-at fe:ff:ff:ff:ff:ff, length 28
+ARP, Request who-has 10.183.114.37 tell 10.183.114.1, length 28
+ARP, Reply 10.183.114.37 is-at 22:00:0a:b7:72:25, length 28
 \end{verbatim}
+\vspace{.5in}
+Enter ARP Spoofing... (Red Team)
 
 \subsection{A simple example}
 Performing the DNS query:
 \begin{verbatim}
 $ tcpdump -t -n -r tcpdump.out udp port 53
 reading from file tcpdump.out, link-type EN10MB (Ethernet)
-IP 10.234.105.225.12637 > 172.16.0.23.53: 32409+ A? www.google.com. (32)
-IP 172.16.0.23.53 > 10.234.105.225.12637: 32409 1/0/0 A 172.217.12.228 (48)
-IP 10.234.105.225.33347 > 172.16.0.23.53: 49414+ AAAA? www.google.com. (32)
-IP 172.16.0.23.53 > 10.234.105.225.33347: 49414 1/0/0 AAAA 2607:f8b0:4004:807::2004 (60)
+IP 10.183.114.37.53383 > 172.16.0.23.53: 20378+ A? www.yahoo.com. (31)
+IP 172.16.0.23.53 > 10.183.114.37.53383: 20378 5/0/0
+	CNAME atsv2-fp-shed.wg1.b.yahoo.com., A 72.30.35.9, A 72.30.35.10,
+	A 98.138.219.231, A 98.138.219.232 (129)
+IP 10.183.114.37.10551 > 172.16.0.23.53: 60792+ AAAA? www.yahoo.com. (31)
+IP 172.16.0.23.53 > 10.183.114.37.10551: 60792 5/0/0 CNAME atsv2-fp-shed.wg1.b.yahoo.com.,
+	AAAA 2001:4998:58:1836::11, AAAA 2001:4998:44:41d::3,
+	AAAA 2001:4998:44:41d::4, AAAA 2001:4998:58:1836::10 (177)
 \end{verbatim}
 
 \subsection{A simple example}
 Establishing the connection to the server:
 \begin{verbatim}
 $ tcpdump -t -n -r tcpdump.out tcp port 80
-IP 10.234.105.225.50194 > 172.217.15.68.80: Flags [S],
-        seq 1054601677, win 65535, options [...], length 0
-IP 172.217.15.68.80 > 10.234.105.225.50194: Flags [S.],
-        seq 230054466, ack 1054601678, win 42408, options [...], length 0
-IP 10.234.105.225.50194 > 172.217.15.68.80: Flags [.],
-        ack 1, win 1026, options [...], length 0
+IP 10.183.114.37.45403 > 72.30.35.9.80: Flags [S], seq 5028151, win 65535,
+	options [mss 1460,nop,wscale 6,sackOK,TS val 598758437 ecr 0], length 0
+IP 72.30.35.9.80 > 10.183.114.37.45403: Flags [S.], seq 1983855029, ack 5028152, win 14480,
+	options [mss 1460,sackOK,TS val 1888595968 ecr 598758437,nop,wscale 8], length 0
+IP 10.183.114.37.45403 > 72.30.35.9.80: Flags [.], ack 1, win 1026,
+	options [nop,nop,TS val 598758465 ecr 1888595968], length 0
 \end{verbatim}
 
 \subsection{A simple example}
 Sending the HTTP request:
 \begin{verbatim}
-IP 10.234.105.225.50194 > 172.217.15.68.80: Flags [P.],
-        seq 1:18, ack 1, win 1026, options [...], length 17
-IP 172.217.15.68.80 > 10.234.105.225.50194: Flags [.],
-        ack 18, win 166, options [...], length 0
-IP 10.234.105.225.50194 > 172.217.15.68.80: Flags [P.],
-        seq 18:20, ack 1, win 1026, options [...], length 2
-IP 172.217.15.68.80 > 10.234.105.225.50194: Flags [.],
-        ack 20, win 166, options [...], length 0
+IP 10.183.114.37.45403 > 72.30.35.9.80: Flags [P.], seq 1:18, ack 1, win 1026,
+	options [nop,nop,TS val 598762755 ecr 1888595968], length 17: HTTP: HEAD / HTTP/1.0
+IP 72.30.35.9.80 > 10.183.114.37.45403: Flags [.], ack 18, win 57,
+	options [nop,nop,TS val 1888600285 ecr 598762755], length 0
+IP 10.183.114.37.45403 > 72.30.35.9.80: Flags [P.], seq 18:20, ack 1, win 1026,
+	options [nop,nop,TS val 598764209 ecr 1888600285], length 2: HTTP
+IP 72.30.35.9.80 > 10.183.114.37.45403: Flags [.], ack 20, win 57,
+	options [nop,nop,TS val 1888601739 ecr 598764209], length 0
 \end{verbatim}
 
 \subsection{A simple example}
 Receiving the HTTP response:
 \begin{verbatim}
-IP 172.217.15.68.80 > 10.234.105.225.50194: Flags [P.],
-        seq 1:666, ack 20, win 166, options [...], length 665
-IP 10.234.105.225.50194 > 172.217.15.68.80: Flags [.],
-        ack 667, win 1015, options [...], length 0
+IP 72.30.35.9.80 > 10.183.114.37.45403: Flags [P.], seq 1:325, ack 20, win 57,
+	options [nop,nop,TS val 1888601741 ecr 598764209], length 324: HTTP: HTTP/1.0 200 OK
 \end{verbatim}
 
 \subsection{A simple example}
 Terminating the connection:
 \begin{verbatim}
-IP 172.217.15.68.80 > 10.234.105.225.50194: Flags [F.],
-        seq 666, ack 20, win 166, options [...], length 0
-IP 10.234.105.225.50194 > 172.217.15.68.80: Flags [F.],
-        seq 20, ack 667, win 1026, options [...], length 0
-IP 172.217.15.68.80 > 10.234.105.225.50194: Flags [.],
-        ack 21, win 166, options [...], length 0
+IP 72.30.35.9.80 > 10.183.114.37.45403: Flags [F.], seq 325, ack 20, win 57,
+	options [nop,nop,TS val 1888601741 ecr 598764209], length 0
+IP 10.183.114.37.45403 > 72.30.35.9.80: Flags [.], ack 326, win 1021,
+	options [nop,nop,TS val 598764236 ecr 1888601741], length 0
+IP 10.183.114.37.45403 > 72.30.35.9.80: Flags [F.], seq 20, ack 326, win 1026,
+	options [nop,nop,TS val 598764236 ecr 1888601741], length 0
+IP 72.30.35.9.80 > 10.183.114.37.45403: Flags [.], ack 21, win 57,
+	options [nop,nop,TS val 1888601768 ecr 598764236], length 0
 \end{verbatim}
 
 \subsection{Notables from this simple example}
@@ -480,6 +553,8 @@ PING any-fp.wa1.b.yahoo.com (67.195.160.76): 56 data bytes
 round-trip min/avg/max/stddev = 23.193/26.505/30.888/3.958 ms
 $
 \end{verbatim}
+\vspace{.25in}
+Enter ICMP attacks... (Blue Team)
 
 \subsection{TCP/IP Basics: ICMP: Ping}
 \vspace*{\fill}
@@ -669,33 +744,32 @@ Transmission Control Protocol
 \end{center}
 \vspace{.2in}
 \begin{verbatim}
-$ telnet www.google.com 80
-Trying 173.194.73.99...
-Connected to www.google.com.
+$ telnet www.yahoo.com 80
+Trying 98.138.219.232...
+Connected to atsv2-fp-shed.wg1.b.yahoo.com.
 Escape character is '^]'.
-GET / HTTP/1.0
-
+HEAD / HTTP/1.0
 \end{verbatim}
 
 \subsection{TCP/IP Basics: TCP}
-\begin{center}
-Transmission Control Protocol
-\end{center}
-\vspace{.2in}
 \begin{verbatim}
-IP 166.84.7.99.58356 > 67.195.160.76.80: S
-      2267539609:2267539609(0) win 32768
-      <mss 1460,nop,wscale 3,sackOK,nop,nop,nop,nop,timestamp 10>
-IP 67.195.160.76.80 > 166.84.7.99.58356: S
-      3229501874:3229501874(0) ack 2267539610 win 5792
-      <mss 1440,sackOK,timestamp 1241180702 1,nop,wscale 8>
-IP 166.84.7.99.58356 > 67.195.160.76.80: .
-      ack 1 win 4197 <nop,nop,timestamp 1 1241180702>
-IP 166.84.7.99.58356 > 67.195.160.76.80: P
-      1:17(16) ack 1 win 4197 <nop,nop,timestamp 9 1241180702>
-IP 67.195.160.76.80 > 166.84.7.99.58356: .
-      ack 17 win 23 <nop,nop,timestamp 12411848 53 9>
+IP 10.183.114.37.45403 > 72.30.35.9.80: Flags [S], seq 5028151, win 65535,
+	options [mss 1460,nop,wscale 6,sackOK,TS val 598758437 ecr 0], length 0
+IP 72.30.35.9.80 > 10.183.114.37.45403: Flags [S.], seq 1983855029, ack 5028152, win 14480,
+	options [mss 1460,sackOK,TS val 1888595968 ecr 598758437,nop,wscale 8], length 0
+IP 10.183.114.37.45403 > 72.30.35.9.80: Flags [.], ack 1, win 1026,
+	options [nop,nop,TS val 598758465 ecr 1888595968], length 0
+IP 10.183.114.37.45403 > 72.30.35.9.80: Flags [P.], seq 1:18, ack 1, win 1026,
+	options [nop,nop,TS val 598762755 ecr 1888595968], length 17: HTTP: HEAD / HTTP/1.0
+[...]
+IP 72.30.35.9.80 > 10.183.114.37.45403: Flags [F.], seq 325, ack 20, win 57,
+	options [nop,nop,TS val 1888601741 ecr 598764209], length 0
+IP 10.183.114.37.45403 > 72.30.35.9.80: Flags [F.], seq 20, ack 326, win 1026,
+	options [nop,nop,TS val 598764236 ecr 1888601741], length 0
+IP 72.30.35.9.80 > 10.183.114.37.45403: Flags [.], ack 21, win 57,
+	options [nop,nop,TS val 1888601768 ecr 598764236], length 0
 \end{verbatim}
+Performance considerations? (Green Team)
 
 \subsection{TCP/IP Basics: TCP}
 \begin{center}
@@ -822,8 +896,7 @@ IP6 (hlim 61, next-header: UDP (17), length: 119)
 
 \subsection{Homework}
 
-\verb+https://www.cs.stevens.edu/~jschauma/615/s18-hw4.html+
-
+\verb+https://www.cs.stevens.edu/~jschauma/615/s19-hw3.html+
 
 \subsection{Reading}
 \begin{itemize}
@@ -832,6 +905,10 @@ IP6 (hlim 61, next-header: UDP (17), length: 119)
 	\item \verb+tcp(4)+/\verb+ip(4)+
 	\item \verb+netstat(1)+
 	\item \verb+nslookup(1)+
+\end{itemize}
+\vspace{.5in}
+\begin{itemize}
+	\item \verb+https://is.gd/mrrdYc+
 \end{itemize}
 
 \end{document}

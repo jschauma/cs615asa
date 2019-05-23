@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W4C//DTD HTML 4.01 Transitional//EN">
+
+<HTML>
+<HEAD>
+
+  <TITLE>CS615A -- Aspects of System Administration -- Backup Exercise</TITLE>
+  <STYLE type="text/css">
+  body {
+  background-color: #FFFFFf;
+  }
+  </STYLE>
+  <STYLE type="text/css">
+  li.c1 {list-style: none}
+  </STYLE>
+</HEAD>
+
+<BODY>
+  <TABLE border="1" align="center" cellpadding="15">
+    <TR>
+      <TD valign="top">
+        <H2>CS615A -- Aspects of System Administration - Backup Exercise</H2>
+
+        <H3>Using <tt>dump(8)</tt> and <tt>restore(8)</tt></H3>
+
+	<h4>An incremental restore</h4>
+	<p>
+	Create an EC2 instance and perform a level 0
+	backup of the entire file system using the
+	<tt><a
+	href="http://netbsd.gw.com/cgi-bin/man-cgi?dump++NetBSD-current">dump(8)</a></tt>
+	command:
+	</p>
+	<p><blockquote><tt><pre>$ ssh ec2-instance "/sbin/dump -u -0 -f - /" | bzip2 -c -9 &gt; ec2.0.bz2</pre></tt></blockquote></p>
+	<p>Install a webserver using the native
+	backage manager and configure it.  Once you
+	have everything working, create an incremental
+	backup:</p>
+
+	<p><blockquote><tt><pre>$ ssh ec2-instance "/sbin/dump -u -i -f - /" | bzip2 -c -9 &gt; ec2.1.bz2</pre></tt></blockquote></p>
+
+	<p>Inspect the different files and verify that
+	the incremental backup contains only a (small)
+	subset of the files contained in the complete
+	backup.</p>
+
+	<p>Now simulate some data loss:</p>
+	<p><blockquote><tt><pre>$ ssh ec2-instance
+# pkg_info | wc -l
+      14
+# rm -f /usr/pkg /var/db/pkg
+# echo "Oh no! What a mess!"
+# exit
+$ </pre></tt></blockquote></p>
+
+	<p>Use your incremental backup to restore the lost files:</p>
+
+	<p><blockquote><tt><pre>$ bzip2 -d -c ec2.1.bz2 | ssh ec2-instance "cd /; /sbin/restore xf -"</pre></tt></blockquote></p>
+
+	<p>Verify that all your software is back in place:</p>
+	<p><blockquote><tt><pre>$ ssh ec2-instance /usr/sbin/pkg_info | wc -l</pre></tt></blockquote></p>
+
+	<p>But restoring the full data from the backup
+	is a bit of a waste if all you lost was a few
+	files.  Delete one or two select files, then
+	Use <tt>restore(8)</tt>'s interactive
+	mode to only restore exactly those files that
+	you deleted.</p>
+
+	<h4>A full restore</h4>
+
+	<p>Next, let's restore the complete filesystem
+	into a separate volume:
+	create a new volume of the same size
+	as the instance file system, create a single
+	partition on it, create a new filesystem, and
+	mount it on the existing instance under <tt>/mnt</tt>.</p>
+
+	<p>Restore the entire backup into the new
+	location.  Note that you will have to apply
+	<em>both</em> backups <em>in order</em> to
+	recreate the final end state.  Verify that the
+	filesystem on the new volume is identical by
+	<tt>chroot(8)</tt>ing into <tt>/mnt</tt> and
+	e.g., running your usual package utilities in
+	there.</p>
+
+	<h4>Restoring to a separate instance</h4>
+
+	<p>We have a full backup of our instance, so
+	can we now delete it and later restore it?
+	Let's give it a try!</p>
+
+	<p>Terminate the instance and create a new
+	one.  Then extract your <em>level 1 backup only</em>
+	over the root directory of the new instance.
+	Did this bring your new instance into the same
+	state as your previous instance was?</p>
+
+	<p>Now revisit the concept of "shareable" vs.
+	"unshareable" data as explained in <a
+href="https://www.netmeister.org/book/05-software-installation-and-package-management.pdf">our
+discussion of Software Installation and Package
+Management</a>; how does this apply in this context?
+	Can we restore our level 0 backup over the
+	new instance?  Give it a try, then reboot
+	the instance.</p>
+
+	<P>How could you structure your backup
+	strategy to allow for restoration of
+	the full filesystem across different
+	EC2 instances?</p>
+
+      <hr>
+      [<a href="index.html">Course Website</a>]
+</BODY>
+</HTML>

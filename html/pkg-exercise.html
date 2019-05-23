@@ -26,7 +26,7 @@
 	<hr>
         <H4>Run a Fedora instance</H4>
 
-	<blockquote><pre><tt>$ aws ec2 run-instances --instance-type t1.micro --image-id ami-3b361952</tt></pre></blockquote>
+	<blockquote><pre><tt>$ aws ec2 run-instances --instance-type t1.micro --image-id ami-0187f76b</tt></pre></blockquote>
 
         <H4>Binary Packages</H4>
 
@@ -43,9 +43,9 @@ $ rpm -qa | wc -l</pre></tt></blockquote>
 
 	<H4>Build manually from source</H4>
 
-	<blockquote><pre><tt>$ curl http://nginx.org/download/nginx-1.7.9.tar.gz &gt; nginx-1.7.9.tar.gz
-$ tar zxvf nginx-1.7.9.tar.gz 
-$ cd nginx-1.7.9
+	<blockquote><pre><tt>$ curl http://nginx.org/download/nginx-1.9.9.tar.gz &gt; nginx-1.9.9.tar.gz
+$ tar zxvf nginx-1.9.9.tar.gz 
+$ cd nginx-1.9.9
 $ ./configure
 $ make
 $ sudo make install</tt></pre></blockquote>

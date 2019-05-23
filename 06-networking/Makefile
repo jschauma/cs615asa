@@ -12,6 +12,7 @@ PDFTOTEXT=	pdftotext
 PICTURES= \
 	pics/2computers.eps \
 	pics/3computers.eps \
+	pics/broadcast-domain.eps \
 	pics/AS-interconnection.eps \
 	pics/Room_641A.eps \
 	pics/cable-layer.eps \

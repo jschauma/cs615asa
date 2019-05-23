@@ -11,6 +11,7 @@ PDFTOTEXT=	pdftotext
 
 FIGURES=	pics/sysadmin-personalities.eps	\
 		pics/chicken-egg.eps		\
+		pics/xkcd705.eps \
 		pics/Cable_Tie.eps	\
 		pics/Caffeine_molecule.eps	\
 		pics/DuckTape.eps	\
@@ -25,6 +26,7 @@ FIGURES=	pics/sysadmin-personalities.eps	\
 		pics/wrong-usability.eps	\
 		pics/better-usability.eps	\
 		pics/kiss.eps	\
+		pics/red-pill-blue-pill.eps \
 		pics/car-duct-tape.eps	\
 		pics/usability-security.eps	\
 		pics/camera.eps	\
@@ -53,7 +55,7 @@ FIGURES=	pics/sysadmin-personalities.eps	\
 		pics/kinesis.eps	\
 		pics/labelmaker.eps	\
 		pics/leatherman.eps	\
-		pics/macmini.eps	\
+		pics/pi.eps	\
 		pics/matrix.eps	\
 		pics/mushroom_cloud.eps	\
 		pics/office-chair.eps	\

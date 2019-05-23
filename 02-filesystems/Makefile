@@ -10,6 +10,12 @@ FIGURES=	\
 		pics/FireWire_4_6Pin.eps \
 		pics/IRIX.filesystem.eps \
 		pics/Installer_edit_partitions.eps \
+		pics/chs.eps \
+		pics/disk-structure-zone-bit-recording.eps \
+		pics/team-drives.eps \
+		pics/dnsflagday.eps \
+		pics/icecubelayingcables.eps \
+		pics/Facebook-Research-Install-Root-Certificate.eps \
 		pics/S50JBOD.eps \
 		pics/SFF_8086.eps \
 		pics/SFF_8087.eps \
