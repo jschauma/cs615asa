@@ -3,7 +3,7 @@
 <HTML>
 <HEAD>
 
-  <TITLE>CS615A -- Aspects of System Administration</TITLE>
+  <TITLE>CS615 - System Administration</TITLE>
   <STYLE type="text/css">
   body {
   background-color: #FFFFFf;
@@ -20,17 +20,20 @@
   <TABLE border="1" align="center" cellpadding="15">
     <TR>
       <TD valign="top">
-        <H2>CS615A -- Aspects of System Administration - Course Notes</H2>
+        <H2>CS615 - System Administration</H2>
 
 	<h3>Objective</h3>
         <p>
 	  In order to get the most our of this class, it is useful to
 	  read up on the topic of the lectures <em>before</em> class
 	  as well as to revisit the material <em>after</em> the lecture.
+	  Doing this will be part of the requirements of this class.
 	</p>
 	<p>
-	  Doing this will be part of the requirements of this class.
-	  The format will be the course notes described here:
+	  <em>Note</em>: this is not a request for
+	  you to submit whatever notes you are taking
+	  <em>in</em> class for yourself.  Instead, 
+	  the format will be as described here:
 	</p>
 	<p>
 	  <em>Prior</em> to each class, please review the linked reading
@@ -43,7 +46,8 @@
 	  <em>After</em> each class, please revisit your notes and
 	  assess your understanding.  Did your questions get answered?
 	  Did new ones arise?  What did you learn?  Was there anything
-	  of particular interest that you came across?
+	  of particular interest that you came across?  Share your
+	  questions or findings on the class mailing list!
 	</p>
 	<p>
 
@@ -55,29 +59,70 @@
 	  once <em>after</em> the class.  Make sure to <tt>git commit</tt>.
 	</p>
 	<p>
+	  The following is an illustration what your
+	  notes for the first class might look like:
+	  <blockquote><pre>
+Lecture 01
+==========
+
+Before class:
+-------------
+I carefully read the course website and syllabus.
+I read chapters 01 and 02 in ``Principles of System
+Administration'' as well as the first chapter of ``The
+Practice of System and Network Administration''.
+
+I came across this interesting article:
+https://some.website.you.found/something-relevant.html
+
+Open questions:
+What's the difference between System Administration
+and Site Reliability Engineering?
+
+Do I need to create an AWS account for this class?
+
+After class:
+------------
+Important take-away:
+- get set up with AWS
+- the Unix history helped me understand the difference
+  between Linux and other Unix variants; I had not put
+  much though into this before
+- I still need to grok the pipeline example from class
+	  </pre></blockquote>
+	</p>
+	<p>
+          Note how the text is well-formatted with
+          blocks, paragraphs, and line breaks inserted
+          to make it easy to read.  Please follow this
+          example.
+	</p>
+	<p>
 	  At the end of the semester, <tt>tar</tt> up the directory,
 	  including the <tt>.git</tt> files and submit the resulting
-	  file via email to <a href="mailto:jschauma@stevens.edu?subject=[CS615] class notes">jschauma@stevens.edu</a>.
+	  file via email to <a href="mailto:jschauma@stevens.edu?subject=[CS631] class notes">jschauma@stevens.edu</a>.
+	</p>
+	<p>
+	  The due dates for the course notes to be
+	submitted is 2020-05-07 18:00.
 	</p>
 	<p>
 	 The folllowing is an example sequence of commands to create a valid
 	 submission:
 <pre>
+cd cs615
 mkdir $USER-notes
 cd $USER-notes
-git init
 vi 01.txt
+git add 01.txt
 git commit .
 vi 02.txt
+git add 02.txt
 git commit .
 ...
 cd ..
 tar cf $USER-notes.tar $USER-notes
 </pre>
-       </p>
-       <p>
-       The due date for the submission of the class notes is
-       2019-05-13 16:00 EDT.
        </p>
       <hr>
       [<a href="index.html">Course Website</a>]

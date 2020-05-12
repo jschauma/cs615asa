@@ -12,7 +12,9 @@ PDFTOTEXT=	pdftotext
 PICTURES=	\
 		pics/sysadmin_infosec.eps \
 		pics/kane.eps \
+		pics/cia_triad.eps \
 		pics/redhat.eps \
+		pics/sample-infrastructure-7.eps \
 		pics/osi-stack2.eps \
 		pics/bluehat.eps \
 		pics/blackhat.eps \

@@ -48,6 +48,35 @@
 \end{center}
 \vspace*{\fill}
 
+\subsection{Team Missions}
+\begin{itemize}
+	\item \textcolor{red}{https://www.us-cert.gov/ics/advisories/icsa-19-274-01}
+	\item \textcolor{green}{https://is.gd/soixLV}
+	\item https://is.gd/vSuYvF
+	\item \textcolor{blue}{https://is.gd/qkXhe2}
+\end{itemize}
+
+\subsection{TCP}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.7]{pics/tcp-packet.eps}
+\end{center}
+\vspace*{\fill}
+
+\subsection{Networking I}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.7]{pics/osi-stack.eps}
+\end{center}
+\vspace*{\fill}
+
+\subsection{Networking I}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.7]{pics/osi-stack.eps}
+\end{center}
+\vspace*{\fill}
+
 \subsection{Networking I}
 \vspace*{\fill}
 \begin{center}
@@ -62,74 +91,97 @@ $ curl -s -I http://www.cs.stevens.edu/ >/dev/null
 $ fg
 ^C
 $ sudo tcpdump -r /tmp/out -n -XX -c 1
-14:22:49.493234 IP 172.16.1.20.51999 > 155.246.89.84.80: Flags [S], seq 858820044, win 65535,
-options [mss 1460,nop,wscale 6,nop,nop,TS val 929935740 ecr 0,sackOK,eol], length 0
-        0x0000:  c4b3 01db afe2 8c85 9013 73c1 0800 4510  ..........s...E.
-        0x0010:  0040 0000 4000 4006 9839 ac10 0114 9bf6  .@..@.@..9......
-        0x0020:  5954 cb1f 0050 3330 8dcc 0000 0000 b002  YT...P30........
-        0x0030:  ffff 1f37 0000 0204 05b4 0103 0306 0101  ...7............
-        0x0040:  080a 376d b17c 0000 0000 0402 0000       ..7m.|........
+15:23:43.477095 IP 172.16.1.30.51525 > 155.246.56.11.80: Flags [S], seq 1016422373,
+    win 65535, options [mss 1460,nop,wscale 6,nop,nop,TS val 86305166 ecr 0,sackOK,eol], length 0
+        0x0000:  c4b3 01db afe2 8c85 9047 b4f6 0800 4500  .........G....E.
+        0x0010:  0040 0000 4000 4006 b988 ac10 011e 9bf6  .@..@.@.........
+        0x0020:  380b c945 0050 3c95 5fe5 0000 0000 b002  8..E.P<._.......
+        0x0030:  ffff 6109 0000 0204 05b4 0103 0306 0101  ..a.............
+        0x0040:  080a 0524 e98e 0000 0000 0402 0000       ...$..........
 \end{verbatim}
 
 \subsection{Networking I}
-Layer 2: Ethernet information: \\
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.7]{pics/tcp-encapsulation.eps}
+\end{center}
+\vspace*{\fill}
+
+\subsection{Networking I}
+Layers:
 \begin{Verbatim}
-        0x0000:  \textcolor{blue}{c4b3 01db afe2} \textcolor{red}{8c85 9013 73c1} \textcolor{green}{0800} 4510  ..........s...E.
-        0x0010:  0040 0000 4000 4006 9839 ac10 0114 9bf6  .@..@.@..9......
-        0x0020:  5954 cb1f 0050 3330 8dcc 0000 0000 b002  YT...P30........
-        0x0030:  ffff 1f37 0000 0204 05b4 0103 0306 0101  ...7............
-        0x0040:  080a 376d b17c 0000 0000 0402 0000       ..7m.|........
+        0x0000:  \textcolor{red}{c4b3 01db afe2 8c85 9047 b4f6 0800} \textcolor{orange}{4500}  .........G....E.
+        0x0010:  \textcolor{orange}{0040 0000 4000 4006 b988 ac10 011e 9bf6}  .@..@.@.........
+        0x0020:  \textcolor{orange}{380b} \textcolor{cyan}{c945 0050 3c95 5fe5 0000 0000 b002}  8..E.P<._.......
+        0x0030:  \textcolor{cyan}{ffff 6109 0000 0204 05b4 0103 0306 0101}  ..a.............
+        0x0040:  \textcolor{cyan}{080a 0524 e98e 0000 0000 0402 0000}       ...$..........
+\end{Verbatim}
+
+\vspace{.25in}
+\textcolor{red}{Link layer information}; here: Ethernet \\
+\textcolor{orange}{Network layer information}; here: IP \\
+\textcolor{cyan}{Transport layer information}; here: TCP
+
+\subsection{Networking I}
+OSI Layer 2 / TCP/IP Layer 1: Ethernet information: \\
+\begin{Verbatim}
+        0x0000:  \textcolor{blue}{c4b3 01db afe2} \textcolor{red}{8c85 9047 b4f6} \textcolor{green}{0800} \textcolor{orange}{4500}  .........G....E.
+        0x0010:  \textcolor{orange}{0040 0000 4000 4006 b988 ac10 011e 9bf6}  .@..@.@.........
+        0x0020:  \textcolor{orange}{380b} \textcolor{cyan}{c945 0050 3c95 5fe5 0000 0000 b002}  8..E.P<._.......
+        0x0030:  \textcolor{cyan}{ffff 6109 0000 0204 05b4 0103 0306 0101}  ..a.............
+        0x0040:  \textcolor{cyan}{080a 0524 e98e 0000 0000 0402 0000}       ...$..........
 \end{Verbatim}
 
 \vspace{.25in}
 Destination address: \textcolor{blue}{c4:b3:01:db:af:e2} \\
-Source address: \textcolor{red}{8c:85:90:13:73:c1} \\
-Type: IP (\textcolor{green}{0800})
+Source address: \textcolor{red}{8c:85:90:47:b4:f6} \\
+Type: IP (\textcolor{green}{0800}) \\
+\textcolor{orange}{IPv4 stuff} \textcolor{cyan}{TCP stuff}
 \vspace{.25in}
 
 \begin{Verbatim}
 $ ifconfig en0 | grep ether
-	ether \textcolor{red}{8c:85:90:13:73:c1}
+	ether \textcolor{red}{8c:85:90:47:b4:f6}
 \end{Verbatim}
 
 \subsection{Networking I}
-Layer 3: Internet Protocol: \\
+OSI Layer 3 / TCP/IP Layer 2: Internet Protocol: \\
 \begin{Verbatim}
-        0x0000:  c4b3 01db afe2 8c85 9013 73c1 0800 \textcolor{gray}{45}\textcolor{green}{10}  ..........s...E.
-        0x0010:  \textcolor{cyan}{0040} \textcolor{yellow}{0000} \textcolor{olive}{40}00 \textcolor{orange}{40}06 9839 ac10 0114 9bf6  .@..@.@..9......
-        0x0020:  5954 cb1f 0050 3330 8dcc 0000 0000 b002  YT...P30........
-        0x0030:  ffff 1f37 0000 0204 05b4 0103 0306 0101  ...7............
-        0x0040:  080a 376d b17c 0000 0000 0402 0000       ..7m.|........
+        0x0000:  c4b3 01db afe2 8c85 9047 b4f6 0800 \textcolor{gray}{45}\textcolor{green}{00}  .........G....E.
+        0x0010:  \textcolor{cyan}{0040} \textcolor{yellow}{0000} \textcolor{olive}{40}00 \textcolor{orange}{40}06 b988 ac10 011e 9bf6  .@..@.@.........
+        0x0020:  380b c945 0050 3c95 5fe5 0000 0000 b002  8..E.P<._.......
+        0x0030:  ffff 6109 0000 0204 05b4 0103 0306 0101  ..a.............
+        0x0040:  080a 0524 e98e 0000 0000 0402 0000       ...$..........
 \end{Verbatim}
 \vspace{.5in}
 
-Version 4 (0100) + Header Length 20 (0101); 01000101 = 69 dec = \textcolor{gray}{45} \\
-DSCP unknown (000100) + Not-ECN (00); 00010000 = 16 dec = \textcolor{green}{10} \\
-Total length 64 = \textcolor{cyan}{0040} \\
-Identification \textcolor{yellow}{0000} \\
-Flags: Don't Fragment (010) + Frag Offset (00000) = 64 dec = \textcolor{olive}{40}00 \\
-TTL: 64 (\textcolor{orange}{40}) \\
+Version 4 (0100) + Header Length 20 (0101) = 01000101 = \textcolor{gray}{45} \\
+DSCP default (000000) + Not-ECN (00) = \textcolor{green}{00} \\
+Total length = \textcolor{cyan}{0040} = 64\\
+Identification = \textcolor{yellow}{0000} \\
+Flags = Don't Fragment (010) + Frag Offset (00000) = \textcolor{olive}{40}00 \\
+TTL= \textcolor{orange}{40} = 64 \\
 
 
 \subsection{Networking I}
-Layer 3: Internet Protocol: \\
+OSI Layer 3 / TCP/IP Layer 2: Internet Protocol: \\
 \begin{Verbatim}
         0x0000:  c4b3 01db afe2 8c85 9013 73c1 0800 4510  ..........s...E.
-        0x0010:  0040 0000 4000 40\textcolor{purple}{06} 9839 \textcolor{red}{ac10 0114} \textcolor{blue}{9bf6}  .@..@.@..9......
-        0x0020:  \textcolor{blue}{5954} \textcolor{green}{cb1f 0050 3330 8dcc 0000 0000 b002}  YT...P30........
-        0x0030:  \textcolor{green}{ffff 1f37 0000 0204 05b4 0103 0306 0101}  ...7............
-        0x0040:  \textcolor{green}{080a 376d b17c 0000 0000 0402 0000}       ..7m.|........
+        0x0010:  0040 0000 4000 40\textcolor{purple}{06} b988 \textcolor{red}{ac10 011e} \textcolor{blue}{9bf6}  .@..@.@.........
+        0x0020:  \textcolor{blue}{380b} \textcolor{green}{c945 0050 3c95 5fe5 0000 0000 b002}  8..E.P<._.......
+        0x0030:  \textcolor{green}{ffff 6109 0000 0204 05b4 0103 0306 0101}  ..a.............
+        0x0040:  \textcolor{green}{080a 0524 e98e 0000 0000 0402 0000}       ...$..........
 \end{Verbatim}
 Protocol: TCP (6) \textcolor{purple}{06} \\
-Header Checksum: 0x9839 \\
-Source Address: 172.16.1.20 (\textcolor{red}{ac10 0114}) \\
-Destination Address: 155.246.89.84 (\textcolor{blue}{9bf6 5954}) \\
-TCP Stuff: \textcolor{green}{cb1f ... 0000}
+Header Checksum: 0xb988 \\
+Source Address: 172.16.1.30 (\textcolor{red}{ac10 011e}) \\
+Destination Address: 155.246.56.11 (\textcolor{blue}{9bf6 380b}) \\
+TCP Stuff: \textcolor{green}{c945 ... 0000}
 
 \vspace{.25in}
 \begin{Verbatim}
 $ ifconfig en0 | grep "inet "
-	inet \textcolor{red}{172.16.1.20} netmask 0xffffff00 broadcast 172.16.1.255
+	inet \textcolor{red}{172.16.1.30} netmask 0xffffff00 broadcast 172.16.1.255
 $ 
 \end{Verbatim}
 
@@ -137,7 +189,7 @@ $
 \vspace{.5in}
 \Hugesize
 \begin{center}
-\verb|10011011111101100101100101100100| \\
+\verb|10011011111101100011100000001011| \\
 \vspace{.5in}
 IPv4 addresses are 32-bit numbers.
 \end{center}
@@ -147,7 +199,7 @@ IPv4 addresses are 32-bit numbers.
 \vspace{.5in}
 \Hugesize
 \begin{center}
-\verb|10011011  11110110  01011001  01010100| \\
+\verb|10011011  11110110  00111000  00001011| \\
 \vspace{.5in}
 Each IPv4 address consists of four octets.
 \end{center}
@@ -157,13 +209,13 @@ Each IPv4 address consists of four octets.
 \vspace{.5in}
 \Hugesize
 \begin{center}
-\verb|10011011  11110110  01011001  01010100| \\
+\verb|10011011  11110110  00111000  00001011| \\
 
-\verb|  155   .   246   .    89   .   84| \\
+\verb|  155   .   246   .    56   .   11| \\
 
 
 \begin{Verbatim}
-        \textcolor{blue}{9B        F6        59       54}
+        \textcolor{blue}{9B        F6        38       0B}
 \end{Verbatim}
 \vspace{.5in}
 Each IPv4 address consists of four octets.
@@ -175,7 +227,7 @@ Each IPv4 address consists of four octets.
 \vspace{.5in}
 \Hugesize
 \begin{center}
-\verb|10011011 11110110   01011001 01010100| \\
+\verb|10011011 11110110   00111000 00001011| \\
 \vspace{.5in}
 IPv4 addresses are divided into a {\em network part} and a {\em host part}. \\
 \vspace{.25in}
@@ -189,7 +241,7 @@ without the help of a router.
 \Hugesize
 \begin{center}
 \begin{Verbatim}
-    \textcolor{red}{10}011011 11110110   01011001 01010100
+    \textcolor{red}{10}011011 11110110   00111000 00001011
 \end{Verbatim}
 \vspace{.5in}
 There are three different {\em classes} of IPv4 networks.
@@ -201,7 +253,7 @@ There are three different {\em classes} of IPv4 networks.
 \Hugesize
 \begin{center}
 \begin{Verbatim}
-    \textcolor{red}{10}\textcolor{gray}{01}1011 11110110   01011001 01010100
+    \textcolor{red}{10}\textcolor{gray}{01}1011 11110110   00111000 00001011
 \end{Verbatim}
 \vspace{.5in}
 There are three different {\em classes} of IPv4 networks. \\
@@ -220,7 +272,7 @@ Well, five, really.
 \vspace{.5in}
 \Hugesize
 \begin{center}
-\verb|10011011  11110110  01011001  01010100| \\
+\verb|10011011  11110110  00111000  00001011| \\
 
 \verb|11111111  11111111  00000000  00000000| \\
 \vspace{.5in}
@@ -233,7 +285,7 @@ parts.
 \vspace{.5in}
 \Hugesize
 \begin{center}
-\verb|10011011  11110110  01011001  01010100| \\
+\verb|10011011  11110110  00111000  00001011| \\
 
 \verb|11111111  11111111  11111111  00000000| \\
 \vspace{.5in}
@@ -244,8 +296,8 @@ parts.
 
 \subsection{Subnets}
 \begin{verbatim}
-$ ipcalc -n 155.246.89.84/16
-Address:   155.246.89.84        10011011.11110110. 01011001.01010100
+$ ipcalc -n 155.246.56.11/16
+Address:   155.246.56.11        10011011.11110110. 00111000.00001011
 Netmask:   255.255.0.0 = 16     11111111.11111111. 00000000.00000000
 Wildcard:  0.0.255.255          00000000.00000000. 11111111.11111111
 =>
@@ -254,26 +306,26 @@ HostMin:   155.246.0.1          10011011.11110110. 00000000.00000001
 HostMax:   155.246.255.254      10011011.11110110. 11111111.11111110
 Broadcast: 155.246.255.255      10011011.11110110. 11111111.11111111
 Hosts/Net: 65534                 Class B
-
 \end{verbatim}
 \vspace{.5in}
-Try also: \verb+sipcalc -a 155.246.89.84/16+
+Try also: \verb+sipcalc -a 155.246.56.11/16+
 
 \subsection{Subnets}
 \begin{verbatim}
-$ ipcalc -n 155.246.89.84/24
-Address:   155.246.89.84        10011011.11110110.01011001. 01010100
+$ ipcalc -n 155.246.56.11/24
+Address:   155.246.56.11        10011011.11110110.00111000. 00001011
 Netmask:   255.255.255.0 = 24   11111111.11111111.11111111. 00000000
 Wildcard:  0.0.0.255            00000000.00000000.00000000. 11111111
 =>
-Network:   155.246.89.0/24      10011011.11110110.01011001. 00000000
-HostMin:   155.246.89.1         10011011.11110110.01011001. 00000001
-HostMax:   155.246.89.254       10011011.11110110.01011001. 11111110
-Broadcast: 155.246.89.255       10011011.11110110.01011001. 11111111
+Network:   155.246.56.0/24      10011011.11110110.00111000. 00000000
+HostMin:   155.246.56.1         10011011.11110110.00111000. 00000001
+HostMax:   155.246.56.254       10011011.11110110.00111000. 11111110
+Broadcast: 155.246.56.255       10011011.11110110.00111000. 11111111
 Hosts/Net: 254                   Class B
+
 \end{verbatim}
 \vspace{.5in}
-Try also: \verb+sipcalc -a 155.246.89.84/24+
+Try also: \verb+sipcalc -a 155.246.56.11/24+
 
 \subsection{CIDR cheat sheet}
 A.B.C.D/N
@@ -336,7 +388,7 @@ institutions.
 
 \subsection{IPv4 Subnets: Common CIDRs}
 \begin{verbatim}
-10011011  11110110  01011001  01100100
+10011011  11110110  00111000  00001011
        |         |  ||||   |  |||||||| /32   Host route
        |         |  ||||   |  ||||||   /30   "Glue network" (Point-to-point)
        |         |  ||||   |  |||||    /29   Smallest multi-host network
@@ -407,21 +459,21 @@ IANA Address Pool Exhaustion: & 2011-02-03 \\
 APNIC reached final {\tt /8}: & 2011-04-19 \\
 RIPENCC reached final {\tt /8}: & 2012-09-14 \\
 LACNIC reached final {\tt /8}: & 2014-06-10 \\
-ARIN reached final {\tt /8}: & 2015-09-15 \\
-AFRINIC (predicted): & 2019-09-14 \\
+ARIN reached final {\tt /8}: & 2015-09-24 \\
+AFRINIC (predicted): & 2020-05-17 \\
 \end{tabular}
 \\
 
 \vspace{.5in}
-{\tt http://www.potaroo.net/tools/ipv4/} \\
-{\tt http://www.iana.org/assignments/ipv4-address-space/}
+{\tt https://www.potaroo.net/tools/ipv4/} \\
+{\tt https://www.iana.org/assignments/ipv4-address-space/ipv4-address-space.xhtml}
 
 \subsection{IPv6 Basics}
 \vspace{.5in}
 \Hugesize
 \begin{center}
 \begin{verbatim}
-      10011011111101100101100101100100
+      10011011111101100011100000001011
 \end{verbatim}
 \vspace{.5in}
 IPv4 addresses are 32-bit numbers.
@@ -436,31 +488,32 @@ $ fg
 ^C
 $ sudo tcpdump -t -r /tmp/out -n -XX -c 1
 reading from PCAP-NG file /tmp/out.pcap
-IP6 2001:470:1f07:1d1:797b:fa1e:7161:e495.52491 > 2001:4998:58:1836::11.80: Flags [S], seq 2984917756, win 65535, options [mss 1440,nop,wscale 6,nop,nop,TS val 935411423 ecr 0,sackOK,eol], length 0
-	0x0000:  c4b3 01db afe2 8c85 9013 73c1 86dd 600f  ..........s...`.
-	0x0010:  bc0a 002c 0640 2001 0470 1f07 01d1 797b  ...,.@...p....y{
-	0x0020:  fa1e 7161 e495 2001 4998 0058 1836 0000  ..qa....I..X.6..
-	0x0030:  0000 0000 0011 cd0b 0050 b1ea 3afc 0000  .........P..:...
-	0x0040:  0000 b002 ffff 751a 0000 0204 05a0 0103  ......u.........
-	0x0050:  0306 0101 080a 37c1 3edf 0000 0000 0402  ......7.>.......
+IP6 2001:470:1f07:1d1:a8af:a9d:98ff:e30f.52369 > 2001:4998:58:1836::11.80: Flags [S], seq 1370475612,
+    win 65535, options [mss 1440,nop,wscale 6,nop,nop,TS val 90153796 ecr 0,sackOK,eol], length 0
+	0x0000:  c4b3 01db afe2 8c85 9047 b4f6 86dd 6000  .........G....`.
+	0x0010:  6c64 002c 0640 2001 0470 1f07 01d1 a8af  ld.,.@...p......
+	0x0020:  0a9d 98ff e30f 2001 4998 0058 1836 0000  ........I..X.6..
+	0x0030:  0000 0000 0011 cc91 0050 51af cc5c 0000  .........PQ..\..
+	0x0040:  0000 b002 ffff aca1 0000 0204 05a0 0103  ................
+	0x0050:  0306 0101 080a 055f a344 0000 0000 0402  ......._.D......
 	0x0060:  0000                                     ..
 \end{verbatim}
 
 \subsection{IPv6 Basics}
-Layer 3: Internet Protocol v6: \\
+OSI Layer 3 / TCP/IP Layer 2: Internet Protocol v6:
 \begin{Verbatim}
-	0x0000:  \textcolor{blue}{c4b3 01db afe2} \textcolor{red}{8c85 9013 73c1} \textcolor{green}{86dd} \textcolor{orange}{600f}  ..........s...`.
-	0x0010:  \textcolor{orange}{bc0a 002c 0640 2001 0470 1f07 01d1 797b}  ...,.@...p....y\{
-	0x0020:  \textcolor{orange}{fa1e 7161 e495 2001 4998 0058 1836 0000}  ..qa....I..X.6..
-	0x0030:  \textcolor{orange}{0000 0000 0011} \textcolor{cyan}{cd0b 0050 b1ea 3afc 0000}  .........P..:...
-	0x0040:  \textcolor{cyan}{0000 b002 ffff 751a 0000 0204 05a0 0103}  ......u.........
-	0x0050:  \textcolor{cyan}{0306 0101 080a 37c1 3edf 0000 0000 0402}  ......7.>.......
-	0x0060:  \textcolor{cyan}{0000                                     ..}
+	0x0000:  \textcolor{blue}{c4b3 01db afe2} \textcolor{red}{8c85 9047 b4f6} \textcolor{green}{86dd} \textcolor{orange}{6000}  .........G....`.
+	0x0010:  \textcolor{orange}{6c64 002c 0640 2001 0470 1f07 01d1 a8af}  ld.,.@...p......
+	0x0020:  \textcolor{orange}{0a9d 98ff e30f 2001 4998 0058 1836 0000}  ........I..X.6..
+	0x0030:  \textcolor{orange}{0000 0000 0011} \textcolor{cyan}{cc91 0050 51af cc5c 0000}  .........PQ..\..
+	0x0040:  \textcolor{cyan}{0000 b002 ffff aca1 0000 0204 05a0 0103}  ................
+	0x0050:  \textcolor{cyan}{0306 0101 080a 055f a344 0000 0000 0402}  ......._.D......
+	0x0060:  \textcolor{cyan}{0000}                                     ..
 \end{Verbatim}
 
 \vspace{.25in}
 Destination address: \textcolor{blue}{c4:b3:01:db:af:e2} \\
-Source address: \textcolor{red}{8c:85:90:13:73:c1} \\
+Source address: \textcolor{red}{8c:85:90:47:b4:f6} \\
 Type: IPv6 (\textcolor{green}{86dd}) \\
 \textcolor{orange}{IPv6 stuff}
 \textcolor{cyan}{TCP stuff}
@@ -468,16 +521,16 @@ Type: IPv6 (\textcolor{green}{86dd}) \\
 
 \begin{Verbatim}
 $ ifconfig en0 | grep ether
-	ether \textcolor{red}{8c:85:90:13:73:c1}
+	ether \textcolor{red}{8c:85:90:47:b4:f6}
 \end{Verbatim}
 
 \subsection{IPv6 Basics}
-Layer 3: Internet Protocol v6:
+OSI Layer 3 / TCP/IP Layer 2: Internet Protocol v6:
 \begin{Verbatim}
-	0x0000:  c4b3 01db afe2 8c85 9013 73c1 86dd \textcolor{orange}{600f}  ..........s...`.
-	0x0010:  \textcolor{orange}{bc0a 002c 06}\textcolor{purple}{40} \textcolor{red}{2001 0470 1f07 01d1 797b}  ...,.@...p....y\{
-	0x0020:  \textcolor{red}{fa1e 7161 e495} \textcolor{blue}{2001 4998 0058 1836 0000}  ..qa....I..X.6..
-	0x0030:  \textcolor{blue}{0000 0000 0011} \textcolor{cyan}{cd0b 0050 b1ea 3afc 0000}  .........P..:...
+	0x0000:  c4b3 01db afe2 8c85 9047 b4f6 86dd \textcolor{orange}{6000}  .........G....`.
+	0x0010:  \textcolor{orange}{6c64 002c 06}\textcolor{purple}{40} \textcolor{red}{2001 0470 1f07 01d1 a8af}  ld.,.@...p......
+	0x0020:  \textcolor{red}{0a9d 98ff e30f} \textcolor{blue}{2001 4998 0058 1836 0000}  ........I..X.6..
+	0x0030:  \textcolor{blue}{0000 0000 0011} \textcolor{cyan}{cc91 0050 51af cc5c 0000}  .........PQ..\..
 	0x0040:  \textcolor{cyan}{0000 b002 ffff 751a 0000 0204 05a0 0103}  ......u.........
 	0x0050:  \textcolor{cyan}{0306 0101 080a 37c1 3edf 0000 0000 0402}  ......7.>.......
 	0x0060:  \textcolor{cyan}{0000                                     ..}
@@ -485,29 +538,29 @@ Layer 3: Internet Protocol v6:
 
 \vspace{.15in}
 \textcolor{orange}{Version, Traffic Class, Flow Label, Length, Next Header}; TTL: 64 (\textcolor{purple}{40}) \\
-Source address: \textcolor{red}{2001:470:1f07:1d1:797b:fa1e:7161:e495} \\
+Source address: \textcolor{red}{2001:470:1f07:1d1:18af:0a9d:98ff:e30f} \\
 Destination address: \textcolor{blue}{2001:4998:58:1836::11}
 \vspace{.15in}
 
 \begin{Verbatim}
 $ ifconfig en0 | grep inet6
-	inet6 fe80::1074:475f:7ee9:557f%en0 prefixlen 64 secured scopeid 0xc 
-	inet6 2001:470:1f07:1d1:8c7:8161:ccf7:bfc prefixlen 64 autoconf secured 
-	inet6 \textcolor{red}{2001:470:1f07:1d1:797b:fa1e:7161:e495} prefixlen 64 autoconf temporary 
+	inet6 fe80::1461:d52b:78a7:334a%en0 prefixlen 64 secured scopeid 0x5 
+	inet6 2001:470:1f07:1d1:cd9:97f3:f16:eb48 prefixlen 64 autoconf secured 
+	inet6 \textcolor{red}{2001:470:1f07:1d1:a8af:a9d:98ff:e30f} prefixlen 64 autoconf temporary 
 \end{Verbatim}
 
 \subsection{IPv6 Basics}
 \Hugesize
 \begin{center}
 \begin{verbatim}
-              0010000000000001
-              0000010011111000
-              0000000000000100
-              0000000000000111
-              0000001011100000
-              1000000111111111
-              1111111001010010
-              1001101001101011
+              0000000000100000
+              0000000101001001
+              1001100001011000
+              0001100000110110
+              0000000000000000
+              0000000000000000
+              0000000000000000
+              0000000000010001
 \end{verbatim}
 \vspace{.5in}
 IPv6 addresses are 128 bits.
@@ -776,18 +829,18 @@ Network range           - 2001:0470:0030:0084:0000:0000:0000:0000 -
 |8
 \end{verbatim}
 \Normalsize
-%
-%\newpage
-%\vspace*{\fill}
-%\begin{center}
-%    \Hugesize
-%        Hooray! \\ [1em]
-%    \hspace*{5mm}
-%    \blueline\\
-%    \hspace*{5mm}\\
-%        5 Minute Break
-%\end{center}
-%\vspace*{\fill}
+
+\newpage
+\vspace*{\fill}
+\begin{center}
+    \Hugesize
+        Hooray! \\ [1em]
+    \hspace*{5mm}
+    \blueline\\
+    \hspace*{5mm}\\
+        5 Minute Break
+\end{center}
+\vspace*{\fill}
 
 \subsection{Networking Buzzwords}
 \\
@@ -879,7 +932,7 @@ You can query databases on the internet about e.g. IP
 block or ASN information via the {\tt WHOIS} protocol:
 
 \begin{verbatim}
-$ whois 155.246.89.84 | more
+$ whois 155.246.56.11 | more
 NetRange:       155.246.0.0 - 155.246.255.255
 CIDR:           155.246.0.0/16
 NetName:        STEVENS
@@ -902,6 +955,7 @@ tiered basis. \\
 
 Examples:
 \begin{verbatim}
+https://peeringdb.com/net?asn=21976
 https://peeringdb.com/net?asn=6939
 https://peeringdb.com/net/27
 https://peeringdb.com/net/433
@@ -911,7 +965,7 @@ https://peeringdb.com/net/457
 \subsection{Networking}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=0.7]{pics/AS-interconnection.eps} \\
+	\includegraphics[scale=1.2]{pics/asns.eps} \\
 \end{center}
 \vspace*{\fill}
 
@@ -984,7 +1038,7 @@ Stringing cables across the oceans' floors since 1866!
 \vspace*{\fill}
 \begin{center}
 	\includegraphics[scale=1.0]{pics/internet-undersea-cable.eps} \\
-	\verb+http://www.submarinecablemap.com/+ \\
+	\verb+https://www.submarinecablemap.com/+ \\
 	\verb+https://is.gd/CjanOu+
 \end{center}
 \vspace*{\fill}
@@ -993,7 +1047,7 @@ Stringing cables across the oceans' floors since 1866!
 \vspace*{\fill}
 \begin{center}
 	\includegraphics[scale=0.7]{pics/cablemap.eps} \\
-	\verb+http://www.submarinecablemap.com/+ \\
+	\verb+https://www.submarinecablemap.com/+ \\
 \end{center}
 \vspace*{\fill}
 
@@ -1010,7 +1064,7 @@ Stringing cables across the oceans' floors since 1866!
 \vspace*{\fill}
 
 {\tt https://blog.cloudflare.com/how-syria-turned-off-the-internet} \\
-{\tt https://player.vimeo.com/video/54630037}
+{\tt https://youtu.be/OZHKeYwnALc}
 \end{center}
 
 \subsection{Networking}
@@ -1018,8 +1072,8 @@ Stringing cables across the oceans' floors since 1866!
 \vspace*{\fill}
 	\includegraphics[scale=0.9]{pics/tubes.eps} \\
 \vspace*{\fill}
-{\tt http://amzn.com/0061994952} \\
-{\tt http://cromwell-intl.com/travel/usa/new-york-internet/}
+{\tt https://amzn.com/0061994952} \\
+{\tt https://cromwell-intl.com/travel/usa/new-york-internet/}
 \end{center}
 
 \subsection{Networking}
@@ -1943,22 +1997,21 @@ traceroute to search.yahoo.com (63.250.200.63), 30 hops max, 60 byte packets
 \subsection{Internet Maps and Architecture}
 \begin{itemize}
 	\item \verb+https://is.gd/C66S8a+
-	\item \verb+http://www.peer1.com/map-of-the-internet+
-	\item \verb+http://www.submarinecablemap.com/+
-	\item \verb+http://en.wikipedia.org/wiki/Peering+
+	\item \verb+https://www.submarinecablemap.com/+
+	\item \verb+https://en.wikipedia.org/wiki/Peering+
 	\item \verb+https://is.gd/tpPNE5+
 	\item \verb+https://is.gd/B0d3kh+
-	\item \verb+http://amzn.com/0061994936+
+	\item \verb+https://amzn.com/0061994936+
 	\item \verb+https://bgp.he.net/+
 	\item \verb+https://www.wired.com/2014/08/shark_cable/+
 \end{itemize}
 
 \subsection{IPv6}
 \begin{itemize}
-	\item \verb+http://www.potaroo.net/papers/isoc/2005-07/ipv6size.html+
+	\item \verb+https://www.potaroo.net/papers/isoc/2005-07/ipv6size.html+
 	\item \verb+https://bgp.he.net/ipv6-progress-report.cgi+
 	\item \verb+https://ipv6.he.net/statistics/+
-	\item \verb+http://tunnelbroker.net/+
+	\item \verb+https://tunnelbroker.net/+
 \end{itemize}
 
 %\subsection{Reading}

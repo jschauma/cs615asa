@@ -14,7 +14,7 @@
 \lhead{\slidetitle}                               % default:\lhead{\slidetitle}
 \chead{CS615 - Aspects of System Administration}% default:\chead{\relax}
 \rhead{Slide \thepage}                       % default:\rhead{\sectiontitle}
-\lfoot{\Gray{Configuration Management}}% default:\lfoot{\slideauthor}
+\lfoot{\Gray{Monitoring, Configuration Management}}% default:\lfoot{\slideauthor}
 \cfoot{\relax}                               % default:\cfoot{\relax}
 \rfoot{\Gray{\today}}
 
@@ -24,7 +24,7 @@
 \begin{center}
 	\Hugesize
 		CS615 - Aspects of System Administration\\ [1em]
-		Configuration Management\\ [1em]
+		Monitoring, Configuration Management\\ [1em]
 	\hspace*{5mm}\blueline\\ [1em]
 	\Normalsize
 		Department of Computer Science\\
@@ -34,6 +34,604 @@
 		\verb+https://stevens.netmeister.org/615/+
 \end{center}
 \vspace*{\fill}
+
+\newpage
+\vspace*{\fill}
+\begin{center}
+	\Hugesize
+		Hooray!\\ [1em]
+	\hspace*{5mm}
+	\blueline\\
+	\hspace*{5mm}\\
+		5 minute break
+\end{center}
+\vspace*{\fill}
+
+
+\subsection{Problem Report}
+\vspace*{\fill}
+\Huge
+\begin{center}
+``Something's wrong.''
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Now what?}
+\begin{center}
+	\includegraphics[scale=0.55]{pics/monkey.eps}
+\end{center}
+
+\subsection{Problem Report}
+\vspace*{\fill}
+\Huge
+\begin{center}
+``The system feels slow.'' \\
+\addvspace{.5in}
+``I can't log in.'' \\
+\addvspace{.5in}
+``My mail was not delivered.'' \\
+\addvspace{.5in}
+``The site is down.''
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Now what?}
+\begin{center}
+	\includegraphics[scale=0.55]{pics/monkey.eps}
+\end{center}
+
+\subsection{To the logs!}
+\begin{center}
+	\includegraphics[scale=0.55]{pics/logs.eps}
+\end{center}
+
+\subsection{Answers}
+``The system feels slow.''
+\begin{verbatim}
+up 1318 days, 13:46, 1 user, load averages: 993.81, 272.91, 1012.18
+\end{verbatim}
+
+\addvspace{.3in}
+``I can't log in.''
+\begin{verbatim}
+Apr 6 09:25:56 <auth.info>hostname sshd[1624]: Failed password for jdoe from
+115.239.231.100 port 1047 ssh2
+\end{verbatim}
+
+\addvspace{.3in}
+``My mail was not delivered.''
+\begin{verbatim}
+Apr 11 16:15:40 panix postfix/smtpd[7566]: connect from unknown[122.3.68.122]
+Apr 11 16:15:41 panix postfix/smtpd[7566]: NOQUEUE: reject_warning: RCPT from
+unknown[122.3.68.122]: 450 4.7.1 Client host rejected: cannot find your hostname,
+[122.3.68.122]; from=<McneilRomany28@pldt.net> to=<jschauma@stevens.edu>
+proto=ESMTP helo=<122.3.68.122.pldt.net>
+\end{verbatim}
+
+\subsection{Answers}
+``The site is down.'' \\
+
+\begin{verbatim}
+94.242.252.41 - "" [11/Apr/2016:19:18:47 -0400] "GET /secret/ HTTP/1.1"
+403 524 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:28.0)
+Gecko/20100101 Firefox/28.0"
+\end{verbatim}
+
+\subsection{Answers}
+``The site is down.'' \\
+
+\begin{verbatim}
+94.242.252.41 - "" [11/Apr/2016:19:18:47 -0400] "GET /secret/ HTTP/1.1"
+403 524 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:28.0)
+Gecko/20100101 Firefox/28.0"
+\end{verbatim}
+
+\addvspace{.2in}
+\begin{center}
+	\includegraphics[scale=0.25]{pics/monkey.eps}
+\end{center}
+
+\subsection{Events}
+\vspace*{\fill}
+\Huge
+\begin{center}
+``Something's wrong.'' is just an {\em unexpected} or
+{\em undesirable} event.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Events}
+\vspace*{\fill}
+\Huge
+\begin{center}
+``Something's wrong.'' is just an {\em unexpected} or
+{\em undesirable} event. \\
+\vspace{.4in}
+{\em Events} happen all the time.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Events}
+\vspace*{\fill}
+\Huge
+\begin{center}
+``Something's wrong.'' is just an {\em unexpected} or
+{\em undesirable} event. \\
+\vspace{.4in}
+{\em Events} happen all the time. \\
+\vspace{.4in}
+Being able to identify {\em relevant} events allows
+you to diagnose, predict and even prevent {\em
+undesirable} events.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Events}
+\vspace*{\fill}
+\Huge
+\begin{center}
+In order to be able to identify an event as {\em
+unexpected}, you have to have {\em expected} events.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Expected Events}
+\vspace*{\fill}
+\Huge
+\begin{center}
+Know your applications.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Expected Events}
+\vspace*{\fill}
+\Huge
+\begin{center}
+Know your applications. \\
+\vspace{.4in}
+Know your users.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Expected Events}
+\vspace*{\fill}
+\Huge
+\begin{center}
+Know your applications. \\
+\vspace{.4in}
+Know your users. \\
+\vspace{.4in}
+Know your traffic patterns.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Expected Events}
+\vspace*{\fill}
+\Huge
+\begin{center}
+Know your applications. \\
+\vspace{.4in}
+Know your users. \\
+\vspace{.4in}
+Know your traffic patterns. \\
+\vspace{.4in}
+{\em Know your systems.}
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Events and Metrics}
+\vspace*{\fill}
+\begin{verbatim}
+$ dict event
+  event
+      n 1: something that happens at a given place and time
+      2: a special set of circumstances; "in that event, the first
+         possibility is excluded"; "it may rain in which case the
+         picnic will be canceled" [syn: {event}, {case}]
+
+
+$ dict metric
+  metric
+      3: a system of related measures that facilitates the
+         quantification of some particular characteristic [syn:
+         {system of measurement}, {metric}]
+
+\end{verbatim}
+\vspace*{\fill}
+
+\subsection{Events and Metrics}
+\begin{center}
+	\includegraphics[scale=0.75]{pics/events-metrics.eps}
+\end{center}
+
+\subsection{Events and Metrics}
+Events
+\begin{itemize}
+	\item may occur rarely / frequently / constantly
+	\item can be collected in logs
+	\item may be comprised of other events
+	\item may be: ’something happened’
+	\item may be: ’nothing (new) happened’
+\end{itemize}
+\addvspace{.5in}
+
+Metrics:
+\begin{itemize}
+	\item correlation of related events
+	\item may help identify outliers
+	\item may trigger events
+	\item may help make (automated or interactive) decisions
+\end{itemize}
+
+
+\subsection{Collecting Data}
+{\em Counters}: easy, numeric data tracking individual events. Example: HTTP status codes
+
+\addvspace{.5in}
+{\em Timers}: easy, numeric data tracking event duration. Example: Time to send all
+data for a successful HTTP request.
+
+\addvspace{.5in}
+{\em Thresholds}: easy, numeric trigger for events; may itself trigger events or metrics.
+Example: more than N HTTP hits in X seconds yield 404.
+
+% % \subsection{Counting counters, timing timers...}
+% % SNMP
+% % \vspace{.5in}
+% % \begin{center}
+% % 	\Huge
+% % 	A complete network management system to monitor network-attached devices.
+% % \end{center}
+% % \Normalsize
+% % 
+% % \subsection{SNMP}
+% % Base concepts:
+% % \begin{itemize}
+% % 	\item managed devices run an {\em snmp agent} or d\ae mon
+% % 	\item information about the device is exposed in {\em management information bases}
+% % 	\item parts of a system are made available in {\em read-only} mode
+% % 	\item parts of a system may be made available in {\em write} mode
+% % 	\item certain conditions may trigger actions or {\em traps}
+% % 	\item normally uses UDP 161 for the {\em agent} and 162 for the {\em manager}
+% % \end{itemize}
+% % 
+% % \subsection{SNMP}
+% % Management Information Bases (MIBs):
+% % \begin{itemize}
+% % 	\item hierarchical namespace
+% % 	\item contains {\em Object Identifiers} (OIDs)
+% % 	\item written in {\em Abstract Syntax Notation One} (ASN.1)
+% % 	\item often vendor defined
+% % \end{itemize}
+% % 
+% % \subsection{SNMP Versions}
+% % SNMPv1:
+% % \begin{itemize}
+% % 	\item de-facto standard
+% % 	\item poor security (``community strings'' act as passwords)
+% % \end{itemize}
+% % \vspace{.2in}
+% % SNMPv2:
+% % \begin{itemize}
+% % 	\item improvements in the area of performance (\verb+GETBULK+ instead of \verb+GETNEXT+) and security
+% % 	\item comes in the flavors {\em SNMPv2c}, {\em SNMPv1.5} and {\em SNMPv2u}
+% % \end{itemize}
+% % \vspace{.2in}
+% % SNMPv3:
+% % \begin{itemize}
+% % 	\item official standard
+% % 	\item adds authentication, privacy and access control
+% % \end{itemize}
+% % 
+% % \subsection{SNMP: An example}
+% % \smallish
+% % \begin{verbatim}
+% % $ snmpwalk -c public -v 1 bluemoon.cs.stevens-tech.edu
+% % iso.3.6.1.2.1.1.1.0 = STRING: "HP ETHERNET MULTI-ENVIRONMENT,ROM none,JETDIRECT,JD147,EEPROM
+% % JDI2300 0013,CIDATE 07/13/2013"
+% % iso.3.6.1.2.1.1.2.0 = OID: iso.3.6.1.4.1.11.2.3.9.1
+% % iso.3.6.1.2.1.1.3.0 = Timeticks: (293219400) 33 days, 22:29:54.00
+% % [...]
+% % iso.3.6.1.2.1.25.3.2.1.3.1 = STRING: "HP Color LaserJet CP5520 Series"
+% % iso.3.6.1.2.1.25.3.2.1.3.2 = STRING: "SanDisk SDSA5AK-008G-1006"
+% % [...]
+% % iso.3.6.1.2.1.43.16.5.1.2.1.1 = STRING: "Sleep mode on"
+% % \end{verbatim}
+% % 
+% % \subsection{SNMP: An example}
+% % \smallish
+% % \begin{verbatim}
+% % $ snmpwalk -c public -v 1 gw.cc.stevens-tech.edu
+% % SNMPv2-MIB::sysDescr.0 = STRING: Cisco IOS Software, s72033_rp Software
+% % (s72033_rp-ADVIPSERVICESK9_WAN-M), Version 12.2(33)SXH, RELEASE SOFTWARE (fc5)
+% % DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (3112108803) 360 days, 4:44:48.03
+% % SNMPv2-MIB::sysContact.0 = STRING: chose@stevens.edu x5457
+% % SNMPv2-MIB::sysName.0 = STRING: gw.cc.stevens-tech.edu
+% % SNMPv2-MIB::sysLocation.0 = STRING: campus:sl:0:machineroom
+% % SNMPv2-MIB::sysORLastChange.0 = Timeticks: (0) 0:00:00.00
+% % [...]
+% % IF-MIB::ifPhysAddress.1 = STRING: 0:17:95:68:d2:dc
+% % IF-MIB::ifPhysAddress.2 = STRING: 0:18:74:1c:e3:80
+% % [...]
+% % IF-MIB::ifAdminStatus.1 = INTEGER: up(1)
+% % IF-MIB::ifAdminStatus.2 = INTEGER: down(2)
+% % [...]
+% % IF-MIB::ifInOctets.1 = Counter32: 147341347
+% % IF-MIB::ifInOctets.2 = Counter32: 487894092
+% % [...]
+% % IF-MIB::ifOutOctets.1 = Counter32: 956876160
+% % IF-MIB::ifOutOctets.2 = Counter32: 1532452749
+% % [...]
+% % RFC1213-MIB::ipRouteDest.66.193.255.0 = IpAddress: 66.193.255.0
+% % RFC1213-MIB::ipRouteDest.66.194.0.0 = IpAddress: 66.194.0.0
+% % [...]
+% % \end{verbatim}
+% % \Normalsize
+% % 
+% % \subsection{SNMP: An example}
+% % \smallish
+% % \begin{verbatim}
+% % $ snmpwalk -Os -c public -v 1 localhost
+% % iso.3.6.1.2.1.1.1.0 = STRING: "Linux avatar 3.2.0-51-generic #77-Ubuntu SMP Wed Jul 24 20:18:19
+% % UTC 2013 x86_64"
+% % iso.3.6.1.2.1.1.2.0 = OID: iso.3.6.1.4.1.8072.3.2.10
+% % iso.3.6.1.2.1.1.3.0 = Timeticks: (31099465) 3 days, 14:23:14.65
+% % [...]
+% % iso.3.6.1.2.1.1.5.0 = STRING: "avatar"
+% % iso.3.6.1.2.1.25.1.4.0 = STRING: "root=/dev/xvda2 ro
+% % root=/dev/xvda2 ro ip=:127.0.255.255::::eth0:dhcp"
+% % \end{verbatim}
+% % \Normalsize
+
+\subsection{Know Your Systems}
+Profile your application:
+\begin{itemize}
+	\item execution time (for example: {\tt time(1)})
+	\item data sources and destination affect execution
+	\item {\tt strace(1)} and friends for more detailed analysis
+\end{itemize}
+
+\addvspace{.5in}
+Understand your system performance:
+\begin{itemize}
+	\item CPU load, memory (for example: {\tt top(1)}, {\tt vmstat(1)})
+	\item disk I/O (for example: {\tt iostat(1)})
+	\item user activity (for example: {\tt ac(1)}, {\tt lsof(8)}, {\tt sa(8)})
+\end{itemize}
+
+\subsection{Know Your Systems}
+Network statistics:
+\begin{itemize}
+	\item ports and applications (for example: {\tt lsof(8)}, {\tt netstat(8)})
+	\item packets in and out
+	\item connection origin
+	\item {\em NetFlow} etc.
+\end{itemize}
+
+\subsection{Context}
+{\em Context} lets you find {\em relevant} events in
+your haystack of metrics.
+
+\begin{center}
+	\includegraphics[scale=0.75]{pics/glass-needle.eps}
+\end{center}
+
+\subsection{No context.}
+CPU load - 12 hours
+\begin{center}
+	\includegraphics[scale=0.9]{pics/cpu-12h.eps}
+\end{center}
+
+\subsection{No context.}
+Disk I/O - 12 hours
+\begin{center}
+	\includegraphics[scale=0.9]{pics/disk-io-12h.eps}
+\end{center}
+
+\subsection{No context.}
+Load Average - 12 hours
+\begin{center}
+	\includegraphics[scale=0.9]{pics/load-average-12h.eps}
+\end{center}
+
+\subsection{No context.}
+Memory - 12 hours
+\begin{center}
+	\includegraphics[scale=0.9]{pics/memory-12h.eps}
+\end{center}
+
+\subsection{Some context.}
+12 hours
+\begin{center}
+	\includegraphics[scale=0.36]{pics/cpu-12h.eps}
+	\includegraphics[scale=0.36]{pics/disk-io-12h.eps} \\
+	\includegraphics[scale=0.36]{pics/load-average-12h.eps}
+	\includegraphics[scale=0.36]{pics/memory-12h.eps} \\
+\end{center}
+
+\subsection{With context.}
+7 days
+\begin{center}
+	\includegraphics[scale=0.36]{pics/cpu-7day.eps}
+	\includegraphics[scale=0.36]{pics/disk-io-7day.eps} \\
+	\includegraphics[scale=0.36]{pics/load-average-7day.eps}
+	\includegraphics[scale=0.36]{pics/memory-7day.eps} \\
+\end{center}
+
+\subsection{Know your systems.}
+30 days
+\begin{center}
+	\includegraphics[scale=0.36]{pics/cpu-30day.eps}
+	\includegraphics[scale=0.36]{pics/disk-io-30day.eps} \\
+	\includegraphics[scale=0.36]{pics/load-average-30day.eps}
+	\includegraphics[scale=0.36]{pics/memory-30day.eps} \\
+\end{center}
+
+\subsection{Turn {\em events} into {\em metrics.}}
+\begin{itemize}
+	\item Log it!
+\end{itemize}
+
+\addvspace{.5in}
+\begin{itemize}
+	\item Export counters/timers from within your application.
+	\item Process logs and produce counters/timers:
+\begin{verbatim}
+awk '{print $9}' /var/log/httpd/access.log | sort | uniq -c
+\end{verbatim}
+	\item create a baseline
+\end{itemize}
+
+\addvspace{.5in}
+\begin{itemize}
+	\item Graph it. \\
+	{\tt https://is.gd/tDCmQI}
+\end{itemize}
+
+\subsection{Monitoring/graphing}
+SNMP based:
+\begin{itemize}
+	\item Cacti: \verb+http://www.cacti.net/+
+	\item MRTG: \verb+http://oss.oetiker.ch/mrtg/+
+	\item Observium: \verb+http://demo.observium.org/+
+	\item ...
+\end{itemize}
+\vspace{.2in}
+Other / complementary:
+\begin{itemize}
+	\item Ganglia: \verb+http://ganglia.info/+
+	\item Munin: \verb+http://munin-monitoring.org/+
+	\item Nagios: \verb+http://nagioscore.demos.nagios.com/+
+	\item Graphite: \verb+http://graphite.wikidot.com/+
+\end{itemize}
+\vspace{.5in}
+%More on monitoring and performance in a future lecture (if time permits).
+
+\subsection{Context doesn't explain everything...}
+...but it helps you look into what to investigate.
+
+\begin{center}
+	\includegraphics[scale=0.6]{pics/traffic-by-cipher.eps}
+\end{center}
+
+\subsection{Context doesn't explain everything...}
+...but it helps you look into what to investigate.
+
+\begin{center}
+	\includegraphics[scale=0.6]{pics/traffic-by-site.eps}
+\end{center}
+
+\subsection{To the cloud!}
+There’s a service for that. In the cloud. \\
+
+Consider:
+\begin{itemize}
+	\item support / convenience vs. do-it-yourself
+	\item integration with your other services
+	\item data confidentiality
+	\item data lock-in (esp. when trending data over years)
+\end{itemize}
+
+\subsection{Monitoring Pitfalls}
+\vspace*{\fill}
+\Huge
+\begin{center}
+Increasing the size of your haystack does not always
+help in finding the needle.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Monitoring Pitfalls}
+\vspace*{\fill}
+\Huge
+\begin{center}
+Increasing the size of your haystack does not always
+help in finding the needle. \\
+\vspace{.2in}
+Email is not a scalable network monitoring solution.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Monitoring Pitfalls}
+\vspace*{\fill}
+\Huge
+\begin{center}
+Increasing the size of your haystack does not always
+help in finding the needle. \\
+\vspace{.2in}
+Email is not a scalable network monitoring solution. \\
+\vspace{.2in}
+Absence of a signal can itself be a signal.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Monitoring Pitfalls}
+\vspace*{\fill}
+\Huge
+\begin{center}
+Increasing the size of your haystack does not always
+help in finding the needle. \\
+\vspace{.2in}
+Email is not a scalable network monitoring solution. \\
+\vspace{.2in}
+Absence of a signal can itself be a signal. \\
+\vspace{.2in}
+Most of the value of your metrics only becomes evident
+over time.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\subsection{Monitoring Pitfalls}
+\vspace*{\fill}
+\Huge
+\begin{center}
+Increasing the size of your haystack does not always
+help in finding the needle. \\
+\vspace{.2in}
+Email is not a scalable network monitoring solution. \\
+\vspace{.2in}
+Absence of a signal can itself be a signal. \\
+\vspace{.2in}
+Most of the value of your metrics only becomes evident
+over time. \\
+\vspace{.2in}
+This list is incomplete.
+\end{center}
+\Normalsize
+\vspace*{\fill}
+
+\newpage
+\vspace*{\fill}
+\begin{center}
+	\Hugesize
+		Hooray!\\ [1em]
+	\hspace*{5mm}
+	\blueline\\
+	\hspace*{5mm}\\
+		5 minute break
+\end{center}
+\vspace*{\fill}
+
+\subsection{Team Missions}
+Red Team: \verb+https://is.gd/LfrKPi+ \\
+
+\vspace{.5in}
+
+Blue Team: \verb+https://is.gd/kkXMQ2+ \\
 
 \subsection{Entropy is the Enemy}
 \vfill
@@ -112,87 +710,6 @@ $ ssh root@server1
         \hline
         \end{tabular}
 \Normalsize
-
-\subsection{Every Sysadmin ever...}
-\begin{enumerate}
-	\item {\tt scp(1)}
-\end{enumerate}
-
-\subsection{Every Sysadmin ever...}
-\begin{enumerate}
-	\item {\tt scp(1)}
-	\item {\tt rsync(1)}
-\end{enumerate}
-
-\subsection{Every Sysadmin ever...}
-\begin{enumerate}
-	\item {\tt scp(1)}
-	\item {\tt rsync(1)}
-	\item some sort of parallel {\tt ssh(1)} of the above
-\end{enumerate}
-
-\subsection{Every Sysadmin ever...}
-\begin{enumerate}
-	\item {\tt scp(1)}
-	\item {\tt rsync(1)}
-	\item some sort of parallel {\tt ssh(1)} of the above
-	\item switch to {\em pull}
-\end{enumerate}
-
-\subsection{Every Sysadmin ever...}
-\begin{enumerate}
-	\item {\tt scp(1)}
-	\item {\tt rsync(1)}
-	\item some sort of parallel {\tt ssh(1)} of the above
-	\item switch to {\em pull}
-	\item add mutual authentication
-\end{enumerate}
-
-\subsection{Every Sysadmin ever...}
-\begin{enumerate}
-	\item {\tt scp(1)}
-	\item {\tt rsync(1)}
-	\item some sort of parallel {\tt ssh(1)} of the above
-	\item switch to {\em pull}
-	\item add mutual authentication
-	\item but effectively ignore mismatches, because doing things the right way is difficult and inconvenient
-\end{enumerate}
-
-\subsection{Every Sysadmin ever...}
-\begin{enumerate}
-	\item {\tt scp(1)}
-	\item {\tt rsync(1)}
-	\item some sort of parallel {\tt ssh(1)} of the above
-	\item switch to {\em pull}
-	\item add mutual authentication
-	\item but effectively ignore mismatches, because doing things the right way is difficult and inconvenient
-	\item switch to {\em push} with remote d\ae mon
-\end{enumerate}
-
-\subsection{Every Sysadmin ever...}
-\begin{enumerate}
-	\item {\tt scp(1)}
-	\item {\tt rsync(1)}
-	\item some sort of parallel {\tt ssh(1)} of the above
-	\item switch to {\em pull}
-	\item add mutual authentication
-	\item but effectively ignore mismatches, because doing things the right way is difficult and inconvenient
-	\item switch to {\em push} with remote d\ae mon
-	\item write an inventory database
-\end{enumerate}
-
-\subsection{Every Sysadmin ever...}
-\begin{enumerate}
-	\item {\tt scp(1)}
-	\item {\tt rsync(1)}
-	\item some sort of parallel {\tt ssh(1)} of the above
-	\item switch to {\em pull}
-	\item add mutual authentication
-	\item but effectively ignore mismatches, because doing things the right way is difficult and inconvenient
-	\item switch to {\em push} with remote d\ae mon
-	\item write an inventory database
-	\item deploy a well-known CM system
-\end{enumerate}
 
 \subsection{Every Sysadmin ever...}
 \begin{enumerate}
@@ -340,6 +857,17 @@ bundle agent sshd(parameter) {
 }
 \end{verbatim}
 \Normalsize
+
+\subsection{Team Missions}
+
+Black Team: \verb+https://is.gd/zQFtGJ+ and
+\verb+https://is.gd/b1fN36+ \\
+
+\vspace{.5in}
+
+Green Team: \verb+https://is.gd/mWKosu+ and
+\verb+https://is.gd/ejJT1T+ \\
+
 
 \subsection{CM Requirements}
 \begin{itemize}
@@ -499,24 +1027,6 @@ f(f(x)) \equiv f(x)
 \end{displaymath}
 
 \begin{verbatim}
-$ cd etc
-\end{verbatim}
-
-\subsection{Idempotence}
-CM systems assert state.  For this, all operations
-must be {\em idempotent}. \\
-\vspace{.5in}
-
-\begin{displaymath}
-f(f(x)) \equiv f(x)
-\end{displaymath}
-
-\begin{displaymath}
-| |-1| | \equiv |-1|
-\end{displaymath}
-
-\begin{verbatim}
-$ cd etc                                            # not idempotent
 $ rm resolv.conf
 \end{verbatim}
 
@@ -534,7 +1044,6 @@ f(f(x)) \equiv f(x)
 \end{displaymath}
 
 \begin{verbatim}
-$ cd etc                                            # not idempotent
 $ rm resolv.conf                                    # idempotent
 $ echo "nameserver 192.168.0.1" > resolv.conf
 \end{verbatim}
@@ -553,7 +1062,6 @@ f(f(x)) \equiv f(x)
 \end{displaymath}
 
 \begin{verbatim}
-$ cd etc                                            # not idempotent
 $ rm resolv.conf                                    # idempotent
 $ echo "nameserver 192.168.0.1" > resolv.conf       # idempotent
 $ echo "nameserver 192.168.0.2" >> resolv.conf
@@ -573,7 +1081,6 @@ f(f(x)) \equiv f(x)
 \end{displaymath}
 
 \begin{verbatim}
-$ cd etc                                            # not idempotent
 $ rm resolv.conf                                    # idempotent
 $ echo "nameserver 192.168.0.1" > resolv.conf       # idempotent
 $ echo "nameserver 192.168.0.2" >> resolv.conf      # not idempotent
@@ -594,16 +1101,88 @@ f(f(x)) \equiv f(x)
 \end{displaymath}
 
 \begin{verbatim}
-$ cd etc                                            # not idempotent
+$ rm resolv.conf                                    # idempotent
+$ echo "nameserver 192.168.0.1" > resolv.conf       # idempotent
+$ echo "nameserver 192.168.0.2" >> resolv.conf      # not idempotent
+$ chown root:wheel resolv.conf                      # idempotent
+$ chmod 0644 resolv.conf
+\end{verbatim}
+
+\subsection{Idempotence}
+CM systems assert state.  For this, all operations
+must be {\em idempotent}. \\
+\vspace{.5in}
+
+\begin{displaymath}
+f(f(x)) \equiv f(x)
+\end{displaymath}
+
+\begin{displaymath}
+| |-1| | \equiv |-1|
+\end{displaymath}
+
+\begin{verbatim}
 $ rm resolv.conf                                    # idempotent
 $ echo "nameserver 192.168.0.1" > resolv.conf       # idempotent
 $ echo "nameserver 192.168.0.2" >> resolv.conf      # not idempotent
 $ chown root:wheel resolv.conf                      # idempotent
 $ chmod 0644 resolv.conf                            # idempotent
+$ yum install frozzle
+\end{verbatim}
+
+
+\subsection{Idempotence}
+CM systems assert state.  For this, all operations
+must be {\em idempotent}. \\
+\vspace{.5in}
+
+\begin{displaymath}
+f(f(x)) \equiv f(x)
+\end{displaymath}
+
+\begin{displaymath}
+| |-1| | \equiv |-1|
+\end{displaymath}
+
+\begin{verbatim}
+$ rm resolv.conf                                    # idempotent
+$ echo "nameserver 192.168.0.1" > resolv.conf       # idempotent
+$ echo "nameserver 192.168.0.2" >> resolv.conf      # not idempotent
+$ chown root:wheel resolv.conf                      # idempotent
+$ chmod 0644 resolv.conf                            # idempotent
+$ yum install frozzle                               # not idempotent
+$ yum install frozzle-1.2.3
+\end{verbatim}
+
+\subsection{Idempotence}
+CM systems assert state.  For this, all operations
+must be {\em idempotent}. \\
+\vspace{.5in}
+
+\begin{displaymath}
+f(f(x)) \equiv f(x)
+\end{displaymath}
+
+\begin{displaymath}
+| |-1| | \equiv |-1|
+\end{displaymath}
+
+\begin{verbatim}
+$ rm resolv.conf                                    # idempotent
+$ echo "nameserver 192.168.0.1" > resolv.conf       # idempotent
+$ echo "nameserver 192.168.0.2" >> resolv.conf      # not idempotent
+$ chown root:wheel resolv.conf                      # idempotent
+$ chmod 0644 resolv.conf                            # idempotent
+$ yum install frozzle                               # not idempotent
+$ yum install frozzle-1.2.3                         # "it depends"
 \end{verbatim}
 
 \subsection{Convergence and Eventual Consistency}
-Note: idempotence does not guarantee efficiency! \\
+
+Note: while idempotence enables self-healing and may
+allow you to not keep state, it does not guarantee
+efficiency! \\
+
 \vspace{.5in}
 
 CM systems should ensure changes are:
@@ -685,6 +1264,7 @@ also need to manage configurations for:
 \vspace{.25in}
 
 \begin{itemize}
+	\item desktops and item mobile clients
 	\item network equipment
 	\item load balancers
 	\item containers

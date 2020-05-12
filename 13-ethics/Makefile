@@ -13,6 +13,7 @@ PICTURES=	\
 		pics/thumbsup-borat.eps \
 		pics/hats.eps \
 		pics/lopsa.eps \
+		pics/ai-guidelines.eps \
 		pics/snowden.eps \
 		pics/weev.eps \
 		pics/chelsea-manning-and-julian-assange.eps \

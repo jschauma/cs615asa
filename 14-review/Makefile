@@ -30,6 +30,7 @@ FIGURES=	\
 	pics/traceroute4.eps \
 	pics/tcpip-stack.eps \
 	pics/hierarchical-dns.eps \
+	pics/wireshark.eps \
 	pics/resolution.eps \
 	pics/www.cs.stevens.edu.eps \
 	pics/csr-process.eps \
@@ -40,6 +41,7 @@ FIGURES=	\
 	pics/Room_641A.eps \
 	pics/revproxy.eps \
 	pics/schrodinger.eps \
+	pics/wafl.eps \
 	pics/host-states.eps
 
 #
@@ -327,7 +329,6 @@ FIGURES=	\
 #	pics/wafl2.eps \
 #	pics/waste.eps \
 #	pics/wateringhole.eps \
-#	pics/wireshark.eps \
 #	pics/wolfram.eps \
 #	pics/xdvipresent.1.ps \
 #	pics/xdvipresent.2.ps \

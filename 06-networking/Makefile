@@ -13,15 +13,19 @@ PICTURES= \
 	pics/2computers.eps \
 	pics/3computers.eps \
 	pics/broadcast-domain.eps \
+	pics/asns.eps \
 	pics/AS-interconnection.eps \
 	pics/Room_641A.eps \
 	pics/cable-layer.eps \
 	pics/cablemap.eps \
 	pics/car-duct-tape.eps \
 	pics/cerf.eps \
+	pics/redbox.eps \
 	pics/classfull.eps \
 	pics/cloud.eps \
 	pics/hub.eps \
+	pics/tcp-encapsulation.eps \
+	pics/tcp-packet.eps \
 	pics/internet-undersea-cable.eps \
 	pics/map-of-internet.eps \
 	pics/osi-stack.eps \

@@ -27,7 +27,10 @@ DETAILS
      ec2-backup utilizes the dd(1) command to write out the data to the raw
      volume.  In essence, ec2-backup wraps the following pipeline:
 
-	   tar cf - <dir> | ssh ec2-instance "dd of=/dev/sda3"
+	   tar cf - <dir> | ssh ec2-instance "dd of=/dev/xbd2d"
+
+     Here, "/dev/xbd2d" stands for the suitable raw disk device, which may
+     differ depending on the instance type.
 
      ec2-backup does not use any temporary files, nor creates a local copy of
      the archive it writes to the volume.
@@ -39,6 +42,16 @@ DETAILS
      ec2-backup will create an instance suitable to perform the backup, attach
      the volume in question and then back up the data from the given direc-
      tory.  Afterwards, ec2-backup will terminate the instance it created.
+
+     ec2-backup will not create or modify any other AWS resources.
+
+VERIFICATION
+     ec2-backup simply writes the data to the volume.  To verify that this was
+     successful, the user may manually perform the following tasks:
+
+	   aws ec2 run-instances
+	   aws ec2 attach-volume
+	   ssh instance "dd if=/dev/xbd2d" | tar tvf -
 
 OUTPUT
      If successful, ec2-backup will print the volume-id of the volume to which
@@ -97,6 +110,21 @@ EXAMPLES
 	   $ ec2-backup -v vol-1a2b3c4d .
 	   vol-1a2b3c4d
 
+     To do the same thing again, but having the program tell us what it's
+     doing, the user can set the EC2_BACKUP_VERBOSE environment variable.
+     Possible diagnostic messages generated when that variable is set are
+     shown below:
+
+	   $ EC2_BACKUP_VERBOSE=1 ec2-backup -v vol-1a2b3c4d .
+	   Verifying volume...
+	   Volume vol-1a2b3c4d is in availability zone 'us-east-1a'.
+	   Creating a suitable instance in 'us-east-1a'...
+	   Attaching volume vol-1a2b3c4d to instance i-123abcd456...
+	   Performing backup...
+	   Terminating instance i-123abcd456...
+	   Backup complete, 1.7 GB of data written to:
+	   vol-1a2b3c4d
+
      Suppose a user has their ~/.ssh/config set up to use the private key
      ~/.ec2/stevens but wishes to use the key ~/.ssh/ec2-key instead:
 
@@ -120,4 +148,4 @@ HISTORY
      of System Administration" at Stevens Institute of Technology in the
      Spring of 2011.
 
-NetBSD 8.0			 April 1, 2019			    NetBSD 8.0
+NetBSD 8.0			 March 7, 2020			    NetBSD 8.0

@@ -34,6 +34,16 @@
 \end{center}
 \vspace*{\fill}
 
+\subsection{How to secure a Linux system}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=1.0]{pics/bluehat.eps} \\
+	\vspace{.25in}
+	\verb+https://is.gd/96cQgL+
+\end{center}
+\vspace*{\fill}
+
+
 \subsection{This lecture}
 What I won't tell you:
 \begin{itemize}
@@ -160,35 +170,26 @@ Lecture 11 (Configuration Management)
 	\item CAP theorem may impact security controls
 \end{itemize}
 
-\subsection{How do we secure a system?}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.0]{pics/bluehat.eps} \\
-	\vspace{.25in}
-	\verb+https://www.bu.edu/tech/about/security-resources/bestpractice/unix/+
-\end{center}
-\vspace*{\fill}
-
-\subsection{How do we secure a system?}
-\Huge
-\vspace*{\fill}
-\begin{center}
-	Rub some crypto on it - duh. \\
-\end{center}
-\vspace*{\fill}
-
-\subsection{How do we secure a system?}
-\Huge
-\vspace*{\fill}
-\begin{center}
-	\sout{Rub some crypto on it - duh.} \\
-\vspace{.5in}
-	It depends. \\
-\vspace{.5in}
-\Normalsize
-	(Context required.)
-\end{center}
-\vspace*{\fill}
+% \subsection{How do we secure a system?}
+% \Huge
+% \vspace*{\fill}
+% \begin{center}
+% 	Rub some crypto on it - duh. \\
+% \end{center}
+% \vspace*{\fill}
+% 
+% \subsection{How do we secure a system?}
+% \Huge
+% \vspace*{\fill}
+% \begin{center}
+% 	\sout{Rub some crypto on it - duh.} \\
+% \vspace{.5in}
+% 	It depends. \\
+% \vspace{.5in}
+% \Normalsize
+% 	(Context required.)
+% \end{center}
+% \vspace*{\fill}
 
 \subsection{What is security?}
 \Huge
@@ -201,15 +202,6 @@ security
 \end{verbatim}
 \Normalsize
 
-\subsection{Cost, Benefit and Acceptable Risks}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.0]{pics/greenhat.eps} \\
-	\vspace{.25in}
-	\verb+https://pdfs.semanticscholar.org/da9d/7d27b11b48733b867cbe2aa7c1466e37982b.pdf+
-\end{center}
-\vspace*{\fill}
-
 \subsection{What is risk?}
 \Huge
 \begin{verbatim}
@@ -221,56 +213,6 @@ risk
 \end{verbatim}
 \Normalsize
 
-\subsection{Suffering harm or loss of {\em what}?}
-
-\begin{itemize}
-	\item access to data
-\end{itemize}
-
-\subsection{Suffering harm or loss of {\em what}?}
-
-\begin{itemize}
-	\item access to data
-	\item integrity of data
-\end{itemize}
-
-\subsection{Suffering harm or loss of {\em what}?}
-
-\begin{itemize}
-	\item access to data
-	\item integrity of data
-	\item availability of services
-\end{itemize}
-
-\subsection{Suffering harm or loss of {\em what}?}
-
-\begin{itemize}
-	\item access to data
-	\item integrity of data
-	\item availability of services
-	\item reputation
-\end{itemize}
-
-\subsection{Suffering harm or loss of {\em what}?}
-
-\begin{itemize}
-	\item access to data
-	\item integrity of data
-	\item availability of services
-	\item reputation
-	\item monetary loss due to any of the above
-\end{itemize}
-
-\subsection{Suffering harm or loss of {\em what}?}
-
-\begin{itemize}
-	\item access to data
-	\item integrity of data
-	\item availability of services
-	\item reputation
-	\item monetary loss due to any of the above
-	\item monetary loss due to physical items of actual value
-\end{itemize}
 
 \subsection{Suffering harm or loss of {\em what}?}
 
@@ -392,27 +334,18 @@ For each system/component/product/service/...
 		system or in general)
 \end{itemize}
 
-\subsection{Threat Model}
+\subsection{CIA Triad}
 \vspace*{\fill}
-\Huge
 \begin{center}
-Your adversaries are determined human actors with
-specific goals. \\
-\addvspace{.5in}
-Threat actors have their own risk profile, -tolerance, and cost/benefit calculations.
+	\includegraphics[scale=0.5]{pics/cia_triad.eps} \\
 \end{center}
-\Normalsize
 \vspace*{\fill}
 
 \subsection{Threat Model}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=0.57]{pics/threat-model.eps} \\
-\vspace{.2in}
-\small
-	\verb+https://www.netmeister.org/blog/threat-model-101.html.html+
+	\includegraphics[scale=0.6]{pics/sample-infrastructure-7.eps} \\
 \end{center}
-\Normalsize
 \vspace*{\fill}
 
 \subsection{Threat Model}
@@ -426,6 +359,17 @@ Threat actors have their own risk profile, -tolerance, and cost/benefit calculat
 \Normalsize
 \vspace*{\fill}
 
+\subsection{Threat Model}
+\vspace*{\fill}
+\Huge
+\begin{center}
+Your adversaries are determined human actors with
+specific goals. \\
+\addvspace{.5in}
+Threat actors have their own risk profile, -tolerance, and cost/benefit calculations.
+\end{center}
+\Normalsize
+\vspace*{\fill}
 
 
 \subsection{Imperatives}
@@ -471,17 +415,19 @@ can be circumvented or broken.
 \end{center}
 \vspace*{\fill}
 
-\subsection{The biggest threat comes from the inside}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.0]{pics/kane.eps} \\
-\small
-	{\em Never} ignore quarantine regulations.
-\Normalsize
-\end{center}
-\vspace*{\fill}
+% \subsection{The biggest threat comes from the inside}
+% \vspace*{\fill}
+% \begin{center}
+% 	\includegraphics[scale=1.0]{pics/kane.eps} \\
+% \small
+% 	{\em Never} ignore quarantine regulations.
+% \Normalsize
+% \end{center}
+% \vspace*{\fill}
 
-\subsection{The biggest threat comes from the inside}
+\subsection{The Attack Life Cycle}
+\Normalsize
+...or why you need to think about {\em Zero Trust}.
 \vspace*{\fill}
 \begin{center}
 	\includegraphics[scale=1.0]{pics/Killchain.eps} \\
@@ -491,6 +437,16 @@ can be circumvented or broken.
 \Normalsize
 \end{center}
 \vspace*{\fill}
+
+\subsection{Zero Trust}
+\begin{itemize}
+	\item not a product, but a model
+	\item assume all networks are hostile
+	\item users and clients are mutually authenticated
+	\item actions are explicitly authorized
+	\item authorizations are tightly scoped
+	\item privileges are role based and time limited
+\end{itemize}
 
 \subsection{Cryptography}
 \Normalsize
@@ -583,6 +539,22 @@ Different approaches:
 		\end{itemize}
 \end{itemize}
 
+\subsection{Confidentiality}
+\begin{verbatim}
+$ curl http://random-place-on-the-internet/some-file | sudo bash
+\end{verbatim}
+
+\subsection{Confidentiality}
+\begin{verbatim}
+$ curl http://random-place-on-the-internet/some-file | sudo bash
+\end{verbatim}
+
+vs.
+
+\begin{verbatim}
+$ curl -k https://random-place-on-the-internet/some-file | sudo bash
+\end{verbatim}
+
 \subsection{Threats to Confidentiality}
 \begin{itemize}
 	\item lack of {\em authenticity}
@@ -593,16 +565,6 @@ Different approaches:
 \addvspace{.5in}
 {\em Never} store secrets in code! \\
 {\em Always} use a key management system.
-
-\subsection{Key Management Systems}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.4]{pics/blackhat.eps} \\
-	\vspace{.25in}
-	\verb+https://www.hashicorp.com/products/vault/+
-\end{center}
-\vspace*{\fill}
-
 
 \subsection{Basic Security Concepts: Integrity}
 In order to protect against forgery or data manipulation, provide some sort of
@@ -625,6 +587,25 @@ choices for cryptographic integrity.
 
 See also: \\
 \verb+https://latacora.singles/2018/04/03/cryptographic-right-answers.html+
+
+\subsection{Integrity}
+\begin{verbatim}
+$ curl -k https://random-place-on-the-internet/some-file | sudo bash
+\end{verbatim}
+
+\subsection{Integrity}
+\begin{verbatim}
+$ curl -k https://random-place-on-the-internet/some-file | sudo bash
+\end{verbatim}
+
+vs.
+
+\begin{verbatim}
+$ curl -k https://random-place-on-the-internet/some-file >file
+$ curl -k https://random-place-on-the-internet/some-file.md5 >file.md5
+$ diff <(md5 <file) <(file.md5) && cat file | sudo bash 
+\end{verbatim}
+
 
 \subsection{Basic Security Concepts: Integrity}
 Examples: host based IDS, package manager signatures
@@ -750,6 +731,29 @@ Three general ways of proving that you are who you say you are:
 \end{center}
 \vfill
 
+\subsection{Authenticity}
+\begin{verbatim}
+$ curl -k https://random-place-on-the-internet/some-file >file
+$ curl -k https://random-place-on-the-internet/some-file.md5 >file.md5
+$ diff <(md5 <file) <(file.md5) && cat file | sudo bash 
+\end{verbatim}
+
+\subsection{Authenticity}
+\begin{verbatim}
+$ curl -k https://random-place-on-the-internet/some-file >file
+$ curl -k https://random-place-on-the-internet/some-file.md5 >file.md5
+$ diff <(md5 <file) <(file.md5) && cat file | sudo bash 
+\end{verbatim}
+
+vs.
+
+\begin{verbatim}
+$ curl https://random-place-on-the-internet/some-file >file
+$ curl https://random-place-on-the-internet/some-file.sig >file.sig
+$ gpg --verify file.sig file && cat file | sudo bash
+\end{verbatim}
+
+
 \subsection{Basic Security Concepts: Authenticity}
 Some possible threats:
 \begin{itemize}
@@ -763,7 +767,9 @@ Some possible threats:
 \subsection{Principle of Least Privilege}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=0.9]{pics/turbolift_access_denied.eps}
+	\includegraphics[scale=0.7]{pics/turbolift_access_denied.eps} \\
+	Black Team Links: \\
+	\verb+https://is.gd/y0GkhU+, \verb+https://is.gd/ZBnl1P+
 \end{center}
 \vspace*{\fill}
 
@@ -781,11 +787,6 @@ grant access explicitly. \\
 {\em Never} grant permanent overly broad access; {\em
 always} use periodic access renewal and Role Based
 Access Controls (RBAC).
-\\
-
-\vspace{.5in}
-Current popular buzzword: {\em Zero Trust}
-
 
 \subsection{It's not just 1s and 0s}
 \vspace{.5in}
@@ -811,14 +812,13 @@ components.  It's the human component.
 \end{center}
 \vspace*{\fill}
 
-
-
 \subsection{Secure by default}
 \vspace{.5in}
 \Huge
 \begin{center}
-Users care about usability, not about security.
+Users care about usability, not about security. \\
 \end{center}
+\vspace*{\fill}
 \Normalsize
 
 \subsection{Secure by default}
@@ -841,7 +841,9 @@ Users will not change their default settings. \\
 \subsection{Secure by default}
 \vspace*{\fill}
 \begin{center}
-	\includegraphics[scale=0.9]{pics/usability.eps} \\
+	\includegraphics[scale=1.0]{pics/greenhat.eps} \\
+	\vspace{.125in}
+	\verb+https://is.gd/L2H9k4+
 \end{center}
 \vspace*{\fill}
 
@@ -855,15 +857,6 @@ Users will not change their default settings. \\
     \blueline\\
     \hspace*{5mm}\\
         5 Minute Break
-\end{center}
-\vspace*{\fill}
-
-\subsection{(Some) Classes of Vulnerabilities}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.0]{pics/redhat.eps} \\
-	\vspace{.25in}
-	\verb+https://phoenixnap.com/blog/cyber-security-attack-types+
 \end{center}
 \vspace*{\fill}
 
@@ -1032,6 +1025,17 @@ attack surface? \\
 {\em Always} make a conscious decision; {\em never} blindly follow
 the promises without understanding the trade-offs.
 
+\subsection{Bug Bounty Programs}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.5]{pics/redhat.eps} \\
+	\vspace{.25in}
+	\verb+https://is.gd/2Eb26A+, \verb+https://is.gd/WAqf6O+, \verb+https://is.gd/Tyu7Hu+ \\
+	\vspace{.125in}
+\verb+https://www.netmeister.org/blog/bug-bounty.html+
+\end{center}
+\vspace*{\fill}
+
 \subsection{Embrace Automation}
 \vspace*{\fill}
 \Huge
@@ -1058,70 +1062,81 @@ the promises without understanding the trade-offs.
 \Normalsize
 \vspace*{\fill}
 
-\subsection{Toning down the Paranoia}
+\subsection{Know Your Threat Model}
 \vspace*{\fill}
 \begin{center}
-    \Hugesize
-        Proving a Negative \\
-	\vspace{.25in}
-	\Normalsize
-	(Evidence of Absences vs. Absence of Evidence)
-\end{center}
-\vspace*{\fill}
-
-
-\subsection{Toning down the Paranoia}
-\vspace*{\fill}
-\Huge
-\begin{center}
-Never attribute to malice that which can be adequately explained by stupidity. \\
-\vspace{.25in}
-\Normalsize
-Hanlon's Razor
-\end{center}
-\Normalsize
-\vspace*{\fill}
-
-\subsection{Toning down the Paranoia}
-\vspace*{\fill}
-\Huge
-\begin{center}
-Know which threat you're facing. \\
-\vspace{.25in}
-Know which mechanisms can help you. \\
-Don't dismiss those.
-\end{center}
-\Normalsize
-\vspace*{\fill}
-
-
-
-\subsection{Sysadmin $\cap$ Infosec}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.0]{pics/sysadmin_infosec.eps} \\
-	\verb+https://www.netmeister.org/blog/infosec-basics.html+
-\end{center}
-\vspace*{\fill}
-
-\subsection{Sysadmin $\cap$ Infosec}
-\vspace*{\fill}
-\Huge
-\begin{center}
-	Nothing is always absolutely so.
-\end{center}
-\Normalsize
-\vspace*{\fill}
-
-\subsection{Two Questions}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.67]{pics/two-questions.eps} \\
+	\includegraphics[scale=0.57]{pics/threat-model.eps} \\
+\vspace{.2in}
 \small
-	\verb+https://www.netmeister.org/blog/two-questions.html+
+	\verb+https://www.netmeister.org/blog/threat-model-101.html.html+
 \end{center}
 \Normalsize
 \vspace*{\fill}
+
+% \subsection{Toning down the Paranoia}
+% \vspace*{\fill}
+% \begin{center}
+%     \Hugesize
+%         Proving a Negative \\
+% 	\vspace{.25in}
+% 	\Normalsize
+% 	(Evidence of Absences vs. Absence of Evidence)
+% \end{center}
+% \vspace*{\fill}
+% 
+% 
+% \subsection{Know your Threat Model}
+% \vspace*{\fill}
+% \Huge
+% \begin{center}
+% Never attribute to malice that which can be adequately explained by stupidity. \\
+% \vspace{.25in}
+% \Normalsize
+% Hanlon's Razor
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
+% 
+% \subsection{Toning down the Paranoia}
+% \vspace*{\fill}
+% \Huge
+% \begin{center}
+% Know which threat you're facing. \\
+% \vspace{.25in}
+% Know which mechanisms can help you. \\
+% Don't dismiss those.
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
+% 
+% 
+% 
+% \subsection{Sysadmin $\cap$ Infosec}
+% \vspace*{\fill}
+% \begin{center}
+% 	\includegraphics[scale=1.0]{pics/sysadmin_infosec.eps} \\
+% 	\verb+https://www.netmeister.org/blog/infosec-basics.html+
+% \end{center}
+% \vspace*{\fill}
+% 
+% \subsection{Sysadmin $\cap$ Infosec}
+% \vspace*{\fill}
+% \Huge
+% \begin{center}
+% 	Nothing is always absolutely so.
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
+% 
+% \subsection{Two Questions}
+% \vspace*{\fill}
+% \begin{center}
+% 	\includegraphics[scale=0.67]{pics/two-questions.eps} \\
+% \small
+% 	\verb+https://www.netmeister.org/blog/two-questions.html+
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
 
 \subsection{Last Words of Advice: Don't be lazy!}
 \begin{itemize}
@@ -1156,6 +1171,7 @@ https://twitter.com/jschauma/status/713118376550404096
 https://t.co/DRHbEKXod8
 https://danielmiessler.com/study/security_and_obscurity/
 https://is.gd/sGnRVL
+https://www.netmeister.org/blog/two-questions.html
 \end{verbatim}
 
 

@@ -20,7 +20,7 @@
 
 %%% Headers and footers
 \lhead{\slidetitle}                               % default:\lhead{\slidetitle}
-\chead{CS615 - Aspects of System Administration}% default:\chead{\relax}
+\chead{CS615 - System Administration}% default:\chead{\relax}
 \rhead{Slide \thepage}                       % default:\rhead{\sectiontitle}
 \lfoot{\Gray{Networking II}}% default:\lfoot{\slideauthor}
 \cfoot{\relax}                               % default:\cfoot{\relax}
@@ -29,7 +29,7 @@
 \vspace*{\fill}
 \begin{center}
 	\Hugesize
-		CS615 - Aspects of System Administration\\ [1em]
+		CS615 - System Administration\\ [1em]
 		Networking II\\ [1em]
 	\hspace*{5mm}\blueline\\ [1em]
 	\Normalsize
@@ -37,7 +37,7 @@
 		Stevens Institute of Technology\\
 		Jan Schaumann\\
 		\verb+jschauma@stevens.edu+\\
-		\verb+http://stevens.netmeister.org/615/+
+		\verb+https://stevens.netmeister.org/615/+
 \end{center}
 \vspace*{\fill}
 
@@ -45,7 +45,7 @@
 
 \Hugesize
 \vspace*{\fill}
-Start a FreeBSD instance: {\tt ami-03b0f822e17669866}
+Start a FreeBSD instance: {\tt ami-0de268ac2498ba33d}
 \vspace*{\fill}
 \Normalsize
 
@@ -55,11 +55,23 @@ Start a FreeBSD instance: {\tt ami-03b0f822e17669866}
 	\item provide more details in your README
 	\item learn to format your README in a
 		readable manner
-	\item if you run into problems, ask on the mailing list
-	\item do not print any output that was not requested
-	\item avoid useless comments
+	\item carefully review the problem statement
+	\item if anything is unclear, don't guess; ask on the mailing list
+	\item pay attention to the discussions on the mailing list
+\end{itemize}
+
+\subsection{HW1 Comments}
+
+\begin{itemize}
+	\item incremental improvements (MVP); make it
+		work, then iterate (but remain able and willing to
+		overhaul if needed)
 	\item make no assumptions about the directory
 		from which your program will be invoked
+	\item avoid temporary files wherever possible
+	\item consider efficiency (e.g., validate first, then create an instance)
+	\item (understand how to) verify that your program works
+	\item write your tool to look and feel like any other system tool
 \end{itemize}
 
 \subsection{HW1 Comments}
@@ -67,10 +79,9 @@ Start a FreeBSD instance: {\tt ami-03b0f822e17669866}
 	\item do not hardcode information that is specific to your own account
 	\item do not hardcode a single AMI; you need
 		to be able to support multiple availability zones
-	\item terminate the instance after your
+	\item use an exit handler to terminate the instance after your
 		program completes (on success {\em or} error)
 	\item do not specify {\tt -i} to {\tt ssh(1)}
-	\item use {\tt aws ec2 wait} instead of loop-waiting yourself
 \end{itemize}
 
 \subsection{HW1 Comments: avoid waterfall code}
@@ -92,6 +103,7 @@ writing programs in other languages.
 Some useful links:
 \begin{itemize}
 	\item \verb+https://www.netmeister.org/blog/writing-shell-scripts.html+
+	\item \verb+https://www.netmeister.org/blog/mktemp.html+
 	\item \verb+https://github.com/koalaman/shellcheck+
 	\item \verb+https://google.github.io/styleguide/shell.xml+
 \end{itemize}
@@ -104,6 +116,12 @@ Some useful links:
 	Half-duplex, cheap, obsolete.
 \end{center}
 \vspace*{\fill}
+
+\subsection{Layer 1:}
+Black Team: \\
+
+Error Detection and Correction on the Link Layer \\
+\verb+https://is.gd/6xYRGH+
 
 \subsection{Layer 2: Network Switch}
 \vspace*{\fill}
@@ -170,6 +188,26 @@ Server: ATS
 
 \subsection{A simple example}
 What exactly happens?
+
+\subsection{Let's collect some data...}
+\begin{verbatim}
+laptop$ ssh ec2-user@<instance-name>
+$ su
+script commands.out
+ifconfig -a; route -n get default
+cat /etc/resolv.conf
+tcpdump -w tcpdump.out port not 22 >&/dev/null &
+arp -d -a
+ping -n -c 3 8.8.8.8
+ktrace -i telnet www.yahoo.com 80
+HEAD / HTTP/1.0
+
+kill %1
+kdump > kdump.out
+chmod a+r kdump.out
+exit
+laptop$ scp ec2-user@<instance-name>:*out /tmp/
+\end{verbatim}
 
 \subsection{A simple example}
 What exactly happens?
@@ -318,25 +356,6 @@ And then?
 	\item open socket to requested port on remote IP
 \end{itemize}
 
-\subsection{Let's collect some data...}
-\begin{verbatim}
-laptop$ ssh ec2-user@<instance-name>
-$ su
-# script commands.out
-# ifconfig -a; route -n get default
-# cat /etc/resolv.conf
-# tcpdump -w tcpdump.out port not 22 >&/dev/null &
-# arp -d -a
-# ping -n -c 3 8.8.8.8
-# ktrace -i telnet www.yahoo.com 80
-HEAD / HTTP/1.0
-# kill %1
-# kdump > kdump.out
-# chmod a+r kdump.out
-$ exit
-laptop$ scp ec2-user@<instance-name>:*out /tmp/
-\end{verbatim}
-
 \subsection{A simple example}
 Finding the next hop:
 \begin{verbatim}
@@ -348,7 +367,6 @@ ARP, Request who-has 10.183.114.37 tell 10.183.114.1, length 28
 ARP, Reply 10.183.114.37 is-at 22:00:0a:b7:72:25, length 28
 \end{verbatim}
 \vspace{.5in}
-Enter ARP Spoofing... (Red Team)
 
 \subsection{A simple example}
 Performing the DNS query:
@@ -554,7 +572,6 @@ round-trip min/avg/max/stddev = 23.193/26.505/30.888/3.958 ms
 $
 \end{verbatim}
 \vspace{.25in}
-Enter ICMP attacks... (Blue Team)
 
 \subsection{TCP/IP Basics: ICMP: Ping}
 \vspace*{\fill}
@@ -696,6 +713,12 @@ IP (tos 0x0, ttl 248, id 0, offset 0, flags [none], proto ICMP (1), length 56)
     149.20.53.86 > 166.84.7.99: ICMP 149.20.53.86 udp port 33482 unreachable, length 36
 \end{verbatim}
 
+\subsection{TCP/IP Basics: ICMP}
+Green Team: \\
+\vspace{.5in}
+
+Path MTU Discovery in Practice \\
+\verb+https://blog.cloudflare.com/path-mtu-discovery-in-practice/+
 
 \subsection{TCP/IP Basics: ICMP6}
 \begin{center}
@@ -769,7 +792,16 @@ IP 10.183.114.37.45403 > 72.30.35.9.80: Flags [F.], seq 20, ack 326, win 1026,
 IP 72.30.35.9.80 > 10.183.114.37.45403: Flags [.], ack 21, win 57,
 	options [nop,nop,TS val 1888601768 ecr 598764236], length 0
 \end{verbatim}
-Performance considerations? (Green Team)
+
+\subsection{TCP/IP Basics: TCP}
+Blue Team: \\
+
+\vspace{.5in}
+Low Rate TCP Denial of Service Attack Detection at
+Edge Routers \\
+\vspace{.5in}
+See also:
+\verb+http://oriolrius.cat/article_fitxers/326/pdf/p75-kuzmanovic.pdf+
 
 \subsection{TCP/IP Basics: TCP}
 \begin{center}
@@ -806,6 +838,11 @@ IP6 2001:4f8:3:7:2e0:81ff:fe52:9a6b.80 >
       2001:470:30:84:204:d7b0:0:1.58334: . ack 17 win 33120
 \end{verbatim}
 
+\subsection{TCP/IP Basics: TCP}
+Red Team: \\
+
+[CVE-2019-14899] Inferring and hijacking VPN-tunneled TCP connections. \\
+\verb+https://seclists.org/oss-sec/2019/q4/122+
 
 \subsection{TCP/IP Basics: UDP}
 \begin{center}
@@ -834,13 +871,13 @@ User Datagram Protocol
 \vspace{.2in}
 \begin{verbatim}
 IP (tos 0x0, ttl 64, id 0, offset 0, flags [none],
-    proto UDP (17), length 59) panix.netmeister.org.49164 >
-        cache2.ns.access.net.domain: 28557+ A? www.yahoo.com. (31)
+    proto UDP (17), length 59) 166.84.7.99.61507 > 166.84.67.2.53:
+        [udp sum ok] 25447+ A? www.yahoo.com. (31)
 
-IP (tos 0x0, ttl 63, id 1862, offset 0, flags [none],
-    proto UDP (17), length 207) cache2.ns.access.net.domain >
-        panix.netmeister.org.49164: 28557 4/2/2
-            www.yahoo.com. CNAME fp3.wg1.b.yahoo.com.[|domain]
+IP (tos 0x0, ttl 63, id 58853, offset 0, flags [none],
+    proto UDP (17), length 275) 166.84.67.2.53 > 166.84.7.99.61507:
+        [udp sum ok] 25447 q: A? www.yahoo.com. 3/4/4 www.yahoo.com.
+            CNAME atsv2-fp-shed.wg1.b.yahoo.com., [...]
 \end{verbatim}
 
 \subsection{TCP/IP Basics: UDP}
@@ -896,7 +933,7 @@ IP6 (hlim 61, next-header: UDP (17), length: 119)
 
 \subsection{Homework}
 
-\verb+https://www.cs.stevens.edu/~jschauma/615/s19-hw3.html+
+\verb+https://www.cs.stevens.edu/~jschauma/615/s20-hw3.html+
 
 \subsection{Reading}
 \begin{itemize}

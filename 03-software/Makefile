@@ -51,7 +51,6 @@ PICTURES=	pics/bandaid.eps \
 		pics/kernel-dmesg.eps \
 		pics/kernel.eps \
 		pics/kfc1.eps \
-		pics/labels.eps \
 		pics/leftshark.eps \
 		pics/lego.eps \
 		pics/link.eps \
@@ -80,10 +79,10 @@ PICTURES=	pics/bandaid.eps \
 		pics/sun-firmware.eps \
 		pics/system-software.eps \
 		pics/tetris.eps \
-		pics/three-buckets.eps \
 		pics/two-buckets.eps \
 		pics/two-cats-one-bucket.eps \
 		pics/types-of-software.eps \
+		pics/uefi.eps \
 		pics/ufs-details.eps \
 		pics/unikernel.eps \
 		pics/usb-icon.eps

@@ -1,4 +1,4 @@
-.Dd April 1, 2019
+.Dd March 7, 2020
 .Dt EC2-BACKUP 1
 .Os
 .Sh NAME
@@ -57,8 +57,12 @@ In essence,
 .Nm
 wraps the following pipeline:
 .Bd -literal -offset indent
-tar cf - <dir> | ssh ec2-instance "dd of=/dev/sda3"
+tar cf - <dir> | ssh ec2-instance "dd of=/dev/xbd2d"
 .Ed
+.Pp
+Here, "/dev/xbd2d" stands for the suitable raw disk
+device, which may differ depending on the instance
+type.
 .Pp
 .Nm
 does not use any temporary files, nor creates a local
@@ -83,6 +87,19 @@ in question and then back up the data from the given directory.
 Afterwards,
 .Nm
 will terminate the instance it created.
+.Pp
+.Nm
+will not create or modify any other AWS resources.
+.Sh VERIFICATION
+.Nm
+simply writes the data to the volume.
+To verify that this was successful, the user may
+manually perform the following tasks:
+.Bd -literal -offset indent
+aws ec2 run-instances
+aws ec2 attach-volume
+ssh instance "dd if=/dev/xbd2d" | tar tvf -
+.Ed
 .Sh OUTPUT
 If successful,
 .Nm
@@ -163,6 +180,23 @@ defaults to the volume with the ID vol-1a2b3c4d,
 possibly overwriting any data previously stored there:
 .Bd -literal -offset indent
 $ ec2-backup -v vol-1a2b3c4d .
+vol-1a2b3c4d
+.Ed
+.Pp
+To do the same thing again, but having the program
+tell us what it's doing, the user can set the
+EC2_BACKUP_VERBOSE environment variable.
+Possible diagnostic messages generated when that
+variable is set are shown below:
+.Bd -literal -offset indent
+$ EC2_BACKUP_VERBOSE=1 ec2-backup -v vol-1a2b3c4d .
+Verifying volume...
+Volume vol-1a2b3c4d is in availability zone 'us-east-1a'.
+Creating a suitable instance in 'us-east-1a'...
+Attaching volume vol-1a2b3c4d to instance i-123abcd456...
+Performing backup...
+Terminating instance i-123abcd456...
+Backup complete, 1.7 GB of data written to:
 vol-1a2b3c4d
 .Ed
 .Pp

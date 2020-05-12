@@ -8,6 +8,24 @@ PS2PDF	=	ps2pdf
 
 PICTURES=	pics/throw.eps \
 		pics/host-states.eps \
+		pics/logs.eps \
+		pics/events-metrics.eps \
+		pics/glass-needle.eps	\
+		pics/cpu-12h.eps	\
+		pics/cpu-30day.eps	\
+		pics/cpu-7day.eps	\
+		pics/disk-io-12h.eps	\
+		pics/disk-io-30day.eps	\
+		pics/disk-io-7day.eps	\
+		pics/load-average-12h.eps \
+		pics/load-average-30day.eps \
+		pics/load-average-7day.eps \
+		pics/traffic-by-cipher.eps \
+		pics/traffic-by-site.eps \
+		pics/memory-12h.eps	\
+		pics/memory-30day.eps \
+		pics/memory-7day.eps	\
+		pics/monkey.eps \
 		pics/change-sets.eps \
 		pics/groups-machines.eps \
 		pics/host-sets.eps \

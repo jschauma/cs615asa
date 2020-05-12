@@ -14,6 +14,7 @@ PICTURES=	\
 		pics/root-servers.eps \
 		pics/dns-space.eps \
 		pics/vanilla.eps \
+		pics/http2.eps \
 		pics/chocolate.eps \
 		pics/clown-computing.eps \
 		pics/2computers.eps \

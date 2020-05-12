@@ -6,6 +6,8 @@
 \usepackage{graphicx}
 \usepackage{colordvi}
 
+\newcommand{\smallish}{\fontsize{16}{16}\selectfont}
+
 \begin{document}
 \setfontphv
 
@@ -16,22 +18,6 @@
 \lfoot{\Gray{Writing System Tools}}% default:\lfoot{\slideauthor}
 \cfoot{\relax}                               % default:\cfoot{\relax}
 \rfoot{\Gray{\today}}
-
-\subsection{Pop Quiz!}
-\Huge
-What is this IP address? \\
-
-\vspace{.5in}
-10011011111101100101100101100100 \\
-\vspace{.5in}
-
-Encrypt your answer using double-rot13
-and submit here: \\
-
-\verb+https://stevens.netmeister.org/615/rr.html+
-\Normalsize
-
-\newpage
 
 \vspace*{\fill}
 \begin{center}
@@ -49,59 +35,31 @@ and submit here: \\
 \end{center}
 \vspace*{\fill}
 
+\subsection{Team Mission Link}
+Red Team: \verb+https://is.gd/KnEKb9+ \\
+
+\vspace{.5in}
+Blue Team: \verb+https://is.gd/4Zqu94+ \\
+
+\vspace{.5in}
+Black Team: \verb+https://is.gd/7Z7RmV+ \\
+
+\vspace{.5in}
+Green Team: \verb+https://is.gd/vKpFqQ+, \verb+https://is.gd/HCQ79v+
+
+\subsection{Typical SysAdmin Tasks}
+\\
+
+\vspace{.5in}
+\verb+https://stevens.netmeister.org/615/scripting-exercise.html+
+
+
 \subsection{Tools}
 \vspace*{\fill}
 \begin{center}
 	\includegraphics[scale=1.4]{pics/tools.eps}
 \end{center}
 \vspace*{\fill}
-
-\subsection{Benefits of Automation}
-\begin{itemize}
-	\item {\em repeatability} -- some of the tasks we
-		perform are complex and need to be
-		executed in a fixed order
-\end{itemize}
-
-\subsection{Benefits of Automation}
-\begin{itemize}
-	\item {\em repeatability} -- some of the tasks we
-		perform are complex and need to be
-		executed in a fixed order
-	\item {\em reliability} -- we are forgetful, make
-		mistakes and tyops, think we know
-		better, ...
-\end{itemize}
-
-\subsection{Benefits of Automation}
-\begin{itemize}
-	\item {\em repeatability} -- some of the tasks we
-		perform are complex and need to be
-		executed in a fixed order
-	\item {\em reliability} -- we are forgetful, make
-		mistakes and tyops, think we know
-		better, ...
-	\item {\em regularity} -- some tasks need to
-		be executed at a specific time, some with
-		a specific frequency, ...
-\end{itemize}
-
-\subsection{Benefits of Automation}
-\begin{itemize}
-	\item {\em repeatability} -- some of the tasks we
-		perform are complex and need to be
-		executed in a fixed order
-	\item {\em reliability} -- we are forgetful, make
-		mistakes and tyops, think we know
-		better, ...
-	\item {\em regularity} -- some tasks need to
-		be executed at a specific time, some with
-		a specific frequency, ...
-	\item {\em flexibility} -- minor variations of
-		a complex task or the environment it
-		executes in
-\end{itemize}
-
 
 \subsection{Benefits of Automation}
 \begin{itemize}
@@ -151,57 +109,6 @@ is worth automating.
 \vspace*{\fill}
 
 \subsection{Automation Pitfalls}
-\vspace{.5in}
-Blue Team link:
-\verb+https://enterprisersproject.com/article/2018/2/8-it-automation-mistakes-avoid+
-
-\subsection{Automation Pitfalls}
-\begin{itemize}
-	\item implementation and debugging takes time and effort
-\end{itemize}
-
-\subsection{Automation Pitfalls}
-\begin{itemize}
-	\item implementation and debugging takes time and effort
-	\item automation often increases complexity
-\end{itemize}
-
-\subsection{Automation Pitfalls}
-\begin{itemize}
-	\item implementation and debugging takes time and effort
-	\item automation often increases complexity
-	\item automation increases the (potential for (negative)) impact
-\end{itemize}
-
-\subsection{Automation Pitfalls}
-\begin{itemize}
-	\item implementation and debugging takes time and effort
-	\item automation often increases complexity
-	\item automation increases the (potential for (negative)) impact
-	\item automation may lead to a loss of audit trail or accountability
-\end{itemize}
-
-\subsection{Automation Pitfalls}
-\begin{itemize}
-	\item implementation and debugging takes time and effort
-	\item automation often increases complexity
-	\item automation increases the (potential for (negative)) impact
-	\item automation may lead to a loss of audit trail or accountability
-	\item abstracting a problem requires {\em understanding} it
-\end{itemize}
-
-
-\subsection{Automation Pitfalls}
-\begin{itemize}
-	\item implementation and debugging takes time and effort
-	\item automation often increases complexity
-	\item automation increases the (potential for (negative)) impact
-	\item automation may lead to a loss of audit trail or accountability
-	\item abstracting a problem requires {\em understanding} it
-	\item system tools require documentation
-\end{itemize}
-
-\subsection{Automation Pitfalls}
 \begin{itemize}
 	\item implementation and debugging takes time and effort
 	\item automation often increases complexity
@@ -232,123 +139,9 @@ Three basic categories:
 	\item scripting
 		\begin{itemize}
 			\item automating {\em very} simple tasks
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item scripting
-		\begin{itemize}
-			\item automating {\em very} simple tasks
-			\item customization of user environment
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item scripting
-		\begin{itemize}
-			\item automating {\em very} simple tasks
-			\item customization of user environment
-			\item often only suitable for one individual user
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item scripting
-		\begin{itemize}
-			\item automating {\em very} simple tasks
 			\item customization of user environment
 			\item often only suitable for one individual user
 			\item usually eventually evolves into larger programs
-		\end{itemize}
-\end{itemize}
-
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-\begin{itemize}
-	\item scripting
-		\begin{itemize}
-			\item automating {\em very} simple tasks
-			\item customization of user environment
-			\item often only suitable for one individual user
-			\item usually eventually evolves into larger programs
-		\end{itemize}
-	\item programming
-		\begin{itemize}
-			\item suitable for simple to moderately complex tasks
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item scripting
-		\begin{itemize}
-			\item automating {\em very} simple tasks
-			\item customization of user environment
-			\item often only suitable for one individual user
-			\item usually eventually evolves into larger programs
-		\end{itemize}
-	\item programming
-		\begin{itemize}
-			\item suitable for simple to moderately complex tasks
-			\item results frequently used by a small base of users
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item scripting
-		\begin{itemize}
-			\item automating {\em very} simple tasks
-			\item customization of user environment
-			\item often only suitable for one individual user
-			\item usually eventually evolves into larger programs
-		\end{itemize}
-	\item programming
-		\begin{itemize}
-			\item suitable for simple to moderately complex tasks
-			\item results frequently used by a small base of users
-			\item uses basic framework or common toolkits
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item scripting
-		\begin{itemize}
-			\item automating {\em very} simple tasks
-			\item customization of user environment
-			\item often only suitable for one individual user
-			\item usually eventually evolves into larger programs
-		\end{itemize}
-	\item programming
-		\begin{itemize}
-			\item suitable for simple to moderately complex tasks
-			\item results frequently used by a small base of users
-			\item uses basic framework or common toolkits
-			\item provides consistent interface
 		\end{itemize}
 \end{itemize}
 
@@ -371,45 +164,6 @@ Three basic categories:
 			\item uses basic framework or common toolkits
 			\item provides consistent interface
 			\item may evolve into full product
-		\end{itemize}
-\end{itemize}
-
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item software development
-		\begin{itemize}
-			\item required for any reasonably complex task
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item software development
-		\begin{itemize}
-			\item required for any reasonably complex task
-			\item uses formal software engineering approach (measurable goals,
-				requirements, specifications, ...)
-		\end{itemize}
-\end{itemize}
-
-\subsection{Approaching Automation}
-Three basic categories:
-\\
-
-\begin{itemize}
-	\item software development
-		\begin{itemize}
-			\item required for any reasonably complex task
-			\item uses formal software engineering approach (measurable goals,
-				requirements, specifications, ...)
-			\item may evolve from previous prototypes
 		\end{itemize}
 \end{itemize}
 
@@ -475,9 +229,9 @@ systems.
 Perl, Python, Ruby, Node, ... \\
 
 \begin{itemize}
-	\item suitable for moderately complex tasks
+	\item suitable for more complex tasks
 	\item move to these when sed(1), awk(1), etc. become too cumbersome
-	\item text manipulation frequently easier
+	\item text manipulation and handling of well-defined data structures frequently easier
 	\item beware of "quick-and-dirty" solutions, they grow to become
 		unmaintainable
 	\item try to build self-contained modules that can be tested independent of
@@ -577,68 +331,71 @@ General Disadvantages: \\
 % % All sorts of other things you thought were true are not: \\
 % % \verb+http://infiniteundo.com/post/25326999628/falsehoods-programmers-believe-about-time+
 % % 
-% % \subsection{Regular Expressions 101}
-% % A {\em regular expression} is a pattern that describes a set of strings. \\
-% % 
-% % \begin{itemize}
-% % 	\item patterns can be
-% % 		\begin{itemize}
-% % 			\item single characters (\verb+a+)
-% % 			\item a bracket expression, such as
-% % 				\begin{itemize}
-% % 					\item a set of characters -- \verb+[aK2l,]+
-% % 					\item a range expression -- \verb+[a-z]+
-% % 					\item a negated bracket expression -- \verb+[^0-9]+
-% % 				\end{itemize}
-% % 			\item a character with a special meaning, such as
-% % 				\begin{itemize}
-% % 					\item \verb+.+ -- any single character
-% % 					\item \verb+^+ -- beginning of line
-% % 					\item \verb+$+ -- end of line
-% % 				\end{itemize}
-% % 			\item a combination of patterns
-% % 		\end{itemize}
-% % \end{itemize}
-% % 
-% % \subsection{Regular Expressions}
-% % \begin{itemize}
-% % 	\item patterns can be followed by qualifiers and quantifiers
-% % 		\begin{itemize}
-% % 			\item \verb+?+ -- the pattern is optional and matched at most once
-% % 			\item \verb+*+ -- the pattern will be matched zero or more times
-% % 			\item \verb|+| -- the pattern will be matched one or more times
-% % 			\item \verb+{n}+ -- the pattern is matched exactly \verb+n+ times
-% % 			\item \verb+{n,}+ -- the pattern is matched \verb+n+ or more times
-% % 			\item \verb+{n,m}+ -- the pattern is matched at least \verb+n+,
-% % 				but no more than \verb+m+ times
-% % 		\end{itemize}
-% % 	\item patterns can be logically grouped together \verb+(1[a-z]2|a[0-9]z)+
-% % 	\item matched patterns can be remembered and referenced lateron
-% % \end{itemize}
-% % \addvspace{.5in}
-% % NB: different tools/libraries implement regular expressions somewhat differently
+% \subsection{Regular Expressions 101}
+% A {\em regular expression} is a pattern that describes a set of strings. \\
+% 
+% \begin{itemize}
+% 	\item patterns can be
+% 		\begin{itemize}
+% 			\item single characters (\verb+a+)
+% 			\item a bracket expression, such as
+% 				\begin{itemize}
+% 					\item a set of characters -- \verb+[aK2l,]+
+% 					\item a range expression -- \verb+[a-z]+
+% 					\item a negated bracket expression -- \verb+[^0-9]+
+% 				\end{itemize}
+% 			\item a character with a special meaning, such as
+% 				\begin{itemize}
+% 					\item \verb+.+ -- any single character
+% 					\item \verb+^+ -- beginning of line
+% 					\item \verb+$+ -- end of line
+% 				\end{itemize}
+% 			\item a combination of patterns
+% 		\end{itemize}
+% \end{itemize}
+% 
+% \subsection{Regular Expressions}
+% \begin{itemize}
+% 	\item patterns can be followed by qualifiers and quantifiers
+% 		\begin{itemize}
+% 			\item \verb+?+ -- the pattern is optional and matched at most once
+% 			\item \verb+*+ -- the pattern will be matched zero or more times
+% 			\item \verb|+| -- the pattern will be matched one or more times
+% 			\item \verb+{n}+ -- the pattern is matched exactly \verb+n+ times
+% 			\item \verb+{n,}+ -- the pattern is matched \verb+n+ or more times
+% 			\item \verb+{n,m}+ -- the pattern is matched at least \verb+n+,
+% 				but no more than \verb+m+ times
+% 		\end{itemize}
+% 	\item patterns can be logically grouped together \verb+(1[a-z]2|a[0-9]z)+
+% 	\item matched patterns can be remembered and referenced lateron
+% \end{itemize}
+% \addvspace{.5in}
+% NB: different tools/libraries implement regular expressions somewhat differently
 
 \subsection{Regular Expressions}
 Example exercises:
 \begin{itemize}
 	\item check if a string is a valid date \\
-		\verb+03/07/2016, 7.3.2016, 2016-03-07, 2016/03/07, ...+
-	\item check if a string is a valid IPv4 address \\
-		\verb+0.0.0.0, 255.255.255.255, ...+
-	\item check if a string is a valid IPv6 address \\
-		\verb+::1, fe80::e276:63ff:fe72:3900%xennet0, 2001:470:30:84:e276:63ff:fe72:3900, ...+
+		\verb+03/07/2016, 7.3.2016, 2016-03-07, 2016/03/07, 30/02/20, ...+
 	\item extract all URLs from a document \\
 		\verb+http://example.com, ftp://example.com/dir/file.html,+ \\
 		\verb+https://example.com/?foo=bar&blob=';alert(1);,+ \\
 		\verb+http://example.com/?redir=http://example.com, ...+
 	\item extract all proper words from a document \\
 		\verb+word, it's, Name, Henry the 3rd, cross-site scripting, ...+
+	\item check if a string is a valid IPv4 address \\
+		\verb+0.0.0.0, 255.255.255.255, ...+
+	\item check if a string is a valid IPv6 address \\
+		\verb+::1, fe80::e276:63ff:fe72:3900%xennet0, 2001:470:30:84:e276:63ff:fe72:3900, ...+
 \end{itemize}
 \vspace{.25in}
 \verb+https://stevens.netmeister.org/615/regex-exercise.html+
 
 \subsection{Regular Expressions}
-IPv4:
+IPv4: \\
+
+\vspace{.5in}
+\verb+https://regex101.com/r/Pgi7Rb/6+
 
 \subsection{Regular Expressions}
 IPv4:
@@ -647,6 +404,9 @@ IPv4:
 [0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?\.(25[0-5]|2[0-4][0-9]|[01]
 ?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)
 \end{verbatim}
+
+Although this can be golfed down to: \\
+\verb+^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}$+
 
 \subsection{Regular Expressions}
 IPv4:
@@ -669,19 +429,6 @@ IPv6:
 ([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.
 ){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))
 \end{verbatim}
-
-\subsection{Regular Expressions}
-Green Team links: \\
-
-\verb+https://www.regular-expressions.info/catastrophic.html+
-\\
-
-\vspace{.5in}
-\verb+https://blog.codinghorror.com/regex-performance/+
-\\
-
-\vspace{.5in}
-\verb+https://www.regexbuddy.com/+
 
 \subsection{Regular Expressions}
 {\em Some people, when confronted with a problem,
@@ -761,10 +508,12 @@ enough' is good enough.
 \begin{center}
     \Hugesize
         Hooray! \\ [1em]
+        5 Minute Break
     \hspace*{5mm}
     \blueline\\
     \hspace*{5mm}\\
-        5 Minute Break
+	Maybe play some Regex Golf? \\
+	\verb+https://alf.nu/RegexGolf+
 \end{center}
 \vspace*{\fill}
 
@@ -797,165 +546,88 @@ enough' is good enough.
 \begin{center}
 	Use boring technology. \\
 \vspace{1in}
-	Write boring code.
+	Write boring code. \\
+\vspace{1in}
+	Write {\em legible} code.
 \end{center}
 \Normalsize
 
-\subsection{Know your languages / eco-system}
-Some advice transcends language: \\
-
+\subsection{The Zen of Python}
+\smallish
 \begin{verbatim}
 $ echo import this | python
-\end{verbatim}
+The Zen of Python, by Tim Peters
 
-\subsection{The Zen of Python}
-\Huge
-\begin{center}
 Beautiful is better than ugly.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
 Explicit is better than implicit.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-    Simple is better than complex.
-\vspace*{\fill}
-	\includegraphics[scale=0.8]{pics/complexity.eps}
-	\\
-	\small \verb+https://xkcd.com/399/+
-\end{center}
-\vspace*{\fill}
-\Huge
-
-\subsection{The Zen of Python}
-\begin{center}
-    Complex is better than complicated.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-    Flat is better than nested. \\
-    Sparse is better than dense. \\
-\vspace{.5in}
-    Readability counts.
-\end{center}
-
-\subsection{A comment on comments}
-Write descriptive code, use descriptive variables and
-function names. \\
-\vspace{1in}
-
-Comments should explain {\em why}, not {\em what}. \\
-
-\subsection{The Zen of Python}
-\begin{center}
-    Special cases aren't special enough to break the rules. \\
-\addvspace{.5in}
-    Although practicality beats purity.
-\end{center}
-
-\subsection{The Zen of Python}
-\\
-\begin{center}
-    Errors should never pass silently.
-\end{center}
-
-\subsection{The Zen of Python}
-\\
-\begin{center}
-    Errors should never pass silently. \\
-\addvspace{.2in}
-	\small
-	(That would be implicitly accepted failure.)
-\end{center}
-\Huge
-
-\subsection{The Zen of Python}
-\\
-\begin{center}
-    Errors should never pass silently. \\
-\addvspace{.2in}
-	\small
-	(That would be implicitly accepted failure.) \\
-\addvspace{.2in}
-	(You know what would be better than something {\em implicit}?)
-\end{center}
-
-\subsection{The Zen of Python}
-\\
-\begin{center}
-    Errors should never pass silently. \\
-\addvspace{.2in}
-	\small
-	(That would be implicitly accepted failure.) \\
-\addvspace{.2in}
-	(You know what would be better than something {\em implicit}?) \\
-\addvspace{.2in}
-	(Why, of course, something {\em explicit}!)
-\end{center}
-
-\subsection{The Zen of Python}
-\\
-\begin{center}
-    Errors should never pass silently. \\
-\addvspace{.5in}
-    Unless explicitly silenced.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-    In the face of ambiguity, refuse the temptation to guess.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-    There should be one -- and preferably only one -- obvious way to do it.
-
-\addvspace{.5in}
-
-    Although that way may not be obvious at first unless you're Dutch. \\
-% You have to understand the idiomatic way to do
-% things.
-\end{center}
-
-
-\subsection{The Zen of Python}
-\begin{center}
-    Now is better than never.  \\
-
-\addvspace{.5in}
-
-    Although never is often better than {\bf right} now.
-\end{center}
-
-\subsection{The Zen of Python}
-\begin{center}
-    If the implementation is hard to explain, \\
-it's a bad idea. \\
-
-\addvspace{.5in}
-
-    If the implementation is easy to explain, \\
-	it {\em may} be a good idea.
-\end{center}
-
-\subsection{A simple interface, easy to explain.  Yet...}
-\\
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.0]{pics/elevator_buttons-reverse.eps}
-\end{center}
-\vspace*{\fill}
-
-
-\subsection{The Zen of Python}
-\begin{center}
-    Namespaces are one honking great idea -- let's do more of those!
-\end{center}
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless
+you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+\end{verbatim}
 \Normalsize
+
+\subsection{Readability counts!}
+Visual flow:
+\begin{itemize}
+	\item use spaces/tabs/indentation {\em consistently}
+	\item use a standard width terminal (\verb+~+80 chars)
+	\item refactor if code wraps / trails off right side
+	\item refactor if logic doesn't fit into about one screen height
+	\item avoid repeating the same code block
+\end{itemize}
+
+\subsection{Readability counts!}
+Code is language:
+\begin{itemize}
+	\item you are not charged per character
+	\item use {\em descriptive} function and variable names
+	\item use comments {\em where necessary}; explain {\em why}, not {\em what}
+	\item don't use magic numbers
+	\item write boring code
+\end{itemize}
+
+\subsection{Pitfalls}
+\begin{itemize}
+	\item check the return value of any function that can fail!
+	\item avoid file I/O whenever possible
+	\item avoid using temporary files whenever possible
+	\item don't assume you can write to the current working directory
+	\item be explicit in setting permissions; set/use \verb+umask(2)+
+	\item use an exit handler to clean up after yourself
+	\item retain idempotency whenever possible
+\end{itemize}
+
+\subsection{Never trust the user}
+\begin{itemize}
+	\item your tool must be safe even if hostile input is given
+	\item never trust the environment
+	\item sanitize and validate all input
+	\item you can't exhaustively identify all "bad" cases, so use a permit list, not a deny list
+\end{itemize}
+
+\subsection{How to figure things out}
+\begin{itemize}
+	\item know your editor (tags, folds, jumping, ...)
+	\item use a debugger
+	\item use the source
+	\item use \verb+strace(1)+/\verb+dtrace(1)+/\verb+ktrace(1)+ etc.
+	\item write separate code to prove yourself right (or wrong)
+\end{itemize}
 
 \subsection{Documentation}
 \vspace*{\fill}
@@ -975,7 +647,12 @@ it's a bad idea. \\
 \\
 \Huge
 \begin{center}
-	Be conservative in what you do; be liberal in what you accept from others.
+	``Be conservative in what you do; \\
+	be liberal in what you accept from others.''
+
+\vspace{.5in}
+
+Fail early, fail explicitly, fail gracefully.
 \end{center}
 \Normalsize
 
@@ -999,53 +676,24 @@ Who will use your tools?
 \end{itemize}
 \vspace{.5in}
 What assumptions can you make? \\
-How will your users script around your tool?
+How will your users script around your tool? \\
+Can your tool be used as a filter?
 
-\subsection{Avoid the Quick Fix}
-\\
+\subsection{Additional Accumulated Words of Wisdom}
 \Huge
 \begin{center}
-There's nothing as permanent \\
-as a temporary solution.
-\end{center}
+	There's nothing as permanent as a temporary solution. \\
+\vspace{.5in}
+	Don't let the Perfect be the enemy of the Good. \\
+\vspace{.5in}
+	Release Early, Release Often. \\
 \Normalsize
-
-\subsection{Avoid the Project That Was Never Finished}
-\\
-\Huge
-\begin{center}
-	Don't let the Perfect be the enemy of the Good.
-\end{center}
-\Normalsize
-
-\subsection{Avoid Feature Creep}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.0]{pics/feeping.eps} \\
-	\small
-	\verb+http://www.feepingcreatures.com+
-\end{center}
-\vspace*{\fill}
-
-\subsection{Release Early, Release Often}
-\\
-\Huge
-\begin{center}
-	``More users find more bugs.'' \\
 	\addvspace{.2in}
+	``More users find more bugs.'' \\
+	\addvspace{.1in}
 	\small F. Brooks, ``The Mythical Man Month''
 \end{center}
 \Normalsize
-
-\subsection{Take a good look in the mirror!}
-\\
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.65]{pics/donkey.eps} \\
-	\small
-	Looks like {\em you} are the ass.
-\end{center}
-\vspace*{\fill}
 
 \subsection{Learn to write a detailed bug report}
 Pre-requisite:
@@ -1053,17 +701,6 @@ Pre-requisite:
 	\item RTFM
 	\item Internet Search
 	\item Know Your Community
-\end{itemize}
-
-\subsection{Learn to write a detailed bug report}
-Pre-requisite: Do your homework. \\
-
-Required:
-\begin{itemize}
-	\item Description Of Problem
-	\item Steps To Reproduce
-	\item Expected Results
-	\item Actual Results
 \end{itemize}
 
 \subsection{Learn to write a detailed bug report}
@@ -1142,13 +779,6 @@ See also:
 \end{itemize}
 
 
-\subsection{Fix Broken Windows}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.6]{pics/broken-windows.eps}
-\end{center}
-\vspace*{\fill}
-
 \subsection{Scope}
 \\
 \Huge
@@ -1158,104 +788,6 @@ See also:
 	\small F. Brooks, ``The Mythical Man Month''
 \end{center}
 \Normalsize
-
-
-\subsection{Scalability}
-\begin{itemize}
-	\item Simplify!
-\end{itemize}
-
-\subsection{Scalability}
-\begin{itemize}
-	\item Simplify!
-	\item Separate code and config.
-\end{itemize}
-\vspace{.5in}
-Black Team Link: \verb+https://is.gd/RTc0ge+
-
-\subsection{Scalability}
-\begin{itemize}
-	\item Simplify!
-	\item Separate code and config.
-	\item Reduce or eliminate interactions with the user.
-\end{itemize}
-
-\subsection{Scalability}
-\begin{itemize}
-	\item Simplify!
-	\item Separate code and config.
-	\item Reduce or eliminate interactions with the user.
-	\item Premature optimization is the root of all evil.
-\end{itemize}
-
-\subsection{Scalability}
-\begin{itemize}
-	\item Simplify!
-	\item Separate code and config.
-	\item Reduce or eliminate interactions with the user.
-	\item Premature optimization is the root of all evil.
-	\item So is excusing shoddy programming.
-\end{itemize}
-
-\subsection{Scalability}
-\begin{itemize}
-	\item Simplify!
-	\item Separate code and config.
-	\item Reduce or eliminate interactions with the user.
-	\item Premature optimization is the root of all evil.
-	\item So is excusing shoddy programming.
-	\item Fix {\em all} warnings and errors.
-\end{itemize}
-
-\subsection{Scalability}
-\begin{itemize}
-	\item Simplify!
-	\item Separate code and config.
-	\item Reduce or eliminate interactions with the user.
-	\item Premature optimization is the root of all evil.
-	\item So is excusing shoddy programming.
-	\item Fix {\em all} warnings and errors.
-	\item Document all assumptions.  Be specific.
-\end{itemize}
-
-\subsection{Scalability}
-\begin{itemize}
-	\item Simplify!
-	\item Separate code and config.
-	\item Reduce or eliminate interactions with the user.
-	\item Premature optimization is the root of all evil.
-	\item So is excusing shoddy programming.
-	\item Fix {\em all} warnings and errors.
-	\item Document all assumptions.  Be specific.
-	\item Always apply the Principle of Least Privilege.
-\end{itemize}
-
-\subsection{Scalability}
-\begin{itemize}
-	\item Simplify!
-	\item Separate code and config.
-	\item Reduce or eliminate interactions with the user.
-	\item Premature optimization is the root of all evil.
-	\item So is excusing shoddy programming.
-	\item Fix {\em all} warnings and errors.
-	\item Document all assumptions.  Be specific.
-	\item Always apply the Principle of Least Privilege.
-	\item Assume hostile input and usage.
-\end{itemize}
-
-\subsection{Scalability}
-\begin{itemize}
-	\item Simplify!
-	\item Separate code and config.
-	\item Reduce or eliminate interactions with the user.
-	\item Premature optimization is the root of all evil.
-	\item So is excusing shoddy programming.
-	\item Fix {\em all} warnings and errors.
-	\item Document all assumptions.  Be specific.
-	\item Always apply the Principle of Least Privilege.
-	\item Assume hostile input and usage.
-	\item Understand your code.
-\end{itemize}
 
 \subsection{Scalability}
 \begin{itemize}
@@ -1271,7 +803,6 @@ Black Team Link: \verb+https://is.gd/RTc0ge+
 	\item Understand your code.
 	\item Document your tools.
 \end{itemize}
-
 
 \subsection{Program Maintenance}
 \\
@@ -1296,7 +827,7 @@ Black Team Link: \verb+https://is.gd/RTc0ge+
 \vspace{.5in}
 \begin{center}
 \begin{verbatim}
-https://stevens.netmeister.org/615/s19-ec2-backup.html
+https://stevens.netmeister.org/615/s20-ec2-backup.html
 \end{verbatim}
 \end{center}
 
@@ -1342,9 +873,16 @@ Ruby:
 	\item \verb+http://is.gd/DR4aNU+
 \end{itemize}
 
+Regex:
+\begin{itemize}
+	\item \verb+https://alf.nu/RegexGolf+
+	\item \verb+https://regex101.com/+
+	\item \verb+https://regexr.com/+
+	\item \verb+https://www.regular-expressions.info/+
+\end{itemize}
+
 Other:
 \begin{itemize}
-	\item \verb+http://www.regex.alf.nu/+
 	\item \verb+http://is.gd/jDDGpW+
 	\item \verb+https://www.netmeister.org/blog/writing-tools.html+
 \end{itemize}

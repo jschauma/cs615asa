@@ -14,7 +14,7 @@
 
 %%% Headers and footers
 \lhead{\slidetitle}                               % default:\lhead{\slidetitle}
-\chead{CS615 - Aspects of System Administration}% default:\chead{\relax}
+\chead{CS615 - System Administration}% default:\chead{\relax}
 \rhead{Slide \thepage}                       % default:\rhead{\sectiontitle}
 \lfoot{\Gray{DNS; HTTP}}% default:\lfoot{\slideauthor}
 \cfoot{\relax}                               % default:\cfoot{\relax}
@@ -25,35 +25,17 @@
 \vspace*{\fill}
 \begin{center}
 	\Hugesize
-		CS615 - Aspects of System Administration\\ [1em]
+		CS615 - System Administration\\ [1em]
 		DNS; HTTP\\ [1em]
 	\hspace*{5mm}\blueline\\ [1em]
 	\Normalsize
 		Department of Computer Science\\
 		Stevens Institute of Technology\\
 		Jan Schaumann\\
-		\verb+jschauma@stevens-tech.edu+
+		\verb+jschauma@stevens-tech.edu+ \\
 		\verb+https://stevens.netmeister.org/615/+
 \end{center}
 \vspace*{\fill}
-
-\subsection{Current Events}
-
-\$10,000 Scholarship opportunity: \\
-
-"The North American Network Operators' Group (NANOG),
-is the professional association for Internet
-engineering, architecture and operations. Our core
-focus is on continuous improvement of the data
-transmission technologies, practices, and facilities
-that make the Internet function. In an effort to
-support the next generation of network operators,
-NANOG has established a scholarship program to assist
-current undergraduate and graduate-level students
-pursuing a degree in one of the eligible fields listed
-below." \\
-
-\verb+https://www.scholarsapply.org/nanog/+
 
 \subsection{Current Events}
 \vspace*{\fill}
@@ -63,18 +45,20 @@ below." \\
 \end{center}
 \vspace*{\fill}
 
-\subsection{Current Events}
+\subsection{Falsehoods Programmers Believe About Time:}
 \Huge
-\begin{center}
-Falsehoods Programmers Believe About Time: \\
-
-\vspace{.5in}
 1. There are always 24 hours in a day. \\
 
+2. Months have either 30 or 31 days. \\
+
+3. Years have 365 days. \\
+
+4. February is always 28 days long. \\
 \vspace{.5in}
-\verb+http://FalsehoodsAboutTime.com+
-\end{center}
+
 \Normalsize
+\verb+http://FalsehoodsAboutTime.com+ \\
+\verb+https://azure.microsoft.com/en-us/blog/is-your-code-ready-for-the-leap-year/+
 
 \subsection{In the beginning...}
 \vspace*{\fill}
@@ -137,13 +121,13 @@ Falsehoods Programmers Believe About Time: \\
 10.0.0.4	UTAH-CS
 \end{verbatim}
 
-
-\subsection{But then...}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.3]{pics/routed.eps} \\
-\end{center}
-\vspace*{\fill}
+%
+%\subsection{But then...}
+%\vspace*{\fill}
+%\begin{center}
+%	\includegraphics[scale=0.3]{pics/routed.eps} \\
+%\end{center}
+%\vspace*{\fill}
 
 \subsection{The Domain Name System}
 \vspace{.5in}
@@ -623,6 +607,39 @@ $
 
 Stevens doesn't have write access to the {\tt
 in-addr.arpa} domain.  How does this work?
+
+\subsection{DNS Security}
+\begin{verbatim}
+$ tcpdump -t -n -r tcpdump.out udp port 53
+reading from file tcpdump.out, link-type EN10MB (Ethernet)
+IP 10.183.114.37.53383 > 172.16.0.23.53: 20378+ A? www.yahoo.com. (31)
+IP 172.16.0.23.53 > 10.183.114.37.53383: 20378 5/0/0
+	CNAME atsv2-fp-shed.wg1.b.yahoo.com., A 72.30.35.9, A 72.30.35.10,
+	A 98.138.219.231, A 98.138.219.232 (129)
+IP 10.183.114.37.10551 > 172.16.0.23.53: 60792+ AAAA? www.yahoo.com. (31)
+IP 172.16.0.23.53 > 10.183.114.37.10551: 60792 5/0/0 CNAME atsv2-fp-shed.wg1.b.yahoo.com.,
+	AAAA 2001:4998:58:1836::11, AAAA 2001:4998:44:41d::3,
+	AAAA 2001:4998:44:41d::4, AAAA 2001:4998:58:1836::10 (177)
+\end{verbatim}
+\vspace{.25in}
+How do we know {\tt 172.16.0.23} didn't lie to us? \\
+How do we protect a MitM from observing this traffic?
+
+\subsection{DNS Security}
+Blue Team: DNS over HTTPs \\
+\begin{verbatim}
+https://blog.mozilla.org/netpolicy/2020/02/25/the-facts-mozillas-dns-over-https-doh
+https://hacks.mozilla.org/2018/05/a-cartoon-intro-to-dns-over-https/                                
+https://www.zdnet.com/article/dns-over-https-causes-more-problems-than-it-solves-experts-say/       
+\end{verbatim}
+
+\vspace{.5in}
+Black Team: DNS over TLS \\
+\begin{verbatim}
+https://developers.cloudflare.com/1.1.1.1/dns-over-tls/
+https://developers.google.com/speed/public-dns/docs/dns-over-tls                                    
+https://android-developers.googleblog.com/2018/04/dns-over-tls-support-in-android-p.html            
+\end{verbatim}
  
 \subsection{Creative uses of DNS Resource Records}
 \begin{itemize}
@@ -798,13 +815,10 @@ HTTP is a request/response protocol:
 %\smallish
 \begin{verbatim}
 HTTP/1.0 200 OK
-Date: Sun, 31 Mar 2013 01:54:40 GMT
-Set-Cookie: PREF=ID=c5eb56d629b347cc:FF=0:TM=1364694880:LM=1364694880:
-S=sIdRFdxV9YvtQOlG; expires=Tue, 31-Mar-2015 01:54:40 GMT; path=/;
-domain=.google.com
-Set-Cookie: NID=67=hvBnOob2NoZW4haTJVfajbcyn_jips50lKRe-8nawzdCZ6AukNR
-_s8CNHD6ZA-Z2721nA3TpLrNXt-2zyIui23j4kdsdF8Gg--PmGsMOJ3Jv5frEzQG1elHJv92HL-w2;
-expires=Mon, 30-Sep-2013 01:54:40 GMT; path=/; domain=.google.com; HttpOnly
+Date: Mon, 09 Mar 2020 14:15:41 GMT
+Set-Cookie: 1P_JAR=2020-03-09-14; expires=Wed, 08-Apr-2020 14:15:41 GMT;
+        path=/; domain=.google.com; Secure
+Content-Type: text/html; charset=ISO-8859-1
 Server: gws
 
 <!doctype html><html itemscope="itemscope" itemtype="http://schema.org/WebPage">
@@ -831,16 +845,15 @@ Server status codes:
 \smallish
 \begin{verbatim}
 $ telnet www.cs.stevens.edu 80
-Trying 155.246.89.84...
+Trying 155.246.56.11...
 Connected to www.cs.stevens-tech.edu.
 Ecape character is '^]'.
 GET / HTTP/1.0
 
 HTTP/1.1 301 Moved Permanently
-Date: Mon, 05 Mar 2018 20:41:06 GMT
+Date: Mon, 09 Mar 2020 14:18:12 GMT
 Server: Apache
 Location: https://www.cs.stevens.edu/
-Vary: Accept-Encoding
 Content-Length: 235
 Connection: close
 Content-Type: text/html; charset=iso-8859-1
@@ -866,29 +879,20 @@ Content-Type: text/html; charset=iso-8859-1
 \smallish
 \begin{verbatim}
 $ printf "HEAD /ses/cs HTTP/1.1\r\nHost: www.stevens.edu\r\n\r\n" |
-        openssl s_client -quiet -ign_eof -connect www.stevens.edu:443 2>/dev/null
-
-HTTP/1.1 301 Moved Permanently
-Date: Mon, 05 Mar 2018 20:54:51 GMT
-Content-Type: text/html; charset=UTF-8
-Location: https://www.stevens.edu/schaefer-school-engineering-science/departments/computer-science
-
-\end{verbatim}
-\Normalsize
-
-
-\subsection{HTTP: A client request}
-\smallish
-\begin{verbatim}
-$ printf "HEAD /schaefer-school-engineering-science/departments/computer-science HTTP/1.1\r\nHost: www.stevens.edu\r\n\r\n" |
         openssl s_client -quiet -ign_eof -connect www.stevens.edu:443 2>/dev/null 
 
 HTTP/1.1 200 OK
-Date: Mon, 05 Mar 2018 20:56:37 GMT
+Date: Mon, 09 Mar 2020 14:26:48 GMT
 Content-Type: text/html; charset=utf-8
 Connection: keep-alive
+Set-Cookie: __cfduid=d6186e98e40e13f81b13ff7edac3d15af1583764008;
+        expires=Wed, 08-Apr-20 14:26:48 GMT; path=/; domain=.stevens.edu; HttpOnly; SameSite=Lax
+X-Drupal-Cache: HIT
+X-Generator: Drupal 7 (http://drupal.org)
+Last-Modified: Mon, 09 Mar 2020 09:00:07 GMT
 Expires: Sun, 19 Nov 1978 05:00:00 GMT
-Last-Modified: Mon, 05 Mar 2018 16:44:39 GMT
+Via: varnish
+Server: cloudflare
 [...]
 \end{verbatim}
 \Normalsize
@@ -913,6 +917,26 @@ text format.
 \begin{center}
 	\includegraphics[scale=2.0]{pics/datatransfer.eps}
 \end{center}
+
+\subsection{HTTP Evolution}
+\begin{itemize}
+	\item invented around 1989
+	\item 1991: HTTP 0.9
+	\item 1996: HTTP 1.0 (RFC1945)
+	\item 1997: HTTP 1.1 (RFC2068)
+	\item 1999: HTTP 1.1 updates (RFC2616)
+	\item 2012: QUIC (implemented; to become HTTP/3)
+	\item 2015: HTTP/2 (RFC7540)
+	\item 2018: HTTP/3 (IETF Draft)
+\end{itemize}
+
+\subsection{HTTP/2}
+\begin{center}
+	\includegraphics[scale=0.3]{pics/http2.eps}
+\end{center}
+\vspace{.5in}
+Red Team link: HTTP/2 protocol vulnerabilities \\
+\verb+https://www.imperva.com/docs/Imperva_HII_HTTP2.pdf+
 
 \subsection{HTTP - more than just static data}
 HTTP is a {\em Transfer Protocol} -- what is transferred need not be
@@ -944,7 +968,7 @@ variables.
 	\includegraphics[scale=0.6]{pics/revproxy.eps}
 \end{center}
 
-\subsection{HTTP overload}
+\subsection{HTTP Overload}
 Ways to mitigate HTTP overload:
 
 \begin{itemize}
@@ -959,8 +983,11 @@ the environment.
 
 \subsection{Load Balancing}
 \begin{center}
-	\includegraphics[scale=0.55]{pics/Lb101.eps}
+	\includegraphics[scale=0.45]{pics/Lb101.eps}
 \end{center}
+Green Team Mission: nginx HTTP Load Balancing \\
+\verb+https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/+
+
 
 \subsection{Load Balancing: Inbound}
 \begin{center}
@@ -1015,6 +1042,10 @@ Both HTTP and DNS are trivial to set up. \\
 Both HTTP and DNS are not trivial to get right. \\
 \Normalsize
 \vspace*{\fill}
+
+\subsection{HW4: Monitoring HTTP and DNS traffic}
+\verb+https://stevens.netmeister.org/615/s20-hw4.html+
+
 
 \subsection{Reading}
 HTTP etc.:

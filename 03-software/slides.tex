@@ -1,6 +1,6 @@
-https://manybutfinite.com/post/how-computers-boot-up/
+%https://manybutfinite.com/post/how-computers-boot-up/
  
-% CS615A Aspects of System Administration
+% CS615A System Administration
 % Author: Jan Schaumann <jschauma@netmeister.org>
 
 \special{! TeXDict begin /landplus90{true}store end }
@@ -19,7 +19,7 @@ https://manybutfinite.com/post/how-computers-boot-up/
 
 %%% Headers and footers
 \lhead{\slidetitle}                               % default:\lhead{\slidetitle}
-\chead{CS615 - Aspects of System Administration}% default:\chead{\relax}
+\chead{CS615 - System Administration}% default:\chead{\relax}
 \rhead{Slide \thepage}                       % default:\rhead{\sectiontitle}
 \lfoot{\Gray{Lecture 03: Software Installation Concepts}}% default:\lfoot{\slideauthor}
 \cfoot{\relax}                               % default:\cfoot{\relax}
@@ -28,8 +28,8 @@ https://manybutfinite.com/post/how-computers-boot-up/
 \vspace*{\fill}
 \begin{center}
 	\Hugesize
-		CS615 - Aspects of System Administration\\ [1em]
-		Software Installation Concepts \\ [1em]
+		CS615 - System Administration\\ [1em]
+		Filesystem and OS Boot Process Concepts \\ [1em]
 	\hspace*{5mm}\blueline\\ [1em]
 	\Normalsize
 		Department of Computer Science\\
@@ -43,177 +43,6 @@ https://manybutfinite.com/post/how-computers-boot-up/
 \newpage
 \vspace*{\fill}
 \begin{center}
-    \Hugesize
-        Hooray! \\ [1em]
-    \hspace*{5mm}
-    \blueline\\
-    \hspace*{5mm}\\
-        5 Minute Break
-\end{center}
-\vspace*{\fill}
-
-\newpage
-\vspace*{\fill}
-\begin{center}
-	\Hugesize
-		Basic Filesystem Concepts\\ [1em]
-	\hspace*{5mm}
-	\blueline\\
-	\hspace*{5mm}\\
-		Filesystem Layout
-\end{center}
-\vspace*{\fill}
-
-\subsection{Basic Filesystem Concepts}
-All partitions -- with the exception of the {\em root} (or \verb+/+) partition
--- can be {\em mounted} anywhere in the filesystem hierarchy.
-\\
-
-\begin{center}
-	\includegraphics[scale=0.5]{pics/filesystem-tree-mountpoints.eps} \\
-\end{center}
-
-\subsection{Basic Filesystem Concepts}
-All partitions -- with the exception of the {\em root} (or \verb+/+) partition
--- can be {\em mounted} anywhere in the filesystem hierarchy.
-\\
-
-The file \verb+/etc/fstab+ (see fstab(5)) specifies which disks / partitions
-to mount where:
-\\
-\begin{verbatim}
-/dev/xbd1a /        ffs    rw 1 1
-/dev/xbd0a /grub    ext2fs rw 2 2
-kernfs     /kern    kernfs rw
-ptyfs      /dev/pts ptyfs  rw
-procfs     /proc    procfs rw
-\end{verbatim}
-\Normalsize
-
-\subsection{Basic Filesystem Concepts}
-All partitions -- with the exception of the {\em root} (or \verb+/+) partition
--- can be {\em mounted} anywhere in the filesystem hierarchy.
-\\
-
-The file \verb+/etc/fstab+ (see fstab(5)) specifies which disks / partitions
-to mount where:
-\\
-\begin{verbatim}
-$ cat /etc/fstab
-# /etc/fstab: static file system information.
-#
-# <file system> <mount point>   <type>  <options>       <dump>  <pass>
-/dev/mapper/nemo--vg-root /               ext4    errors=remount-ro 0       1
-# /boot was on /dev/sda1 during installation
-UUID=e5abfdb9-1d53-4df7-9894-1c5a08b7f8c7 /boot           ext2    defaults        0       2
-/dev/mapper/nemo--vg-swap_1 none            swap    sw              0       0
-\end{verbatim}
-
-
-\subsection{Basic Filesystem Concepts}
-All partitions -- with the exception of the {\em root} (or \verb+/+) partition
--- can be {\em mounted} anywhere in the filesystem hierarchy.
-\\
-
-To see what filesystems are currently mounted, run \verb+mount(8)+:
-\\
-
-\begin{verbatim}
-/dev/xbd1a on / type ffs (local)
-/dev/xbd0a on /grub type ext2fs (local)
-kernfs on /kern type kernfs (local)
-ptyfs on /dev/pts type ptyfs (local)
-procfs on /proc type procfs (local)
-/dev/xbd2a on /mnt type ffs (local)
-\end{verbatim}
-
-
-\subsection{Basic Filesystem Concepts}
-\\
-
-\begin{verbatim}
-$ mount
-proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)
-udev on /dev type devtmpfs (rw,nosuid,relatime,size=1002928k,nr_inodes=250732,mode=755)
-devpts on /dev/pts type devpts (rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000)
-tmpfs on /run type tmpfs (rw,nosuid,noexec,relatime,size=204804k,mode=755)
-/dev/mapper/nemo--vg-root on / type ext4 (rw,relatime,errors=remount-ro,data=ordered)
-cgroup on /sys/fs/cgroup/memory type cgroup (rw,nosuid,nodev,noexec,relatime,memory)
-cgroup on /sys/fs/cgroup/cpuset type cgroup (rw,nosuid,nodev,noexec,relatime,cpuset)
-/dev/vda1 on /boot type ext2 (rw,relatime,block_validity,barrier,user_xattr,acl)
-ldap:nirvana.phy.stevens-tech.edu:ou=auto.home,dc=phy,dc=stevens-tech,dc=edu on /home type autofs (rw,relatime,fd=6,pgrp=1345,timeout=60,minproto=5,maxproto=5,indirect)
-kronos.srcit.stevens-tech.edu:/xraid0-1/export/home/jschauma on /home/jschauma type nfs (rw,relatime,sync,vers=3,rsize=32768,wsize=32768,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=155.246.89.203,mountvers=3,mountport=53643,mountproto=udp,local_lock=none,addr=155.246.89.203)
-\end{verbatim}
-
-\subsection{Where do we put all of our files?}
-Layout of filesystem {\em should} be standardized.  Some UNIX versions adhere
-to these standards, some are strongly influenced by tradition.
-\\
-
-{\tt man hier}
-
-\subsection{File System Hierarchy}
-\small
-\begin{verbatim}
-                     /          root directory of the system
-
-                     /bin/      utilities used in both single and multi-user environments
-
-                     /dev/      block, character and other special device files
-
-                     /etc/      system configuration files and scripts
-
-                     /lib/      dynamic linked libraries used by dynamic linked programs (such
-                                as those in /bin/ and /sbin/) that cannot rely upon /usr/lib/
-                                being available.
-
-                     /sbin/     system programs and administration utilities used in both sin-
-                                gle-user and multi-user environments
-
-                     /tmp/      temporary files, usually a mfs(8) memory-based filesystem (the
-                                contents of /tmp are usually not preserved across a system
-                                reboot)
-
-                     /usr/      contains the majority of the system utilities and files
-
-
-                                bin/      common utilities, programming tools, and applica-
-                                          tions
-
-                                lib/      archive, profiled, position independent archive, and
-                                          shared libraries
-
-                                sbin/     system daemons and system utilities (normally exe-
-                                          cuted by the super-user)
-
-                                share/    architecture-independent text files
-\end{verbatim}
-\Normalsize
-
-\subsection{Basic Filesystem Concepts}
-Some of the different kinds of filesystems:
-
-\subsection{Basic Filesystem Concepts}
-Some of the different kinds of filesystems:
-\begin{itemize}
-	\item ``Regular'' File Systems
-	\item Journaling File Systems
-	\item Network File Systems
-	\item Various
-\end{itemize}
-
-\subsection{Team Missions}
-
-\vspace*{\fill}
-\begin{center}
-\includegraphics[scale=1.3]{pics/green-hat.eps}
-\end{center}
-\vspace*{\fill}
-
-
-\newpage
-\vspace*{\fill}
-\begin{center}
 	\Hugesize
 		Basic Filesystem Concepts\\ [1em]
 	\hspace*{5mm}
@@ -223,42 +52,24 @@ Some of the different kinds of filesystems:
 \end{center}
 \vspace*{\fill}
 
-\subsection{Let's pretend we're a filesystem...}
-
-\begin{verbatim}
-aws ec2 create-volume --size 1 --availability-zone us-east-1a
-
-aws ec2 attach-volume --volume-id  XXX --instance-id XXX --device /dev/sda2
-
-dmesg
-
-echo hello | dd of=/dev/xbd2
-
-dd if=/dev/xbd2 count=6 | hexdump -C
-
-echo hello | dd of=/dev/xbd2 seek=1024
-
-dd if=/dev/xbd2 count=2048 2>/dev/null | hexdump -C
-
-printf "\x7\x4\x4hello" | dd of=/dev/xbd2
-\end{verbatim}
-
-\subsection{Let's pretend we're a filesystem...}
-\begin{verbatim}
-echo Hello > /root/newfile
-
-tar cf - /root | dd of=/dev/xbd2
-
-dd if=/dev/xbd2 | tar tvf -
-\end{verbatim}
-\vspace{1in}
-See also: \verb+https://stevens.netmeister.org/615/tar.html+
-
 \subsection{Basic Filesystem Concepts: The UNIX Filesystem}
 The filesystem is responsible for storing the data on the disk.
 So to read/write data, it needs to know in which physical blocks the actual
 data is located; ie how to map files to the disk blocks.
 
+\subsection{Let's pretend we're a filesystem...}
+
+\begin{verbatim}
+aws ec2 create-volume --size 1 --availability-zone us-east-1d
+
+aws ec2 attach-volume --volume-id  XXX --instance-id XXX --device /dev/sda3
+
+dmesg
+
+for i in $(seq $((1024 * 128))); do
+        printf '\0\0\0\0\0\0\0\0'
+done | dd of=/dev/xbd2d
+\end{verbatim}
 
 \subsection{Basic Filesystem Concepts: The UNIX Filesystem}
 \vspace*{\fill}
@@ -275,21 +86,7 @@ data is located; ie how to map files to the disk blocks.
 \subsection{Basic Filesystem Concepts: The UNIX Filesystem}
 \vspace*{\fill}
 \begin{center}
-\includegraphics[scale=1.0]{pics/three-buckets.eps} \\
-\end{center}
-\vspace*{\fill}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-\vspace*{\fill}
-\begin{center}
 \includegraphics[scale=0.95]{pics/buckets.eps} \\
-\end{center}
-\vspace*{\fill}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-\vspace*{\fill}
-\begin{center}
-\includegraphics[scale=0.95]{pics/labels.eps} \\
 \end{center}
 \vspace*{\fill}
 
@@ -297,6 +94,15 @@ data is located; ie how to map files to the disk blocks.
 \begin{center}
 \includegraphics[scale=0.95]{pics/one-bucket-full.eps} \\
 \end{center}
+
+\subsection{Let's pretend we're a filesystem...}
+
+Creating a 'file':
+\begin{verbatim}
+echo -n meow | dd of=/dev/xbd2d
+
+dd if=/dev/xbd2d count=512 2>/dev/null | hexdump -C
+\end{verbatim}
 
 \subsection{Basic Filesystem Concepts: The UNIX Filesystem}
 \vspace*{\fill}
@@ -307,6 +113,19 @@ data is located; ie how to map files to the disk blocks.
 \end{center}
 \vspace*{\fill}
 
+\subsection{Let's pretend we're a filesystem...}
+
+Each file can be up to 4096 bytes in size:
+\begin{verbatim}
+echo -n meow | dd of=/dev/xbd2d
+
+dd if=/dev/xbd2d 2>/dev/null | hexdump -C
+
+echo -n miumiu | dd of=/dev/xbd2d bs=1 seek=4096
+
+dd if=/dev/xbd2d count=512 2>/dev/null | hexdump -C
+\end{verbatim}
+
 \subsection{Basic Filesystem Concepts: The UNIX Filesystem}
 \vspace*{\fill}
 \begin{center}
@@ -314,17 +133,46 @@ data is located; ie how to map files to the disk blocks.
 \end{center}
 \vspace*{\fill}
 
+\subsection{Let's pretend we're a filesystem...}
+
+We can store data for multiple files in a single
+bucket:
+\begin{verbatim}
+printf 'meow' | dd of=/dev/xbd2d
+printf 'miumiu' | dd of=/dev/xbd2d bs=1 seek=32
+
+dd if=/dev/xbd2d count=512 2>/dev/null | hexdump -C
+\end{verbatim}
+
 \subsection{Basic Filesystem Concepts: The UNIX Filesystem}
 \begin{center}
 \includegraphics[scale=0.9]{pics/several-cats.eps} \\
 \end{center}
 
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-\vspace*{\fill}
-\begin{center}
-\includegraphics[scale=0.225]{pics/nutrition-facts.eps} \\
-\end{center}
-\vspace*{\fill}
+\subsection{Let's pretend we're a filesystem...}
+
+We can store data for multiple files in a single
+bucket:
+\begin{verbatim}
+printf 'meow miu meow miu meow miu meow ' | dd of=/dev/xbd2d
+printf 'miumiu miau miao miauw miaow ' | dd of=/dev/xbd2d bs=1 seek=32
+printf 'hiss hiss' | dd of=/dev/xbd2d bs=1 seek=64
+printf 'hiss hiss' | dd of=/dev/xbd2d bs=1 seek=96
+
+dd if=/dev/xbd2d count=512 2>/dev/null | hexdump -C
+\end{verbatim}
+
+\subsection{Let's pretend we're a filesystem...}
+
+New format: identifier followed by data.
+\begin{verbatim}
+printf '\x1meow miu meow miu meow miu meow ' | dd of=/dev/xbd2d
+printf '\x2miumiu miau miao miauw miaow ' | dd of=/dev/xbd2d bs=1 seek=512
+printf '\x3hiss hiss' | dd of=/dev/xbd2d bs=1 seek=1024
+printf '\x4hiss hiss' | dd of=/dev/xbd2d bs=1 seek=1535
+
+dd if=/dev/xbd2d count=512 2>/dev/null | hexdump -C
+\end{verbatim}
 
 \subsection{Basic Filesystem Concepts: The UNIX Filesystem}
 \vspace*{\fill}
@@ -332,6 +180,85 @@ data is located; ie how to map files to the disk blocks.
 \includegraphics[scale=1.0]{pics/numbered-cats.eps}
 \end{center}
 \vspace*{\fill}
+
+
+\subsection{Let's pretend we're a filesystem...}
+
+Quick note: removing a file does not "delete" the
+data:
+\begin{verbatim}
+dd if=/dev/rxbd2a 2>/dev/null | hexdump -C
+
+rm /mnt/newfile
+
+dd if=/dev/rxbd2a 2>/dev/null | hexdump -C
+\end{verbatim}
+
+
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+What's in a file?
+\vspace*{\fill}
+\begin{center}
+\includegraphics[scale=0.225]{pics/nutrition-facts.eps} \\
+\end{center}
+\vspace*{\fill}
+
+\subsection{Let's pretend we're a filesystem...}
+
+New format: identifier, permission, owner, group, data.
+\begin{verbatim}
+printf '\x1\x7\x4\x4\x0\x0meow miu meow miu meow miu meow ' | dd of=/dev/xbd2d
+printf '\x2\x7\x4\x4\x1\x1purrrrrr' | dd of=/dev/xbd2d bs=1 seek=4096
+\end{verbatim}
+
+\subsection{Let's pretend we're a filesystem...}
+
+New format: identifier, permission, owner, group, data.
+\begin{verbatim}
+printf '\x1\x7\x4\x4\x0\x0meow miu meow miu meow miu meow ' | dd of=/dev/xbd2d
+printf '\x2\x7\x4\x4\x1\x1purrrrrr' | dd of=/dev/xbd2d bs=1 seek=4096
+\end{verbatim}
+\vspace{.5in}
+Problem: what if we have a file $>$4K?
+
+\subsection{Let's pretend we're a filesystem...}
+
+New format: separate meta-data from data
+\begin{itemize}
+	\item meta-data (16 bytes total, LE):
+		\begin{itemize}
+			\item identifier (2 bytes)
+			\item permission (4 bytes)
+			\item owner (1 byte)
+			\item group (1 byte)
+			\item size (4 bytes)
+			\item offset (4 bytes)
+		\end{itemize}
+	\item data stored in separate area
+\end{itemize}
+\smallish
+\begin{verbatim}
+printf '\x1\x0\x0\x7\x4\x4\x0\x0\x20\x0\x0\x0\x0\x1\x0\x0' | dd of=/dev/xbd2d
+printf 'meow miu meow miu meow miu meow ' | dd of=/dev/xbd2d bs=1 seek=4096
+printf '\x2\x0\x0\x7\x4\x4\x1\x1\x8\x0\x0\x0\x20\x10\x0\x0' | dd of=/dev/xbd2d bs=1 seek=16
+printf 'purrrrrr' | dd of=/dev/xbd2d bs=1 seek=4128
+\end{verbatim}
+\Normalsize
+(What limitations do we have now?)
+
+\subsection{A different "filesystem" format}
+\begin{verbatim}
+echo "hello world" > /root/newfile
+
+tar cf - /root | dd of=/dev/xbd2d
+
+dd if=/dev/xbd2d count=512 2>/dev/null | hexdump -C
+
+dd if=/dev/xbd2d | tar tvf -
+\end{verbatim}
+\vspace{1in}
+See also: \verb+https://stevens.netmeister.org/615/tar.html+
 
 \subsection{Basic Filesystem Concepts: The UNIX Filesystem}
 The filesystem is responsible for storing the data on the disk.
@@ -365,7 +292,7 @@ Components of the Berkeley Fast Filesystem:
 	\item set of {\em inode} storage cells
 	\item set of scattered ``superblocks''
 \end{itemize}
-{\tt newfs -N /dev/rdsk/c1t2160d0s0}
+{\tt newfs -b 4096 -f 512 xbd2d}
 & \multirow{2}{*}{\includegraphics[scale=0.3]{pics/lego.eps}} \\
 \end{tabular}
 
@@ -384,6 +311,7 @@ Components of the Berkeley Fast Filesystem:
 	\item set of scattered ``superblocks''
 	\item map of disk blocks
 \end{itemize}
+{\tt dumpfs -v xbd2}
 & \multirow{2}{*}{\includegraphics[scale=0.5]{pics/map.eps}} \\
 \end{tabular}
 
@@ -403,7 +331,6 @@ Components of the Berkeley Fast Filesystem:
 	\item map of disk blocks
 	\item block usage summary
 \end{itemize}
-{\tt fstyp -v /dev/rdsk/c1t2160d0s0  | more}
 & \multirow{2}{*}{\includegraphics[scale=0.5]{pics/tetris.eps}} \\
 \end{tabular}
 
@@ -435,88 +362,12 @@ Components of the Berkeley Fast Filesystem:
 
 \subsection{Basic Filesystem Concepts: The UNIX Filesystem}
 Information stored in an {\em inode}:
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
-\begin{itemize}
-	\item user owner and group owner ID's
-\end{itemize}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
 \begin{itemize}
 	\item user owner and group owner ID's
 	\item file type
-\end{itemize}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
-\begin{itemize}
-	\item user owner and group owner ID's
-	\item file type
-	\item access mode (permissions)
-\end{itemize}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
-\begin{itemize}
-	\item user owner and group owner ID's
-	\item file type
-	\item access mode (permissions)
-	\item file access and modification time
-\end{itemize}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
-\begin{itemize}
-	\item user owner and group owner ID's
-	\item file type
-	\item access mode (permissions)
-	\item file access and modification time
-	\item file status modification time
-\end{itemize}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
-\begin{itemize}
-	\item user owner and group owner ID's
-	\item file type
-	\item access mode (permissions)
-	\item file access and modification time
-	\item file status modification time
-	\item number of links to the file
-\end{itemize}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
-\begin{itemize}
-	\item user owner and group owner ID's
-	\item file type
-	\item access mode (permissions)
-	\item file access and modification time
-	\item file status modification time
-	\item number of links to the file
-	\item size of the file
-\end{itemize}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
-\begin{itemize}
-	\item user owner and group owner ID's
-	\item file type
-	\item access mode (permissions)
-	\item file access and modification time
-	\item file status modification time
-	\item number of links to the file
-	\item size of the file
-	\item disk device containing this file
-\end{itemize}
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-Information stored in an {\em inode}:
-\begin{itemize}
-	\item user owner and group owner ID's
-	\item file type
+		\begin{itemize}
+			\item (regular ('r'), directory ('d'), special ('c', 'b'), symlink ('l'), socket ('s'), fifo ('p'))
+		\end{itemize}
 	\item access mode (permissions)
 	\item file access and modification time
 	\item file status modification time
@@ -529,122 +380,36 @@ Information stored in an {\em inode}:
 $ stat /etc/passwd
 \end{verbatim}
 
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-File types:
-\\
-
-\begin{tabular}{ p{10cm} S }
-\begin{itemize}
-	\item regular files
-\end{itemize}
-& \multirow{2}{*}{\includegraphics[scale=0.7]{pics/file.eps}} \\
-\end{tabular}
-\\
-
-\verb+$ stat /etc/passwd+
-
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-File types:
-\\
-
-\begin{tabular}{ p{10cm} S }
-\begin{itemize}
-	\item regular files
-	\item directories
-\end{itemize}
-& \multirow{2}{*}{\includegraphics[scale=1.5]{pics/directory.eps}} \\
-\end{tabular}
-\\
-
-\verb+$ stat /+
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-File types:
-\\
-
-\begin{tabular}{ p{10cm} S }
-\begin{itemize}
-	\item regular files
-	\item directories
-	\item special files
-\end{itemize}
-& \multirow{2}{*}{\includegraphics[scale=1.0]{pics/devices.eps}} \\
-\end{tabular}
-\\
-
-\verb+$ file /dev/* | more+
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-File types:
-\\
-
-\begin{tabular}{ p{10cm} S }
-\begin{itemize}
-	\item regular files
-	\item directories
-	\item special files
-	\item links
-\end{itemize}
-& \multirow{2}{*}{\includegraphics[scale=0.6]{pics/link.eps}} \\
-\end{tabular}
-\\
-
+\subsection{Let's {\em not} pretend we're a filesystem...}
 \begin{verbatim}
-$ touch /tmp/foo
-$ ln /tmp/foo /tmp/bar
-$ stat /tmp/foo /tmp/bar
-$ ln -sf /tmp/foo /tmp/bar
-$ stat /tmp/foo /tmp/bar
+dumpfs xbd2
+
+disklabel xbd2
+
+newfs -b 4096 -f 512 xbd2a
+
+mount /dev/xbd2a /mnt
+
+echo hello world > /mnt/newfile
+
+dd if=/dev/rxbd2a 2>/dev/null | hexdump -C
+
+dumpfs xbd2
+
+dumpfs -v -i xbd2
 \end{verbatim}
 
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-File types:
-\\
-
-\begin{tabular}{ p{10cm} S }
-\begin{itemize}
-	\item regular files
-	\item directories
-	\item special files
-	\item links
-	\item sockets
-\end{itemize}
-& \multirow{2}{*}{\includegraphics[scale=0.8]{pics/socket.eps}} \\
-\end{tabular}
-\\
-
-\verb+$ stat /dev/log+
-
-\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
-File types:
-\\
-
-\begin{tabular}{ p{10cm} S }
-\begin{itemize}
-	\item regular files
-	\item directories
-	\item special files
-	\item links
-	\item sockets
-	\item named pipes
-\end{itemize}
-& \multirow{2}{*}{\includegraphics[scale=1.0]{pics/pipe.eps}} \\
-\end{tabular}
-\\
-
-\begin{verbatim}
-$ mkfifo /tmp/fifo
-$ cat /tmp/fifo > /tmp/out &
-$ stat /tmp/fifo | tee /tmp/fifo
-$ cat /tmp/out
-\end{verbatim}
-
-\subsection{HW2}
-\\
-
-\vspace{2in}
-\verb+https://stevens.netmeister.org/615/s19-hw2.html+
+\newpage
+\vspace*{\fill}
+\begin{center}
+    \Hugesize
+        Hooray! \\ [1em]
+    \hspace*{5mm}
+    \blueline\\
+    \hspace*{5mm}\\
+        5 Minute Break
+\end{center}
+\vspace*{\fill}
 
 \subsection{Down the stack we go}
 Consider a website on an AWS EC2 instance...
@@ -920,6 +685,15 @@ Bringin up this web service might include...
 \end{itemize}
 
 
+\subsection{Team Missions}
+\vspace*{\fill}
+\begin{center}
+\includegraphics[scale=1.0]{pics/blue-hat.eps}
+\end{center}
+{\tt https://is.gd/VFWyp6}
+\vspace*{\fill}
+
+
 \subsection{Typical Boot Sequence}
 \vspace*{\fill}
 \begin{center}
@@ -933,6 +707,23 @@ Bringin up this web service might include...
 	\includegraphics[scale=1.5]{pics/BIOS.eps} \\
 \end{center}
 \vspace*{\fill}
+
+\subsection{Typical Boot Sequence}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.5]{pics/UEFI.eps} \\
+Unified Extensible Firmware Interface (UEFI)
+\end{center}
+\vspace*{\fill}
+
+\subsection{Team Missions}
+\vspace*{\fill}
+\begin{center}
+\includegraphics[scale=1.3]{pics/green-hat.eps}
+\end{center}
+{\tt https://is.gd/KgvP8p}
+\vspace*{\fill}
+
 
 \subsection{Typical Boot Sequence}
 \vspace*{\fill}
@@ -975,6 +766,35 @@ No active partition.
 \end{verbatim}
 
 \subsection{Boot partitions}
+See e.g. {\tt
+https://en.wikipedia.org/wiki/Master\_boot\_record\#Partition\_table\_entries}
+\smallish
+\begin{verbatim}
+fdisk xbd2
+
+# 0x80 = active; 0x00 inactive
+printf '\x0' | dd of=/dev/xbd2d bs=1 seek=446
+# CHS of first sector
+printf '\01\01\00' | dd of=/dev/xbd2d bs=1 seek=447
+# partition type 169 decimal = NetBSD
+printf '\xa9' | dd of=/dev/xbd2d bs=1 seek=450
+# CHS of last sector
+printf '\x8a\x08\x82' | dd of=/dev/xbd2d bs=1 seek=451
+# LBA of first sector (4 bytes, little endian)
+printf '\x3f' | dd of=/dev/xbd2d bs=1 seek=454
+# total # of sector (4 bytes little endian)
+printf '\xc1\xff\x1f' | dd of=/dev/xbd2d bs=1 seek=458
+# magic header / boot signature
+printf '\x55\xaa' | dd of=/dev/xbd2d seek=510 bs=1
+
+fdisk xbd2
+
+# of, a bit easier:
+fdisk -f -u -0 -s 169/63/2097089 /dev/rxbd2d
+\end{verbatim}
+
+\subsection{Boot partitions}
+Dual boot example:
 \smallish
 \begin{verbatim}
 # fdisk xbd2
@@ -1043,6 +863,8 @@ boots up? Review ``remote attestation'' of software,
 ``secure boot'' mechanisms, and Trusted Computing.
 
 \subsection{Typical Boot Sequences}
+Exercise:
+
 \verb+https://stevens.netmeister.org/615/boot-sequence/+
 \vspace*{\fill}
 \begin{verbatim}
@@ -1060,137 +882,19 @@ filesystem specific parts.  Can you explain what's
 happening?
 \vspace*{\fill}
 
-\subsection{Types of Software}
+\subsection{HW and Reading}
+\verb+https://stevens.netmeister.org/615/s20-hw2.html+
 
-\subsection{Firmware}
-\begin{center}
-	\includegraphics[scale=2.2]{pics/ignition-firmware.eps}
-\end{center}
+\vspace{1in}
+\begin{itemize}
+	\item as always: manual pages for all commands
+	\item {\tt fs(5)}, {\tt newfs(8)}, {\tt tunefs(8)}
+	\item {\tt https://wiki.osdev.org/Partition\_Table}
+	\item {\tt https://en.wikipedia.org/wiki/Master\_boot\_record}
+	\item \verb+https://is.gd/8KHnQj+
+	\item \verb+https://is.gd/wGgJ0e+
+\end{itemize}
 
-\subsection{Firmware}
-\begin{center}
-	\includegraphics[scale=0.8]{pics/linksys.eps}
-	\includegraphics[scale=0.3]{pics/remote.eps}
-	\includegraphics[scale=0.5]{pics/car-firmware.eps}
-\end{center}
-
-\subsection{Firmware}
-\begin{center}
-	\includegraphics[scale=0.8]{pics/linksys.eps}
-	\includegraphics[scale=0.3]{pics/remote.eps}
-	\includegraphics[scale=0.5]{pics/car-firmware.eps} \\
-	\includegraphics[scale=0.4]{pics/ide-drive.eps}
-	\includegraphics[scale=0.9]{pics/usb-icon.eps}
-\end{center}
-
-
-
-\subsection{Firmware}
-\begin{center}
-	\includegraphics[scale=1.0]{pics/sun-firmware.eps}
-\end{center}
-
-\subsection{Firmware}
-\begin{center}
-	\includegraphics[scale=1.5]{pics/BIOS.eps}
-\end{center}
-
-\subsection{...}
-\begin{center}
-	\includegraphics[scale=1.3]{pics/kfc1.eps}
-\end{center}
-
-\subsection{Kernel}
-\begin{center}
-        \includegraphics[scale=1.7]{pics/engine-kernel.eps}
-\end{center}
-
-\subsection{Kernel}
-\small
-\begin{verbatim}
-Copyright (c) 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-    2006, 2007, 2008, 2009, 2010, 2011, 2012
-    The NetBSD Foundation, Inc.  All rights reserved.
-
-Copyright (c) 1982, 1986, 1989, 1991, 1993
-    The Regents of the University of California.  All rights reserved.
-
-NetBSD 6.1.2 (XEN3PAE_DOMU)
-total memory = 615 MB
-avail memory = 597 MB
-mainbus0 (root)
-hypervisor0 at mainbus0: Xen version 3.4.3.amazon
-vcpu0 at hypervisor0: Intel(R) Xeon(R) CPU E5-2650 0 @ 2.00GHz, id 0x206d7
-xenbus0 at hypervisor0: Xen Virtual Bus Interface
-xencons0 at hypervisor0: Xen Virtual Console Driver
-npx0 at hypervisor0: using exception 16
-xbd0 at xenbus0 id 2049: Xen Virtual Block Device Interface
-xbd1 at xenbus0 id 2050: Xen Virtual Block Device Interface
-xennet0 at xenbus0 id 0: Xen Virtual Network Interface
-xennet0: MAC address 22:00:0a:47:89:0e
-balloon0 at xenbus0 id 0: Xen Balloon driver
-balloon0: current reservation: 629760 KiB
-xennet0: using RX copy mode
-balloon0: current reservation: 157440 pages => target: 157440 pages
-boot device: xbd1
-root on xbd1a dumps on xbd1b
-root file system type: ffs
-Sat Feb  1 21:46:17 UTC 2014
-\end{verbatim}
-\Normalsize
-
-\subsection{OS}
-\begin{center}
-	\includegraphics[scale=0.4]{pics/engine-os.eps}
-\end{center}
-
-\subsection{OS}
-\begin{center}
-	\includegraphics[scale=0.6]{pics/os-screenshot.eps}
-\end{center}
-
-\subsection{System Software}
-\begin{center}
-	\includegraphics[scale=1.6]{pics/dashboard-system-software.eps}
-\end{center}
-
-\subsection{System Software}
-\begin{center}
-	\includegraphics[scale=0.6]{pics/system-software.eps}
-\end{center}
-
-\subsection{Applications}
-\begin{center}
-	\includegraphics[scale=1.6]{pics/car_radio-applications.eps}
-\end{center}
-
-\subsection{Applications}
-\begin{center}
-	\includegraphics[scale=0.3]{pics/python.eps}
-	\includegraphics[scale=0.3]{pics/logo_oracle.eps}
-	\includegraphics[scale=0.8]{pics/apache.eps} \\
-	\includegraphics[scale=0.3]{pics/mysql.eps}
-	\includegraphics[scale=0.3]{pics/php-logo.eps}
-\end{center}
-
-\subsection{...and then there are unikernels and containers.}
-\vfill
-\begin{center}
-	\includegraphics[scale=0.4]{pics/unikernel.eps}
-\end{center}
-\vfill
-
-\newpage
-\vspace*{\fill}
-\begin{center}
-    \Hugesize
-        Hooray! \\ [1em]
-    \hspace*{5mm}
-    \blueline\\
-    \hspace*{5mm}\\
-        5 Minute Break
-\end{center}
-\vspace*{\fill}
 
 %\subsection{Team Missions}
 %\vfill
@@ -1222,7 +926,7 @@ Sat Feb  1 21:46:17 UTC 2014
 %\subsection{OS Installation}
 %\small
 %\begin{verbatim}
-%# fdisk -f -u 0 -s 169/63/4194241 /dev/rwd0d
+%# fdisk -f -u -0 -s 169/63/4194241 /dev/rwd0d
 %# fdisk -f -c /usr/mdec/mbr /dev/rwd0d
 %# fdisk -f -a -0 /dev/rwd0d
 %# disklabel -e -I wd0
@@ -1620,5 +1324,273 @@ Sat Feb  1 21:46:17 UTC 2014
 %		\end{itemize}
 %	\item \verb+http://www.pkgsrc.org/+
 %\end{itemize}
-%
+
+\subsection{Additional Content}
+
+Content for topics we couldn't fit into class below.
+\\
+Please review on your own time.
+
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+File types:
+\\
+
+\begin{tabular}{ p{10cm} S }
+\begin{itemize}
+	\item regular files
+\end{itemize}
+& \multirow{2}{*}{\includegraphics[scale=0.7]{pics/file.eps}} \\
+\end{tabular}
+\\
+
+\verb+$ stat /etc/passwd+
+
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+File types:
+\\
+
+\begin{tabular}{ p{10cm} S }
+\begin{itemize}
+	\item regular files
+	\item directories
+\end{itemize}
+& \multirow{2}{*}{\includegraphics[scale=1.5]{pics/directory.eps}} \\
+\end{tabular}
+\\
+
+\verb+$ stat /+
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+File types:
+\\
+
+\begin{tabular}{ p{10cm} S }
+\begin{itemize}
+	\item regular files
+	\item directories
+	\item special files
+\end{itemize}
+& \multirow{2}{*}{\includegraphics[scale=1.0]{pics/devices.eps}} \\
+\end{tabular}
+\\
+
+\verb+$ file /dev/* | more+
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+File types:
+\\
+
+\begin{tabular}{ p{10cm} S }
+\begin{itemize}
+	\item regular files
+	\item directories
+	\item special files
+	\item links
+\end{itemize}
+& \multirow{2}{*}{\includegraphics[scale=0.6]{pics/link.eps}} \\
+\end{tabular}
+\\
+
+\begin{verbatim}
+$ touch /tmp/foo
+$ ln /tmp/foo /tmp/bar
+$ stat /tmp/foo /tmp/bar
+$ ln -sf /tmp/foo /tmp/bar
+$ stat /tmp/foo /tmp/bar
+\end{verbatim}
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+File types:
+\\
+
+\begin{tabular}{ p{10cm} S }
+\begin{itemize}
+	\item regular files
+	\item directories
+	\item special files
+	\item links
+	\item sockets
+\end{itemize}
+& \multirow{2}{*}{\includegraphics[scale=0.8]{pics/socket.eps}} \\
+\end{tabular}
+\\
+
+\verb+$ stat /dev/log+
+
+\subsection{Basic Filesystem Concepts: The UNIX Filesystem}
+File types:
+\\
+
+\begin{tabular}{ p{10cm} S }
+\begin{itemize}
+	\item regular files
+	\item directories
+	\item special files
+	\item links
+	\item sockets
+	\item named pipes
+\end{itemize}
+& \multirow{2}{*}{\includegraphics[scale=1.0]{pics/pipe.eps}} \\
+\end{tabular}
+\\
+
+\begin{verbatim}
+$ mkfifo /tmp/fifo
+$ cat /tmp/fifo > /tmp/out &
+$ stat /tmp/fifo | tee /tmp/fifo
+$ cat /tmp/out
+\end{verbatim}
+
+\newpage
+\vspace*{\fill}
+\begin{center}
+	\Hugesize
+		Basic Filesystem Concepts\\ [1em]
+	\hspace*{5mm}
+	\blueline\\
+	\hspace*{5mm}\\
+		Filesystem Layout
+\end{center}
+\vspace*{\fill}
+
+\subsection{Basic Filesystem Concepts}
+All partitions -- with the exception of the {\em root} (or \verb+/+) partition
+-- can be {\em mounted} anywhere in the filesystem hierarchy.
+\\
+
+\begin{center}
+	\includegraphics[scale=0.5]{pics/filesystem-tree-mountpoints.eps} \\
+\end{center}
+
+\subsection{Basic Filesystem Concepts}
+All partitions -- with the exception of the {\em root} (or \verb+/+) partition
+-- can be {\em mounted} anywhere in the filesystem hierarchy.
+\\
+
+The file \verb+/etc/fstab+ (see fstab(5)) specifies which disks / partitions
+to mount where:
+\\
+\begin{verbatim}
+/dev/xbd1a /        ffs    rw 1 1
+/dev/xbd0a /grub    ext2fs rw 2 2
+kernfs     /kern    kernfs rw
+ptyfs      /dev/pts ptyfs  rw
+procfs     /proc    procfs rw
+\end{verbatim}
+\Normalsize
+
+\subsection{Basic Filesystem Concepts}
+All partitions -- with the exception of the {\em root} (or \verb+/+) partition
+-- can be {\em mounted} anywhere in the filesystem hierarchy.
+\\
+
+The file \verb+/etc/fstab+ (see fstab(5)) specifies which disks / partitions
+to mount where:
+\\
+\begin{verbatim}
+$ cat /etc/fstab
+# /etc/fstab: static file system information.
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+/dev/mapper/nemo--vg-root /               ext4    errors=remount-ro 0       1
+# /boot was on /dev/sda1 during installation
+UUID=e5abfdb9-1d53-4df7-9894-1c5a08b7f8c7 /boot           ext2    defaults        0       2
+/dev/mapper/nemo--vg-swap_1 none            swap    sw              0       0
+\end{verbatim}
+
+
+\subsection{Basic Filesystem Concepts}
+All partitions -- with the exception of the {\em root} (or \verb+/+) partition
+-- can be {\em mounted} anywhere in the filesystem hierarchy.
+\\
+
+To see what filesystems are currently mounted, run \verb+mount(8)+:
+\\
+
+\begin{verbatim}
+/dev/xbd1a on / type ffs (local)
+/dev/xbd0a on /grub type ext2fs (local)
+kernfs on /kern type kernfs (local)
+ptyfs on /dev/pts type ptyfs (local)
+procfs on /proc type procfs (local)
+/dev/xbd2a on /mnt type ffs (local)
+\end{verbatim}
+
+
+\subsection{Basic Filesystem Concepts}
+\\
+
+\begin{verbatim}
+$ mount
+proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)
+udev on /dev type devtmpfs (rw,nosuid,relatime,size=1002928k,nr_inodes=250732,mode=755)
+devpts on /dev/pts type devpts (rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000)
+tmpfs on /run type tmpfs (rw,nosuid,noexec,relatime,size=204804k,mode=755)
+/dev/mapper/nemo--vg-root on / type ext4 (rw,relatime,errors=remount-ro,data=ordered)
+cgroup on /sys/fs/cgroup/memory type cgroup (rw,nosuid,nodev,noexec,relatime,memory)
+cgroup on /sys/fs/cgroup/cpuset type cgroup (rw,nosuid,nodev,noexec,relatime,cpuset)
+/dev/vda1 on /boot type ext2 (rw,relatime,block_validity,barrier,user_xattr,acl)
+ldap:nirvana.phy.stevens-tech.edu:ou=auto.home,dc=phy,dc=stevens-tech,dc=edu on /home type autofs (rw,relatime,fd=6,pgrp=1345,timeout=60,minproto=5,maxproto=5,indirect)
+kronos.srcit.stevens-tech.edu:/xraid0-1/export/home/jschauma on /home/jschauma type nfs (rw,relatime,sync,vers=3,rsize=32768,wsize=32768,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=155.246.89.203,mountvers=3,mountport=53643,mountproto=udp,local_lock=none,addr=155.246.89.203)
+\end{verbatim}
+
+\subsection{Basic Filesystem Concepts}
+Some of the different kinds of filesystems:
+\begin{itemize}
+	\item ``Regular'' File Systems
+	\item Journaling File Systems
+	\item Network File Systems
+	\item Various
+\end{itemize}
+
+
+\subsection{Where do we put all of our files?}
+Layout of filesystem {\em should} be standardized.  Some UNIX versions adhere
+to these standards, some are strongly influenced by tradition.
+\\
+
+{\tt man hier}
+
+\subsection{File System Hierarchy}
+\small
+\begin{verbatim}
+                     /          root directory of the system
+
+                     /bin/      utilities used in both single and multi-user environments
+
+                     /dev/      block, character and other special device files
+
+                     /etc/      system configuration files and scripts
+
+                     /lib/      dynamic linked libraries used by dynamic linked programs (such
+                                as those in /bin/ and /sbin/) that cannot rely upon /usr/lib/
+                                being available.
+
+                     /sbin/     system programs and administration utilities used in both sin-
+                                gle-user and multi-user environments
+
+                     /tmp/      temporary files, usually a mfs(8) memory-based filesystem (the
+                                contents of /tmp are usually not preserved across a system
+                                reboot)
+
+                     /usr/      contains the majority of the system utilities and files
+
+
+                                bin/      common utilities, programming tools, and applica-
+                                          tions
+
+                                lib/      archive, profiled, position independent archive, and
+                                          shared libraries
+
+                                sbin/     system daemons and system utilities (normally exe-
+                                          cuted by the super-user)
+
+                                share/    architecture-independent text files
+\end{verbatim}
+\Normalsize
+
+
+
 \end{document}

@@ -39,11 +39,27 @@
 \end{center}
 \vspace*{\fill}
 
+\subsection{Team Missions}
+Red team: \\
+\verb+https://is.gd/pbcgc5+ \\
+\verb+https://is.gd/mJoJEV+ \\
+
+Black team: \\
+\verb+https://is.gd/xCRWDn+ \\
+\verb+https://is.gd/xa2LSp+ \\
+
+Blue team: \\
+\verb+https://is.gd/onqXl6+ \\
+
+Green team: \\
+\verb+https://is.gd/7jGOn3+ \\
+\verb+https://is.gd/pzrgaO+ \\
+\verb+https://is.gd/o4Gcqm+
 
 \subsection{HTTP}
 \begin{center}
-	\includegraphics[scale=0.3]{pics/stevens-ec2.eps} \\
-	\verb+http://ec2-54-160-173-145.compute-1.amazonaws.com/+
+	\includegraphics[scale=0.4]{pics/stevens-ec2.eps} \\
+	\verb+http://ec2-54-82-75-174.compute-1.amazonaws.com/+
 \end{center}
 
 \subsection{HTTP}
@@ -96,7 +112,7 @@ to the web server from your {\tt pcap} file.
 
 \subsection{HTTPS}
 \begin{verbatim}
-$ </dev/null openssl s_client -connect ec2-54-160-173-145.compute-1.amazonaws.com:443 |
+$ </dev/null openssl s_client -connect ec2-54-82-75-174.compute-1.amazonaws.com:443 |
         openssl x509 -text -noout | more
 $ sudo tcpdump -w post.pcap port 443 2>/dev/null &
 $ fg
@@ -214,9 +230,29 @@ See also: \verb+https://tls.ulfheim.net/+
 	\includegraphics[scale=0.4]{pics/wireshark.eps}
 \end{center}
 
+
 \subsection{TLS}
 \begin{verbatim}
 $ openssl s_client -connect www.stevens.edu:443
+[...]
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Server public key is 2048 bit
+Early data was not sent
+---
+GET / HTTP/1.0
+
+Post-Handshake New Session Ticket arrived:
+SSL-Session:
+    Protocol  : TLSv1.3
+    Cipher    : TLS_AES_256_GCM_SHA384
+    Session-ID: 11A6C0CF6C661080EED2E0A82356F164FFFFB798DF00758E6ABDE35375871480
+    Session-ID-ctx:
+    Resumption PSK: 48CBBD750915769BB0C86C89DA7E9C0DE0E88311504F847FEFD4CC50E360B538A6B4280A2860DEA0D3D7A5EF9FF817A3
+\end{verbatim}
+
+\subsection{TLS}
+\begin{verbatim}
+$ openssl s_client -tls1_2 -connect www.stevens.edu:443
 [...]
 New, TLSv1.2, Cipher is ECDHE-RSA-CHACHA20-POLY1305
 Server public key is 2048 bit
@@ -224,9 +260,9 @@ Secure Renegotiation IS supported
 SSL-Session:
     Protocol  : TLSv1.2
     Cipher    : ECDHE-RSA-CHACHA20-POLY1305
-    Session-ID: 32FB0E95CA87601D671ACF26AD3B7BF9C288C8CCF1C1FF8116018E7DC8890448
+    Session-ID: 5AEA1C7F5402937F72688473F585FAE0B51FCBE75CB0B214EBAE7C9EAF55BDFF
     Session-ID-ctx: 
-    Master-Key: A7B50CCD8F08745B019163C107BCBB52DFB67453BAF90E09F48B0E393E7E05401F1754E67E0C6005F656A55B493444CA
+    Master-Key: BAE87DF4DFD95DF4539B67178248A13535FE847C8297B36C14E45F573DB020517DB2AD87B792AE51D173E72585899FCF
     PSK identity: None
     PSK identity hint: None
     SRP username: None
@@ -241,22 +277,22 @@ $ openssl s_client -connect www.stevens.edu:443 | \
         openssl x509 -text -noout
 [...]
         Serial Number:
-            9a:9e:f8:47:2d:aa:4b:a3:e6:be:85:b7:9d:51:18:d6
-    Signature Algorithm: sha256WithRSAEncryption
-        Issuer: C=US, ST=MI, L=Ann Arbor, O=Internet2, OU=InCommon, CN=InCommon RSA Server CA
+            17:a1:13:55:6f:88:2b:29:c7:64:e1:0d:69:31:e1:88
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C = US, ST = MI, L = Ann Arbor, O = Internet2, OU = InCommon,
+                CN = InCommon RSA Server CA   
         Validity
-            Not Before: Dec  4 00:00:00 2018 GMT
-            Not After : Dec  4 23:59:59 2019 GMT
-        Subject: C=US/postalCode=07030, ST=NJ,
-                 L=Hoboken/street=Castle Point on Hudson,
-                 O=Stevens Institute of Technology, OU=IT,
-                 CN=*.stevens.edu
+            Not Before: Apr 22 00:00:00 2019 GMT
+            Not After : Apr 21 23:59:59 2021 GMT
+        Subject: C = US, postalCode = 07030, ST = NJ,
+                L = Hoboken, street = Castle Point on Hudson,
+                O = Stevens Institute of Technology, OU = IT,
+                CN = stevens.edu
 [...]
             X509v3 Subject Alternative Name: 
-                DNS:*.stevens.edu, DNS:stevens.edu
+                DNS:stevens.edu, DNS:*.stevens-tech.edu, DNS:*.stevens.edu
 \end{verbatim}
 \Normalsize
-Note the absence of 'stevens-tech.edu' names...
 
 % \subsection{TLS}
 % Setting up a Man in the Middle attack site: \\
@@ -425,6 +461,7 @@ Good news, everybody: Slack has not yet replaced email. (And it's not going to.)
 	\item {\bf 42} - Percentage of Americans that check their email in the bathroom.
 	\item {\bf 18} - Percentage of Americans that check their email while driving.
 	\item {\bf $>$70} - Percentage of emails that are Spam.
+	\item {\bf 99.95} - Percentage of SysAdmins, SREs, and DevOps who rely on email for monitoring
 \end{itemize}
 
 \subsection{The Mail System}
@@ -877,10 +914,6 @@ helo ec2-54-160-173-145.compute-1.amazonaws.com
 \begin{verbatim}
 $ host -t txt _mta-sts.yahoo.com
 _mta-sts.yahoo.com descriptive text "v=STSv1; id=20161109010200Z;"
-$ host -t txt _mta-sts.gmail.com
-_mta-sts.gmail.com descriptive text "v=STSv1; id=20171114T070707;"
-$ host -t txt _mta-sts.stevens.edu
-Host _mta-sts.stevens.edu not found: 3(NXDOMAIN)
 $ curl https://mta-sts.yahoo.com/.well-known/mta-sts.txt
 version: STSv1
 mode: testing
@@ -950,7 +983,7 @@ Lines: 5
 \vspace*{\fill}
 \begin{center}
 	\includegraphics[scale=1.5]{pics/spam.eps} \\
-	{\tt https://youtu.be/9OVKXIfrGJE}
+	\verb+https://www.youtube.com/watch?v=_bW4vEo1F4E+
 \end{center}
 \vspace*{\fill}
 
@@ -960,16 +993,15 @@ $ telnet stevens-edu.mail.protection.outlook.com 25
 Trying 104.47.36.36...
 Connected to stevens-edu.mail.protection.outlook.com.
 Escape character is '^]'.
-220 SN1NAM02FT062.mail.protection.outlook.com Microsoft ESMTP MAIL Service
-        ready at Mon, 25 Mar 2019 16:27:13 +0000
+220 SN1NAM02FT055.mail.protection.outlook.com Microsoft ESMTP MAIL Service
+        ready at Mon, 23 Mar 2020 16:06:29 +0000
 EHLO localhost
-250 SN1NAM02FT062.mail.protection.outlook.com Hello [54.160.173.145]
+250-SN1NAM02FT055.mail.protection.outlook.com Hello [54.82.75.174]
 MAIL FROM: <leaks@whitehouse.gov>
 250 2.1.0 Sender OK
-RCPT TO: <mueller@fbi.gov>
-451 4.4.62 Mail sent to the wrong Office 365 region. ATTR35.
-        For more information please go to https://go.microsoft.com/fwlink/?linkid=865268
-        [SN1NAM02FT062.eop-nam02.prod.protection.outlook.com]
+RCPT TO: <fauci@nih.gov>
+550 5.7.64 TenantAttribution; Relay Access Denied
+        [SN1NAM02FT055.eop-nam02.prod.protection.outlook.com]
 quit
 221 2.0.0 Service closing transmission channel
 Connection closed by foreign host.
@@ -1293,13 +1325,14 @@ SMTP
 \subsection{Reading}
 HTTPS / TLS:
 \begin{itemize}
-	\item {\tt https://en.wikipedia.org/wiki/HTTPS}
+	\item \verb+https://en.wikipedia.org/wiki/HTTPS+
 	\item RFC5246 (TLS 1.2) and RFC6176 (prohibiting SSL)
 	\item RFC8446 (TLS 1.3)
-	\item {\tt https://bugzilla.mozilla.org/show\_bug.cgi?id=647959}
-	\item {\tt https://cabforum.org}
-	\item {\tt https://jhalderm.com/pub/papers/interception-ndss17.pdf}
-	\item {\tt https://tls.ulfheim.net/} / {\tt https://tls13.ulfheim.net/}
+	\item \verb+https://bugzilla.mozilla.org/show_bug.cgi?id=647959+
+	\item \verb+https://cabforum.org+
+	\item \verb+https://jhalderm.com/pub/papers/interception-ndss17.pdf+
+	\item \verb+https://tls.ulfheim.net/+
+	\item \verb+https://tls13.ulfheim.net/+
 \end{itemize}
 
 %http://websocketd.com/

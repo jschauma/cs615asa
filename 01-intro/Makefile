@@ -13,15 +13,13 @@ FIGURES=	pics/sysadmin-personalities.eps	\
 		pics/chicken-egg.eps		\
 		pics/xkcd705.eps \
 		pics/Cable_Tie.eps	\
-		pics/Caffeine_molecule.eps	\
 		pics/DuckTape.eps	\
 		pics/MagrittePipe.eps	\
 		pics/System-Call-and-Library-Function.eps	\
 		pics/altix.eps	\
 		pics/may-you-realize-your-ambitions.eps	\
-		pics/armchair.eps	\
-		pics/big-red-button.eps	\
 		pics/blades.eps	\
+		pics/ops-organization.eps	\
 		pics/cables2.eps	\
 		pics/wrong-usability.eps	\
 		pics/better-usability.eps	\
@@ -44,14 +42,12 @@ FIGURES=	pics/sysadmin-personalities.eps	\
 		pics/diesel-generator.eps	\
 		pics/enter-the-dragon.eps	\
 		pics/little-dragon.eps	\
-		pics/google_whiteboard_large.eps	\
 		pics/hand-scanner.eps	\
 		pics/hats.eps	\
 		pics/homer-brain.eps	\
 		pics/internet.eps	\
 		pics/juniper.eps	\
 		pics/kernel-programs.eps	\
-		pics/keyboard.eps	\
 		pics/kinesis.eps	\
 		pics/labelmaker.eps	\
 		pics/leatherman.eps	\
@@ -64,8 +60,8 @@ FIGURES=	pics/sysadmin-personalities.eps	\
 		pics/quincy-panorama.eps	\
 		pics/raid.eps	\
 		pics/remote_hands.eps	\
-		pics/screwdrivers.eps	\
 		pics/switches.eps	\
+		pics/sysadmin-was-here.eps	\
 		pics/unix-parts.eps	\
 		pics/unix_history.eps	\
 		pics/donkey_too_small_for_load.eps \

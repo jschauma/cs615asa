@@ -41,16 +41,23 @@
 \vspace*{\fill}
 
 \subsection{Backups vs. Restores}
+Start two instances:
 
-\vspace*{\fill}
+\begin{itemize}
+	\item NetBSD ({\tt ami-569ed93c})
+	\item OmniOS ({\tt ami-0a01a5636f3c4f21c})
+\end{itemize}
+
+\subsection{Backups vs. Restores}
 \Huge
 \begin{center}
-``Only wimps use tape backup.  Just upload important
-stuff to FTP and let the rest of the world mirror
-it.'' -- {\em Linus Torvalds} (paraphrased)
+Backups are boring. \\
+\vspace{.5in}
+Backups are tedious. \\
+\vspace{.5in}
+Nobody likes doing backups. \\
 \end{center}
 \Normalsize
-\vspace*{\fill}
 
 \subsection{Backups vs. Restores}
 \Huge
@@ -65,33 +72,50 @@ to accomplish a specific {\em goal}: \\
 \end{center}
 \Normalsize
 
-\subsection{To the backups!}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.8]{pics/schrodinger.eps}
-\end{center}
-\vspace*{\fill}
+\subsection{Basic Terminology, Concepts, and Considerations}
+\begin{itemize}
+	\item "full backup"
+	\item "incremental backup"
+	\item "synthetic backup" (Green Team link: \verb+https://is.gd/0bKE1c+)
+	\item file level vs. block level
+	\item differential backup
+	\item journalling vs. snapshots
+	\item live data / open files, meta data (e.g., file- and filesystem), file data
+	\item Recovery Point Objective (RPO)
+	\item Recovery Time Objective (RTO)
+	\item Business Continuity Plan (BCP)
+	\item replaceable vs irreplaceable systems
+\end{itemize}
 
-\subsection{Long-term storage}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=2.5]{pics/daily-tapes.eps}
-\end{center}
-\vspace*{\fill}
+\subsection{Data Storage Media}
+What media can we back up to?
 
-\subsection{Long-term storage}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.1]{pics/dlt-library.eps}
-\end{center}
-\vspace*{\fill}
+\subsection{Data Storage Media}
+Media:
+\begin{itemize}
+	\item magnetic tape 
+	\item traditional hard disk
+	\item solid-state drive
+	\item optical storage
+	\item the cloud, why not
+\end{itemize}
 
-\subsection{Long-term storage}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.5]{pics/libraries.eps}
-\end{center}
-\vspace*{\fill}
+\subsection{Data Storage Media}
+What factors do we have to consider when choosing a
+backup medium?
+
+\subsection{Data Storage Media}
+Factors:
+\begin{itemize}
+	\item I/O performance (both read/write, sequential vs. random access, ...)
+	\item reusability and degredation
+	\item longevity
+	\item mobility
+	\item data integrity assurance (e.g., WORM - write once, read many)
+	\item data compression, encryption
+	\item deduplication
+	\item availability
+\end{itemize}
 
 \subsection{Long-term storage}
 \begin{itemize}
@@ -109,72 +133,8 @@ to accomplish a specific {\em goal}: \\
 When do we need backups?
 \begin{itemize}
 	\item long-term storage / archival
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.3]{pics/archive.eps}
-\end{center}
-	\item recover from data loss
+	\item recover from data loss due to...
 \end{itemize}
-\vspace*{\fill}
-
-\subsection{Backups and Restore Basics}
-When do we need backups?
-\begin{itemize}
-	\item long-term storage / archival
-	\item recover from data loss due to
-\end{itemize}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.0]{pics/headcrash-closeup.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{Backups and Restore Basics}
-When do we need backups?
-\begin{itemize}
-	\item long-term storage / archival
-	\item recover from data loss due to
-\end{itemize}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=1.2]{pics/dumb-user.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{Backups and Restore Basics}
-When do we need backups?
-\begin{itemize}
-	\item long-term storage / archival
-	\item recover from data loss due to
-\end{itemize}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.4]{pics/20th-and-C.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{Backups and Restore Basics}
-When do we need backups?
-\begin{itemize}
-	\item long-term storage / archival
-	\item recover from data loss due to
-\end{itemize}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.6]{pics/hacker.eps}
-\end{center}
-\vspace*{\fill}
-
-\subsection{Backups and Restore Basics}
-When do we need backups?
-\begin{itemize}
-	\item long-term storage / archival
-	\item recover from data loss due to
-\end{itemize}
-\vspace*{\fill}
-\begin{center}
-	\includegraphics[scale=0.6]{pics/bugs.eps}
-\end{center}
 \vspace*{\fill}
 
 \subsection{Backups and Restore Basics}
@@ -184,7 +144,7 @@ When do we need backups?
 	\item recover from data loss due to
 		\begin{itemize}
 			\item equipment failure
-			\item bozotic users
+			\item user failure
 			\item natural disaster
 			\item security breach
 			\item software bugs
@@ -198,7 +158,7 @@ When do we need backups?
 	\item recover from data loss due to
 		\begin{itemize}
 			\item equipment failure
-			\item bozotic users
+			\item user failure
 			\item natural disaster
 			\item security breach
 			\item software bugs
@@ -208,20 +168,11 @@ When do we need backups?
 Think of your backups as {\em insurance}:  you invest and pay for it, hoping
 you will never need it.
 
-\subsection{Disaster Recovery}
-Black Team link: \\
-
-
-\verb+https://is.gd/zDB8WL+
-
-\subsection{Disaster Recovery}
+\subsection{Reasons for Restore Requests}
 \begin{itemize}
-	\item loss of e.g. entire file system
-	\item leads to downtime (of individual systems)
-	\item RAID may help
-	\item takes long time to restore
-	\item may require retrieval of archival backups from long-term storage 
-	\item often involves {\em some} data loss
+	\item file recovery
+	\item system recovery (full or partial loss of e.g. a single system)
+	\item disaster recovery
 \end{itemize}
 
 \subsection{Disaster Recovery}
@@ -232,12 +183,45 @@ Black Team link: \\
 	\item takes long time to restore
 	\item may require retrieval of archival backups from long-term storage 
 	\item often involves {\em some} data loss
+	\item 3-2-1 Rule:
+		\begin{itemize}
+			\item keep at least 3 copies of your data
+			\item keep at least 2 copies on different storage media
+			\item keep at least 1 copy offsite
+		\end{itemize}
+\end{itemize}
+
+\subsection{Disaster Recovery}
+\begin{itemize}
+	\item loss of e.g. entire file system
+	\item leads to downtime (of individual systems)
+	\item RAID may help
+	\item takes long time to restore
+	\item may require retrieval of archival backups from long-term storage 
+	\item often involves {\em some} data loss
+	\item 3-2-1 Rule:
+		\begin{itemize}
+			\item keep at least 3 copies of your data
+			\item keep at least 2 copies on different storage media
+			\item keep at least 1 copy offsite
+		\end{itemize}
 \end{itemize}
 \vspace{.5in}
 Beware: disasters scale up much faster than your
 backup strategy!
 
+\subsection{To the backups!}
+\vspace*{\fill}
+\begin{center}
+	\includegraphics[scale=0.8]{pics/schrodinger.eps} \\
+	Black Team link:\verb+https://www.guru99.com/recovery-testing.html+
+\end{center}
+\vspace*{\fill}
+
 \subsection{Trusting your backups}
+Backing up data requires superuser privileges! \\
+Red Team link: CVE-2019-16155: \verb+https://danishcyberdefence.dk/blog/forticlient_linux+ \\
+
 
 A backup is a {\em copy} of the data.  If the data is
 corrupt, your backup may become corrupt. \\
@@ -247,16 +231,15 @@ use trusted tools. \\
 
 Verify the authenticity of your backups! \\
 
-See also: Red Team Link \\
-\verb+https://is.gd/ZawHrG+
+Blue Team link: \verb+https://is.gd/lG6ZQM+
 
 \subsection{File deletion recovery}
 Accidentally deleted files ought to be recoverable for
 a certain amount of time:
 \begin{itemize}
 	\item "Undo"
-	\item time window and granularity requirements
-	\item restore time, including
+	\item time window and granularity requirements (Recovery Point Objective)
+	\item restore time (Recovery Time Objective), including
 		\begin{itemize}
 			\item actual time spent restoring
 			\item waiting until resources permit the restore
@@ -268,21 +251,10 @@ a certain amount of time:
 But note: sometimes people {\em do} want to delete
 data and it be gone!
 
-% \subsection{Filesystem backup}
-% \begin{itemize}
-% 	\item start an EC2 instance
-% 	\item create a full filesystem backup using \verb+dump(8)+
-% 	\item add e.g. the 'apache' package
-% 	\item create an incremental backup
-% 	\item delete the 'apache' package
-% 	\item restore all files from the incremental backup using the \verb+restore(8)+ command
-% 	\item verify that the 'apache' package is fully installed
-% \end{itemize}
- 
 \subsection{Filesystem backup}
 \smallish
 \begin{verbatim}
-ssh ec2-instance "dump -u -0 -f - /" | bzip2 -c -9 >tmp/ec2.0.bz2
+ssh netbsd-instance "dump -u -0 -f - /" | bzip2 -c -9 >tmp/ec2.0.bz2
   DUMP: Found /dev/rxbd1a on / in /etc/fstab
   DUMP: Date of this level 0 dump: Mon Apr  2 19:34:30 2018
   DUMP: Date of last level 0 dump: the epoch
@@ -312,9 +284,13 @@ ssh ec2-instance "dump -u -0 -f - /" | bzip2 -c -9 >tmp/ec2.0.bz2
 \subsection{Filesystem backup}
 \smallish
 \begin{verbatim}
-$ cat /etc/dumpdates
+$ ssh netbsd-instance
+netbsd$ cat /etc/dumpdates
 /dev/rxbd1a      0 Mon Apr  2 19:34:30 2018
-$ ssh ec2-instance "dump -u -i -f - /" | bzip2 -c -9 >tmp/ec2.1.bz2
+netbsd# mkdir -p /usr/local/data
+
+$ scp -r some-data netbsd-instance:/usr/local/data/
+$ ssh netbsd-instance "dump -u -i -f - /" | bzip2 -c -9 >tmp/ec2.1.bz2
   DUMP: Found /dev/rxbd1a on / in /etc/fstab
   DUMP: Date of this level i dump: Mon Apr  2 20:09:24 2018
   DUMP: Date of last level 0 dump: Mon Apr  2 19:34:30 2018
@@ -341,10 +317,10 @@ $ ssh ec2-instance "dump -u -i -f - /" | bzip2 -c -9 >tmp/ec2.1.bz2
 \subsection{Filesystem backup}
 \smallish
 \begin{verbatim}
-# rm -fr /usr/pkg
+netbsd# rm -fr /usr/local/data /etc/resolv.conf
 
 $ bzip2 -d -c ec2.1.bz2 | ssh ec2-instance "cd /; /sbin/restore xf -"
-...
+$ bzip2 -d -c ec2.0.bz2 | ssh ec2-instance "cd /; /sbin/restore xf - etc/resolv.conf"
 \end{verbatim}
 
 
@@ -556,7 +532,7 @@ Example: ZFS snapshots
 \begin{verbatim}
 $ start-omnios
 $ ssh e2-instance
-# snapshot syspool/ROOT/omnios@201904081035
+# zfs snapshot rpool/ROOT/omnios-r151030c@202004051830
 # ls -la / | grep zfs
 # ls -la /.zfs
 total 6
@@ -573,7 +549,7 @@ dr-xr-xr-x   4 root     root           4 Apr  8 14:35 snapshot
 Restoring individual files
 \smallish
 \begin{verbatim}
-# diff -bur /root/. /.zfs/snapshot/201904081035/root/.
+# diff -bur /root/. /.zfs/snapshot/202004051830/root/.
 Only in /root/.: .bash_history
 Common subdirectories: /root/./.ssh and /.zfs/snapshot/201904081035/root/./.ssh
 Only in /root/.: file
@@ -585,7 +561,7 @@ Only in /.zfs/snapshot/201904081035/root/./.ssh: authorized_keys
 Rolling back:
 \begin{verbatim}
 # rm /root/.ssh/authorized_keys
-# zfs rollback syspool/ROOT/omnios@201904081035
+# zfs rollback rpool/ROOT/omnios-r151030c@202004051830
 # ls -l /root/.ssh/authorized_keys
 -rw-------   1 root     root         389 Apr  8 15:19 /root/.ssh/authorized_keys
 # ls /root/file
@@ -625,577 +601,577 @@ Rolling back:
 \end{center}
 \vspace*{\fill}
 
-
-\subsection{Problem Report}
-\vspace*{\fill}
-\Huge
-\begin{center}
-``Something's wrong.''
-\end{center}
-\Normalsize
-\vspace*{\fill}
-
-\subsection{Now what?}
-\begin{center}
-	\includegraphics[scale=0.55]{pics/monkey.eps}
-\end{center}
-
-\subsection{Problem Report}
-\vspace*{\fill}
-\Huge
-\begin{center}
-``The system feels slow.'' \\
-\addvspace{.5in}
-``I can't log in.'' \\
-\addvspace{.5in}
-``My mail was not delivered.'' \\
-\addvspace{.5in}
-``The site is down.''
-\end{center}
-\Normalsize
-\vspace*{\fill}
-
-\subsection{Now what?}
-\begin{center}
-	\includegraphics[scale=0.55]{pics/monkey.eps}
-\end{center}
-
-\subsection{To the logs!}
-\begin{center}
-	\includegraphics[scale=0.55]{pics/logs.eps}
-\end{center}
-
-\subsection{Answers}
-``The system feels slow.''
-\begin{verbatim}
-up 1318 days, 13:46, 1 user, load averages: 993.81, 272.91, 1012.18
-\end{verbatim}
-
-\addvspace{.3in}
-``I can't log in.''
-\begin{verbatim}
-Apr 6 09:25:56 <auth.info>hostname sshd[1624]: Failed password for jdoe from
-115.239.231.100 port 1047 ssh2
-\end{verbatim}
-
-\addvspace{.3in}
-``My mail was not delivered.''
-\begin{verbatim}
-Apr 11 16:15:40 panix postfix/smtpd[7566]: connect from unknown[122.3.68.122]
-Apr 11 16:15:41 panix postfix/smtpd[7566]: NOQUEUE: reject_warning: RCPT from
-unknown[122.3.68.122]: 450 4.7.1 Client host rejected: cannot find your hostname,
-[122.3.68.122]; from=<McneilRomany28@pldt.net> to=<jschauma@stevens.edu>
-proto=ESMTP helo=<122.3.68.122.pldt.net>
-\end{verbatim}
-
-\subsection{Answers}
-``The site is down.'' \\
-
-\begin{verbatim}
-94.242.252.41 - "" [11/Apr/2016:19:18:47 -0400] "GET /secret/ HTTP/1.1"
-403 524 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:28.0)
-Gecko/20100101 Firefox/28.0"
-\end{verbatim}
-
-\subsection{Answers}
-``The site is down.'' \\
-
-\begin{verbatim}
-94.242.252.41 - "" [11/Apr/2016:19:18:47 -0400] "GET /secret/ HTTP/1.1"
-403 524 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:28.0)
-Gecko/20100101 Firefox/28.0"
-\end{verbatim}
-
-\addvspace{.2in}
-\begin{center}
-	\includegraphics[scale=0.25]{pics/monkey.eps}
-\end{center}
-
-\subsection{Events}
-\vspace*{\fill}
-\Huge
-\begin{center}
-``Something's wrong.'' is just an {\em unexpected} or
-{\em undesirable} event.
-\end{center}
-\Normalsize
-\vspace*{\fill}
-
-\subsection{Events}
-\vspace*{\fill}
-\Huge
-\begin{center}
-``Something's wrong.'' is just an {\em unexpected} or
-{\em undesirable} event. \\
-\vspace{.4in}
-{\em Events} happen all the time.
-\end{center}
-\Normalsize
-\vspace*{\fill}
-
-\subsection{Events}
-\vspace*{\fill}
-\Huge
-\begin{center}
-``Something's wrong.'' is just an {\em unexpected} or
-{\em undesirable} event. \\
-\vspace{.4in}
-{\em Events} happen all the time. \\
-\vspace{.4in}
-Being able to identify {\em relevant} events allows
-you to diagnose, predict and even prevent {\em
-undesirable} events.
-\end{center}
-\Normalsize
-\vspace*{\fill}
-
-\subsection{Events}
-\vspace*{\fill}
-\Huge
-\begin{center}
-In order to be able to identify an event as {\em
-unexpected}, you have to have {\em expected} events.
-\end{center}
-\Normalsize
-\vspace*{\fill}
-
-\subsection{Expected Events}
-\vspace*{\fill}
-\Huge
-\begin{center}
-Know your applications.
-\end{center}
-\Normalsize
-\vspace*{\fill}
-
-\subsection{Expected Events}
-\vspace*{\fill}
-\Huge
-\begin{center}
-Know your applications. \\
-\vspace{.4in}
-Know your users.
-\end{center}
-\Normalsize
-\vspace*{\fill}
-
-\subsection{Expected Events}
-\vspace*{\fill}
-\Huge
-\begin{center}
-Know your applications. \\
-\vspace{.4in}
-Know your users. \\
-\vspace{.4in}
-Know your traffic patterns.
-\end{center}
-\Normalsize
-\vspace*{\fill}
-
-\subsection{Expected Events}
-\vspace*{\fill}
-\Huge
-\begin{center}
-Know your applications. \\
-\vspace{.4in}
-Know your users. \\
-\vspace{.4in}
-Know your traffic patterns. \\
-\vspace{.4in}
-{\em Know your systems.}
-\end{center}
-\Normalsize
-\vspace*{\fill}
-
-\subsection{Events and Metrics}
-\vspace*{\fill}
-\begin{verbatim}
-$ dict event
-  event
-      n 1: something that happens at a given place and time
-      2: a special set of circumstances; "in that event, the first
-         possibility is excluded"; "it may rain in which case the
-         picnic will be canceled" [syn: {event}, {case}]
-
-
-$ dict metric
-  metric
-      3: a system of related measures that facilitates the
-         quantification of some particular characteristic [syn:
-         {system of measurement}, {metric}]
-
-\end{verbatim}
-\vspace*{\fill}
-
-\subsection{Events and Metrics}
-\begin{center}
-	\includegraphics[scale=0.75]{pics/events-metrics.eps}
-\end{center}
-
-\subsection{Events and Metrics}
-Events
-\begin{itemize}
-	\item may occur rarely / frequently / constantly
-	\item can be collected in logs
-	\item may be comprised of other events
-	\item may be: ’something happened’
-	\item may be: ’nothing (new) happened’
-\end{itemize}
-\addvspace{.5in}
-
-Metrics:
-\begin{itemize}
-	\item correlation of related events
-	\item may help identify outliers
-	\item may trigger events
-	\item may help make (automated or interactive) decisions
-\end{itemize}
-
-
-\subsection{Collecting Data}
-{\em Counters}: easy, numeric data tracking individual events. Example: HTTP status codes
-
-\addvspace{.5in}
-{\em Timers}: easy, numeric data tracking event duration. Example: Time to send all
-data for a successful HTTP request.
-
-\addvspace{.5in}
-{\em Thresholds}: easy, numeric trigger for events; may itself trigger events or metrics.
-Example: more than N HTTP hits in X seconds yield 404.
-
-% % \subsection{Counting counters, timing timers...}
-% % SNMP
-% % \vspace{.5in}
-% % \begin{center}
-% % 	\Huge
-% % 	A complete network management system to monitor network-attached devices.
-% % \end{center}
-% % \Normalsize
-% % 
-% % \subsection{SNMP}
-% % Base concepts:
-% % \begin{itemize}
-% % 	\item managed devices run an {\em snmp agent} or d\ae mon
-% % 	\item information about the device is exposed in {\em management information bases}
-% % 	\item parts of a system are made available in {\em read-only} mode
-% % 	\item parts of a system may be made available in {\em write} mode
-% % 	\item certain conditions may trigger actions or {\em traps}
-% % 	\item normally uses UDP 161 for the {\em agent} and 162 for the {\em manager}
-% % \end{itemize}
-% % 
-% % \subsection{SNMP}
-% % Management Information Bases (MIBs):
-% % \begin{itemize}
-% % 	\item hierarchical namespace
-% % 	\item contains {\em Object Identifiers} (OIDs)
-% % 	\item written in {\em Abstract Syntax Notation One} (ASN.1)
-% % 	\item often vendor defined
-% % \end{itemize}
-% % 
-% % \subsection{SNMP Versions}
-% % SNMPv1:
-% % \begin{itemize}
-% % 	\item de-facto standard
-% % 	\item poor security (``community strings'' act as passwords)
-% % \end{itemize}
-% % \vspace{.2in}
-% % SNMPv2:
-% % \begin{itemize}
-% % 	\item improvements in the area of performance (\verb+GETBULK+ instead of \verb+GETNEXT+) and security
-% % 	\item comes in the flavors {\em SNMPv2c}, {\em SNMPv1.5} and {\em SNMPv2u}
-% % \end{itemize}
-% % \vspace{.2in}
-% % SNMPv3:
-% % \begin{itemize}
-% % 	\item official standard
-% % 	\item adds authentication, privacy and access control
-% % \end{itemize}
-% % 
-% % \subsection{SNMP: An example}
-% % \smallish
-% % \begin{verbatim}
-% % $ snmpwalk -c public -v 1 bluemoon.cs.stevens-tech.edu
-% % iso.3.6.1.2.1.1.1.0 = STRING: "HP ETHERNET MULTI-ENVIRONMENT,ROM none,JETDIRECT,JD147,EEPROM
-% % JDI2300 0013,CIDATE 07/13/2013"
-% % iso.3.6.1.2.1.1.2.0 = OID: iso.3.6.1.4.1.11.2.3.9.1
-% % iso.3.6.1.2.1.1.3.0 = Timeticks: (293219400) 33 days, 22:29:54.00
-% % [...]
-% % iso.3.6.1.2.1.25.3.2.1.3.1 = STRING: "HP Color LaserJet CP5520 Series"
-% % iso.3.6.1.2.1.25.3.2.1.3.2 = STRING: "SanDisk SDSA5AK-008G-1006"
-% % [...]
-% % iso.3.6.1.2.1.43.16.5.1.2.1.1 = STRING: "Sleep mode on"
-% % \end{verbatim}
-% % 
-% % \subsection{SNMP: An example}
-% % \smallish
-% % \begin{verbatim}
-% % $ snmpwalk -c public -v 1 gw.cc.stevens-tech.edu
-% % SNMPv2-MIB::sysDescr.0 = STRING: Cisco IOS Software, s72033_rp Software
-% % (s72033_rp-ADVIPSERVICESK9_WAN-M), Version 12.2(33)SXH, RELEASE SOFTWARE (fc5)
-% % DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (3112108803) 360 days, 4:44:48.03
-% % SNMPv2-MIB::sysContact.0 = STRING: chose@stevens.edu x5457
-% % SNMPv2-MIB::sysName.0 = STRING: gw.cc.stevens-tech.edu
-% % SNMPv2-MIB::sysLocation.0 = STRING: campus:sl:0:machineroom
-% % SNMPv2-MIB::sysORLastChange.0 = Timeticks: (0) 0:00:00.00
-% % [...]
-% % IF-MIB::ifPhysAddress.1 = STRING: 0:17:95:68:d2:dc
-% % IF-MIB::ifPhysAddress.2 = STRING: 0:18:74:1c:e3:80
-% % [...]
-% % IF-MIB::ifAdminStatus.1 = INTEGER: up(1)
-% % IF-MIB::ifAdminStatus.2 = INTEGER: down(2)
-% % [...]
-% % IF-MIB::ifInOctets.1 = Counter32: 147341347
-% % IF-MIB::ifInOctets.2 = Counter32: 487894092
-% % [...]
-% % IF-MIB::ifOutOctets.1 = Counter32: 956876160
-% % IF-MIB::ifOutOctets.2 = Counter32: 1532452749
-% % [...]
-% % RFC1213-MIB::ipRouteDest.66.193.255.0 = IpAddress: 66.193.255.0
-% % RFC1213-MIB::ipRouteDest.66.194.0.0 = IpAddress: 66.194.0.0
-% % [...]
-% % \end{verbatim}
-% % \Normalsize
-% % 
-% % \subsection{SNMP: An example}
-% % \smallish
-% % \begin{verbatim}
-% % $ snmpwalk -Os -c public -v 1 localhost
-% % iso.3.6.1.2.1.1.1.0 = STRING: "Linux avatar 3.2.0-51-generic #77-Ubuntu SMP Wed Jul 24 20:18:19
-% % UTC 2013 x86_64"
-% % iso.3.6.1.2.1.1.2.0 = OID: iso.3.6.1.4.1.8072.3.2.10
-% % iso.3.6.1.2.1.1.3.0 = Timeticks: (31099465) 3 days, 14:23:14.65
-% % [...]
-% % iso.3.6.1.2.1.1.5.0 = STRING: "avatar"
-% % iso.3.6.1.2.1.25.1.4.0 = STRING: "root=/dev/xvda2 ro
-% % root=/dev/xvda2 ro ip=:127.0.255.255::::eth0:dhcp"
-% % \end{verbatim}
-% % \Normalsize
-
-\subsection{Know Your Systems}
-Profile your application:
-\begin{itemize}
-	\item execution time (for example: {\tt time(1)})
-	\item data sources and destination affect execution
-	\item {\tt strace(1)} and friends for more detailed analysis
-\end{itemize}
-
-\addvspace{.5in}
-Understand your system performance:
-\begin{itemize}
-	\item CPU load, memory (for example: {\tt top(1)}, {\tt vmstat(1)})
-	\item disk I/O (for example: {\tt iostat(1)})
-	\item user activity (for example: {\tt ac(1)}, {\tt lsof(8)}, {\tt sa(8)})
-\end{itemize}
-
-\subsection{Know Your Systems}
-Network statistics:
-\begin{itemize}
-	\item ports and applications (for example: {\tt lsof(8)}, {\tt netstat(8)})
-	\item packets in and out
-	\item connection origin
-	\item {\em NetFlow} etc.
-\end{itemize}
-
-\subsection{Context}
-{\em Context} lets you find {\em relevant} events in
-your haystack of metrics.
-
-\begin{center}
-	\includegraphics[scale=0.75]{pics/glass-needle.eps}
-\end{center}
-
-\subsection{No context.}
-CPU load - 12 hours
-\begin{center}
-	\includegraphics[scale=0.9]{pics/cpu-12h.eps}
-\end{center}
-
-\subsection{No context.}
-Disk I/O - 12 hours
-\begin{center}
-	\includegraphics[scale=0.9]{pics/disk-io-12h.eps}
-\end{center}
-
-\subsection{No context.}
-Load Average - 12 hours
-\begin{center}
-	\includegraphics[scale=0.9]{pics/load-average-12h.eps}
-\end{center}
-
-\subsection{No context.}
-Memory - 12 hours
-\begin{center}
-	\includegraphics[scale=0.9]{pics/memory-12h.eps}
-\end{center}
-
-\subsection{Some context.}
-12 hours
-\begin{center}
-	\includegraphics[scale=0.36]{pics/cpu-12h.eps}
-	\includegraphics[scale=0.36]{pics/disk-io-12h.eps} \\
-	\includegraphics[scale=0.36]{pics/load-average-12h.eps}
-	\includegraphics[scale=0.36]{pics/memory-12h.eps} \\
-\end{center}
-
-\subsection{With context.}
-7 days
-\begin{center}
-	\includegraphics[scale=0.36]{pics/cpu-7day.eps}
-	\includegraphics[scale=0.36]{pics/disk-io-7day.eps} \\
-	\includegraphics[scale=0.36]{pics/load-average-7day.eps}
-	\includegraphics[scale=0.36]{pics/memory-7day.eps} \\
-\end{center}
-
-\subsection{Know your systems.}
-CPU load - 30 days
-\begin{center}
-	\includegraphics[scale=0.9]{pics/cpu-30day.eps}
-\end{center}
-
-\subsection{Know your systems.}
-30 days
-\begin{center}
-	\includegraphics[scale=0.36]{pics/cpu-30day.eps}
-	\includegraphics[scale=0.36]{pics/disk-io-30day.eps} \\
-	\includegraphics[scale=0.36]{pics/load-average-30day.eps}
-	\includegraphics[scale=0.36]{pics/memory-30day.eps} \\
-\end{center}
-
-\subsection{Turn {\em events} into {\em metrics.}}
-\begin{itemize}
-	\item Log it!
-\end{itemize}
-
-\addvspace{.5in}
-\begin{itemize}
-	\item Export counters/timers from within your application.
-	\item Process logs and produce counters/timers:
-\begin{verbatim}
-awk '{print $9}' /var/log/httpd/access.log | sort | uniq -c
-\end{verbatim}
-\end{itemize}
-
-\addvspace{.5in}
-\begin{itemize}
-	\item Graph it. \\
-	{\tt https://is.gd/tDCmQI}
-\end{itemize}
-
-\subsection{Monitoring/graphing}
-SNMP based:
-\begin{itemize}
-	\item Cacti: \verb+http://www.cacti.net/+
-	\item MRTG: \verb+http://oss.oetiker.ch/mrtg/+
-	\item Observium: \verb+http://demo.observium.org/+
-	\item ...
-\end{itemize}
-\vspace{.2in}
-Other / complementary:
-\begin{itemize}
-	\item Ganglia: \verb+http://monitor.millennium.berkeley.edu/+
-	\item Munin: \verb+http://munin.ping.uio.no/+
-	\item Nagios: \verb+http://nagioscore.demos.nagios.com/+
-	\item Graphite: \verb+http://graphite.wikidot.com/+
-\end{itemize}
-\vspace{.5in}
-%More on monitoring and performance in a future lecture (if time permits).
-
-\subsection{Context doesn't explain everything...}
-...but it helps you look into what to investigate.
-
-\begin{center}
-	\includegraphics[scale=0.6]{pics/traffic-by-cipher.eps}
-\end{center}
-
-\subsection{Context doesn't explain everything...}
-...but it helps you look into what to investigate.
-
-\begin{center}
-	\includegraphics[scale=0.6]{pics/traffic-by-site.eps}
-\end{center}
-
-\subsection{To the cloud!}
-There’s a service for that. In the cloud. \\
-
-Consider:
-\begin{itemize}
-	\item support / convenience vs. do-it-yourself
-	\item integration with your other services
-	\item data confidentiality
-	\item data lock-in (esp. when trending data over years)
-\end{itemize}
-
-\subsection{Monitoring Pitfalls}
-\vspace*{\fill}
-\Huge
-\begin{center}
-Increasing the size of your haystack does not always
-help in finding the needle.
-\end{center}
-\Normalsize
-\vspace*{\fill}
-
-\subsection{Monitoring Pitfalls}
-\vspace*{\fill}
-\Huge
-\begin{center}
-Increasing the size of your haystack does not always
-help in finding the needle. \\
-\vspace{.2in}
-Email is not a scalable network monitoring solution.
-\end{center}
-\Normalsize
-\vspace*{\fill}
-
-\subsection{Monitoring Pitfalls}
-\vspace*{\fill}
-\Huge
-\begin{center}
-Increasing the size of your haystack does not always
-help in finding the needle. \\
-\vspace{.2in}
-Email is not a scalable network monitoring solution. \\
-\vspace{.2in}
-Absence of a signal can itself be a signal.
-\end{center}
-\Normalsize
-\vspace*{\fill}
-
-\subsection{Monitoring Pitfalls}
-\vspace*{\fill}
-\Huge
-\begin{center}
-Increasing the size of your haystack does not always
-help in finding the needle. \\
-\vspace{.2in}
-Email is not a scalable network monitoring solution. \\
-\vspace{.2in}
-Absence of a signal can itself be a signal. \\
-\vspace{.2in}
-Most of the value of your metrics only becomes evident
-over time.
-\end{center}
-\Normalsize
-\vspace*{\fill}
-
-\subsection{Monitoring Pitfalls}
-\vspace*{\fill}
-\Huge
-\begin{center}
-Increasing the size of your haystack does not always
-help in finding the needle. \\
-\vspace{.2in}
-Email is not a scalable network monitoring solution. \\
-\vspace{.2in}
-Absence of a signal can itself be a signal. \\
-\vspace{.2in}
-Most of the value of your metrics only becomes evident
-over time. \\
-\vspace{.2in}
-This list is incomplete.
-\end{center}
-\Normalsize
-\vspace*{\fill}
+% 
+% \subsection{Problem Report}
+% \vspace*{\fill}
+% \Huge
+% \begin{center}
+% ``Something's wrong.''
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
+% 
+% \subsection{Now what?}
+% \begin{center}
+% 	\includegraphics[scale=0.55]{pics/monkey.eps}
+% \end{center}
+% 
+% \subsection{Problem Report}
+% \vspace*{\fill}
+% \Huge
+% \begin{center}
+% ``The system feels slow.'' \\
+% \addvspace{.5in}
+% ``I can't log in.'' \\
+% \addvspace{.5in}
+% ``My mail was not delivered.'' \\
+% \addvspace{.5in}
+% ``The site is down.''
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
+% 
+% \subsection{Now what?}
+% \begin{center}
+% 	\includegraphics[scale=0.55]{pics/monkey.eps}
+% \end{center}
+% 
+% \subsection{To the logs!}
+% \begin{center}
+% 	\includegraphics[scale=0.55]{pics/logs.eps}
+% \end{center}
+% 
+% \subsection{Answers}
+% ``The system feels slow.''
+% \begin{verbatim}
+% up 1318 days, 13:46, 1 user, load averages: 993.81, 272.91, 1012.18
+% \end{verbatim}
+% 
+% \addvspace{.3in}
+% ``I can't log in.''
+% \begin{verbatim}
+% Apr 6 09:25:56 <auth.info>hostname sshd[1624]: Failed password for jdoe from
+% 115.239.231.100 port 1047 ssh2
+% \end{verbatim}
+% 
+% \addvspace{.3in}
+% ``My mail was not delivered.''
+% \begin{verbatim}
+% Apr 11 16:15:40 panix postfix/smtpd[7566]: connect from unknown[122.3.68.122]
+% Apr 11 16:15:41 panix postfix/smtpd[7566]: NOQUEUE: reject_warning: RCPT from
+% unknown[122.3.68.122]: 450 4.7.1 Client host rejected: cannot find your hostname,
+% [122.3.68.122]; from=<McneilRomany28@pldt.net> to=<jschauma@stevens.edu>
+% proto=ESMTP helo=<122.3.68.122.pldt.net>
+% \end{verbatim}
+% 
+% \subsection{Answers}
+% ``The site is down.'' \\
+% 
+% \begin{verbatim}
+% 94.242.252.41 - "" [11/Apr/2016:19:18:47 -0400] "GET /secret/ HTTP/1.1"
+% 403 524 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:28.0)
+% Gecko/20100101 Firefox/28.0"
+% \end{verbatim}
+% 
+% \subsection{Answers}
+% ``The site is down.'' \\
+% 
+% \begin{verbatim}
+% 94.242.252.41 - "" [11/Apr/2016:19:18:47 -0400] "GET /secret/ HTTP/1.1"
+% 403 524 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:28.0)
+% Gecko/20100101 Firefox/28.0"
+% \end{verbatim}
+% 
+% \addvspace{.2in}
+% \begin{center}
+% 	\includegraphics[scale=0.25]{pics/monkey.eps}
+% \end{center}
+% 
+% \subsection{Events}
+% \vspace*{\fill}
+% \Huge
+% \begin{center}
+% ``Something's wrong.'' is just an {\em unexpected} or
+% {\em undesirable} event.
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
+% 
+% \subsection{Events}
+% \vspace*{\fill}
+% \Huge
+% \begin{center}
+% ``Something's wrong.'' is just an {\em unexpected} or
+% {\em undesirable} event. \\
+% \vspace{.4in}
+% {\em Events} happen all the time.
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
+% 
+% \subsection{Events}
+% \vspace*{\fill}
+% \Huge
+% \begin{center}
+% ``Something's wrong.'' is just an {\em unexpected} or
+% {\em undesirable} event. \\
+% \vspace{.4in}
+% {\em Events} happen all the time. \\
+% \vspace{.4in}
+% Being able to identify {\em relevant} events allows
+% you to diagnose, predict and even prevent {\em
+% undesirable} events.
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
+% 
+% \subsection{Events}
+% \vspace*{\fill}
+% \Huge
+% \begin{center}
+% In order to be able to identify an event as {\em
+% unexpected}, you have to have {\em expected} events.
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
+% 
+% \subsection{Expected Events}
+% \vspace*{\fill}
+% \Huge
+% \begin{center}
+% Know your applications.
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
+% 
+% \subsection{Expected Events}
+% \vspace*{\fill}
+% \Huge
+% \begin{center}
+% Know your applications. \\
+% \vspace{.4in}
+% Know your users.
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
+% 
+% \subsection{Expected Events}
+% \vspace*{\fill}
+% \Huge
+% \begin{center}
+% Know your applications. \\
+% \vspace{.4in}
+% Know your users. \\
+% \vspace{.4in}
+% Know your traffic patterns.
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
+% 
+% \subsection{Expected Events}
+% \vspace*{\fill}
+% \Huge
+% \begin{center}
+% Know your applications. \\
+% \vspace{.4in}
+% Know your users. \\
+% \vspace{.4in}
+% Know your traffic patterns. \\
+% \vspace{.4in}
+% {\em Know your systems.}
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
+% 
+% \subsection{Events and Metrics}
+% \vspace*{\fill}
+% \begin{verbatim}
+% $ dict event
+%   event
+%       n 1: something that happens at a given place and time
+%       2: a special set of circumstances; "in that event, the first
+%          possibility is excluded"; "it may rain in which case the
+%          picnic will be canceled" [syn: {event}, {case}]
+% 
+% 
+% $ dict metric
+%   metric
+%       3: a system of related measures that facilitates the
+%          quantification of some particular characteristic [syn:
+%          {system of measurement}, {metric}]
+% 
+% \end{verbatim}
+% \vspace*{\fill}
+% 
+% \subsection{Events and Metrics}
+% \begin{center}
+% 	\includegraphics[scale=0.75]{pics/events-metrics.eps}
+% \end{center}
+% 
+% \subsection{Events and Metrics}
+% Events
+% \begin{itemize}
+% 	\item may occur rarely / frequently / constantly
+% 	\item can be collected in logs
+% 	\item may be comprised of other events
+% 	\item may be: ’something happened’
+% 	\item may be: ’nothing (new) happened’
+% \end{itemize}
+% \addvspace{.5in}
+% 
+% Metrics:
+% \begin{itemize}
+% 	\item correlation of related events
+% 	\item may help identify outliers
+% 	\item may trigger events
+% 	\item may help make (automated or interactive) decisions
+% \end{itemize}
+% 
+% 
+% \subsection{Collecting Data}
+% {\em Counters}: easy, numeric data tracking individual events. Example: HTTP status codes
+% 
+% \addvspace{.5in}
+% {\em Timers}: easy, numeric data tracking event duration. Example: Time to send all
+% data for a successful HTTP request.
+% 
+% \addvspace{.5in}
+% {\em Thresholds}: easy, numeric trigger for events; may itself trigger events or metrics.
+% Example: more than N HTTP hits in X seconds yield 404.
+% 
+% % % \subsection{Counting counters, timing timers...}
+% % % SNMP
+% % % \vspace{.5in}
+% % % \begin{center}
+% % % 	\Huge
+% % % 	A complete network management system to monitor network-attached devices.
+% % % \end{center}
+% % % \Normalsize
+% % % 
+% % % \subsection{SNMP}
+% % % Base concepts:
+% % % \begin{itemize}
+% % % 	\item managed devices run an {\em snmp agent} or d\ae mon
+% % % 	\item information about the device is exposed in {\em management information bases}
+% % % 	\item parts of a system are made available in {\em read-only} mode
+% % % 	\item parts of a system may be made available in {\em write} mode
+% % % 	\item certain conditions may trigger actions or {\em traps}
+% % % 	\item normally uses UDP 161 for the {\em agent} and 162 for the {\em manager}
+% % % \end{itemize}
+% % % 
+% % % \subsection{SNMP}
+% % % Management Information Bases (MIBs):
+% % % \begin{itemize}
+% % % 	\item hierarchical namespace
+% % % 	\item contains {\em Object Identifiers} (OIDs)
+% % % 	\item written in {\em Abstract Syntax Notation One} (ASN.1)
+% % % 	\item often vendor defined
+% % % \end{itemize}
+% % % 
+% % % \subsection{SNMP Versions}
+% % % SNMPv1:
+% % % \begin{itemize}
+% % % 	\item de-facto standard
+% % % 	\item poor security (``community strings'' act as passwords)
+% % % \end{itemize}
+% % % \vspace{.2in}
+% % % SNMPv2:
+% % % \begin{itemize}
+% % % 	\item improvements in the area of performance (\verb+GETBULK+ instead of \verb+GETNEXT+) and security
+% % % 	\item comes in the flavors {\em SNMPv2c}, {\em SNMPv1.5} and {\em SNMPv2u}
+% % % \end{itemize}
+% % % \vspace{.2in}
+% % % SNMPv3:
+% % % \begin{itemize}
+% % % 	\item official standard
+% % % 	\item adds authentication, privacy and access control
+% % % \end{itemize}
+% % % 
+% % % \subsection{SNMP: An example}
+% % % \smallish
+% % % \begin{verbatim}
+% % % $ snmpwalk -c public -v 1 bluemoon.cs.stevens-tech.edu
+% % % iso.3.6.1.2.1.1.1.0 = STRING: "HP ETHERNET MULTI-ENVIRONMENT,ROM none,JETDIRECT,JD147,EEPROM
+% % % JDI2300 0013,CIDATE 07/13/2013"
+% % % iso.3.6.1.2.1.1.2.0 = OID: iso.3.6.1.4.1.11.2.3.9.1
+% % % iso.3.6.1.2.1.1.3.0 = Timeticks: (293219400) 33 days, 22:29:54.00
+% % % [...]
+% % % iso.3.6.1.2.1.25.3.2.1.3.1 = STRING: "HP Color LaserJet CP5520 Series"
+% % % iso.3.6.1.2.1.25.3.2.1.3.2 = STRING: "SanDisk SDSA5AK-008G-1006"
+% % % [...]
+% % % iso.3.6.1.2.1.43.16.5.1.2.1.1 = STRING: "Sleep mode on"
+% % % \end{verbatim}
+% % % 
+% % % \subsection{SNMP: An example}
+% % % \smallish
+% % % \begin{verbatim}
+% % % $ snmpwalk -c public -v 1 gw.cc.stevens-tech.edu
+% % % SNMPv2-MIB::sysDescr.0 = STRING: Cisco IOS Software, s72033_rp Software
+% % % (s72033_rp-ADVIPSERVICESK9_WAN-M), Version 12.2(33)SXH, RELEASE SOFTWARE (fc5)
+% % % DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (3112108803) 360 days, 4:44:48.03
+% % % SNMPv2-MIB::sysContact.0 = STRING: chose@stevens.edu x5457
+% % % SNMPv2-MIB::sysName.0 = STRING: gw.cc.stevens-tech.edu
+% % % SNMPv2-MIB::sysLocation.0 = STRING: campus:sl:0:machineroom
+% % % SNMPv2-MIB::sysORLastChange.0 = Timeticks: (0) 0:00:00.00
+% % % [...]
+% % % IF-MIB::ifPhysAddress.1 = STRING: 0:17:95:68:d2:dc
+% % % IF-MIB::ifPhysAddress.2 = STRING: 0:18:74:1c:e3:80
+% % % [...]
+% % % IF-MIB::ifAdminStatus.1 = INTEGER: up(1)
+% % % IF-MIB::ifAdminStatus.2 = INTEGER: down(2)
+% % % [...]
+% % % IF-MIB::ifInOctets.1 = Counter32: 147341347
+% % % IF-MIB::ifInOctets.2 = Counter32: 487894092
+% % % [...]
+% % % IF-MIB::ifOutOctets.1 = Counter32: 956876160
+% % % IF-MIB::ifOutOctets.2 = Counter32: 1532452749
+% % % [...]
+% % % RFC1213-MIB::ipRouteDest.66.193.255.0 = IpAddress: 66.193.255.0
+% % % RFC1213-MIB::ipRouteDest.66.194.0.0 = IpAddress: 66.194.0.0
+% % % [...]
+% % % \end{verbatim}
+% % % \Normalsize
+% % % 
+% % % \subsection{SNMP: An example}
+% % % \smallish
+% % % \begin{verbatim}
+% % % $ snmpwalk -Os -c public -v 1 localhost
+% % % iso.3.6.1.2.1.1.1.0 = STRING: "Linux avatar 3.2.0-51-generic #77-Ubuntu SMP Wed Jul 24 20:18:19
+% % % UTC 2013 x86_64"
+% % % iso.3.6.1.2.1.1.2.0 = OID: iso.3.6.1.4.1.8072.3.2.10
+% % % iso.3.6.1.2.1.1.3.0 = Timeticks: (31099465) 3 days, 14:23:14.65
+% % % [...]
+% % % iso.3.6.1.2.1.1.5.0 = STRING: "avatar"
+% % % iso.3.6.1.2.1.25.1.4.0 = STRING: "root=/dev/xvda2 ro
+% % % root=/dev/xvda2 ro ip=:127.0.255.255::::eth0:dhcp"
+% % % \end{verbatim}
+% % % \Normalsize
+% 
+% \subsection{Know Your Systems}
+% Profile your application:
+% \begin{itemize}
+% 	\item execution time (for example: {\tt time(1)})
+% 	\item data sources and destination affect execution
+% 	\item {\tt strace(1)} and friends for more detailed analysis
+% \end{itemize}
+% 
+% \addvspace{.5in}
+% Understand your system performance:
+% \begin{itemize}
+% 	\item CPU load, memory (for example: {\tt top(1)}, {\tt vmstat(1)})
+% 	\item disk I/O (for example: {\tt iostat(1)})
+% 	\item user activity (for example: {\tt ac(1)}, {\tt lsof(8)}, {\tt sa(8)})
+% \end{itemize}
+% 
+% \subsection{Know Your Systems}
+% Network statistics:
+% \begin{itemize}
+% 	\item ports and applications (for example: {\tt lsof(8)}, {\tt netstat(8)})
+% 	\item packets in and out
+% 	\item connection origin
+% 	\item {\em NetFlow} etc.
+% \end{itemize}
+% 
+% \subsection{Context}
+% {\em Context} lets you find {\em relevant} events in
+% your haystack of metrics.
+% 
+% \begin{center}
+% 	\includegraphics[scale=0.75]{pics/glass-needle.eps}
+% \end{center}
+% 
+% \subsection{No context.}
+% CPU load - 12 hours
+% \begin{center}
+% 	\includegraphics[scale=0.9]{pics/cpu-12h.eps}
+% \end{center}
+% 
+% \subsection{No context.}
+% Disk I/O - 12 hours
+% \begin{center}
+% 	\includegraphics[scale=0.9]{pics/disk-io-12h.eps}
+% \end{center}
+% 
+% \subsection{No context.}
+% Load Average - 12 hours
+% \begin{center}
+% 	\includegraphics[scale=0.9]{pics/load-average-12h.eps}
+% \end{center}
+% 
+% \subsection{No context.}
+% Memory - 12 hours
+% \begin{center}
+% 	\includegraphics[scale=0.9]{pics/memory-12h.eps}
+% \end{center}
+% 
+% \subsection{Some context.}
+% 12 hours
+% \begin{center}
+% 	\includegraphics[scale=0.36]{pics/cpu-12h.eps}
+% 	\includegraphics[scale=0.36]{pics/disk-io-12h.eps} \\
+% 	\includegraphics[scale=0.36]{pics/load-average-12h.eps}
+% 	\includegraphics[scale=0.36]{pics/memory-12h.eps} \\
+% \end{center}
+% 
+% \subsection{With context.}
+% 7 days
+% \begin{center}
+% 	\includegraphics[scale=0.36]{pics/cpu-7day.eps}
+% 	\includegraphics[scale=0.36]{pics/disk-io-7day.eps} \\
+% 	\includegraphics[scale=0.36]{pics/load-average-7day.eps}
+% 	\includegraphics[scale=0.36]{pics/memory-7day.eps} \\
+% \end{center}
+% 
+% \subsection{Know your systems.}
+% CPU load - 30 days
+% \begin{center}
+% 	\includegraphics[scale=0.9]{pics/cpu-30day.eps}
+% \end{center}
+% 
+% \subsection{Know your systems.}
+% 30 days
+% \begin{center}
+% 	\includegraphics[scale=0.36]{pics/cpu-30day.eps}
+% 	\includegraphics[scale=0.36]{pics/disk-io-30day.eps} \\
+% 	\includegraphics[scale=0.36]{pics/load-average-30day.eps}
+% 	\includegraphics[scale=0.36]{pics/memory-30day.eps} \\
+% \end{center}
+% 
+% \subsection{Turn {\em events} into {\em metrics.}}
+% \begin{itemize}
+% 	\item Log it!
+% \end{itemize}
+% 
+% \addvspace{.5in}
+% \begin{itemize}
+% 	\item Export counters/timers from within your application.
+% 	\item Process logs and produce counters/timers:
+% \begin{verbatim}
+% awk '{print $9}' /var/log/httpd/access.log | sort | uniq -c
+% \end{verbatim}
+% \end{itemize}
+% 
+% \addvspace{.5in}
+% \begin{itemize}
+% 	\item Graph it. \\
+% 	{\tt https://is.gd/tDCmQI}
+% \end{itemize}
+% 
+% \subsection{Monitoring/graphing}
+% SNMP based:
+% \begin{itemize}
+% 	\item Cacti: \verb+http://www.cacti.net/+
+% 	\item MRTG: \verb+http://oss.oetiker.ch/mrtg/+
+% 	\item Observium: \verb+http://demo.observium.org/+
+% 	\item ...
+% \end{itemize}
+% \vspace{.2in}
+% Other / complementary:
+% \begin{itemize}
+% 	\item Ganglia: \verb+http://monitor.millennium.berkeley.edu/+
+% 	\item Munin: \verb+http://munin.ping.uio.no/+
+% 	\item Nagios: \verb+http://nagioscore.demos.nagios.com/+
+% 	\item Graphite: \verb+http://graphite.wikidot.com/+
+% \end{itemize}
+% \vspace{.5in}
+% %More on monitoring and performance in a future lecture (if time permits).
+% 
+% \subsection{Context doesn't explain everything...}
+% ...but it helps you look into what to investigate.
+% 
+% \begin{center}
+% 	\includegraphics[scale=0.6]{pics/traffic-by-cipher.eps}
+% \end{center}
+% 
+% \subsection{Context doesn't explain everything...}
+% ...but it helps you look into what to investigate.
+% 
+% \begin{center}
+% 	\includegraphics[scale=0.6]{pics/traffic-by-site.eps}
+% \end{center}
+% 
+% \subsection{To the cloud!}
+% There’s a service for that. In the cloud. \\
+% 
+% Consider:
+% \begin{itemize}
+% 	\item support / convenience vs. do-it-yourself
+% 	\item integration with your other services
+% 	\item data confidentiality
+% 	\item data lock-in (esp. when trending data over years)
+% \end{itemize}
+% 
+% \subsection{Monitoring Pitfalls}
+% \vspace*{\fill}
+% \Huge
+% \begin{center}
+% Increasing the size of your haystack does not always
+% help in finding the needle.
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
+% 
+% \subsection{Monitoring Pitfalls}
+% \vspace*{\fill}
+% \Huge
+% \begin{center}
+% Increasing the size of your haystack does not always
+% help in finding the needle. \\
+% \vspace{.2in}
+% Email is not a scalable network monitoring solution.
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
+% 
+% \subsection{Monitoring Pitfalls}
+% \vspace*{\fill}
+% \Huge
+% \begin{center}
+% Increasing the size of your haystack does not always
+% help in finding the needle. \\
+% \vspace{.2in}
+% Email is not a scalable network monitoring solution. \\
+% \vspace{.2in}
+% Absence of a signal can itself be a signal.
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
+% 
+% \subsection{Monitoring Pitfalls}
+% \vspace*{\fill}
+% \Huge
+% \begin{center}
+% Increasing the size of your haystack does not always
+% help in finding the needle. \\
+% \vspace{.2in}
+% Email is not a scalable network monitoring solution. \\
+% \vspace{.2in}
+% Absence of a signal can itself be a signal. \\
+% \vspace{.2in}
+% Most of the value of your metrics only becomes evident
+% over time.
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
+% 
+% \subsection{Monitoring Pitfalls}
+% \vspace*{\fill}
+% \Huge
+% \begin{center}
+% Increasing the size of your haystack does not always
+% help in finding the needle. \\
+% \vspace{.2in}
+% Email is not a scalable network monitoring solution. \\
+% \vspace{.2in}
+% Absence of a signal can itself be a signal. \\
+% \vspace{.2in}
+% Most of the value of your metrics only becomes evident
+% over time. \\
+% \vspace{.2in}
+% This list is incomplete.
+% \end{center}
+% \Normalsize
+% \vspace*{\fill}
 
 \subsection{Reading}
 Hurricane Sandy
@@ -1233,14 +1209,14 @@ Book: \verb+http://www.oreilly.com/catalog/unixbr/+
 % % 	\item \verb+snmpcmd(1)+
 % % \end{itemize}
 
-Monitoring:
-\begin{itemize}
-	\item {\tt https://monitorama.com}
-	\item {\tt https://www.slac.stanford.edu/xorg/nmtf/nmtf-tools.html}
-	\item {\tt https://www.datadoghq.com/}
-	\item {\tt https://www.newrelic.com/}
-	\item {\tt https://www.elastic.co/products/logstash}
-	\item {\tt https://www.splunk.com/}
-\end{itemize}
+% Monitoring:
+% \begin{itemize}
+% 	\item {\tt https://monitorama.com}
+% 	\item {\tt https://www.slac.stanford.edu/xorg/nmtf/nmtf-tools.html}
+% 	\item {\tt https://www.datadoghq.com/}
+% 	\item {\tt https://www.newrelic.com/}
+% 	\item {\tt https://www.elastic.co/products/logstash}
+% 	\item {\tt https://www.splunk.com/}
+% \end{itemize}
 
 \end{document}
