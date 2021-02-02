@@ -1,0 +1,145 @@
+# This file contains a few shell aliases and functions
+# that should it easier for you to work with AWS EC2
+# within the context of the class CS615 System
+# Administration.
+#
+# Author: Jan Schaumann <jschauma@netmeister.org>
+#         @jschauma
+#
+# See https://stevens.netmeister.org/615/ for more
+# information.
+#
+# This file is in the public domain.
+
+###
+# Generic handling of instances first
+###
+
+# First, I'm too lazy to always type
+# 'aws ec2 run-instances ...'
+#
+# In addition, I use a separate SSH key for AWS
+# resources associated with Stevens.  If you have only
+# a default SSH key, then you do not need to include
+# that option here.
+alias instance='aws ec2 run-instances --key-name stevens --image-id'
+
+# Next, I want my instances to be IPv4/IPv6 dual stack
+# enabled.  AWS does not offer this by default, but if
+# you configure an appropriate subnet and security
+# group as described in
+# https://www.netmeister.org/blog/ec2-ipv6.html, then
+# you can grab the right resources to specify.
+#
+# We're using a function instead of an alias here
+# because we are passing an argument ("$@").
+startInstance() {
+	subnet=$(aws ec2 describe-subnets | jq -r '.Subnets[] | select( .Tags[]? | select(.Value == "dualstack")).SubnetId')
+	sg=$(aws ec2 describe-security-groups | jq -r '.SecurityGroups [] | select( .GroupName == "dualstack").GroupId')
+	instance $@ 				\
+		--instance-type t2.micro	\
+		--subnet-id "${subnet}"		\
+		--security-group-ids "${sg}" |	\
+		jq -r '.Instances[].InstanceId'
+}
+
+# Often I have an instance-id, but want to know what
+# the hostname associated with it is.  Specifically,
+# after we start an instance, we don't immedately get
+# the hostname back, so use the 'iname' function
+# to get it:
+iname() {
+	aws ec2 describe-instances --instance-ids $@ | \
+		jq -r ".Reservations[].Instances[].PublicDnsName"
+}
+
+# After we start an instance, we have to wait for it
+# to come up.  Note: this uses the 'iname' function
+# above to report the hostname when we think it's up.
+ec2wait() {
+	aws ec2 wait instance-running --instance-ids $@
+	# "running" does not mean SSH is up, so give it a bit more time
+	sleep 60
+	echo "Instance $@ should now be up and running: "
+	iname $@
+}
+
+# Use this to see which instances you currently
+# have, regardless of their state.
+alias instances='aws ec2 describe-instances | jq -r ".Reservations[].Instances[].InstanceId"'
+
+# Same thing, but printing the hostnames instead:
+alias inames='aws ec2 describe-instances | jq -r ".Reservations[].Instances[].PublicDnsName" | grep .'
+
+# ...but often we only care about which instances are
+# currently running:
+alias running='aws ec2 describe-instances --query Reservations[*].Instances[*].[InstanceId] --filters Name=instance-state-name,Values=running | jq -r ".[] | .[] | .[]"'
+
+# Same thing, but printing hostnames isntead:
+alias running-names='aws ec2 describe-instances --query Reservations[*].Instances[*].[PublicDnsName] --filter Name=instance-state-name,Values=running | jq -r ".[] | .[] | .[]"'
+
+# To get a listing of hostnames with instance-ids:
+alias instance-id-and-names='aws ec2 describe-instances --output json | jq -r ".Reservations[].Instances[] | \"\(.PublicDnsName) \(.InstanceId)\""'
+
+# Analogous to 'instance':
+alias term-instance='aws ec2 terminate-instances --instance-ids'
+
+# When you want to kill all instances instead of going
+# one-by-one.  We don't pipe into 'term-instance'
+# because that may not be defined when xargs runs.
+alias kill-all-instances='instances | xargs aws ec2 terminate-instances --instance-ids'
+
+# To get console output:
+alias console='aws ec2 get-console-output --output text --instance-id'
+
+###
+# Generic handling of volumes next:
+###
+
+# Create a new volume of size 1GB in us-east-1a unless
+# specified otherwise, e.g., "new-volume 3 us-west-1"
+new-volume() {
+	aws ec2 create-volume --size "${1:-1}" --availability-zone "${2:-us-east-1a}"
+}
+
+# Like 'instances', but for EBS volumes:
+alias volumes='aws ec2 describe-volumes | jq -r ".Volumes[].VolumeId"'
+
+# Like 'term-instance', but for a single EBS volume:
+alias del-volume='aws ec2 delete-volume --volume-id'
+
+# Like 'killallInstances', but for EBS volumes:
+alias kill-all-volumes='volumes | xargs -n 1 aws ec2 delete-volume --volume-id'
+
+###
+# Specific instances
+###
+
+# I usually have aliases for the latest stable version
+# of some common OS.  These generally change every few
+# months when new releases are made available.
+
+# https://wiki.debian.org/Cloud/AmazonEC2Image/Buster
+# Log in as "admin".
+alias start-debian='startInstance ami-0e0161137b4b30900'
+
+# https://omniosce.org/setup/aws
+# Log in as "root".
+alias start-omnios='startInstance ami-0242bbd23361d20e2'
+
+# https://alt.fedoraproject.org/cloud/
+# Log in as "fedora".
+alias start-fedora='startInstance ami-01efb339f953fdf36'
+
+# https://cloud-images.ubuntu.com/locator/ec2/
+# Log in as "ubuntu".
+alias start-ubuntu='startInstance ami-0f593aebffc0070e1'
+
+# https://www.freebsd.org/releases/12.2R/announce/
+# Log in as "root".
+alias start-freebsd='startInstance ami-00be86d9bba30a7b3'
+
+# https://mail-index.netbsd.org/netbsd-users/2021/01/22/msg026460.html
+# https://stevens.netmeister.org/615/netbsd-amis.html
+# Log in as "root".
+alias start-netbsd='startInstance ami-0018b2d98332ba7e3'
