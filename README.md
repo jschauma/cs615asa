@@ -3,9 +3,13 @@ CS615ASA - Aspects Of System Administration
 
 In this repository you can find the files I use for my class "[CS615 -
 Aspects of System
-Administration](https://www.cs.stevens.edu/~jschauma/615/)", which is
+Administration](https://stevens.netmeister.org/615/)", which is
 currently offered at [Stevens Institute of
 Technology](http://www.cs.stevens.edu/).
+
+Video lectures covering these materials are publicly
+available via the [Course YouTube
+Channel](https://www.youtube.com/channel/UCK9UCt1zAQ9JvTG0o6Z8zpg).
 
 Contents
 --------
