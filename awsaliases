@@ -36,7 +36,7 @@ alias instance='aws ec2 run-instances --key-name stevens --image-id'
 startInstance() {
 	subnet=$(aws ec2 describe-subnets | jq -r '.Subnets[] | select( .Tags[]? | select(.Value == "dualstack")).SubnetId')
 	sg=$(aws ec2 describe-security-groups | jq -r '.SecurityGroups [] | select( .GroupName == "dualstack").GroupId')
-	instance $@ 				\
+	instance $@				\
 		--instance-type t2.micro	\
 		--subnet-id "${subnet}"		\
 		--security-group-ids "${sg}" |	\
@@ -99,7 +99,27 @@ alias console='aws ec2 get-console-output --output text --instance-id'
 # Create a new volume of size 1GB in us-east-1a unless
 # specified otherwise, e.g., "new-volume 3 us-west-1"
 new-volume() {
-	aws ec2 create-volume --size "${1:-1}" --availability-zone "${2:-us-east-1a}"
+	aws ec2 create-volume --size "${1:-1}" --availability-zone "${2:-us-east-1a}" | \
+		jq -r ".VolumeId"
+}
+
+# We often attach just one volume to a given instance,
+# so let's have a default function to save ourselves
+# some typing.
+attach-volume() {
+	aws ec2 attach-volume --volume-id "${1}" --instance-id "${2}" --device "${3:-/dev/sdf}"
+}
+
+# Same for detachingk, but we don't need to know the
+# instance-id:
+detach-volume() {
+	local instance="$(aws ec2 describe-volumes --volume-id "${1}" | \
+				jq -r '.Volumes[].Attachments[].InstanceId')"
+	if [ -z "${instance}" ]; then
+		echo "Volume ${1} not attached to any instance?" >&2
+		return
+	fi
+	aws ec2 detach-volume --volume-id "${1}" --instance-id "${instance}" 
 }
 
 # Like 'instances', but for EBS volumes:
@@ -121,7 +141,7 @@ alias kill-all-volumes='volumes | xargs -n 1 aws ec2 delete-volume --volume-id'
 
 # https://wiki.debian.org/Cloud/AmazonEC2Image/Buster
 # Log in as "admin".
-alias start-debian='startInstance ami-0e0161137b4b30900'
+alias start-debian='startInstance ami-031283ff8a43b021c'
 
 # https://omniosce.org/setup/aws
 # Log in as "root".
@@ -129,17 +149,16 @@ alias start-omnios='startInstance ami-0242bbd23361d20e2'
 
 # https://alt.fedoraproject.org/cloud/
 # Log in as "fedora".
-alias start-fedora='startInstance ami-01efb339f953fdf36'
+alias start-fedora='startInstance ami-08b4ee602f76bff79'
 
 # https://cloud-images.ubuntu.com/locator/ec2/
-# Log in as "ubuntu".
-alias start-ubuntu='startInstance ami-0f593aebffc0070e1'
+# Log in as "ubuntu". 
+alias start-ubuntu='startInstance ami-0133407e358cc1af0'
 
-# https://www.freebsd.org/releases/12.2R/announce/
-# Log in as "root".
-alias start-freebsd='startInstance ami-00be86d9bba30a7b3'
+# https://www.freebsd.org/releases/13.0R/announce/
+# Log in as "ec2-user".
+alias start-freebsd='startInstance ami-00e91cb82b335d15f'
 
 # https://mail-index.netbsd.org/netbsd-users/2021/01/22/msg026460.html
 # https://stevens.netmeister.org/615/netbsd-amis.html
-# Log in as "root".
 alias start-netbsd='startInstance ami-0018b2d98332ba7e3'
