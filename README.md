@@ -61,6 +61,14 @@ Commons Attribution 3.0 Unported License</a>.
 </td></tr>
 </table></div>
 
+Note: The videos available on YouTube are licensed as
+<a
+href="https://creativecommons.org/licenses/by-nc/4.0/">CC
+BY-NC</a>; if you are interested in using them in a
+commercial context, please <a
+href="mailto:jschauma@netmeister.org">email me</a> and
+we can work something out.
+
 
 Non-copyright / licensed materials
 ----------------------------------
