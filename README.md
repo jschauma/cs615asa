@@ -61,13 +61,21 @@ Commons Attribution 3.0 Unported License</a>.
 </td></tr>
 </table></div>
 
-Note: The videos available on YouTube are licensed as
-<a
-href="https://creativecommons.org/licenses/by-nc/4.0/">CC
-BY-NC</a>; if you are interested in using them in a
+<div style="float: center"><table border="1" width="75%" align="center" style="float: center">
+<tr><td>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img
+alt="Creative Commons License" style="border-width:0"
+src="http://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />The
+videos available on YouTube are work by <span xmlns:cc="http://creativecommons.org/ns#"
+property="cc:attributionName">Jan Schaumann
+&lt;jschauma@netmeister.org&gt;</span> and are licensed under a <a
+rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative
+Commons Attribution-Non Commercial 4.0 International License</a>.  If you are interested in using them in a
 commercial context, please <a
-href="mailto:jschauma@netmeister.org">email me</a> and
+href="mailto:jschauma@netmeister.org">email me</a> and 
 we can work something out.
+</td></tr>
+</table></div>
 
 
 Non-copyright / licensed materials
