@@ -97,8 +97,8 @@ alias console='aws ec2 get-console-output --output text --instance-id'
 ###
 
 # Create a new volume of size 1GB in us-east-1a unless
-# specified otherwise, e.g., "new-volume 3 us-west-1"
-new-volume() {
+# specified otherwise, e.g., "newVolume 3 us-west-1"
+newVolume() {
 	aws ec2 create-volume --size "${1:-1}" --availability-zone "${2:-us-east-1a}" | \
 		jq -r ".VolumeId"
 }
@@ -106,13 +106,13 @@ new-volume() {
 # We often attach just one volume to a given instance,
 # so let's have a default function to save ourselves
 # some typing.
-attach-volume() {
+attachVolume() {
 	aws ec2 attach-volume --volume-id "${1}" --instance-id "${2}" --device "${3:-/dev/sdf}"
 }
 
 # Same for detachingk, but we don't need to know the
 # instance-id:
-detach-volume() {
+detachVolume() {
 	local instance="$(aws ec2 describe-volumes --volume-id "${1}" | \
 				jq -r '.Volumes[].Attachments[].InstanceId')"
 	if [ -z "${instance}" ]; then
@@ -153,7 +153,7 @@ alias start-fedora='startInstance ami-08b4ee602f76bff79'
 
 # https://cloud-images.ubuntu.com/locator/ec2/
 # Log in as "ubuntu". 
-alias start-ubuntu='startInstance ami-0133407e358cc1af0'
+alias start-ubuntu='startInstance ami-0b0ea68c435eb488d'
 
 # https://www.freebsd.org/releases/13.0R/announce/
 # Log in as "ec2-user".
