@@ -34,10 +34,13 @@ alias instance='aws ec2 run-instances --key-name stevens --image-id'
 # We're using a function instead of an alias here
 # because we are passing an argument ("$@").
 startInstance() {
+	local ami=${1}
+	local itype=${2:-"t3.micro"}
+	
 	subnet=$(aws ec2 describe-subnets | jq -r '.Subnets[] | select( .Tags[]? | select(.Value == "dualstack")).SubnetId')
 	sg=$(aws ec2 describe-security-groups | jq -r '.SecurityGroups [] | select( .GroupName == "dualstack").GroupId')
-	instance $@				\
-		--instance-type t3.micro	\
+	instance ${ami}				\
+		--instance-type ${itype}	\
 		--subnet-id "${subnet}"		\
 		--security-group-ids "${sg}" |	\
 		jq -r '.Instances[].InstanceId'
@@ -143,8 +146,11 @@ alias kill-all-volumes='volumes | xargs -n 1 aws ec2 delete-volume --volume-id'
 # Log in as "admin".
 alias start-debian='startInstance ami-031283ff8a43b021c'
 
-# https://omnios.org/dev/ec2.html
+# https://omniosce.org/setup/aws
+# Log in as "root".
+#alias start-omnios='startInstance ami-0242bbd23361d20e2'
 # needs t3.micro; log in as "omnios"
+# ami-02683094e95a285d7
 alias start-omnios='startInstance ami-06654442c2796b43f'
 
 # https://alt.fedoraproject.org/cloud/
@@ -155,10 +161,14 @@ alias start-fedora='startInstance ami-08b4ee602f76bff79'
 # Log in as "ubuntu". 
 alias start-ubuntu='startInstance ami-0b0ea68c435eb488d'
 
+# https://www.freebsd.org/releases/13.0R/announce/
+# Log in as "ec2-user".
+#alias start-freebsd='startInstance ami-00e91cb82b335d15f'
 # https://www.freebsd.org/releases/13.1R/announce/
 # Log in as "ec2-user".
 alias start-freebsd='startInstance ami-0cf377776fddcf8ba'
 
 # https://mail-index.netbsd.org/netbsd-users/2021/01/22/msg026460.html
 # https://stevens.netmeister.org/615/netbsd-amis.html
-alias start-netbsd='startInstance ami-0018b2d98332ba7e3'
+#alias start-netbsd='startInstance ami-0018b2d98332ba7e3'
+alias start-netbsd='startInstance ami-08b87fed21cce91cb t4g.nano'
