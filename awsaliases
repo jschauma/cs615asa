@@ -147,11 +147,8 @@ alias kill-all-volumes='volumes | xargs -n 1 aws ec2 delete-volume --volume-id'
 alias start-debian='startInstance ami-031283ff8a43b021c'
 
 # https://omniosce.org/setup/aws
-# Log in as "root".
-#alias start-omnios='startInstance ami-0242bbd23361d20e2'
 # needs t3.micro; log in as "omnios"
-# ami-02683094e95a285d7
-alias start-omnios='startInstance ami-06654442c2796b43f'
+alias start-omnios='startInstance ami-0669dd7b1ff900fcc'
 
 # https://alt.fedoraproject.org/cloud/
 # Log in as "fedora".
