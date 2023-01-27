@@ -169,3 +169,5 @@ alias start-freebsd='startInstance ami-0cf377776fddcf8ba'
 # https://stevens.netmeister.org/615/netbsd-amis.html
 #alias start-netbsd='startInstance ami-0018b2d98332ba7e3'
 alias start-netbsd='startInstance ami-08b87fed21cce91cb t4g.nano'
+# Log in as "ec2-user":
+alias start-netbsd-amd64='startInstance ami-05ffda7ac6da57de1'
