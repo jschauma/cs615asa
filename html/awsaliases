@@ -10,6 +10,7 @@
 # information.
 #
 # This file is in the public domain.
+alias _aedi='aws ec2 describe-instances --output json'
 
 ###
 # Generic handling of instances first
@@ -22,7 +23,7 @@
 # resources associated with Stevens.  If you have only
 # a default SSH key, then you do not need to include
 # that option here.
-alias instance='aws ec2 run-instances --key-name stevens --image-id'
+alias instance='aws ec2 run-instances --key-name stevens --image-id --output json'
 
 # Next, I want my instances to be IPv4/IPv6 dual stack
 # enabled.  AWS does not offer this by default, but if
@@ -37,8 +38,8 @@ startInstance() {
 	local ami=${1}
 	local itype=${2:-"t3.micro"}
 	
-	subnet=$(aws ec2 describe-subnets | jq -r '.Subnets[] | select( .Tags[]? | select(.Value == "dualstack")).SubnetId')
-	sg=$(aws ec2 describe-security-groups | jq -r '.SecurityGroups [] | select( .GroupName == "dualstack").GroupId')
+	subnet=$(aws ec2 describe-subnets --output json | jq -r '.Subnets[] | select( .Tags[]? | select(.Value == "dualstack")).SubnetId')
+	sg=$(aws ec2 describe-security-groups --output json | jq -r '.SecurityGroups [] | select( .GroupName == "dualstack").GroupId')
 	instance ${ami}				\
 		--instance-type ${itype}	\
 		--subnet-id "${subnet}"		\
@@ -52,7 +53,7 @@ startInstance() {
 # the hostname back, so use the 'iname' function
 # to get it:
 iname() {
-	aws ec2 describe-instances --instance-ids $@ | \
+	_aedi --instance-ids $@ | \
 		jq -r ".Reservations[].Instances[].PublicDnsName"
 }
 
@@ -60,7 +61,7 @@ iname() {
 # to come up.  Note: this uses the 'iname' function
 # above to report the hostname when we think it's up.
 ec2wait() {
-	aws ec2 wait instance-running --instance-ids $@
+	aws ec2 wait instance-running --output json --instance-ids $@
 	# "running" does not mean SSH is up, so give it a bit more time
 	sleep 60
 	echo "Instance $@ should now be up and running: "
@@ -69,23 +70,23 @@ ec2wait() {
 
 # Use this to see which instances you currently
 # have, regardless of their state.
-alias instances='aws ec2 describe-instances | jq -r ".Reservations[].Instances[].InstanceId"'
+alias instances='_aeid | jq -r ".Reservations[].Instances[].InstanceId"'
 
 # Same thing, but printing the hostnames instead:
-alias inames='aws ec2 describe-instances | jq -r ".Reservations[].Instances[].PublicDnsName" | grep .'
+alias inames='_aeid | jq -r ".Reservations[].Instances[].PublicDnsName" | grep .'
 
 # ...but often we only care about which instances are
 # currently running:
-alias running='aws ec2 describe-instances --query Reservations[*].Instances[*].[InstanceId] --filters Name=instance-state-name,Values=running | jq -r ".[] | .[] | .[]"'
+alias running='_aeid --query Reservations[*].Instances[*].[InstanceId] --filters Name=instance-state-name,Values=running | jq -r ".[] | .[] | .[]"'
 
 # Same thing, but printing hostnames isntead:
-alias running-names='aws ec2 describe-instances --query Reservations[*].Instances[*].[PublicDnsName] --filter Name=instance-state-name,Values=running | jq -r ".[] | .[] | .[]"'
+alias running-names='_aeid --query Reservations[*].Instances[*].[PublicDnsName] --filter Name=instance-state-name,Values=running | jq -r ".[] | .[] | .[]"'
 
 # To get a listing of hostnames with instance-ids:
-alias instance-id-and-names='aws ec2 describe-instances --output json | jq -r ".Reservations[].Instances[] | \"\(.PublicDnsName) \(.InstanceId)\""'
+alias instance-id-and-names='_aeid | jq -r ".Reservations[].Instances[] | \"\(.PublicDnsName) \(.InstanceId)\""'
 
 # Analogous to 'instance':
-alias term-instance='aws ec2 terminate-instances --instance-ids'
+alias term-instance='aws ec2 terminate-instances --output json --instance-ids'
 
 # When you want to kill all instances instead of going
 # one-by-one.  We don't pipe into 'term-instance'
@@ -102,7 +103,7 @@ alias console='aws ec2 get-console-output --output text --instance-id'
 # Create a new volume of size 1GB in us-east-1a unless
 # specified otherwise, e.g., "newVolume 3 us-west-1"
 newVolume() {
-	aws ec2 create-volume --size "${1:-1}" --availability-zone "${2:-us-east-1a}" | \
+	aws ec2 create-volume --output json --size "${1:-1}" --availability-zone "${2:-us-east-1a}" | \
 		jq -r ".VolumeId"
 }
 
@@ -110,23 +111,23 @@ newVolume() {
 # so let's have a default function to save ourselves
 # some typing.
 attachVolume() {
-	aws ec2 attach-volume --volume-id "${1}" --instance-id "${2}" --device "${3:-/dev/sdf}"
+	aws ec2 attach-volume --output json --volume-id "${1}" --instance-id "${2}" --device "${3:-/dev/sdf}"
 }
 
 # Same for detachingk, but we don't need to know the
 # instance-id:
 detachVolume() {
-	local instance="$(aws ec2 describe-volumes --volume-id "${1}" | \
+	local instance="$(aws ec2 describe-volumes --output json --volume-id "${1}" | \
 				jq -r '.Volumes[].Attachments[].InstanceId')"
 	if [ -z "${instance}" ]; then
 		echo "Volume ${1} not attached to any instance?" >&2
 		return
 	fi
-	aws ec2 detach-volume --volume-id "${1}" --instance-id "${instance}" 
+	aws ec2 detach-volume --output json --volume-id "${1}" --instance-id "${instance}" 
 }
 
 # Like 'instances', but for EBS volumes:
-alias volumes='aws ec2 describe-volumes | jq -r ".Volumes[].VolumeId"'
+alias volumes='aws ec2 describe-volumes --output json | jq -r ".Volumes[].VolumeId"'
 
 # Like 'term-instance', but for a single EBS volume:
 alias del-volume='aws ec2 delete-volume --volume-id'
