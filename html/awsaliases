@@ -180,6 +180,48 @@ awsCurrentBill() {
 	echo "AWS Billing Period ${start} - ${end}: \$${num}"
 }
 
+awsListResources() {
+	local spacer=""
+	local amis snapshots instances volumes
+
+	amis=$(aws ec2 describe-images --owner self | 			\
+		jq -r '.Images[] | "\(.ImageId) \(.Description)"')
+	if [ -n "${amis}" ]; then
+		echo "You have the following AMIs:"
+		echo "${amis}"
+		spacer="
+"
+	fi
+
+	snapshots=$(aws ec2 describe-snapshots --owner self |		\
+			jq -r '.Snapshots[] | "\(.SnapshotId) \(.VolumeId) \(.StartTime)"')
+	if [ -n "${snapshots}" ]; then
+		/bin/echo -n "${spacer}"
+		echo "You have the following snapshots:"
+		echo "${snapshots}"
+		spacer="
+"
+	fi
+
+	instances=$(aws ec2 describe-instances |			\
+			jq -r '.Reservations[].Instances[] | "\(.InstanceId) (\(.State.Name)) \(.PublicDnsName)"')
+	if [ -n "${instances}" ]; then
+		/bin/echo -n "${spacer}"
+		echo "You have the following instances:"
+		echo "${instances}"
+		spacer="
+"
+	fi
+
+	volumes=$(aws ec2 describe-volumes |				\
+			jq -r '.Volumes[] | "\(.VolumeId) \(.CreateTime) \(.Attachments[].InstanceId)"')
+	if [ -n "${volumes}" ]; then
+		/bin/echo -n "${spacer}"
+		echo "You have the following volumes:"
+		echo "${volumes}"
+	fi
+}
+
 ###
 # Specific instances
 ###
