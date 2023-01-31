@@ -32,7 +32,7 @@ alias instance='aws ec2 run-instances --key-name stevens --image-id'
 # you can grab the right resources to specify.
 #
 # We're using a function instead of an alias here
-# because we are passing an argument ("$@").
+# because we are passing arguments.
 startInstance() {
 	local ami=${1}
 	local itype=${2:-"t3.micro"}
@@ -134,6 +134,51 @@ alias del-volume='aws ec2 delete-volume --volume-id'
 # Like 'killallInstances', but for EBS volumes:
 alias kill-all-volumes='volumes | xargs -n 1 aws ec2 delete-volume --volume-id'
 
+# A simple function to determine your current AWS bill
+# for the calendar month.
+#
+# You need read access to the 'Cost Explorer Service';
+# create an IAM policy that grants permissions to
+# 'Read' and 'List' under "ce:".  (This may require
+# additional "Anomaly" resources.)
+awsCurrentBill() {
+	local readonly ym=$(date +%Y-%m)
+	local start end lday
+	local num
+
+	if [ ! -r ~/.aws/config ]; then
+		return
+	fi
+
+	start="${ym}-01"
+
+	lday=31
+	case "${ym##*-}" in
+	02)
+		# screw leap years
+		lday=28
+		;;
+	0[469]|11)
+		lday=30
+		;;
+	esac
+	end="${ym}-${lday}"
+
+	num=$(aws ce get-cost-and-usage					\
+		--output json						\
+		--time-period Start=${start},End=${end}			\
+		--granularity MONTHLY					\
+		--metrics UnblendedCost					\
+		--query 'ResultsByTime[*].Total.[UnblendedCost]' |	\
+		jq '.[][0].Amount  | tonumber*100 | round/100')
+
+	if [ -z "${num}" ]; then
+		return
+	fi
+
+	echo "AWS Billing Period ${start} - ${end}: \$${num}"
+}
+
 ###
 # Specific instances
 ###
@@ -158,16 +203,14 @@ alias start-fedora='startInstance ami-08b4ee602f76bff79'
 # Log in as "ubuntu". 
 alias start-ubuntu='startInstance ami-0b0ea68c435eb488d'
 
-# https://www.freebsd.org/releases/13.0R/announce/
-# Log in as "ec2-user".
-#alias start-freebsd='startInstance ami-00e91cb82b335d15f'
 # https://www.freebsd.org/releases/13.1R/announce/
 # Log in as "ec2-user".
 alias start-freebsd='startInstance ami-0cf377776fddcf8ba'
 
 # https://mail-index.netbsd.org/netbsd-users/2021/01/22/msg026460.html
 # https://stevens.netmeister.org/615/netbsd-amis.html
-#alias start-netbsd='startInstance ami-0018b2d98332ba7e3'
+# Log in as "root":
 alias start-netbsd='startInstance ami-08b87fed21cce91cb t4g.nano'
+alias start-netbsd-arm='start-netbsd'
 # Log in as "ec2-user":
 alias start-netbsd-amd64='startInstance ami-05ffda7ac6da57de1'
