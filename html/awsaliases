@@ -143,7 +143,7 @@ alias kill-all-volumes='volumes | xargs -n 1 aws ec2 delete-volume --volume-id'
 # 'Read' and 'List' under "ce:".  (This may require
 # additional "Anomaly" resources.)
 awsCurrentBill() {
-	local readonly start="start=$(date -r $(( $(date +%s) - (86400 * 30) )) +%Y-%m-%d)"
+	local readonly start="$(date -r $(( $(date +%s) - (86400 * 30) )) +%Y-%m-%d)"
 	local readonly end="$(date +%Y-%m-%d)"
 	local num
 
