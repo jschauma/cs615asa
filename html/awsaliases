@@ -70,20 +70,20 @@ ec2wait() {
 
 # Use this to see which instances you currently
 # have, regardless of their state.
-alias instances='_aeid | jq -r ".Reservations[].Instances[].InstanceId"'
+alias instances='_aedi | jq -r ".Reservations[].Instances[].InstanceId"'
 
 # Same thing, but printing the hostnames instead:
-alias inames='_aeid | jq -r ".Reservations[].Instances[].PublicDnsName" | grep .'
+alias inames='_aedi | jq -r ".Reservations[].Instances[].PublicDnsName" | grep .'
 
 # ...but often we only care about which instances are
 # currently running:
-alias running='_aeid --query Reservations[*].Instances[*].[InstanceId] --filters Name=instance-state-name,Values=running | jq -r ".[] | .[] | .[]"'
+alias running='_aedi --query Reservations[*].Instances[*].[InstanceId] --filters Name=instance-state-name,Values=running | jq -r ".[] | .[] | .[]"'
 
 # Same thing, but printing hostnames isntead:
-alias running-names='_aeid --query Reservations[*].Instances[*].[PublicDnsName] --filter Name=instance-state-name,Values=running | jq -r ".[] | .[] | .[]"'
+alias running-names='_aedi --query Reservations[*].Instances[*].[PublicDnsName] --filter Name=instance-state-name,Values=running | jq -r ".[] | .[] | .[]"'
 
 # To get a listing of hostnames with instance-ids:
-alias instance-id-and-names='_aeid | jq -r ".Reservations[].Instances[] | \"\(.PublicDnsName) \(.InstanceId)\""'
+alias instance-id-and-names='_aedi | jq -r ".Reservations[].Instances[] | \"\(.PublicDnsName) \(.InstanceId)\""'
 
 # Analogous to 'instance':
 alias term-instance='aws ec2 terminate-instances --output json --instance-ids'
@@ -143,7 +143,7 @@ alias kill-all-volumes='volumes | xargs -n 1 aws ec2 delete-volume --volume-id'
 # 'Read' and 'List' under "ce:".  (This may require
 # additional "Anomaly" resources.)
 awsCurrentBill() {
-	local readonly start="$(date +%Y-%m-01)"
+	local readonly start="start=$(date -r $(( $(date +%s) - (86400 * 30) )) +%Y-%m-%d)"
 	local readonly end="$(date +%Y-%m-%d)"
 	local num
 
@@ -167,7 +167,7 @@ awsListResources() {
 	local amis snapshots instances volumes
 
 	amis=$(aws ec2 describe-images --owner self | 			\
-		jq -r '.Images[] | "\(.ImageId) \(.Description)"')
+		jq -r '.Images[] | "\(.ImageId) \(.BlockDeviceMappings[0].Ebs.SnapshotId) \"\(.Description)\""')
 	if [ -n "${amis}" ]; then
 		echo "You have the following AMIs:"
 		echo "${amis}"
@@ -176,7 +176,7 @@ awsListResources() {
 	fi
 
 	snapshots=$(aws ec2 describe-snapshots --owner self |		\
-			jq -r '.Snapshots[] | "\(.SnapshotId) \(.VolumeId) \(.StartTime)"')
+			jq -r '.Snapshots[] | "\(.SnapshotId) \(.StartTime)"')
 	if [ -n "${snapshots}" ]; then
 		/bin/echo -n "${spacer}"
 		echo "You have the following snapshots:"
