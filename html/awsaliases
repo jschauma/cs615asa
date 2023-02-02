@@ -159,7 +159,7 @@ awsCurrentBill() {
 		return
 	fi
 
-	num=$(echo "${num}" | tr '\n' '+' | sed -e 's/\+$//' | bc)
+	num=$(echo "0+${num}" | tr '\n' '+' | sed -e 's/\+$//' | xargs | bc)
 
 	echo "AWS Billing Period ${start} - ${end}: \$${num}"
 }
