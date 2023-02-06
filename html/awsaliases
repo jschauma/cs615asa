@@ -198,7 +198,7 @@ awsListResources() {
 	fi
 
 	volumes=$(aws ec2 describe-volumes |				\
-			jq -r '.Volumes[] | "\(.VolumeId) \(.CreateTime) \(.Attachments[].InstanceId)"')
+			jq -r '.Volumes[] | "\(.VolumeId) \(.CreateTime) \(.Attachments[0].InstanceId)"')
 	if [ -n "${volumes}" ]; then
 		/bin/echo -n "${spacer}"
 		echo "You have the following volumes:"
