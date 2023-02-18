@@ -166,44 +166,60 @@ awsCurrentBill() {
 
 awsListResources() {
 	local spacer=""
-	local amis snapshots instances volumes
+	local amis snapshots instances region volumes
+	local regions="${1}"
 
-	amis=$(aws ec2 describe-images --owner self | 			\
-		jq -r '.Images[] | "\(.ImageId) \(.BlockDeviceMappings[0].Ebs.SnapshotId) \"\(.Description)\""')
-	if [ -n "${amis}" ]; then
-		echo "You have the following AMIs:"
-		echo "${amis}"
-		spacer="
+	if [ -z "${regions}" ]; then
+		regions=$(aws configure get region)
+	elif [ x"${regions}" = x"all" ]; then
+		regions=$(aws ec2 describe-regions | jq -r '.Regions[].RegionName')
+	fi
+
+	for region in ${regions}; do
+		amis=$(aws ec2 describe-images --region ${region} --owner self | \
+			jq -r '.Images[] | "\(.ImageId) \(.BlockDeviceMappings[0].Ebs.SnapshotId) \"\(.Description)\""')
+		if [ -n "${amis}" ]; then
+			/bin/echo -n "${spacer}"
+			echo "You have the following AMIs in ${region}:"
+				echo "${amis}"
+			spacer="
 "
-	fi
+		fi
+	done
 
-	snapshots=$(aws ec2 describe-snapshots --owner self |		\
-			jq -r '.Snapshots[] | "\(.SnapshotId) \(.StartTime)"')
-	if [ -n "${snapshots}" ]; then
-		/bin/echo -n "${spacer}"
-		echo "You have the following snapshots:"
-		echo "${snapshots}"
-		spacer="
+	for region in ${regions}; do
+		snapshots=$(aws ec2 describe-snapshots --region ${region} --owner self | \
+				jq -r '.Snapshots[] | "\(.SnapshotId) \(.StartTime)"')
+		if [ -n "${snapshots}" ]; then
+			/bin/echo -n "${spacer}"
+			echo "You have the following snapshots in ${region}:"
+			echo "${snapshots}"
+			spacer="
 "
-	fi
+		fi
+	done
 
-	instances=$(aws ec2 describe-instances |			\
-			jq -r '.Reservations[].Instances[] | "\(.InstanceId) (\(.State.Name)) \(.PublicDnsName)"')
-	if [ -n "${instances}" ]; then
-		/bin/echo -n "${spacer}"
-		echo "You have the following instances:"
-		echo "${instances}"
-		spacer="
+	for region in ${regions}; do
+		instances=$(aws ec2 describe-instances --region ${region} | \
+				jq -r '.Reservations[].Instances[] | "\(.InstanceId) (\(.State.Name)) \(.PublicDnsName)"')
+		if [ -n "${instances}" ]; then
+			/bin/echo -n "${spacer}"
+			echo "You have the following instances in ${region}:"
+			echo "${instances}"
+			spacer="
 "
-	fi
+		fi
+	done
 
-	volumes=$(aws ec2 describe-volumes |				\
-			jq -r '.Volumes[] | "\(.VolumeId) \(.CreateTime) \(.Attachments[0].InstanceId)"')
-	if [ -n "${volumes}" ]; then
-		/bin/echo -n "${spacer}"
-		echo "You have the following volumes:"
-		echo "${volumes}"
-	fi
+	for region in ${regions}; do
+		volumes=$(aws ec2 describe-volumes --region ${region} |	\
+				jq -r '.Volumes[] | "\(.VolumeId) \(.CreateTime) \(.Attachments[0].InstanceId)"')
+		if [ -n "${volumes}" ]; then
+			/bin/echo -n "${spacer}"
+			echo "You have the following volumes in ${region}:"
+			echo "${volumes}"
+		fi
+	done
 }
 
 ###
