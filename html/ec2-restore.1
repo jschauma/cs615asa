@@ -1,96 +1,127 @@
-.Dd April 17, 2011
+.Dd January 29, 2023
 .Dt EC2-RESTORE 1
 .Os
 .Sh NAME
 .Nm ec2-restore
-.Nd restore a backup of a directory from Elastic Block Storage (EBS)
+.Nd restore data from an EC2 EBS volume
 .Sh SYNOPSIS
 .Nm
-.Op Fl ehv
-.Op Fl i Ar instance
-.OP Fl m Ar method
-.Op Fl t Ar tag
-.Fl d Ar dir
+.Op Fl hv
+.Op Fl s Ar size
+.Ar volume-id
 .Sh DESCRIPTION
 The
 .Nm
-tool retores the contents of a previously backed up directory from Amazon
-Elastic Block Storage (EBS).
-It is the complementary tool to the
-.Xr ec2-backup 1
-utility.
+restores data from an Amazon EC2 Elastic Block Storage
+volume that was backed up using the approach used by
+e.g.,
+.Xr ec2-backup 1 .
 .Sh OPTIONS
 .Nm
 accepts the following command-line flags:
-.Bl -tag -width e_recipient_
-.It Fl e
-Data was encrypted during backup, so decrypt.
+.Bl -tag -width _s_size_
 .It Fl h
 Print a usage statement and exit.
-.It Fl i Ar instance
-Attach the volume in question to the given instance.
-.It Fl m Ar method
-Use the given method to perform the restore.
-Valid methods are 'dd' and 'rsync'; default is 'dd'.
-.It Fl t Ar tag
-Use the volume with the given tag.
-If no tag is specified, use 'ec2-backup'.
+.It Fl s Ar size
+Only read
+.Ar size
+bytes from the volume.
 .It Fl v
-Be verbose.
-If not specified,
-.Nm
-will not generate any output at all (unless an error is encountered).
+Be verbose and print diagnostic messages to stderr.
 .El
 .Sh DETAILS
+.Xr ec2-backup 1
+describes a method of backing up data into an EBS
+volume that, in a nutshell, writes the data in
+question to the raw device.
 .Nm
-will restore data from a backup in an ESB volume into the given directory.
-The restore is done in one of two ways: via direct read from the volume
-(utilizing
-.Xr dd 1
-on the remote instance and
-.Xr tar 1
-on the local host), or via a (possibly incremental) filesystem sync
-(utilizing
-.Xr rsync 1 Ns ).
+allows for easy data restoration by performing the
+inverse operation.
+.Pp
+In particular,
+.Nm
+will create an EC2 instance, attach the specified
+volume to the new instance, and then use
+.Xr ssh 1
+to connect to the instance and read the data from the
+raw device using
+.Xr dd 1 .
+.Pp
+In other words,
+.Nm
+effectively performs the same actions as the following
+sequence of commands:
+.Bd -literal -offset indent
+aws ec2 run-instances
+aws ec2 attach-volume
+ssh ec2-instance "dd if=/dev/xbd2d"
+.Ed
+.Pp
+Here, "/dev/xbd2d" stands for the suitable raw disk
+device, which may differ depending on the instance
+type.
+.Pp
+After all data is read,
+.Nm
+will terminate the instance it created.
 .Pp
 .Nm
-will create the directory specified via the
-.Fl d
-flag if it does not exist.
+will not create or modify any other AWS resources.
 .Pp
-Unless an instance is given using the
-.Fl i
-flag,
-.Nm
-will create an instance suitable to retrieve the data from the volume,
-attach the volume in question and restore the data into the given directory
-using the specified method and then shut down the instance it created.
-.Sh ENCRYPTION
-If
-.Fl e
-was specified, then
-.Nm
-will assume the backups was initially encrypted and thus attempt to
-decrypt it.
-This implies a restore method of 'dd' -- specifying 'rsync' with
-.Fl e
-is thus an error condition.
-.Pp
-.Nm
-will let the
-.Xr gpg 1
-tool perform the decryption.
-.Sh OUTPUT
 Unless the
 .Fl v
-flag is given,
+flag is specified,
 .Nm
-will not generate any output unless any errors are encountered.
-Otherwise, it may print out some useful information about what steps it
-is currently performing.
+will not generate any other output unless any errors are encountered.
+If
+.Fl v
+is specified,
+.Nm
+may print out some useful information about what steps it is currently
+performing to stderr.
 .Pp
+.Nm
+generates the data found on the volume on stdout.
 Any errors encountered cause a meaningful error message to be printed to
 STDERR.
+.Pp
+Unless the
+.Fl s
+is given,
+.Nm
+will read all data from the given volume.
+Otherwise, it will read only
+.Ar size
+bytes, where
+.Ar size
+may be specified as a total number of bytes, or using
+a common unit suffix (.e.g., 1K, 2M, 3G to represent 1
+kilobyte, 2 megabytes, or 3 gigabytes respectively).
+.Sh ENVIRONMENT
+.Nm
+assumes that the user has set up their environment for
+general use with the EC2 command-line tools, and it
+will not set nor modify any related environment
+variables nor write to any files
+.Pp
+.Nm
+allows the user to add custom flags to the aws ec2
+commands related to starting a new EC2 instance via
+the
+.Ar EC2_RESTORE_FLAGS_AWS
+environment variable.
+.Pp
+.Nm
+further assumes that the user has set up their
+.Ar ~/.ssh/config
+file to access instances in EC2 via
+.Xr ssh 1
+without any additional settings.
+It does allow the user to add custom flags to the
+.Xr ssh 1
+commands it invokes via the
+.Ar EC2_RESTORE_FLAGS_SSH
+environment variable.
 .Sh EXIT STATUS
 The
 .Nm
@@ -101,28 +132,54 @@ will exit with a value >0.
 .Sh EXAMPLES
 The following examples illustrate common usage of this tool.
 .Pp
-To restore the data found on the volume tagged as 'backup' over the
-root filesystem using .Xr rsync 1 Ns :
+To write the raw data from the remote volume to a
+local file:
 .Bd -literal -offset indent
-ec2-restore -t backup -m rsync -d /
+$ ec2-restore vol-1a2b3c4d > data
 .Ed
 .Pp
-To restore the encrypted data from the default volume into the current
-directory:
+To count the number of lines of the first 100
+megabytes of the data on the remote volume while
+showing debugging information:
 .Bd -literal -offset indent
-ec2-restore -e -d .
+$ ec2-restore -s 100M vol-1a2b3c4d | wc -l
+=> Verifying volume...
+=> Volume vol-1a2b3c4d is in availability zone 'us-east-1a'.
+=> Creating a suitable instance in 'us-east-1a'...
+=> Attaching volume vol-1a2b3c4d to instance i-123abcd456...
+=> Reading 100M bytes of data...
+        123456
+=> Terminating instance i-123abcd456...
+.Ed
+.Pp
+Note: messages prefixed with "=>" are printed to stderr.
+.Pp
+Suppose a user has their ~/.ssh/config set up to use the private key
+.Ar ~/.ec2/stevens
+but wishes to use the key
+.Ar ~/.ssh/ec2-key
+instead:
+.Bd -literal -offset indent
+$ export EC2_BACKUP_FLAGS_SSH="-i ~/.ssh/ec2-key"
+$ ec2-restore vol-1a2b3c4d | tar xf -
+.Ed
+.Pp
+To force creation of an instance type of
+.Ar t1.micro
+instead of whatever defaults might apply
+.Bd -literal -offset indent
+$ export EC2_BACKUP_FLAGS_AWS="--instance-type t1.micro"
+$ ec2-restore vol-1a2b3c4d | dd of=/dev/sd2a
 .Ed
 .Sh SEE ALSO
-.Xr dd 1 ,
+aws help,
 .Xr ec2-backup 1 ,
-.Xr ec2-start-instance 1 ,
-.Xr gpg 1 ,
-.Xr tar 1 ,
-.Xr rsync 1
+.Xr dd 1 ,
+.Xr ssh 1
 .Sh HISTORY
 .Nm
 was originally assigned by
 .An Jan Schaumann
-.Aq jschauma@cs.stevens.edu
+.Aq jschauma@stevens.edu
 as a homework assignment for the class "Aspects of System Administration" at
-Stevens Institute of Technology in the Spring of 2011.
+Stevens Institute of Technology in the Spring of 2023.

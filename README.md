@@ -14,20 +14,24 @@ Channel](https://www.youtube.com/channel/UCK9UCt1zAQ9JvTG0o6Z8zpg).
 Contents
 --------
 
-For the most part, you will find the LaTeX files I use to create the
-slides for my lectures.  (I use
-[xdvipresent](http://clip.dia.fi.upm.es/Software/xdvipresent_html/xdvipresent_2.html)
-to create the slides.)
+The organization of the this directory tree is by
+lecture.  In each directory, you will find `.pdf`
+files that go with the videos in the YouTube
+channel.
 
-Homework assignments etc, are generally kept on the course website and are
-usually changing, so I may not necessarily include them here.
+There may also be older versions of the slides for
+each lecture that I used prior to creating the video
+lectures.  For those, I used
+[xdvipresent](http://clip.dia.fi.upm.es/Software/xdvipresent_html/xdvipresent_2.html),
+and the `.tex` files in the directory can be used to
+create the slides.
 
-Sometimes a given lecture's directory may include additional notes or
-scripts.
+Homework assignments etc, are generally kept on the
+course website and are usually changing, so I may not
+necessarily include them here.
 
-The organization of the this directory tree is by lecture, and I will
-commit/update the contents each semester (when I
-remember).
+Sometimes a given lecture's directory may include
+additional notes or scripts.
 
 License
 -------

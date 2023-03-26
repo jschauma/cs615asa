@@ -50,9 +50,8 @@ Unless stated otherwise in the individual assignment, the following applies:
   directory named after your username.  Do not submit .zip, .rar, or other
   archives.
 
-- When submitting documents, always submit plain text ascii files created
-  on linux-lab.cs.stevens.edu.  Do not submit .doc, .xls, .pdf, .mov, or
-  other unsuitable formats.
+- When submitting documents, always submit plain text ascii files.
+  Do not submit .doc, .xls, .pdf, .mov, or other unsuitable formats.
 
 - The due date is always given in the date format YYYY-MM-DD HH:MM:SS,
   according to our systems local time (EST or EDT), using a 24 hour clock.
