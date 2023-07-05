@@ -218,6 +218,39 @@ awsListResources() {
 			/bin/echo -n "${spacer}"
 			echo "You have the following volumes in ${region}:"
 			echo "${volumes}"
+			spacer="
+"
+		fi
+	done
+
+	awsS3Usage "${spacer}"
+}
+
+awsS3Usage() {
+	local buckets
+	local b
+	local usage
+	local spacer="${1:-""}"
+
+	buckets=$(aws s3api list-buckets --query "Buckets[].Name" | \
+			jq -r '.[]')
+
+	if [ -n "${buckets}" ]; then
+		/bin/echo -n "${spacer}"
+		echo "You have the following S3 buckets:"
+		echo ${buckets}
+		spacer="
+"
+	fi
+
+	for b in ${buckets}; do
+		usage=$(aws s3 ls s3://${b} --recursive --summarize --human-readable | tail -2)
+		if [ $(echo "${usage}" | awk '{print $3; exit; }') -gt 0 ]; then
+			/bin/echo -n "${spacer}"
+			echo "${b}"
+			echo "${usage}"
+			spacer="
+"
 		fi
 	done
 }
