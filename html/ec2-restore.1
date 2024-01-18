@@ -1,4 +1,4 @@
-.Dd January 29, 2023
+.Dd April 17, 2023
 .Dt EC2-RESTORE 1
 .Os
 .Sh NAME
@@ -7,7 +7,9 @@
 .Sh SYNOPSIS
 .Nm
 .Op Fl hv
+.OP Fl r Ar region
 .Op Fl s Ar size
+.Fl k Ar keyname
 .Ar volume-id
 .Sh DESCRIPTION
 The
@@ -19,9 +21,16 @@ e.g.,
 .Sh OPTIONS
 .Nm
 accepts the following command-line flags:
-.Bl -tag -width _s_size_
+.Bl -tag -width _k_keyname_
 .It Fl h
 Print a usage statement and exit.
+.It Fl k Ar keyname
+Specify the name of the AWS SSH keypair to use when
+creating instances.
+.It Fl r Ar region
+Specify the AWS region explicitly.
+If not specified, the user's default region as per
+their AWS configuration is used.
 .It Fl s Ar size
 Only read
 .Ar size
@@ -87,7 +96,7 @@ STDERR.
 .Pp
 Unless the
 .Fl s
-is given,
+flag is given,
 .Nm
 will read all data from the given volume.
 Otherwise, it will read only
@@ -95,7 +104,7 @@ Otherwise, it will read only
 bytes, where
 .Ar size
 may be specified as a total number of bytes, or using
-a common unit suffix (.e.g., 1K, 2M, 3G to represent 1
+a common unit suffix (e.g., 1K, 2M, 3G to represent 1
 kilobyte, 2 megabytes, or 3 gigabytes respectively).
 .Sh ENVIRONMENT
 .Nm
@@ -103,13 +112,6 @@ assumes that the user has set up their environment for
 general use with the EC2 command-line tools, and it
 will not set nor modify any related environment
 variables nor write to any files
-.Pp
-.Nm
-allows the user to add custom flags to the aws ec2
-commands related to starting a new EC2 instance via
-the
-.Ar EC2_RESTORE_FLAGS_AWS
-environment variable.
 .Pp
 .Nm
 further assumes that the user has set up their
@@ -135,14 +137,14 @@ The following examples illustrate common usage of this tool.
 To write the raw data from the remote volume to a
 local file:
 .Bd -literal -offset indent
-$ ec2-restore vol-1a2b3c4d > data
+$ ec2-restore -k default vol-1a2b3c4d > data
 .Ed
 .Pp
 To count the number of lines of the first 100
 megabytes of the data on the remote volume while
 showing debugging information:
 .Bd -literal -offset indent
-$ ec2-restore -s 100M vol-1a2b3c4d | wc -l
+$ ec2-restore -v -k mykey -s 100M vol-1a2b3c4d | wc -l
 => Verifying volume...
 => Volume vol-1a2b3c4d is in availability zone 'us-east-1a'.
 => Creating a suitable instance in 'us-east-1a'...
@@ -158,18 +160,11 @@ Suppose a user has their ~/.ssh/config set up to use the private key
 .Ar ~/.ec2/stevens
 but wishes to use the key
 .Ar ~/.ssh/ec2-key
-instead:
+instead, restoring data from a volume in the
+`eu-west-3` region:
 .Bd -literal -offset indent
-$ export EC2_BACKUP_FLAGS_SSH="-i ~/.ssh/ec2-key"
-$ ec2-restore vol-1a2b3c4d | tar xf -
-.Ed
-.Pp
-To force creation of an instance type of
-.Ar t1.micro
-instead of whatever defaults might apply
-.Bd -literal -offset indent
-$ export EC2_BACKUP_FLAGS_AWS="--instance-type t1.micro"
-$ ec2-restore vol-1a2b3c4d | dd of=/dev/sd2a
+$ export EC2_RESTORE_FLAGS_SSH="-i ~/.ssh/ec2-key"
+$ ec2-restore -k mykey -r eu-west-3 vol-1a2b3c4d | tar xf -
 .Ed
 .Sh SEE ALSO
 aws help,
