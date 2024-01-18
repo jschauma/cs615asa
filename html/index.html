@@ -3,777 +3,777 @@
 <HTML>
 <HEAD>
 
-	<TITLE>CS615 -- System Administration</TITLE>
-	<STYLE type="text/css">
-	body {
-	background-color: #FFFFFf;
-	}
-	</STYLE>
-	<STYLE type="text/css">
-	li.c1 {list-style: none}
-	</STYLE>
+  <TITLE>CS615 -- System Administration</TITLE>
+  <STYLE type="text/css">
+  body {
+  background-color: #FFFFFf;
+  }
+  </STYLE>
+  <STYLE type="text/css">
+  li.c1 {list-style: none}
+  </STYLE>
 </HEAD>
 
 <BODY>
-	<TABLE border="1" align="center" cellpadding="15">
-		<TR>
-			<TD valign="top">
-				<H2>CS615 -- System Administration</H2>
+  <TABLE border="1" align="center" cellpadding="15">
+    <TR>
+      <TD valign="top">
+        <H2>CS615 -- System Administration</H2>
 
-				<H3>Course Overview:</H3>
+        <H3>Course Overview:</H3>
 
-				<P>In a networked environment, the need for a skilled system
-				administrator has become increasingly obvious, but what exactly
-				does a System Administrator do?  Traditionally, the System
-				Administrator's job has not had a precise definition; in
-				some places they are referred to as Systems Engineers,
-				Site Reliability Engineers (SRE), or perhaps Web Operations.
-				Elsewhere, the boundaries between traditional "dev" and "ops"
-				are being torn down, yielding a collaborative culture of
-				"DevOps".</p>
+        <P>In a networked environment, the need for a skilled system
+        administrator has become increasingly obvious, but what exactly
+        does a System Administrator do?  Traditionally, the System
+        Administrator's job has not had a precise definition; in
+        some places they are referred to as Systems Engineers,
+        Site Reliability Engineers (SRE), or perhaps Web Operations.
+        Elsewhere, the boundaries between traditional "dev" and "ops"
+        are being torn down, yielding a collaborative culture of
+        "DevOps".</p>
 
-				<P>In this class, some of the most essential aspects of
-				system administration and the rather broad skillset
-				required in this profession will be covered, giving students the
-				opportunity to develop the skills necessary to architect
-				solutions for as well as analyze and
-				troubleshoot problems arising in every day usage of
-				complex networks and large-scale installations.</P>
+        <P>In this class, some of the most essential aspects of
+        system administration and the rather broad skillset
+        required in this profession will be covered, giving students the
+        opportunity to develop the skills necessary to architect
+        solutions for as well as analyze and
+        troubleshoot problems arising in every day usage of
+        complex networks and large-scale installations.</P>
 
-				<P>Some of the topics covered include: fundamental
-				operating system and filesystem concepts,
-				software installation and package management, configuration
-				management, task automation and tools development, TCP/IP
-				networking, common internet services, and
-				system security.</P>
+        <P>Some of the topics covered include: fundamental
+        operating system and filesystem concepts,
+        software installation and package management, configuration
+        management, task automation and tools development, TCP/IP
+        networking, common internet services, and
+        system security.</P>
 
-				<P><b>Students are expected to be comfortable operating in a
-				UNIX-like environment on a user level and have a solid
-				understanding of TCP/IP networking and Operating System
-				concepts.  <em>All coursework will be done exclusively on
-				the command-line on <!-- <a href="linux-lab.html">linux-lab.cs.stevens.edu</a> and/or --> AWS systems.</em> This is <em>not</em>
-				an introduction to using Unix!</b></P>
+        <P><b>Students are expected to be comfortable operating in a
+        UNIX-like environment on a user level and have a solid
+        understanding of TCP/IP networking and Operating System
+        concepts.  <em>All coursework will be done exclusively on
+        the command-line on <!-- <a href="linux-lab.html">linux-lab.cs.stevens.edu</a> and/or --> AWS systems.</em> This is <em>not</em>
+        an introduction to using Unix!</b></P>
 
-				<p>If you email me to waive the prerequisites, please provide
-				information about how you meet the requirements listed above in bold.
-				(This has the added benefit of showing that you've actually read at least
-				this far on this page.)</p>
+        <p>If you email me to waive the prerequisites, please provide
+        information about how you meet the requirements listed above in bold.
+        (This has the added benefit of showing that you've actually read at least
+        this far on this page.)</p>
 
-				<P><em>If you have questions about this class, please email <a
-				href="mailto:jschauma@stevens.edu">jschauma@stevens.edu</a>
-				<b>from your @stevens.edu address</b> and (this is important to escape the spam filters) include
-				"[CS615]" in the subject line.</em></p>
+        <P><em>If you have questions about this class, please email <a
+        href="mailto:jschauma@stevens.edu">jschauma@stevens.edu</a>
+        <b>from your @stevens.edu address</b> and (this is important to escape the spam filters) include
+        "[CS615]" in the subject line.</em></p>
 
-				<hr>
-				<table width="100%" border="0">
-					<tr><td valign="top">
-						<H3>Time, Date &amp; Place:</H3>
-							<p><b>Interactive/synchronous: Mondays, 18:30 - 21:00 Eastern, Babbio 210</b><br>
-							<b>Online on-demand: anytime via <a href="https://www.youtube.com/c/cs615asa">YouTube video lectures</a></b></p>
+        <hr>
+        <H3>Time, Date &amp; Place:</H3>
+        <p><b>Interactive/synchronous: Mondays, 18:30 - 21:00 Eastern, Babbio 210</b><br>
+        <b>Online on-demand: anytime via <a href="https://www.youtube.com/c/cs615asa">YouTube video lectures</a></b></p>
 
-					        <H3><a name="instructor"></a>Instructor:</H3><A href=
-						"https://stevens.netmeister.org/">Jan Schaumann</A>
-						[<A href="mailto:jschauma@stevens.edu">jschauma@stevens.edu</A>]
+        <H3><a name="instructor"></a>Instructor:</H3><A href=
+        "https://stevens.netmeister.org/">Jan Schaumann</A>
+        [<A href="mailto:jschauma@stevens.edu">jschauma@stevens.edu</A>]
 
-						<hr>
-						<H3>Resources:</H3>
+        <hr>
+        <H3>Resources:</H3>
 
-						<p>Content and discussions:
-						<ul>
-							<LI><A href="https://lists.stevens.edu/cgi-bin/mailman/listinfo/cs615asa">CS615ASA Mailinglist</a><br>
-							<em>Note: all class communications happen via this mailing list.</em><br>
-							All registered students are subscribed to this list using their
-							<tt>@stevens.edu</tt> address.  It is critical that you read this list.</li>
-							<li><a href="https://cs615asa.slack.com/">Course Slack</a></li>
-						<li><a href="https://www.youtube.com/c/cs615asa">Course Videos / Youtube Channel</a> (<a href="https://www.youtube.com/feeds/videos.xml?channel_id=UCK9UCt1zAQ9JvTG0o6Z8zpg">RSS Feed</a>)</li>
-						</ul>
+        <p>Content and discussions:
+        <ul>
+          <LI><A href="https://lists.stevens.edu/cgi-bin/mailman/listinfo/cs615asa">CS615ASA Mailinglist</a><br>
+          <em>Note: all class communications happen via this mailing list.</em><br>
+          All registered students are subscribed to this list using their
+          <tt>@stevens.edu</tt> address.  It is critical that you read this list.</li>
+          <li><a href="https://cs615asa.slack.com/">Course Slack</a></li>
+          <li><a href="https://www.youtube.com/c/cs615asa">Course Videos / Youtube Channel</a> (<a href="https://www.youtube.com/feeds/videos.xml?channel_id=UCK9UCt1zAQ9JvTG0o6Z8zpg">RSS Feed</a>)</li>
+        </ul>
 
-						<p>Assignments and meta-information:
-						<UL>
-							<LI><A href="#syllabus">Syllabus</A></LI>
-							<LI><a href="#systems">Systems used in this class</a></LI>
-							<LI><A href="#grading">Grading</A></LI>
-							<LI><A href="#hw">Homeworks</A></LI>
-							<LI><A href="/cgi-bin/midterm.cgi">Midterm Evaluation</A></LI>
-							<LI><a href="https://twitter.com/#!/cs615asa">CS615 ASA Twitter Account</a></LI>
-							<li><a href="slack.html">CS615ASA on Slack</a></LI>
-							<LI><a href="https://github.com/jschauma/cs615asa">Raw course material on github</a></LI>
-							<LI><A href=
-							"http://netbsd.gw.com/cgi-bin/man-cgi/man">
-							NetBSD Manual Pages</A></LI>
-							<LI><A href="http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html">AWS Command Line Interface</a></li>
-						</UL>
-					</td><td valign="top" align="right">
-<a class="twitter-timeline" data-dnt="true" width="400"
-href="https://twitter.com/cs615asa"
-data-widget-id="407334104082817025">Tweets by @cs615asa</a>
-<script>!function(d,s,id){var
-js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        <p>Assignments and meta-information:
+        <UL>
+          <LI><A href="#syllabus">Syllabus</A></LI>
+          <LI><a href="#systems">Systems used in this class</a></LI>
+          <LI><A href="#grading">Grading</A></LI>
+          <LI><A href="#hw">Homeworks</A></LI>
+          <LI><A href="use-of-ai.html">Permitted use of (generative) AI technologies</a></li>
+          <LI><A href="/cgi-bin/midterm.cgi">Midterm Evaluation</A></LI>
+          <!-- <LI><a href="https://twitter.com/#!/cs615asa">CS615 ASA Twitter Account</a></LI> -->
+          <li><a href="slack.html">CS615ASA on Slack</a></LI>
+          <LI><a href="https://github.com/jschauma/cs615asa">Raw course material on github</a></LI>
+          <LI><A href="http://netbsd.gw.com/cgi-bin/man-cgi/man">NetBSD Manual Pages</A></LI>
+          <LI><A href="http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html">AWS Command Line Interface</a></li>
+        </UL>
 
-					</td></tr>
-				</table>
+        <hr>
+        <H3>Textbooks:</H3>
 
-				<hr>
-				<H3>Textbooks:</H3>
+        <P>This class does not have any strictly <EM>required</EM>
+        textbooks. However, there are some books which are
+        <EM>recommended</EM>, if only as a reference throughout the
+        semester. These are:</P>
 
-				<P>This class does not have any strictly <EM>required</EM>
-				textbooks. However, there are some books which are
-				<EM>recommended</EM>, if only as a reference throughout the
-				semester. These are:</P>
+        <UL>
+          <LI>"<a href="https://www.netmeister.org/book/principles-of-system-administration.pdf">Principles of
+          System Administration</a>", by Jan Schaumann<br>
+          (Unpublished / work in progress)<br>
+          &#160;</LI>
 
-				<UL>
-					<LI>"<a href="https://www.netmeister.org/book/principles-of-system-administration.pdf">Principles of
-					System Administration</a>", by Jan Schaumann<br>
-					(Unpublished / work in progress)<br>
-					&#160;</LI>
+          <LI>"<A href=
+          "https://www.wiley.com/en-gb/Principles+of+Network+and+System+Administration%2C+2nd+Edition-p-9780470868072">Principles
+          of Network and System Administration</A>", 2nd Edition, by Mark
+          Burgess<BR>
+          ISBN: 0470868074<BR>
+          Publisher: John Wiley &amp; Sons<BR>
+          &#160;</LI>
 
-					<LI>"<A href=
-					"https://www.wiley.com/en-gb/Principles+of+Network+and+System+Administration%2C+2nd+Edition-p-9780470868072">Principles
-					of Network and System Administration</A>", 2nd Edition, by Mark
-					Burgess<BR>
-					ISBN: 0470868074<BR>
-					Publisher: John Wiley &amp; Sons<BR>
-					&#160;</LI>
+          <LI>"<a href="https://www.pearson.com/us/higher-education/program/Limoncelli-Practice-of-System-and-Network-Administration-The-Volume-1-Dev-Ops-and-other-Best-Practices-for-Enterprise-IT-3rd-Edition/PGM281808.html">The
+    Practice of System and Network Administration</a>", by <A href=
+          "https://everythingsysadmin.com/about.html">Thomas
+          A. Limoncelli, Christine Hogan,  Strata R. Chalup</A><BR>
+          ISBN: 9780321919168<BR>
+          Publisher: Addison-Wesley<BR>
+          &#160;</LI>
 
-					<LI>"<a href="https://www.pearson.com/us/higher-education/program/Limoncelli-Practice-of-System-and-Network-Administration-The-Volume-1-Dev-Ops-and-other-Best-Practices-for-Enterprise-IT-3rd-Edition/PGM281808.html">The
-		Practice of System and Network Administration</a>", by <A href=
-					"https://everythingsysadmin.com/about.html">Thomas
-					A. Limoncelli, Christine Hogan,	Strata R. Chalup</A><BR>
-					ISBN: 9780321919168<BR>
-					Publisher: Addison-Wesley<BR>
-					&#160;</LI>
+          <LI>"<a href="https://www.pearson.com/us/higher-education/program/Limoncelli-Practice-of-Cloud-System-Administration-The-Dev-Ops-and-SRE-Practices-for-Web-Services-Volume-2/PGM65967.html">The
+    Practice of Cloud System Administration</a>", by <A href=
+          "https://everythingsysadmin.com/about.html">Thomas
+          A. Limoncelli, Christine Hogan,  Strata R. Chalup</A><BR>
+          ISBN: 032194318X<BR>
+          Publisher: Addison-Wesley<BR>
+          &#160;</LI>
 
-					<LI>"<a href="https://www.pearson.com/us/higher-education/program/Limoncelli-Practice-of-Cloud-System-Administration-The-Dev-Ops-and-SRE-Practices-for-Web-Services-Volume-2/PGM65967.html">The
-		Practice of Cloud System Administration</a>", by <A href=
-					"https://everythingsysadmin.com/about.html">Thomas
-					A. Limoncelli, Christine Hogan,	Strata R. Chalup</A><BR>
-					ISBN: 032194318X<BR>
-					Publisher: Addison-Wesley<BR>
-					&#160;</LI>
+        </UL>
 
-				</UL>
-
-				Other suggested reading:
-				<UL>
-					<LI>" Site Reliability Engineering -- How Google Runs Production Systems",
-					Jennifer Petoff, Niall Richard Murphy, Betsy Beyer, Chris
+        Other suggested reading:
+        <UL>
+          <LI>" Site Reliability Engineering -- How Google Runs Production Systems",
+          Jennifer Petoff, Niall Richard Murphy, Betsy Beyer, Chris
 Jones<BR>
-					ISBN: 978-1-4919-2912-4<BR>
-					Publisher: <a
+          ISBN: 978-1-4919-2912-4<BR>
+          Publisher: <a
 href="http://shop.oreilly.com/product/0636920041528.do">O'Reilly &amp;
 Associates</a><BR>
-					(<a
+          (<a
 href="http://proquest.safaribooksonline.com/book/networking/9781491929117/firstchapter">read
 online</a>)<br>
-					&#160;</LI>
-					<li>"Building Secure and Reliable Systems", Heather Adkins, Betsy Beyer, Paul Blankinship, Ana Oprea, Piotr Lewandowski, Adam Stubblefield<br>
-					ISBN: 978-1-4920-8312-2<br>
-					Publisher: <a
+          &#160;</LI>
+          <li>"Building Secure and Reliable Systems", Heather Adkins, Betsy Beyer, Paul Blankinship, Ana Oprea, Piotr Lewandowski, Adam Stubblefield<br>
+          ISBN: 978-1-4920-8312-2<br>
+          Publisher: <a
 href="http://shop.oreilly.com/product/0636920297550.do">O'Reilly &amp; Associates</a><br>
-					(<a href="https://landing.google.com/sre/books/">read online</a>)<br>
-					&#160;<LI>"Essential System Administration", 3rd Edition, by
-					<A href="http://www.aeleen.com/">&#198;leen
-					Frisch</A><BR>
-					ISBN: 0-596-00343-9,<BR>
-					Publisher: <A href=
-					"http://www.oreilly.com/catalog/esa3/">O'Reilly &amp;
-					Associates</A><BR>
-					(<a href="https://ezproxy.stevens.edu:2155/book/operating-systems-and-server-administration/unix/0596003439">read online</a>)<br>
-					&#160;</LI>
+          (<a href="https://landing.google.com/sre/books/">read online</a>)<br>
+          &#160;<LI>"Essential System Administration", 3rd Edition, by
+          <A href="http://www.aeleen.com/">&#198;leen
+          Frisch</A><BR>
+          ISBN: 0-596-00343-9,<BR>
+          Publisher: <A href=
+          "http://www.oreilly.com/catalog/esa3/">O'Reilly &amp;
+          Associates</A><BR>
+          (<a href="https://ezproxy.stevens.edu:2155/book/operating-systems-and-server-administration/unix/0596003439">read online</a>)<br>
+          &#160;</LI>
 
 
-					<LI>"<A href=
-						"http://oreilly.com/catalog/9780596100292/">UNIX in a
-						Nutshell</A>", 4th Edition, by Arnold Robbins<BR>
-						ISBN: 978-0-596-10029-2<BR>
-						Publisher: O'Reilly &amp; Associates<BR>(<a href="https://ezproxy.stevens.edu:2155/book/operating-systems-and-server-administration/unix/0596100299">read online</a>)<br>
-					&nbsp;</LI>
-					<LI>"<A href="https://www.admin.com/">Unix System
-					Administration Handbook</A>", 3rd Edition, by Evi
-					Nemeth, Garth Snyder, Scott Seebass, Trent R. Hein.<BR>
-					ISBN: 0-13-020601-6,<BR>
-					Publisher: <A href=
-					"http://vig.prenhall.com/catalog/academic/product/0,1144,0130206016,00.html">
-					Prentice Hall</A><BR>(<a href="https://ezproxy.stevens.edu:2155/book/operating-systems-and-server-administration/unix/9780137002740">read online</a>)<br>&nbsp;</LI>
+          <LI>"<A href=
+            "http://oreilly.com/catalog/9780596100292/">UNIX in a
+            Nutshell</A>", 4th Edition, by Arnold Robbins<BR>
+            ISBN: 978-0-596-10029-2<BR>
+            Publisher: O'Reilly &amp; Associates<BR>(<a href="https://ezproxy.stevens.edu:2155/book/operating-systems-and-server-administration/unix/0596100299">read online</a>)<br>
+          &nbsp;</LI>
+          <LI>"<A href="https://www.admin.com/">Unix System
+          Administration Handbook</A>", 3rd Edition, by Evi
+          Nemeth, Garth Snyder, Scott Seebass, Trent R. Hein.<BR>
+          ISBN: 0-13-020601-6,<BR>
+          Publisher: <A href=
+          "http://vig.prenhall.com/catalog/academic/product/0,1144,0130206016,00.html">
+          Prentice Hall</A><BR>(<a href="https://ezproxy.stevens.edu:2155/book/operating-systems-and-server-administration/unix/9780137002740">read online</a>)<br>&nbsp;</LI>
 
-					<LI>"<A href=
-					"https://www.wiley.com/en-us/Analytical+Network+and+System+Administration%3A+Managing+Human+Computer+Networks-p-9780470861004">Analytical
-					Network and System Administration : Managing Human-Computer
-					Systems</A>", by Mark Burgess<BR>
-					ISBN: 0-470-86100-2<BR>
-					Publisher: <a href="http://www.wiley.com/WileyCDA/">Wiley &amp;
-					Sons</A><BR>
-					&nbsp;</LI>
+          <LI>"<A href=
+          "https://www.wiley.com/en-us/Analytical+Network+and+System+Administration%3A+Managing+Human+Computer+Networks-p-9780470861004">Analytical
+          Network and System Administration : Managing Human-Computer
+          Systems</A>", by Mark Burgess<BR>
+          ISBN: 0-470-86100-2<BR>
+          Publisher: <a href="http://www.wiley.com/WileyCDA/">Wiley &amp;
+          Sons</A><BR>
+          &nbsp;</LI>
 
-					<LI><A href=
-					"https://www.usenix.org/short-topics">
-					SAGE Booklets</A><BR>
-					&#160;</LI>
+          <LI><A href=
+          "https://www.usenix.org/short-topics">
+          SAGE Booklets</A><BR>
+          &#160;</LI>
 
-					<LI><A href="http://bofharchive.com/BOFH.html">BOFH
-					Article series</A><BR>
-					&#160;</LI>
+          <LI><A href="http://bofharchive.com/BOFH.html">BOFH
+          Article series</A><BR>
+          &#160;</LI>
 
-					<LI><a href="http://www.opsschool.org/">Ops School</a></LI>
+          <LI><a href="http://www.opsschool.org/">Ops School</a></LI>
 
-					<LI><a href="https://archive.is/Akjau">Learn Linux The Hard Way</a></LI>
-				</UL>
+          <LI><a href="https://archive.is/Akjau">Learn Linux The Hard Way</a></LI>
+        </UL>
 
-				Other related videos:
-				<UL>
-					<LI><a
+        Other related videos:
+        <UL>
+          <LI><a
 href="https://missing.csail.mit.edu">MIT's Missing
 Semester</a> -- <a
 href="https://www.youtube.com/playlist?list=PLyzOVJj3bHQuloKGG59rS43e29ro7I57J">video
 lectures</a></LI>
-				</UL>
+        </UL>
 
-				<hr>
-				<H3><a name="systems"></a>Systems Used</H3>
-				<p>
-				In this class, we will make use of <a
-				href="https://aws.amazon.com/ec2/">Amazon's Elastic Compute Cloud</a>
-				for most homework assignments;	this will give students the chance
-				to gain valuable experience in new technologies currently in high
-				demand in the industry (cloud computing, IPv6) and also provide a
-				possibility for students to gain superuser access to a number of
-				operating systems otherwise not available at Stevens.
-				</p>
-				<p>
-				As a student, you should qualify for Amazon's <a href="https://aws.amazon.com/education/awseducate/">AWS Educate</a> program.
-				</p>
+        <hr>
+        <H3><a name="systems"></a>Systems Used</H3>
+        <p>
+        In this class, we will make use of <a
+        href="https://aws.amazon.com/ec2/">Amazon's Elastic Compute Cloud</a>
+        for most homework assignments;  this will give students the chance
+        to gain valuable experience in new technologies currently in high
+        demand in the industry (cloud computing, IPv6) and also provide a
+        possibility for students to gain superuser access to a number of
+        operating systems otherwise not available at Stevens.
+        </p>
+        <p>
+        As a student, you should qualify for Amazon's <a href="https://aws.amazon.com/education/awseducate/">AWS Educate</a> program.
+        </p>
+        <p>
+        (You may also use any other cloud provider or a
+        <a href="/631/netbsd.html">local VM</a>, but
+        please note that some assignments will
+        <em>require</em> the use of EC2.  All
+        examples, unless otherwise noted, are given using EC2
+        as well.)
+        </p>
 
-				<!--
-				<p>We will access EC2 from and use for almost all assignments and
-				exercises
-				the university's <tt>linux-lab.cs.stevens-tech.edu</tt> systems.
-				It is the students' responsibility to <a href="linux-lab.html">get
-				an account on these systems</a>
-				<b>prior to the start of the class</b>.</p>
-				-->
+        <!--
+        <p>We will access EC2 from and use for almost all assignments and
+        exercises
+        the university's <tt>linux-lab.cs.stevens-tech.edu</tt> systems.
+        It is the students' responsibility to <a href="linux-lab.html">get
+        an account on these systems</a>
+        <b>prior to the start of the class</b>.</p>
+        -->
 
-				<hr>
-				<H3><A name="grading">Grading</A>:</H3>There will (probably) be:<BR>
+        <hr>
+        <H3><A name="grading">Grading</A>:</H3>There will (probably) be:<BR>
 
-				<UL>
-					<LI>course participation, <a href="questionnaires.html">questionnaires</a>, and <a href="course-notes.html">course notes</a> (12% of the grade)</LI>
-					<LI>a meetup requirement (8% of the grade)</LI>
-					<LI>four individual homework assignments (65% of the grade)</LI>
-					<LI>a group project (CtF) towards the end of the semester (15% of the grade)</LI>
+        <UL>
+          <LI>course participation, <a href="questionnaires.html">questionnaires</a>, and <a href="course-notes.html">course notes</a> (12% of the grade)</LI>
+          <LI>a meetup requirement (8% of the grade)</LI>
+          <LI>four individual homework assignments (65% of the grade)</LI>
+          <LI>a group project (CtF) towards the end of the semester (15% of the grade)</LI>
 
-				</UL>Letter grades will be given as follows:
+        </UL>Letter grades will be given as follows:
 
-				<UL>
-					<LI>90% - 100% of total points =&gt; A</LI>
-					<LI>80% - 89.99% =&gt; B</LI>
-					<LI>70% - 79.99% =&gt; C</LI>
-					<LI>0 - 69.99% points =&gt; F</LI>
-				</UL>
+        <UL>
+          <LI>90% - 100% of total points =&gt; A</LI>
+          <LI>80% - 89.99% =&gt; B</LI>
+          <LI>70% - 79.99% =&gt; C</LI>
+          <LI>0 - 69.99% points =&gt; F</LI>
+        </UL>
 
-				Within each letter grade, there are +/- grades given at the
-				discretion of the instructor. (Exception: there is no A+)
+        Within each letter grade, there are +/- grades given at the
+        discretion of the instructor. (Exception: there is no A+)
 
-				<H4><a name="plagiarism"></a>Plagiarism, Cheating and other ways to get an F</H4>
-				This really should not be necessary, but just to preempt any complains
-				that I did not make myself clear:
-				<blockquote>
-					Students are responsible for their own work.	It is unethical (and in
-					some cases illegal) to present as one's work the ideas, words or
-					representations of another without the proper indication of the
-					source.	Therefore, it is the student's responsibility to give credit
-					for any quotation, idea or data (such as statistical data or source
-					code) borrowed from an outside source.
-					<br><br>
-					Failure to do so constitutes <a href="https://www.netmeister.org/blog/plagiarism.html">plagiarism</a>, may imply copyright
-					infringement and license violations and is viewed as cheating
-					in this class, yielding a failing grade.
-				</blockquote>
-				Any incidents are reported to the Dean of Graduate
-				Academics, as per the <a
-				href="https://my.stevens.edu/system/files/graduate_student_code_of_academic_integrity_0.pdf">Graduate Student Code of Academic Conduct</a>.
-				<p>
-				Note: even if the license/author allows usage of the code or
-				content, you may <em>still</em> not copy it and hand it in as your
-				own work.  You are responsible for your own work.
-				Google-&gt;StackOverflow-&gt;copy'n paste does <em>not</em> count
-				as "work", regardless of how long it took you.
-				</p>
-				<hr>
+        <H4><a name="plagiarism"></a>Plagiarism, Cheating and other ways to get an F</H4>
+        This really should not be necessary, but just to preempt any complains
+        that I did not make myself clear:
+        <blockquote>
+          Students are responsible for their own work.  It is unethical (and in
+          some cases illegal) to present as one's work the ideas, words or
+          representations of another without the proper indication of the
+          source.  Therefore, it is the student's responsibility to give credit
+          for any quotation, idea or data (such as statistical data or source
+          code) borrowed from an outside source.
+          <br><br>
+          Failure to do so constitutes <a href="https://www.netmeister.org/blog/plagiarism.html">plagiarism</a>, may imply copyright
+          infringement and license violations and is viewed as cheating
+          in this class, yielding a failing grade.
+        </blockquote>
+        Any incidents are reported to the Dean of Graduate
+        Academics, as per the <a
+        href="https://my.stevens.edu/system/files/graduate_student_code_of_academic_integrity_0.pdf">Graduate Student Code of Academic Conduct</a>.
+        <p>
+        Note: even if the license/author allows usage of the code or
+        content, you may <em>still</em> not copy it and hand it in as your
+        own work.  You are responsible for your own work.
+        Google-&gt;StackOverflow-&gt;copy'n paste does <em>not</em> count
+        as "work", regardless of how long it took you.
+        </p>
+        <p>
+        <em>Note</em>: this also applies to the use of AI such
+        as (but not limited to) e.g., ChatGPT.  Please
+        see <a href="use-of-ai.html">this document</a>
+        for more details on the permitted use of AI in this
+        class.
+        </p>
+        <hr>
 
-				<H3><a name="hw">Homework Assignments</a>:</h3>
+        <H3><a name="hw">Homework Assignments</a>:</h3>
 
-				<p>
-				The following are the assignments from the Spring 2022 semester. Assignments may be changed in 2023.
-				<ul>
-					<li><a href="hw.txt">General Homework Submission Guidelines</a></li>
-					<li><a href="meetup.html">Homework #N: Attend a relevant Meetup/Talk/community event</a></li>
-					<li><a href="s23-hw1.html">Homework #1: Setup your environment for EC2 and create an instance</a></li>
-					<li><a href="s23-hw2.html">HW#2: packet capture</a></li>
-					<li><a href="s23-hw3.html">HW#3: DNS packet capture</a></li>
-					<li><a href="s23-hw4.html">HW#4: EBS Restore</a></li>
-					<!-- <li><a href="s20-hw2.html">HW#2: ec2-backup-v1</a></li> -->
-					<!-- <li><a href="s20-hw4.html">HW#3: monitoring DNS and HTTP traffic</a></li> -->
-					<!-- <li><a href="s20-ec2-backup.html">Homework #5: EC2 Backup</a></li> -->
-				<!--
-					<li><a href="ctf.html">Capture the Flag!</a></li>
-				-->
-				</ul>
-				</p>
-				<p>
-				The following exercises are not graded, but are recommended
-				to be completed before or soon after the given lecture to help you
-				better understand the concepts dicussed:
-				</p>
-				<p>
-				<ul>
-					<li><a href="https://youtu.be/vxTXXaCr4s8">screen(1)</a> [<a href="/631/tt/screen/tt-screen.pdf">slides</a>]&nbsp;[<a href="/631/tt/screen/tt-screen.txt">transcript</a>]
-					<li><a href="partition-exercise.html">Lecture 02: Partition Exercise</a></li>
-					<li><a href="filesystems-exercise.html">Lecture 03: Filesystems Exercise</a></li>
-					<li><a href="package-exercise.html">Lecture 04: Package Manager Exercise</a></li>
-					<li><a href="useradd-exercise.html">Lecture 04: Useradd Exercise</a></li>
-					<li><a href="http-exercise.html">Lecture 07/08: HTTP Exercise</a></li>
-					<li><a href="smtp-exercise.html">Lecture 08: SMTP Exercise</a></li>
-					<li><a href="regex-exercise.html">Lecture 09: Regex Exercise</a></li>
-					<li><a href="scripting-exercise.html">Lecture 09: Scripting Exercise</a></li>
-					<li><a href="bugfiling-exercise.html">Lecture 09: Bugfiling Exercise</a></li>
-					<li><a href="backup-exercise.html">Lecture 10: Backup Exercise</a></li>
+        <p>
+        The following are the assignments from the Spring 2023 semester. Assignments may be changed in 2024.
+        <ul>
+          <li><a href="hw.txt">General Homework Submission Guidelines</a></li>
+          <li><a href="meetup.html">Homework #N: Attend a relevant Meetup/Talk/community event</a></li>
+          <li><a href="s24-hw1.html">Homework #1: Setup your environment for EC2 and create an instance</a></li>
+          <li><a href="s24-hw2.html">HW#2: packet capture</a></li>
+          <li><a href="s24-hw3.html">HW#3: DNS packet capture</a></li>
+          <li><a href="s24-hw4.html">HW#4: EBS Restore</a></li>
+          <!-- <li><a href="s20-hw2.html">HW#2: ec2-backup-v1</a></li> -->
+          <!-- <li><a href="s20-hw4.html">HW#3: monitoring DNS and HTTP traffic</a></li> -->
+          <!-- <li><a href="s20-ec2-backup.html">Homework #5: EC2 Backup</a></li> -->
+        <!--
+          <li><a href="ctf.html">Capture the Flag!</a></li>
+        -->
+        </ul>
+        </p>
+        <p>
+        The following exercises are not graded, but are recommended
+        to be completed before or soon after the given lecture to help you
+        better understand the concepts dicussed:
+        </p>
+        <p>
+        <ul>
+          <li><a href="https://youtu.be/vxTXXaCr4s8">screen(1)</a> [<a href="/631/tt/screen/tt-screen.pdf">slides</a>]&nbsp;[<a href="/631/tt/screen/tt-screen.txt">transcript</a>]
+          <li><a href="partition-exercise.html">Lecture 02: Partition Exercise</a></li>
+          <li><a href="filesystems-exercise.html">Lecture 03: Filesystems Exercise</a></li>
+          <li><a href="package-exercise.html">Lecture 04: Package Manager Exercise</a></li>
+          <li><a href="useradd-exercise.html">Lecture 04: Useradd Exercise</a></li>
+          <li><a href="http-exercise.html">Lecture 07/08: HTTP Exercise</a></li>
+          <li><a href="smtp-exercise.html">Lecture 08: SMTP Exercise</a></li>
+          <li><a href="regex-exercise.html">Lecture 09: Regex Exercise</a></li>
+          <li><a href="scripting-exercise.html">Lecture 09: Scripting Exercise</a></li>
+          <li><a href="bugfiling-exercise.html">Lecture 09: Bugfiling Exercise</a></li>
+          <li><a href="backup-exercise.html">Lecture 10: Backup Exercise</a></li>
 <!--
-					<li><a href="http-exercise.html">Extra Credit Exercise: HTTP</a></li>
-					<li><a href="s12-hw5.html">Homework #5: Syslog over IPv6</a></li>
-					<li><a href="s11-hw6.html">Homework #6: Encrypted EC2 Backup</a></li>
-					<li><a href="hw6.txt">Homework #6: Practical PGP</a></li> -->
-				</ul>
-				</p>
-				<hr>
-				<H3><A name="syllabus">Syllabus</A>:</H3>
+          <li><a href="http-exercise.html">Extra Credit Exercise: HTTP</a></li>
+          <li><a href="s12-hw5.html">Homework #5: Syslog over IPv6</a></li>
+          <li><a href="s11-hw6.html">Homework #6: Encrypted EC2 Backup</a></li>
+          <li><a href="hw6.txt">Homework #6: Practical PGP</a></li> -->
+        </ul>
+        </p>
+        <hr>
+        <H3><A name="syllabus">Syllabus</A>:</H3>
 
-				Lecture slides and other supporting material listed here is from the
-				Spring 2022 semester and may be updated/changed throughout the Spring
-				2023 semester.  Updated materials will be uploaded here after each class.
-				<TABLE border="1" cellpadding="5">
-					<TR>
-						<TH>Date</TH>
-						<TH>Topic</TH>
-						<TH>Suggested Reading Material</TH>
-						<TH>Course Material</TH>
-					</TR>
+        Lecture slides and other supporting material listed here is from the
+        Spring 2023 semester and may be updated/changed throughout the Spring
+        2024 semester.  Updated materials will be uploaded here after each class.
+        <TABLE border="1" cellpadding="5">
+          <TR>
+            <TH>Date</TH>
+            <TH>Topic</TH>
+            <TH>Suggested Reading Material</TH>
+            <TH>Course Material</TH>
+          </TR>
 
-					<TR>
-						<TD>2023-01-23</TD>
-						<TD>Introduction, Policies, Overview, UNIX history and
-						basics</TD>
+          <TR>
+            <TD>2024-01-22</TD>
+            <TD>Introduction, Policies, Overview, UNIX history and
+            basics</TD>
 
-						<TD><em>Frisch</em>: Preface<BR>
-							<em>Nemeth et al</em>: Chap. 1<BR>
-							<em>Burgess</em>: Chap. 1, 2, 14<BR>
-							<em>Limoncelli &amp; Hogan</em>: Preface, 26<BR>
-							<A href="https://2459d6dc103cb5933875-c0245c5c937c5dedcca3f1764ecc9b2f.ssl.cf2.rackcdn.com/books/22_jobs3rd_complete.pdf">SAGE Job
-							Descriptions for System Administrators</A><br>
-							<a href="https://www.netmeister.org/book/01-introduction.pdf">An Introduction to System Administration</a><br>
-							<a href="https://www.netmeister.org/book/02-unix.pdf">Unix</a><br>
-							<a href="https://www.netmeister.org/book/03-documentation.pdf">Documentation Techniques</a></TD>
+            <TD><em>Frisch</em>: Preface<BR>
+              <em>Nemeth et al</em>: Chap. 1<BR>
+              <em>Burgess</em>: Chap. 1, 2, 14<BR>
+              <em>Limoncelli &amp; Hogan</em>: Preface, 26<BR>
+              <A href="https://2459d6dc103cb5933875-c0245c5c937c5dedcca3f1764ecc9b2f.ssl.cf2.rackcdn.com/books/22_jobs3rd_complete.pdf">SAGE Job
+              Descriptions for System Administrators</A><br>
+              <a href="https://www.netmeister.org/book/01-introduction.pdf">An Introduction to System Administration</a><br>
+              <a href="https://www.netmeister.org/book/02-unix.pdf">Unix</a><br>
+              <a href="https://www.netmeister.org/book/03-documentation.pdf">Documentation Techniques</a></TD>
 
-						<TD>
-							<a href="/cgi-bin/CS615-01.cgi">Week 01 Checkpoint</a><br><br>
-							<b>Week 01, Segment 1: Introduction</b><br>
-							[<a href="01-introduction.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/QJL5cNv9dJs">video lecture</a>]&nbsp;[<a href="01-introduction.txt">transcript</a>]<br>
+            <TD>
+              <a href="/cgi-bin/CS615-01.cgi">Week 01 Checkpoint</a><br><br>
+              <b>Week 01, Segment 1: Introduction</b><br>
+              [<a href="01-introduction.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/QJL5cNv9dJs">video lecture</a>]&nbsp;[<a href="01-introduction.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 01, Segment 2: The Job of a System Administrator</b><br>
-							[<a href="01-job.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/osIO9CbqHQo">video lecture</a>]&nbsp;[<a href="01-job.txt">transcript</a>]<br>
+              <b>Week 01, Segment 2: The Job of a System Administrator</b><br>
+              [<a href="01-job.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/osIO9CbqHQo">video lecture</a>]&nbsp;[<a href="01-job.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 01, Segment 3: Core Principles</b><br>
-							[<a href="01-rules.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/bfqP6PlS6Og">video lecture</a>]&nbsp;[<a href="01-rules.txt">transcript</a>]<br>
+              <b>Week 01, Segment 3: Core Principles</b><br>
+              [<a href="01-rules.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/bfqP6PlS6Og">video lecture</a>]&nbsp;[<a href="01-rules.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 01, Segment 4: UNIX History</b><br>
-							[<a href="/631/01-history.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/3H7SQWTR6Dw">video lecture</a>]&nbsp;[<a href="/631/01-history.txt">transcript</a>]<br>
+              <b>Week 01, Segment 4: UNIX History</b><br>
+              [<a href="/631/01-history.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/3H7SQWTR6Dw">video lecture</a>]&nbsp;[<a href="/631/01-history.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 01, Segment 5: Just enough git(1) -- but without GitHub!</b><br>
-							[<a href="01-git.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/4YfAGa_6M0k">video lecture</a>]&nbsp;[<a href="01-git.txt">transcript</a>]<br>
+              <b>Week 01, Segment 5: Just enough git(1) -- but without GitHub!</b><br>
+              [<a href="01-git.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/4YfAGa_6M0k">video lecture</a>]&nbsp;[<a href="01-git.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 01, Segment 6: Homework 1: Warming up to EC2</b><br>
-							[<a href="01-hw1.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/cA_pgRH0IDw">video lecture</a>]&nbsp;[<a href="01-hw1.txt">transcript</a>]<br>
+              <b>Week 01, Segment 6: Homework 1: Warming up to EC2</b><br>
+              [<a href="01-hw1.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/cA_pgRH0IDw">video lecture</a>]&nbsp;[<a href="01-hw1.txt">transcript</a>]<br>
             &#160;<BR>
-							<a href="s23-hw1.html">HW#1</a></td>
-					</TR>
+              <a href="s24-hw1.html">HW#1</a></td>
+          </TR>
 
-					<TR>
-						<TD>2023-01-30</TD>
-						<TD>Storage Models and Disks</TD>
-						<TD><em>Frisch</em>: Chap. 10<br>
-								<em>Nemeth et al</em>: Chap. 5, 8<br>
-							<a href="https://www.netmeister.org/book/04-file-systems.pdf">File Systems and Storage Models</a><br>
-							<a href="https://repo.zenk-security.com/Forensic/File%20System%20Forensic%20Analysis.pdf">File System Forensic Analysis</a></TD>
-						<TD>
-							<b>Warmup Exercise: <a href="awsaliases">AWS aliases</a></b><br>
-							[<a href="warmup-aws-aliases.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/fnWdB20_OoY">video lecture</a>]&nbsp;[<a href="warmup-aws-aliases.txt">transcript</a>]<br>
+          <TR>
+            <TD>2024-01-29</TD>
+            <TD>Storage Models and Disks</TD>
+            <TD><em>Frisch</em>: Chap. 10<br>
+                <em>Nemeth et al</em>: Chap. 5, 8<br>
+              <a href="https://www.netmeister.org/book/04-file-systems.pdf">File Systems and Storage Models</a><br>
+              <a href="https://repo.zenk-security.com/Forensic/File%20System%20Forensic%20Analysis.pdf">File System Forensic Analysis</a></TD>
+            <TD>
+              <b>Warmup Exercise: <a href="awsaliases">AWS aliases</a></b><br>
+              [<a href="warmup-aws-aliases.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/fnWdB20_OoY">video lecture</a>]&nbsp;[<a href="warmup-aws-aliases.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 02, Warmup Exercise 1: No Space Left On Device</b><br>
-							[<a href="02-no-space.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/eyRNL6fGDM8">video lecture</a>]&nbsp;[<a href="02-no-space.txt">transcript</a>]<br>
+              <b>Week 02, Warmup Exercise 1: No Space Left On Device</b><br>
+              [<a href="02-no-space.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/eyRNL6fGDM8">video lecture</a>]&nbsp;[<a href="02-no-space.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 02, Warmup Exercise 2: <a href="filesystems-exercise.html">Moving an EBS Volume across OS</a></b><br>
-							[<a href="02-netbsd-to-linux-ebs.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/FxzANp8Z1FA">video lecture</a>]&nbsp;[<a href="02-netbsd-to-linux-ebs.txt">transcript</a>]<br>
+              <b>Week 02, Warmup Exercise 2: <a href="filesystems-exercise.html">Moving an EBS Volume across OS</a></b><br>
+              [<a href="02-netbsd-to-linux-ebs.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/FxzANp8Z1FA">video lecture</a>]&nbsp;[<a href="02-netbsd-to-linux-ebs.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 02, Segment 1: Storage Models and Disks</b><br>
-							[<a href="02-storage-models.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/w-wfCe7Yb68">video lecture</a>]&nbsp;[<a href="02-storage-models.txt">transcript</a>]<br>
+              <b>Week 02, Segment 1: Storage Models and Disks</b><br>
+              [<a href="02-storage-models.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/w-wfCe7Yb68">video lecture</a>]&nbsp;[<a href="02-storage-models.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 02, Segment 2: Devices and Interfaces</b><br>
-							[<a href="02-devices-interfaces.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/C5PXWFFP31A">video lecture</a>]&nbsp;[<a href="02-devices-interfaces.txt">transcript</a>]<br>
+              <b>Week 02, Segment 2: Devices and Interfaces</b><br>
+              [<a href="02-devices-interfaces.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/C5PXWFFP31A">video lecture</a>]&nbsp;[<a href="02-devices-interfaces.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 02, Segment 3: Storage Virtualization</b><br>
-							[<a href="02-storage-virtualization.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/tw-QTAoYU9w">video lecture</a>]&nbsp;[<a href="02-storage-virtualization.txt">transcript</a>]<br>
+              <b>Week 02, Segment 3: Storage Virtualization</b><br>
+              [<a href="02-storage-virtualization.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/tw-QTAoYU9w">video lecture</a>]&nbsp;[<a href="02-storage-virtualization.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 02, Segment 4: Physical Disk Structure</b><br>
-							[<a href="02-physical-disk-structure.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/HqjxRrhspFo">video lecture</a>]&nbsp;[<a href="02-physical-disk-structure.txt">transcript</a>]<br>
+              <b>Week 02, Segment 4: Physical Disk Structure</b><br>
+              [<a href="02-physical-disk-structure.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/HqjxRrhspFo">video lecture</a>]&nbsp;[<a href="02-physical-disk-structure.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 02, Segment 5: Partitions</b><br>
-							[<a href="02-partitions.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/vmL9ZUh_j2U">video lecture</a>]&nbsp;[<a href="02-partitions.txt">transcript</a>]<br>
+              <b>Week 02, Segment 5: Partitions</b><br>
+              [<a href="02-partitions.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/vmL9ZUh_j2U">video lecture</a>]&nbsp;[<a href="02-partitions.txt">transcript</a>]<br>
             &#160;<BR>
-							<a href="partition-exercise.html">Lecture 02: Partition Exercise</a><br>
-							<a href="/cgi-bin/CS615-02.cgi">Week 02 Checkpoint</a><br><br>
-							<!-- <a href="slides/lecture02.pdf">Lecture 02 slides</a><br> -->
-							<!-- <a href="s19-hw2.html">HW#2</a> --></td>
-						</td>
-					</TR>
-					<TR>
-						<TD>2023-02-06</TD>
-						<TD>Filesystem Basics</TD>
-						<TD>
-							<em>Limoncelli &amp; Hogan</em>: Chap. 23 (in first edition) or Chap. 28 (in second edition)<br>
-							<em>Burgess</em> (Principles): Chap. 4.6 - 4.8<br>
-							<em>Frisch</em>: Parts of Chap. 3<br>
-							<a href="https://www.netmeister.org/book/04-file-systems.pdf">File Systems and Storage Models</a><br>
-							<a href="https://www.youtube.com/playlist?list=PL0qfF8MrJ-jxLPww0nD0ObhHwJ48MaUMo">CS631 APUE Lectures on the Unix Filesystem</a><br>
-							<a href="https://repo.zenk-security.com/Forensic/File%20System%20Forensic%20Analysis.pdf">File System Forensic Analysis</a><br>
-						<TD>
-							<b>Week 03, Segment 1: The Boot Process &amp; the MBR</b><br>
-							[<a href="03-boot-process.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/VHMkg3wlOSM">video lecture</a>]&nbsp;[<a href="03-boot-process.txt">transcript</a>]<br>
+              <a href="partition-exercise.html">Lecture 02: Partition Exercise</a><br>
+              <a href="/cgi-bin/CS615-02.cgi">Week 02 Checkpoint</a><br><br>
+              <!-- <a href="slides/lecture02.pdf">Lecture 02 slides</a><br> -->
+              <!-- <a href="s19-hw2.html">HW#2</a> --></td>
+            </td>
+          </TR>
+          <TR>
+            <TD>2022-02-05</TD>
+            <TD>Filesystem Basics</TD>
+            <TD>
+              <em>Limoncelli &amp; Hogan</em>: Chap. 23 (in first edition) or Chap. 28 (in second edition)<br>
+              <em>Burgess</em> (Principles): Chap. 4.6 - 4.8<br>
+              <em>Frisch</em>: Parts of Chap. 3<br>
+              <a href="https://www.netmeister.org/book/04-file-systems.pdf">File Systems and Storage Models</a><br>
+              <a href="https://www.youtube.com/playlist?list=PL0qfF8MrJ-jxLPww0nD0ObhHwJ48MaUMo">CS631 APUE Lectures on the Unix Filesystem</a><br>
+              <a href="https://repo.zenk-security.com/Forensic/File%20System%20Forensic%20Analysis.pdf">File System Forensic Analysis</a><br>
+            <TD>
+              <b>Week 03, Segment 1: The Boot Process &amp; the MBR</b><br>
+              [<a href="03-boot-process.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/VHMkg3wlOSM">video lecture</a>]&nbsp;[<a href="03-boot-process.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 03, Segment 2: Filesystems</b><br>
-							[<a href="03-filesystem.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/9MWeiuw8WHU">video lecture</a>]&nbsp;[<a href="03-filesystem.txt">transcript</a>]<br>
+              <b>Week 03, Segment 2: Filesystems</b><br>
+              [<a href="03-filesystem.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/9MWeiuw8WHU">video lecture</a>]&nbsp;[<a href="03-filesystem.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 03, Segment 3: The Unix Filesystem</b><br>
-							[<a href="03-ufs.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/sHEjgCB1UZ0">video lecture</a>]&nbsp;[<a href="03-ufs.txt">transcript</a>]<br>
+              <b>Week 03, Segment 3: The Unix Filesystem</b><br>
+              [<a href="03-ufs.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/sHEjgCB1UZ0">video lecture</a>]&nbsp;[<a href="03-ufs.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 03, Segment 4: Files go <tt>hier(7)</tt></b><br>
-							[<a href="03-hier.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/J0ontdqxpUg">video lecture</a>]&nbsp;[<a href="03-hier.txt">transcript</a>]<br>
+              <b>Week 03, Segment 4: Files go <tt>hier(7)</tt></b><br>
+              [<a href="03-hier.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/J0ontdqxpUg">video lecture</a>]&nbsp;[<a href="03-hier.txt">transcript</a>]<br>
             &#160;<BR>
 <br>
-							<a href="/cgi-bin/CS615-03.cgi">Week 03 Checkpoint</a><br><br>
+              <a href="/cgi-bin/CS615-03.cgi">Week 03 Checkpoint</a><br><br>
 
-							<!-- <a href="slides/lecture03.pdf">Lecture 03 slides</a><br> -->
-							<a href="boot-sequence/">boot sequences for different OS</a><br>
-							</td>
-					</TR>
+              <!-- <a href="slides/lecture03.pdf">Lecture 03 slides</a><br> -->
+              <a href="boot-sequence/">boot sequences for different OS</a><br>
+              </td>
+          </TR>
 
-					<TR>
-						<TD>2023-02-13</TD>
-						<TD>Software Types<br>Software Installation<br>Multi-user basics</TD>
-						<TD>
-							<em>Frisch</em>: Chap. 6<br>
-							<em>Burgess</em>: Chap. 5<br>
-							<em>Nemeth et al</em>: Chap. 3, 6, 27<br>
-							<a href="https://www.netmeister.org/book/05-software-installation-and-package-management.pdf">Software Installation and Package Management</a><br>
-							<a href="https://www.netmeister.org/book/06-users-and-groups.pdf">Of Users and Groups</a></TD>
-						<TD>
-							<b>Week 04, Segment 1: Types of Software</b><br>
-							[<a href="04-software-types.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/48HmSsqOfuE">video lecture</a>]&nbsp;[<a href="04-software-types.txt">transcript</a>]<br>
+          <TR>
+            <TD>2024-02-12</TD>
+            <TD>Software Types<br>Software Installation<br>Multi-user basics</TD>
+            <TD>
+              <em>Frisch</em>: Chap. 6<br>
+              <em>Burgess</em>: Chap. 5<br>
+              <em>Nemeth et al</em>: Chap. 3, 6, 27<br>
+              <a href="https://www.netmeister.org/book/05-software-installation-and-package-management.pdf">Software Installation and Package Management</a><br>
+              <a href="https://www.netmeister.org/book/06-users-and-groups.pdf">Of Users and Groups</a></TD>
+            <TD>
+              <b>Week 04, Segment 1: Types of Software</b><br>
+              [<a href="04-software-types.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/48HmSsqOfuE">video lecture</a>]&nbsp;[<a href="04-software-types.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 04, Segment 2: OS Installation</b><br>
-							[<a href="04-os-installation.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/XRTDMgIpK68">video lecture</a>]&nbsp;[<a href="04-os-installation.txt">transcript</a>]<br>
+              <b>Week 04, Segment 2: OS Installation</b><br>
+              [<a href="04-os-installation.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/XRTDMgIpK68">video lecture</a>]&nbsp;[<a href="04-os-installation.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 04, Segment 3: Package Management</b><br>
-							[<a href="04-package-management.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/dU66_sPjnXg">video lecture</a>]&nbsp;[<a href="04-package-management.txt">transcript</a>]<br>
+              <b>Week 04, Segment 3: Package Management</b><br>
+              [<a href="04-package-management.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/dU66_sPjnXg">video lecture</a>]&nbsp;[<a href="04-package-management.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 04, Segment 4: Package Management Pitfalls</b><br>
-							[<a href="04-pkg-trust.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/R3zlbOND00Q">video lecture</a>]&nbsp;[<a href="04-pkg-trust.txt">transcript</a>]<br>
+              <b>Week 04, Segment 4: Package Management Pitfalls</b><br>
+              [<a href="04-pkg-trust.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/R3zlbOND00Q">video lecture</a>]&nbsp;[<a href="04-pkg-trust.txt">transcript</a>]<br>
             &#160;<BR>
-							<a href="package-exercise.html">Package Manager Exercise</a><br>
-							<a href="useradd-exercise.html">Exercise: adding users</a><br>
+              <a href="package-exercise.html">Package Manager Exercise</a><br>
+              <a href="useradd-exercise.html">Exercise: adding users</a><br>
 
-							<a href="/cgi-bin/CS615-software.cgi">Week 04 Checkpoint</a><br><br>
+              <a href="/cgi-bin/CS615-software.cgi">Week 04 Checkpoint</a><br><br>
 
-							<a href="slides/lecture04.pdf">Multiuser Fundamentals slides</a><br> <!--
-							<a href="https://www.usenix.org/sites/default/files/code_of_ethics_diploma.pdf">System Administrators' Code of Ethics</a><br> -->
-						</TD>
-					</TR>
-					<TR>
-						<TD>2023-02-20</TD>
-						<td colspan="3"><em>Presidents' Day</em></td>
-					</TR>
-					<TR>
-						<TD>2023-02-22</TD>
-						<td colspan="3"><em>Async class: <a href="s23-hw2.html">HW#2: packet capture</a></td>
-					</TR>
-					<TR>
-						<TD>2023-02-27</TD>
-						<TD>Networking I</td>
-						<TD>
-							<em>Frisch</em>: Chap. 5<BR>
-							<em>Nemeth et al</em>: Chap. 13, 15, 20<br>
-							<em>Burgess</em>: Chap. 3, 10<br>
-							<em>Limoncelli &amp; Hogan</em>: Chap. 18<br><br>
-							<a href="https://www.netmeister.org/blog/whois.html">WHOIS: Fragile, unparseable, obsolete... and universally relied upon</a></TD>
+              <a href="slides/lecture04.pdf">Multiuser Fundamentals slides</a><br> <!--
+              <a href="https://www.usenix.org/sites/default/files/code_of_ethics_diploma.pdf">System Administrators' Code of Ethics</a><br> -->
+            </TD>
+          </TR>
+          <TR>
+            <TD>2024-02-19</TD>
+            <td colspan="3"><em>Presidents' Day</em></td>
+          </TR>
+          <TR>
+            <TD>2024-02-21</TD>
+            <TD>Networking I</td>
+            <TD>
+              <em>Frisch</em>: Chap. 5<BR>
+              <em>Nemeth et al</em>: Chap. 13, 15, 20<br>
+              <em>Burgess</em>: Chap. 3, 10<br>
+              <em>Limoncelli &amp; Hogan</em>: Chap. 18<br><br>
+              <a href="https://www.netmeister.org/blog/whois.html">WHOIS: Fragile, unparseable, obsolete... and universally relied upon</a></TD>
 
-						<TD>
-							<b>Week 05, Segment 1: Networking I: Layers</b><br>
-							[<a href="05-layers.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/qYWkJ2KyRHU">video lecture</a>]&nbsp;[<a href="05-layers.txt">transcript</a>]<br>
+            <TD>
+              <em>Note: Wednesday class!</em><br><br>
+              <b>Week 05, Segment 1: Networking I: Layers</b><br>
+              [<a href="05-layers.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/qYWkJ2KyRHU">video lecture</a>]&nbsp;[<a href="05-layers.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 05, Segment 2: Networking I: IPv4 Basics &amp; CIDR subnetting</b><br>
-							[<a href="05-ipv4-basics.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/CxdN-TcpSk8">video lecture</a>]&nbsp;[<a href="05-ipv4-basics.txt">transcript</a>]<br>
+              <b>Week 05, Segment 2: Networking I: IPv4 Basics &amp; CIDR subnetting</b><br>
+              [<a href="05-ipv4-basics.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/CxdN-TcpSk8">video lecture</a>]&nbsp;[<a href="05-ipv4-basics.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 05, Segment 3: Networking I: IPv6 Basics</b><br>
-							[<a href="05-ipv6-basics.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/wZ5cmlIlP3I">video lecture</a>]&nbsp;[<a href="05-ipv6-basics.txt">transcript</a>]<br>
+              <b>Week 05, Segment 3: Networking I: IPv6 Basics</b><br>
+              [<a href="05-ipv6-basics.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/wZ5cmlIlP3I">video lecture</a>]&nbsp;[<a href="05-ipv6-basics.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 05, Segment 4: Networking I: IP Allocation &amp; IPv4 Exhaustion</b><br>
-							[<a href="05-ip-allocation.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/r2GXh8uUgWc">video lecture</a>]&nbsp;[<a href="05-ip-allocation.txt">transcript</a>]<br>
+              <b>Week 05, Segment 4: Networking I: IP Allocation &amp; IPv4 Exhaustion</b><br>
+              [<a href="05-ip-allocation.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/r2GXh8uUgWc">video lecture</a>]&nbsp;[<a href="05-ip-allocation.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 05, Segment 5: Networking I: The Physical Internet</b><br>
-							[<a href="05-physical-internet.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/4YrHdD1uIxs">video lecture</a>]&nbsp;[<a href="05-physical-internet.txt">transcript</a>]<br>
+              <b>Week 05, Segment 5: Networking I: The Physical Internet</b><br>
+              [<a href="05-physical-internet.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/4YrHdD1uIxs">video lecture</a>]&nbsp;[<a href="05-physical-internet.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 05, Segment 6: Networking I: A Network of Networks</b><br>
-							[<a href="05-peering.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/OOq7jGlhBjY">video lecture</a>]&nbsp;[<a href="05-peering.txt">transcript</a>]<br>
+              <b>Week 05, Segment 6: Networking I: A Network of Networks</b><br>
+              [<a href="05-peering.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/OOq7jGlhBjY">video lecture</a>]&nbsp;[<a href="05-peering.txt">transcript</a>]<br>
             &#160;<BR>
-							<a href="/cgi-bin/CS615-networking-I.cgi">Week 05 Checkpoint</a><br>
-							<!-- <a href="s15-hw4.html">HW#4: Traceroute Explained</a><br>
-							<a href="strace.out">telnet strace</a><br>
-							<a href="commands.out">EC2 script output</a><br>
-							<a href="tcpdump.out">EC2 binary tcpdump output</a><br>
-							<a href="tcpdump-dig6">tcpdump DNS lookup over IPv6</a><br>
-							<a href="tcpdump-nslookup4">tcpdump DNS lookup over IPv4</a><br>
-							<a href="tcpdump-ping-traceroute">tcpdump ping and traceroute</a><br>
-							<a href="tcpdump-telnet-netbsd">tcpdump TCP port 80 over IPv6</a><br>
-							<a href="tcpdump-telnet-yahoo">tcpdump TCP port 80 over IPv4</a><br><br>
-							<a href="s16-hw5.html">HW5: Use tcpdump to observe traffic</a></br> -->
-						 </TD>
-					</TR>
+              <a href="/cgi-bin/CS615-networking-I.cgi">Week 05 Checkpoint</a><br>
+              <a href="s24-hw2.html">HW#2: packet capture</a><br>
+              <!-- <a href="s15-hw4.html">HW#4: Traceroute Explained</a><br>
+              <a href="strace.out">telnet strace</a><br>
+              <a href="commands.out">EC2 script output</a><br>
+              <a href="tcpdump.out">EC2 binary tcpdump output</a><br>
+              <a href="tcpdump-dig6">tcpdump DNS lookup over IPv6</a><br>
+              <a href="tcpdump-nslookup4">tcpdump DNS lookup over IPv4</a><br>
+              <a href="tcpdump-ping-traceroute">tcpdump ping and traceroute</a><br>
+              <a href="tcpdump-telnet-netbsd">tcpdump TCP port 80 over IPv6</a><br>
+              <a href="tcpdump-telnet-yahoo">tcpdump TCP port 80 over IPv4</a><br><br>
+              <a href="s16-hw5.html">HW5: Use tcpdump to observe traffic</a></br> -->
+             </TD>
+          </TR>
 
-					<TR>
-						<TD>2023-03-06</TD>
-						<TD>Networking II</td>
-						<TD>
-							<em>Frisch</em>: Chap. 5<BR>
-							<em>Nemeth et al</em>: Chap. 13, 15, 20<br>
-							<em>Burgess</em>: Chap. 3, 10<br>
-							<em>Limoncelli &amp; Hogan</em>: Chap. 18<br><br>
-							<a href="https://www.netmeister.org/blog/basic-network-troubleshooting.html">Basic Network Troubleshooting</a></TD>
+          <TR>
+            <TD>2024-02-26</TD>
+            <TD>Networking II</td>
+            <TD>
+              <em>Frisch</em>: Chap. 5<BR>
+              <em>Nemeth et al</em>: Chap. 13, 15, 20<br>
+              <em>Burgess</em>: Chap. 3, 10<br>
+              <em>Limoncelli &amp; Hogan</em>: Chap. 18<br><br>
+              <a href="https://www.netmeister.org/blog/basic-network-troubleshooting.html">Basic Network Troubleshooting</a></TD>
 
-						<TD>
-							<b>Week 06, Segment 1: Networking II: A Simple Request</b><br>
-							[<a href="06-simple-request.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/mw1YzFSYuwE">video lecture</a>]&nbsp;[<a href="06-simple-request.txt">transcript</a>]<br>
+            <TD>
+              <b>Week 06, Segment 1: Networking II: A Simple Request</b><br>
+              [<a href="06-simple-request.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/mw1YzFSYuwE">video lecture</a>]&nbsp;[<a href="06-simple-request.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 06, Segment 2: Networking II: A Simple Request II</b><br>
-							[<a href="06-simple-request-II.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/UDXJSyyp_18">video lecture</a>]&nbsp;[<a href="06-simple-request-II.txt">transcript</a>]<br>
+              <b>Week 06, Segment 2: Networking II: A Simple Request II</b><br>
+              [<a href="06-simple-request-II.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/UDXJSyyp_18">video lecture</a>]&nbsp;[<a href="06-simple-request-II.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 06, Segment 3: Networking II: ARP and NDP</b><br>
-							[<a href="06-arp-ndp.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/1gtkpbF_h6M">video lecture</a>]&nbsp;[<a href="06-arp-ndp.txt">transcript</a>]<br>
+              <b>Week 06, Segment 3: Networking II: ARP and NDP</b><br>
+              [<a href="06-arp-ndp.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/1gtkpbF_h6M">video lecture</a>]&nbsp;[<a href="06-arp-ndp.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 06, Segment 4: Networking II: ICMP</b><br>
-							[<a href="06-icmp.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/JQn8PgfZ68M">video lecture</a>]&nbsp;[<a href="06-icmp.txt">transcript</a>]<br>
+              <b>Week 06, Segment 4: Networking II: ICMP</b><br>
+              [<a href="06-icmp.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/JQn8PgfZ68M">video lecture</a>]&nbsp;[<a href="06-icmp.txt">transcript</a>]<br>
             &#160;<BR>
-							<!-- <a href="slides/lecture06.pdf">Lecture 06 slides</a><br> -->
-							<a href="ktrace.out">telnet ktrace(1)/kdump(1) output</a><br>
-							<a href="simple.pcap">telnet pcap</a><br>
-							<!-- <a href="commands.out">EC2 script output</a><br>
-							<a href="tcpdump.out">EC2 binary tcpdump output</a><br>
-							<a href="tcpdump-dig6">tcpdump DNS lookup over IPv6</a><br>
-							<a href="tcpdump-nslookup4">tcpdump DNS lookup over IPv4</a><br>
-							<a href="tcpdump-ping-traceroute">tcpdump ping and traceroute</a><br>
-							<a href="tcpdump-telnet-netbsd">tcpdump TCP port 80 over IPv6</a><br>
-							<a href="tcpdump-telnet-yahoo">tcpdump TCP port 80 over IPv4</a><br><br> -->
-							<!-- <a href="s19-hw3.html">HW3: packet capture</a></br> -->
-						 </TD>
-					</TR>
-					<TR>
-						<TD>2023-03-13</TD>
-						<td colspan="3"><em>Spring Break</em></td>
-					</TR>
-					<TR>
-						<TD>2023-03-20</TD>
-						<TD>DNS, HTTP</TD>
-						<TD>
-							<em>Frisch</em>: Chap. 9<BR>
-							<em>Nemeth et al</em>: Chap. 16, 19, 22<br>
-							<em>Burgess</em>: Chap. 9<br>
-							<em>Limoncelli &amp; Hogan</em>: Chap. 19<br><br>
-							<a href="https://www.netmeister.org/blog/dns-rrs.html">(All) DNS Resource Records</a><br>
-							<a href="https://www.netmeister.org/blog/tlds.html">TLDs -- Putting the '.fun' in the top of the DNS</a><br>
-							<a href="https://www.netmeister.org/blog/nsauth-diversity.html">Who controls the internet?</a><br>
-							<a href="https://www.netmeister.org/blog/doh-dot-dnssec.html">DNS Security: Threat Modeling DNSSEC, DoT, and DoH</a></TD>
-						<TD>
-							<b>Week 07, Segment 1: The Domain Name System, Part I</b><br>
-							[<a href="07-dns-I.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/-bpIT7M9i00">video lecture</a>]&nbsp;[<a href="07-dns-I.txt">transcript</a>]<br>
+              <!-- <a href="slides/lecture06.pdf">Lecture 06 slides</a><br> -->
+              <a href="ktrace.out">telnet ktrace(1)/kdump(1) output</a><br>
+              <a href="simple.pcap">telnet pcap</a><br>
+              <!-- <a href="commands.out">EC2 script output</a><br>
+              <a href="tcpdump.out">EC2 binary tcpdump output</a><br>
+              <a href="tcpdump-dig6">tcpdump DNS lookup over IPv6</a><br>
+              <a href="tcpdump-nslookup4">tcpdump DNS lookup over IPv4</a><br>
+              <a href="tcpdump-ping-traceroute">tcpdump ping and traceroute</a><br>
+              <a href="tcpdump-telnet-netbsd">tcpdump TCP port 80 over IPv6</a><br>
+              <a href="tcpdump-telnet-yahoo">tcpdump TCP port 80 over IPv4</a><br><br> -->
+              <!-- <a href="s19-hw3.html">HW3: packet capture</a></br> -->
+             </TD>
+          </TR>
+            <TD>2024-03-04</TD>
+            <TD>DNS, HTTP</TD>
+            <TD>
+              <em>Frisch</em>: Chap. 9<BR>
+              <em>Nemeth et al</em>: Chap. 16, 19, 22<br>
+              <em>Burgess</em>: Chap. 9<br>
+              <em>Limoncelli &amp; Hogan</em>: Chap. 19<br><br>
+              <a href="https://www.netmeister.org/blog/dns-rrs.html">(All) DNS Resource Records</a><br>
+              <a href="https://www.netmeister.org/blog/tlds.html">TLDs -- Putting the '.fun' in the top of the DNS</a><br>
+              <a href="https://www.netmeister.org/blog/nsauth-diversity.html">Who controls the internet?</a><br>
+              <a href="https://www.netmeister.org/blog/doh-dot-dnssec.html">DNS Security: Threat Modeling DNSSEC, DoT, and DoH</a></TD>
+            <TD>
+              <b>Week 07, Segment 1: The Domain Name System, Part I</b><br>
+              [<a href="07-dns-I.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/-bpIT7M9i00">video lecture</a>]&nbsp;[<a href="07-dns-I.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 07, Segment 2: The Domain Name System, Part II</b><br>
-							[<a href="07-dns-II.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/z55ULZcKP8A">video lecture</a>]&nbsp;[<a href="07-dns-II.txt">transcript</a>]<br>
+              <b>Week 07, Segment 2: The Domain Name System, Part II</b><br>
+              [<a href="07-dns-II.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/z55ULZcKP8A">video lecture</a>]&nbsp;[<a href="07-dns-II.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 07, Segment 3: The Domain Name System, Part III</b><br>
-							[<a href="07-dns-III.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/XDJEJFVNoko">video lecture</a>]&nbsp;[<a href="07-dns-III.txt">transcript</a>]<br>
+              <b>Week 07, Segment 3: The Domain Name System, Part III</b><br>
+              [<a href="07-dns-III.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/XDJEJFVNoko">video lecture</a>]&nbsp;[<a href="07-dns-III.txt">transcript</a>]<br>
             &#160;<BR>
-							<a href="/cgi-bin/CS615-dns.cgi">Week 07 Checkpoint</a><br>
-							<a href="slides/lecture07.pdf">Lecture 07 slides</a><br>
-							<!-- <a href="s20-hw4.html">Homework #4: monitoring DNS and HTTP traffic</a> -->
-					    <a href="s23-hw3.html">HW#3: DNS packet capture</a><br>
-							</td>
-					</TR>
-					<TR>
-						<TD>2023-03-27</TD>
+              <a href="/cgi-bin/CS615-dns.cgi">Week 07 Checkpoint</a><br>
+              <a href="slides/lecture07.pdf">Lecture 07 slides</a><br>
+              <!-- <a href="s20-hw4.html">Homework #4: monitoring DNS and HTTP traffic</a> -->
+              <a href="s24-hw3.html">HW#3: DNS packet capture</a><br>
+              </td>
+          </TR>
+          <TR>
+            <TD>2024-03-11</TD>
+            <td colspan="3"><em>Spring Break</em></td>
+          </TR>
+          <TR>
+          <TR>
+            <TD>2024-03-18</TD>
 
-						<TD>SMTP, HTTPS</TD>
+            <TD>SMTP, HTTPS</TD>
 
-						<TD><em>Frisch</em>: Chap. 15<BR>
-							<em>Nemeth et al</em>: Chap. 21<br>
-							<em>Limoncelli &amp; Hogan</em>: Chap. 22<br>
-							<a href="https://www.netmeister.org/blog/mx-diversity.html">Who reads your email?</a><br>
-							<a href="https://www.netmeister.org/blog/spf.html">The Sender Policy Framework (SPF)</a><br>
-							<a href="https://www.netmeister.org/blog/email.html">Your E-Mail Validation Logic is Wrong</a></TD>
-						<TD>
-							<b>Week 08, Segment 1: E-Mail, Part I</b><br>
-							[<a href="08-smtp-I.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/Ai8rjqelwsI">video lecture</a>]&nbsp;[<a href="08-smtp-I.txt">transcript</a>]<br>
+            <TD><em>Frisch</em>: Chap. 15<BR>
+              <em>Nemeth et al</em>: Chap. 21<br>
+              <em>Limoncelli &amp; Hogan</em>: Chap. 22<br>
+              <a href="https://www.netmeister.org/blog/mx-diversity.html">Who reads your email?</a><br>
+              <a href="https://www.netmeister.org/blog/spf.html">The Sender Policy Framework (SPF)</a><br>
+              <a href="https://www.netmeister.org/blog/email.html">Your E-Mail Validation Logic is Wrong</a></TD>
+            <TD>
+              <b>Week 08, Segment 1: E-Mail, Part I</b><br>
+              [<a href="08-smtp-I.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/Ai8rjqelwsI">video lecture</a>]&nbsp;[<a href="08-smtp-I.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 08, Segment 2: E-Mail, Part II</b><br>
-							[<a href="08-smtp-II.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/RgEiAOKv640">video lecture</a>]&nbsp;[<a href="08-smtp-II.txt">transcript</a>]<br>
+              <b>Week 08, Segment 2: E-Mail, Part II</b><br>
+              [<a href="08-smtp-II.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/RgEiAOKv640">video lecture</a>]&nbsp;[<a href="08-smtp-II.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 08, Segment 3: E-Mail, Part III</b><br>
-							[<a href="08-smtp-III.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/KwCmv3GHGfc">video lecture</a>]&nbsp;[<a href="08-smtp-III.txt">transcript</a>]<br>
+              <b>Week 08, Segment 3: E-Mail, Part III</b><br>
+              [<a href="08-smtp-III.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/KwCmv3GHGfc">video lecture</a>]&nbsp;[<a href="08-smtp-III.txt">transcript</a>]<br>
             &#160;<BR>
-							<a href="http-exercise.html">HTTP Exercise</a><br>
-							<a href="smtp-exercise.html">SMTP Exercise</a><br>
-							<a href="/cgi-bin/CS615-https-smtp.cgi">Week 08 Checkpoint</a><br>
-							<!-- <a href="08-pcaps/">pcap files</a><br> -->
-							<a href="slides/lecture08.pdf">Lecture 08 slides</a><br>
-						</TD>
-					</TR>
+              <a href="http-exercise.html">HTTP Exercise</a><br>
+              <a href="smtp-exercise.html">SMTP Exercise</a><br>
+              <a href="/cgi-bin/CS615-https-smtp.cgi">Week 08 Checkpoint</a><br>
+              <!-- <a href="08-pcaps/">pcap files</a><br> -->
+              <a href="slides/lecture08.pdf">Lecture 08 slides</a><br>
+            </TD>
+          </TR>
 
-					<TR>
-						<TD>2023-04-03</TD>
+          <TR>
+            <TD>2024-03-25</TD>
 
-						<TD>Writing System Tools</TD>
-						<TD><em>Frisch</em>: Chap. 14, Append. A<br>
-							<em>Nemeth et al</em>: Chap. 9<br>
-							<a href="https://www.netmeister.org/book/08-automation.pdf">Automation</a><br>
-							<a href="https://www.netmeister.org/book/09-building-scalable-tools.pdf">Building Scalable Tools</a><br>
-							<a
+            <TD>Writing System Tools</TD>
+            <TD><em>Frisch</em>: Chap. 14, Append. A<br>
+              <em>Nemeth et al</em>: Chap. 9<br>
+              <a href="https://www.netmeister.org/book/08-automation.pdf">Automation</a><br>
+              <a href="https://www.netmeister.org/book/09-building-scalable-tools.pdf">Building Scalable Tools</a><br>
+              <a
 href="https://www.netmeister.org/blog/writing-tools.html">Writing System
 Tools</a><br>
-							<a href="https://www.netmeister.org/blog/consistent-tools.html">Writing Consistent Tools</a><br></TD>
-						<TD>
-							<a href="/cgi-bin/CS615-programming.cgi">Week 09 Checkpoint</a><br>
-							<a href="regex-exercise.html">Lecture 09: Regex Exercise</a><br>
-							<a href="scripting-exercise.html">Lecture 09: Scripting Exercise</a><br>
-							<a href="bugfiling-exercise.html">Lecture 09: Bugfiling Exercise</a><br>
-							<a href="slides/lecture09.pdf">Lecture 09 slides</a><br>
-							<a href="s23-hw4.html">HW#4: EC2 Backup</a><br>
-							<a href="examples/shexamples">shell basics</a><br>
-							</TD>
-					</TR>
+              <a href="https://www.netmeister.org/blog/consistent-tools.html">Writing Consistent Tools</a><br></TD>
+            <TD>
+              <a href="/cgi-bin/CS615-programming.cgi">Week 09 Checkpoint</a><br>
+              <a href="regex-exercise.html">Lecture 09: Regex Exercise</a><br>
+              <a href="scripting-exercise.html">Lecture 09: Scripting Exercise</a><br>
+              <a href="bugfiling-exercise.html">Lecture 09: Bugfiling Exercise</a><br>
+              <a href="slides/lecture09.pdf">Lecture 09 slides</a><br>
+              <a href="s24-hw4.html">HW#4: EBS Restore</a><br>
+              <a href="examples/shexamples">shell basics</a><br>
+              </TD>
+          </TR>
 
-					<TR>
-						<TD>2023-04-10</TD>
+          <TR>
+            <TD>2024-04-01</TD>
 
-						<TD>Backup and Disaster Recovery / Monitoring</TD>
+            <TD>Backup and Disaster Recovery / Monitoring</TD>
 
-						<TD>
-							<em>Frisch</em>: Chap. 8.1, Chap. 11<br>
-							<em>Nemeth et al</em>: Chap. 16, Chap. 10<br>
-							<em>Limoncelli &amp; Hogan</em>: 26<br>
-							<a href="https://2459d6dc103cb5933875-c0245c5c937c5dedcca3f1764ecc9b2f.ssl.cf2.rackcdn.com/books/9_backups.pdf">SAGE Booklet: Backups and Recovery</a><br>
-							<a href="https://2459d6dc103cb5933875-c0245c5c937c5dedcca3f1764ecc9b2f.ssl.cf2.rackcdn.com/books/12_logging.pdf">SAGE Booklet: Building a Logging Infrastructure</a></TD>
-						<TD>
-							<b>Week 09/10, Segment 1: Backups, Part I</b><br>
-							[<a href="09-backups-I.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/IRu04Mc7VlA">video lecture</a>]&nbsp;[<a href="09-backups-I.txt">transcript</a>]<br>
+            <TD>
+              <em>Frisch</em>: Chap. 8.1, Chap. 11<br>
+              <em>Nemeth et al</em>: Chap. 16, Chap. 10<br>
+              <em>Limoncelli &amp; Hogan</em>: 26<br>
+              <a href="https://2459d6dc103cb5933875-c0245c5c937c5dedcca3f1764ecc9b2f.ssl.cf2.rackcdn.com/books/9_backups.pdf">SAGE Booklet: Backups and Recovery</a><br>
+              <a href="https://2459d6dc103cb5933875-c0245c5c937c5dedcca3f1764ecc9b2f.ssl.cf2.rackcdn.com/books/12_logging.pdf">SAGE Booklet: Building a Logging Infrastructure</a></TD>
+            <TD>
+              <b>Week 09/10, Segment 1: Backups, Part I</b><br>
+              [<a href="09-backups-I.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/IRu04Mc7VlA">video lecture</a>]&nbsp;[<a href="09-backups-I.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 09/10, Segment 2: Backups, Part II</b><br>
-							[<a href="09-backups-II.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/L4SB8UfFz8c">video lecture</a>]&nbsp;[<a href="09-backups-II.txt">transcript</a>]<br>
+              <b>Week 09/10, Segment 2: Backups, Part II</b><br>
+              [<a href="09-backups-II.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/L4SB8UfFz8c">video lecture</a>]&nbsp;[<a href="09-backups-II.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 09/10, Segment 3: Time Machines and Snapshots</b><br>
-							[<a href="09-backups-III.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/zIEBnZAd5dE">video lecture</a>]&nbsp;[<a href="09-backups-III.txt">transcript</a>]<br>
+              <b>Week 09/10, Segment 3: Time Machines and Snapshots</b><br>
+              [<a href="09-backups-III.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/zIEBnZAd5dE">video lecture</a>]&nbsp;[<a href="09-backups-III.txt">transcript</a>]<br>
             &#160;<BR>
-							<a href="slides/monitoring.pdf">Monitoring slides</a><br><br>
-							<a href="/cgi-bin/CS615-backup-monitoring.cgi">Week 10 Checkpoint</a><br>
-							<a href="tar.html">Know a Unix Command: tar(1)</a><br>
-							<a href="backup-exercise.html">Lecture 10: Backup Exercise</a><br>
-						 </TD>
+              <a href="slides/monitoring.pdf">Monitoring slides</a><br><br>
+              <a href="/cgi-bin/CS615-backup-monitoring.cgi">Week 10 Checkpoint</a><br>
+              <a href="tar.html">Know a Unix Command: tar(1)</a><br>
+              <a href="backup-exercise.html">Lecture 10: Backup Exercise</a><br>
+             </TD>
 
-					</TR>
+          </TR>
 
 
-					<TR>
-						<TD>2023-04-17</TD>
-						<TD>Configuration Management</TD>
-						<TD><a
+          <TR>
+            <TD>2024-04-08</TD>
+            <TD>Configuration Management</TD>
+            <TD><a
 href="https://www.netmeister.org/book/07-configuration-management.pdf">Configuration
 Management</a></TD>
-						<TD>
-							<b>Week 10/Week 11, Segment 1: Configuration Management</b><br>
-							[<a href="10-cm-I.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/pY0mCH7tpR0">video lecture</a>]&nbsp;[<a href="10-cm-I.txt">transcript</a>]<br>
+            <TD>
+              <b>Week 10/Week 11, Segment 1: Configuration Management</b><br>
+              [<a href="10-cm-I.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/pY0mCH7tpR0">video lecture</a>]&nbsp;[<a href="10-cm-I.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 10/Week 11, Segment 2: Configuration Management</b><br>
-							[<a href="10-cm-II.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/FJSpmBPv1J4">video lecture</a>]&nbsp;[<a href="10-cm-II.txt">transcript</a>]<br>
+              <b>Week 10/Week 11, Segment 2: Configuration Management</b><br>
+              [<a href="10-cm-II.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/FJSpmBPv1J4">video lecture</a>]&nbsp;[<a href="10-cm-II.txt">transcript</a>]<br>
             &#160;<BR>
-						<a href="/cgi-bin/CS615-cm.cgi">Week 11 Checkpoint</a><br>
-						<!-- <a href="slides/lecture11.pdf">Lecture 11 slides</a> --></td>
-					</TR>
-					<TR>
-						<TD>2023-04-24</TD>
-						<TD>System Security</TD>
-						<TD><em>Frisch</em>: Chap. 7<BR>
-							<em>Nemeth et al</em>: Chap. 21<br>
-							<em>Burgess</em>: Chap. 11, 12<br>
-							<em>Limoncelli &amp; Hogan</em>: Chap. 7<br><br>
-							<a
+            <a href="/cgi-bin/CS615-cm.cgi">Week 11 Checkpoint</a><br>
+            <!-- <a href="slides/lecture11.pdf">Lecture 11 slides</a> --></td>
+          </TR>
+          <TR>
+            <TD>2024-04-15</TD>
+            <TD>System Security</TD>
+            <TD><em>Frisch</em>: Chap. 7<BR>
+              <em>Nemeth et al</em>: Chap. 21<br>
+              <em>Burgess</em>: Chap. 11, 12<br>
+              <em>Limoncelli &amp; Hogan</em>: Chap. 7<br><br>
+              <a
 href="https://www.netmeister.org/blog/infosec-basics.html">Information
 Security Basics</a><br>
-							<a href="https://www.netmeister.org/blog/attack-life-cycle.html">The Attack Life Cycle</a></TD>
-						<TD>
-							<b>Week 11/Week 12, Segment 1: System Security I: Risk Assessment</b><br>
-							[<a href="11-security-I.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/KZi9ZWF6vWI">video lecture</a>]&nbsp;[<a href="11-security-I.txt">transcript</a>]<br>
+              <a href="https://www.netmeister.org/blog/attack-life-cycle.html">The Attack Life Cycle</a></TD>
+            <TD>
+              <b>Week 11/Week 12, Segment 1: System Security I: Risk Assessment</b><br>
+              [<a href="11-security-I.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/KZi9ZWF6vWI">video lecture</a>]&nbsp;[<a href="11-security-I.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 11/Week 12, Segment 2: System Security II: Defining a Threat Model</b><br>
-							[<a href="11-security-II.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/nZQboq3gjgg">video lecture</a>]&nbsp;[<a href="11-security-II.txt">transcript</a>]<br>
+              <b>Week 11/Week 12, Segment 2: System Security II: Defining a Threat Model</b><br>
+              [<a href="11-security-II.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/nZQboq3gjgg">video lecture</a>]&nbsp;[<a href="11-security-II.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 11/Week 12, Segment 3: System Security III: From the Attack Life Cycle to Zero Trust</b><br>
-							[<a href="11-security-III.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/mNxHw5XzxJw">video lecture</a>]&nbsp;[<a href="11-security-III.txt">transcript</a>]<br>
+              <b>Week 11/Week 12, Segment 3: System Security III: From the Attack Life Cycle to Zero Trust</b><br>
+              [<a href="11-security-III.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/mNxHw5XzxJw">video lecture</a>]&nbsp;[<a href="11-security-III.txt">transcript</a>]<br>
             &#160;<BR>
-							<b>Week 11/Week 12, Segment 4: System Security IV: Crypto means Cryptography</b><br>
-							[<a href="11-security-IV.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/zLH2jwzgFfw">video lecture</a>]&nbsp;[<a href="11-security-IV.txt">transcript</a>]<br>
+              <b>Week 11/Week 12, Segment 4: System Security IV: Crypto means Cryptography</b><br>
+              [<a href="11-security-IV.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/zLH2jwzgFfw">video lecture</a>]&nbsp;[<a href="11-security-IV.txt">transcript</a>]<br>
             &#160;<BR>
-						<a href="/cgi-bin/CS615-security.cgi">Week 12 Checkpoint</a><br>
-						<a href="slides/lecture12.pdf">Lecture 12 slides</a> <br><br>
+            <a href="/cgi-bin/CS615-security.cgi">Week 12 Checkpoint</a><br>
+            <a href="slides/lecture12.pdf">Lecture 12 slides</a> <br><br>
 <!-- <a href="ctf.html">Capture the Flag!</a> --></td>
-					</TR>
-					<TR>
-						<TD>2023-05-01</TD>
-						<TD>Ethics and Social Responsibility / Review</TD>
-						<TD><a
+          </TR>
+          <TR>
+            <TD>2024-04-22</TD>
+            <TD>Ethics and Social Responsibility / Review</TD>
+            <TD><a
 href="https://www.netmeister.org/blog/primum-non-nocere.html">Primum non
 nocere</a><br>
-							<a
+              <a
 href="https://www.netmeister.org/blog/all-is-not-lost.html">All is not
 lost (but we need your help)</a></TD>
-						<TD>
-						<a href="slides/lecture13.pdf">Lecture 13 slides</a><br>
-						<a href="/cgi-bin/CS615-ethics.cgi">Week 13 Checkpoint</a><br>
-						<a href="ctf.html">Capture the Flag!</a></td>
-					</TR>
-<!--
-					<TR>
-						<TD>2023-05-01</TD>
-						<TD>Review</TD>
-						<TD>All course materials and additional links.</TD>
-						<TD><a href="/cgi-bin/CS615-review.cgi">Review Checkpoint</a><br>
-						<a href="ctf.html">Capture the Flag!</a>
-						</TD>
-					</TR>
-				</TABLE>
-			</TD>
-		</TR>
-	</TABLE>
+            <TD>
+            <a href="slides/lecture13.pdf">Lecture 13 slides</a><br>
+            <a href="/cgi-bin/CS615-ethics.cgi">Week 13 Checkpoint</a><br>
+            </TD>
+          </TR>
+          <TR>
+            <TD>2023-04-29</TD>
+            <TD>Review</TD>
+            <TD>All course materials and additional links.</TD>
+            <TD><a href="/cgi-bin/CS615-review.cgi">Review Checkpoint</a><br>
+            <a href="ctf.html">Capture the Flag!</a>
+            </TD>
+          </TR>
+        </TABLE>
+      </TD>
+    </TR>
+  </TABLE>
 
-	<!-- <P><SMALL><EM>Misc. Topics</EM> are done based on interest and
-	time available. They may also be used as a presentation topic.
-	They include: cloud computing, virtualization, IPv6 migration,
-	heterogenous networks / multiple OS,
-	automated installation, server room basics, cooling issues,
-	racking etc. clustering, spam...</SMALL></P> -->
+  <!-- <P><SMALL><EM>Misc. Topics</EM> are done based on interest and
+  time available. They may also be used as a presentation topic.
+  They include: cloud computing, virtualization, IPv6 migration,
+  heterogenous networks / multiple OS,
+  automated installation, server room basics, cooling issues,
+  racking etc. clustering, spam...</SMALL></P> -->
 </BODY>
 </HTML>
