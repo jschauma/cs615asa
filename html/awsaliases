@@ -61,6 +61,10 @@ iname() {
 # to come up.  Note: this uses the 'iname' function
 # above to report the hostname when we think it's up.
 ec2wait() {
+	if ! expr "$@" : ".*i-[0-9a-f]*" >/dev/null 2>&1; then
+		echo "That doesn't look like an instance ID." >&2
+		return 1;
+	fi
 	aws ec2 wait instance-running --output json --instance-ids $@
 	# "running" does not mean SSH is up, so give it a bit more time
 	sleep 60
@@ -263,9 +267,10 @@ awsS3Usage() {
 # of some common OS.  These generally change every few
 # months when new releases are made available.
 
-# https://wiki.debian.org/Cloud/AmazonEC2Image/Buster
+# https://wiki.debian.org/Cloud/AmazonEC2Image/
 # Log in as "admin".
-alias start-debian='startInstance ami-031283ff8a43b021c'
+# Debian 12 ("Bookworm") amd64
+alias start-debian='startInstance ami-0e365edd3d30d031b'
 
 # https://omniosce.org/setup/aws
 # needs t3.micro; log in as "omnios"
@@ -273,15 +278,19 @@ alias start-omnios='startInstance ami-0669dd7b1ff900fcc'
 
 # https://alt.fedoraproject.org/cloud/
 # Log in as "fedora".
-alias start-fedora='startInstance ami-08b4ee602f76bff79'
+#alias start-fedora='startInstance ami-08b4ee602f76bff79'
+# Fedora Cloud 39
+alias start-fedora='startInstance ami-0746fc234df9c1ee0'
 
 # https://cloud-images.ubuntu.com/locator/ec2/
 # Log in as "ubuntu". 
+# 16.04 LTS
 alias start-ubuntu='startInstance ami-0b0ea68c435eb488d'
 
-# https://www.freebsd.org/releases/13.1R/announce/
+# https://www.freebsd.org/releases/
 # Log in as "ec2-user".
-alias start-freebsd='startInstance ami-0cf377776fddcf8ba'
+# 13.2R
+alias start-freebsd='startInstance ami-0fe92206920260384'
 
 # https://mail-index.netbsd.org/netbsd-users/2021/01/22/msg026460.html
 # https://stevens.netmeister.org/615/netbsd-amis.html
