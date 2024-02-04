@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <title>CS615A -- Aspects of System Administration -- Resize Exercise</title>
+  <style type="text/css">
+  body {
+  background-color: #FFFFFf;
+  }
+  </style>
+  <style type="text/css">
+  li.c1 {list-style: none}
+  </style>
+
+  <table cellpadding="15" border="1" align="center">
+    <tbody><tr>
+      <td valign="top">
+        <h2>CS615A -- Aspects of System Administration</h2>
+
+        <h3>Resize Exercise</h3>
+        <p>
+          The objective of this exercise is for you to gain some
+          more familiarty with the tools use to manipulate
+          disks, partitions, and filesystems.  The practical
+          goal is to be able to resize an existing filesystem.
+        </p>
+        <p>
+           Perform the following tasks:
+        </p>
+        <p>
+          <ul>
+             <li>create a NetBSD instance</li>
+             <li>create a 1GB volume and attach it to the instance</li>
+             <li>use <tt>disklabel(8)</tt> to create two 512MB partitions on this volume</li>
+             <li>create a new filesystem on both partitions and mount them</li>
+             <li>create a file on one of the new filesystems</li>
+             <li>use <tt>resize_ffs(8)</tt> to expand the first partition over the second to a size of 1GB</li>
+             <li>verify that you can still access the file you created</li>
+             <li>now shrink the 1GB partition to 256MB</li>
+          </ul>
+           Then, repeat for a different OS, e.g., Linux.  Note any differences in the
+	   process or tools.  What happens to the
+           filesystem structure, the number of inodes, the data
+           blocks, the superblocks etc.?
+        </p>
+        <p>
+          You may find the following commands and manual pages helpful: <tt>aws ec2 create-volume</tt>,
+          <tt>aws ec2 attach-volume</tt>, <tt>disklabel(8)</tt>,  <tt>mount(8)</tt>,
+          <tt>newfs(8)</tt>, <tt>resize_ffs(8)</tt>.
+        </p>
+        <p>
+          If you get stuck, check out <a href="https://www.youtube.com/watch?v=9l-g3keN48g">this
+          video</a> for help.  But it might be best for you to
+          first try to solve the problem on your own.
+        </p>
+        <hr>
+        [<a href="index.html">Course Website</a>]
+      </td>
+    </tr></tbody>
+  </table>
+</body>
+</html>
