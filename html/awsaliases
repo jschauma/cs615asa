@@ -10,13 +10,6 @@
 # information.
 #
 # This file is in the public domain.
-#
-# To use these aliases, save this file as e.g.,
-# ~/.awsaliases and then add the following line to
-# your bourne-compatible shell:
-#
-# source ~/.awsaliases
-
 alias _aedi='aws ec2 describe-instances --output json'
 
 ###
@@ -30,7 +23,7 @@ alias _aedi='aws ec2 describe-instances --output json'
 # resources associated with Stevens.  If you have only
 # a default SSH key, then you do not need to include
 # that option here.
-alias instance='aws ec2 run-instances --key-name stevens --output json --image-id'
+alias instance='aws ec2 run-instances --key-name stevens --image-id --output json'
 
 # Next, I want my instances to be IPv4/IPv6 dual stack
 # enabled.  AWS does not offer this by default, but if
@@ -114,6 +107,11 @@ alias console='aws ec2 get-console-output --output text --instance-id'
 # Create a new volume of size 1GB in us-east-1a unless
 # specified otherwise, e.g., "newVolume 3 us-west-1"
 newVolume() {
+	if [ x"${1}" = x"-h" ]; then
+		echo "Usage: newVolume [size in GB] [availability-zone]"
+		echo "       default: 1, us-east-1a"
+		return 0
+	fi
 	aws ec2 create-volume --output json --size "${1:-1}" --availability-zone "${2:-us-east-1a}" | \
 		jq -r ".VolumeId"
 }
@@ -122,12 +120,25 @@ newVolume() {
 # so let's have a default function to save ourselves
 # some typing.
 attachVolume() {
+	if [ x"${1}" = x"-h" ]; then
+		echo "Usage: attachVolume volume-id instance-id [device]"
+		echo "       default device: /dev/sdf"
+		return 0
+	fi
+	if [ -z "${2}" ]; then
+		echo "Usage: attachVolume vol-id instance-id [device]" >&2
+		return 1
+	fi
 	aws ec2 attach-volume --output json --volume-id "${1}" --instance-id "${2}" --device "${3:-/dev/sdf}"
 }
 
 # Same for detachingk, but we don't need to know the
 # instance-id:
 detachVolume() {
+	if [ -z "${1}" ]; then
+		echo "Usage: detachVolume vol-id" >&2
+		return 1
+	fi
 	local instance="$(aws ec2 describe-volumes --output json --volume-id "${1}" | \
 				jq -r '.Volumes[].Attachments[].InstanceId')"
 	if [ -z "${instance}" ]; then
@@ -273,6 +284,8 @@ awsS3Usage() {
 # I usually have aliases for the latest stable version
 # of some common OS.  These generally change every few
 # months when new releases are made available.
+#
+# Unless noted otherwise, these AMIs are in us-east-1.
 
 # https://wiki.debian.org/Cloud/AmazonEC2Image/
 # Log in as "admin".
