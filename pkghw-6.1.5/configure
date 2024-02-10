@@ -1,0 +1,38 @@
+#! /bin/sh
+
+set -eu
+
+prefix="${PREFIX:-/usr/local}"
+perl="$(which perl)"
+
+error() {
+	echo "Usage: ./configure [--prefix PREFIX] [--perl PERL]" >&2
+	exit 1
+}
+
+while [ "$#" -gt 0 ]; do
+	arg="${1}"
+	shift
+	case "${arg}" in
+		--prefix)
+			prefix=${1:?"--prefix requires an argument"}
+			shift
+		;;
+		--perl)
+			perl=${1:?"--perl requires an argument"}
+			shift
+		;;
+		*)
+			error
+			# NOTREACHED
+		;;
+	esac
+done
+
+echo "Setting PREFIX to ${prefix}..."
+sed -e "s|<PREFIX>|${prefix}|g" src/pkghw.c.in > src/pkghw.c
+
+echo "Setting PERLPATH to ${perl}..."
+sed -e "s|<PERLPATH>|${perl}|g" src/pkghw.pl.in > src/pkghw.pl
+
+echo "Configuration complete, ready to run 'make'."

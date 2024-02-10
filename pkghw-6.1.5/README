@@ -1,0 +1,13 @@
+# pkghw
+
+This directory contains a rather useless application
+intended to serve as a practice target to build
+software packages as a homework assignment in the
+class "CS615 - System Administration" offered at
+Stevens Institute of Technology.
+
+Students should create a proper software package of
+this "application" such that it integrates with the
+targeted package manager, accounting for proper
+dependency resolution, configuration file management,
+and the build process.

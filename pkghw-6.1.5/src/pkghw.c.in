@@ -1,0 +1,118 @@
+/*
+ * Copyright (c) 2024, Jan Schaumann <jschauma@stevens.edu>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS
+ * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+#include <err.h>
+#include <pwd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+#ifdef __linux
+#  include <bsd/stdlib.h>
+#endif
+
+#ifndef TARGET_USER
+#  define TARGET_USER "cs615"
+#endif
+#define VERSION "6.1.5"
+
+char *PROGRAM = "<PREFIX>/libexec/pkghw.pl";
+char *CONFIG = "<PREFIX>/etc/pkghw.conf";
+
+void usage(FILE *);
+
+
+void
+usage(FILE *out) {
+	(void)fprintf(out,
+"Usage: %s [-Vh] [-p program]\n"
+"    -V          print version number and exit\n"
+"    -h          print this help and exit\n"
+"    -p program  run this program\n"
+			, getprogname());
+}
+
+
+int
+main(int argc, char **argv) {
+	int ch;
+	struct passwd *pw;
+	uid_t uid;
+
+	setprogname(argv[0]);
+
+	while ((ch = getopt(argc, argv, "Vhp:")) != -1) {
+		switch(ch) {
+		case 'V':
+			(void)printf("%s version %s\n", getprogname(), VERSION);
+			exit(EXIT_SUCCESS);
+			/* NOTREACHED */
+		case 'h':
+			usage(stdout);
+			exit(EXIT_SUCCESS);
+			/* NOTREACHED */
+		case 'p':
+			if ((PROGRAM = strdup(optarg)) == NULL) {
+				err(EXIT_FAILURE, "Unable to strdup");
+				/* NOTREACHED */
+			}
+			break;
+		default:
+			usage(stderr);
+			exit(EXIT_FAILURE);
+			/* NOTREACHED */
+		}
+	}
+
+	argc -= optind;
+	argv += optind;
+
+	if ((pw = getpwnam(TARGET_USER)) == NULL) {
+		err(EXIT_FAILURE, "Unable to find user '%s'", TARGET_USER);
+		/* NOTREACHED */
+	}
+
+	uid = geteuid();
+	if (uid != pw->pw_uid) {
+		if (uid != 0) {
+			errx(EXIT_FAILURE, "Need to run as '%s' or 'root'.", TARGET_USER);
+			/* NOTREACHED */
+		}
+		if (seteuid(pw->pw_uid) == -1) {
+			err(EXIT_FAILURE, "Unable to setuid to '%s' (%d)", TARGET_USER, pw->pw_uid);
+			/* NOTREACHED */
+		}
+	}
+
+	(void)execl(PROGRAM, PROGRAM, "-c", CONFIG, NULL);
+	err(EXIT_FAILURE, "Unable to execl '%s'", PROGRAM);
+
+	return EXIT_FAILURE;
+}
+

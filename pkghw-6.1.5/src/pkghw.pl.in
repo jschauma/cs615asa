@@ -1,0 +1,129 @@
+#! <PERLPATH> -Tw
+#
+# This perl script is part of the "pkghw" package used
+# to practice building software packages as part of
+# the class "CS615 - System Administration offered at
+# Stevens Institute of Technology.
+#
+# You're right, it doesn't really do anything useful.
+
+use 5.008;
+
+use strict;
+use File::Basename;
+use Getopt::Long;
+
+use Curses;
+use Term::Animation;
+
+Getopt::Long::Configure("bundling");
+
+###
+### Constants
+###
+use constant EXIT_FAILURE => 1;
+use constant EXIT_SUCCESS => 0;
+
+use constant VERSION => 0.1;
+
+###
+### Variables
+###
+my %CONFIG = ( "config-file" => "/etc/pkghw.conf" );
+
+my $PROGNAME = basename($0);
+
+###
+### Functions
+###
+
+sub msg($) {
+	my ($m) = @_;
+	my $anim = Term::Animation->new();
+	halfdelay(1);
+
+	my ($width, $height, $assumed_size) = $anim->screen_size();
+	$height = $height / 2 - 1;
+
+	$anim->new_entity(
+			shape         => $m,
+			position      => [0, 0, 10],
+			callback_args => [1, 1, 0, 0],
+			wrap          => 1
+			);
+
+	while(1) {
+		$anim->animate();
+		my $input = getch();
+		last if $input eq 'q';
+	}
+
+	$anim->end();
+}
+
+sub usage($) {
+	my ($err) = @_;
+
+	my $FH = $err ? \*STDERR : \*STDOUT;
+
+	print $FH <<EOH
+Usage: $PROGNAME [-h] [-config file]
+	-c file  read config from this file (default: $CONFIG{'config-file'})
+	-h       print this help and exit
+EOH
+	;
+}
+
+###
+### "main"
+###
+
+my $ok = GetOptions(
+		"config|c=s" => \$CONFIG{'config-file'},
+		"help|h"     => \$CONFIG{'help'},
+		);
+
+if ($CONFIG{'help'} || !$ok) {
+	usage($ok);
+	exit(!$ok);
+	# NOTREACHED
+}
+
+if (scalar(@ARGV) > 1) {
+	usage(EXIT_FAILURE);
+	exit(EXIT_FAILURE);
+	# NOTREACHED
+}
+
+my $cfg;
+
+open($cfg, '<', $CONFIG{'config-file'}) or die "Unable to open " . $CONFIG{'config-file'} . ": $!\n";
+
+my $n = 0;
+while (my $line = <$cfg>) {
+	$n++;
+	$line =~ s/#.*//;
+	$line =~ s/^ *//;
+	chomp($line);
+	next if $line =~ m/^$/;
+	if ($line =~ m/(.*)\s* =\s*(.*)/) {
+		my $key = $1;
+		my $val = $2;
+		chomp($key);
+		chomp($val);
+		$CONFIG{$key} = $val;
+	} else {
+		print STDERR "Invalid line in configuration file " . $CONFIG{'config-file'} . " on line $n.\n";
+		exit(EXIT_FAILURE);
+		# NOTREACHED
+	}
+}
+close($cfg);
+
+if (!$CONFIG{"PKGHW_GREETING"}) {
+	print STDERR "Missing mandatory configuration option 'PKGHW_GREETING' in config file.\n";
+	exit(EXIT_FAILURE);
+	# NOTREACHED
+}
+
+msg($CONFIG{"PKGHW_GREETING"});
