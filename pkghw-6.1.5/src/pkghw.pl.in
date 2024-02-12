@@ -24,7 +24,7 @@ Getopt::Long::Configure("bundling");
 use constant EXIT_FAILURE => 1;
 use constant EXIT_SUCCESS => 0;
 
-use constant VERSION => 0.1;
+use constant VERSION => "6.1.5";
 
 ###
 ### Variables
@@ -81,6 +81,10 @@ EOH
 my $ok = GetOptions(
 		"config|c=s" => \$CONFIG{'config-file'},
 		"help|h"     => \$CONFIG{'help'},
+		"version|V"  => sub {
+		 			print "$PROGNAME: " . VERSION . "\n";
+					exit(EXIT_SUCCESS);
+				}
 		);
 
 if ($CONFIG{'help'} || !$ok) {
