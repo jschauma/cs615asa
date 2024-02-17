@@ -45,8 +45,8 @@ materials in any manner you wish so long as you give
 credit for it.  Pointing people to this repository,
 the [course
 website](https://www.cs.stevens.edu/~jschauma/615/),
-or my [Twitter account
-@jschauma](https://twitter.com/jschauma) is sufficient
+or my [Mastodon account
+@jschauma](https://mstdn.social/@jschauma) is sufficient
 and appreciated.  Likewise, you are encouraged to
 contact me with any questions, suggestions,
 corrections, concerns or comments relating to this
