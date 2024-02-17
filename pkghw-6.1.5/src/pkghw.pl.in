@@ -110,7 +110,7 @@ while (my $line = <$cfg>) {
 	$line =~ s/^ *//;
 	chomp($line);
 	next if $line =~ m/^$/;
-	if ($line =~ m/(.*)\s* =\s*(.*)/) {
+	if ($line =~ m/(.*)\s*=\s*(.*)/) {
 		my $key = $1;
 		my $val = $2;
 		chomp($key);
