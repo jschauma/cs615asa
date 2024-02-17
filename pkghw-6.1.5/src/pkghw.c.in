@@ -27,6 +27,7 @@
  */
 
 #include <err.h>
+#include <errno.h>
 #include <pwd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -94,7 +95,11 @@ main(int argc, char **argv) {
 	argv += optind;
 
 	if ((pw = getpwnam(TARGET_USER)) == NULL) {
-		err(EXIT_FAILURE, "Unable to find user '%s'", TARGET_USER);
+		if (errno) {
+			err(EXIT_FAILURE, "Unable to find user '%s'", TARGET_USER);
+		} else {
+			errx(EXIT_FAILURE, "No such user '%s'.", TARGET_USER);
+		}
 		/* NOTREACHED */
 	}
 
