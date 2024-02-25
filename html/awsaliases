@@ -57,6 +57,22 @@ iname() {
 		jq -r ".Reservations[].Instances[].PublicDnsName"
 }
 
+# Basically the inverse:  I have an instance name, but
+# I want to get the instance ID.
+instanceId() {
+	local hname="${1}"
+	if [ x"${hname}" = x"-h" ]; then
+		echo "Usage: instanceId <hostname>" >&2
+		return 0
+	fi
+	if ! expr "${hname}" : "ec2-" >/dev/null 2>&1 ; then
+		echo "'${hname}' does not look like an EC2 name to me." >&2
+		return 0
+	fi
+	_aedi --filters Name=dns-name,Values="${hname}" | \
+		jq -r ".Reservations[].Instances[].InstanceId"
+}
+
 # After we start an instance, we have to wait for it
 # to come up.  Note: this uses the 'iname' function
 # above to report the hostname when we think it's up.
