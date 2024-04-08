@@ -105,16 +105,43 @@ alias running-names='_aedi --query Reservations[*].Instances[*].[PublicDnsName] 
 # To get a listing of hostnames with instance-ids:
 alias instance-id-and-names='_aedi | jq -r ".Reservations[].Instances[] | \"\(.PublicDnsName) \(.InstanceId)\""'
 
-# Analogous to 'instance':
-alias term-instance='aws ec2 terminate-instances --output json --instance-ids'
-
 # When you want to kill all instances instead of going
-# one-by-one.  We don't pipe into 'term-instance'
+# one-by-one.  We don't pipe into 'termInstance'
 # because that may not be defined when xargs runs.
 alias kill-all-instances='instances | xargs aws ec2 terminate-instances --instance-ids'
 
-# To get console output:
-alias console='aws ec2 get-console-output --output text --instance-id'
+# Terminate a single instance, either by instance-id
+# or by ec2-* hostname.
+termInstance() {
+	local hname="${1}"
+	if [ x"${hname}" = x"-h" ]; then
+		echo "Usage: termInstance <hostname|id>" >&2
+		return 0
+	fi
+	if expr "${hname}" : "ec2-" >/dev/null 2>&1 ; then
+		hname="$(instanceId ${hname})"
+	elif ! expr "${hname}" : "i-" >/dev/null 2>&1 ; then
+		echo "<hostname|id> should match 'ec2-*' or 'i-*'" >&2
+		return 0
+	fi
+	aws ec2 terminate-instances --output json --instance-ids "${hname}"
+}
+
+console() {
+	local hname="${1}"
+	if [ x"${hname}" = x"-h" ]; then
+		echo "Usage: console <hostname|id>" >&2
+		return 0
+	fi
+	if expr "${hname}" : "ec2-" >/dev/null 2>&1 ; then
+		hname="$(instanceId ${hname})"
+	elif ! expr "${hname}" : "i-" >/dev/null 2>&1 ; then
+		echo "<hostname|id> should match 'ec2-*' or 'i-*'" >&2
+		return 0
+	fi
+	aws ec2 get-console-output --output text --instance-id "${hname}"
+}
+
 
 ###
 # Generic handling of volumes next:
@@ -167,7 +194,7 @@ detachVolume() {
 # Like 'instances', but for EBS volumes:
 alias volumes='aws ec2 describe-volumes --output json | jq -r ".Volumes[].VolumeId"'
 
-# Like 'term-instance', but for a single EBS volume:
+# Like 'termInstance', but for a single EBS volume:
 alias del-volume='aws ec2 delete-volume --volume-id'
 
 # Like 'killallInstances', but for EBS volumes:
