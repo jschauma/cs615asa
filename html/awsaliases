@@ -10,11 +10,12 @@
 # information.
 #
 # This file is in the public domain.
-alias _aedi='aws ec2 describe-instances --output json'
 
 ###
 # Generic handling of instances first
 ###
+
+alias _aedi='aws ec2 describe-instances --output json'
 
 # First, I'm too lazy to always type
 # 'aws ec2 run-instances ...'
@@ -34,7 +35,7 @@ alias instance='aws ec2 run-instances --key-name stevens --image-id --output jso
 #
 # We're using a function instead of an alias here
 # because we are passing arguments.
-startInstance() {
+launchInstance() {
 	local ami=${1}
 	local itype=${2:-"t3.micro"}
 	
@@ -77,13 +78,24 @@ instanceId() {
 # to come up.  Note: this uses the 'iname' function
 # above to report the hostname when we think it's up.
 ec2wait() {
+	local ami descr
+	local sleep=60
 	if ! expr "$@" : ".*i-[0-9a-f]*" >/dev/null 2>&1; then
 		echo "That doesn't look like an instance ID." >&2
 		return 1;
 	fi
 	aws ec2 wait instance-running --output json --instance-ids $@
-	# "running" does not mean SSH is up, so give it a bit more time
-	sleep 60
+	# "running" does not mean SSH is up, so give it a bit more time,
+	# guessing different time intervals for different OS versions
+	ami=$(_aedi  --instance-ids "$@" | jq -r '.Reservations[0].Instances[0].ImageId')
+	if [ -n "${ami}" ]; then
+		descr=$(aws ec2 describe-images --image-id "${ami}" |
+			jq -r '.Images[0].Description')
+		if expr "${descr}" : "OmniOS" >/dev/null 2>&1 ; then
+			sleep=120
+		fi
+	fi
+	sleep ${sleep}
 	echo "Instance $@ should now be up and running: "
 	iname $@
 }
@@ -110,12 +122,15 @@ alias instance-id-and-names='_aedi | jq -r ".Reservations[].Instances[] | \"\(.P
 # because that may not be defined when xargs runs.
 alias kill-all-instances='instances | xargs aws ec2 terminate-instances --instance-ids'
 
-# Terminate a single instance, either by instance-id
-# or by ec2-* hostname.
-termInstance() {
-	local hname="${1}"
+# A generic function to invoke an EC2 operation on a
+# single instance-id or hostname.
+_instanceOperation() {
+	local op="${1}"
+	local hname="${2}"
+	local arg="--instance-ids"
+
 	if [ x"${hname}" = x"-h" ]; then
-		echo "Usage: termInstance <hostname|id>" >&2
+		echo "Supported arguments: <hostname|id>" >&2
 		return 0
 	fi
 	if expr "${hname}" : "ec2-" >/dev/null 2>&1 ; then
@@ -124,22 +139,27 @@ termInstance() {
 		echo "<hostname|id> should match 'ec2-*' or 'i-*'" >&2
 		return 0
 	fi
-	aws ec2 terminate-instances --output json --instance-ids "${hname}"
+
+	if [ "${op}" = "get-console-output" ]; then
+		arg="--instance-id"
+	fi
+	aws ec2 ${op} --output json ${arg} "${hname}"
 }
 
 console() {
-	local hname="${1}"
-	if [ x"${hname}" = x"-h" ]; then
-		echo "Usage: console <hostname|id>" >&2
-		return 0
-	fi
-	if expr "${hname}" : "ec2-" >/dev/null 2>&1 ; then
-		hname="$(instanceId ${hname})"
-	elif ! expr "${hname}" : "i-" >/dev/null 2>&1 ; then
-		echo "<hostname|id> should match 'ec2-*' or 'i-*'" >&2
-		return 0
-	fi
-	aws ec2 get-console-output --output text --instance-id "${hname}"
+	_instanceOperation get-console-output "${1}"
+}
+
+termInstance() {
+	_instanceOperation terminate-instances "${1}"
+}
+
+startInstance() {
+	_instanceOperation start-instances "${1}"
+}
+
+stopInstance() {
+	_instanceOperation stop-instances "${1}"
 }
 
 
@@ -333,32 +353,32 @@ awsS3Usage() {
 # https://wiki.debian.org/Cloud/AmazonEC2Image/
 # Log in as "admin".
 # Debian 12 ("Bookworm") amd64
-alias start-debian='startInstance ami-0e365edd3d30d031b'
+alias start-debian='launchInstance ami-0e365edd3d30d031b'
 
 # https://omniosce.org/setup/aws
 # needs t3.micro; log in as "omnios"
-alias start-omnios='startInstance ami-0669dd7b1ff900fcc'
+alias start-omnios='launchInstance ami-0669dd7b1ff900fcc'
 
 # https://alt.fedoraproject.org/cloud/
 # Log in as "fedora".
-#alias start-fedora='startInstance ami-08b4ee602f76bff79'
+#alias start-fedora='launchInstance ami-08b4ee602f76bff79'
 # Fedora Cloud 39
-alias start-fedora='startInstance ami-0746fc234df9c1ee0'
+alias start-fedora='launchInstance ami-0746fc234df9c1ee0'
 
 # https://cloud-images.ubuntu.com/locator/ec2/
 # Log in as "ubuntu". 
 # 16.04 LTS
-alias start-ubuntu='startInstance ami-0b0ea68c435eb488d'
+alias start-ubuntu='launchInstance ami-0b0ea68c435eb488d'
 
 # https://www.freebsd.org/releases/
 # Log in as "ec2-user".
 # 13.2R
-alias start-freebsd='startInstance ami-0fe92206920260384'
+alias start-freebsd='launchInstance ami-0fe92206920260384'
 
 # https://mail-index.netbsd.org/netbsd-users/2021/01/22/msg026460.html
 # https://stevens.netmeister.org/615/netbsd-amis.html
 # Log in as "root":
-alias start-netbsd='startInstance ami-08b87fed21cce91cb t4g.nano'
+alias start-netbsd='launchInstance ami-08b87fed21cce91cb t4g.nano'
 alias start-netbsd-arm='start-netbsd'
 # Log in as "ec2-user":
-alias start-netbsd-amd64='startInstance ami-05ffda7ac6da57de1'
+alias start-netbsd-amd64='launchInstance ami-05ffda7ac6da57de1'
