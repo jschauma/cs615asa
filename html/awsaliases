@@ -128,6 +128,7 @@ _instanceOperation() {
 	local op="${1}"
 	local hname="${2}"
 	local arg="--instance-ids"
+	local out="json"
 
 	if [ x"${hname}" = x"-h" ]; then
 		echo "Supported arguments: <hostname|id>" >&2
@@ -142,8 +143,9 @@ _instanceOperation() {
 
 	if [ "${op}" = "get-console-output" ]; then
 		arg="--instance-id"
+		out="text"
 	fi
-	aws ec2 ${op} --output json ${arg} "${hname}"
+	aws ec2 ${op} --output ${out} ${arg} "${hname}"
 }
 
 console() {
