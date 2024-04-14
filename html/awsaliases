@@ -78,7 +78,8 @@ instanceId() {
 # to come up.  Note: this uses the 'iname' function
 # above to report the hostname when we think it's up.
 ec2wait() {
-	local ami descr
+	local ami descr n
+	local user="root"
 	local sleep=60
 	if ! expr "$@" : ".*i-[0-9a-f]*" >/dev/null 2>&1; then
 		echo "That doesn't look like an instance ID." >&2
@@ -93,11 +94,31 @@ ec2wait() {
 			jq -r '.Images[0].Description')
 		if expr "${descr}" : "OmniOS" >/dev/null 2>&1 ; then
 			sleep=120
+			user="omnios"
+		elif expr "${descr}" : "FreeBSD" >/dev/null 2>&1 ; then
+			sleep=140
+			user="ec2-user"
+		elif expr "${descr}" : "Debian" >/dev/null 2>&1 ; then
+			user="admin"
+		elif expr "${descr}" : "Fedora" >/dev/null 2>&1 ; then
+			user="fedora"
+		elif expr "${descr}" : "Canonical" >/dev/null 2>&1 ; then
+			user="ubuntu"
 		fi
 	fi
-	sleep ${sleep}
-	echo "Instance $@ should now be up and running: "
+	echo "$@"
 	iname $@
+	echo "${user}"
+	echo
+	echo "Sleeping ${sleep} seconds to wait for ssh:"
+	n=5
+	while [ ${n} -lt ${sleep} ]; do
+		/bin/echo -n "."
+		sleep 5
+		n=$(( n + 5 ))
+	done
+	echo
+	echo "Ready."
 }
 
 # Use this to see which instances you currently
