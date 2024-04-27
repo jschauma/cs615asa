@@ -162,11 +162,17 @@ _instanceOperation() {
 		return 0
 	fi
 
-	if [ "${op}" = "get-console-output" ]; then
-		arg="--instance-id"
-		out="text"
-	fi
-	aws ec2 ${op} --output ${out} ${arg} "${hname}"
+	case "${op}" in
+		"get-console-output")
+			arg="--instance-id"
+			out="text"
+		;;
+		"modify-instance"*)
+			arg="--instance-id"
+		;;
+	esac
+
+	eval aws ec2 ${op} --output ${out} ${arg} "${hname}"
 }
 
 console() {
@@ -185,6 +191,21 @@ stopInstance() {
 	_instanceOperation stop-instances "${1}"
 }
 
+protectІnstance() {
+	local hname="${1}"
+	local onoff="${2}"
+	local readonly mod="modify-instance-attribute"
+	local readonly arg="disable-api-termination"
+
+	if [ -z "${onoff}" -o x"${onoff}" = x"on" ]; then
+		_instanceOperation "${mod} --${arg}" "${1}"
+	elif [ x"${onoff}" = x"off" ]; then
+		_instanceOperation "${mod} --no-${arg}" "${1}"
+	else
+		echo "Usage: protectІnstance <instance> <on|off>" >&2;
+	fi
+	return 0
+}
 
 ###
 # Generic handling of volumes next:
