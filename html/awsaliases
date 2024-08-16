@@ -295,8 +295,25 @@ awsCurrentBill() {
 
 awsListResources() {
 	local spacer=""
-	local amis snapshots instances region volumes
+	local amis snapshots instances volumes
+	local ok region resource
 	local regions="${1}"
+	local which="${2:-all}"
+
+	local valid="amis snapshots instances s3 volumes"
+
+	if [ x"${which}" != x"all" ]; then
+		for resource in ${valid}; do
+			if [ x"${which}" = x"${resource}" ]; then
+				ok="found"
+			fi
+		done
+		if [ x"${ok}" != x"found" ]; then
+			echo "Invalid argument '${which}'." >&2
+			echo "Please specify one of ${valid}." >&2
+			return 1
+		fi
+	fi
 
 	if [ -z "${regions}" ]; then
 		regions=$(aws configure get region)
@@ -305,54 +322,59 @@ awsListResources() {
 	fi
 
 	for region in ${regions}; do
-		amis=$(aws ec2 describe-images --region ${region} --owner self | \
-			jq -r '.Images[] | "\(.ImageId) \(.BlockDeviceMappings[0].Ebs.SnapshotId) \"\(.Description)\""')
-		if [ -n "${amis}" ]; then
-			/bin/echo -n "${spacer}"
-			echo "You have the following AMIs in ${region}:"
+
+		if [ x"${which}" = x"all" -o x"${which}" = x"amis" ]; then
+			amis=$(aws ec2 describe-images --region ${region} --owner self | \
+				jq -r '.Images[] | "\(.ImageId) \(.BlockDeviceMappings[0].Ebs.SnapshotId) \"\(.Description)\""')
+			if [ -n "${amis}" ]; then
+				/bin/echo -n "${spacer}"
+				echo "You have the following AMIs in ${region}:"
 				echo "${amis}"
-			spacer="
+				spacer="
 "
+			fi
+		fi
+
+		if [ x"${which}" = x"all" -o x"${which}" = x"snapshots" ]; then
+			snapshots=$(aws ec2 describe-snapshots --region ${region} --owner self | \
+					jq -r '.Snapshots[] | "\(.SnapshotId) \(.StartTime)"')
+			if [ -n "${snapshots}" ]; then
+				/bin/echo -n "${spacer}"
+				echo "You have the following snapshots in ${region}:"
+				echo "${snapshots}"
+				spacer="
+"
+			fi
+		fi
+
+		if [ x"${which}" = x"all" -o x"${which}" = x"instances" ]; then
+			instances=$(aws ec2 describe-instances --region ${region} | \
+					jq -r '.Reservations[].Instances[] | "\(.InstanceId) (\(.State.Name)) \(.PublicDnsName)"')
+			if [ -n "${instances}" ]; then
+				/bin/echo -n "${spacer}"
+				echo "You have the following instances in ${region}:"
+				echo "${instances}"
+				spacer="
+"
+			fi
+		fi
+
+		if [ x"${which}" = x"all" -o x"${which}" = x"volumes" ]; then
+			volumes=$(aws ec2 describe-volumes --region ${region} |	\
+					jq -r '.Volumes[] | "\(.VolumeId) \(.CreateTime) \(.Attachments[0].InstanceId)"')
+			if [ -n "${volumes}" ]; then
+				/bin/echo -n "${spacer}"
+				echo "You have the following volumes in ${region}:"
+				echo "${volumes}"
+				spacer="
+"
+			fi
 		fi
 	done
 
-	for region in ${regions}; do
-		snapshots=$(aws ec2 describe-snapshots --region ${region} --owner self | \
-				jq -r '.Snapshots[] | "\(.SnapshotId) \(.StartTime)"')
-		if [ -n "${snapshots}" ]; then
-			/bin/echo -n "${spacer}"
-			echo "You have the following snapshots in ${region}:"
-			echo "${snapshots}"
-			spacer="
-"
-		fi
-	done
-
-	for region in ${regions}; do
-		instances=$(aws ec2 describe-instances --region ${region} | \
-				jq -r '.Reservations[].Instances[] | "\(.InstanceId) (\(.State.Name)) \(.PublicDnsName)"')
-		if [ -n "${instances}" ]; then
-			/bin/echo -n "${spacer}"
-			echo "You have the following instances in ${region}:"
-			echo "${instances}"
-			spacer="
-"
-		fi
-	done
-
-	for region in ${regions}; do
-		volumes=$(aws ec2 describe-volumes --region ${region} |	\
-				jq -r '.Volumes[] | "\(.VolumeId) \(.CreateTime) \(.Attachments[0].InstanceId)"')
-		if [ -n "${volumes}" ]; then
-			/bin/echo -n "${spacer}"
-			echo "You have the following volumes in ${region}:"
-			echo "${volumes}"
-			spacer="
-"
-		fi
-	done
-
-	awsS3Usage "${spacer}"
+	if [ x"${which}" = x"all" -o x"${which}" = x"s3" ]; then
+		awsS3Usage "${spacer}"
+	fi
 }
 
 awsS3Usage() {
@@ -367,7 +389,7 @@ awsS3Usage() {
 	if [ -n "${buckets}" ]; then
 		/bin/echo -n "${spacer}"
 		echo "You have the following S3 buckets:"
-		echo ${buckets}
+		echo "${buckets}"
 		spacer="
 "
 	fi
