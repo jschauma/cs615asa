@@ -254,7 +254,7 @@ lectures</a></LI>
         <UL>
           <LI>course participation, <a href="questionnaires.html">questionnaires</a>, and <a href="course-notes.html">course notes</a> (12% of the grade)</LI>
           <LI>a meetup requirement (8% of the grade)</LI>
-          <LI>four individual homework assignments (65% of the grade)</LI>
+          <LI>five individual homework assignments (65% of the grade)</LI>
           <LI>a group project (CtF) towards the end of the semester (15% of the grade)</LI>
 
         </UL>Letter grades will be given as follows:
@@ -311,9 +311,11 @@ lectures</a></LI>
           <li><a href="hw.txt">General Homework Submission Guidelines</a></li>
           <li><a href="meetup.html">Homework #N: Attend a relevant Meetup/Talk/community event</a></li>
           <li><a href="s24-hw1.html">Homework #1: Setup your environment for EC2 and create an instance</a></li>
-          <li><a href="s24-hw2.html">HW#2: packet capture</a></li>
-          <li><a href="s24-hw3.html">HW#3: DNS packet capture</a></li>
-          <li><a href="s24-hw4.html">HW#4: EBS Restore</a></li>
+          <li><a href="s24-hw2.html">HW#2: packaging software</a></li>
+          <li><a href="s24-hw3.html">HW#3: traceroute packet capture</a></li>
+          <li><a href="s24-hw4.html">HW#4: DNS packet capture</a></li>
+          <li><a href="s24-hw5.html">HW#5: manually sending an email</a></li>
+          <li><a href="s24-hw6.html">HW#6: Syslog Configuration</a></li>
           <!-- <li><a href="s20-hw2.html">HW#2: ec2-backup-v1</a></li> -->
           <!-- <li><a href="s20-hw4.html">HW#3: monitoring DNS and HTTP traffic</a></li> -->
           <!-- <li><a href="s20-ec2-backup.html">Homework #5: EC2 Backup</a></li> -->
@@ -464,6 +466,9 @@ lectures</a></LI>
               <b>Week 03, Warmup Exercise 1: Resizing a filesystem on NetBSD</b><br>
               [<a href="03-resize-netbsd.pdf">slides</a>]&nbsp;[<a href="https://www.youtube.com/watch?v=9l-g3keN48g">video lecture</a>]&nbsp;[<a href="03-resize-netbsd.txt">transcript</a>]<br>
             &#160;<BR>
+              <b>Week 03, Warmup Exercise 2: Resizing a filesystem on Debian Linux</b><br>
+              [<a href="03-resize-linux.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/4V15y5Klo9Y">video lecture</a>]&nbsp;[<a href="03-resize-linux.txt">transcript</a>]<br>
+            &#160;<BR>
 <br>
               <a href="resize-exercise.html">Lecture 03: Resize Exercise</a><br>
               <a href="/cgi-bin/CS615-03.cgi">Week 03 Checkpoint</a><br><br>
@@ -497,11 +502,11 @@ lectures</a></LI>
             &#160;<BR>
               <a href="package-exercise.html">Package Manager Exercise</a><br>
               <a href="useradd-exercise.html">Exercise: adding users</a><br>
+              <a href="s24-hw2.html">HW#2: packaging software</a><br>
 
               <a href="/cgi-bin/CS615-software.cgi">Week 04 Checkpoint</a><br><br>
 
-              <a href="slides/lecture04.pdf">Multiuser Fundamentals slides</a><br> <!--
-              <a href="https://www.usenix.org/sites/default/files/code_of_ethics_diploma.pdf">System Administrators' Code of Ethics</a><br> -->
+              <a href="slides/lecture04.pdf">Multiuser Fundamentals slides</a><br>
             </TD>
           </TR>
           <TR>
@@ -539,7 +544,7 @@ lectures</a></LI>
               [<a href="05-peering.pdf">slides</a>]&nbsp;[<a href="https://youtu.be/OOq7jGlhBjY">video lecture</a>]&nbsp;[<a href="05-peering.txt">transcript</a>]<br>
             &#160;<BR>
               <a href="/cgi-bin/CS615-networking-I.cgi">Week 05 Checkpoint</a><br>
-              <a href="s24-hw2.html">HW#2: packet capture</a><br>
+              <a href="s24-hw3.html">HW#3: traceroute packet capture</a><br>
               <!-- <a href="s15-hw4.html">HW#4: Traceroute Explained</a><br>
               <a href="strace.out">telnet strace</a><br>
               <a href="commands.out">EC2 script output</a><br>
@@ -613,7 +618,7 @@ lectures</a></LI>
               <a href="/cgi-bin/CS615-dns.cgi">Week 07 Checkpoint</a><br>
               <a href="slides/lecture07.pdf">Lecture 07 slides</a><br>
               <!-- <a href="s20-hw4.html">Homework #4: monitoring DNS and HTTP traffic</a> -->
-              <a href="s24-hw3.html">HW#3: DNS packet capture</a><br>
+              <a href="s24-hw4.html">HW#4: DNS packet capture</a><br>
               </td>
           </TR>
           <TR>
@@ -646,7 +651,8 @@ lectures</a></LI>
               <a href="smtp-exercise.html">SMTP Exercise</a><br>
               <a href="/cgi-bin/CS615-https-smtp.cgi">Week 08 Checkpoint</a><br>
               <!-- <a href="08-pcaps/">pcap files</a><br> -->
-              <a href="slides/lecture08.pdf">Lecture 08 slides</a><br>
+              <a href="08-https.pdf">Lecture 08 slides: HTTPS</a><br>
+              <a href="s24-hw5.html">Homework #5: manually sending an meail</a></li>
             </TD>
           </TR>
 
@@ -667,9 +673,9 @@ Tools</a><br>
               <a href="regex-exercise.html">Lecture 09: Regex Exercise</a><br>
               <a href="scripting-exercise.html">Lecture 09: Scripting Exercise</a><br>
               <a href="bugfiling-exercise.html">Lecture 09: Bugfiling Exercise</a><br>
-              <a href="slides/lecture09.pdf">Lecture 09 slides</a><br>
-              <a href="s24-hw4.html">HW#4: EBS Restore</a><br>
-              <a href="examples/shexamples">shell basics</a><br>
+              <a href="09-writing-system-tools.pdf">Lecture 09 slides</a><br>
+              <a href="examples/shexamples">shell basics</a><br><br>
+              <a href="s24-hw6.html">HW#6: Syslog Configuration</a><br>
               </TD>
           </TR>
 
@@ -726,9 +732,8 @@ Management</a></TD>
               <em>Nemeth et al</em>: Chap. 21<br>
               <em>Burgess</em>: Chap. 11, 12<br>
               <em>Limoncelli &amp; Hogan</em>: Chap. 7<br><br>
-              <a
-href="https://www.netmeister.org/blog/infosec-basics.html">Information
-Security Basics</a><br>
+              <a href="https://www.netmeister.org/blog/infosec-basics.html">Information Security Basics</a><br>
+              <a href="https://www.netmeister.org/blog/threat-model-101.html">An Introduction to Threat Modeling</a><br>
               <a href="https://www.netmeister.org/blog/attack-life-cycle.html">The Attack Life Cycle</a></TD>
             <TD>
               <b>Week 11/Week 12, Segment 1: System Security I: Risk Assessment</b><br>
@@ -749,25 +754,34 @@ Security Basics</a><br>
           </TR>
           <TR>
             <TD>2024-04-22</TD>
+            <TD>Review</TD>
+            <TD>All course materials and additional links.</TD>
+            <TD>Self-guided review - no class.</TD>
+            </TD>
+          </TR>
+          <TR>
+            <TD>2023-04-29</TD>
             <TD>Ethics and Social Responsibility / Review</TD>
             <TD><a
 href="https://www.netmeister.org/blog/primum-non-nocere.html">Primum non
 nocere</a><br>
               <a
 href="https://www.netmeister.org/blog/all-is-not-lost.html">All is not
-lost (but we need your help)</a></TD>
+lost (but we need your help)</a><br><br>
+              <a href="https://www.usenix.org/sites/default/files/code_of_ethics_diploma.pdf">System Administrators' Code of Ethics</a><br>
+              <a href="https://www.acm.org/code-of-ethics"> ACM Code of Ethics</a>
+            </TD>
             <TD>
             <a href="slides/lecture13.pdf">Lecture 13 slides</a><br>
             <a href="/cgi-bin/CS615-ethics.cgi">Week 13 Checkpoint</a><br>
+            <a href="ctf.html">Capture the Flag!</a>
             </TD>
           </TR>
           <TR>
-            <TD>2023-04-29</TD>
-            <TD>Review</TD>
-            <TD>All course materials and additional links.</TD>
-            <TD><a href="/cgi-bin/CS615-review.cgi">Review Checkpoint</a><br>
-            <a href="ctf.html">Capture the Flag!</a>
-            </TD>
+            <TD>2023-05-06</TD>
+            <TD><em>no class; review checkpoint due only</em></TD>
+            <TD>&nbsp;</TD>
+            <TD><a href="/cgi-bin/CS615-review.cgi">Review Checkpoint</a></TD>
           </TR>
         </TABLE>
       </TD>

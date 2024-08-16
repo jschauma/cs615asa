@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+  <title>CS615 -- System Administration -- NetBSD AWS EC2 AMIs</title>
+  <style type="text/css">
+  body {
+  background-color: #FFFFFf;
+  }
+  </style>
+  <style type="text/css">
+  li.c1 {list-style: none}
+  </style>
+
+  <table cellpadding="15" border="1" align="center">
+    <tbody><tr>
+      <td valign="top">
+        <h2>CS615 -- System Administration</h2>
+
+        <h3>NetBSD AWS EC2 AMIs</h3>
+
+        <p>
+	  The <a
+href="https://www.netbsd.org">NetBSD</a> Project
+provides a number of official AWS EC2 AMIs under <a
+href="https://wiki.netbsd.org/amazon_ec2/amis/">https://wiki.netbsd.org/amazon_ec2/amis/</a>.
+	</p>
+	<p>
+	  Unfortunately, at this time, this does not
+	  include regularly udpated images for each release.
+	  For our class, I have <a href="https://wiki.netbsd.org/amazon_ec2/bsdec2_image_upload/">built</a> and provided the following images to
+	  use:
+	</p>
+	<p>
+	  <table border="1" width="100%">
+	    <tr>
+	      <td><b>NetBSD version</b></td>
+	      <td><b>Architecture</b></td>
+	      <td><b>Example AWS Instance Types</b></td>
+	      <td><b>AWS Region</b></td>
+	      <td><b>AWS EC2 AMI</b></td>
+	      <td><b>Log in as</b></td>
+	    </tr>
+	    <tr>
+	      <td>NetBSD 10.0</b></td>
+	      <td><a href="http://wiki.netbsd.org/ports/evbarm/">NetBSD/evbarm-aarch64</td>
+	      <td><a href="https://aws.amazon.com/ec2/instance-types/a1/">a1</a> and <a href="https://aws.amazon.com/ec2/instance-types/t4/">t4g</a></td>
+	      <td>us-east-1a</td>
+	      <td><tt>ami-01eeb2af939d69edd</tt></td>
+	      <td>ec2-user</td>
+	    </tr>
+	    <tr>
+	      <td>NetBSD-current 10.99.2</b></td>
+	      <td><a href="http://wiki.netbsd.org/ports/amd64/">NetBSD/amd64</td>
+	      <td><a href="https://aws.amazon.com/ec2/instance-types/t2/">t2</a></td>
+	      <td>us-east-1a</td>
+	      <td><tt>ami-05ffda7ac6da57de1</tt></td>
+	      <td>ec2-user</td>
+	    </tr>
+	    <tr>
+	      <td>NetBSD 9.1</b></td>
+	      <td><a href="http://wiki.netbsd.org/ports/evbarm/">NetBSD/evbarm-aarch64</td>
+	      <td><a href="https://aws.amazon.com/ec2/instance-types/a1/">a1</a> and <a href="https://aws.amazon.com/ec2/instance-types/t4/">t4g</a></td>
+	      <td>us-east-1a</td>
+	      <td><tt>ami-08b87fed21cce91cb</tt></td>
+	      <td>root</td>
+	    </tr>
+	  </table>
+	</p>
+	<p>
+	  These AMIs are currently public and should
+	  be available to you to launch.
+	</p>
+        <hr>
+        [<a href="index.html">Course Website</a>]
+
+
+</td></tr></tbody></table></div></body></html>
