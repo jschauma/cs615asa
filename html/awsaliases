@@ -29,7 +29,7 @@ alias _aedi='aws ec2 describe-instances --output json'
 # resources associated with Stevens.  If you have only
 # a default SSH key, then you do not need to include
 # that option here.
-alias instance='aws ec2 run-instances --key-name stevens --image-id --output json'
+alias instance='aws ec2 run-instances --key-name stevens --output json --image-id' 
 
 # Next, I want my instances to be IPv4/IPv6 dual stack
 # enabled.  AWS does not offer this by default, but if
