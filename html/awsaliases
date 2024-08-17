@@ -12,7 +12,7 @@
 # This file is in the public domain.
 
 _tout=$(which timeout 2>/dev/null)
-if [ -z "${tout}" ]; then
+if [ -z "${_tout}" ]; then
 	timeout() { perl -e 'alarm shift; exec @ARGV' "$@"; }
 fi
 
@@ -93,7 +93,7 @@ ec2wait() {
 	fi
 	timeout 60 "aws ec2 wait instance-running --output json --instance-ids $@" 2>/dev/null
 	if [ $? -gt 0 ]; then
-		echo "Instance not in running state after 60 seconds, giving up." 2>&1
+		echo "Instance not in running state or still pending after 60 seconds, giving up." 2>&1
 		return 1;
 	fi
 
