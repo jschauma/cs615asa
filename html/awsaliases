@@ -1,15 +1,20 @@
 # This file contains a few shell aliases and functions
-# that should it easier for you to work with AWS EC2
-# within the context of the class CS615 System
+# that should make it easier for you to work with AWS
+# EC2 within the context of the class CS615 System
 # Administration.
 #
 # Author: Jan Schaumann <jschauma@netmeister.org>
-#         @jschauma
+#         @jschauma@mstdn.social
 #
 # See https://stevens.netmeister.org/615/ for more
 # information.
 #
 # This file is in the public domain.
+
+_tout=$(which timeout 2>/dev/null)
+if [ -z "${tout}" ]; then
+	timeout() { perl -e 'alarm shift; exec @ARGV' "$@"; }
+fi
 
 ###
 # Generic handling of instances first
@@ -78,14 +83,20 @@ instanceId() {
 # to come up.  Note: this uses the 'iname' function
 # above to report the hostname when we think it's up.
 ec2wait() {
-	local ami descr n
+	local ami descr hostname n
 	local user="root"
 	local sleep=60
+
 	if ! expr "$@" : ".*i-[0-9a-f]*" >/dev/null 2>&1; then
 		echo "That doesn't look like an instance ID." >&2
 		return 1;
 	fi
-	aws ec2 wait instance-running --output json --instance-ids $@
+	timeout 60 "aws ec2 wait instance-running --output json --instance-ids $@" 2>/dev/null
+	if [ $? -gt 0 ]; then
+		echo "Instance not in running state after 60 seconds, giving up." 2>&1
+		return 1;
+	fi
+
 	# "running" does not mean SSH is up, so give it a bit more time,
 	# guessing different time intervals for different OS versions
 	ami=$(_aedi  --instance-ids "$@" | jq -r '.Reservations[0].Instances[0].ImageId')
@@ -104,21 +115,39 @@ ec2wait() {
 			user="fedora"
 		elif expr "${descr}" : "Canonical" >/dev/null 2>&1 ; then
 			user="ubuntu"
+		elif expr "${descr}" : "NetBSD.*10.0" >/dev/null 2>&1 ; then
+			user="ec2-user"
 		fi
 	fi
 	echo "$@"
-	iname $@
+	hostname=$(iname $@)
+	echo "${hostname}"
 	echo "${user}"
 	echo
-	echo "Sleeping ${sleep} seconds to wait for ssh:"
-	n=5
-	while [ ${n} -lt ${sleep} ]; do
-		/bin/echo -n "."
-		sleep 5
-		n=$(( n + 5 ))
-	done
-	echo
-	echo "Ready."
+
+	# Let's try ping and hope for the best:
+	if ping -q -c 1 "${hostname}" >/dev/null 2>&1 ; then
+		sleep=0
+	else
+		echo "Sleeping up to ${sleep} seconds to wait for ssh:"
+
+		n=5
+		while [ ${n} -lt ${sleep} ]; do
+			/bin/echo -n "."
+			sleep 5
+			n=$(( n + 5 ))
+			if ping -q -c 1 "${hostname}" >/dev/null 2>&1 ; then
+				break
+			fi
+		done
+		echo
+	fi
+
+	if ! ping -q -c 1 "${hostname}" >/dev/null 2>&1 ; then
+		echo "${hostname} still not up, sorry."
+	else
+		echo "Ready."
+	fi
 }
 
 # Use this to see which instances you currently
@@ -444,7 +473,9 @@ alias start-freebsd='launchInstance ami-0fe92206920260384'
 # https://mail-index.netbsd.org/netbsd-users/2021/01/22/msg026460.html
 # https://stevens.netmeister.org/615/netbsd-amis.html
 # Log in as "root":
-alias start-netbsd='launchInstance ami-08b87fed21cce91cb t4g.nano'
+#alias start-netbsd='launchInstance ami-08b87fed21cce91cb t4g.nano'
+# Log in as "ec2-user":
+alias start-netbsd='launchInstance ami-01eeb2af939d69edd t4g.nano'
 alias start-netbsd-arm='start-netbsd'
 # Log in as "ec2-user":
 alias start-netbsd-amd64='launchInstance ami-05ffda7ac6da57de1'
