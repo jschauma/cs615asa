@@ -29,7 +29,7 @@ alias _aedi='aws ec2 describe-instances --output json'
 # resources associated with Stevens.  If you have only
 # a default SSH key, then you do not need to include
 # that option here.
-alias instance='aws ec2 run-instances --key-name stevens --output json --image-id' 
+alias instance='aws ec2 run-instances --key-name stevens --output json --image-id'
 
 # Next, I want my instances to be IPv4/IPv6 dual stack
 # enabled.  AWS does not offer this by default, but if
@@ -93,7 +93,7 @@ ec2wait() {
 	fi
 	timeout 60 "aws ec2 wait instance-running --output json --instance-ids $@" 2>/dev/null
 	if [ $? -gt 0 ]; then
-		echo "Instance not in running state or still pending after 60 seconds, giving up." 2>&1
+		echo "Instance terminated or not in running state or still pending after 60 seconds, giving up." 2>&1
 		return 1;
 	fi
 
@@ -125,10 +125,7 @@ ec2wait() {
 	echo "${user}"
 	echo
 
-	# Let's try ping and hope for the best:
-	if ping -q -c 1 "${hostname}" >/dev/null 2>&1 ; then
-		sleep=0
-	else
+	if ! sshCheck "${hostname}" ; then
 		echo "Sleeping up to ${sleep} seconds to wait for ssh:"
 
 		n=5
@@ -136,7 +133,7 @@ ec2wait() {
 			/bin/echo -n "."
 			sleep 5
 			n=$(( n + 5 ))
-			if ping -q -c 1 "${hostname}" >/dev/null 2>&1 ; then
+			if sshCheck "${hostname}"; then
 				break
 			fi
 		done
@@ -148,6 +145,32 @@ ec2wait() {
 	else
 		echo "Ready."
 	fi
+}
+
+sshCheck() {
+	local hname="${1}"
+	if [ x"${hname}" = x"-h" ]; then
+		echo "Supported arguments: <hostname|id>" >&2
+		return 0
+	fi
+
+	if expr "${hname}" : "i-[a-f0-9]*$" >/dev/null 2>&1 ; then
+		hname=$(iname ${hname})
+	fi
+
+	if [ -z "${hname}" ]; then
+		echo "Usage: sshCheck <hostname|id>" >&2
+		return 1
+	fi
+
+	if ping -q -c 1 "${hname}" >/dev/null 2>&1 ; then
+		timeout 2 /bin/sh -c "echo | nc ${hname} 22 >/dev/null 2>&1" >/dev/null 2>&1
+		if [ $? -eq 0 ]; then
+			return 0
+		fi
+	fi
+
+	return 1
 }
 
 # Use this to see which instances you currently
