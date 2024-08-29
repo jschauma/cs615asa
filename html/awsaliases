@@ -501,4 +501,4 @@ alias start-freebsd='launchInstance ami-0fe92206920260384'
 alias start-netbsd='launchInstance ami-01eeb2af939d69edd t4g.nano'
 alias start-netbsd-arm='start-netbsd'
 # Log in as "ec2-user":
-alias start-netbsd-amd64='launchInstance ami-05ffda7ac6da57de1'
+alias start-netbsd-amd64='launchInstance ami-0999f80a08a9de4cc'
