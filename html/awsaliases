@@ -1,15 +1,20 @@
 # This file contains a few shell aliases and functions
-# that should make it easier for you to work with AWS
-# EC2 within the context of the class CS615 System
-# Administration.
+# that make routine AWS EC2 tasks easier.
 #
 # Author: Jan Schaumann <jschauma@netmeister.org>
 #         @jschauma@mstdn.social
 #
-# See https://stevens.netmeister.org/615/ for more
-# information.
-#
 # This file is in the public domain.
+
+# The name of your preferred SSH key for use with AWS.
+AWS_SSH_KEY="${AWS_SSH_KEY:-aws}"
+
+# Default instance type.  Note: some AMIs require
+# specific types, e.g., our NetBSD/amd64 instance
+# won't launch on a t2 instance because it assumes the
+# Nano architecture, and the NetBSD/arm instance uses
+# a t4 instance.
+DEFAULT_INSTANCE_TYPE="t3.micro"
 
 _tout=$(which timeout 2>/dev/null)
 if [ -z "${_tout}" ]; then
@@ -21,15 +26,7 @@ fi
 ###
 
 alias _aedi='aws ec2 describe-instances --output json'
-
-# First, I'm too lazy to always type
-# 'aws ec2 run-instances ...'
-#
-# In addition, I use a separate SSH key for AWS
-# resources associated with Stevens.  If you have only
-# a default SSH key, then you do not need to include
-# that option here.
-alias instance='aws ec2 run-instances --key-name stevens --output json --image-id'
+alias instance='aws ec2 run-instances --key-name ${AWS_SSH_KEY} --output json --image-id'
 
 # Next, I want my instances to be IPv4/IPv6 dual stack
 # enabled.  AWS does not offer this by default, but if
@@ -42,7 +39,7 @@ alias instance='aws ec2 run-instances --key-name stevens --output json --image-i
 # because we are passing arguments.
 launchInstance() {
 	local ami=${1}
-	local itype=${2:-"t3.micro"}
+	local itype=${2:-"${DEFAULT_INSTANCE_TYPE}"}
 	
 	subnet=$(aws ec2 describe-subnets --output json | jq -r '.Subnets[] | select( .Tags[]? | select(.Value == "dualstack")).SubnetId')
 	sg=$(aws ec2 describe-security-groups --output json | jq -r '.SecurityGroups [] | select( .GroupName == "dualstack").GroupId')
@@ -107,7 +104,7 @@ ec2wait() {
 			sleep=120
 			user="omnios"
 		elif expr "${descr}" : "FreeBSD" >/dev/null 2>&1 ; then
-			sleep=140
+			sleep=800
 			user="ec2-user"
 		elif expr "${descr}" : "Debian" >/dev/null 2>&1 ; then
 			user="admin"
@@ -141,7 +138,11 @@ ec2wait() {
 	fi
 
 	if ! ping -q -c 1 "${hostname}" >/dev/null 2>&1 ; then
-		echo "${hostname} still not up, sorry."
+		echo "${hostname} still not up, sorry." 2>&1
+		return 1
+	elif ! sshCheck "${hostname}"; then
+		echo "${hostname} ssh check failed." 2>&1
+		return 1
 	else
 		echo "Ready."
 	fi
@@ -182,13 +183,13 @@ alias inames='_aedi | jq -r ".Reservations[].Instances[].PublicDnsName" | grep .
 
 # ...but often we only care about which instances are
 # currently running:
-alias running='_aedi --query Reservations[*].Instances[*].[InstanceId] --filters Name=instance-state-name,Values=running | jq -r ".[] | .[] | .[]"'
+alias running='_aedi --query "Reservations[*].Instances[*].[InstanceId]" --filters Name=instance-state-name,Values=running | jq -r ".[] | .[] | .[]"'
 
-# Same thing, but printing hostnames isntead:
-alias running-names='_aedi --query Reservations[*].Instances[*].[PublicDnsName] --filter Name=instance-state-name,Values=running | jq -r ".[] | .[] | .[]"'
+# Same thing, but printing hostnames instead:
+alias running-names='_aedi --query "Reservations[*].Instances[*].[PublicDnsName]" --filter Name=instance-state-name,Values=running | jq -r ".[] | .[] | .[]"'
 
 # To get a listing of hostnames with instance-ids:
-alias instance-id-and-names='_aedi | jq -r ".Reservations[].Instances[] | \"\(.PublicDnsName) \(.InstanceId)\""'
+alias instance-id-and-names='_aedi | jq -r ".Reservations[].Instances[] | (if .PublicDnsName != \"\" then \"\(.PublicDnsName) \" else \"\" end) + .InstanceId"'
 
 # When you want to kill all instances instead of going
 # one-by-one.  We don't pipe into 'termInstance'
@@ -354,6 +355,14 @@ awsListResources() {
 
 	local valid="amis snapshots instances s3 volumes"
 
+	for v in ${valid}; do
+		if [ x"${regions}" = x"${v}" ]; then
+			which="${regions}"
+			regions=""
+			break
+		fi
+	done
+
 	if [ x"${which}" != x"all" ]; then
 		for resource in ${valid}; do
 			if [ x"${which}" = x"${resource}" ]; then
@@ -471,34 +480,34 @@ awsS3Usage() {
 # https://wiki.debian.org/Cloud/AmazonEC2Image/
 # Log in as "admin".
 # Debian 12 ("Bookworm") amd64
-alias start-debian='launchInstance ami-0e365edd3d30d031b'
+alias aws-debian='launchInstance ami-0e365edd3d30d031b'
 
 # https://omniosce.org/setup/aws
 # needs t3.micro; log in as "omnios"
-alias start-omnios='launchInstance ami-0669dd7b1ff900fcc'
+alias aws-omnios='launchInstance ami-0669dd7b1ff900fcc'
 
 # https://alt.fedoraproject.org/cloud/
 # Log in as "fedora".
-#alias start-fedora='launchInstance ami-08b4ee602f76bff79'
-# Fedora Cloud 39
-alias start-fedora='launchInstance ami-0746fc234df9c1ee0'
+#alias aws-fedora='launchInstance ami-08b4ee602f76bff79'
+# Fedora Cloud 41
+alias aws-fedora='launchInstance ami-046a6af96ef510bb6'
 
 # https://cloud-images.ubuntu.com/locator/ec2/
 # Log in as "ubuntu". 
 # 16.04 LTS
-alias start-ubuntu='launchInstance ami-0b0ea68c435eb488d'
+alias aws-ubuntu='launchInstance ami-0b0ea68c435eb488d'
 
 # https://www.freebsd.org/releases/
 # Log in as "ec2-user".
-# 13.2R
-alias start-freebsd='launchInstance ami-0fe92206920260384'
+# 14.1R
+alias aws-freebsd='launchInstance ami-0f4666775a3db993d'
 
 # https://mail-index.netbsd.org/netbsd-users/2021/01/22/msg026460.html
 # https://stevens.netmeister.org/615/netbsd-amis.html
 # Log in as "root":
-#alias start-netbsd='launchInstance ami-08b87fed21cce91cb t4g.nano'
+#alias aws-netbsd='launchInstance ami-08b87fed21cce91cb t4g.nano'
 # Log in as "ec2-user":
-alias start-netbsd='launchInstance ami-01eeb2af939d69edd t4g.nano'
-alias start-netbsd-arm='start-netbsd'
+alias aws-netbsd='launchInstance ami-01eeb2af939d69edd t4g.nano'
+alias aws-netbsd-arm='aws-netbsd'
 # Log in as "ec2-user":
-alias start-netbsd-amd64='launchInstance ami-0999f80a08a9de4cc'
+alias aws-netbsd-amd64='launchInstance ami-0999f80a08a9de4cc'
