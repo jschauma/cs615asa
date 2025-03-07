@@ -105,14 +105,8 @@ main(int argc, char **argv) {
 
 	uid = geteuid();
 	if (uid != pw->pw_uid) {
-		if (uid != 0) {
-			errx(EXIT_FAILURE, "Need to run as '%s' or 'root'.", TARGET_USER);
-			/* NOTREACHED */
-		}
-		if (seteuid(pw->pw_uid) == -1) {
-			err(EXIT_FAILURE, "Unable to setuid to '%s' (%d)", TARGET_USER, pw->pw_uid);
-			/* NOTREACHED */
-		}
+		errx(EXIT_FAILURE, "Need to run as '%s'.", TARGET_USER);
+		/* NOTREACHED */
 	}
 
 	(void)execl(PROGRAM, PROGRAM, "-c", CONFIG, NULL);
